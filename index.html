@@ -1096,7 +1096,7 @@
 <div id="authGate" style="position:fixed;inset:0;background:var(--bg,#EEF1F6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:380px;width:100%;border:1px solid var(--line,#DBE2EC);border-top:3px solid #8A6D1F;">
     <div style="text-align:center;margin-bottom:22px;">
-      <div class="app-version-label" style="width:44px;height:44px;border-radius:11px;background:#0C1B33;border:1px solid rgba(201,150,44,0.5);color:#D9B25C;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk';margin:0 auto 12px;" translate="no">V2.5</div>
+      <div class="app-version-label" style="width:44px;height:44px;border-radius:11px;background:#0C1B33;border:1px solid rgba(201,150,44,0.5);color:#D9B25C;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk';margin:0 auto 12px;" translate="no">V2.4</div>
       <h2 style="margin:0;font-size:18px;font-family:'Space Grotesk';" translate="no">Keşan Bayi Takip Paneli</h2>
       <p style="margin:6px 0 0;color:var(--ink-soft,#54617A);font-size:13px;">Devam etmek için giriş yapın</p>
     </div>
@@ -1118,7 +1118,7 @@
 
   <div class="topbar">
     <div class="brand">
-      <div class="brand-mark app-version-label" translate="no" style="font-size:13px;letter-spacing:-.02em;">V2.5</div>
+      <div class="brand-mark app-version-label" translate="no" style="font-size:13px;letter-spacing:-.02em;">V2.4</div>
       <div>
         <h1 translate="no">Keşan Bayi Takip Paneli</h1>
         <p class="brand-tag" translate="no">Akgün Meşrubat Gıda · Berat Çağlar CAN</p>
@@ -7408,16 +7408,20 @@ function yuklemeGunuLitreIleBirlestir(yeniGun, eskiGun){
     });
   });
   // Bu günde tahsilatı olmayıp yalnızca eski arşivde litre kaydı bulunan temsilciler de korunur.
+  // NOT: eski arşiv kayıtlarında "kolonlar" alanı eksik olabiliyor (eski/bozuk arşiv şeması —
+  // bu eksiklik, doğru hesaplanmış günlerin arşive yazılmasını engelleyen bir çökmeye yol açıyordu).
+  // Burada varsayılan boş obje ile kopyalanır: hem aşağıdaki toplama sırasında çökmeyi önler hem de
+  // eksikliği arşivde kalıcı olarak düzeltir (aynı kayıt bir daha işlendiğinde tekrar sorun çıkarmaz).
   (eskiGun.temsilciler||[]).forEach(r=>{
     if(gorulenTemsilciler.has(r.temsilci) || !(r.litre>0)) return;
-    birlesikTemsilciler.push(Object.assign({}, r));
+    birlesikTemsilciler.push(Object.assign({kolonlar:{}}, r));
   });
   birlesikTemsilciler.sort((a,b)=> a.temsilci.localeCompare(b.temsilci,'tr'));
 
   const kolonlar = yeniGun.kolonlar || [];
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
@@ -7458,11 +7462,13 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
   // Bu günde (yeni yüklemede) litresi olmayıp yalnızca eski arşivde tahsilatı bulunan temsilciler de
   // korunur — bu yüklemede sevkiyat verisi bu temsilci için gelmemiş olsa dahi tahsilat rakamları
   // kaybolmaz.
+  // NOT: eski arşiv kayıtlarında "kolonlar" alanı eksik olabiliyor — burada da varsayılan boş
+  // obje ile kopyalanıp hem çökme önleniyor hem eksiklik kalıcı olarak düzeltiliyor.
   (eskiGun.temsilciler||[]).forEach(r=>{
     if(gorulenTemsilciler.has(r.temsilci) || !(r.genelToplam>0)) return;
     birlesikTemsilciler.push({
       temsilci: r.temsilci,
-      kolonlar: r.kolonlar,
+      kolonlar: r.kolonlar || {},
       genelToplam: r.genelToplam,
       litre: 0,
       stTahsilatLitre: null,
@@ -7473,7 +7479,7 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
   const kolonlar = (eskiGun.kolonlar && eskiGun.kolonlar.length) ? eskiGun.kolonlar : (yeniGun.kolonlar||[]);
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
