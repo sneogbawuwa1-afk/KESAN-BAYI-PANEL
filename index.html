@@ -55,6 +55,7 @@
     /* Rakamsal değerler (tutar, adet, oran) için ayrı bir yazı tipi — başlıklardaki
        Space Grotesk ile karışmasın diye tek noktadan yönetilen bir değişken. */
     --font-figures: 'Outfit', system-ui, sans-serif;
+    --sidebar-w: 252px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -73,6 +74,7 @@
   button:focus-visible,a:focus-visible,.tab-btn:focus-visible,[role="button"]:focus-visible,summary:focus-visible,th[role]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   /* Arka plan kaydırma kilidi — herhangi bir modal açıkken sayfa arkada kaymaz. */
   body.modal-open{overflow:hidden;}
+  body.sb-drawer-open{overflow:hidden;}
   @media(prefers-reduced-motion:reduce){
     *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
   }
@@ -86,34 +88,114 @@
      görünür, daha büyük ekranlarda ise ortalanıp kenarlarda nefes payı bırakır. */
   #app{width:100%;max-width:var(--app-max);margin:0 auto;padding:0 var(--page-pad) 80px;}
 
+  /* ===== Sol Navigasyon (Sidebar) ===== */
+  .app-shell{display:flex;align-items:stretch;gap:0;min-height:100vh;}
+  .sidebar{
+    width:var(--sidebar-w);flex:0 0 var(--sidebar-w);
+    position:fixed;top:0;left:0;bottom:0;z-index:50;
+    overflow-y:auto;scrollbar-width:thin;
+    background:var(--navy);color:#fff;
+    display:flex;flex-direction:column;
+    padding:20px 14px calc(18px + env(safe-area-inset-bottom));
+    border-right:2px solid var(--accent);
+  }
+  .sidebar::-webkit-scrollbar{width:6px;}
+  .sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:10px;}
+  .sidebar-nav{display:flex;flex-direction:column;gap:2px;margin-top:8px;}
+  .sidebar-section-label{font-size:10px;font-weight:700;letter-spacing:.09em;color:rgba(255,255,255,.42);padding:16px 12px 6px;text-transform:uppercase;}
+  .sb-link{
+    display:flex;align-items:center;gap:10px;width:100%;
+    border:none;border-left:3px solid transparent;background:transparent;color:rgba(255,255,255,.82);
+    font-family:inherit;font-size:13.5px;font-weight:600;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    padding:10px 10px 10px 9px;border-radius:0 9px 9px 0;cursor:pointer;
+    transition:background .15s ease,color .15s ease,border-color .15s ease;
+  }
+  .sb-link i.sb-ic{width:15px;text-align:center;font-size:13.5px;color:rgba(255,255,255,.55);flex-shrink:0;}
+  .sb-link:hover{background:rgba(255,255,255,.08);color:#fff;}
+  .sb-link.active{background:rgba(255,255,255,.09);color:#fff;border-left-color:var(--accent);font-weight:700;}
+  .sb-link.active i.sb-ic{color:#D9B25C;}
+  .sb-link .sb-arrow{margin-left:auto;font-size:10px;color:rgba(255,255,255,.4);transition:transform .15s ease;flex-shrink:0;}
+  .sb-link.sb-parent.open .sb-arrow{transform:rotate(180deg);}
+  .sb-link.sb-parent.active{color:#F0DCA6;}
+  .sb-link.sb-parent.active i.sb-ic{color:#D9B25C;}
+  .sb-submenu{display:none;flex-direction:column;gap:1px;padding:2px 0 6px 12px;}
+  .sb-submenu.open{display:flex;}
+  .sb-submenu .sb-link{font-size:12.5px;font-weight:500;padding:8px 10px 8px 9px;}
+  .sb-submenu .sb-link i.sb-ic{font-size:12px;}
+  .app-main{flex:1 1 auto;min-width:0;margin-left:var(--sidebar-w);padding:0 0 0 clamp(20px,1.8vw,32px);position:relative;}
+  @media(max-width:980px){
+    .sidebar{
+      transform:translateX(-100%);
+      transition:transform .22s ease;
+    }
+    body.sb-drawer-open .sidebar{transform:translateX(0);box-shadow:8px 0 28px -8px rgba(15,27,51,.45);}
+    .app-main{margin-left:0;padding:0;}
+  }
+  .sb-drawer-overlay{
+    display:none;position:fixed;inset:0;background:rgba(15,27,51,.45);z-index:49;
+  }
+  body.sb-drawer-open .sb-drawer-overlay{display:block;}
+  @media(min-width:981px){
+    .sb-drawer-overlay{display:none !important;}
+  }
+  /* Mobil hamburger üst çubuğu — sadece rapor açıldıktan sonra (has-sidebar) ve dar ekranda
+     görünür; masaüstünde ve rapor öncesi (upload/login) ekranda hiç render edilmez. */
+  .mobile-header{display:none;}
+  @media(max-width:980px){
+    body.has-sidebar .mobile-header{
+      display:flex;align-items:center;gap:12px;
+      position:sticky;top:0;z-index:40;
+      background:var(--navy);border-bottom:2px solid var(--accent);
+      padding:calc(12px + env(safe-area-inset-top)) 14px 12px;
+      margin:0 -12px 16px;
+    }
+    body.has-sidebar .topbar{display:none;}
+  }
+  .mobile-header-burger{
+    width:38px;height:38px;border-radius:9px;flex-shrink:0;
+    border:1px solid rgba(255,255,255,0.22);background:transparent;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;
+  }
+  .mobile-header-burger:active{transform:scale(.94);}
+  .mobile-header-title{
+    font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:14.5px;color:#fff;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+  }
+  .mobile-header-title span{color:#F0DCA6;}
+  /* Masaüstü sidebar'da "Sell Out Raporu" linki gizlendi — DOM'dan kaldırılmadı (id/JS
+     referansları ve dropdown senkronizasyonu bozulmasın diye), sadece görünürlüğü kapatıldı.
+     Mobil tabbar'daki eşdeğeri (tabbtn-sellOut) bu kuraldan etkilenmez, aynen görünür kalır. */
+  @media(min-width:981px){
+    #sbbtn-sellOut{display:none;}
+  }
+
   .topbar{
     display:flex;align-items:center;justify-content:space-between;
     flex-wrap:wrap;gap:14px;
     position:sticky;top:0;z-index:40;
-    /* #app, --app-max genişliğini aşan ekranlarda ortalandığı için kendi kenarlarında
-       ekstra bir boşluk (nefes payı) bırakır. Topbar'ın gerçekten viewport'un tam kenarına
-       kadar uzanabilmesi ve alttaki içerikle (aynı #app iç boşluğunu kullanan) hizalı
-       kalabilmesi için bu ekstra boşluk da negatif margine/paddinge dahil edilir. */
-    margin:0 calc(-1 * (var(--page-pad) + (100vw - min(var(--app-max), 100vw)) / 2)) 24px;
-    padding:calc(18px + env(safe-area-inset-top)) calc(var(--page-pad) + (100vw - min(var(--app-max), 100vw)) / 2) 18px;
-    background:var(--navy);
-    border-bottom:2px solid var(--accent);
-    box-shadow:0 6px 18px -8px rgba(15,27,51,0.35);
+    background:var(--bg);
+    padding:calc(16px + env(safe-area-inset-top)) 0 16px;
+    margin-bottom:24px;
+    border-bottom:1px solid var(--line-soft);
     contain:layout style;
   }
+  @media(min-width:981px){
+    body.has-sidebar .topbar{display:none;}
+  }
+  #storageNote{display:none !important;}
   .brand{display:flex;align-items:center;gap:16px;min-width:0;}
   .brand-mark{
     width:48px;height:48px;border-radius:12px;
-    background:transparent;border:1px solid rgba(201,150,44,0.5);
+    background:var(--navy);border:1px solid var(--accent);
     display:flex;align-items:center;justify-content:center;
     color:#D9B25C;font-family:'Space Grotesk';font-weight:800;font-size:16px;
     flex-shrink:0;
   }
-  .brand h1{font-size:21px;margin:0;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.25;}
-  .brand p{margin:2px 0 0;font-size:12px;color:rgba(255,255,255,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .brand h1{font-size:21px;margin:0;font-weight:700;color:var(--navy);letter-spacing:-.01em;line-height:1.25;}
+  .brand p{margin:2px 0 0;font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .brand-tag{
     display:inline-block;margin-top:5px;
-    color:rgba(255,255,255,.72);font-weight:600;
+    color:var(--ink-soft);font-weight:600;
     font-size:12px;letter-spacing:.06em;white-space:nowrap;
   }
   .scroll-top-btn{
@@ -141,19 +223,21 @@
   .pill.warn{background:var(--warn-soft);color:var(--warn);}
   .pill.danger{background:var(--danger-soft);color:var(--danger);}
   .pill.navy{background:var(--navy-soft);color:var(--navy);}
-  /* #statusPill her zaman lacivert topbar üzerinde durur — paylaşılan .pill sınıfının
-     beyaz zemin üzerindeki durum rozetlerini (tablolardaki ok/warn/danger etiketleri)
-     bozmadan, yalnızca bu örneği altın çerçeveli/şeffaf hale getiriyoruz. */
-  #statusPill{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,.85);gap:7px;}
-  #statusPill.ok{background:rgba(201,150,44,0.14);border-color:var(--accent);color:#F0DCA6;}
   .icon-btn{
     width:38px;height:38px;line-height:36px;text-align:center;flex-shrink:0;
+    display:inline-flex;align-items:center;justify-content:center;
     border:1px solid rgba(255,255,255,0.22);border-radius:9px;background:transparent;
     color:#fff;font-size:15px;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .1s ease;padding:0;
   }
   .icon-btn:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.4);}
   .icon-btn:active{transform:scale(.93);}
   .icon-btn.danger{border-color:var(--accent);background:rgba(201,150,44,0.12);}
+  /* Yükleme ekranındaki topbar artık açık (light) temalı olduğu için, .icon-btn'in koyu-zemin
+     varsayılan stilini burada .app-topbar-actions ile aynı açık-zemin versiyonuyla değiştiriyoruz. */
+  .topbar .icon-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);}
+  .topbar .icon-btn:hover{background:var(--bg);border-color:var(--accent);color:var(--accent-deep);}
+  .topbar .icon-btn.danger{border-color:var(--line);background:var(--surface);color:var(--ink-soft);}
+  .topbar .icon-btn.danger:hover{border-color:var(--danger);background:var(--danger-soft);color:var(--danger);}
   .icon-btn.danger:hover{background:rgba(201,150,44,0.22);}
   .btn{
     border:1px solid var(--line);background:var(--surface);color:var(--ink);
@@ -719,6 +803,8 @@
   .ssm-karne-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
   .ssm-karne-top{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
   .ssm-karne-name{font-weight:700;font-size:14.5px;}
+  .ssm-hiyerarsi-badge{background:var(--navy);color:#D9B25C;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;}
+  .ssm-hiyerarsi-badge i{font-size:9.5px;}
   .ssm-karne-sub{font-size:11px;color:var(--ink-soft);margin-top:1px;}
   .ssm-fkns-ring-wrap{margin-left:auto;text-align:center;flex-shrink:0;}
   .ssm-fkns-ring{width:52px;height:52px;display:block;}
@@ -726,7 +812,11 @@
   .ssm-kanal-row{margin-bottom:11px;}
   .ssm-kanal-row:last-of-type{margin-bottom:0;}
   .ssm-kanal-top{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px;}
-  .ssm-kanal-top .lbl{font-weight:700;color:var(--ink-soft);font-size:10px;letter-spacing:.02em;white-space:nowrap;}
+  .ssm-kanal-top .lbl{font-weight:700;color:var(--ink-soft);font-size:10px;letter-spacing:.02em;white-space:nowrap;display:flex;align-items:center;gap:8px;}
+  .ssm-kanal-icon{width:24px;height:24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+  .fatura-kesilmeyen-lbl{display:flex;align-items:center;gap:9px;}
+  /* Temsilci kartı — referans görseldeki gibi koyu lacivert zeminli, altın harfli avatar */
+  .sellout-card .cust-avatar,.ssm-karne-card .cust-avatar{background:var(--navy);color:#D9B25C;}
   .ssm-kanal-top .val{font-family:var(--font-figures);font-weight:700;color:var(--ink);text-align:right;}
   .ssm-kanal-top .val small{font-family:'Inter',sans-serif;font-weight:600;color:var(--ink-faint);}
   .ssm-kanal-track{height:8px;background:var(--line-soft);border-radius:5px;overflow:hidden;}
@@ -801,6 +891,13 @@
   }
   .tab-dropdown-menu .dropdown-item:hover{opacity:1;background:var(--navy-soft);}
   .tab-dropdown-menu .dropdown-item.active{opacity:1;background:var(--navy-soft);color:var(--navy);font-weight:800;}
+  body.has-sidebar .tabbar,
+  body.has-sidebar .quick-access-bar{display:none;}
+  /* Mobilde navigasyon tamamen sidebar drawer üzerinden yapılıyor — bu yüzden dropdown
+     menüler de (Cari Detay/Dağıtım/Finansal Analiz açılır listeleri) rapor açıkken hiç
+     açılamaz hale getirildi (JS zaten TAB_DROPDOWNS ile bunlara referans veriyor, DOM'dan
+     kaldırmak yerine sadece görünürlüğü kapatılıyor ki referanslar kırılmasın). */
+  body.has-sidebar .tab-dropdown-menu{display:none !important;}
 
   .info-box{background:var(--navy-soft);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden;}
   .info-box summary{cursor:pointer;list-style:none;padding:12px 15px;font-size:12.8px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
@@ -869,10 +966,18 @@
     .modal-overlay{padding:0;align-items:flex-end;}
     .modal{
       max-width:none !important;width:100%;max-height:92dvh;
+      min-height:55vh;
       border-radius:18px 18px 0 0;border-bottom:none;
       padding-bottom:env(safe-area-inset-bottom);
     }
     .modal-body{overscroll-behavior:contain;-webkit-overflow-scrolling:touch;}
+    /* Bir popup içinden açılan ikinci (alt) popup'lar — Analiz, Tahsilat Tahmini, Hakediş,
+       Çek/Senet — altlarındaki ilk popup'ı daha belirgin şekilde koyulaştırır; böylece
+       arkadaki popup hâlâ aktifmiş gibi parlak durmaz, yeni açılan popup net şekilde öne çıkar. */
+    #analizModalOverlay.open,
+    #cekSenetModalOverlay.open,
+    #hakedisModalOverlay.open,
+    #tahsilatTahminiModalOverlay.open{background:rgba(15,22,38,0.6);}
 
     .toolbar{width:100%;flex-direction:column;align-items:stretch;}
     .toolbar > *{width:100%;}
@@ -1090,7 +1195,193 @@
     .stok-section-divider .toolbar{width:100%;}
     .stok-section-divider .toolbar > *{width:100%;}
   }
+
+  /* ===================== GENEL BAKIŞ (DASHBOARD) ===================== */
+  .app-header{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+    position:sticky;top:0;z-index:35;background:var(--bg);
+    padding:16px 0 16px;margin-bottom:20px;border-bottom:1px solid var(--line-soft);
+  }
+  .app-header-brand{display:flex;align-items:center;gap:14px;min-width:0;}
+  .app-header-mark{
+    width:52px;height:52px;border-radius:13px;flex-shrink:0;
+    background:var(--navy);border:1px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    color:#D9B25C;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:800;font-size:15px;
+  }
+  .app-header-title-wrap{min-width:0;}
+  .app-header-title{margin:0;font-size:clamp(20px,2.2vw,28px);line-height:1.15;white-space:nowrap;}
+  .app-header-title-strong{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:800;color:var(--navy);letter-spacing:-.01em;}
+  .app-header-title-sep{color:var(--line);font-weight:400;margin:0 10px;}
+  .app-header-title-light{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:var(--accent-deep);letter-spacing:.01em;}
+  .app-header-breadcrumb{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:12.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase;}
+  .app-topbar-actions{
+    display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap;
+  }
+  .app-topbar-actions .pill{background:var(--navy-soft);color:var(--navy);}
+  .app-topbar-actions .icon-btn{
+    width:38px;height:38px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  }
+  .app-topbar-actions .icon-btn:hover{background:var(--bg);border-color:var(--accent);color:var(--accent-deep);}
+  .app-topbar-actions .icon-btn.danger{border-color:var(--line);background:var(--surface);color:var(--ink-soft);}
+  .app-topbar-actions .icon-btn.danger:hover{border-color:var(--danger);background:var(--danger-soft);color:var(--danger);filter:none;}
+  .app-date-chip{
+    display:flex;align-items:center;gap:8px;height:38px;padding:0 13px;
+    border:1px solid var(--line);background:var(--surface);border-radius:9px;
+    font-size:12.5px;font-weight:600;color:var(--ink-soft);white-space:nowrap;
+  }
+  .app-date-chip i{color:var(--accent);font-size:12px;}
+  @media(max-width:980px){
+    /* Marka bilgisi mobilde .mobile-header'da zaten gösteriliyor — burada tekrar etmesin,
+       sadece durum/aksiyon şeridi (senkron/yükle/çıkış/tarih) kalsın. */
+    .app-header-brand{display:none;}
+    .app-header{justify-content:flex-end;padding-top:10px;}
+  }
+  @media(max-width:760px){
+    .app-header{position:static;flex-direction:column;align-items:flex-start;}
+    .app-topbar-actions{justify-content:flex-start;width:100%;}
+    .app-header-title{white-space:normal;}
+    /* "Güncel Durum" paneli (Toplam Açık/Kapalı Kanal LT kartları + koyu lacivert
+       Toplam Litre/Gerçekleşme Oranı kartı) mobilde kaldırılır; masaüstünde aynen kalır. */
+    .gb-durum-panel{display:none;}
+    /* "Son Aktiviteler" paneli de aynı şekilde sadece mobilde kaldırılır. */
+    .gb-aktivite-panel{display:none;}
+  }
+  .gb-sep{color:var(--line);}
+
+  .gb-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px;}
+  .gb-kpi-card{
+    background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;
+    padding:16px 17px 14px;min-width:0;transition:box-shadow .15s ease,border-color .15s ease;
+  }
+  .gb-kpi-card:hover{box-shadow:var(--shadow);border-color:var(--line);}
+  .gb-kpi-top{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.01em;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .gb-kpi-top i{font-size:12px;color:var(--accent);flex-shrink:0;}
+  .gb-kpi-value{font-family:var(--font-figures);font-size:23px;font-weight:700;color:var(--ink);line-height:1.1;white-space:nowrap;}
+  .gb-kpi-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;}
+  .gb-kpi-delta{font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+  .gb-kpi-delta.up{color:var(--success);}
+  .gb-kpi-delta.down{color:var(--danger);}
+  .gb-kpi-sub{font-size:10px;color:var(--ink-faint);}
+  .gb-kpi-spark{flex-shrink:0;line-height:0;}
+  .gb-kpi-spark svg{display:block;}
+
+  .gb-layout{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;}
+  @media(max-width:1180px){.gb-layout{grid-template-columns:1fr;}}
+  .gb-main-col{min-width:0;}
+  .gb-side-col{display:flex;flex-direction:column;gap:16px;min-width:0;}
+  .gb-side-panel .panel-body{padding-top:12px;}
+
+  .gb-donut-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:4px 0 24px;}
+  .gb-donut-card{background:var(--bg);border:1px solid var(--line-soft);border-radius:14px;padding:16px;}
+  .gb-donut-card-title{font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.02em;margin-bottom:10px;}
+  .gb-donut-body{display:flex;align-items:center;gap:14px;}
+  .gb-donut-svg-wrap{position:relative;flex-shrink:0;width:104px;height:104px;}
+  .gb-donut-svg-wrap svg{width:100%;height:100%;}
+  .gb-donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;}
+  .gb-donut-center-val{font-family:var(--font-figures);font-size:15px;font-weight:700;color:var(--ink);line-height:1.15;}
+  .gb-donut-center-lbl{font-size:8.5px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:1px;}
+  .gb-donut-center-big{font-family:var(--font-figures);font-size:18px;font-weight:700;line-height:1.1;}
+  .gb-donut-legend{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;}
+  .gb-donut-legend-row{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-soft);white-space:nowrap;}
+  .gb-donut-legend-row .dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+  .gb-donut-legend-row b{color:var(--ink);font-weight:700;}
+  .gb-donut-legend-row .amt{margin-left:auto;font-weight:600;color:var(--ink-faint);font-size:11px;}
+
+  .gb-section-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:6px 0 14px;}
+  .gb-section-head h3{font-family:'Space Grotesk',system-ui,sans-serif;font-size:15px;margin:0;color:var(--navy);font-weight:700;flex-shrink:0;}
+  .gb-section-head h3 .count{font-family:'Inter',system-ui,sans-serif;font-size:12px;color:var(--accent-deep);font-weight:600;margin-left:8px;}
+  .gb-risk-chip-filters{display:flex;gap:6px;flex-wrap:wrap;}
+  .gb-chip{
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:100px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;transition:all .15s ease;
+  }
+  .gb-chip i{font-size:7px;}
+  .gb-chip[data-risk="yuksek"] i{color:var(--danger);}
+  .gb-chip[data-risk="orta"] i{color:var(--warn);}
+  .gb-chip[data-risk="dusuk"] i{color:var(--success);}
+  .gb-chip:hover{border-color:var(--accent);}
+  .gb-chip.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .gb-chip.active i{color:inherit;}
+  .gb-section-head .btn.small{margin-left:auto;padding:7px 13px;font-size:12px;}
+
+  .gb-musteri-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:700px){.gb-musteri-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:1400px){.gb-musteri-grid{grid-template-columns:repeat(4,1fr);}}
+
+  .gb-durum-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+  .gb-durum-panel-head h2{position:relative;padding-left:14px;}
+  .gb-durum-panel-head h2::before{content:'';position:absolute;left:0;top:1px;bottom:1px;width:3px;border-radius:3px;background:var(--accent);}
+  .gb-durum-sellout-btn{
+    display:flex;align-items:center;gap:7px;flex-shrink:0;
+    border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent-deep);
+    font-family:inherit;font-size:12px;font-weight:700;padding:7px 13px;border-radius:100px;cursor:pointer;
+    transition:background .15s ease,border-color .15s ease;white-space:nowrap;
+  }
+  .gb-durum-sellout-btn:hover{background:var(--accent);color:#fff;}
+  .gb-durum-sellout-btn i{font-size:11px;}
+  /* Mobil tarafta değişiklik istenmedi — sidebar zaten bu genişlikte gizlendiğinden (bkz. .sidebar
+     @media max-width:980px), bu kısayol da yalnızca masaüstü görünümünde belirir. */
+  @media(max-width:980px){
+    .gb-durum-sellout-btn{display:none;}
+  }
+  .gb-durum-list{display:flex;flex-direction:column;gap:10px;}
+  .gb-durum-row{
+    display:flex;align-items:center;gap:13px;padding:12px 14px;min-width:0;
+    border:1px solid var(--line-soft);border-left:3px solid var(--line);border-radius:12px;
+  }
+  .gb-durum-row.navy{border-left-color:#1B5FAE;}
+  .gb-durum-row.warn{border-left-color:var(--warn);}
+  .gb-durum-row.success{border-left-color:var(--success);}
+  .gb-durum-row.danger{border-left-color:var(--danger);}
+  .gb-durum-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .gb-durum-ic.navy{background:#E6F1FB;color:#1B5FAE;}
+  .gb-durum-ic.danger{background:var(--danger-soft);color:var(--danger);}
+  .gb-durum-ic.warn{background:var(--warn-soft);color:var(--warn);}
+  .gb-durum-ic.success{background:var(--success-soft);color:var(--success);}
+  .gb-durum-text{min-width:0;flex:1;overflow:hidden;}
+  .gb-durum-label{font-size:12px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .gb-durum-val{font-family:var(--font-figures);font-size:18px;font-weight:700;color:var(--ink);margin-top:2px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  .gb-realizasyon-card{
+    margin-top:14px;border-radius:16px;padding:22px 20px;
+    background:var(--navy);border:1px solid var(--accent);
+    display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;
+  }
+  .gb-realizasyon-dots{position:absolute;top:14px;right:16px;width:70px;height:50px;opacity:.5;pointer-events:none;}
+  .gb-realizasyon-ring{position:relative;width:96px;height:96px;flex-shrink:0;}
+  .gb-realizasyon-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
+  .gb-realizasyon-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+  .gb-realizasyon-ring-pct{font-family:var(--font-figures);font-size:19px;font-weight:800;color:#F0DCA6;line-height:1.1;}
+  .gb-realizasyon-ring-lbl{font-size:8.5px;color:rgba(255,255,255,.6);font-weight:700;margin-top:2px;line-height:1.25;text-align:center;}
+  .gb-realizasyon-info{min-width:0;flex:1;}
+  .gb-realizasyon-label{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase;}
+  .gb-realizasyon-value{font-family:var(--font-figures);font-size:28px;font-weight:800;color:#F0DCA6;margin-top:5px;line-height:1.1;}
+  .gb-realizasyon-bar{height:3px;border-radius:3px;background:rgba(255,255,255,.14);margin-top:14px;overflow:hidden;}
+  .gb-realizasyon-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#8A6D1F,#F0DCA6);}
+  @media(max-width:420px){
+    .gb-realizasyon-card{flex-direction:column;align-items:flex-start;gap:16px;}
+  }
+
+  .gb-aktivite-list{display:flex;flex-direction:column;gap:14px;}
+  .gb-aktivite-row{display:flex;align-items:flex-start;gap:10px;}
+  .gb-aktivite-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11.5px;flex-shrink:0;margin-top:1px;}
+  .gb-aktivite-ic.navy{background:var(--navy-soft);color:var(--navy);}
+  .gb-aktivite-ic.success{background:var(--success-soft);color:var(--success);}
+  .gb-aktivite-ic.accent{background:var(--accent-soft);color:var(--accent-deep);}
+  .gb-aktivite-text{min-width:0;flex:1;}
+  .gb-aktivite-title{font-size:12.5px;font-weight:700;color:var(--ink);}
+  .gb-aktivite-sub{font-size:11px;color:var(--ink-faint);margin-top:1px;line-height:1.4;}
+  .gb-aktivite-time{font-size:10px;color:var(--ink-faint);white-space:nowrap;margin-left:6px;}
+
+  @media(max-width:760px){
+    .gb-kpi-grid{grid-template-columns:repeat(2,1fr);}
+    .gb-donut-row{grid-template-columns:1fr;}
+    .gb-section-head .btn.small{margin-left:0;}
+  }
 </style>
+
 </head>
 <body>
 <div id="authGate" style="position:fixed;inset:0;background:var(--bg,#EEF1F6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
@@ -1259,6 +1550,151 @@
   </div>
 
   <div id="reportSection">
+  <div class="app-shell">
+
+    <nav class="sidebar" id="appSidebar" aria-label="Ana navigasyon">
+      <div class="sidebar-nav">
+        <button class="sb-link sb-nav-link active" id="sbbtn-genelBakis" data-view="genelBakis" type="button"><i class="fa-solid fa-house sb-ic" aria-hidden="true"></i> Genel Bakış</button>
+
+        <button class="sb-link sb-parent open" id="sbbtn-cariDetay" type="button" aria-expanded="true" aria-controls="sbSubCariDetay"><i class="fa-solid fa-file-invoice sb-ic" aria-hidden="true"></i> Cari Detay <span class="sb-arrow">▾</span></button>
+        <div class="sb-submenu open" id="sbSubCariDetay">
+          <button class="sb-link sb-nav-link" id="sbbtn-yaslandirma" data-view="yaslandirma" type="button"><i class="fa-solid fa-clock sb-ic" aria-hidden="true"></i> Yaşlandırma Raporu</button>
+        </div>
+
+        <button class="sb-link sb-parent" id="sbbtn-dagitim" type="button" aria-expanded="false" aria-controls="sbSubDagitim"><i class="fa-solid fa-truck-fast sb-ic" aria-hidden="true"></i> Dağıtım <span class="sb-arrow">▾</span></button>
+        <div class="sb-submenu" id="sbSubDagitim">
+          <button class="sb-link sb-nav-link" id="sbbtn-sevk" data-view="sevk" type="button"><i class="fa-solid fa-truck sb-ic" aria-hidden="true"></i> Sevk Raporu</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-faturaKontrol" data-view="faturaKontrol" type="button"><i class="fa-solid fa-file-circle-check sb-ic" aria-hidden="true"></i> Fatura Kontrol</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-yukleme" data-view="yukleme" type="button"><i class="fa-solid fa-file-lines sb-ic" aria-hidden="true"></i> ST Tahsilat/Litre</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-ticariStok" data-view="ticariStok" type="button"><i class="fa-solid fa-box sb-ic" aria-hidden="true"></i> Ticari Stok Raporu</button>
+        </div>
+
+        <button class="sb-link sb-nav-link" id="sbbtn-bayiHakedis" data-view="bayiHakedis" type="button"><i class="fa-solid fa-award sb-ic" aria-hidden="true"></i> Bayi Hakediş</button>
+        <button class="sb-link sb-nav-link" id="sbbtn-sellOut" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> Sell Out Raporu</button>
+
+        <button class="sb-link sb-parent" id="sbbtn-finansalAnaliz" type="button" aria-expanded="false" aria-controls="sbSubFinansal"><i class="fa-solid fa-file-invoice-dollar sb-ic" aria-hidden="true"></i> Finansal Analiz <span class="sb-arrow">▾</span></button>
+        <div class="sb-submenu" id="sbSubFinansal">
+          <button class="sb-link sb-nav-link" id="sbbtn-temsilciKarnesi" data-view="temsilciKarnesi" type="button"><i class="fa-solid fa-trophy sb-ic" aria-hidden="true"></i> Temsilci Karnesi</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-tahsilatVerimlilik" data-view="tahsilatVerimlilik" type="button"><i class="fa-solid fa-arrow-trend-up sb-ic" aria-hidden="true"></i> Temsilci Tahsilat Verimliliği</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-cei" data-view="cei" type="button"><i class="fa-solid fa-calculator sb-ic" aria-hidden="true"></i> Tahsilat Başarı Oranı</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-nakitAkis" data-view="nakitAkis" type="button"><i class="fa-solid fa-money-bill sb-ic" aria-hidden="true"></i> Nakit Akış Tahmini</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-supheliAlacak" data-view="supheliAlacak" type="button"><i class="fa-solid fa-triangle-exclamation sb-ic" aria-hidden="true"></i> Şüpheli Alacak</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-dsoTrend" data-view="dsoTrend" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> DSO Trendi</button>
+          <button class="sb-link sb-nav-link" id="sbbtn-yonetimOzeti" data-view="yonetimOzeti" type="button"><i class="fa-solid fa-folder sb-ic" aria-hidden="true"></i> Yönetim Özeti</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sb-drawer-overlay" id="sbDrawerOverlay"></div>
+
+    <div class="app-main">
+
+    <div class="mobile-header">
+      <button type="button" class="mobile-header-burger" id="mobileHamburgerBtn" aria-label="Menüyü aç" aria-expanded="false" aria-controls="appSidebar"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+      <div class="mobile-header-title" translate="no">AKGÜN <span>MEŞRUBAT GIDA</span></div>
+    </div>
+
+    <div class="app-header">
+      <div class="app-header-brand">
+        <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+        <div class="app-header-title-wrap">
+          <h1 class="app-header-title" translate="no"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
+          <div class="app-header-breadcrumb" id="gbSubeWrap"><span id="gbSubeAdi">Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
+        </div>
+      </div>
+      <div class="app-topbar-actions">
+        <span class="pill" id="statusPillMain"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMainMsg">Veri bekleniyor</span></span>
+        <button class="icon-btn" id="sbSyncBtn" style="display:none;" title="Diğer Cihazdan Güncelle" aria-label="Diğer Cihazdan Güncelle"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i></button>
+        <button class="icon-btn" id="sbResetBtn" style="display:none;" title="Yeni veri yükle" aria-label="Yeni veri yükle"><i class="fa-solid fa-upload" aria-hidden="true"></i></button>
+        <button class="icon-btn danger" id="sbLogoutBtn" style="display:none;" title="Çıkış Yap" aria-label="Çıkış Yap"><i class="fa-solid fa-lock" aria-hidden="true"></i></button>
+        <div class="app-date-chip" id="appDateChip"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span id="appDateChipText">--.--.----</span></div>
+      </div>
+    </div>
+
+    <div id="genelBakisView" role="tabpanel" aria-labelledby="sbbtn-genelBakis">
+
+      <div class="gb-kpi-grid" id="gbKpiGrid"></div>
+
+      <div class="alert-banner" id="gbDikkatBanner" style="display:none;" role="button" tabindex="0" aria-haspopup="dialog">
+        <div class="alert-banner-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+        <div class="alert-banner-text"><strong id="gbDikkatBannerCount"></strong>müşterinin vadesi geçmiş borcu bulunmaktadır. Toplam tutar: <span id="gbDikkatEsikBanner"></span> gün ve üzeri</div>
+        <div class="alert-banner-cta">Detayları Gör →</div>
+      </div>
+
+      <div class="gb-layout">
+        <div class="gb-main-col">
+
+          <div class="panel" id="gbMusteriPanel">
+            <div class="panel-body">
+              <div class="toolbar" style="margin-bottom:16px;">
+                <div class="search-box">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                  <input type="text" id="gbSearchInput" placeholder="Müşteri adı, kodu veya temsilci ara…" aria-label="Müşteri adı, kodu veya temsilci ara" />
+                  <button type="button" id="gbSearchClearBtn" class="search-clear-btn" title="Aramayı temizle" aria-label="Aramayı temizle" style="display:none;">✕</button>
+                </div>
+                <select class="filter-select" id="gbTemsilciFilter"><option value="">Tüm temsilciler</option></select>
+                <select class="filter-select" id="gbSortSelect">
+                  <option value="kalanBorc" selected>Kalan Borç (Azalan)</option>
+                  <option value="avgVadeGun">Ortalama Vade (Azalan)</option>
+                  <option value="toplamRisk">Toplam Risk (Azalan)</option>
+                  <option value="musteriAdi">Müşteri Adı (A-Z)</option>
+                </select>
+              </div>
+
+              <div class="gb-donut-row">
+                <div class="gb-donut-card">
+                  <div class="gb-donut-card-title">Vade Dağılımı</div>
+                  <div class="gb-donut-body" id="gbVadeDonutBody"></div>
+                </div>
+                <div class="gb-donut-card">
+                  <div class="gb-donut-card-title">Risk Dağılımı</div>
+                  <div class="gb-donut-body" id="gbRiskDonutBody"></div>
+                </div>
+                <div class="gb-donut-card">
+                  <div class="gb-donut-card-title">Tahsilat Performansı</div>
+                  <div class="gb-donut-body" id="gbTahsilatDonutBody"></div>
+                </div>
+              </div>
+
+              <div class="gb-section-head">
+                <h3>Nokta Detay <span class="count" id="gbMusteriCount"></span></h3>
+                <div class="gb-risk-chip-filters" id="gbRiskChipFilters">
+                  <button type="button" class="gb-chip active" data-risk="all">Tümü</button>
+                  <button type="button" class="gb-chip" data-risk="yuksek"><i class="fa-solid fa-circle" aria-hidden="true"></i> Yüksek Risk</button>
+                  <button type="button" class="gb-chip" data-risk="orta"><i class="fa-solid fa-circle" aria-hidden="true"></i> Orta Risk</button>
+                  <button type="button" class="gb-chip" data-risk="dusuk"><i class="fa-solid fa-circle" aria-hidden="true"></i> Düşük Risk</button>
+                </div>
+                <button type="button" class="btn small" id="gbTumunuGorBtn">Tümünü Gör →</button>
+              </div>
+
+              <div class="gb-musteri-grid" id="gbMusteriGrid"></div>
+              <div class="musteri-daha-fazla-wrap" id="gbDahaFazlaWrap" style="display:none;">
+                <button type="button" class="btn" id="gbDahaFazlaBtn">Tüm müşterileri görüntüle ↓</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="gb-side-col">
+          <div class="panel gb-side-panel gb-durum-panel">
+            <div class="panel-head gb-durum-panel-head">
+              <h2>Güncel Durum</h2>
+              <button type="button" class="gb-durum-sellout-btn" id="gbDurumSellOutBtn"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> SellOut</button>
+            </div>
+            <div class="panel-body">
+              <div class="gb-durum-list" id="gbDurumList"></div>
+              <div class="gb-realizasyon-card" id="gbRealizasyonCard"></div>
+            </div>
+          </div>
+
+          <div class="panel gb-side-panel gb-aktivite-panel">
+            <div class="panel-head"><h2>Son Aktiviteler</h2></div>
+            <div class="panel-body gb-aktivite-list" id="gbAktiviteList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="tabbar" id="tabBar" role="tablist" aria-label="Rapor sekmeleri">
       <button class="tab-btn tab-dropdown-btn active" id="tabbtn-cariDetay" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cariDetayDropdownMenu"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> Cari Detay <span class="dd-arrow">▾</span></button>
@@ -1277,7 +1713,6 @@
     </div>
 
     <div class="tab-dropdown-menu" id="cariDetayDropdownMenu" role="menu" aria-hidden="true" aria-labelledby="tabbtn-cariDetay">
-      <button class="tab-btn dropdown-item active" id="tabbtn-genel" data-view="genel" type="button" role="tab" aria-selected="true" aria-controls="genelView"><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Genel Rapor</button>
       <button class="tab-btn dropdown-item" id="tabbtn-yaslandirma" data-view="yaslandirma" type="button" role="tab" aria-selected="false" aria-controls="yaslandirmaView"><i class="fa-solid fa-clock" aria-hidden="true"></i> Yaşlandırma Raporu</button>
     </div>
 
@@ -1349,7 +1784,7 @@
       </div>
     </div>
 
-    <div id="genelView" role="tabpanel" aria-labelledby="tabbtn-genel">
+    <div id="genelView" style="display:none;" role="tabpanel">
 
     <div id="kpiGrid"></div>
 
@@ -2247,7 +2682,9 @@
     </div>
 
     <footer>Bu rapor yüklenen ham veri dosyalarından tarayıcınızda anlık olarak hesaplanmıştır. Hiçbir veri sunucuya gönderilmez.</footer>
-  </div>
+    </div><!-- /.app-main -->
+  </div><!-- /.app-shell -->
+  </div><!-- /#reportSection -->
 
 </div>
 
@@ -2534,6 +2971,8 @@ const state = {
   yaslandirmaGosterilen: 30,
   hukukiGosterilen: 25,
   ticariStokGosterilen: 20,
+  gbGosterilen: 16,
+  gbRiskFiltre: 'all',
 };
 
 const MUSTERI_SAYFA_BOYUTU = 30;
@@ -4053,6 +4492,41 @@ const statusPillMsg = document.getElementById('statusPillMsg');
 const resetBtn = document.getElementById('resetBtn');
 const syncBtn = document.getElementById('syncBtn');
 
+// Sidebar'daki (sbResetBtn/sbSyncBtn/sbLogoutBtn) ikon butonları, gerçek topbar butonlarının
+// (resetBtn/syncBtn/authLogoutBtn) görünürlüğünü ve tıklama davranışını birebir yansıtır —
+// böylece iki ayrı görünürlük durumu elle senkron tutulmak zorunda kalınmaz.
+function syncSidebarFooterButtons(){
+  const pairs = [['sbResetBtn','resetBtn'], ['sbSyncBtn','syncBtn'], ['sbLogoutBtn','authLogoutBtn']];
+  pairs.forEach(([sbId, realId])=>{
+    const sb = document.getElementById(sbId);
+    const real = document.getElementById(realId);
+    if(!sb || !real) return;
+    sb.style.display = (real.style.display==='none' || getComputedStyle(real).display==='none') ? 'none' : 'inline-flex';
+  });
+}
+['sbResetBtn','sbSyncBtn','sbLogoutBtn'].forEach((sbId,i)=>{
+  const realId = ['resetBtn','syncBtn','authLogoutBtn'][i];
+  document.getElementById(sbId)?.addEventListener('click', ()=> document.getElementById(realId)?.click());
+});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('resetBtn'), {attributes:true, attributeFilter:['style']});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('syncBtn'), {attributes:true, attributeFilter:['style']});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('authLogoutBtn'), {attributes:true, attributeFilter:['style']});
+syncSidebarFooterButtons();
+
+// Üst action bar'daki durum rozeti (statusPillMain), asıl statusPill ile birebir aynı metni ve
+// "ok" (başarılı) durumunu gösterir — tek bir yerden (statusPillMsg/statusPill) güncellenen
+// mevcut mantığı iki kez yazmak yerine burada pasif olarak yansıtıyoruz.
+function syncStatusPillMain(){
+  const mainMsg = document.getElementById('statusPillMainMsg');
+  const mainPill = document.getElementById('statusPillMain');
+  if(!mainMsg || !mainPill) return;
+  mainMsg.textContent = statusPillMsg.textContent;
+  mainPill.classList.toggle('ok', statusPill.classList.contains('ok'));
+}
+new MutationObserver(syncStatusPillMain).observe(statusPillMsg, {characterData:true, childList:true, subtree:true});
+new MutationObserver(syncStatusPillMain).observe(statusPill, {attributes:true, attributeFilter:['class']});
+syncStatusPillMain();
+
 dropzone.addEventListener('click', ()=>fileInput.click());
 dropzone.addEventListener('keydown', e=>{
   if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
@@ -4153,6 +4627,7 @@ buildBtn.addEventListener('click', async ()=>{
     renderReport(state.report);
     document.getElementById('uploadCard').style.display='none';
     document.getElementById('reportSection').style.display='block';
+    document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
     const saved = await saveReportToStorage(state.report);
     faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
@@ -4234,6 +4709,7 @@ async function resetAll(){
   statusPill.classList.remove('ok');
   document.getElementById('uploadCard').style.display='block';
   document.getElementById('reportSection').style.display='none';
+  document.body.classList.remove('has-sidebar');
   document.getElementById('storageNote').style.display='none';
   resetBtn.style.display='none';
   syncBtn.style.display='none';
@@ -4243,11 +4719,11 @@ async function resetAll(){
   document.getElementById('sevkVadeMinInput').value = '';
   document.getElementById('sevkVadeMaxInput').value = '';
   document.querySelectorAll('.tab-btn').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-  const genelTab = document.querySelector('.tab-btn[data-view="genel"]');
-  if(genelTab){ genelTab.classList.add('active'); genelTab.setAttribute('aria-selected','true'); }
-  const cariDetayTab = document.getElementById('tabbtn-cariDetay');
-  if(cariDetayTab) cariDetayTab.classList.add('active');
-  document.getElementById('genelView').style.display='block';
+  document.querySelectorAll('.sb-nav-link').forEach(b=> b.classList.remove('active'));
+  const genelBakisTab = document.getElementById('sbbtn-genelBakis');
+  if(genelBakisTab) genelBakisTab.classList.add('active');
+  document.getElementById('genelBakisView').style.display='block';
+  document.getElementById('genelView').style.display='none';
   document.getElementById('sevkView').style.display='none';
   document.getElementById('yuklemeView').style.display='none';
   document.getElementById('yaslandirmaView').style.display='none';
@@ -4310,6 +4786,7 @@ async function uygulamayiBaslat(){
     renderReport(report);
     document.getElementById('uploadCard').style.display='none';
     document.getElementById('reportSection').style.display='block';
+    document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
     document.getElementById('storageNote').style.display='block';
     if(cloudEnabled()){
@@ -4832,6 +5309,398 @@ function computeGenelKPI(report, temsilciFilter){
   };
 }
 
+/* ============================== GENEL BAKIŞ (DASHBOARD) ============================== */
+
+// Genel Bakış'taki risk sınıflandırması: ortalama vadeye göre 3 kademe (düşük/orta/yüksek).
+// Hukuki Takip'teki (90/180 gün) eşiklerden farklı — burada amaç günlük operasyonel bir özet.
+function gbRiskSeviyesi(m){
+  const g = Number(m.avgVadeGun)||0;
+  if(m.cekSenet>0 && g>30) return 'yuksek';
+  if(g>=45) return 'yuksek';
+  if(g>=15) return 'orta';
+  return 'dusuk';
+}
+const GB_RISK_META = {
+  yuksek: {label:'Yüksek Risk', renk:'var(--danger)'},
+  orta:   {label:'Orta Risk',   renk:'var(--warn)'},
+  dusuk:  {label:'Düşük Risk',  renk:'var(--success)'},
+};
+
+function gbTumMusteriler(report){
+  const bakiyesizSatirlari = (report.bakiyesiz||[]).map(b=>({
+    musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
+    kalanBorc: 0, avgVadeGun: null, siparisTutari: b.siparisTutari||0, emanetSiparis: b.emanetSiparis||0,
+    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.siparisTutari||0)+(b.cekSenet||0),
+    invoices: [], __bakiyesiz: true,
+  }));
+  return report.musteriler.concat(bakiyesizSatirlari);
+}
+
+function gbDonutSvg(segments, sizePx){
+  // segments: [{value, color}] — basit stroke-dasharray tabanlı donut, ekstra kütüphane gerektirmez.
+  const size = sizePx || 104;
+  const stroke = 13;
+  const r = (size - stroke) / 2;
+  const c = size/2;
+  const circ = 2 * Math.PI * r;
+  const toplam = segments.reduce((s,x)=>s+(x.value||0), 0);
+  let offset = 0;
+  let arcs = '';
+  if(toplam <= 0){
+    arcs = `<circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="var(--line-soft)" stroke-width="${stroke}"/>`;
+  } else {
+    segments.forEach(seg=>{
+      const frac = (seg.value||0) / toplam;
+      if(frac<=0) return;
+      const len = frac * circ;
+      const gap = circ - len;
+      arcs += `<circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${seg.color}" stroke-width="${stroke}"
+        stroke-dasharray="${len.toFixed(2)} ${gap.toFixed(2)}" stroke-dashoffset="${(-offset).toFixed(2)}" stroke-linecap="butt"/>`;
+      offset += len;
+    });
+  }
+  return `<svg viewBox="0 0 ${size} ${size}" style="transform:rotate(-90deg);">${arcs}</svg>`;
+}
+
+function gbSparkline(seed, color){
+  // Gerçek geçmiş zaman serisi verisi tutulmadığından, KPI kartlarındaki mini-grafik yalnızca
+  // görsel bir trend ipucu olarak, KPI değerinden türetilmiş sabit (deterministik) bir dalga ile çizilir.
+  const w=64,h=22, pts=8;
+  let seedNum = 0;
+  String(seed).split('').forEach(ch=> seedNum += ch.charCodeAt(0));
+  const vals = [];
+  for(let i=0;i<pts;i++){
+    const n = Math.sin(seedNum*0.7 + i*1.3) * 0.5 + Math.sin(seedNum*0.31 + i*2.1)*0.5;
+    vals.push(0.5 + n*0.4);
+  }
+  const stepX = w/(pts-1);
+  const d = vals.map((v,i)=> `${i===0?'M':'L'}${(i*stepX).toFixed(1)},${(h-v*h).toFixed(1)}`).join(' ');
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+function renderGenelBakisView(report){
+  const view = document.getElementById('genelBakisView');
+  if(!view) return;
+  if(!report){
+    return;
+  }
+
+  const musteriler = gbTumMusteriler(report);
+  const kpi = report.kpi || computeGenelKPI(report, '');
+
+  const toplamKalanBorc = sum(musteriler,'kalanBorc');
+  const toplamCekSenet = sum(musteriler,'cekSenet');
+  const toplamRisk = sum(musteriler,'toplamRisk');
+  const toplamTahsilat = kpi.toplamTahsilat || 0;
+  const vAgirlikli = sum(report.musteriler,'vadeAgirlikliToplam');
+  const vBorc = sum(report.musteriler,'agirlikBorc');
+  const ortalamaVade = vBorc!==0 ? Math.round(vAgirlikli/vBorc) : null;
+  const tahsilatOraniPayda = toplamTahsilat + toplamKalanBorc;
+  const tahsilatOrani = tahsilatOraniPayda>0 ? (toplamTahsilat/tahsilatOraniPayda*100) : null;
+
+  // ---- KPI kartları ----
+  const kpiDefs = [
+    {icon:'fa-coins', label:'Toplam Kalan Borç', value:TL(toplamKalanBorc), color:'var(--navy)'},
+    {icon:'fa-circle-half-stroke', label:'Ortalama Vade', value: ortalamaVade!=null ? ortalamaVade+' gün' : '—', color:'var(--accent)'},
+    {icon:'fa-triangle-exclamation', label:'Toplam Risk', value:TL(toplamRisk), color:'var(--danger)'},
+    {icon:'fa-file-signature', label:'Çek / Senet Riski', value:TL(toplamCekSenet), color:'var(--danger)'},
+    {icon:'fa-sack-dollar', label:'Alınan Tahsilat', value:TL(toplamTahsilat), color:'var(--success)'},
+    {icon:'fa-percent', label:'Tahsilat Oranı', value: tahsilatOrani!=null ? tahsilatOrani.toFixed(1).replace('.',',')+'%' : '—', color:'var(--accent)'},
+  ];
+  document.getElementById('gbKpiGrid').innerHTML = kpiDefs.map(k=>`
+    <div class="gb-kpi-card">
+      <div class="gb-kpi-top"><i class="fa-solid ${k.icon}" aria-hidden="true"></i> ${k.label}</div>
+      <div class="gb-kpi-value">${k.value}</div>
+      <div class="gb-kpi-foot">
+        <span class="gb-kpi-sub">güncel veriye göre</span>
+        <span class="gb-kpi-spark">${gbSparkline(k.label+toplamKalanBorc, k.color)}</span>
+      </div>
+    </div>`).join('');
+
+  // ---- Dikkat banner ----
+  const riskliSayisi = report.musteriler.filter(isRiskliMusteri).length;
+  const banner = document.getElementById('gbDikkatBanner');
+  if(riskliSayisi>0){
+    banner.style.display = 'flex';
+    document.getElementById('gbDikkatBannerCount').textContent = riskliSayisi.toLocaleString('tr-TR') + ' ';
+    document.getElementById('gbDikkatEsikBanner').textContent = VADE_RISK_ESIGI;
+    banner.onclick = openDikkatModal;
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // ---- Vade Dağılımı donut ----
+  const vadeBuckets = [
+    {label:'0 - 30 gün', test:g=>g<=30, color:'#1B5FAE'},
+    {label:'31 - 60 gün', test:g=>g>30&&g<=60, color:'var(--warn)'},
+    {label:'61 - 90 gün', test:g=>g>60&&g<=90, color:'#C2571B'},
+    {label:'90+ gün', test:g=>g>90, color:'var(--danger)'},
+  ];
+  const vadeAmounts = vadeBuckets.map(()=>0);
+  musteriler.forEach(m=>{
+    if(m.kalanBorc<=0) return;
+    const g = m.avgVadeGun==null ? 0 : m.avgVadeGun;
+    const idx = vadeBuckets.findIndex(b=>b.test(g));
+    if(idx>=0) vadeAmounts[idx] += m.kalanBorc;
+  });
+  const vadeToplam = vadeAmounts.reduce((a,b)=>a+b,0);
+  document.getElementById('gbVadeDonutBody').innerHTML = `
+    <div class="gb-donut-svg-wrap">
+      ${gbDonutSvg(vadeBuckets.map((b,i)=>({value:vadeAmounts[i], color:b.color})), 104)}
+      <div class="gb-donut-center">
+        <div class="gb-donut-center-lbl">Toplam</div>
+        <div class="gb-donut-center-big">${gbKisaTL(vadeToplam)}</div>
+      </div>
+    </div>
+    <div class="gb-donut-legend">
+      ${vadeBuckets.map((b,i)=>`<div class="gb-donut-legend-row"><span class="dot" style="background:${b.color}"></span>${b.label}<span class="amt">${gbKisaTL(vadeAmounts[i])} (${vadeToplam>0?(vadeAmounts[i]/vadeToplam*100).toFixed(1):'0'}%)</span></div>`).join('')}
+    </div>`;
+
+  // ---- Risk Dağılımı donut ----
+  const riskKeys = ['yuksek','orta','dusuk'];
+  const riskAmounts = {yuksek:0, orta:0, dusuk:0};
+  musteriler.forEach(m=>{ riskAmounts[gbRiskSeviyesi(m)] += (m.toplamRisk||0); });
+  const riskToplam = riskKeys.reduce((s,k)=>s+riskAmounts[k],0);
+  const bakinizRiskin = riskKeys.reduce((best,k)=> riskAmounts[k]>riskAmounts[best] ? k : best, 'yuksek');
+  document.getElementById('gbRiskDonutBody').innerHTML = `
+    <div class="gb-donut-svg-wrap">
+      ${gbDonutSvg(riskKeys.map(k=>({value:riskAmounts[k], color:GB_RISK_META[k].renk})), 104)}
+      <div class="gb-donut-center">
+        <div class="gb-donut-center-lbl" style="color:${GB_RISK_META[bakinizRiskin].renk};font-weight:700;">${GB_RISK_META[bakinizRiskin].label}</div>
+        <div class="gb-donut-center-big">${gbKisaTL(riskToplam)}</div>
+      </div>
+    </div>
+    <div class="gb-donut-legend">
+      ${riskKeys.map(k=>`<div class="gb-donut-legend-row"><span class="dot" style="background:${GB_RISK_META[k].renk}"></span>${GB_RISK_META[k].label}<span class="amt">%${riskToplam>0?(riskAmounts[k]/riskToplam*100).toFixed(0):'0'} (${gbKisaTL(riskAmounts[k])})</span></div>`).join('')}
+    </div>`;
+
+  // ---- Tahsilat Performansı donut ----
+  document.getElementById('gbTahsilatDonutBody').innerHTML = `
+    <div class="gb-donut-svg-wrap">
+      ${gbDonutSvg([{value:toplamTahsilat, color:'var(--success)'},{value:toplamKalanBorc, color:'var(--navy-soft)'}], 104)}
+      <div class="gb-donut-center">
+        <div class="gb-donut-center-big">${tahsilatOrani!=null?tahsilatOrani.toFixed(1).replace('.',','):'—'}%</div>
+        <div class="gb-donut-center-lbl">Tahsilat Oranı</div>
+      </div>
+    </div>
+    <div class="gb-donut-legend">
+      <div class="gb-donut-legend-row"><span class="dot" style="background:var(--success)"></span>Alınan Tahsilat<span class="amt">${TL(toplamTahsilat)}</span></div>
+      <div class="gb-donut-legend-row"><span class="dot" style="background:var(--navy-soft)"></span>Kalan Borç<span class="amt">${TL(toplamKalanBorc)}</span></div>
+      <div class="gb-donut-legend-row"><span class="dot" style="background:var(--danger)"></span>Toplam Risk<span class="amt">${TL(toplamRisk)}</span></div>
+    </div>`;
+
+  populateTemsilciFilter(report.musteriler, 'gbTemsilciFilter');
+
+  // ---- Müşteri arama/filtre/sırala + kart grid ----
+  state.gbRiskFiltre = state.gbRiskFiltre || 'all';
+  renderGbMusteriGrid(report);
+  renderGbSidePanels(report);
+}
+
+function gbKisaTL(n){
+  n = Math.round(n||0);
+  if(Math.abs(n) >= 1000000) return (n/1000000).toFixed(1).replace('.',',') + 'M ₺';
+  if(Math.abs(n) >= 1000) return (n/1000).toFixed(0) + 'K ₺';
+  return n.toLocaleString('tr-TR') + ' ₺';
+}
+
+function renderGbMusteriGrid(report){
+  const q = document.getElementById('gbSearchInput').value.trim().toLowerCase();
+  const temsilci = document.getElementById('gbTemsilciFilter').value;
+  const sortKey = document.getElementById('gbSortSelect').value;
+  const riskFiltre = state.gbRiskFiltre || 'all';
+
+  let rows = gbTumMusteriler(report).filter(m=>{
+    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
+    if(temsilci && m.temsilci !== temsilci) return false;
+    if(riskFiltre!=='all' && gbRiskSeviyesi(m)!==riskFiltre) return false;
+    return true;
+  });
+
+  rows = rows.slice().sort((a,b)=>{
+    if(sortKey==='musteriAdi') return String(a.musteriAdi).localeCompare(String(b.musteriAdi),'tr');
+    const av = a[sortKey]||0, bv = b[sortKey]||0;
+    return bv-av;
+  });
+
+  document.getElementById('gbMusteriCount').textContent = rows.length.toLocaleString('tr-TR') + ' müşteri';
+
+  const gosterilecekSayi = Math.min(state.gbGosterilen || 16, rows.length);
+  const gosterilecekRows = rows.slice(0, gosterilecekSayi);
+  const grid = document.getElementById('gbMusteriGrid');
+
+  if(!rows.length){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">Filtreyle eşleşen müşteri bulunamadı.</div>`;
+    document.getElementById('gbDahaFazlaWrap').style.display = 'none';
+    return;
+  }
+
+  const hakedisKodlari = bayiHakedisliMusteriKodlari();
+  grid.innerHTML = gosterilecekRows.map(m=>{
+    state.faturaModalYedekMap.set(m.musteri, m);
+    const risk = hukukiRiskSeviyesi(m.avgVadeGun);
+    const vadeRenk = ortVadeRenk(m.avgVadeGun);
+    return `<div class="htk-card" data-musteri="${escapeHtml(m.musteri)}" style="--htk-risk:${risk.renk};--htk-risk-bg:${risk.bg};">
+      <div class="htk-head">
+        <div style="min-width:0;">
+          <div class="htk-musteri-row">
+            <span class="htk-musteri">${escapeHtml(m.musteriAdi)}</span>
+            ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${hakedisRozeti(m.musteri, hakedisKodlari)}
+          </div>
+          <div class="htk-temsilci">${HTK_USER_ICON}${escapeHtml(m.temsilci||'—')}</div>
+        </div>
+        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
+            <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
+          </span>
+      </div>
+      <div class="htk-borc-satir">
+        <span class="htk-borc">${TL(m.kalanBorc)}</span>
+      </div>
+      <div class="htk-inline-stats">
+        <div class="htk-stat-item"><span class="l">Sipariş</span><span class="v${m.siparisTutari>0?' c-siparis':' zero'}">${m.siparisTutari>0?TL(m.siparisTutari):'—'}</span></div>
+        <div class="htk-stat-item"><span class="l">Sevk Ert.</span><span class="v${m.emanetSiparis>0?' c-sevk':' zero'}">${m.emanetSiparis>0?TL(m.emanetSiparis):'—'}</span></div>
+        <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.alinanTahsilat>0?' c-tahsilat':' zero'}">${m.alinanTahsilat>0?TL(m.alinanTahsilat):'—'}</span></div>
+      </div>
+      <div class="htk-alt">
+        <span class="htk-ceksenet">Çek/Senet: ${TL(m.cekSenet||0)}</span>
+        <div class="htk-alt-actions">
+          <button type="button" class="btn small gb-senet-btn" data-musteri="${escapeHtml(m.musteri)}" data-musteri-adi="${escapeHtml(m.musteriAdi)}" data-tutar="${m.siparisTutari||0}" data-emanet="${m.emanetSiparis||0}" data-kalan-borc="${m.kalanBorc||0}"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Senet</button>
+          <button type="button" class="nokta-detay-btn primary gb-detay-btn" data-musteri="${escapeHtml(m.musteri)}" data-musteri-adi="${escapeHtml(m.musteriAdi)}">Detay ↗</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  if(rows.length > gosterilecekSayi){
+    document.getElementById('gbDahaFazlaWrap').style.display = 'flex';
+  } else {
+    document.getElementById('gbDahaFazlaWrap').style.display = 'none';
+  }
+
+  grid.querySelectorAll('.gb-detay-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const musteriKod = btn.getAttribute('data-musteri');
+      const musteriAdi = btn.getAttribute('data-musteri-adi');
+      faturaModalAc(musteriKod, musteriAdi);
+    });
+  });
+  grid.querySelectorAll('.gb-senet-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const musteriKod = btn.getAttribute('data-musteri');
+      const musteriAdi = btn.getAttribute('data-musteri-adi');
+      const tutar = Number(btn.getAttribute('data-tutar'))||0;
+      const emanet = Number(btn.getAttribute('data-emanet'))||0;
+      const kalanBorc = Number(btn.getAttribute('data-kalan-borc'))||0;
+      senetModalAc(musteriKod, musteriAdi, tutar, emanet, kalanBorc);
+    });
+  });
+}
+
+document.getElementById('gbSearchInput')?.addEventListener('input', debounce(()=>{
+  updateGbSearchClearBtn();
+  state.gbGosterilen = 16;
+  if(state.report) renderGbMusteriGrid(state.report);
+}, 180));
+function updateGbSearchClearBtn(){
+  const val = document.getElementById('gbSearchInput').value;
+  document.getElementById('gbSearchClearBtn').style.display = val ? 'flex' : 'none';
+}
+document.getElementById('gbSearchClearBtn')?.addEventListener('click', ()=>{
+  document.getElementById('gbSearchInput').value = '';
+  updateGbSearchClearBtn();
+  if(state.report) renderGbMusteriGrid(state.report);
+});
+document.getElementById('gbTemsilciFilter')?.addEventListener('change', ()=>{ state.gbGosterilen=16; if(state.report) renderGbMusteriGrid(state.report); });
+document.getElementById('gbSortSelect')?.addEventListener('change', ()=>{ state.gbGosterilen=16; if(state.report) renderGbMusteriGrid(state.report); });
+document.getElementById('gbDahaFazlaBtn')?.addEventListener('click', ()=>{
+  state.gbGosterilen = (state.gbGosterilen||16) + 16;
+  if(state.report) renderGbMusteriGrid(state.report);
+});
+document.getElementById('gbTumunuGorBtn')?.addEventListener('click', ()=>{
+  state.gbGosterilen = 100000;
+  if(state.report) renderGbMusteriGrid(state.report);
+  document.getElementById('gbMusteriPanel')?.scrollIntoView({behavior:'smooth', block:'start'});
+});
+document.getElementById('gbDurumSellOutBtn')?.addEventListener('click', ()=> setActiveView('sellOut'));
+document.querySelectorAll('#gbRiskChipFilters .gb-chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('#gbRiskChipFilters .gb-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    state.gbRiskFiltre = chip.getAttribute('data-risk');
+    state.gbGosterilen = 16;
+    if(state.report) renderGbMusteriGrid(state.report);
+  });
+});
+
+// İnce, yuvarlak uçlu tek-renk "gerçekleşme" halkası (görseldeki Toplam Litre kartındaki gibi).
+function gbRealizasyonRingSvg(oran){
+  const size = 96, stroke = 9;
+  const r = (size - stroke) / 2;
+  const c = size/2;
+  const circ = 2 * Math.PI * r;
+  const pct = Math.max(0, Math.min(1, (oran||0)/100));
+  const len = pct * circ;
+  return `<svg viewBox="0 0 ${size} ${size}">
+    <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="${stroke}"/>
+    <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="#F0DCA6" stroke-width="${stroke}"
+      stroke-dasharray="${len.toFixed(2)} ${(circ-len).toFixed(2)}" stroke-linecap="round"/>
+  </svg>`;
+}
+
+// ---- Sağ panel: Güncel Durum + Son Aktiviteler (gerçek veriden özet) ----
+function renderGbSidePanels(report){
+  // Açık/Kapalı Kanal litre verileri Sell Out Raporu'ndan gelir — Sell Out Raporu'nun kendi üst
+  // KPI şeridiyle AYNI ortak fonksiyon (sellOutKanalOzeti) kullanılır, ayrı bir hesap yapılmaz.
+  const sellOutRaw = state.sellOutReport;
+  const sellOutProcessed = sellOutRaw ? applySellOutHedef(sellOutRaw, state.sellOutHedef) : null;
+  const {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, gerceklesmeOrani, toplamLitre} = sellOutKanalOzeti(sellOutProcessed);
+  const gerceklesmeOraniGosterim = gerceklesmeOrani!=null ? gerceklesmeOrani : 0;
+
+  const durumRows = [
+    {ic:'fa-box', cls:'navy', label:'Toplam Açık Kanal LT', val: LT(toplamAcikLitre)},
+    {ic:'fa-box', cls:'warn', label:'Toplam Kapalı Kanal LT', val: LT(toplamKapaliLitre)},
+    {ic:'fa-store', cls:'success', label:'Açık Kanal Kalan Litre', val: LT(acikKalan)},
+    {ic:'fa-users', cls:'danger', label:'Kapalı Kanal Kalan Litre', val: LT(kapaliKalan)},
+  ];
+  document.getElementById('gbDurumList').innerHTML = durumRows.map(r=>`
+    <div class="gb-durum-row ${r.cls}">
+      <div class="gb-durum-ic ${r.cls}"><i class="fa-solid ${r.ic}" aria-hidden="true"></i></div>
+      <div class="gb-durum-text"><div class="gb-durum-label">${r.label}</div><div class="gb-durum-val">${r.val}</div></div>
+    </div>`).join('');
+
+  document.getElementById('gbRealizasyonCard').innerHTML = `
+    <svg class="gb-realizasyon-dots" viewBox="0 0 70 50" aria-hidden="true">
+      ${Array.from({length:24}).map((_,i)=>`<circle cx="${(i%8)*9+3}" cy="${Math.floor(i/8)*16+5}" r="1.4" fill="#F0DCA6" opacity="${0.15+((i%3)*0.12)}"/>`).join('')}
+    </svg>
+    <div class="gb-realizasyon-ring">
+      ${gbRealizasyonRingSvg(gerceklesmeOraniGosterim)}
+      <div class="gb-realizasyon-ring-center">
+        <div class="gb-realizasyon-ring-pct">${gerceklesmeOraniGosterim.toFixed(0)}%</div>
+        <div class="gb-realizasyon-ring-lbl">Gerçekleşme<br>Oranı</div>
+      </div>
+    </div>
+    <div class="gb-realizasyon-info">
+      <div class="gb-realizasyon-label">Toplam Litre</div>
+      <div class="gb-realizasyon-value">${Math.round(toplamLitre).toLocaleString('tr-TR')} L</div>
+      <div class="gb-realizasyon-bar"><div class="gb-realizasyon-bar-fill" style="width:${Math.max(gerceklesmeOraniGosterim,3).toFixed(1)}%;"></div></div>
+    </div>`;
+
+  const riskliSayisi = report.musteriler.filter(isRiskliMusteri).length;
+  document.getElementById('gbAktiviteList').innerHTML = `
+    <div class="gb-aktivite-row">
+      <div class="gb-aktivite-ic navy"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
+      <div class="gb-aktivite-text"><div class="gb-aktivite-title">Rapor güncellendi</div><div class="gb-aktivite-sub">${report.musteriler.length.toLocaleString('tr-TR')} müşteri verisi işlendi</div></div>
+    </div>
+    <div class="gb-aktivite-row">
+      <div class="gb-aktivite-ic success"><i class="fa-solid fa-sack-dollar" aria-hidden="true"></i></div>
+      <div class="gb-aktivite-text"><div class="gb-aktivite-title">Tahsilat özeti hazır</div><div class="gb-aktivite-sub">${TL(report.kpi ? report.kpi.toplamTahsilat : 0)} tahsilat kaydedildi</div></div>
+    </div>
+    <div class="gb-aktivite-row">
+      <div class="gb-aktivite-ic accent"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+      <div class="gb-aktivite-text"><div class="gb-aktivite-title">Risk taraması tamamlandı</div><div class="gb-aktivite-sub">${riskliSayisi.toLocaleString('tr-TR')} müşteri dikkat listesinde</div></div>
+    </div>`;
+}
+
 function renderReport(report){
   refreshGenelKPIs(report);
   populateTemsilciFilter(report.musteriler, 'temsilciFilter');
@@ -4846,6 +5715,18 @@ function renderReport(report){
   renderRepGrid(report.temsilciler);
   renderYaslandirmaView(report);
   renderTicariStokView(report);
+  renderGenelBakisView(report);
+  renderAppHeaderBadges(report);
+}
+
+// Üst header'daki tarih göstergesi — tüm sayfalarda ortak olduğu için her raporda bir kez,
+// Genel Bakış'a özel olmadan güncellenir.
+function renderAppHeaderBadges(report){
+  const dateEl = document.getElementById('appDateChipText');
+  if(dateEl){
+    const asOf = report && report.asOf ? new Date(report.asOf) : turkiyeBugun();
+    dateEl.textContent = asOf.toLocaleDateString('tr-TR');
+  }
 }
 
 const FINANSAL_ANALIZ_VIEWS = ['temsilciKarnesi','tahsilatVerimlilik','cei','nakitAkis','supheliAlacak','dsoTrend','yonetimOzeti'];
@@ -4893,48 +5774,107 @@ document.addEventListener('click', (e)=>{
 window.addEventListener('resize', ()=>{ TAB_DROPDOWNS.forEach(d=>{ if(d.menu.classList.contains('open')) openDropdown(d); }); });
 document.querySelector('.tabbar')?.addEventListener('scroll', ()=>closeAllDropdowns(), {passive:true});
 
+const ALL_VIEW_IDS = ['genelBakis','genel','sevk','yukleme','yaslandirma','ticariStok','faturaKontrol','bayiHakedis','sellOut','tahsilatVerimlilik','dsoTrend','nakitAkis','supheliAlacak','temsilciKarnesi','yonetimOzeti','cei'];
+
+// ---- Sol sidebar: alt menü (Cari Detay / Dağıtım / Finansal Analiz) aç/kapa ----
+const SB_SUBMENUS = [
+  {btn: document.getElementById('sbbtn-cariDetay'), menu: document.getElementById('sbSubCariDetay'), views: CARI_DETAY_VIEWS},
+  {btn: document.getElementById('sbbtn-dagitim'), menu: document.getElementById('sbSubDagitim'), views: DAGITIM_VIEWS},
+  {btn: document.getElementById('sbbtn-finansalAnaliz'), menu: document.getElementById('sbSubFinansal'), views: FINANSAL_ANALIZ_VIEWS},
+].filter(x=>x.btn && x.menu);
+SB_SUBMENUS.forEach(s=>{
+  s.btn.addEventListener('click', ()=>{
+    const willOpen = !s.menu.classList.contains('open');
+    s.menu.classList.toggle('open', willOpen);
+    s.btn.classList.toggle('open', willOpen);
+    s.btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  });
+});
+
+function setActiveView(view){
+  // Üst sekme çubuğu (mobil/dar ekran) ve sidebar linklerini birlikte senkronize et.
+  document.querySelectorAll('.tab-btn[data-view]').forEach(b=>{
+    const match = b.getAttribute('data-view')===view;
+    b.classList.toggle('active', match);
+    b.setAttribute('aria-selected', match ? 'true' : 'false');
+  });
+  TAB_DROPDOWNS.forEach(d=> d.btn.classList.toggle('active', d.views.includes(view)));
+
+  document.querySelectorAll('.sb-nav-link[data-view]').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-view')===view);
+  });
+  SB_SUBMENUS.forEach(s=>{
+    const isActiveGroup = s.views.includes(view);
+    s.btn.classList.toggle('active', isActiveGroup);
+    if(isActiveGroup && !s.menu.classList.contains('open')){
+      s.menu.classList.add('open');
+      s.btn.classList.add('open');
+      s.btn.setAttribute('aria-expanded','true');
+    }
+  });
+
+  ALL_VIEW_IDS.forEach(id=>{
+    const el = document.getElementById(id+'View');
+    if(el) el.style.display = (id===view) ? 'block' : 'none';
+  });
+
+  if(view==='genelBakis') renderGenelBakisView(state.report);
+  if(view==='sevk' && state.report) renderSevkView(state.report);
+  if(view==='yukleme') renderYuklemeView();
+  if(view==='yaslandirma' && state.report) renderYaslandirmaView(state.report);
+  if(view==='ticariStok' && state.report) renderTicariStokView(state.report);
+  if(view==='faturaKontrol' && state.report) renderFaturaKontrolView(state.report);
+  if(view==='bayiHakedis') renderBayiHakedisView();
+  if(view==='sellOut') renderSellOutView();
+  if(view==='tahsilatVerimlilik' && state.report) renderTahsilatVerimlilikView(state.report);
+  if(view==='dsoTrend' && state.report) renderDsoTrendView(state.report);
+  if(view==='nakitAkis' && state.report) renderNakitAkisView(state.report);
+  if(view==='supheliAlacak' && state.report) renderSupheliAlacakView(state.report);
+  if(view==='temsilciKarnesi' && state.report) renderTemsilciKarnesiView(state.report);
+  if(view==='yonetimOzeti' && state.report) renderYonetimOzetiView(state.report);
+  if(view==='cei' && state.report) renderCeiView(state.report);
+
+  try{ window.scrollTo({top:0, behavior:'instant'}); }catch(e){ window.scrollTo(0,0); }
+}
+
+document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    setActiveView(btn.getAttribute('data-view'));
+    closeSidebarDrawer();
+  });
+});
+
+// ---- Mobil hamburger menü (sidebar'ı kayan panel/drawer olarak aç-kapat) ----
+function openSidebarDrawer(){
+  document.body.classList.add('sb-drawer-open');
+  document.getElementById('mobileHamburgerBtn')?.setAttribute('aria-expanded','true');
+}
+function closeSidebarDrawer(){
+  document.body.classList.remove('sb-drawer-open');
+  document.getElementById('mobileHamburgerBtn')?.setAttribute('aria-expanded','false');
+}
+document.getElementById('mobileHamburgerBtn')?.addEventListener('click', ()=>{
+  if(document.body.classList.contains('sb-drawer-open')) closeSidebarDrawer(); else openSidebarDrawer();
+});
+document.getElementById('sbDrawerOverlay')?.addEventListener('click', closeSidebarDrawer);
+document.addEventListener('keydown', (e)=>{
+  if(e.key==='Escape') closeSidebarDrawer();
+});
+// Ekran mobil eşiğin (980px) üzerine büyürse (ör. tablet döndürme/pencere genişletme) drawer
+// state'i temizlensin — masaüstü görünümde sidebar zaten her zaman açık/sabit olduğundan.
+window.addEventListener('resize', ()=>{
+  if(window.innerWidth > 980) closeSidebarDrawer();
+});
+
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     if(TAB_DROPDOWNS.some(d=>d.btn===btn)) return;
     const view = btn.getAttribute('data-view');
-    document.querySelectorAll('.tab-btn[data-view]').forEach(b=>{
-      const match = b.getAttribute('data-view')===view;
-      b.classList.toggle('active', match);
-      b.setAttribute('aria-selected', match ? 'true' : 'false');
-    });
-    TAB_DROPDOWNS.forEach(d=> d.btn.classList.toggle('active', d.views.includes(view)));
     if(btn.classList.contains('dropdown-item')) closeAllDropdowns();
-    document.getElementById('genelView').style.display = view==='genel' ? 'block' : 'none';
-    document.getElementById('sevkView').style.display = view==='sevk' ? 'block' : 'none';
-    document.getElementById('yuklemeView').style.display = view==='yukleme' ? 'block' : 'none';
-    document.getElementById('yaslandirmaView').style.display = view==='yaslandirma' ? 'block' : 'none';
-    document.getElementById('ticariStokView').style.display = view==='ticariStok' ? 'block' : 'none';
-    document.getElementById('faturaKontrolView').style.display = view==='faturaKontrol' ? 'block' : 'none';
-    document.getElementById('bayiHakedisView').style.display = view==='bayiHakedis' ? 'block' : 'none';
-    document.getElementById('sellOutView').style.display = view==='sellOut' ? 'block' : 'none';
-    document.getElementById('tahsilatVerimlilikView').style.display = view==='tahsilatVerimlilik' ? 'block' : 'none';
-    document.getElementById('dsoTrendView').style.display = view==='dsoTrend' ? 'block' : 'none';
-    document.getElementById('nakitAkisView').style.display = view==='nakitAkis' ? 'block' : 'none';
-    document.getElementById('supheliAlacakView').style.display = view==='supheliAlacak' ? 'block' : 'none';
-    document.getElementById('temsilciKarnesiView').style.display = view==='temsilciKarnesi' ? 'block' : 'none';
-    document.getElementById('yonetimOzetiView').style.display = view==='yonetimOzeti' ? 'block' : 'none';
-    document.getElementById('ceiView').style.display = view==='cei' ? 'block' : 'none';
-    if(view==='sevk' && state.report) renderSevkView(state.report);
-    if(view==='yukleme') renderYuklemeView();
-    if(view==='yaslandirma' && state.report) renderYaslandirmaView(state.report);
-    if(view==='ticariStok' && state.report) renderTicariStokView(state.report);
-    if(view==='faturaKontrol' && state.report) renderFaturaKontrolView(state.report);
-    if(view==='bayiHakedis') renderBayiHakedisView();
-    if(view==='sellOut') renderSellOutView();
-    if(view==='tahsilatVerimlilik' && state.report) renderTahsilatVerimlilikView(state.report);
-    if(view==='dsoTrend' && state.report) renderDsoTrendView(state.report);
-    if(view==='nakitAkis' && state.report) renderNakitAkisView(state.report);
-    if(view==='supheliAlacak' && state.report) renderSupheliAlacakView(state.report);
-    if(view==='temsilciKarnesi' && state.report) renderTemsilciKarnesiView(state.report);
-    if(view==='yonetimOzeti' && state.report) renderYonetimOzetiView(state.report);
-    if(view==='cei' && state.report) renderCeiView(state.report);
+    setActiveView(view);
   });
 });
+
 
 const AGING_DAY_BUCKETS = [
   {key:'g0_6',  label:'0-6 Gün',   test:g=> g>=0  && g<=6},
@@ -7408,20 +8348,16 @@ function yuklemeGunuLitreIleBirlestir(yeniGun, eskiGun){
     });
   });
   // Bu günde tahsilatı olmayıp yalnızca eski arşivde litre kaydı bulunan temsilciler de korunur.
-  // NOT: eski arşiv kayıtlarında "kolonlar" alanı eksik olabiliyor (eski/bozuk arşiv şeması —
-  // bu eksiklik, doğru hesaplanmış günlerin arşive yazılmasını engelleyen bir çökmeye yol açıyordu).
-  // Burada varsayılan boş obje ile kopyalanır: hem aşağıdaki toplama sırasında çökmeyi önler hem de
-  // eksikliği arşivde kalıcı olarak düzeltir (aynı kayıt bir daha işlendiğinde tekrar sorun çıkarmaz).
   (eskiGun.temsilciler||[]).forEach(r=>{
     if(gorulenTemsilciler.has(r.temsilci) || !(r.litre>0)) return;
-    birlesikTemsilciler.push(Object.assign({kolonlar:{}}, r));
+    birlesikTemsilciler.push(Object.assign({}, r));
   });
   birlesikTemsilciler.sort((a,b)=> a.temsilci.localeCompare(b.temsilci,'tr'));
 
   const kolonlar = yeniGun.kolonlar || [];
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
@@ -7462,13 +8398,11 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
   // Bu günde (yeni yüklemede) litresi olmayıp yalnızca eski arşivde tahsilatı bulunan temsilciler de
   // korunur — bu yüklemede sevkiyat verisi bu temsilci için gelmemiş olsa dahi tahsilat rakamları
   // kaybolmaz.
-  // NOT: eski arşiv kayıtlarında "kolonlar" alanı eksik olabiliyor — burada da varsayılan boş
-  // obje ile kopyalanıp hem çökme önleniyor hem eksiklik kalıcı olarak düzeltiliyor.
   (eskiGun.temsilciler||[]).forEach(r=>{
     if(gorulenTemsilciler.has(r.temsilci) || !(r.genelToplam>0)) return;
     birlesikTemsilciler.push({
       temsilci: r.temsilci,
-      kolonlar: r.kolonlar || {},
+      kolonlar: r.kolonlar,
       genelToplam: r.genelToplam,
       litre: 0,
       stTahsilatLitre: null,
@@ -7479,7 +8413,7 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
   const kolonlar = (eskiGun.kolonlar && eskiGun.kolonlar.length) ? eskiGun.kolonlar : (yeniGun.kolonlar||[]);
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
@@ -9685,6 +10619,11 @@ function populateSellOutAySelect(){
 function sellOutRenk(oran){
   return performansRenk(oran, {iyi:90, orta:75, ortaRenk:'var(--warn)'});
 }
+// sellOutRenk ile aynı eşiklere göre, katı renk yerine "soft" (açık tonlu) zemin rengi döner —
+// rozet/ikon arka planlarında kullanılır (örn. temsilci kartındaki #sıra rozeti ve kanal ikonları).
+function sellOutRenkSoft(oran){
+  return performansRenk(oran, {iyi:90, orta:75, iyiRenk:'var(--success-soft)', ortaRenk:'var(--warn-soft)', dusukRenk:'var(--danger-soft)'});
+}
 
 // FKNS (ya da Genel FKNS) oranını gösteren dairesel gösterge (donut) — SSM Karneleri ve Temsilci
 // Karnesi kartlarında birebir aynı görselle kullanılır. Çevre uzunluğu r=16 için ~100 birim olduğundan
@@ -9702,14 +10641,16 @@ function fknsRingSvg(oran){
 
 // Açık/Kapalı Kanal ilerleme satırı — hedef girilmemişse (0) sadece satış litresi gösterilir.
 // Hedef girilmişse, çubuğun altında kalan (hedef-satış, negatifse 0) litre bilgisi de gösterilir.
-function ssmKanalRowHtml(label, satis, hedef){
+function ssmKanalRowHtml(label, satis, hedef, icon){
   const hedefVarMi = hedef>0;
   const pct = hedefVarMi ? Math.min(100, satis/hedef*100) : 0;
   const renk = hedefVarMi ? sellOutRenk(pct) : 'var(--ink-faint)';
+  const renkSoft = hedefVarMi ? sellOutRenkSoft(pct) : 'var(--line-soft)';
   const valTxt = hedefVarMi ? `${NUM(satis)} / ${NUM(hedef)} Lt.` : `${LT(satis)} <small>· hedef yok</small>`;
   const kalanTxt = hedefVarMi ? `<div class="ssm-kanal-kalan">Kalan ${LT(Math.max(0, hedef-satis))}</div>` : '';
+  const iconHtml = icon ? `<span class="ssm-kanal-icon" style="background:${renkSoft};color:${renk};"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>` : '';
   return `<div class="ssm-kanal-row">
-    <div class="ssm-kanal-top"><span class="lbl">${escapeHtml(label)}</span><span class="val">${valTxt}</span></div>
+    <div class="ssm-kanal-top"><span class="lbl">${iconHtml}${escapeHtml(label)}</span><span class="val">${valTxt}</span></div>
     <div class="ssm-kanal-track"><div class="ssm-kanal-fill" style="width:${pct.toFixed(1)}%;background:${renk};"></div></div>
     ${kalanTxt}
   </div>`;
@@ -9795,6 +10736,27 @@ function renderSellOutTrendCharts(gunlukTrendTam){
     </div>`;
 }
 
+// Açık/Kapalı Kanal LT özeti — hem Sell Out Raporu'nun kendi üst KPI şeridi hem Genel Bakış'ın
+// "Güncel Durum" kartı bu TEK fonksiyonu çağırır; böylece iki yerde ayrı hesap yapılıp
+// aralarında tutarsızlık (farklı formül/eksik hedef verisi vb.) oluşma riski kalmaz.
+// NOT: `report` zaten applySellOutHedef uygulanmış (acikHedef/kapaliHedef dolu) olmalı —
+// bu fonksiyon sadece o veriden özet çıkarır, hedef eşlemesini kendisi yapmaz (arşiv
+// görüntülemede hedefler arşivleme anındaki değerle donmuş kalmalı, güncel hedefle ezilmemeli).
+function sellOutKanalOzeti(report){
+  if(!report || !Array.isArray(report.temsilciler)){
+    return {toplamAcikLitre:0, toplamKapaliLitre:0, acikKalan:0, kapaliKalan:0, gerceklesmeOrani:null, toplamLitre:0};
+  }
+  const toplamAcikLitre = report.temsilciler.reduce((a,t)=>a+t.acikLitre,0);
+  const toplamKapaliLitre = report.temsilciler.reduce((a,t)=>a+t.kapaliLitre,0);
+  const toplamAcikHedef = report.temsilciler.reduce((a,t)=>a+t.acikHedef,0);
+  const toplamKapaliHedef = report.temsilciler.reduce((a,t)=>a+t.kapaliHedef,0);
+  const acikKalan = Math.max(0, toplamAcikHedef - toplamAcikLitre);
+  const kapaliKalan = Math.max(0, toplamKapaliHedef - toplamKapaliLitre);
+  const toplamHedef = toplamAcikHedef + toplamKapaliHedef;
+  const gerceklesmeOrani = toplamHedef>0 ? ((toplamAcikLitre+toplamKapaliLitre)/toplamHedef*100) : null;
+  return {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, gerceklesmeOrani, toplamLitre: report.toplamLitre||0};
+}
+
 async function renderSellOutView(){
   const bosPanel = document.getElementById('sellOutBosPanel');
   const icerik = document.getElementById('sellOutIcerik');
@@ -9843,14 +10805,8 @@ async function renderSellOutView(){
     alertEl.innerHTML = '';
   }
 
-  const toplamAcikLitreGenel = report.temsilciler.reduce((a,t)=>a+t.acikLitre,0);
-  const toplamKapaliLitreGenel = report.temsilciler.reduce((a,t)=>a+t.kapaliLitre,0);
-  const toplamAcikHedefGenel = report.temsilciler.reduce((a,t)=>a+t.acikHedef,0);
-  const toplamKapaliHedefGenel = report.temsilciler.reduce((a,t)=>a+t.kapaliHedef,0);
-  const acikKalanGenel = Math.max(0, toplamAcikHedefGenel - toplamAcikLitreGenel);
-  const kapaliKalanGenel = Math.max(0, toplamKapaliHedefGenel - toplamKapaliLitreGenel);
-  const toplamHedefGenelHero = toplamAcikHedefGenel + toplamKapaliHedefGenel;
-  const genelGerceklesmeOraniHero = toplamHedefGenelHero>0 ? ((toplamAcikLitreGenel+toplamKapaliLitreGenel)/toplamHedefGenelHero*100) : null;
+  const kanalOzeti = sellOutKanalOzeti(report);
+  const {toplamAcikLitre: toplamAcikLitreGenel, toplamKapaliLitre: toplamKapaliLitreGenel, acikKalan: acikKalanGenel, kapaliKalan: kapaliKalanGenel, gerceklesmeOrani: genelGerceklesmeOraniHero} = kanalOzeti;
 
   const items = [
     {label:'Gerçekleşme Oranı', icon:'<i class="fa-solid fa-bullseye" aria-hidden="true"></i>', value:null, display: genelGerceklesmeOraniHero!=null?fmtYuzde(genelGerceklesmeOraniHero):'—', sub: `<span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px;"><span style="font-size:9.5px;font-weight:700;letter-spacing:.04em;opacity:.8;">Toplam Litre</span><span style="font-family:var(--font-figures);font-size:19px;font-weight:800;line-height:1.15;">${Math.round(report.toplamLitre).toLocaleString('tr-TR')} L</span></span>`},
@@ -9868,7 +10824,7 @@ async function renderSellOutView(){
       <div class="ssm-karne-top">
         <div class="cust-avatar">${escapeHtml(avatarBaslangic(s.ssm))}</div>
         <div>
-          <div class="ssm-karne-name">${escapeHtml(s.ssm)}</div>
+          <div class="ssm-karne-name">${escapeHtml(s.ssm)} <span class="badge ssm-hiyerarsi-badge"><i class="fa-solid fa-user-tie" aria-hidden="true"></i> SSM</span></div>
           <div class="ssm-karne-sub">${s.temsilciSayisi.toLocaleString('tr-TR')} temsilci</div>
         </div>
         <div class="ssm-fkns-ring-wrap">
@@ -9876,8 +10832,8 @@ async function renderSellOutView(){
           <div class="ssm-fkns-ring-label">FKNS</div>
         </div>
       </div>
-      ${ssmKanalRowHtml('Açık Kanal', s.acikLitre, s.acikHedef)}
-      ${ssmKanalRowHtml('Kapalı Kanal', s.kapaliLitre, s.kapaliHedef)}
+      ${ssmKanalRowHtml('Açık Kanal', s.acikLitre, s.acikHedef, 'fa-lock-open')}
+      ${ssmKanalRowHtml('Kapalı Kanal', s.kapaliLitre, s.kapaliHedef, 'fa-lock')}
       <div class="ssm-karne-foot">
         <span class="g-lbl">Hedef Gerçekleşme</span>
         <span class="g-val" style="color:${sellOutRenk(s.hedefGerceklesme)};">${s.hedefGerceklesme!=null?fmtYuzde(s.hedefGerceklesme):'—'}</span>
@@ -9895,7 +10851,7 @@ async function renderSellOutView(){
       <div class="ssm-karne-top">
         <div class="cust-avatar">${escapeHtml(avatarBaslangic(r.temsilci))}</div>
         <div class="cust-info">
-          <div class="musteri-name">${escapeHtml(r.temsilci)} <span class="badge info">#${i+1}</span></div>
+          <div class="musteri-name">${escapeHtml(r.temsilci)} <span class="badge" style="background:${sellOutRenkSoft(r.fknsOrani)};color:${fknsRenk};">#${i+1}</span></div>
           <span class="temsilci-tag" style="margin-top:5px;display:inline-block;">${escapeHtml(r.ssm)}</span>
         </div>
         <div class="ssm-fkns-ring-wrap">
@@ -9903,8 +10859,8 @@ async function renderSellOutView(){
           <div class="ssm-fkns-ring-label">FKNS</div>
         </div>
       </div>
-      ${ssmKanalRowHtml('Açık Kanal', r.acikLitre, r.acikHedef)}
-      ${ssmKanalRowHtml('Kapalı Kanal', r.kapaliLitre, r.kapaliHedef)}
+      ${ssmKanalRowHtml('Açık Kanal', r.acikLitre, r.acikHedef, 'fa-lock-open')}
+      ${ssmKanalRowHtml('Kapalı Kanal', r.kapaliLitre, r.kapaliHedef, 'fa-lock')}
       <div class="ssm-karne-foot">
         <span class="g-lbl">Hedef Gerçekleşme</span>
         <span class="g-val" style="color:${gercRenk};">${r.hedefGerceklesme!=null?fmtYuzde(r.hedefGerceklesme):'—'}</span>
@@ -9917,7 +10873,7 @@ async function renderSellOutView(){
       </div>`}
 
       <div class="htk-alt" style="margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);">
-        <span class="htk-ceksenet">Fatura kesilmeyen: <b style="color:var(--ink);">${r.faturaKesilmeyenNokta} nokta</b></span>
+        <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-file-circle-xmark" aria-hidden="true"></i></span>Fatura kesilmeyen: <b style="color:var(--ink);">${r.faturaKesilmeyenNokta} nokta</b></span>
         <div class="htk-alt-actions">
           <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}">Detay ↗</button>
         </div>
