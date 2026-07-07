@@ -939,12 +939,15 @@
 
   @media(max-width:760px){
     #app{padding:0 12px 60px;}
-    .topbar{margin:0 -12px 18px;padding:calc(12px + env(safe-area-inset-top)) 12px 12px;top:0;}
+    .topbar{padding:calc(12px + env(safe-area-inset-top)) 0 12px;top:0;}
     .brand{gap:10px;}
     .brand-mark{width:38px;height:38px;font-size:15px;border-radius:9px;}
     .brand h1{font-size:16.5px;}
     .brand p{font-size:11px;}
     .brand-tag{font-size:10.5px;padding:2px 9px;}
+    .topbar .app-header-mark{width:40px;height:40px;font-size:12px;}
+    .topbar .app-header-title{font-size:16px;white-space:normal;}
+    .topbar .app-header-title-sep{margin:0 6px;}
     .topbar-actions{width:100%;}
     .topbar-actions .pill{font-size:11px;padding:5px 10px;}
     .btn{padding:9px 12px;font-size:12.5px;flex:1 1 auto;text-align:center;min-height:40px;}
@@ -1234,7 +1237,7 @@
   @media(max-width:980px){
     /* Marka bilgisi mobilde .mobile-header'da zaten gösteriliyor — burada tekrar etmesin,
        sadece durum/aksiyon şeridi (senkron/yükle/çıkış/tarih) kalsın. */
-    .app-header-brand{display:none;}
+    .app-header .app-header-brand{display:none;}
     .app-header{justify-content:flex-end;padding-top:10px;}
   }
   @media(max-width:760px){
@@ -1386,10 +1389,12 @@
 <body>
 <div id="authGate" style="position:fixed;inset:0;background:var(--bg,#EEF1F6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:380px;width:100%;border:1px solid var(--line,#DBE2EC);border-top:3px solid #8A6D1F;">
-    <div style="text-align:center;margin-bottom:22px;">
-      <div class="app-version-label" style="width:44px;height:44px;border-radius:11px;background:#0C1B33;border:1px solid rgba(201,150,44,0.5);color:#D9B25C;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Space Grotesk';margin:0 auto 12px;" translate="no">V2.4</div>
-      <h2 style="margin:0;font-size:18px;font-family:'Space Grotesk';" translate="no">Keşan Bayi Takip Paneli</h2>
-      <p style="margin:6px 0 0;color:var(--ink-soft,#54617A);font-size:13px;">Devam etmek için giriş yapın</p>
+    <div class="app-header-brand" style="justify-content:center;margin-bottom:26px;">
+      <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+      <div class="app-header-title-wrap">
+        <h1 class="app-header-title" translate="no" style="font-size:19px;white-space:normal;"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
+        <div class="app-header-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
+      </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       <input type="text" id="authKullaniciKodu" placeholder="Kullanıcı Kodu" aria-label="Kullanıcı Kodu" autocomplete="username" inputmode="numeric" style="padding:11px 13px;border:1px solid var(--line,#DBE2EC);border-radius:9px;font-size:16px;font-family:inherit;" />
@@ -1408,11 +1413,11 @@
 <div id="app" style="display:none;">
 
   <div class="topbar">
-    <div class="brand">
-      <div class="brand-mark app-version-label" translate="no" style="font-size:13px;letter-spacing:-.02em;">V2.4</div>
-      <div>
-        <h1 translate="no">Keşan Bayi Takip Paneli</h1>
-        <p class="brand-tag" translate="no">Akgün Meşrubat Gıda · Berat Çağlar CAN</p>
+    <div class="app-header-brand">
+      <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+      <div class="app-header-title-wrap">
+        <h1 class="app-header-title" translate="no"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
+        <div class="app-header-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
       </div>
     </div>
     <div class="topbar-actions">
