@@ -17,13 +17,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bayi Takip">
 <title>Keşan Bayi Takip Paneli</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Outfit:wght@500;600;700;800&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet';">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 <style>
   :root{
     --bg:#EEF1F6;
@@ -59,7 +60,7 @@
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
-  html{-webkit-text-size-adjust:100%;}
+  html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable;}
   body{
     background:var(--bg);
     color:var(--ink);
@@ -74,6 +75,10 @@
   button:focus-visible,a:focus-visible,.tab-btn:focus-visible,[role="button"]:focus-visible,summary:focus-visible,th[role]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
   /* Arka plan kaydırma kilidi — herhangi bir modal açıkken sayfa arkada kaymaz. */
   body.modal-open{overflow:hidden;}
+  /* Daraltılmış (icon-rail) sidebar modunda açılan flyout alt menü, ekranda sabit
+     konumlanmış bir panel olduğundan arkadaki sayfa kayarsa flyout'un konumu
+     (top hesaplaması) geçersiz kalıp görsel olarak kopuk/yarım açık görünüyordu. */
+  body.sb-flyout-open{overflow:hidden;}
   body.sb-drawer-open{overflow:hidden;}
   @media(prefers-reduced-motion:reduce){
     *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}
@@ -89,7 +94,11 @@
   #app{width:100%;max-width:var(--app-max);margin:0 auto;padding:0 var(--page-pad) 80px;}
 
   /* ===== Sol Navigasyon (Sidebar) ===== */
-  .app-shell{display:flex;align-items:stretch;gap:0;min-height:100vh;}
+  /* 100dvh (dynamic viewport height), iOS Safari'de adres çubuğu gizlenip
+     görününce gerçek görünür alanı yansıtır; 100vh bu geçişte sabit kalıp
+     içerik zıplamasına neden olabiliyordu. Eski tarayıcılar için 100vh
+     fallback olarak önce yazılıyor, dvh destekleniyorsa üzerine yazılıyor. */
+  .app-shell{display:flex;align-items:stretch;gap:0;min-height:100vh;min-height:100dvh;}
   .sidebar{
     width:var(--sidebar-w);flex:0 0 var(--sidebar-w);
     position:fixed;top:0;left:0;bottom:0;z-index:50;
@@ -130,6 +139,9 @@
       transition:transform .22s ease;
     }
     body.sb-drawer-open .sidebar{transform:translateX(0);box-shadow:8px 0 28px -8px rgba(15,27,51,.45);}
+    /* will-change sadece drawer açıkken devrede — sürekli açık bırakılırsa gereksiz
+       GPU katmanı/bellek maliyeti oluşturur, bu yüzden kapalı durumda tanımlanmıyor. */
+    body.sb-drawer-open .sidebar{will-change:transform;}
     .app-main{margin-left:0;padding:0;}
   }
   .sb-drawer-overlay{
@@ -173,7 +185,7 @@
   /* ===== Sidebar daraltma (icon-rail) modu — yalnızca masaüstü genişliklerinde ===== */
   .sb-collapse-row{display:flex;justify-content:flex-end;padding:0 2px 6px;}
   .sb-collapse-btn{
-    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    width:30px;height:30px;border-radius:8px;flex-shrink:0;position:relative;
     border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);
     display:flex;align-items:center;justify-content:center;font-size:12.5px;cursor:pointer;
     transition:background .15s ease,color .15s ease,transform .15s ease;
@@ -285,6 +297,7 @@
     display:inline-flex;align-items:center;justify-content:center;
     border:1px solid rgba(255,255,255,0.22);border-radius:9px;background:transparent;
     color:#fff;font-size:15px;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .1s ease;padding:0;
+    position:relative;
   }
   .icon-btn:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.4);}
   .icon-btn:active{transform:scale(.93);}
@@ -476,9 +489,11 @@
   .temsilci-tag{
     font-size:11px;font-weight:600;color:var(--navy);background:var(--navy-soft);
     padding:3px 8px;border-radius:100px;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:5px;
   }
+  .temsilci-tag svg{width:11px;height:11px;flex-shrink:0;opacity:.7;}
   .temsilci-tag.mudur-tag{
-    color:var(--accent-deep);background:var(--accent-soft);
+    color:#3C3489;background:#EEEDFE;
   }
   .verim-pill{
     display:inline-block;padding:3px 10px;border-radius:100px;border:1.5px solid currentColor;
@@ -498,14 +513,41 @@
   .aging-table tbody tr.data-row:hover td:first-child{background:var(--bg);}
   .aging-table tbody td.num{font-weight:600;}
   .aging-table tbody td.zero{font-weight:400;}
+  /* "Yaşlandırma" kolonu — 28-34 ve +35 gün bakiyelerinin toplamı (en riskli/yaşlanmış
+     kısım), açık yeşil zeminle diğer kolonlardan ayrıştırılıp tek bakışta görünür
+     kılınıyor. Metin rengi/kalınlığı kasıtlı olarak diğer hücrelerle aynı bırakıldı
+     (özel bir renk/kalınlık yok) — sadece zemin rengi ayırt edici, "Genel Toplam"
+     satırında da diğer toplam hücreleriyle aynı görünüyor. */
+  .aging-table th.aging-toplam-col,.aging-table td.aging-toplam-col{background:var(--success-soft);}
+  /* Temsilci satırına tıklanınca altında açılan müşteri bazlı yaşlandırma detayı —
+     ok simgesi tıklanınca döner, alt tablo hafif gri zeminle ana tablodan ayrışıyor. */
+  .aging-temsilci-row{cursor:pointer;}
+  .aging-temsilci-row:hover{background:var(--bg);}
+  .aging-expand-ic{display:inline-flex;width:14px;color:var(--ink-faint);transition:transform .15s ease;margin-right:2px;}
+  .aging-temsilci-row.open .aging-expand-ic{transform:rotate(90deg);}
+  .aging-subtable{width:100%;border-collapse:collapse;background:#FAFBFC;}
+  .aging-subtable td{padding:6px 12px;font-size:11.5px;border-top:1px solid var(--line-soft);}
+  .aging-subtable td:first-child{padding-left:32px;color:var(--ink);}
 
   /* --- Müşteri kart listesi (Tasarım 2) --- */
   .sort-bar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
   .sort-bar-label{font-size:12px;font-weight:700;color:var(--ink-soft);}
-  .sort-dir-btn{width:34px;height:34px;flex-shrink:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);cursor:pointer;font-size:14px;color:var(--ink-soft);transition:border-color .15s ease,color .15s ease;}
+  .sort-dir-btn{width:34px;height:34px;flex-shrink:0;border:1px solid var(--line);border-radius:9px;background:var(--surface);cursor:pointer;font-size:14px;color:var(--ink-soft);transition:border-color .15s ease,color .15s ease;position:relative;}
+  /* Mobilde görsel boyutu (34px) koruyoruz ama gerçek dokunma alanını görünmez bir
+     ::after ile 44px'e genişletiyoruz — Apple/Google'ın önerdiği asgari dokunma hedefi. */
+  @media(max-width:980px){
+    .sort-dir-btn::after{content:'';position:absolute;inset:-5px;}
+  }
   .sort-dir-btn:hover{border-color:var(--accent);color:var(--accent-deep);}
 
-  .cust-card-list{display:grid;grid-template-columns:1fr;gap:10px;align-items:start;}
+  /* align-items:start kaldırıldı — bu, grid'in varsayılan stretch davranışını
+     geçersiz kılıp her kartı kendi içeriği kadar yükseklikte bırakıyordu, bu yüzden
+     Dikkat/Hakediş/Emanet rozet sayısı farklı olan kartlar aynı satırda farklı
+     boyda görünüyordu. Stretch (varsayılan) ile birlikte .htk-card'daki
+     flex-direction:column + .htk-alt'taki margin-top:auto, tüm kartların aynı
+     satırda eşit yükseklikte hizalanmasını ve alt satırın (Çek/Senet + Detay)
+     her kartta aynı noktada kalmasını sağlıyor. */
+  .cust-card-list{display:grid;grid-template-columns:1fr;gap:10px;}
   @media(min-width:820px){.cust-card-list{grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;}}
   .cust-card{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:14px 15px;cursor:pointer;transition:box-shadow .15s ease,border-color .15s ease;min-width:0;}
   .cust-card:hover{box-shadow:var(--shadow);border-color:var(--line);}
@@ -583,8 +625,9 @@
   .badge.ok{background:var(--success-soft);color:var(--success);}
   .badge.info{background:var(--navy-soft);color:var(--navy);}
   .badge.hakedis{background:#DCEBFC;color:#1D5FB8;}
+  .badge.emanet{background:var(--accent-soft);color:var(--accent-deep);}
   .badge.dikkat{
-    background:var(--danger-soft);color:var(--danger);display:inline-flex;align-items:center;gap:4px;
+    background:#FDEBD8;color:#B8541A;display:inline-flex;align-items:center;gap:4px;
     margin-left:7px;padding:2px 8px 2px 6px;vertical-align:middle;
   }
 
@@ -614,6 +657,10 @@
   #hakedisModalOverlay{z-index:1020;}
   #analizModalOverlay{z-index:1020;}
   #tahsilatTahminiModalOverlay{z-index:1020;}
+  /* stokModalOverlay (Depoda Kalan Ürünler / Emanet) de faturaModalOverlay'in İÇİNDEN
+     (Emanet butonuyla) açılabiliyor — diğer ikinci-seviye popup'larla aynı z-index
+     verilmezse faturaModal'ın (1010) altında kalıp görünmez oluyordu. */
+  #stokModalOverlay{z-index:1020;}
   .modal{
     background:var(--surface);border-radius:14px;box-shadow:0 24px 60px -12px rgba(24,34,51,0.35);
     width:100%;max-width:920px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;
@@ -1046,6 +1093,16 @@
     .search-box input,select.filter-select,input.filter-input{width:100%;box-sizing:border-box;font-size:16px;}
     .search-box input{padding-top:10px;padding-bottom:10px;}
     .search-box svg{top:12px;}
+    /* Aynı zoom-önleme kuralı, dosyanın başka yerlerindeki (senet formu, hedef
+       tablosu, oran tablosu) küçük punto input'ları için de geçerli. Punto
+       12.5px'ten 16px'e çıkınca .rate-table'daki dar kutu taşabileceğinden
+       genişliği de birlikte artırıyoruz. */
+    .senet-manuel-tutar-row input,.senet-adet-input,.senet-vade-card-date input,.hedef-field input,.rate-table input[type=number]{font-size:16px;}
+    .rate-table input[type=number]{width:76px;}
+    /* .icon-btn (21 kullanım) ve .search-clear-btn görsel boyutları küçük (38px, 20px) —
+       masaüstünde değiştirmeden, mobilde ::after ile 44px'lik görünmez dokunma alanı ekliyoruz. */
+    .icon-btn::after{content:'';position:absolute;inset:-3px;}
+    .search-clear-btn::after{content:'';position:absolute;inset:-8px;}
 
     table{font-size:12px;}
     thead th{padding:6px 9px;font-size:10px;}
@@ -1135,6 +1192,14 @@
     border-radius:12px;padding:13px 16px;
     box-shadow:0 1px 2px rgba(19,34,63,0.05),0 6px 16px -10px rgba(19,34,63,0.28);
     transition:border-color .15s ease,box-shadow .15s ease;
+    /* Grid hücreleri varsayılan olarak (align-items:stretch) satırdaki en uzun kart
+       kadar streç olur, ama kart içi eskiden normal blok akışındaydı — bu yüzden
+       Dikkat/Hakediş/Emanet gibi değişken sayıda rozeti olan kartlar farklı yükseklikte
+       görünüyor, alttaki "Çek/Senet + Detay" satırı da her kartta farklı bir noktada
+       kalıyordu. Kartı dikey flex yapıp .htk-alt'ı margin-top:auto ile en alta
+       yapıştırınca, rozet sayısı ne olursa olsun tüm kartlarda alt satır aynı
+       hizada (kartın tam altında) sabitlenmiş oluyor. */
+    display:flex;flex-direction:column;
   }
   .htk-card:hover{box-shadow:0 2px 4px rgba(19,34,63,0.06),0 10px 24px -10px rgba(19,34,63,0.32);}
   .htk-card:hover{border-color:#C7D0E0;border-left-color:var(--htk-risk,var(--ink-faint));}
@@ -1147,6 +1212,17 @@
   .htk-temsilci svg{width:13px;height:13px;flex-shrink:0;opacity:.75;}
   .htk-badge-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;padding:4px 11px 4px 4px;border-radius:100px;white-space:nowrap;letter-spacing:.01em;flex-shrink:0;}
   .htk-badge-circle{font-size:11px;font-weight:800;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;}
+  /* Ort Vade için, dairesel rozet yerine dikey kart tasarımı — büyük gün sayısı üstte,
+     küçük "ORT. VADE" etiketi altta, ince çerçeveli beyaz zemin üzerinde ortalanmış.
+     Yalnızca "ORT VADE" etiketli kullanımlara özel; aynı bileşeni paylaşan diğer rozetler
+     (KALEM, GÜN SONRA, DÖNÜŞ, KAYIT) eski .htk-badge-pill tasarımında kalmaya devam ediyor. */
+  .htk-badge-vade{
+    display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:10px;background:var(--surface);
+    padding:7px 16px;min-width:60px;flex-shrink:0;
+  }
+  .htk-badge-vade .htk-badge-vade-num{font-size:18px;font-weight:700;line-height:1.1;}
+  .htk-badge-vade .htk-badge-vade-lbl{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-top:2px;}
   .htk-risk-badge{
     font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;white-space:nowrap;
     background:var(--htk-risk-bg,var(--navy-soft));color:var(--htk-risk,var(--navy));letter-spacing:.02em;
@@ -1154,12 +1230,30 @@
   .htk-borc-satir{display:flex;align-items:center;gap:10px;margin:9px 0 8px;flex-wrap:wrap;}
   .htk-borc{font-size:23px;font-weight:700;color:var(--ink);letter-spacing:-.01em;}
   .htk-gecikme{font-size:12.5px;color:var(--htk-risk,var(--ink-soft));font-weight:600;}
-  .htk-alt{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px dashed var(--line);padding-top:10px;}
+  .htk-alt{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px dashed var(--line);padding-top:10px;margin-top:auto;}
   .htk-ceksenet{font-size:12px;color:var(--ink-faint);}
   .htk-alt .fatura-detay-btn{white-space:nowrap;}
   .htk-musteri-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
   .htk-musteri-row .htk-musteri{margin:0;}
   .htk-musteri-row .badge{margin-left:0;}
+  /* Kartın sağ üst köşesi: Ort. Vade kartı + altında (varsa) Dikkat/Hakediş/Emanet
+     rozetleri dikey olarak sıralanıyor — önceden bu rozetler müşteri adının yanında
+     (sol üstte) duruyordu, buraya taşınarak sağ taraftaki boş dikey alan kullanılmış oldu. */
+  .htk-badge-col{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0;}
+  .htk-badge-col .badge{margin-left:0;}
+  /* Ort. Vade kartına yakın ama ondan biraz daha küçük boyut — önceki 10.5px/2px 8px
+     yerine 11.5px/3.5px 11px; sadece bu sütundaki rozetlere özel, diğer yerlerdeki
+     (Açık Faturalar popup başlığı, tablo satırları vb.) .badge kullanımını etkilemiyor. */
+  .htk-badge-col .badge{font-size:11.5px;padding:3.5px 11px;}
+  .htk-badge-col .badge.dikkat{padding:3.5px 11px 3.5px 8px;}
+  /* Hakediş/Emanet artık salt bilgi rozeti değil, tıklanınca ilgili popup'ı açan
+     birer buton — görsel dili (renk/boyut) aynı kalıyor ama buton olduğunu belli
+     etmek için imleç ve hafif bir hover geri bildirimi ekleniyor. */
+  .htk-badge-col .badge.hakedis-btn,.htk-badge-col .badge.emanet-btn{
+    border:none;cursor:pointer;font-family:inherit;transition:filter .12s ease,transform .1s ease;
+  }
+  .htk-badge-col .badge.hakedis-btn:hover,.htk-badge-col .badge.emanet-btn:hover{filter:brightness(0.94);}
+  .htk-badge-col .badge.hakedis-btn:active,.htk-badge-col .badge.emanet-btn:active{transform:scale(.96);}
   .htk-inline-stats{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft);margin:0 0 12px;}
   .htk-inline-stats b{color:var(--ink);font-weight:600;}
   .htk-stat-item{display:flex;flex-direction:column;gap:2px;}
@@ -1358,11 +1452,19 @@
     display:inline-flex;align-items:center;gap:6px;transition:all .15s ease;
   }
   .gb-chip i{font-size:7px;}
-  .gb-chip[data-risk="yuksek"] i{color:var(--danger);}
-  .gb-chip[data-risk="orta"] i{color:var(--warn);}
-  .gb-chip[data-risk="dusuk"] i{color:var(--success);}
   .gb-chip:hover{border-color:var(--accent);}
+  .gb-chip[data-risk="ortVade"]:hover{border-color:var(--danger);color:var(--danger);}
+  .gb-chip[data-risk="hakedis"]:hover{border-color:#1D5FB8;color:#1D5FB8;}
+  .gb-chip[data-risk="emanet"]:hover{border-color:var(--accent-deep);color:var(--accent-deep);}
+  /* "Tümü" nötr/varsayılan olduğu için lacivert kalıyor; diğer üç çip aktifken kendi
+     karşılık geldiği rozetle aynı renk paletini kullanıyor — Ort Vade (Açık Faturalar
+     popup'ındaki kırmızı "Ort. Vade" değeriyle aynı), Hakediş (mavi Hakediş rozetiyle
+     aynı), Emanet (gold/amber Emanet rozetiyle aynı) — böylece çipin rengi tıklandığında
+     hangi veriye göre sıralandığını rozetlerle tutarlı şekilde anlatıyor. */
   .gb-chip.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .gb-chip[data-risk="ortVade"].active{background:var(--danger);border-color:var(--danger);color:#fff;}
+  .gb-chip[data-risk="hakedis"].active{background:#1D5FB8;border-color:#1D5FB8;color:#fff;}
+  .gb-chip[data-risk="emanet"].active{background:var(--accent-deep);border-color:var(--accent-deep);color:#fff;}
   .gb-chip.active i{color:inherit;}
   .gb-section-head .btn.small{margin-left:auto;padding:7px 13px;font-size:12px;}
 
@@ -1479,7 +1581,7 @@
     </div>
     <div class="topbar-actions">
       <button class="icon-btn" id="pwaInstallBtn" style="display:none;width:auto;height:38px;line-height:normal;padding:0 14px;background:#0C1B33;color:#D9B25C;border:1px solid rgba(201,150,44,0.5);gap:6px;align-items:center;justify-content:center;white-space:nowrap;" title="Uygulamayı Yükle" aria-label="Uygulamayı Yükle"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span style="font-size:12.5px;font-weight:600;">Yükle</span></button>
-      <span class="pill" id="statusPill"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMsg">Veri bekleniyor</span></span>
+      <span class="pill" id="statusPill" role="status" aria-live="polite"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMsg">Veri bekleniyor</span></span>
       <button class="icon-btn" id="syncBtn" style="display:none;" title="Diğer Cihazdan Güncelle" aria-label="Diğer Cihazdan Güncelle"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i></button>
       <button class="icon-btn" id="resetBtn" style="display:none;" title="Yeni veri yükle" aria-label="Yeni veri yükle"><i class="fa-solid fa-upload" aria-hidden="true"></i></button>
       <button class="icon-btn danger" id="authLogoutBtn" style="display:none;" title="Çıkış Yap" aria-label="Çıkış Yap"><i class="fa-solid fa-lock" aria-hidden="true"></i></button>
@@ -1671,7 +1773,7 @@
         </div>
       </div>
       <div class="app-topbar-actions">
-        <span class="pill" id="statusPillMain"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMainMsg">Veri bekleniyor</span></span>
+        <span class="pill" id="statusPillMain" role="status" aria-live="polite"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMainMsg">Veri bekleniyor</span></span>
         <button class="icon-btn" id="sbSyncBtn" style="display:none;" title="Diğer Cihazdan Güncelle" aria-label="Diğer Cihazdan Güncelle"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i></button>
         <button class="icon-btn" id="sbResetBtn" style="display:none;" title="Yeni veri yükle" aria-label="Yeni veri yükle"><i class="fa-solid fa-upload" aria-hidden="true"></i></button>
         <button class="icon-btn danger" id="sbLogoutBtn" style="display:none;" title="Çıkış Yap" aria-label="Çıkış Yap"><i class="fa-solid fa-lock" aria-hidden="true"></i></button>
@@ -1728,9 +1830,9 @@
                 <h3>Nokta Detay <span class="count" id="gbMusteriCount"></span></h3>
                 <div class="gb-risk-chip-filters" id="gbRiskChipFilters">
                   <button type="button" class="gb-chip active" data-risk="all">Tümü</button>
-                  <button type="button" class="gb-chip" data-risk="yuksek"><i class="fa-solid fa-circle" aria-hidden="true"></i> Yüksek Risk</button>
-                  <button type="button" class="gb-chip" data-risk="orta"><i class="fa-solid fa-circle" aria-hidden="true"></i> Orta Risk</button>
-                  <button type="button" class="gb-chip" data-risk="dusuk"><i class="fa-solid fa-circle" aria-hidden="true"></i> Düşük Risk</button>
+                  <button type="button" class="gb-chip" data-risk="ortVade">Ort Vade</button>
+                  <button type="button" class="gb-chip" data-risk="hakedis">Hakediş</button>
+                  <button type="button" class="gb-chip" data-risk="emanet">Emanet</button>
                 </div>
                 <button type="button" class="btn small" id="gbTumunuGorBtn">Tümünü Gör →</button>
               </div>
@@ -2049,51 +2151,31 @@
 
     <div id="yaslandirmaView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-yaslandirma">
 
-      <div class="panel" id="yaslandirmaPanel">
-        <div class="panel-head panel-head-navy-hero">
-          <div class="yukleme-head-left">
-            <div class="yukleme-head-badge"><i class="fa-solid fa-clock" aria-hidden="true"></i></div>
-            <div><h2>Nokta Bazlı Yaşlandırma Raporu</h2><span class="count" id="yaslandirmaCount"></span></div>
-          </div>
-        </div>
-        <div class="panel-body" style="padding:16px 20px 0;">
-          <div class="stok-section-divider" style="margin-top:0;padding-top:0;border-top:none;margin-bottom:16px;">
-            <div class="stok-section-divider-title">Nokta Ara ve Filtrele</div>
-            <div class="toolbar">
-              <div class="search-box">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-                <input type="text" id="yaslandirmaSearchInput" placeholder="Nokta adı, kodu veya temsilci ara…" aria-label="Nokta adı, kodu veya temsilci ara" />
-              </div>
-              <select class="filter-select" id="yaslandirmaTemsilciFilter"><option value="">Tüm temsilciler</option></select>
-            </div>
-          </div>
-        </div>
-        <div class="panel-body" style="padding:0 0 20px;">
+      <div class="panel" id="yaslandirmaOzetMuduruPanel">
+        <div class="panel-head panel-head-navy-hero"><h2>SSM</h2></div>
+        <div class="panel-body" style="padding:0;">
           <div class="table-scroll aging-table-scroll">
-            <table id="yaslandirmaTable" class="aging-table">
+            <table id="yaslandirmaOzetMuduruTable" class="aging-table">
               <thead><tr>
-                <th data-key="musteriAdi">Nokta<span class="arrow"></span></th>
-                <th data-key="temsilci">Satış Temsilcisi<span class="arrow"></span></th>
-                <th class="num" data-key="g_g0_6">0-6 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="g_g7_13">7-13 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="g_g14_20">14-20 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="g_g21_27">21-27 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="g_g28_34">28-34 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="g_g35p">+35 Gün<span class="arrow"></span></th>
-                <th class="num" data-key="toplam">Toplam<span class="arrow"></span></th>
+                <th>Saha Satış Müdürü</th>
+                <th class="num">0-6 Gün</th>
+                <th class="num">7-13 Gün</th>
+                <th class="num">14-20 Gün</th>
+                <th class="num">21-27 Gün</th>
+                <th class="num">28-34 Gün</th>
+                <th class="num">+35 Gün</th>
+                <th class="num aging-toplam-col">Yaşlandırma</th>
+                <th class="num">Toplam</th>
               </tr></thead>
-              <tbody id="yaslandirmaTbody"></tbody>
+              <tbody id="yaslandirmaOzetMuduruTbody"></tbody>
+              <tfoot id="yaslandirmaOzetMuduruTfoot"></tfoot>
             </table>
-          </div>
-          <div class="musteri-daha-fazla-wrap" id="yaslandirmaDahaFazlaWrap" style="display:none;padding:16px 20px 4px;">
-            <button type="button" class="btn" id="yaslandirmaDahaFazlaBtn">Daha fazla göster</button>
-            <span class="musteri-daha-fazla-info" id="yaslandirmaDahaFazlaInfo"></span>
           </div>
         </div>
       </div>
 
       <div class="panel" id="yaslandirmaOzetPanel">
-        <div class="panel-head"><h2>Özet — Temsilci Bazlı Yaşlandırma</h2></div>
+        <div class="panel-head panel-head-navy-hero"><h2>ST</h2></div>
         <div class="panel-body" style="padding:0;">
           <div class="table-scroll aging-table-scroll">
             <table id="yaslandirmaOzetTable" class="aging-table">
@@ -2106,32 +2188,11 @@
                 <th class="num">21-27 Gün</th>
                 <th class="num">28-34 Gün</th>
                 <th class="num">+35 Gün</th>
+                <th class="num aging-toplam-col">Yaşlandırma</th>
                 <th class="num">Toplam</th>
               </tr></thead>
               <tbody id="yaslandirmaOzetTbody"></tbody>
               <tfoot id="yaslandirmaOzetTfoot"></tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel" id="yaslandirmaOzetMuduruPanel">
-        <div class="panel-head"><h2>Özet — Saha Satış Müdürü Bazlı Yaşlandırma</h2></div>
-        <div class="panel-body" style="padding:0;">
-          <div class="table-scroll aging-table-scroll">
-            <table id="yaslandirmaOzetMuduruTable" class="aging-table">
-              <thead><tr>
-                <th>Saha Satış Müdürü</th>
-                <th class="num">0-6 Gün</th>
-                <th class="num">7-13 Gün</th>
-                <th class="num">14-20 Gün</th>
-                <th class="num">21-27 Gün</th>
-                <th class="num">28-34 Gün</th>
-                <th class="num">+35 Gün</th>
-                <th class="num">Toplam</th>
-              </tr></thead>
-              <tbody id="yaslandirmaOzetMuduruTbody"></tbody>
-              <tfoot id="yaslandirmaOzetMuduruTfoot"></tfoot>
             </table>
           </div>
         </div>
@@ -2822,7 +2883,6 @@
             <button type="button" class="modal-head-navy-analiz-btn gold" id="faturaModalAnalizBtn"><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Analiz</button>
             <button type="button" class="modal-head-navy-analiz-btn gold" id="faturaModalTahsilatTahminiBtn"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Tahsilat Tahmini</button>
             <button type="button" class="modal-head-navy-analiz-btn" id="faturaModalCekSenetBtn" style="display:none;"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Çek/Senet</button>
-            <button type="button" class="modal-head-navy-analiz-btn" id="faturaModalHakedisBtn" style="display:none;"><i class="fa-solid fa-award" aria-hidden="true"></i> Hakediş</button>
           </div>
           <button class="modal-close" id="faturaModalClose" type="button" aria-label="Kapat">✕</button>
         </div>
@@ -3001,6 +3061,7 @@
     </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
 const state = {
   files: { kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null },
   report: null,
@@ -4708,6 +4769,9 @@ buildBtn.addEventListener('click', async ()=>{
     if(saved){
       statusPillMsg.textContent = 'Rapor oluşturuldu ve cihaza kaydedildi';
       statusPill.classList.add('ok');
+      // iOS'ta kullanıcı ilk raporunu başarıyla oluşturduğunda — uygulamayı ana ekrana
+      // eklemeye en istekli olduğu an — kurulum ipucunu (bir kereye mahsus) gösteriyoruz.
+      if(typeof window.iosKurulumIpucunuGoster === 'function') window.iosKurulumIpucunuGoster(true);
     }
     if(cloudEnabled()){
       syncBtn.style.display = 'inline-block';
@@ -4734,28 +4798,34 @@ syncBtn.addEventListener('click', async ()=>{
   syncBtn.disabled = true;
   const prevText = syncBtn.textContent;
   syncBtn.textContent = '🔄 Güncelleniyor…';
-  const cloudReport = await loadReportFromCloud();
-  await faturaArsivYenile(true);
-  await musteriMasterYenile();
-  await bayiHakedisYenile();
-  await sellOutHedefYenile();
-  await sellOutYenile();
-  await sellOutArsivYenile(true);
-  if(document.getElementById('bayiHakedisView') && document.getElementById('bayiHakedisView').style.display !== 'none') renderBayiHakedisView();
-  if(document.getElementById('sellOutView') && document.getElementById('sellOutView').style.display !== 'none') renderSellOutView();
-  if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
-  syncBtn.disabled = false;
-  syncBtn.textContent = prevText;
-  if(cloudReport && cloudReport.musteriler && cloudReport.musteriler.length){
-    state.report = cloudReport;
-    state.expanded.clear();
-    await saveReportToStorage(cloudReport);
-    canliGunlerleGuncelle(cloudReport);
-    renderReport(cloudReport);
-    statusPillMsg.textContent = 'Buluttan güncellendi (' + fmtDate(cloudReport.asOf) + ')';
-    statusPill.classList.add('ok');
-  }else{
-    statusPillMsg.textContent = 'Buluttan veri alınamadı, mevcut rapor gösteriliyor';
+  try{
+    const cloudReport = await loadReportFromCloud();
+    await faturaArsivYenile(true);
+    await musteriMasterYenile();
+    await bayiHakedisYenile();
+    await sellOutHedefYenile();
+    await sellOutYenile();
+    await sellOutArsivYenile(true);
+    if(document.getElementById('bayiHakedisView') && document.getElementById('bayiHakedisView').style.display !== 'none') renderBayiHakedisView();
+    if(document.getElementById('sellOutView') && document.getElementById('sellOutView').style.display !== 'none') renderSellOutView();
+    if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+    if(cloudReport && cloudReport.musteriler && cloudReport.musteriler.length){
+      state.report = cloudReport;
+      state.expanded.clear();
+      await saveReportToStorage(cloudReport);
+      canliGunlerleGuncelle(cloudReport);
+      renderReport(cloudReport);
+      statusPillMsg.textContent = 'Buluttan güncellendi (' + fmtDate(cloudReport.asOf) + ')';
+      statusPill.classList.add('ok');
+    }else{
+      statusPillMsg.textContent = 'Buluttan veri alınamadı, mevcut rapor gösteriliyor';
+    }
+  }catch(err){
+    console.error('Diğer cihazdan güncelleme başarısız:', err);
+    alert('Güncelleme sırasında bir hata oluştu: ' + err.message + '\n\nLütfen tekrar deneyin.');
+  }finally{
+    syncBtn.disabled = false;
+    syncBtn.textContent = prevText;
   }
 });
 
@@ -5293,7 +5363,35 @@ function buildReport(files, musteriMasterMap){
   };
 }
 function sum(arr,key){ return arr.reduce((a,b)=>a+(b[key]||0),0); }
-function sumArr(arr,key){ return arr.reduce((a,b)=>a+(b[key]||0),0); }
+const sumArr = sum; // sumArr, sum ile birebir aynı gövdeye sahipti — tekilleştirildi, çağrı yerleri değişmedi.
+
+// ---- Saf (pure) hesaplama fonksiyonları için basit önbellekleme yardımcısı ----
+// Bazı compute* fonksiyonları (computeNoktaYaslandirma, computeSupheliAlacak vb.) aynı `report`
+// referansıyla tek bir render sırasında birden fazla kez çağrılıyor (örn. hem tablo hem özet
+// paneli için), üstelik "Daha Fazla Göster" gibi yalnızca gösterilen satır sayısını artıran bir
+// tıklamada bile view'in tamamı yeniden render edildiği için bu ağır hesaplamalar sıfırdan tekrar
+// çalıştırılıyordu. Bu yardımcı, girdiler (nesne referansları + ilkel değerler) bir önceki
+// çağrıyla birebir aynıysa sonucu yeniden hesaplamak yerine önbellekten döndürür.
+// NOT: Yalnızca TÜM girdilerini parametre olarak alan, global/mutable state (örn.
+// state.faturaArsivCache) okumayan saf fonksiyonlar için güvenlidir — bu yüzden yalnızca bu
+// koşulu sağlayan fonksiyonlara uygulandı (aşağıdaki ilgili tanımların hemen altında).
+let __dvSayac = 0;
+const __dvMap = new WeakMap();
+function __dataVersion(deger){
+  if(deger === null || typeof deger !== 'object') return typeof deger+':'+deger;
+  if(!__dvMap.has(deger)) __dvMap.set(deger, ++__dvSayac);
+  return 'o'+__dvMap.get(deger);
+}
+function memoizePure(fn){
+  let sonAnahtar = null, sonSonuc;
+  return function(...args){
+    const anahtar = args.map(__dataVersion).join('|');
+    if(sonAnahtar !== null && anahtar === sonAnahtar) return sonSonuc;
+    sonSonuc = fn.apply(this, args);
+    sonAnahtar = anahtar;
+    return sonSonuc;
+  };
+}
 
 function canliGunlerleGuncelle(report){
   if(!report || !report.asOf || !report.musteriler) return report;
@@ -5363,6 +5461,7 @@ function computeSevkOzet(report, temsilciFilter){
     siparisliMusteriSayisi, ortalamaVade,
   };
 }
+computeSevkOzet = memoizePure(computeSevkOzet);
 
 function computeGenelKPI(report, temsilciFilter){
   const musteriler = temsilciFilter ? report.musteriler.filter(m=>m.temsilci===temsilciFilter) : report.musteriler;
@@ -5380,6 +5479,7 @@ function computeGenelKPI(report, temsilciFilter){
     toplamBakiye, toplamCekSenet, toplamTahsilat, tahsilatEslesmeyenToplam, toplamRisk, ortalamaVade,
   };
 }
+computeGenelKPI = memoizePure(computeGenelKPI);
 
 /* ============================== GENEL BAKIŞ (DASHBOARD) ============================== */
 
@@ -5580,16 +5680,44 @@ function renderGbMusteriGrid(report){
   const q = document.getElementById('gbSearchInput').value.trim().toLowerCase();
   const temsilci = document.getElementById('gbTemsilciFilter').value;
   const sortKey = document.getElementById('gbSortSelect').value;
-  const riskFiltre = state.gbRiskFiltre || 'all';
+  // gbRiskFiltre artık risk seviyesi değil, "Nokta Detay" başlığındaki çiplerin seçili
+  // olanı: 'all' (Tümü — sıralama menüsü geçerli), 'ortVade' (Ort Vade büyükten küçüğe),
+  // 'hakedis' (Hakediş kaydı olanlar, A-Z) veya 'emanet' (Ticari Stok/Emanet kaydı
+  // olanlar, A-Z). Çip seçiliyken üstteki sıralama menüsü devre dışı kalır.
+  const chipFiltre = state.gbRiskFiltre || 'all';
+
+  // Hakediş/Emanet çipleri için müşteri kodu → kayıt var mı eşlemesi. Sıralama
+  // menüsündeki eski "hakedisTutar" seçeneği kaldırıldığı için burada yalnızca
+  // çip bazlı hakediş tutarına ihtiyaç var (Hakediş çipinde A-Z sıralanıyor,
+  // tutara göre değil — ama kayıt var/yok kontrolü için map yine gerekli).
+  let hakedisKodMap = null, stokKodSeti = null;
+  if(chipFiltre === 'hakedis'){
+    hakedisKodMap = new Set();
+    const rapor = state.bayiHakedisReport;
+    if(rapor && Array.isArray(rapor.noktalar)){
+      rapor.noktalar.forEach(n=>{ hakedisKodMap.add(n.kod); });
+    }
+  }
+  if(chipFiltre === 'emanet'){
+    stokKodSeti = ticariStokluMusteriKodlari();
+  }
 
   let rows = gbTumMusteriler(report).filter(m=>{
     if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
-    if(riskFiltre!=='all' && gbRiskSeviyesi(m)!==riskFiltre) return false;
+    // Hakediş/Emanet çipleri seçiliyken, ilgili raporda hiç kaydı olmayan müşteriler
+    // listeden tamamen çıkarılıyor.
+    if(chipFiltre === 'hakedis' && !hakedisKodMap.has(m.musteri)) return false;
+    if(chipFiltre === 'emanet' && !stokKodSeti.has(m.musteri)) return false;
     return true;
   });
 
   rows = rows.slice().sort((a,b)=>{
+    if(chipFiltre === 'ortVade') return (b.avgVadeGun||0) - (a.avgVadeGun||0);
+    if(chipFiltre === 'hakedis' || chipFiltre === 'emanet'){
+      return String(a.musteriAdi).localeCompare(String(b.musteriAdi),'tr');
+    }
+    // Çip 'all' iken üstteki sıralama menüsü (Kalan Borç/Ortalama Vade/Toplam Risk/Ad) geçerli.
     if(sortKey==='musteriAdi') return String(a.musteriAdi).localeCompare(String(b.musteriAdi),'tr');
     const av = a[sortKey]||0, bv = b[sortKey]||0;
     return bv-av;
@@ -5608,6 +5736,7 @@ function renderGbMusteriGrid(report){
   }
 
   const hakedisKodlari = bayiHakedisliMusteriKodlari();
+  const stokKodlari = ticariStokluMusteriKodlari();
   grid.innerHTML = gosterilecekRows.map(m=>{
     state.faturaModalYedekMap.set(m.musteri, m);
     const risk = hukukiRiskSeviyesi(m.avgVadeGun);
@@ -5617,13 +5746,13 @@ function renderGbMusteriGrid(report){
         <div style="min-width:0;">
           <div class="htk-musteri-row">
             <span class="htk-musteri">${escapeHtml(m.musteriAdi)}</span>
-            ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${hakedisRozeti(m.musteri, hakedisKodlari)}
           </div>
           <div class="htk-temsilci">${HTK_USER_ICON}${escapeHtml(m.temsilci||'—')}</div>
         </div>
-        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
-            <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
-          </span>
+        <div class="htk-badge-col">
+          <span class="htk-badge-vade" style="border-color:${vadeRenk.renk};"><span class="htk-badge-vade-num" style="color:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span><span class="htk-badge-vade-lbl" style="color:${vadeRenk.renk};">Ort. Vade</span></span>
+          ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${hakedisRozeti(m.musteri, hakedisKodlari)}${emanetRozeti(m.musteri, stokKodlari)}
+        </div>
       </div>
       <div class="htk-borc-satir">
         <span class="htk-borc">${TL(m.kalanBorc)}</span>
@@ -5777,7 +5906,6 @@ function renderReport(report){
   refreshGenelKPIs(report);
   populateTemsilciFilter(report.musteriler, 'temsilciFilter');
   populateTemsilciFilter(report.musteriler, 'sevkTemsilciFilter');
-  populateTemsilciFilter(report.musteriler, 'yaslandirmaTemsilciFilter');
   populateTemsilciFilter(report.musteriler, 'dikkatTemsilciFilter');
   populateTemsilciFilter(report.musteriler, 'faturaKontrolTemsilciFilter');
   renderDikkatPanel(report);
@@ -5872,6 +6000,13 @@ SB_SUBMENUS.forEach(s=>{
     s.menu.classList.toggle('open', willOpen);
     s.btn.classList.toggle('open', willOpen);
     s.btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+    // Flyout (daraltılmış/icon-rail moddaki yüzen alt menü) açıkken arka plan sayfa
+    // kaydırılabiliyordu — bu görsel olarak menünün "yarım kapanmış" gibi durmasına
+    // ve kullanıcının menüyü kaybetmesine neden oluyordu. collapsedMode'da açılan
+    // her flyout için body scroll'unu modal'lardaki gibi kilitliyoruz.
+    if(collapsedMode){
+      document.body.classList.toggle('sb-flyout-open', willOpen);
+    }
   });
 });
 
@@ -5925,6 +6060,10 @@ document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     setActiveView(btn.getAttribute('data-view'));
     closeSidebarDrawer();
+    // Daraltılmış moddaki flyout açıkken "Genel Bakış" gibi ana bir sidebar linkine
+    // tıklanınca görünüm değişmesine rağmen flyout panel ekranda açık kalıyordu;
+    // burada da (alt menü linklerinde olduğu gibi) kapatıyoruz.
+    if(typeof window.closeAllFlyouts === 'function') window.closeAllFlyouts();
   });
 });
 
@@ -5949,7 +6088,9 @@ document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
       s.btn.setAttribute('aria-expanded','false');
       s.menu.style.top = '';
     });
+    document.body.classList.remove('sb-flyout-open');
   }
+  window.closeAllFlyouts = closeAllFlyouts;
 
   function applyCollapsed(collapsed){
     sidebar.classList.toggle('collapsed', collapsed);
@@ -6057,8 +6198,11 @@ const AGING_DAY_BUCKETS = [
   {key:'g28_34',label:'28-34 Gün', test:g=> g>=28 && g<=34},
   {key:'g35p',  label:'+35 Gün',   test:g=> g>=35},
 ];
-// Taze (yeşil) -> riskli (kırmızı) renk skalası; AGING_DAY_BUCKETS ile aynı sırada (ısı haritası hücreleri için).
-const AGING_RENK_HEX = ['#3C7A56','#1B5FAE','#D9A030','#D97757','#C1503A','#B23A2C'];
+// İlk 5 kolon (0-6...28-34 gün) sistemin gold/amber vurgu rengiyle uyumlu tek bir renk
+// ailesinin açıktan koyuya yoğunluğuyla gösteriliyor; yalnızca en riskli son kolon
+// (+35 gün) hâlâ kırmızı/danger tonunda kalıyor — böylece asıl dikkat edilmesi gereken
+// vadesi en geçmiş bakiyeler, diğer sistem renklerinden kopmadan yine öne çıkıyor.
+const AGING_RENK_HEX = ['#8A6D1F','#8A6D1F','#8A6D1F','#8A6D1F','#8A6D1F','#B23A2C'];
 function yaslandirmaHexToRgb(hex){
   const h = hex.replace('#','');
   const n = parseInt(h,16);
@@ -6096,6 +6240,7 @@ function computeNoktaYaslandirma(report){
     return {musteri:m.musteri, musteriAdi:m.musteriAdi, temsilci:m.temsilci||'—', buckets, toplam};
   });
 }
+computeNoktaYaslandirma = memoizePure(computeNoktaYaslandirma);
 
 function computeTemsilciYaslandirma(noktaRows){
   const map = new Map();
@@ -6121,69 +6266,8 @@ function computeMuduruYaslandirma(repRows){
   return Array.from(map.values()).sort((a,b)=>b.toplam-a.toplam);
 }
 
-function getFilteredSortedYaslandirma(report){
-  const q = document.getElementById('yaslandirmaSearchInput').value.trim().toLowerCase();
-  const temsilci = document.getElementById('yaslandirmaTemsilciFilter').value;
-  let rows = computeNoktaYaslandirma(report).filter(r=>{
-    if(q && !(String(r.musteriAdi).toLowerCase().includes(q) || String(r.musteri).toLowerCase().includes(q) || String(r.temsilci).toLowerCase().includes(q))) return false;
-    if(temsilci && r.temsilci !== temsilci) return false;
-    return true;
-  });
-  const {key,dir} = state.ySort;
-  rows = rows.slice().sort((a,b)=>{
-    let av, bv;
-    if(key==='toplam'){ av=a.toplam; bv=b.toplam; }
-    else if(key.startsWith('g_')){ const bk=key.slice(2); av=a.buckets[bk]; bv=b.buckets[bk]; }
-    else { av=a[key]; bv=b[key]; }
-    if(typeof av==='string') return dir*String(av).localeCompare(String(bv),'tr');
-    return dir*((av||0)-(bv||0));
-  });
-  return rows;
-}
-
 function yaslandirmaBucketMaksList(rows){
   return AGING_DAY_BUCKETS.map(b => rows.reduce((m,r)=> Math.max(m, r.buckets[b.key]||0), 0));
-}
-
-function renderYaslandirmaDahaFazlaBtn(gosterilenSayi, toplamSayi){
-  const wrap = document.getElementById('yaslandirmaDahaFazlaWrap');
-  const info = document.getElementById('yaslandirmaDahaFazlaInfo');
-  if(!wrap) return;
-  if(toplamSayi > gosterilenSayi){
-    wrap.style.display = 'flex';
-    info.textContent = `${gosterilenSayi.toLocaleString('tr-TR')} / ${toplamSayi.toLocaleString('tr-TR')} nokta gösteriliyor`;
-  } else {
-    wrap.style.display = 'none';
-  }
-}
-
-function renderYaslandirmaTable(report, resetSayfa=true){
-  if(resetSayfa) state.yaslandirmaGosterilen = MUSTERI_SAYFA_BOYUTU;
-  const rows = getFilteredSortedYaslandirma(report);
-  document.getElementById('yaslandirmaCount').textContent = rows.length.toLocaleString('tr-TR') + ' nokta';
-  const tbody = document.getElementById('yaslandirmaTbody');
-  if(!rows.length){
-    tbody.innerHTML = `<tr><td colspan="9"><div class="empty-state">Filtreyle eşleşen nokta bulunamadı.</div></td></tr>`;
-    renderYaslandirmaDahaFazlaBtn(0, 0);
-    return;
-  }
-  const maksList = yaslandirmaBucketMaksList(rows);
-  const gosterilecekSayi = Math.min(state.yaslandirmaGosterilen, rows.length);
-  const gosterilecekRows = rows.slice(0, gosterilecekSayi);
-  const cell = (v,i) => `<td class="num${v>0?'':' zero'}"${yaslandirmaIsiStili(v, maksList[i], i)}>${v>0?TL(v):'—'}</td>`;
-  tbody.innerHTML = gosterilecekRows.map(r=>`<tr class="data-row">
-    <td><div class="musteri-name">${escapeHtml(r.musteriAdi)}</div><div class="musteri-code">${escapeHtml(r.musteri)}</div></td>
-    <td><span class="temsilci-tag">${escapeHtml(r.temsilci)}</span></td>
-    ${cell(r.buckets.g0_6,0)}
-    ${cell(r.buckets.g7_13,1)}
-    ${cell(r.buckets.g14_20,2)}
-    ${cell(r.buckets.g21_27,3)}
-    ${cell(r.buckets.g28_34,4)}
-    ${cell(r.buckets.g35p,5)}
-    <td class="num"><span class="num-strong">${TL(r.toplam)}</span></td>
-  </tr>`).join('');
-
-  renderYaslandirmaDahaFazlaBtn(gosterilecekSayi, rows.length);
 }
 
 function renderYaslandirmaOzet(report){
@@ -6192,31 +6276,79 @@ function renderYaslandirmaOzet(report){
   const muduruRows = computeMuduruYaslandirma(repRows);
   const tbody = document.getElementById('yaslandirmaOzetTbody');
   if(!repRows.length){
-    tbody.innerHTML = `<tr><td colspan="9"><div class="empty-state">Veri bulunamadı.</div></td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10"><div class="empty-state">Veri bulunamadı.</div></td></tr>`;
     document.getElementById('yaslandirmaOzetTfoot').innerHTML = '';
-    document.getElementById('yaslandirmaOzetMuduruTbody').innerHTML = `<tr><td colspan="8"><div class="empty-state">Veri bulunamadı.</div></td></tr>`;
+    document.getElementById('yaslandirmaOzetMuduruTbody').innerHTML = `<tr><td colspan="9"><div class="empty-state">Veri bulunamadı.</div></td></tr>`;
     document.getElementById('yaslandirmaOzetMuduruTfoot').innerHTML = '';
     return;
   }
   const repMaks = yaslandirmaBucketMaksList(repRows);
   const repCell = (v,i) => `<td class="num${v>0?'':' zero'}"${yaslandirmaIsiStili(v, repMaks[i], i)}>${v>0?TL(v):'—'}</td>`;
-  tbody.innerHTML = repRows.map(r=>`<tr class="data-row">
-    <td><span class="temsilci-tag">${escapeHtml(r.temsilci)}</span></td>
-    <td><span class="temsilci-tag mudur-tag">${escapeHtml(r.muduru)}</span></td>
+  // Temsilci satırına tıklanınca, o temsilcinin müşterilerini (aynı 6 gün kolonu +
+  // Yaşlandırma + Toplam formatında) alt satırda gösteren akordiyon — noktaRows zaten
+  // müşteri bazlı yaşlandırma verisini (temsilci alanıyla birlikte) içeriyor, burada
+  // sadece temsilciye göre filtreleyip aynı hücre şablonunu tekrar kullanıyoruz.
+  const musteriMaks = yaslandirmaBucketMaksList(noktaRows);
+  const musteriCell = (v,i) => `<td class="num${v>0?'':' zero'}"${yaslandirmaIsiStili(v, musteriMaks[i], i)}>${v>0?TL(v):'—'}</td>`;
+  function temsilciMusteriSatirHtml(n){
+    const yTop = (n.buckets.g28_34||0) + (n.buckets.g35p||0);
+    return `<tr class="data-row">
+        <td>${escapeHtml(n.musteriAdi)}</td>
+        <td></td>
+        ${musteriCell(n.buckets.g0_6,0)}
+        ${musteriCell(n.buckets.g7_13,1)}
+        ${musteriCell(n.buckets.g14_20,2)}
+        ${musteriCell(n.buckets.g21_27,3)}
+        ${musteriCell(n.buckets.g28_34,4)}
+        ${musteriCell(n.buckets.g35p,5)}
+        <td class="num aging-toplam-col">${yTop>0?TL(yTop):'—'}</td>
+        <td class="num"><span class="num-strong">${TL(n.toplam)}</span></td>
+      </tr>`;
+  }
+  const AGING_MUSTERI_SAYFA_BOYUTU = 10;
+  function temsilciMusterileriHtml(temsilciAdi){
+    // Yaşlandırma (28-34 + 35 gün toplamı) bakiyesi en yüksek müşteri en üstte —
+    // temsilcinin altında açılan bu liste, en riskli/yaşlanmış bakiyeye sahip
+    // müşterileri önce görmek için Toplam yerine bu değere göre sıralanıyor.
+    const musteriler = noktaRows.filter(n=>n.temsilci===temsilciAdi).slice()
+      .sort((a,b)=>((b.buckets.g28_34||0)+(b.buckets.g35p||0)) - ((a.buckets.g28_34||0)+(a.buckets.g35p||0)));
+    if(!musteriler.length) return '<div class="empty-state" style="padding:10px 12px;">Bu temsilciye ait müşteri bulunamadı.</div>';
+    const ilkGrup = musteriler.slice(0, AGING_MUSTERI_SAYFA_BOYUTU);
+    const kalanGrup = musteriler.slice(AGING_MUSTERI_SAYFA_BOYUTU);
+    const ilkGrupHtml = ilkGrup.map(temsilciMusteriSatirHtml).join('');
+    const kalanGrupHtml = kalanGrup.map(temsilciMusteriSatirHtml).join('');
+    const dahaFazlaBtnHtml = kalanGrup.length
+      ? `<tr class="aging-daha-fazla-row"><td colspan="10" style="padding:8px 12px;text-align:center;">
+          <button type="button" class="btn small aging-daha-fazla-btn">Devamını gör (${kalanGrup.length} müşteri daha) ↓</button>
+        </td></tr>`
+      : '';
+    return `<table class="aging-table aging-subtable"><tbody>${ilkGrupHtml}</tbody>`
+      + `<tbody class="aging-kalan-tbody" style="display:none;">${kalanGrupHtml}</tbody>`
+      + `<tbody>${dahaFazlaBtnHtml}</tbody></table>`;
+  }
+  tbody.innerHTML = repRows.map(r=>{
+    const yaslandirmaToplam = (r.buckets.g28_34||0) + (r.buckets.g35p||0);
+    return `<tr class="data-row aging-temsilci-row" data-temsilci="${escapeHtml(r.temsilci)}">
+    <td><span class="aging-expand-ic"><i class="fa-solid fa-caret-right" aria-hidden="true"></i></span><span class="temsilci-tag">${HTK_USER_ICON}${escapeHtml(r.temsilci)}</span></td>
+    <td><span class="temsilci-tag mudur-tag">${HTK_USER_ICON}${escapeHtml(r.muduru)}</span></td>
     ${repCell(r.buckets.g0_6,0)}
     ${repCell(r.buckets.g7_13,1)}
     ${repCell(r.buckets.g14_20,2)}
     ${repCell(r.buckets.g21_27,3)}
     ${repCell(r.buckets.g28_34,4)}
     ${repCell(r.buckets.g35p,5)}
+    <td class="num aging-toplam-col">${yaslandirmaToplam>0?TL(yaslandirmaToplam):'—'}</td>
     <td class="num"><span class="num-strong">${TL(r.toplam)}</span></td>
-  </tr>`).join('');
+  </tr>
+  <tr class="aging-detay-row" style="display:none;"><td colspan="10" style="padding:0;">${temsilciMusterileriHtml(r.temsilci)}</td></tr>`;
+  }).join('');
 
   const grand = {buckets:emptyBuckets(), toplam:0};
   repRows.forEach(r=>{
     AGING_DAY_BUCKETS.forEach(b=> grand.buckets[b.key]+=r.buckets[b.key]);
     grand.toplam += r.toplam;
   });
+  const grandYaslandirma = (grand.buckets.g28_34||0) + (grand.buckets.g35p||0);
   document.getElementById('yaslandirmaOzetTfoot').innerHTML = `<tr class="totals-row">
     <td colspan="2">Genel Toplam</td>
     <td class="num">${TL(grand.buckets.g0_6)}</td>
@@ -6225,22 +6357,27 @@ function renderYaslandirmaOzet(report){
     <td class="num">${TL(grand.buckets.g21_27)}</td>
     <td class="num">${TL(grand.buckets.g28_34)}</td>
     <td class="num">${TL(grand.buckets.g35p)}</td>
+    <td class="num aging-toplam-col"><span class="num-strong">${TL(grandYaslandirma)}</span></td>
     <td class="num"><span class="num-strong">${TL(grand.toplam)}</span></td>
   </tr>`;
 
   const muduruMaks = yaslandirmaBucketMaksList(muduruRows);
   const muduruCell = (v,i) => `<td class="num${v>0?'':' zero'}"${yaslandirmaIsiStili(v, muduruMaks[i], i)}>${v>0?TL(v):'—'}</td>`;
   const mtbody = document.getElementById('yaslandirmaOzetMuduruTbody');
-  mtbody.innerHTML = muduruRows.map(r=>`<tr class="data-row">
-    <td><span class="temsilci-tag mudur-tag">${escapeHtml(r.muduru)}</span></td>
+  mtbody.innerHTML = muduruRows.map(r=>{
+    const yaslandirmaToplam = (r.buckets.g28_34||0) + (r.buckets.g35p||0);
+    return `<tr class="data-row">
+    <td><span class="temsilci-tag mudur-tag">${HTK_USER_ICON}${escapeHtml(r.muduru)}</span></td>
     ${muduruCell(r.buckets.g0_6,0)}
     ${muduruCell(r.buckets.g7_13,1)}
     ${muduruCell(r.buckets.g14_20,2)}
     ${muduruCell(r.buckets.g21_27,3)}
     ${muduruCell(r.buckets.g28_34,4)}
     ${muduruCell(r.buckets.g35p,5)}
+    <td class="num aging-toplam-col">${yaslandirmaToplam>0?TL(yaslandirmaToplam):'—'}</td>
     <td class="num"><span class="num-strong">${TL(r.toplam)}</span></td>
-  </tr>`).join('');
+  </tr>`;
+  }).join('');
   document.getElementById('yaslandirmaOzetMuduruTfoot').innerHTML = `<tr class="totals-row">
     <td>Genel Toplam</td>
     <td class="num">${TL(grand.buckets.g0_6)}</td>
@@ -6249,12 +6386,44 @@ function renderYaslandirmaOzet(report){
     <td class="num">${TL(grand.buckets.g21_27)}</td>
     <td class="num">${TL(grand.buckets.g28_34)}</td>
     <td class="num">${TL(grand.buckets.g35p)}</td>
+    <td class="num aging-toplam-col"><span class="num-strong">${TL(grandYaslandirma)}</span></td>
     <td class="num"><span class="num-strong">${TL(grand.toplam)}</span></td>
   </tr>`;
 }
 
+// Temsilci satırına tıklanınca altındaki müşteri detay satırını aç/kapa — event
+// delegation ile tek seferlik bağlanıyor, tbody her render edildiğinde (filtre/sıralama
+// değiştiğinde) tekrar dinleyici eklemeye gerek kalmıyor. Akordiyon: aynı anda yalnızca
+// bir temsilci açık kalır, yeni birine tıklanınca öncekiler otomatik kapanır.
+document.getElementById('yaslandirmaOzetTbody')?.addEventListener('click', (e)=>{
+  const dahaFazlaBtn = e.target.closest('.aging-daha-fazla-btn');
+  if(dahaFazlaBtn){
+    // Buton, akordiyonun kendi tıklama olayını da tetiklemesin diye önce burada
+    // ele alınıyor — akordiyonu kapatmadan sadece kalan müşterileri gösterip
+    // butonu (artık gereksiz olduğu için) kaldırıyor.
+    const subtable = dahaFazlaBtn.closest('.aging-subtable');
+    const kalanTbody = subtable?.querySelector('.aging-kalan-tbody');
+    if(kalanTbody) kalanTbody.style.display = '';
+    dahaFazlaBtn.closest('tr').remove();
+    return;
+  }
+  const row = e.target.closest('.aging-temsilci-row');
+  if(!row) return;
+  const detayRow = row.nextElementSibling;
+  if(!detayRow || !detayRow.classList.contains('aging-detay-row')) return;
+  const acikMi = row.classList.contains('open');
+  document.querySelectorAll('#yaslandirmaOzetTbody .aging-temsilci-row.open').forEach(r=>{
+    r.classList.remove('open');
+    const d = r.nextElementSibling;
+    if(d && d.classList.contains('aging-detay-row')) d.style.display = 'none';
+  });
+  if(!acikMi){
+    row.classList.add('open');
+    detayRow.style.display = '';
+  }
+});
+
 function renderYaslandirmaView(report){
-  renderYaslandirmaTable(report);
   renderYaslandirmaOzet(report);
 }
 
@@ -6535,14 +6704,6 @@ document.getElementById('ticariStokDahaFazlaBtn').addEventListener('click', ()=>
   renderTicariStokTable(state.report, false);
 });
 
-document.getElementById('yaslandirmaSearchInput').addEventListener('input', debounce(()=>renderYaslandirmaTable(state.report)));
-document.getElementById('yaslandirmaTemsilciFilter').addEventListener('change', ()=>renderYaslandirmaTable(state.report));
-wireSortableTable('yaslandirmaTable', 'ySort', ()=>renderYaslandirmaTable(state.report));
-document.getElementById('yaslandirmaDahaFazlaBtn').addEventListener('click', ()=>{
-  state.yaslandirmaGosterilen += MUSTERI_SAYFA_BOYUTU;
-  renderYaslandirmaTable(state.report, false);
-});
-
 function renderAgingPanel(report){
   const temsilci = document.getElementById('temsilciFilter').value;
   const scopeLabel = temsilci ? temsilci : 'Tüm Temsilciler';
@@ -6716,8 +6877,43 @@ function bayiHakedisliMusteriKodlari(){
 }
 function hakedisRozeti(musteriKod, hakedisKodlari){
   if(!hakedisKodlari || !hakedisKodlari.has(musteriKod)) return '';
-  return '<span class="badge hakedis" title="Bu müşterinin Bayi Hakediş raporunda (Ciro Primi/Dönemsel İskonto) kaydı var">Hakediş</span>';
+  // Artık salt bilgi rozeti değil, tıklanınca o müşterinin Bayi Hakediş popup'ını
+  // açan bir buton — data-musteri-kod ile taşınan kod, kart grid'lerine (Genel
+  // Bakış/Müşteriler/Sevk Erteleme) delege edilen tek bir click listener'da okunuyor.
+  return '<button type="button" class="badge hakedis hakedis-btn" data-musteri-kod="'+escapeHtml(musteriKod)+'" title="Bu müşterinin Bayi Hakediş raporunda (Ciro Primi/Dönemsel İskonto) kaydı var — açmak için tıklayın">Hakediş</button>';
 }
+// Ticari Stok raporunda (depoda kalan emanet ürün) kaydı olan müşteri kodlarının
+// seti — ticariStokGrupMap zaten 'stok_'+musteriNo anahtarıyla dolu, burada sade
+// müşteri koduna (musteriNo) indirgiyoruz ki hakedisKodlari ile aynı şekilde kontrol edilebilsin.
+function ticariStokluMusteriKodlari(){
+  const map = state.ticariStokGrupMap;
+  if(!map) return new Set();
+  const set = new Set();
+  map.forEach(g=>{ if(g && g.musteriNo) set.add(String(g.musteriNo)); });
+  return set;
+}
+function emanetRozeti(musteriKod, stokKodlari){
+  if(!stokKodlari || !stokKodlari.has(musteriKod)) return '';
+  // Aynı şekilde Emanet de artık tıklanınca Ticari Stok/Emanet popup'ını açan bir buton.
+  return '<button type="button" class="badge emanet emanet-btn" data-musteri-kod="'+escapeHtml(musteriKod)+'" title="Bu müşterinin Ticari Stok raporunda depoda kalan (emanet) ürün kaydı var — açmak için tıklayın">Emanet</button>';
+}
+// Kart grid'lerinde (Genel Bakış Nokta Detay, Müşteriler, Sevk Erteleme) render sonrası
+// tekil listener eklemek yerine, her üç grid container'ına tek bir delege click listener
+// bağlıyoruz — kartlar sık sık yeniden render edildiği için bu, olay dinleyicisi
+// birikmesini (memory leak) ve her render sonrası yeniden bağlama ihtiyacını önler.
+document.addEventListener('click', (e)=>{
+  const hakedisBtn = e.target.closest('.hakedis-btn');
+  if(hakedisBtn){
+    e.stopPropagation();
+    hakedisModalAc(hakedisBtn.getAttribute('data-musteri-kod'));
+    return;
+  }
+  const emanetBtn = e.target.closest('.emanet-btn');
+  if(emanetBtn){
+    e.stopPropagation();
+    stokModalAc('stok_'+emanetBtn.getAttribute('data-musteri-kod'));
+  }
+});
 document.getElementById('dikkatEsikBanner').textContent = VADE_RISK_ESIGI;
 document.getElementById('dikkatEsikModal').textContent = VADE_RISK_ESIGI;
 
@@ -6767,11 +6963,6 @@ function faturaModalAc(musteriKod, musteriAdi){
       <div class="fatura-toplam-col"><div class="fatura-toplam-label">Ort. Vade Tarihi</div><div class="fatura-toplam-value">${ortTarih ? fmtDate(ortTarih) : '—'}</div></div>
     `;
 
-    // --- Bayi Hakediş (varsa) → sadece popup butonunu göster/gizle, içerik hakedisModalAc'te dolduruluyor ---
-    const hakedisRapor = state.bayiHakedisReport;
-    const hakedisKaydi = (hakedisRapor && Array.isArray(hakedisRapor.noktalar)) ? hakedisRapor.noktalar.find(n=>n.kod===kod) : null;
-    document.getElementById('faturaModalHakedisBtn').style.display = (hakedisKaydi && hakedisKaydi.kayitlar && hakedisKaydi.kayitlar.length) ? 'inline-flex' : 'none';
-
     // --- Çek / Senet Detayı (varsa) → sadece popup butonunu göster/gizle, içerik cekSenetModalAc'te dolduruluyor ---
     const cekSenetDetay = (m && m.cekSenetDetay) ? m.cekSenetDetay : [];
     document.getElementById('faturaModalCekSenetBtn').style.display = cekSenetDetay.length ? 'inline-flex' : 'none';
@@ -6784,7 +6975,6 @@ function faturaModalAc(musteriKod, musteriAdi){
     document.getElementById('faturaModalSub').textContent = musteriKod||'';
     document.getElementById('faturaModalTbody').innerHTML = '<tr><td colspan="4" class="empty-state">Bir hata oluştu: '+escapeHtml(err.message)+'</td></tr>';
     document.getElementById('faturaModalToplam').innerHTML = '';
-    document.getElementById('faturaModalHakedisBtn').style.display = 'none';
     document.getElementById('faturaModalCekSenetBtn').style.display = 'none';
     document.getElementById('faturaModalOverlay').classList.add('open');
   }
@@ -7004,11 +7194,6 @@ document.getElementById('faturaModalCekSenetBtn').addEventListener('click', ()=>
   if(!mevcut) return;
   cekSenetModalAc(mevcut.kod, mevcut.adi);
 });
-document.getElementById('faturaModalHakedisBtn').addEventListener('click', ()=>{
-  const mevcut = state.faturaModalMevcut;
-  if(!mevcut) return;
-  hakedisModalAc(mevcut.kod);
-});
 document.getElementById('dikkatModalOverlay').addEventListener('click', (e)=>{
   if(e.target.id === 'dikkatModalOverlay') closeDikkatModal();
 });
@@ -7131,6 +7316,7 @@ function renderMusteriTable(report, resetSayfa=true){
     return;
   }
   const hakedisKodlari = bayiHakedisliMusteriKodlari();
+  const stokKodlari = ticariStokluMusteriKodlari();
   const gosterilecekSayi = Math.min(state.musteriGosterilen, rows.length);
   const gosterilecekRows = rows.slice(0, gosterilecekSayi);
   list.innerHTML = gosterilecekRows.map(m=>{
@@ -7142,13 +7328,13 @@ function renderMusteriTable(report, resetSayfa=true){
         <div style="min-width:0;">
           <div class="htk-musteri-row">
             <span class="htk-musteri">${escapeHtml(m.musteriAdi)}</span>
-            ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${hakedisRozeti(m.musteri, hakedisKodlari)}
           </div>
           <div class="htk-temsilci">${HTK_USER_ICON}${escapeHtml(m.temsilci)}</div>
         </div>
-        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
-            <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
-          </span>
+        <div class="htk-badge-col">
+          <span class="htk-badge-vade" style="border-color:${vadeRenk.renk};"><span class="htk-badge-vade-num" style="color:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span><span class="htk-badge-vade-lbl" style="color:${vadeRenk.renk};">Ort. Vade</span></span>
+          ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${hakedisRozeti(m.musteri, hakedisKodlari)}${emanetRozeti(m.musteri, stokKodlari)}
+        </div>
       </div>
       <div class="htk-borc-satir">
         <span class="htk-borc">${TL(m.kalanBorc)}</span>
@@ -7197,7 +7383,11 @@ function ucBasamakYaziyla(n){
 // Senetlerde geleneksel olarak kelimeler birbirine bitişik yazılır (araya sonradan kelime
 // eklenerek sahtecilik yapılmasını zorlaştırmak için) — örnek taslaktaki "YüzElliBin" biçimiyle aynı.
 function sayiyiYaziyaCevir(n){
-  n = Math.round(n);
+  // Negatif veya geçersiz (NaN) girdi normalde buraya ulaşmaz (çağıran taraflar tutarı
+  // önceden >0 diye doğruluyor); yine de bir gün ulaşırsa sessizce boş string dönüp basılı
+  // belgede tutarı görünmez bırakmak yerine, açıkça yanlış olduğu belli olan "Sıfır" yazılır —
+  // böylece hata fark edilmeden imzalanabilecek bir bono çıkmaz.
+  n = Math.max(0, Math.round(n) || 0);
   if(n===0) return 'Sıfır';
   const gruplar = [];
   let x = n;
@@ -7572,6 +7762,7 @@ function renderSevkMusteriTable(report, resetSayfa=true){
     return;
   }
   const hakedisKodlari = bayiHakedisliMusteriKodlari();
+  const stokKodlari = ticariStokluMusteriKodlari();
   const gosterilecekSayi = Math.min(state.sevkGosterilen, rows.length);
   const gosterilecekRows = rows.slice(0, gosterilecekSayi);
   list.innerHTML = gosterilecekRows.map(m=>{
@@ -7584,13 +7775,13 @@ function renderSevkMusteriTable(report, resetSayfa=true){
         <div style="min-width:0;">
           <div class="htk-musteri-row">
             <span class="htk-musteri">${escapeHtml(m.musteriAdi)}</span>
-            ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${bakiyesizEtiket}${hakedisRozeti(m.musteri, hakedisKodlari)}
           </div>
           <div class="htk-temsilci">${HTK_USER_ICON}${escapeHtml(m.temsilci)}</div>
         </div>
-        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
-            <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
-          </span>
+        <div class="htk-badge-col">
+          <span class="htk-badge-vade" style="border-color:${vadeRenk.renk};"><span class="htk-badge-vade-num" style="color:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span><span class="htk-badge-vade-lbl" style="color:${vadeRenk.renk};">Ort. Vade</span></span>
+          ${isRiskliMusteri(m)?'<span class="badge dikkat" title="Ortalama vade '+VADE_RISK_ESIGI+' gün ve üzeri"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Dikkat</span>':''}${bakiyesizEtiket}${hakedisRozeti(m.musteri, hakedisKodlari)}${emanetRozeti(m.musteri, stokKodlari)}
+        </div>
       </div>
       <div class="htk-borc-satir">
         <span class="htk-borc">${TL(m.kalanBorc)}</span>
@@ -7784,9 +7975,7 @@ async function renderFaturaKontrolTable(report, resetSayfa=true){
           </div>
           <div class="htk-temsilci">${HTK_USER_ICON}${escapeHtml(m.temsilci)}</div>
         </div>
-        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
-            <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
-          </span>
+        <span class="htk-badge-vade" style="border-color:${vadeRenk.renk};"><span class="htk-badge-vade-num" style="color:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span><span class="htk-badge-vade-lbl" style="color:${vadeRenk.renk};">Ort. Vade</span></span>
       </div>
       <div class="htk-borc-satir">
         <span class="htk-borc">${TL(m.kalanBorc)}</span>
@@ -7950,10 +8139,10 @@ async function computeMusteriAylikOzet(musteri){
     aylikFatura, aylikLitre, aylikTahsilat, aylikNormalTahsilat, aylikKrediTahsilat, aylikHakedisTahsilat, geriDonusGun, toplamHakedisTahsilat };
 }
 
-function fmtTrendDeger(v, birim){
-  return birim==='gun' ? Math.round(v).toLocaleString('tr-TR')+' gün' : TL(v);
-}
-
+// Not: fmtTrendDeger burada değil, dosyanın ilerisinde (yüzde birimini de destekleyen üst küme
+// versiyonuyla) tek yerden tanımlanıyor — önceden burada da ayrı (ve eksik) bir kopyası vardı,
+// JS'in fonksiyon hoisting kuralları yüzünden ikisi de aynı isimde olduğundan ikincisi sessizce
+// birincisinin yerini alıyordu; kafa karıştırmaması için tekilleştirildi.
 let _trendMeasureCtx = null;
 function trendTextWidth(text, font){
   if(!_trendMeasureCtx) _trendMeasureCtx = document.createElement('canvas').getContext('2d');
@@ -9759,6 +9948,7 @@ function computeNakitAkisTahmini(report, gerceklesmeOrani){
 
   return {buckets, vadesiGecmis, oran:gerceklesmeOrani, oranVarMi, toplamVadesiGelen, toplamBeklenen};
 }
+computeNakitAkisTahmini = memoizePure(computeNakitAkisTahmini);
 
 async function renderNakitAkisView(report){
   document.getElementById('nakitAkisAsOf').textContent = 'Geçmiş tahsilat oranı hesaplanıyor…';
@@ -9835,6 +10025,7 @@ function computeSupheliAlacak(report){
 
   return {satirlar, toplamBakiye, toplamKarsilik, hukuki};
 }
+computeSupheliAlacak = memoizePure(computeSupheliAlacak);
 
 // Hukuki takip kartları — gecikme gününe göre otomatik risk seviyesi
 const HTK_RISK_ESIKLERI = [
@@ -9918,9 +10109,7 @@ function renderSupheliAlacakView(report){
       </div>
       <div class="htk-borc-satir">
         <span class="htk-borc">${TL(m.kalanBorc)}</span>
-        <span class="htk-badge-pill" style="background:${vadeRenk.soft};color:${vadeRenk.renk};">
-          <span class="htk-badge-circle" style="background:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span>ORT VADE
-        </span>
+        <span class="htk-badge-vade" style="border-color:${vadeRenk.renk};"><span class="htk-badge-vade-num" style="color:${vadeRenk.renk};">${Math.round(m.avgVadeGun)||0}</span><span class="htk-badge-vade-lbl" style="color:${vadeRenk.renk};">Ort. Vade</span></span>
       </div>
       <div class="htk-alt">
         <span class="htk-ceksenet">Çek/Senet: ${TL(m.cekSenet||0)}</span>
@@ -10099,8 +10288,9 @@ async function renderTemsilciKarnesiView(report, zorla){
       </div>
       ${karneTahsilatRowHtml('Tahsilat', r.toplamTahsilat, r.hedef)}
       <div class="htk-alt" style="margin-top:14px;padding-top:13px;border-top:1px dashed var(--line);">
-        ${r.ortVade!=null ? `<span class="htk-badge-pill" style="background:${vadeRenkKarne.soft};color:${vadeRenkKarne.renk};">
-          <span class="htk-badge-circle" style="background:${vadeRenkKarne.renk};">${r.ortVade}</span>ORT VADE
+        ${r.ortVade!=null ? `<span class="htk-badge-vade" style="border-color:${vadeRenkKarne.renk};">
+          <span class="htk-badge-vade-num" style="color:${vadeRenkKarne.renk};">${r.ortVade}</span>
+          <span class="htk-badge-vade-lbl" style="color:${vadeRenkKarne.renk};">Ort. Vade</span>
         </span>` : `<span class="htk-ceksenet">Ort. Vade: —</span>`}
         <span class="htk-ceksenet">Riskli müşteri: <b style="color:${r.riskliMusteriSayisi>0?'var(--danger)':'var(--ink)'};">${r.riskliMusteriSayisi}</b></span>
       </div>
@@ -11129,13 +11319,19 @@ document.getElementById('sellOutYenileBtn').addEventListener('click', async ()=>
   btn.disabled = true;
   const prevText = btn.textContent;
   btn.textContent = '🔄 Yenileniyor…';
-  await sellOutHedefYenile();
-  await musteriMasterYenile();
-  await sellOutYenile();
-  await sellOutArsivYenile(true);
-  await renderSellOutView();
-  btn.disabled = false;
-  btn.textContent = prevText;
+  try{
+    await sellOutHedefYenile();
+    await musteriMasterYenile();
+    await sellOutYenile();
+    await sellOutArsivYenile(true);
+    await renderSellOutView();
+  }catch(err){
+    console.error('Sell Out verisi yenilenemedi:', err);
+    alert('Yenileme sırasında bir hata oluştu: ' + err.message + '\n\nLütfen tekrar deneyin.');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = prevText;
+  }
 });
 
 // --- Olay bağlamaları ---
@@ -11240,7 +11436,20 @@ document.querySelectorAll('th[data-key]').forEach(th=>{
   }
 
   function kaydirmaKilidiniGuncelle(){
-    document.body.classList.toggle('modal-open', acikOverlayler().length > 0);
+    var acikMi = acikOverlayler().length > 0;
+    // scrollbar-gutter:stable modern tarayıcılarda (Chrome 94+, Firefox 97+, Safari 17+)
+    // scrollbar'ın kapladığı alanı zaten rezerve ediyor, ama bunu desteklemeyen eski bir
+    // tarayıcıda body{overflow:hidden} devreye girince scrollbar kaybolup sayfa genişliği
+    // artıyor, bu da grid kartlarının (auto-fill,minmax) yeniden hesaplanıp boyut
+    // değiştirmesine neden oluyordu. Burada scrollbar genişliğini ölçüp modal açıkken
+    // sağdan aynı miktarda padding ekleyerek (kapanınca kaldırarak) bu kaymayı önlüyoruz.
+    if(acikMi){
+      var scrollbarGenisligi = window.innerWidth - document.documentElement.clientWidth;
+      if(scrollbarGenisligi > 0) document.body.style.paddingRight = scrollbarGenisligi + 'px';
+    }else{
+      document.body.style.paddingRight = '';
+    }
+    document.body.classList.toggle('modal-open', acikMi);
   }
 
   var oncekiOdak = {};
@@ -11298,6 +11507,7 @@ document.querySelectorAll('th[data-key]').forEach(th=>{
   });
 })();
 
+});
 </script>
 <button type="button" id="scrollTopBtn" class="scroll-top-btn" title="Yukarı çık" aria-label="Sayfanın başına dön">↑</button>
 <script>
@@ -11313,6 +11523,31 @@ document.querySelectorAll('th[data-key]').forEach(th=>{
   btn.addEventListener('click', ()=>{
     window.scrollTo({top:0, behavior:'smooth'});
   });
+})();
+</script>
+
+<div id="iosInstallBannerRapor" style="display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9998;background:#13233F;color:#fff;padding:11px 14px;border-radius:12px;box-shadow:0 8px 24px -8px rgba(19,34,63,0.5);border:1px solid #D9B25C;align-items:center;gap:10px;font-family:'Inter',system-ui,sans-serif;font-size:12.5px;max-width:calc(100vw - 32px);">
+  <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true" style="color:#D9B25C;"></i>
+  <span>Hızlı erişim için Safari'de Paylaş'a dokunup <b>"Ana Ekrana Ekle"</b>yi seçebilirsiniz.</span>
+  <button type="button" id="iosInstallBannerRaporClose" aria-label="Kapat" style="background:transparent;border:none;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer;padding:0 2px;line-height:1;">×</button>
+</div>
+<div id="offlineBanner" style="display:none;position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translateX(-50%);z-index:9998;background:#B23A2C;color:#fff;padding:9px 16px;border-radius:10px;box-shadow:0 8px 24px -8px rgba(19,34,63,0.5);align-items:center;gap:8px;font-family:'Inter',system-ui,sans-serif;font-size:12.5px;font-weight:600;max-width:calc(100vw - 32px);" role="status" aria-live="polite">
+  <i class="fa-solid fa-cloud" aria-hidden="true" style="opacity:.85;"></i>
+  <span id="offlineBannerText">Bağlantı yok — değişiklikler cihazda bekletiliyor</span>
+</div>
+<script>
+// Saha kullanıcıları (satış temsilcileri) değişken mobil bağlantıda çalışabiliyor;
+// bağlantı kesildiğinde sessizce hata vermek yerine görünür ama sakin bir uyarı
+// gösteriyoruz. Bağlantı geri gelince banner otomatik kayboluyor.
+(function(){
+  const banner = document.getElementById('offlineBanner');
+  if(!banner) return;
+  function guncelle(){
+    banner.style.display = navigator.onLine ? 'none' : 'flex';
+  }
+  window.addEventListener('online', guncelle);
+  window.addEventListener('offline', guncelle);
+  guncelle();
 })();
 </script>
 
@@ -11398,12 +11633,24 @@ if('serviceWorker' in navigator){
       // uygulamayı tekrar ön plana getirdiğinde (ekranı açtığında / uygulamaya
       // geri döndüğünde) hemen bir güncelleme kontrolü yapıyoruz — mobilde
       // bildirim genelde bu sayede görünür hale gelir.
+      // Son güncelleme kontrolünden bu yana en az 5 dakika geçmediyse tekrar denemiyoruz —
+      // visibilitychange ve focus olayları art arda (hatta aynı anda) tetiklenebildiğinden
+      // bu koruma olmadan kısa sürede gereksiz, tekrarlı ağ istekleri oluşabiliyordu
+      // (özellikle mobilde uygulamaya sık girip çıkıldığında).
+      let sonGuncellemeKontrolu = Date.now();
+      const GUNCELLEME_KONTROL_ARALIGI = 5*60*1000;
+      function throttledUpdateKontrol(){
+        const simdi = Date.now();
+        if(simdi - sonGuncellemeKontrolu < GUNCELLEME_KONTROL_ARALIGI) return;
+        sonGuncellemeKontrolu = simdi;
+        reg.update().catch(()=>{});
+      }
       document.addEventListener('visibilitychange', ()=>{
         if(document.visibilityState === 'visible'){
-          reg.update().catch(()=>{});
+          throttledUpdateKontrol();
         }
       });
-      window.addEventListener('focus', ()=>{ reg.update().catch(()=>{}); });
+      window.addEventListener('focus', throttledUpdateKontrol);
 
       // Sayfa ilk açıldığında da (interval'ın ilk turunu 1 saat beklemeden) hemen bir kez kontrol et.
       reg.update().catch(()=>{});
@@ -11467,12 +11714,32 @@ if('serviceWorker' in navigator){
 
   // iOS/Safari: beforeinstallprompt hiçbir zaman tetiklenmez (Apple desteklemiyor),
   // bu yüzden orada buton yerine manuel "Paylaş > Ana Ekrana Ekle" ipucu gösteriyoruz.
-  const iosMu = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-  const zatenKuruluMu = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  if(iosMu && !zatenKuruluMu){
-    const ipucu = document.getElementById('iosInstallHint');
-    if(ipucu) ipucu.style.display = 'block';
-  }
+  // Fonksiyon global yapıldı: hem sayfa açılışında (login ekranı) hem de rapor
+  // başarıyla oluşturulduktan sonra (kullanıcının uygulamayı kurmaya en istekli
+  // olduğu an) çağrılabiliyor.
+  window.iosKurulumIpucunuGoster = function(zorla){
+    const iosMu = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+    const zatenKuruluMu = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+    if(!iosMu || zatenKuruluMu) return;
+    if(!zorla){
+      const ipucu = document.getElementById('iosInstallHint');
+      if(ipucu) ipucu.style.display = 'block';
+      return;
+    }
+    // Rapor başarıyla oluşturulduktan sonra çağrılan yol: kullanıcı uygulamayı
+    // kurmaya en istekli olduğu anda, bir kereye mahsus (localStorage ile
+    // işaretlenmiş) kapatılabilir bir alt banner gösteriyoruz.
+    let gosterildiMi = false;
+    try{ gosterildiMi = localStorage.getItem('iosKurulumBanneriGosterildi') === '1'; }catch(e){}
+    if(gosterildiMi) return;
+    const banner = document.getElementById('iosInstallBannerRapor');
+    if(!banner) return;
+    banner.style.display = 'flex';
+    try{ localStorage.setItem('iosKurulumBanneriGosterildi','1'); }catch(e){}
+    const kapatBtn = document.getElementById('iosInstallBannerRaporClose');
+    if(kapatBtn) kapatBtn.addEventListener('click', ()=>{ banner.style.display = 'none'; }, {once:true});
+  };
+  window.iosKurulumIpucunuGoster(false);
 })();
 </script>
 
