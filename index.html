@@ -119,6 +119,7 @@
   .sb-link.sb-parent.active{color:#F0DCA6;}
   .sb-link.sb-parent.active i.sb-ic{color:#D9B25C;}
   .sb-submenu{display:none;flex-direction:column;gap:1px;padding:2px 0 6px 12px;}
+  .sb-submenu-title{display:none;}
   .sb-submenu.open{display:flex;}
   .sb-submenu .sb-link{font-size:12.5px;font-weight:500;padding:8px 10px 8px 9px;}
   .sb-submenu .sb-link i.sb-ic{font-size:12px;}
@@ -167,6 +168,62 @@
      Mobil tabbar'daki eşdeğeri (tabbtn-sellOut) bu kuraldan etkilenmez, aynen görünür kalır. */
   @media(min-width:981px){
     #sbbtn-sellOut{display:none;}
+  }
+
+  /* ===== Sidebar daraltma (icon-rail) modu — yalnızca masaüstü genişliklerinde ===== */
+  .sb-collapse-row{display:flex;justify-content:flex-end;padding:0 2px 6px;}
+  .sb-collapse-btn{
+    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:rgba(255,255,255,.72);
+    display:flex;align-items:center;justify-content:center;font-size:12.5px;cursor:pointer;
+    transition:background .15s ease,color .15s ease,transform .15s ease;
+  }
+  .sb-collapse-btn:hover{background:rgba(255,255,255,.1);color:#fff;}
+  @media(max-width:980px){ .sb-collapse-row{display:none;} }
+  @media(min-width:981px){
+    :root{--sidebar-w-collapsed:72px;}
+    .sidebar.collapsed{width:var(--sidebar-w-collapsed);flex:0 0 var(--sidebar-w-collapsed);padding:20px 12px calc(18px + env(safe-area-inset-bottom));}
+    .app-shell.sb-collapsed .app-main{margin-left:var(--sidebar-w-collapsed);}
+    .sidebar.collapsed .sb-collapse-row{justify-content:center;}
+    .sidebar.collapsed .sb-collapse-btn i{transform:rotate(180deg);}
+    .sidebar.collapsed .sidebar-nav{align-items:center;}
+    .sidebar.collapsed .sb-link{
+      width:44px;height:44px;padding:0;justify-content:center;
+      border-left:none;border-radius:12px;position:relative;flex-shrink:0;
+    }
+    .sidebar.collapsed .sb-link.active{background:var(--accent);color:#fff;}
+    .sidebar.collapsed .sb-link.active i.sb-ic{color:#fff;}
+    .sidebar.collapsed .sb-label,
+    .sidebar.collapsed .sb-arrow{display:none;}
+    .sidebar.collapsed .sb-link.sb-parent::after{
+      content:'';position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;
+      background:#D9B25C;border:2px solid var(--navy);
+    }
+    .sidebar.collapsed > .sidebar-nav > .sb-link:not(.sb-parent)[data-label]::before{
+      content:attr(data-label);position:absolute;left:56px;top:50%;transform:translateY(-50%);
+      background:#152238;color:#fff;font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px;
+      white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .12s ease;z-index:70;
+      box-shadow:0 6px 18px -6px rgba(15,27,51,.5);
+    }
+    .sidebar.collapsed > .sidebar-nav > .sb-link:not(.sb-parent):hover[data-label]::before{opacity:1;}
+    .sidebar.collapsed .sb-submenu{
+      /* position:fixed kasıtlı — .sidebar'ın overflow-y:auto özelliği dolaylı olarak
+         overflow-x'i de kısıtladığından, absolute konumlu bir flyout 72px'lik nav genişliği
+         dışına taşınca kırpılırdı; fixed konumlama bunu by-pass eder (konum JS'te
+         getBoundingClientRect ile hesaplanır). */
+      display:none;position:fixed;left:76px;background:var(--navy);
+      border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:8px;min-width:216px;
+      z-index:60;flex-direction:column;gap:1px;box-shadow:0 10px 30px -10px rgba(15,27,51,.55);
+    }
+    .sidebar.collapsed .sb-submenu.open{display:flex;}
+    .sidebar.collapsed .sb-submenu .sb-link{
+      width:100%;height:auto;justify-content:flex-start;gap:9px;padding:8px 10px;border-radius:7px;
+    }
+    .sidebar.collapsed .sb-submenu .sb-label{display:inline;}
+    .sidebar.collapsed .sb-submenu-title{
+      display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+      color:rgba(255,255,255,.42);padding:4px 8px 8px;
+    }
   }
 
   .topbar{
@@ -1555,37 +1612,43 @@
   </div>
 
   <div id="reportSection">
-  <div class="app-shell">
+  <div class="app-shell sb-collapsed">
 
-    <nav class="sidebar" id="appSidebar" aria-label="Ana navigasyon">
+    <nav class="sidebar collapsed" id="appSidebar" aria-label="Ana navigasyon">
+      <div class="sb-collapse-row">
+        <button class="sb-collapse-btn" id="sbCollapseBtn" type="button" title="Menüyü genişlet" aria-label="Menüyü genişlet" aria-expanded="false"><i class="fa-solid fa-angles-left" aria-hidden="true"></i></button>
+      </div>
       <div class="sidebar-nav">
-        <button class="sb-link sb-nav-link active" id="sbbtn-genelBakis" data-view="genelBakis" type="button"><i class="fa-solid fa-house sb-ic" aria-hidden="true"></i> Genel Bakış</button>
+        <button class="sb-link sb-nav-link active" id="sbbtn-genelBakis" data-view="genelBakis" type="button"><i class="fa-solid fa-house sb-ic" aria-hidden="true"></i> <span class="sb-label">Genel Bakış</span> </button>
 
-        <button class="sb-link sb-parent open" id="sbbtn-cariDetay" type="button" aria-expanded="true" aria-controls="sbSubCariDetay"><i class="fa-solid fa-file-invoice sb-ic" aria-hidden="true"></i> Cari Detay <span class="sb-arrow">▾</span></button>
+        <button class="sb-link sb-parent open" id="sbbtn-cariDetay" type="button" aria-expanded="true" aria-controls="sbSubCariDetay"><i class="fa-solid fa-file-invoice sb-ic" aria-hidden="true"></i> <span class="sb-label">Cari Detay</span> <span class="sb-arrow">▾</span></button>
         <div class="sb-submenu open" id="sbSubCariDetay">
-          <button class="sb-link sb-nav-link" id="sbbtn-yaslandirma" data-view="yaslandirma" type="button"><i class="fa-solid fa-clock sb-ic" aria-hidden="true"></i> Yaşlandırma Raporu</button>
+          <span class="sb-submenu-title">Cari Detay</span>
+          <button class="sb-link sb-nav-link" id="sbbtn-yaslandirma" data-view="yaslandirma" type="button"><i class="fa-solid fa-clock sb-ic" aria-hidden="true"></i> <span class="sb-label">Yaşlandırma Raporu</span> </button>
         </div>
 
-        <button class="sb-link sb-parent" id="sbbtn-dagitim" type="button" aria-expanded="false" aria-controls="sbSubDagitim"><i class="fa-solid fa-truck-fast sb-ic" aria-hidden="true"></i> Dağıtım <span class="sb-arrow">▾</span></button>
+        <button class="sb-link sb-parent" id="sbbtn-dagitim" type="button" aria-expanded="false" aria-controls="sbSubDagitim"><i class="fa-solid fa-truck-fast sb-ic" aria-hidden="true"></i> <span class="sb-label">Dağıtım</span> <span class="sb-arrow">▾</span></button>
         <div class="sb-submenu" id="sbSubDagitim">
-          <button class="sb-link sb-nav-link" id="sbbtn-sevk" data-view="sevk" type="button"><i class="fa-solid fa-truck sb-ic" aria-hidden="true"></i> Sevk Raporu</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-faturaKontrol" data-view="faturaKontrol" type="button"><i class="fa-solid fa-file-circle-check sb-ic" aria-hidden="true"></i> Fatura Kontrol</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-yukleme" data-view="yukleme" type="button"><i class="fa-solid fa-file-lines sb-ic" aria-hidden="true"></i> ST Tahsilat/Litre</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-ticariStok" data-view="ticariStok" type="button"><i class="fa-solid fa-box sb-ic" aria-hidden="true"></i> Ticari Stok Raporu</button>
+          <span class="sb-submenu-title">Dağıtım</span>
+          <button class="sb-link sb-nav-link" id="sbbtn-sevk" data-view="sevk" type="button"><i class="fa-solid fa-truck sb-ic" aria-hidden="true"></i> <span class="sb-label">Sevk Raporu</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-faturaKontrol" data-view="faturaKontrol" type="button"><i class="fa-solid fa-file-circle-check sb-ic" aria-hidden="true"></i> <span class="sb-label">Fatura Kontrol</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-yukleme" data-view="yukleme" type="button"><i class="fa-solid fa-file-lines sb-ic" aria-hidden="true"></i> <span class="sb-label">ST Tahsilat/Litre</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-ticariStok" data-view="ticariStok" type="button"><i class="fa-solid fa-box sb-ic" aria-hidden="true"></i> <span class="sb-label">Ticari Stok Raporu</span> </button>
         </div>
 
-        <button class="sb-link sb-nav-link" id="sbbtn-bayiHakedis" data-view="bayiHakedis" type="button"><i class="fa-solid fa-award sb-ic" aria-hidden="true"></i> Bayi Hakediş</button>
-        <button class="sb-link sb-nav-link" id="sbbtn-sellOut" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> Sell Out Raporu</button>
+        <button class="sb-link sb-nav-link" id="sbbtn-bayiHakedis" data-view="bayiHakedis" type="button"><i class="fa-solid fa-award sb-ic" aria-hidden="true"></i> <span class="sb-label">Bayi Hakediş</span> </button>
+        <button class="sb-link sb-nav-link" id="sbbtn-sellOut" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> <span class="sb-label">Sell Out Raporu</span> </button>
 
-        <button class="sb-link sb-parent" id="sbbtn-finansalAnaliz" type="button" aria-expanded="false" aria-controls="sbSubFinansal"><i class="fa-solid fa-file-invoice-dollar sb-ic" aria-hidden="true"></i> Finansal Analiz <span class="sb-arrow">▾</span></button>
+        <button class="sb-link sb-parent" id="sbbtn-finansalAnaliz" type="button" aria-expanded="false" aria-controls="sbSubFinansal"><i class="fa-solid fa-file-invoice-dollar sb-ic" aria-hidden="true"></i> <span class="sb-label">Finansal Analiz</span> <span class="sb-arrow">▾</span></button>
         <div class="sb-submenu" id="sbSubFinansal">
-          <button class="sb-link sb-nav-link" id="sbbtn-temsilciKarnesi" data-view="temsilciKarnesi" type="button"><i class="fa-solid fa-trophy sb-ic" aria-hidden="true"></i> Temsilci Karnesi</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-tahsilatVerimlilik" data-view="tahsilatVerimlilik" type="button"><i class="fa-solid fa-arrow-trend-up sb-ic" aria-hidden="true"></i> Temsilci Tahsilat Verimliliği</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-cei" data-view="cei" type="button"><i class="fa-solid fa-calculator sb-ic" aria-hidden="true"></i> Tahsilat Başarı Oranı</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-nakitAkis" data-view="nakitAkis" type="button"><i class="fa-solid fa-money-bill sb-ic" aria-hidden="true"></i> Nakit Akış Tahmini</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-supheliAlacak" data-view="supheliAlacak" type="button"><i class="fa-solid fa-triangle-exclamation sb-ic" aria-hidden="true"></i> Şüpheli Alacak</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-dsoTrend" data-view="dsoTrend" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> DSO Trendi</button>
-          <button class="sb-link sb-nav-link" id="sbbtn-yonetimOzeti" data-view="yonetimOzeti" type="button"><i class="fa-solid fa-folder sb-ic" aria-hidden="true"></i> Yönetim Özeti</button>
+          <span class="sb-submenu-title">Finansal Analiz</span>
+          <button class="sb-link sb-nav-link" id="sbbtn-temsilciKarnesi" data-view="temsilciKarnesi" type="button"><i class="fa-solid fa-trophy sb-ic" aria-hidden="true"></i> <span class="sb-label">Temsilci Karnesi</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-tahsilatVerimlilik" data-view="tahsilatVerimlilik" type="button"><i class="fa-solid fa-arrow-trend-up sb-ic" aria-hidden="true"></i> <span class="sb-label">Temsilci Tahsilat Verimliliği</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-cei" data-view="cei" type="button"><i class="fa-solid fa-calculator sb-ic" aria-hidden="true"></i> <span class="sb-label">Tahsilat Başarı Oranı</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-nakitAkis" data-view="nakitAkis" type="button"><i class="fa-solid fa-money-bill sb-ic" aria-hidden="true"></i> <span class="sb-label">Nakit Akış Tahmini</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-supheliAlacak" data-view="supheliAlacak" type="button"><i class="fa-solid fa-triangle-exclamation sb-ic" aria-hidden="true"></i> <span class="sb-label">Şüpheli Alacak</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-dsoTrend" data-view="dsoTrend" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> <span class="sb-label">DSO Trendi</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-yonetimOzeti" data-view="yonetimOzeti" type="button"><i class="fa-solid fa-folder sb-ic" aria-hidden="true"></i> <span class="sb-label">Yönetim Özeti</span> </button>
         </div>
       </div>
     </nav>
@@ -5794,6 +5857,18 @@ const SB_SUBMENUS = [
 SB_SUBMENUS.forEach(s=>{
   s.btn.addEventListener('click', ()=>{
     const willOpen = !s.menu.classList.contains('open');
+    const collapsedMode = document.getElementById('appSidebar')?.classList.contains('collapsed');
+    if(collapsedMode && willOpen){
+      // Daraltılmış (icon-rail) modda aynı anda yalnızca bir flyout açık olmalı — açılmadan
+      // önce diğer tüm alt menüleri kapatıyoruz ki üst üste binmesinler.
+      SB_SUBMENUS.forEach(o=>{
+        if(o===s) return;
+        o.menu.classList.remove('open');
+        o.btn.classList.remove('open');
+        o.btn.setAttribute('aria-expanded','false');
+        o.menu.style.top = '';
+      });
+    }
     s.menu.classList.toggle('open', willOpen);
     s.btn.classList.toggle('open', willOpen);
     s.btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
@@ -5852,6 +5927,95 @@ document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
     closeSidebarDrawer();
   });
 });
+
+// ---- Sol sidebar: daraltma (icon-rail) modu ----
+(function(){
+  const shell = document.querySelector('.app-shell');
+  const sidebar = document.getElementById('appSidebar');
+  const collapseBtn = document.getElementById('sbCollapseBtn');
+  if(!shell || !sidebar || !collapseBtn) return;
+
+  // Tooltip metinleri (data-label) — sb-label span'ının metnini kopyalayarak, daraltılmış
+  // moddaki CSS tooltip'i (attr(data-label)) besler.
+  sidebar.querySelectorAll('.sb-link').forEach(btn=>{
+    const label = btn.querySelector('.sb-label');
+    if(label) btn.setAttribute('data-label', label.textContent.trim());
+  });
+
+  function closeAllFlyouts(){
+    SB_SUBMENUS.forEach(s=>{
+      s.menu.classList.remove('open');
+      s.btn.classList.remove('open');
+      s.btn.setAttribute('aria-expanded','false');
+      s.menu.style.top = '';
+    });
+  }
+
+  function applyCollapsed(collapsed){
+    sidebar.classList.toggle('collapsed', collapsed);
+    shell.classList.toggle('sb-collapsed', collapsed);
+    collapseBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    collapseBtn.setAttribute('title', collapsed ? 'Menüyü genişlet' : 'Menüyü daralt');
+    collapseBtn.setAttribute('aria-label', collapsed ? 'Menüyü genişlet' : 'Menüyü daralt');
+    closeAllFlyouts();
+    try{ localStorage.setItem('sbCollapsed', collapsed ? '1' : '0'); }catch(e){}
+  }
+
+  // Varsayılan açılış durumu: daraltılmış icon-rail. Kullanıcı daha önce sidebar'ı bilerek
+  // genişletmişse (localStorage'da '0' olarak kaydedilmişse) o tercih hatırlanır; aksi halde
+  // (ilk ziyaret veya '1') daraltılmış halde açılır.
+  let collapsedState = true;
+  try{
+    const saved = localStorage.getItem('sbCollapsed');
+    if(saved === '0') collapsedState = false;
+  }catch(e){}
+  if(window.innerWidth > 980) applyCollapsed(collapsedState);
+
+  collapseBtn.addEventListener('click', ()=>{
+    applyCollapsed(!sidebar.classList.contains('collapsed'));
+  });
+
+  // Daraltılmış modda üst menü butonlarına (Cari Detay/Dağıtım/Finansal Analiz) tıklanınca
+  // açılan alt menü artık satır içi değil, ikonun sağında yüzen (flyout) bir panel — bu yüzden
+  // konumunu (top) butonun sidebar içindeki dikey konumuna göre elle hesaplıyoruz.
+  SB_SUBMENUS.forEach(s=>{
+    s.btn.addEventListener('click', ()=>{
+      if(!sidebar.classList.contains('collapsed')) return;
+      if(s.menu.classList.contains('open')){
+        const r = s.btn.getBoundingClientRect();
+        let top = r.top;
+        const maxTop = window.innerHeight - s.menu.offsetHeight - 10;
+        if(top > maxTop) top = Math.max(10, maxTop);
+        s.menu.style.top = top + 'px';
+      }
+    });
+  });
+
+  // Daraltılmış moddaki flyout içindeki bir rapor linkine tıklanınca (görünüm değiştiği için)
+  // flyout'un kendisi de kapanmalı — aksi halde panel ekranda açık kalmaya devam ediyordu.
+  sidebar.querySelectorAll('.sb-submenu .sb-nav-link').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      if(sidebar.classList.contains('collapsed')) closeAllFlyouts();
+    });
+  });
+
+  document.addEventListener('click', (e)=>{
+    if(!sidebar.classList.contains('collapsed')) return;
+    if(sidebar.contains(e.target)) return;
+    closeAllFlyouts();  });
+
+  window.addEventListener('resize', ()=>{
+    if(window.innerWidth <= 980 && sidebar.classList.contains('collapsed')){
+      closeAllFlyouts();
+    }
+  });
+
+  // Sidebar iç kaydırması olursa (dar yükseklikli ekranlarda), açık flyout'un konumu geçersiz
+  // kalmasın diye kapatıyoruz.
+  sidebar.addEventListener('scroll', ()=>{
+    if(sidebar.classList.contains('collapsed')) closeAllFlyouts();
+  }, {passive:true});
+})();
 
 // ---- Mobil hamburger menü (sidebar'ı kayan panel/drawer olarak aç-kapat) ----
 function openSidebarDrawer(){
