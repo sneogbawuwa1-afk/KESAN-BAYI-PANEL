@@ -10,7 +10,7 @@
 // Yeni sürüm hemen devreye girmez; kullanıcı index.html'deki "güncelleme var" bildirimine
 // dokunana kadar "waiting" (bekleme) durumunda kalır — böylece kullanıcı işini yaparken
 // panel aniden yenilenip yarım kalan bir işlemi bozmaz.
-const APP_VERSION = '2.6';
+const APP_VERSION = '2.7';
 const CACHE_NAME = 'bayi-takip-cache-v' + APP_VERSION;
 const CORE_ASSETS = [
   './index.html',
