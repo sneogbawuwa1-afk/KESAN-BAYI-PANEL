@@ -3842,7 +3842,11 @@ async function authQuery(){
   try{
     const user = firebase.auth().currentUser;
     if(!user) return '';
-    const token = await user.getIdToken();
+    // getIdToken() (parametresiz) SDK'nın önbellekteki token'ını döndürür; süresi dolmuşsa normalde
+    // otomatik yeniler ama nadiren (saat kayması, arka arkaya çok sayıda eşzamanlı çağrı vb.) bunu
+    // atlayıp süresi geçmiş bir token döndürebilir — bu da TÜM bulut isteklerinin aynı anda 401
+    // almasına yol açar. getIdToken(true) her seferinde sunucudan taze bir token ister, bu riski ortadan kaldırır.
+    const token = await user.getIdToken(true);
     return '?auth=' + token;
   }catch(err){ return ''; }
 }
@@ -4262,7 +4266,7 @@ async function authTokenParam(){
   try{
     const user = firebase.auth().currentUser;
     if(!user) return '';
-    return await user.getIdToken();
+    return await user.getIdToken(true);
   }catch(err){ return ''; }
 }
 
@@ -8355,14 +8359,17 @@ function yuklemeGunuLitreIleBirlestir(yeniGun, eskiGun){
   // Bu günde tahsilatı olmayıp yalnızca eski arşivde litre kaydı bulunan temsilciler de korunur.
   (eskiGun.temsilciler||[]).forEach(r=>{
     if(gorulenTemsilciler.has(r.temsilci) || !(r.litre>0)) return;
-    birlesikTemsilciler.push(Object.assign({}, r));
+    // Eski arşiv kaydı (özellikle daha önceki bir şema sürümünden kalma) kolonlar alanını
+    // hiç içermeyebilir — bu durumda aşağıdaki genel toplam hesaplaması r.kolonlar[k] okurken
+    // "Cannot read properties of undefined" hatası fırlatırdı; burada {} ile güvenceye alınır.
+    birlesikTemsilciler.push(Object.assign({}, r, {kolonlar: r.kolonlar || {}}));
   });
   birlesikTemsilciler.sort((a,b)=> a.temsilci.localeCompare(b.temsilci,'tr'));
 
   const kolonlar = yeniGun.kolonlar || [];
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
@@ -8407,7 +8414,7 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
     if(gorulenTemsilciler.has(r.temsilci) || !(r.genelToplam>0)) return;
     birlesikTemsilciler.push({
       temsilci: r.temsilci,
-      kolonlar: r.kolonlar,
+      kolonlar: r.kolonlar || {},
       genelToplam: r.genelToplam,
       litre: 0,
       stTahsilatLitre: null,
@@ -8418,7 +8425,7 @@ function yuklemeGunuTahsilatIleBirlestir(yeniGun, eskiGun){
   const kolonlar = (eskiGun.kolonlar && eskiGun.kolonlar.length) ? eskiGun.kolonlar : (yeniGun.kolonlar||[]);
   const genelToplamSatiri = { kolonlar:{}, genelToplam:0, litre:0 };
   birlesikTemsilciler.forEach(r=>{
-    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + (r.kolonlar[k]||0); });
+    kolonlar.forEach(k=>{ genelToplamSatiri.kolonlar[k] = (genelToplamSatiri.kolonlar[k]||0) + ((r.kolonlar||{})[k]||0); });
     genelToplamSatiri.genelToplam += r.genelToplam;
     genelToplamSatiri.litre += r.litre;
   });
