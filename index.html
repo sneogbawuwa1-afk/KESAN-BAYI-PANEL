@@ -11787,41 +11787,47 @@ function stokGunUrunVerileriniTopla(){
   // "sonAylar" (raporun üst bilgisinde gösterilen "6 ay: ...") iki kaynağın aylarının
   // BİRLEŞİMİDİR — kullanıcı hangi ayların hesaba katıldığını görebilsin diye.
   const sonAylar = Array.from(new Set([...sellOutAylar, ...modernKanalAylar])).sort();
-  const urunMap = new Map(); // kod -> {urunAdi, marka, toplamLitre6Ay, toplamMiktar6Ay, gunler:[], aktifAylar:Set, kapsananAylar:Set}
+  const urunMap = new Map(); // kod -> {urunAdi, marka, toplamLitre6Ay, toplamMiktar6Ay, gunler:[], aktifAylar:Set, kapsananAylar:Set, kanal:{sellOut:{...}, modernKanal:{...}}}
 
   // Her iki kaynaktan (Geleneksel Kanal + Modern Kanal) gelen ürün listelerini AYNI urunMap'e
   // TOPLAYARAK birleştirir — bir ürün her iki kanaldan da satılıyorsa (aynı Malzeme/Ürün Kodu),
-  // litre/miktar/gün verileri toplanır; sadece bir kanaldan satılıyorsa o kanalın verisiyle
-  // tek başına yer alır. Bu fonksiyon iki kere (biri Sell Out ayları, biri Modern Kanal ayları
-  // için) çağrılır. "kapsananAylar", bu ürün için GERÇEKTEN veri toplanan ayların birleşimidir
-  // (o ürünün geldiği kaynağın arşivlediği aylar) — birleşik "sonAylar"dan FARKLI olabilir:
-  // ör. bir ürün sadece Modern Kanal'dan satılıyorsa ve Modern Kanal yalnızca 2 ay arşivliyse,
-  // bu ürünün kapsananAylar'ı sadece o 2 ay olur, Sell Out'un 6 ayı değil. Bu ayrım kritiktir:
-  // "gerçek günlük istatistik" (stokGunGercekGunlukIstatistik) hesabı, veri toplanmamış ayları
-  // yanlışlıkla "0 satış günü" saymasın diye bu ürüne özgü pencereyi kullanır.
-  function isle(arsiv, aylar){
+  // BİRLEŞİK litre/miktar/gün verileri toplanır (aktifAylar/veriGuveni/istatistik hesapları için).
+  // AYRICA, "kanal" alanı altında SELL OUT ve MODERN KANAL'ın kendi ayrı toplamLitre6Ay ve
+  // gunler dizileri de AYRI AYRI tutulur — çünkü "pay" artık HER KANALIN KENDİ İÇİNDE ayrı
+  // hesaplanıp kendi hedefine uygulanacak (bkz. computeStokGunRaporu): sadece Modern Kanal'dan
+  // satılan bir ürünün payı, Modern Kanal'ın toplamı içindeki payı olmalı ve SADECE Modern
+  // Kanal'ın (girilen) hedefine uygulanmalı — Sell Out'un (varsa) çok daha büyük hedefine göre
+  // hesaplanıp yapay derecede büyük bir "Gerekli Litre" üretmemeli.
+  function isle(kanalAdi, arsiv, aylar){
     aylar.forEach(ayKey=>{
       const rapor = arsiv[ayKey];
       if(!rapor || !Array.isArray(rapor.malzemeler)) return;
       rapor.malzemeler.forEach(u=>{
-        if(!urunMap.has(u.kod)) urunMap.set(u.kod, {kod:u.kod, urunAdi:u.urunAdi, marka:u.marka||'Diğer', toplamLitre6Ay:0, toplamMiktar6Ay:0, gunler:[], aktifAylar:new Set(), kapsananAylar:new Set()});
+        if(!urunMap.has(u.kod)) urunMap.set(u.kod, {
+          kod:u.kod, urunAdi:u.urunAdi, marka:u.marka||'Diğer',
+          toplamLitre6Ay:0, toplamMiktar6Ay:0, gunler:[], aktifAylar:new Set(), kapsananAylar:new Set(),
+          kanal:{ sellOut:{toplamLitre6Ay:0, gunler:[]}, modernKanal:{toplamLitre6Ay:0, gunler:[]} },
+        });
         const hedef = urunMap.get(u.kod);
         if(u.urunAdi && (!hedef.urunAdi || hedef.urunAdi===u.kod)) hedef.urunAdi = u.urunAdi;
         if(u.marka && (!hedef.marka || hedef.marka==='Diğer')) hedef.marka = u.marka;
         hedef.kapsananAylar.add(ayKey);
+        const kanalHedef = hedef.kanal[kanalAdi];
         let buAyToplamLitre = 0;
         (u.gunler||[]).forEach(g=>{
           hedef.toplamLitre6Ay += g.litre;
           hedef.toplamMiktar6Ay += (g.miktar||0);
           hedef.gunler.push(g);
+          kanalHedef.toplamLitre6Ay += g.litre;
+          kanalHedef.gunler.push(g);
           buAyToplamLitre += g.litre;
         });
         if(buAyToplamLitre>0) hedef.aktifAylar.add(ayKey);
       });
     });
   }
-  isle(sellOutArsiv, sellOutAylar);
-  isle(modernKanalArsiv, modernKanalAylar);
+  isle('sellOut', sellOutArsiv, sellOutAylar);
+  isle('modernKanal', modernKanalArsiv, modernKanalAylar);
 
   const urunler = Array.from(urunMap.values()).map(u=>{
     const aktifAylarSirali = Array.from(u.aktifAylar).sort();
@@ -12113,9 +12119,29 @@ function computeStokGunRaporu(){
     // kanalın arşivlediği ama bu ürünün hiç var olmadığı sonraki aylar yüzünden yanlışlıkla
     // "ölü ürün" damgalanıp hedef dağıtımından haksız yere çıkarılabilirdi.
     const oluUrun = stokGunOluUrunMu(aylikLitre, u.kapsananAylar);
-    return Object.assign({}, u, {aylikLitre, agirlikliOrtalama, cv, gunlukCV: gercekGunlukIstatistik.cv, oluUrun});
+    // ============================================================================
+    // KANAL BAZLI PAY DÜZELTMESİ (kritik): Bir ürünün "payı" artık BİRLEŞİK toplam üzerinden
+    // değil, HER KANALIN KENDİ HAVUZU İÇİNDE ayrı ayrı hesaplanır. Örnek: bir ürün SADECE
+    // Modern Kanal'dan satılıyorsa, payı SADECE Modern Kanal'ın toplam ağırlıklı ortalaması
+    // içindeki payı olmalı ve SADECE Modern Kanal'ın (kullanıcının girdiği) hedefine
+    // uygulanmalı — Sell Out'un (varsa çok daha büyük) hedefine göre hesaplanıp yapay
+    // derecede büyük bir "Gerekli Litre" üretmemeli. Bu yüzden her kanal için ayrı
+    // agirlikliOrtalama hesaplanır; toplamAgirlikliOrtalama da AŞAĞIDA her kanal için AYRI
+    // toplanır (bkz. toplamAgirlikliOrtalamaSellOut / toplamAgirlikliOrtalamaModernKanal).
+    const aylikLitreSellOut = stokGunAylikOzet(u.kanal.sellOut);
+    const aylikLitreModernKanal = stokGunAylikOzet(u.kanal.modernKanal);
+    const agirlikliOrtalamaSellOut = stokGunAgirlikliAylikOrtalama(aylikLitreSellOut, ayAgirlik);
+    const agirlikliOrtalamaModernKanal = stokGunAgirlikliAylikOrtalama(aylikLitreModernKanal, ayAgirlik);
+    return Object.assign({}, u, {aylikLitre, agirlikliOrtalama, cv, gunlukCV: gercekGunlukIstatistik.cv, oluUrun, agirlikliOrtalamaSellOut, agirlikliOrtalamaModernKanal});
   });
+  // Ürünün BİRLEŞİK (iki kanal toplamı) ağırlıklı ortalaması ve bunun toplamı — sadece
+  // tabloda gösterilen "Satış Payı" bilgilendirme kolonu için kullanılır; "Gerekli Litre"
+  // hesabı bunu KULLANMAZ, o kanal bazlı ayrı toplamları (aşağıdaki SellOut/ModernKanal
+  // olanları) kullanır.
   const toplamAgirlikliOrtalama = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalama), 0);
+  // Her kanalın kendi toplam ağırlıklı ortalaması — pay hesabının paydası, KANAL BAZINDA ayrı.
+  const toplamAgirlikliOrtalamaSellOut = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalamaSellOut), 0);
+  const toplamAgirlikliOrtalamaModernKanal = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalamaModernKanal), 0);
   const markaSekilleri = stokGunMarkaHaftaSekilleri(urunler);
 
   const guncelRapor = state.sellOutReport ? applySellOutHedef(state.sellOutReport, state.sellOutHedef) : null;
@@ -12125,26 +12151,35 @@ function computeStokGunRaporu(){
   // mevcut satış" gibi yanlış bir sonuç veriyordu. Artık hedef doğrudan temsilcilerin
   // acikHedef/kapaliHedef alanlarının toplamından okunuyor — hedef gerçekten girilmemişse
   // 0 kalır ve rapor "hedef girilmemiş" boş durumunu gösterir, mevcut satışı hedef sanmaz.
-  const ustYonetimHedefi = (guncelRapor && Array.isArray(guncelRapor.temsilciler)
+  // NOT: sellOutHedefKendi ve modernKanalHedefKendi AYRI AYRI tutulur — "Gerekli Litre" artık
+  // her kanalın kendi payı × kendi hedefi olarak hesaplanır (bkz. rows bloğu); ustYonetimHedefi
+  // (ikisinin toplamı) yalnızca genel bilgi amaçlı (raporun üst şeridinde) kullanılır.
+  const sellOutHedefKendi = guncelRapor && Array.isArray(guncelRapor.temsilciler)
     ? guncelRapor.temsilciler.reduce((a,t)=> a + (t.acikHedef||0) + (t.kapaliHedef||0), 0)
-    : 0) + (state.modernKanalHedef||0);
+    : 0;
+  const modernKanalHedefKendi = state.modernKanalHedef||0;
+  const ustYonetimHedefi = sellOutHedefKendi + modernKanalHedefKendi;
 
   // Bu ayın GÜNCEL/CANLI Sell Out (+ Modern Kanal) verisinden, ürün (Malzeme/Ürün Kodu)
   // bazlı bu ay şimdiye kadar satılan litre çıkarılır — "Gerekli Litre" artık hedefin TAMAMI
-  // değil, bu ana kadar satılan kısım düşüldükten sonra KALAN hedef üzerinden hesaplanır
-  // (ör. hedefin %70'i zaten satıldıysa, kalan %30'a göre günlük hız/stok günü belirlenir).
-  // Aynı ürün her iki kanaldan da satılıyorsa (aynı kod), ikisinin bu ayki satışı TOPLANIR.
-  const buAySatilanMap = new Map();
+  // Bu ayın GÜNCEL/CANLI verisinden, ürün (Malzeme/Ürün Kodu) bazlı bu ay şimdiye kadar
+  // satılan litre KANAL BAZINDA AYRI çıkarılır — "Gerekli Litre" artık her kanalın kendi
+  // hedefinin TAMAMI değil, o kanaldaki bu ana kadar satılan kısım düşüldükten sonra KALAN
+  // hedef üzerinden hesaplanır (ör. Modern Kanal hedefinin %70'i zaten satıldıysa, kalan
+  // %30'a göre günlük hız/stok günü belirlenir). Aynı ürün her iki kanaldan da satılıyorsa,
+  // her kanalın kendi "bu ay satılan"ı kendi kalan hedefinden düşülür, sonra ikisi toplanır.
+  const buAySatilanSellOutMap = new Map();
   if(guncelRapor && Array.isArray(guncelRapor.malzemeler)){
     guncelRapor.malzemeler.forEach(u=>{
       const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
-      buAySatilanMap.set(u.kod, (buAySatilanMap.get(u.kod)||0) + toplam);
+      buAySatilanSellOutMap.set(u.kod, (buAySatilanSellOutMap.get(u.kod)||0) + toplam);
     });
   }
+  const buAySatilanModernKanalMap = new Map();
   if(state.modernKanalReport && Array.isArray(state.modernKanalReport.malzemeler)){
     state.modernKanalReport.malzemeler.forEach(u=>{
       const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
-      buAySatilanMap.set(u.kod, (buAySatilanMap.get(u.kod)||0) + toplam);
+      buAySatilanModernKanalMap.set(u.kod, (buAySatilanModernKanalMap.get(u.kod)||0) + toplam);
     });
   }
 
@@ -12159,13 +12194,34 @@ function computeStokGunRaporu(){
   const haftaEtiketleri = ['1-7','8-14','15-21','22-ay sonu'];
 
   const rows = urunEk.map(u=>{
+    // "Satış Payı" (tabloda gösterilen, bilgilendirme amaçlı) — ürünün BİRLEŞİK (iki kanal
+    // toplamı) ağırlıklı ortalamasının, BİRLEŞİK toplam içindeki payı. Bu değer sadece
+    // görüntüleme amaçlıdır; "Gerekli Litre" hesabı bunu KULLANMAZ (aşağıya bakınız).
     const pay = (!u.oluUrun && toplamAgirlikliOrtalama>0) ? (u.agirlikliOrtalama / toplamAgirlikliOrtalama) : 0;
-    const toplamGerekliLitre = (!u.oluUrun && ustYonetimHedefi>0) ? ustYonetimHedefi * pay : null;
-    // Bu ürünün bu ay şimdiye kadar gerçekleşen satışı (güncel Sell Out'tan), toplam
-    // gerekli litreden düşülerek KALAN gerekli litre bulunur — negatife düşmez (hedef
-    // zaten aşılmışsa 0 kalır, "artık bu üründen almanıza gerek yok" anlamına gelir).
-    const buAySatilan = buAySatilanMap.get(u.kod) || 0;
-    const gerekliLitre = toplamGerekliLitre!=null ? Math.max(0, toplamGerekliLitre - buAySatilan) : null;
+
+    // ============================================================================
+    // KANAL BAZLI GEREKLİ LİTRE (kritik düzeltme): Her kanalın kendi payı SADECE o kanalın
+    // kendi hedefine uygulanır, sonra ikisi TOPLANIR. Böylece sadece Modern Kanal'dan satılan
+    // bir ürünün Gerekli Litre'si, girilen Modern Kanal hedefini ASLA aşamaz (matematiksel
+    // garanti: Σ tüm ürünlerin Modern Kanal payı = 1, dolayısıyla Σ Modern Kanal Gerekli
+    // Litre'leri = Modern Kanal hedefi). Aynı şekilde sadece Sell Out'tan satılan bir ürün de
+    // sadece Sell Out'un hedefine göre pay alır. Ortak (her iki kanaldan da satılan) ürünlerde
+    // iki katkı toplanır.
+    const paySellOut = (!u.oluUrun && toplamAgirlikliOrtalamaSellOut>0) ? (u.agirlikliOrtalamaSellOut / toplamAgirlikliOrtalamaSellOut) : 0;
+    const payModernKanal = (!u.oluUrun && toplamAgirlikliOrtalamaModernKanal>0) ? (u.agirlikliOrtalamaModernKanal / toplamAgirlikliOrtalamaModernKanal) : 0;
+    const gerekliLitreSellOutToplam = (!u.oluUrun && sellOutHedefKendi>0) ? sellOutHedefKendi * paySellOut : 0;
+    const gerekliLitreModernKanalToplam = (!u.oluUrun && modernKanalHedefKendi>0) ? modernKanalHedefKendi * payModernKanal : 0;
+    const toplamGerekliLitre = (!u.oluUrun && (sellOutHedefKendi>0 || modernKanalHedefKendi>0))
+      ? (gerekliLitreSellOutToplam + gerekliLitreModernKanalToplam)
+      : null;
+    // Bu ürünün bu ay şimdiye kadar gerçekleşen satışı, HER KANALIN KENDİ kalan hedefinden
+    // kendi kanalındaki satış düşülerek bulunur (negatife düşmez), sonra ikisi toplanır —
+    // "kalan hedef" de artık kanal bazında ayrı hesaplanıp öyle birleştirilir.
+    const buAySatilanSellOut = buAySatilanSellOutMap.get(u.kod) || 0;
+    const buAySatilanModernKanal = buAySatilanModernKanalMap.get(u.kod) || 0;
+    const kalanSellOut = Math.max(0, gerekliLitreSellOutToplam - buAySatilanSellOut);
+    const kalanModernKanal = Math.max(0, gerekliLitreModernKanalToplam - buAySatilanModernKanal);
+    const gerekliLitre = toplamGerekliLitre!=null ? (kalanSellOut + kalanModernKanal) : null;
     // Litre/Miktar oranı (bir "miktar" biriminin kaç litreye denk geldiği) — Sell Out
     // verisindeki aynı satırlarda hem Litre hem Miktar birlikte geldiği için, 6 aylık
     // toplamlardan çıkarılan bu oran ürüne özgü sabit bir çevrim katsayısı olarak kullanılır.
@@ -12182,16 +12238,30 @@ function computeStokGunRaporu(){
     // (bkz. stokGunOwnVeMarkaShapeKarisimi) — 3+ aylık geçmişi olan ürünlerde bu, kendi
     // gerçek deseniyle pratikte aynı sonucu verir (kendiAgirlik=1).
     const haftaDagilimi = stokGunOwnVeMarkaShapeKarisimi(u, markaSekilleri);
-    // Her haftanin litresi, GECMIS 6 aylik gercek satis yerine YENI (KALAN) hedefe gore
-    // olceklendirilir: olcek orani = (bu urunun KALAN hedefteki payi) / (bu urunun gecmis
-    // 6 aylik toplami). Kalan hedef ne kadar buyuk/kucukse, T\u00dcM haftalarin hizi da o
-    // oranda buyur/kuculur - haftalik dagilim SEKLINI (3. hafta yine en yogun kalir) koruyarak.
-    // ÖLÜ ÜRÜN istisnası: hedefe dahil olmadığı için (gerekliLitre=null) olcekOrani=1 kalır —
-    // yani hedefe göre büyütülüp küçültülmez, ürünün KENDİ eski (organik) hızıyla gösterilir.
-    // Bu sayede stok günü "artık pratikte tükenmiyor" gibi yapay bir değer değil, "eski
-    // hızıyla devam etseydi kaç günde biterdi" gibi anlamlı bir referans değer olur.
-    const olcekOrani = (!u.oluUrun && gerekliLitre!=null && u.toplamLitre6Ay>0) ? (gerekliLitre/u.toplamLitre6Ay) : 1;
-    const haftaGunlukHizlari = haftaDagilimi.litre.map(litre => (litre*olcekOrani)/7);
+    // ============================================================================
+    // KANAL BAZLI HAFTALIK ÖLÇEKLEME (kritik düzeltme): haftaDagilimi.litre, ürünün BİRLEŞİK
+    // (iki kanal karışık) geçmiş deseninin ŞEKLİNİ (hangi hafta ne kadar yoğun) veriyor — bu
+    // şekli birleşik olarak kullanmak makul (iki kanalın mevsimsel deseni genelde benzerdir).
+    // AMA önceden bu şekle TEK bir "olcekOrani" (kalan hedef toplamı / geçmiş toplam) uygulanıyordu
+    // — bu, ortak ürünlerde (hem Sell Out hem Modern Kanal'dan satılan) YANLIŞ sonuç verirdi:
+    // örneğin Modern Kanal hedefi geçmişin 4 katına çıkarken Sell Out hedefi geçmişin sadece
+    // %40'ına düşmüşse, "birleşik ortalama" oran (ör. 0.73) HİÇBİR kanalın gerçek değişimini
+    // yansıtmaz. Artık haftalık şekil (oran olarak) her kanalın KENDİ kalan hedefine ayrı ayrı
+    // uygulanıyor, sonra iki kanalın o haftaki litresi TOPLANIYOR — böylece her kanal kendi
+    // gerçek büyüme/küçülme oranıyla ölçeklenmiş oluyor.
+    const haftaSekilOrani = u.toplamLitre6Ay>0 ? haftaDagilimi.litre.map(v=>v/u.toplamLitre6Ay) : [0.25,0.25,0.25,0.25];
+    const haftaGunlukHizlari = haftaSekilOrani.map((oran, i)=>{
+      if(u.oluUrun){
+        // ÖLÜ ÜRÜN istisnası: hedefe dahil olmadığı için (gerekliLitre=null) kanal bazlı kalan
+        // hedeflerden pay almaz — bunun yerine ürünün KENDİ eski (organik, birleşik) haftalık
+        // hızı gösterilir. Böylece stok günü "artık pratikte tükenmiyor" gibi yapay bir değer
+        // değil, "eski hızıyla devam etseydi kaç günde biterdi" gibi anlamlı bir referans olur.
+        return haftaDagilimi.litre[i]/7;
+      }
+      const haftaLitreSellOut = oran*kalanSellOut;
+      const haftaLitreModernKanal = oran*kalanModernKanal;
+      return (haftaLitreSellOut + haftaLitreModernKanal)/7;
+    });
     const gunlukHiz = haftaGunlukHizlari[bugunHaftaIndex] || 0; // tabloda "bugünün hızı" olarak gösterilmeye devam eder
     const gunlukMiktar = litreMiktarOrani>0 ? (gunlukHiz/litreMiktarOrani) : null;
     // ÖNEMLİ DÜZELTME: Malzemeler dosyasındaki "Tahditsiz Kullanılabilir" değeri MİKTAR
