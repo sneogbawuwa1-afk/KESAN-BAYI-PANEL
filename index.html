@@ -175,12 +175,6 @@
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
   }
   .mobile-header-title span{color:#F0DCA6;}
-  /* Masaüstü sidebar'da "Sell Out Raporu" linki gizlendi — DOM'dan kaldırılmadı (id/JS
-     referansları ve dropdown senkronizasyonu bozulmasın diye), sadece görünürlüğü kapatıldı.
-     Mobil tabbar'daki eşdeğeri (tabbtn-sellOut) bu kuraldan etkilenmez, aynen görünür kalır. */
-  @media(min-width:981px){
-    #sbbtn-sellOut{display:none;}
-  }
 
   /* ===== Sidebar daraltma (icon-rail) modu — yalnızca masaüstü genişliklerinde ===== */
   .sb-collapse-row{display:flex;justify-content:flex-end;padding:0 2px 6px;}
@@ -644,6 +638,41 @@
     font-size:12.5px;font-weight:700;color:var(--danger);white-space:nowrap;
     background:var(--surface);border:1px solid var(--danger);border-radius:8px;padding:7px 12px;
   }
+
+  /* Stok Gün: Tümü/Kritik/Yeni/Ölü sekme butonları */
+  .stokgun-sekme-btn{
+    font-family:inherit;font-size:12px;font-weight:700;padding:7px 13px;border-radius:100px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);cursor:pointer;
+    transition:background .12s ease,color .12s ease,border-color .12s ease;
+  }
+  .stokgun-sekme-btn:hover{border-color:var(--ink-faint);}
+  .stokgun-sekme-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .stokgun-sekme-btn .sekme-count{opacity:.72;margin-left:4px;}
+
+  /* Sidebar/tab menüsündeki kritik stok sayısı rozeti */
+  .sb-link[data-badge]::after, .tab-btn[data-badge]::after{
+    content:attr(data-badge);
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:16px;height:16px;padding:0 4px;margin-left:6px;
+    background:var(--danger);color:#fff;font-size:9.5px;font-weight:800;border-radius:100px;
+    line-height:16px;vertical-align:middle;
+  }
+
+  /* Ürün×temsilci risk detayı (Stok Gün tablosunda genişletilebilir satır) */
+  .stokgun-risk-toggle{
+    background:none;border:none;cursor:pointer;color:var(--ink-faint);font-size:12px;padding:2px 4px;
+  }
+  .stokgun-risk-toggle:hover{color:var(--navy);}
+  .stokgun-risk-detay{background:var(--line-soft);}
+  .stokgun-risk-detay td{padding:10px 14px !important;}
+  .stokgun-risk-chip{
+    display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--line);
+    border-radius:100px;padding:4px 10px;margin:2px 4px 2px 0;font-size:11.5px;
+  }
+  .stokgun-risk-chip .pay{color:var(--ink-faint);}
+  .stokgun-risk-chip .tahsilat-dusuk{color:var(--danger);font-weight:700;}
+  .stokgun-risk-chip .tahsilat-iyi{color:var(--success);font-weight:700;}
+  .stokgun-risk-chip .tahsilat-yok{color:var(--ink-faint);}
 
   .modal-overlay{
     display:none;position:fixed;inset:0;background:rgba(24,34,51,0.45);
@@ -1739,7 +1768,14 @@
         </div>
 
         <button class="sb-link sb-nav-link" id="sbbtn-bayiHakedis" data-view="bayiHakedis" type="button"><i class="fa-solid fa-award sb-ic" aria-hidden="true"></i> <span class="sb-label">Bayi Hakediş</span> </button>
-        <button class="sb-link sb-nav-link" id="sbbtn-sellOut" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> <span class="sb-label">Sell Out Raporu</span> </button>
+
+        <button class="sb-link sb-parent" id="sbbtn-bayiSatis" type="button" aria-expanded="false" aria-controls="sbSubBayiSatis"><i class="fa-solid fa-cart-shopping sb-ic" aria-hidden="true"></i> <span class="sb-label">Bayi Satış</span> <span class="sb-arrow">▾</span></button>
+        <div class="sb-submenu" id="sbSubBayiSatis">
+          <span class="sb-submenu-title">Bayi Satış</span>
+          <button class="sb-link sb-nav-link" id="sbbtn-sellOut" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> <span class="sb-label">Geleneksel Kanal</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-modernKanal" data-view="modernKanal" type="button"><i class="fa-solid fa-store sb-ic" aria-hidden="true"></i> <span class="sb-label">Modern Kanal</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-stokGun" data-view="stokGun" type="button"><i class="fa-solid fa-warehouse sb-ic" aria-hidden="true"></i> <span class="sb-label">Stok Gün</span> </button>
+        </div>
 
         <button class="sb-link sb-parent" id="sbbtn-finansalAnaliz" type="button" aria-expanded="false" aria-controls="sbSubFinansal"><i class="fa-solid fa-file-invoice-dollar sb-ic" aria-hidden="true"></i> <span class="sb-label">Finansal Analiz</span> <span class="sb-arrow">▾</span></button>
         <div class="sb-submenu" id="sbSubFinansal">
@@ -1870,7 +1906,7 @@
       <button class="tab-btn tab-dropdown-btn active" id="tabbtn-cariDetay" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="cariDetayDropdownMenu"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> Cari Detay <span class="dd-arrow">▾</span></button>
       <button class="tab-btn tab-dropdown-btn" id="tabbtn-dagitim" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dagitimDropdownMenu"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Dağıtım <span class="dd-arrow">▾</span></button>
       <button class="tab-btn" id="tabbtn-bayiHakedis" data-view="bayiHakedis" type="button" role="tab" aria-selected="false" aria-controls="bayiHakedisView"><i class="fa-solid fa-award" aria-hidden="true"></i> Bayi Hakediş</button>
-      <button class="tab-btn" id="tabbtn-sellOut" data-view="sellOut" type="button" role="tab" aria-selected="false" aria-controls="sellOutView"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Sell Out Raporu</button>
+      <button class="tab-btn tab-dropdown-btn" id="tabbtn-bayiSatis" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="bayiSatisDropdownMenu"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> Bayi Satış <span class="dd-arrow">▾</span></button>
       <button class="tab-btn tab-dropdown-btn" id="tabbtn-finansalAnaliz" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="finansalDropdownMenu"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> Finansal Analiz <span class="dd-arrow">▾</span></button>
     </div>
 
@@ -1879,7 +1915,7 @@
       <button class="tab-btn quick-access-btn" data-view="sevk" type="button"><i class="fa-solid fa-truck" aria-hidden="true"></i> Sevk Raporu</button>
       <button class="tab-btn quick-access-btn" data-view="yukleme" type="button"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> ST Tahsilat/Litre</button>
       <button class="tab-btn quick-access-btn" data-view="faturaKontrol" type="button"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i> Fatura Kontrol</button>
-      <button class="tab-btn quick-access-btn" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Sell Out Raporu</button>
+      <button class="tab-btn quick-access-btn" data-view="sellOut" type="button"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Geleneksel Kanal</button>
     </div>
 
     <div class="tab-dropdown-menu" id="cariDetayDropdownMenu" role="menu" aria-hidden="true" aria-labelledby="tabbtn-cariDetay">
@@ -1891,6 +1927,12 @@
       <button class="tab-btn dropdown-item" id="tabbtn-faturaKontrol" data-view="faturaKontrol" type="button" role="tab" aria-selected="false" aria-controls="faturaKontrolView"><i class="fa-solid fa-file-circle-check" aria-hidden="true"></i> Fatura Kontrol</button>
       <button class="tab-btn dropdown-item" id="tabbtn-yukleme" data-view="yukleme" type="button" role="tab" aria-selected="false" aria-controls="yuklemeView"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> ST Tahsilat/Litre</button>
       <button class="tab-btn dropdown-item" id="tabbtn-ticariStok" data-view="ticariStok" type="button" role="tab" aria-selected="false" aria-controls="ticariStokView"><i class="fa-solid fa-box" aria-hidden="true"></i> Ticari Stok Raporu</button>
+    </div>
+
+    <div class="tab-dropdown-menu" id="bayiSatisDropdownMenu" role="menu" aria-hidden="true" aria-labelledby="tabbtn-bayiSatis">
+      <button class="tab-btn dropdown-item" id="tabbtn-sellOut" data-view="sellOut" type="button" role="tab" aria-selected="false" aria-controls="sellOutView"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Geleneksel Kanal</button>
+      <button class="tab-btn dropdown-item" id="tabbtn-modernKanal" data-view="modernKanal" type="button" role="tab" aria-selected="false" aria-controls="modernKanalView"><i class="fa-solid fa-store" aria-hidden="true"></i> Modern Kanal</button>
+      <button class="tab-btn dropdown-item" id="tabbtn-stokGun" data-view="stokGun" type="button" role="tab" aria-selected="false" aria-controls="stokGunView"><i class="fa-solid fa-warehouse" aria-hidden="true"></i> Stok Gün</button>
     </div>
 
     <div class="tab-dropdown-menu" id="finansalDropdownMenu" role="menu" aria-hidden="true" aria-labelledby="tabbtn-finansalAnaliz">
@@ -2359,9 +2401,26 @@
         </div>
       </details>
 
+      <div class="panel" id="sellOutKendiYuklemePanel">
+        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <label for="sellOutKendiDosyaInput" class="btn small" style="cursor:pointer;">
+            <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> Geleneksel Kanal Dosyası Seç
+          </label>
+          <input type="file" id="sellOutKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+          <span id="sellOutKendiDosyaAdi" style="font-size:12.5px;color:var(--ink-soft);">Dosya seçilmedi</span>
+          <button type="button" class="btn small" id="sellOutKendiGuncelleBtn" disabled>
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+          </button>
+          <span id="sellOutKendiDurum" style="font-size:12px;color:var(--ink-faint);"></span>
+        </div>
+        <div class="panel-body" style="padding-top:0;font-size:11.5px;color:var(--ink-faint);">
+          Bu alan ana yükleme ekranından bağımsızdır — diğer raporlar (Kalemler, Sipariş vb.) için dosya yüklemenize gerek kalmadan yalnızca Geleneksel Kanal verisini buradan güncelleyip hesaplatabilirsiniz.
+        </div>
+      </div>
+
       <div class="panel" id="sellOutFiltrePanel">
         <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
-          <div class="as-of" id="sellOutAsOf" style="margin:0;">Veri kaynağı: Sell Out Raporu (SAPUI5 dışa aktarımı)</div>
+          <div class="as-of" id="sellOutAsOf" style="margin:0;">Veri kaynağı: Geleneksel Kanal (SAPUI5 dışa aktarımı)</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
             <label for="sellOutAySelect" style="font-size:12.5px;font-weight:600;color:var(--ink-soft);">Dönem:</label>
             <select class="filter-select" id="sellOutAySelect"><option value="">Güncel (canlı)</option></select>
@@ -2373,7 +2432,7 @@
 
       <div id="sellOutBosPanel" class="panel" style="display:none;">
         <div class="panel-body">
-          <div class="empty-state">Sell Out Raporu için ana yükleme sayfasında "Sell Out Raporu" dosyasını yükleyip "Raporu Oluştur"a basmanız gerekir.</div>
+          <div class="empty-state">Geleneksel Kanal için yukarıdaki alandan dosyayı yükleyip "Verileri Güncelle"ye basmanız (veya ana yükleme sayfasında "Sell Out Raporu" dosyasını yükleyip "Raporu Oluştur"a basmanız) gerekir.</div>
         </div>
       </div>
 
@@ -2394,30 +2453,168 @@
             <div class="cust-card-list" id="sellOutKarneGrid"></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="panel">
-          <div class="panel-head"><div><h2>Marka Bazlı Dağılım</h2><span class="count">Litre satışına göre</span></div></div>
-          <div class="panel-body" id="sellOutMarkaBar"></div>
+    <div id="modernKanalView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-modernKanal">
+
+      <details class="info-box">
+        <summary>ℹ️ Nasıl Yorumlanır?</summary>
+        <div class="info-box-body">
+          <h4><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bu Rapor Ne İşe Yarar?</h4>
+          <p>İrsaliye Listesi (Key Account/Modern Kanal sevkiyat dökümü) üzerinden, İbrahim Işık'ın <b>toplam litre satışını</b> ve girilen <b>Key Account Hedefi'ne göre gerçekleşme oranını</b> gösterir. Bu kanalın satışı, tahsilat henüz gerçekleşmemiş olsa da anlık tahsil edilmiş kabul edilir — bu yüzden Tahsilat Verimliliği, FKNS, DSO gibi tahsilat bazlı raporlara hiç dahil edilmez; yalnızca Stok Gün raporundaki ürün bazlı hedef/litre hesaplarına ve genel toplam sayılara katılır.</p>
+          <h4><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Nasıl Yorumlanmalı?</h4>
+          <ul>
+            <li><b>Key Account Hedef:</b> bu kanal için elle girilen tek toplam litre hedefi (Açık/Kapalı Kanal ayrımı yok).</li>
+            <li><b>Gerçekleşme Oranı:</b> toplam satılan litrenin, girilen Key Account Hedefi'ne oranı.</li>
+          </ul>
+          <p><b>Aksiyon:</b> Hedef girilmemişse gerçekleşme oranı hesaplanamaz; Stok Gün raporunda bu kanalın ürün payı yine de görünür ama hedef katkısı olmaz.</p>
+        </div>
+      </details>
+
+      <div class="panel" id="modernKanalKendiYuklemePanel">
+        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <label for="modernKanalKendiDosyaInput" class="btn small" style="cursor:pointer;">
+            <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> İrsaliye Dosyası Seç
+          </label>
+          <input type="file" id="modernKanalKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+          <span id="modernKanalKendiDosyaAdi" style="font-size:12.5px;color:var(--ink-soft);">Dosya seçilmedi</span>
+          <button type="button" class="btn small" id="modernKanalKendiGuncelleBtn" disabled>
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+          </button>
+          <span id="modernKanalKendiDurum" style="font-size:12px;color:var(--ink-faint);"></span>
+        </div>
+        <div class="panel-body" style="padding-top:0;font-size:11.5px;color:var(--ink-faint);">
+          Bu alan ana yükleme ekranından bağımsızdır — İrsaliye Tarihi kolonuna göre veri işlenir, birden fazla ayı aynı anda içeren dosyalar da yüklenebilir (arşivleme adımında ay ay veya toplu olarak ayrıştırılır).
+        </div>
+      </div>
+
+      <div id="modernKanalBosPanel" class="panel" style="display:none;">
+        <div class="panel-body">
+          <div class="empty-state">Modern Kanal için yukarıdaki alandan İrsaliye dosyasını yükleyip "Verileri Güncelle"ye basmanız gerekir.</div>
+        </div>
+      </div>
+
+      <div id="modernKanalIcerik" style="display:none;">
+
+        <div class="panel" id="modernKanalFiltrePanel">
+          <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+            <div class="as-of" id="modernKanalAsOf" style="margin:0;">Veri kaynağı: İrsaliye Listesi (Key Account/Modern Kanal)</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+              <select class="filter-select" id="modernKanalAySelect"><option value="">Güncel (canlı)</option></select>
+              <button type="button" class="btn small" id="modernKanalArsivleBtn"><i class="fa-solid fa-box-archive" aria-hidden="true"></i> Bu Ayı Arşivle</button>
+              <button type="button" class="btn small" id="modernKanalTopluArsivleBtn"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Tüm Ayları Toplu Arşivle</button>
+            </div>
+          </div>
         </div>
 
-        <div class="grid2">
-          <div class="panel" style="margin-bottom:0;">
-            <div class="panel-head"><h2>Satış Kanalı Dağılımı</h2></div>
-            <div class="panel-body" id="sellOutKanalBar"></div>
-          </div>
-          <div class="panel" style="margin-bottom:0;">
-            <div class="panel-head"><h2>Hacim Segmenti</h2></div>
-            <div class="panel-body" id="sellOutHacimBar"></div>
+        <div class="panel" id="modernKanalHedefPanel">
+          <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <label style="font-size:12.5px;font-weight:600;color:var(--ink-soft);" for="modernKanalHedefInput">Key Account Hedef (Lt.)</label>
+            <input type="number" id="modernKanalHedefInput" class="sellout-hedef-input" placeholder="Hedef litre" style="width:140px;padding:6px 10px;border:1px solid var(--line);border-radius:7px;">
+            <button type="button" class="btn small" id="modernKanalHedefKaydetBtn"><i class="fa-solid fa-lock" aria-hidden="true"></i> Kaydet</button>
+            <span id="modernKanalHedefDurum" style="font-size:12px;color:var(--ink-faint);"></span>
           </div>
         </div>
 
-        <div class="panel">
-          <div class="panel-head"><h2 id="sellOutTrendBaslik">Günlük Trend</h2></div>
+        <div class="panel" id="modernKanalKartPanel">
           <div class="panel-body">
-            <div class="trend-grid" id="sellOutTrendGrid"></div>
+            <div class="ssm-karne-grid" id="modernKanalKartGrid"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="stokGunView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-stokGun">
+
+      <details class="info-box">
+        <summary>ℹ️ Nasıl Yorumlanır?</summary>
+        <div class="info-box-body">
+          <h4><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Bu Rapor Ne İşe Yarar?</h4>
+          <p>Üst yönetimin belirlediği toplam Sell-Out hedefini (temsilci Açık+Kapalı Kanal hedeflerinin toplamı) ürün bazında geçmiş 6 aylık satış paylarına göre litreye böler, ardından her ürünün 6 aylık toplam satışının hafta dilimlerine (1-7/8-14/15-21/22-sonu) göre yüzdesel dağılımını çıkarıp, bugün hangi hafta diliminde olduğumuzu tespit ederek o dilimin günlük ortalama satış hızına göre anlık depo stoğunun kaç gün yeteceğini hesaplar.</p>
+          <h4><i class="fa-solid fa-chart-column" aria-hidden="true"></i> Nasıl Yorumlanmalı?</h4>
+          <ul>
+            <li><b>Gerekli Litre:</b> üst yönetim hedefinin bu ürüne düşen payı (geçmiş 6 aylık satış oranına göre dağıtılmış).</li>
+            <li><b>Aktif Hafta Dilimi:</b> bugünün tarihine göre otomatik seçilen dilim (ör. bugün ayın 16'sıysa "15-21" dilimi).</li>
+            <li><b>Bu Haftanın Günlük Hızı:</b> ürünün aktif hafta dilimindeki geçmiş 6 aylık satışı, yeni üst yönetim hedefine göre ölçeklendirilip 7'ye bölünür — hedef geçmişten yüksekse hız da o oranda artar (ör. hedef geçmişin %120'si ise günlük hız da %20 daha yüksek hesaplanır), haftanın kendi yoğunluk deseni (ör. 3. hafta hep daha yoğun) korunur.</li>
+            <li><b>Dinamik Stok Günü:</b> anlık depo stoğu ÷ bu haftanın günlük hızı. Klasik "aylık ortalamaya bölme" yöntemine göre, ayın hangi döneminde olduğumuzu hesaba katan daha gerçekçi bir tükeniş süresi verir.</li>
+          </ul>
+          <p><b>Aksiyon:</b> Dinamik Stok Günü düşük olan (kritik) ürünlerde depo/tedarik ekibiyle erken iletişime geçin — talep patladığında mal kesintisi yaşanmadan önce.</p>
+        </div>
+      </details>
+
+      <div class="panel" id="stokGunKendiYuklemePanel">
+        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <label for="stokGunKendiDosyaInput" class="btn small" style="cursor:pointer;">
+            <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> Malzemeler Dosyası Seç
+          </label>
+          <input type="file" id="stokGunKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+          <span id="stokGunKendiDosyaAdi" style="font-size:12.5px;color:var(--ink-soft);">Dosya seçilmedi</span>
+          <button type="button" class="btn small" id="stokGunKendiGuncelleBtn" disabled>
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+          </button>
+          <span id="stokGunKendiDurum" style="font-size:12px;color:var(--ink-faint);"></span>
+        </div>
+        <div class="panel-body" style="padding-top:0;font-size:11.5px;color:var(--ink-faint);">
+          Malzeme Numarası ve Tahditsiz Kullanılabilir stok kolonlarını içeren anlık depo stok dökümü yüklenir — bu alan da ana yükleme ekranından bağımsızdır.
+        </div>
+      </div>
+
+      <div class="panel" id="stokGunBosPanel">
+        <div class="panel-body" style="text-align:center;padding:32px 20px;">
+          <div class="empty-state" id="stokGunBosMesaj">Bu rapor için hem Sell Out (en az 6 aylık arşivlenmiş veri) hem Malzemeler dosyasını yüklemeniz gerekir.</div>
+        </div>
+      </div>
+
+      <div id="stokGunIcerik" style="display:none;">
+        <div class="panel">
+          <div class="panel-body" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
+            <div class="as-of" id="stokGunAsOf" style="margin:0;">Veri kaynağı: Sell Out arşivi (son 6 ay) + Malzemeler (anlık stok)</div>
+          </div>
+        </div>
+
+        <div id="stokGunKritikBanner"></div>
+
+        <div class="panel">
+          <div class="panel-head panel-head-navy-hero"><h2>Ürün Bazlı Stok Gün Analizi</h2></div>
+          <div class="panel-body" style="padding:16px 20px 0;display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" class="stokgun-sekme-btn active" data-sekme="tumu" id="stokGunSekmeTumu">Tümü</button>
+            <button type="button" class="stokgun-sekme-btn" data-sekme="kritik" id="stokGunSekmeKritik">Kritik (&lt;7 gün)</button>
+            <button type="button" class="stokgun-sekme-btn" data-sekme="yeni" id="stokGunSekmeYeni">Yeni Ürünler</button>
+            <button type="button" class="stokgun-sekme-btn" data-sekme="olu" id="stokGunSekmeOlu">Ölü Ürünler</button>
+          </div>
+          <div class="panel-body" style="padding:16px 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <div class="search-box">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+              <input type="text" id="stokGunSearchInput" placeholder="Ürün adı veya kodu ara…" aria-label="Ürün adı veya kodu ara" />
+              <button type="button" id="stokGunSearchClearBtn" class="search-clear-btn" title="Aramayı temizle" aria-label="Aramayı temizle" style="display:none;">✕</button>
+            </div>
+            <select class="filter-select" id="stokGunMarkaFilter"><option value="">Tüm mal grupları</option></select>
+          </div>
+          <div class="panel-body" style="padding:0;">
+            <div class="table-scroll">
+              <table id="stokGunTable" class="aging-table">
+                <thead><tr>
+                  <th data-key="kod">Ürün Kodu<span class="arrow"></span></th>
+                  <th data-key="urunAdi">Ürün Adı<span class="arrow"></span></th>
+                  <th class="num" data-key="anlikStok">Depo Stok<span class="arrow"></span></th>
+                  <th class="num" data-key="pay">Satış Payı<span class="arrow"></span></th>
+                  <th class="num" data-key="aktifAySayisi" title="Son 6 ay içinde bu ürünün en az 1 satış gördüğü ay sayısı">Aktif Ay<span class="arrow"></span></th>
+                  <th class="num" data-key="stokGunu">Stok Gün<span class="arrow"></span></th>
+                  <th class="num" data-key="gunlukMiktar">Günlük Satış Miktarı<span class="arrow"></span></th>
+                  <th class="num" data-key="gunlukHiz">Günlük Satış Litre<span class="arrow"></span></th>
+                  <th class="num" data-key="gerekliMiktar">Satış Hedefi Gereken Miktar<span class="arrow"></span></th>
+                  <th class="num" data-key="gerekliLitre">Satış Hedefi Gereken Litre<span class="arrow"></span></th>
+                </tr></thead>
+                <tbody id="stokGunTbody"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
     <div id="tahsilatVerimlilikView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-tahsilatVerimlilik">
@@ -3080,6 +3277,13 @@ const state = {
   faturaModalYedekMap: new Map(), // musteri kodu -> tam satır (bakiyesiz müşteriler için — report.musteriler'de kaydı olmayanların çek/senet detayını Detay popup'ında göstermek amacıyla)
   musteriMasterMap: new Map(),
   musteriMasterDetay: new Map(), // musteri kodu -> {tabelaAdi, musteriAdi, vergiNo, tcKimlikNo, adres, il, ilce} (senet basımı için)
+  sellOutKendiDosya: null, // Sell Out sekmesindeki bağımsız yükleme alanından seçilen dosyanın ham verisi ({data, ad})
+  stokGunKendiDosya: null, // Stok Gün sekmesindeki bağımsız yükleme alanından seçilen Malzemeler dosyasının ham verisi ({data, ad})
+  stokGunTumRows: [], // Stok Gün tablosunun filtrelenmemiş tam veri seti (arama kutusu bunun üzerinde filtreler)
+  stokGunSort: { key:'stokGunu', dir:1 }, // Stok Gün tablosu sıralama durumu (varsayılan: en kritik/düşük stok günü önce)
+  stokGunSekme: 'tumu', // Stok Gün tablosu üst sekmesi: 'tumu'|'kritik'|'yeni'|'olu'
+  stokGunAcikRiskSatirlar: new Set(), // Ürün×temsilci risk detayı genişletilmiş satırların ürün kodları
+  malzemelerStok: new Map(), // malzemeKodu -> anlık kullanılabilir stok miktarı (Malzemeler dosyasından)
   musteriMasterDurum: new Map(), // musteri kodu -> 'Aktif' | ham durum metni (Sell Out Raporu FKNS hesaplaması için)
   sellOutHedef: {}, // { [temsilciAdi]: {acik:Number, kapali:Number} } — buluta kayıtlı, şifreyle değiştirilebilir
   sellOutNoktaSort: new Map(), // temsilciKey -> {key:'adi'|'kod', dir:1|-1} — Fatura Kesilmeyen Aktif Noktalar listesi sıralaması
@@ -3087,6 +3291,11 @@ const state = {
   sellOutReport: null,
   sellOutArsivCache: {}, // ayKey (YYYY-MM) -> o ayın "Arşivle" ile kaydedilmiş Sell Out rapor anlık görüntüsü
   sellOutSeciliAy: null, // null = Güncel (canlı) veri; dolu ise seçili arşiv ayının verisi gösterilir
+  modernKanalKendiDosya: null, // Modern Kanal sekmesindeki bağımsız yükleme alanından seçilen İrsaliye dosyasının ham verisi ({data, ad})
+  modernKanalReport: null, // buildIrsaliyeReport çıktısı (güncel/canlı)
+  modernKanalArsivCache: {}, // ayKey (YYYY-MM) -> o ayın arşivlenmiş İrsaliye rapor anlık görüntüsü
+  modernKanalSeciliAy: null, // null = Güncel (canlı); dolu ise seçili arşiv ayı
+  modernKanalHedef: 0, // Key Account Hedef (Lt.) — tek toplam hedef, buluta kayıtlı
   bayiHakedisReport: null,
   bayiHakedisHata: null,
   bhSort: { key:'toplamKdvli', dir:-1 },
@@ -4221,6 +4430,52 @@ async function loadMusteriMasterDetayFromLocal(){
   }catch(err){ console.error(err); return null; }
 }
 
+// Malzemeler (anlık depo stoğu) — son yüklenen dosya buluta kaydedilir, yeni biri yüklenene
+// kadar kullanılmaya devam eder (Müşteri Master ile aynı desen). Stok Gün sekmesi açıldığında
+// bu kayıt otomatik geri yüklenir, kullanıcı her seferinde dosyayı tekrar yüklemek zorunda kalmaz.
+const MALZEMELER_STOK_CLOUD_PATH = CLOUD.path + '_malzemelerStok';
+const MALZEMELER_STOK_LOCAL_KEY = 'noktaCariTakip_malzemelerStok_v1';
+async function saveMalzemelerStokToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MALZEMELER_STOK_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Malzemeler stoğu buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMalzemelerStokFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MALZEMELER_STOK_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Malzemeler stoğu buluttan okunamadı:', err); return null; }
+}
+async function saveMalzemelerStokToLocal(obj){
+  const ok = await idbSet(MALZEMELER_STOK_LOCAL_KEY, obj);
+  if(!ok) console.error('Malzemeler stoğu cihaza kaydedilemedi.');
+}
+async function loadMalzemelerStokFromLocal(){
+  try{ return await idbGet(MALZEMELER_STOK_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function malzemelerStokYenile(){
+  let obj = null;
+  if(cloudEnabled()) obj = await loadMalzemelerStokFromCloud();
+  if(!obj) obj = await loadMalzemelerStokFromLocal();
+  state.malzemelerStok = musteriMasterObjToMap(obj);
+  return state.malzemelerStok;
+}
+async function malzemelerStokKaydet(map){
+  state.malzemelerStok = map;
+  const obj = musteriMasterMapToObj(map);
+  await saveMalzemelerStokToLocal(obj);
+  if(cloudEnabled()) await saveMalzemelerStokToCloud(obj);
+}
+
 async function saveMusteriMasterDurumToCloud(obj){
   if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
   try{
@@ -4903,6 +5158,10 @@ async function uygulamayiBaslat(){
   await sellOutHedefYenile();
   await sellOutYenile();
   await sellOutArsivYenile();
+  await modernKanalHedefYenile();
+  await modernKanalYenile();
+  await modernKanalArsivYenile();
+  await malzemelerStokYenile();
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';
     const cloudReport = await loadReportFromCloud();
@@ -5677,7 +5936,7 @@ function gbKisaTL(n){
 }
 
 function renderGbMusteriGrid(report){
-  const q = document.getElementById('gbSearchInput').value.trim().toLowerCase();
+  const q = document.getElementById('gbSearchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('gbTemsilciFilter').value;
   const sortKey = document.getElementById('gbSortSelect').value;
   // gbRiskFiltre artık risk seviyesi değil, "Nokta Detay" başlığındaki çiplerin seçili
@@ -5703,7 +5962,7 @@ function renderGbMusteriGrid(report){
   }
 
   let rows = gbTumMusteriler(report).filter(m=>{
-    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     // Hakediş/Emanet çipleri seçiliyken, ilgili raporda hiç kaydı olmayan müşteriler
     // listeden tamamen çıkarılıyor.
@@ -5854,7 +6113,19 @@ function renderGbSidePanels(report){
   // KPI şeridiyle AYNI ortak fonksiyon (sellOutKanalOzeti) kullanılır, ayrı bir hesap yapılmaz.
   const sellOutRaw = state.sellOutReport;
   const sellOutProcessed = sellOutRaw ? applySellOutHedef(sellOutRaw, state.sellOutHedef) : null;
-  const {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, gerceklesmeOrani, toplamLitre} = sellOutKanalOzeti(sellOutProcessed);
+  const {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, toplamLitre: sellOutToplamLitre} = sellOutKanalOzeti(sellOutProcessed);
+  // Genel "Gerçekleşme Oranı" ve "Toplam Litre" — Geleneksel Kanal (Açık+Kapalı) hedefiyle
+  // Modern Kanal'ın (İbrahim Işık) Key Account Hedefi ve satışı TOPLANARAK hesaplanır; Modern
+  // Kanal kendi ayrı hedef girişine sahip olsa da, genel toplam sayılarda tek bir birleşik
+  // oran/litre olarak yansır (tahsilat/FKNS gibi metriklere ise hiç karışmaz).
+  const modernKanalLitre = state.modernKanalReport ? (state.modernKanalReport.toplamLitre||0) : 0;
+  const modernKanalHedefDeger = state.modernKanalHedef||0;
+  const sellOutHedefToplam = sellOutProcessed && Array.isArray(sellOutProcessed.temsilciler)
+    ? sellOutProcessed.temsilciler.reduce((a,t)=>a+(t.acikHedef||0)+(t.kapaliHedef||0), 0)
+    : 0;
+  const toplamLitre = sellOutToplamLitre + modernKanalLitre;
+  const toplamHedefBirlesik = sellOutHedefToplam + modernKanalHedefDeger;
+  const gerceklesmeOrani = toplamHedefBirlesik>0 ? (toplamLitre/toplamHedefBirlesik*100) : null;
   const gerceklesmeOraniGosterim = gerceklesmeOrani!=null ? gerceklesmeOrani : 0;
 
   const durumRows = [
@@ -5932,9 +6203,11 @@ function renderAppHeaderBadges(report){
 const FINANSAL_ANALIZ_VIEWS = ['temsilciKarnesi','tahsilatVerimlilik','cei','nakitAkis','supheliAlacak','dsoTrend','yonetimOzeti'];
 const CARI_DETAY_VIEWS = ['genel','yaslandirma'];
 const DAGITIM_VIEWS = ['sevk','faturaKontrol','yukleme','ticariStok'];
+const BAYI_SATIS_VIEWS = ['sellOut','modernKanal','stokGun'];
 const TAB_DROPDOWNS = [
   {btn: document.getElementById('tabbtn-cariDetay'), menu: document.getElementById('cariDetayDropdownMenu'), views: CARI_DETAY_VIEWS},
   {btn: document.getElementById('tabbtn-dagitim'), menu: document.getElementById('dagitimDropdownMenu'), views: DAGITIM_VIEWS},
+  {btn: document.getElementById('tabbtn-bayiSatis'), menu: document.getElementById('bayiSatisDropdownMenu'), views: BAYI_SATIS_VIEWS},
   {btn: document.getElementById('tabbtn-finansalAnaliz'), menu: document.getElementById('finansalDropdownMenu'), views: FINANSAL_ANALIZ_VIEWS},
 ];
 function closeDropdown(d){
@@ -5974,12 +6247,13 @@ document.addEventListener('click', (e)=>{
 window.addEventListener('resize', ()=>{ TAB_DROPDOWNS.forEach(d=>{ if(d.menu.classList.contains('open')) openDropdown(d); }); });
 document.querySelector('.tabbar')?.addEventListener('scroll', ()=>closeAllDropdowns(), {passive:true});
 
-const ALL_VIEW_IDS = ['genelBakis','genel','sevk','yukleme','yaslandirma','ticariStok','faturaKontrol','bayiHakedis','sellOut','tahsilatVerimlilik','dsoTrend','nakitAkis','supheliAlacak','temsilciKarnesi','yonetimOzeti','cei'];
+const ALL_VIEW_IDS = ['genelBakis','genel','sevk','yukleme','yaslandirma','ticariStok','faturaKontrol','bayiHakedis','sellOut','modernKanal','stokGun','tahsilatVerimlilik','dsoTrend','nakitAkis','supheliAlacak','temsilciKarnesi','yonetimOzeti','cei'];
 
 // ---- Sol sidebar: alt menü (Cari Detay / Dağıtım / Finansal Analiz) aç/kapa ----
 const SB_SUBMENUS = [
   {btn: document.getElementById('sbbtn-cariDetay'), menu: document.getElementById('sbSubCariDetay'), views: CARI_DETAY_VIEWS},
   {btn: document.getElementById('sbbtn-dagitim'), menu: document.getElementById('sbSubDagitim'), views: DAGITIM_VIEWS},
+  {btn: document.getElementById('sbbtn-bayiSatis'), menu: document.getElementById('sbSubBayiSatis'), views: BAYI_SATIS_VIEWS},
   {btn: document.getElementById('sbbtn-finansalAnaliz'), menu: document.getElementById('sbSubFinansal'), views: FINANSAL_ANALIZ_VIEWS},
 ].filter(x=>x.btn && x.menu);
 SB_SUBMENUS.forEach(s=>{
@@ -6045,6 +6319,8 @@ function setActiveView(view){
   if(view==='faturaKontrol' && state.report) renderFaturaKontrolView(state.report);
   if(view==='bayiHakedis') renderBayiHakedisView();
   if(view==='sellOut') renderSellOutView();
+  if(view==='modernKanal') renderModernKanalView();
+  if(view==='stokGun') renderStokGunView();
   if(view==='tahsilatVerimlilik' && state.report) renderTahsilatVerimlilikView(state.report);
   if(view==='dsoTrend' && state.report) renderDsoTrendView(state.report);
   if(view==='nakitAkis' && state.report) renderNakitAkisView(state.report);
@@ -6428,13 +6704,13 @@ function renderYaslandirmaView(report){
 }
 
 function getFilteredSortedTicariStok(report){
-  const q = document.getElementById('ticariStokSearchInput').value.trim().toLowerCase();
+  const q = document.getElementById('ticariStokSearchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('ticariStokTemsilciFilter').value;
   const rows = (report.ticariStok ? report.ticariStok.rows : []);
   let filtered = rows.filter(r=>{
-    if(q && !(String(r.musteriAdi).toLowerCase().includes(q) || String(r.musteriNo).toLowerCase().includes(q) ||
-      String(r.urunAdi).toLowerCase().includes(q) || String(r.urunKodu).toLowerCase().includes(q) ||
-      String(r.temsilci).toLowerCase().includes(q))) return false;
+    if(q && !(musteriAramaEslesiyorMu(q, r.musteriAdi, r.musteriNo) ||
+      String(r.urunAdi).toLocaleLowerCase('tr-TR').includes(q) || String(r.urunKodu).toLocaleLowerCase('tr-TR').includes(q) ||
+      String(r.temsilci).toLocaleLowerCase('tr-TR').includes(q))) return false;
     if(temsilci && r.temsilci !== temsilci) return false;
     return true;
   });
@@ -6809,6 +7085,24 @@ function populateTemsilciFilter(musteriler, selectId){
 
 function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
+// Müşteri Master'daki Tabela Adı — arama filtrelerinde müşteri adının yanı sıra tabela
+// adına göre de eşleşme yapabilmek için. Kayıt yoksa boş string döner (arama etkilenmez).
+function musteriTabelaAdi(musteriKod){
+  const detay = state.musteriMasterDetay && state.musteriMasterDetay.get(String(musteriKod||''));
+  return (detay && detay.tabelaAdi) || '';
+}
+// Arama kutusundaki metnin (q, zaten toLowerCase yapılmış) bir müşteri kaydıyla eşleşip
+// eşleşmediğini kontrol eder — müşteri adı, kodu ve varsa Tabela Adı'na bakar. Büyük/küçük
+// harf duyarlılığı olmaması için hem q hem de karşılaştırılan alanlar toLowerCase kullanır.
+function musteriAramaEslesiyorMu(q, musteriAdi, musteriKod){
+  if(!q) return true;
+  if(String(musteriAdi||'').toLocaleLowerCase('tr-TR').includes(q)) return true;
+  if(String(musteriKod||'').toLocaleLowerCase('tr-TR').includes(q)) return true;
+  const tabela = musteriTabelaAdi(musteriKod);
+  if(tabela && tabela.toLocaleLowerCase('tr-TR').includes(q)) return true;
+  return false;
+}
+
 // Bir kart açıldığında (expand), içine eklenen detay/tablo satırları kartın boyunu uzatır; bu da
 // bazı durumlarda tıklanan kartın alt kısmının (hatta tamamının) ekranın dışına kaymasına yol
 // açabiliyordu. Kart yeniden çizildikten (render) SONRA, DOM'a yeni eklenen elemanı bulup normal
@@ -6828,7 +7122,7 @@ function debounce(fn, delay){
 }
 
 function getFilteredSorted(report){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const q = document.getElementById('searchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('temsilciFilter').value;
   const riskFilter = document.getElementById('riskFilter').value;
   const vadeMin = document.getElementById('vadeMinInput').value;
@@ -6845,7 +7139,7 @@ function getFilteredSorted(report){
     invoices: [], cekSenetDetay: b.cekSenetDetay||[], __bakiyesiz: true,
   }));
   let rows = report.musteriler.concat(bakiyesizSatirlari).filter(m=>{
-    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over60' && !(m.avgVadeGun>60)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -7706,7 +8000,7 @@ function renderMusteriDetail(m, showSenetBtn){
 }
 
 function getSevkFilteredSorted(report){
-  const q = document.getElementById('sevkSearchInput').value.trim().toLowerCase();
+  const q = document.getElementById('sevkSearchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('sevkTemsilciFilter').value;
   const riskFilter = document.getElementById('sevkRiskFilter').value;
   const vadeMin = document.getElementById('sevkVadeMinInput').value;
@@ -7719,7 +8013,7 @@ function getSevkFilteredSorted(report){
   }));
   let rows = report.musteriler.filter(m=> m.siparisTutari>0 || m.emanetSiparis>0).concat(bakiyesizSatirlari);
   rows = rows.filter(m=>{
-    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over60' && !(m.avgVadeGun>60)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -7887,7 +8181,7 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
     else e.seciliTahsilatKaynak.normal += r.tutar||0;
   });
 
-  const q = String(aramaMetni||'').trim().toLowerCase();
+  const q = String(aramaMetni||'').trim().toLocaleLowerCase('tr-TR');
   const musterilerByCode = new Map(report.musteriler.map(m=>[m.musteri, m]));
   let rows = [];
   eslesen.forEach((v, musteri)=>{
@@ -7906,7 +8200,7 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
       };
     }
     if(temsilciFilter && m.temsilci !== temsilciFilter) return;
-    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q))) return;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri)) return;
     // Fatura Kontrol'de gösterilen tahsilat SEÇİLİ TARİHE özgüdür — bu yüzden döküm de (varsa
     // Genel Rapor'un "bugüne en yakın gün" bazlı dökümü değil) o güne özgü kaynak dağılımıyla
     // gösterilir (bkz. renderMusteriDetail'daki alinanTahsilatKaynak kullanımı).
@@ -9054,10 +9348,10 @@ async function bayiHakedisRaporuOlustur(){
 function getBayiHakedisFilteredSorted(){
   const report = state.bayiHakedisReport;
   if(!report) return [];
-  const q = document.getElementById('bayiHakedisSearchInput').value.trim().toLowerCase();
+  const q = document.getElementById('bayiHakedisSearchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('bayiHakedisTemsilciFilter').value;
   let rows = report.noktalar.filter(r=>{
-    if(q && !(String(r.adi).toLowerCase().includes(q) || String(r.kod).toLowerCase().includes(q))) return false;
+    if(q && !musteriAramaEslesiyorMu(q, r.adi, r.kod)) return false;
     if(temsilci && r.temsilci !== temsilci) return false;
     return true;
   });
@@ -10040,14 +10334,14 @@ function hukukiRiskSeviyesi(gecikmeGun){
 const HTK_USER_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>';
 
 function getHukukiFiltered(hukukiListesi){
-  const q = document.getElementById('hukukiSearchInput').value.trim().toLowerCase();
+  const q = document.getElementById('hukukiSearchInput').value.trim().toLocaleLowerCase('tr-TR');
   const temsilci = document.getElementById('hukukiTemsilciFilter').value;
   const riskFilter = document.getElementById('hukukiRiskFilter').value;
   const vadeMin = document.getElementById('hukukiVadeMinInput').value;
   const vadeMax = document.getElementById('hukukiVadeMaxInput').value;
 
   return hukukiListesi.filter(m=>{
-    if(q && !(String(m.musteriAdi).toLowerCase().includes(q) || String(m.musteri).toLowerCase().includes(q) || String(m.temsilci).toLowerCase().includes(q))) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over180' && !(m.avgVadeGun>=180)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -10627,6 +10921,24 @@ function sellOutKanalSinifla(musteriKanaliRaw, acikOtelRaw){
   return String(acikOtelRaw||'').trim() ? 'Açık Kanal' : 'Kapalı Kanal';
 }
 
+// Rakı/viski/votka/cin/konyak gibi distile içki markaları, Mal Grubu Tnm. metninde geçen
+// anahtar kelimelere göre tek bir "Distile" grubunda toplanır — Stok Gün raporundaki marka
+// filtresinde bu markalar artık kendi isimleriyle değil, tek "Distile" seçeneği olarak
+// görünür. Anahtar kelime tabanlı olduğu için yeni bir viski/rakı markası eklendiğinde de
+// (marka adında bu kelimelerden biri geçtiği sürece) otomatik yakalanır; adında anahtar kelime
+// geçmeyen bilinen distile markaları (Glenfiddich, Grant's, Monkey Shoulder gibi) ayrıca sabit
+// bir liste ile eşleştirilir.
+const DISTILE_ANAHTAR_KELIMELER = ['rakı','raki','viski','whisky','whiskey','votka','vodka','cin','gin','konyak','brendi','brandy','likör','likor'];
+const DISTILE_BILINEN_MARKALAR = ['glenfiddich','grant\'s triple wood','grants triple wood','monkey shoulder'];
+function sellOutMarkaGrubu(markaHam){
+  const marka = String(markaHam||'').trim();
+  if(!marka) return 'Diğer';
+  const normalize = marka.toLocaleLowerCase('tr-TR');
+  if(DISTILE_ANAHTAR_KELIMELER.some(k=> normalize.includes(k))) return 'Distile';
+  if(DISTILE_BILINEN_MARKALAR.some(k=> normalize.includes(k))) return 'Distile';
+  return marka;
+}
+
 // Ham satış kalemlerinden; hedef-bağımsız olmayan (litre, FKNS, marka, kanal, trend) her şeyi
 // hesaplar. Açık/Kapalı Kanal LİTRE HEDEFLERİ elle girildiği ve her an değişebildiği için burada
 // HESAPLANMAZ — bunlar render anında applySellOutHedef() ile ayrıca uygulanır; böylece bir hedef
@@ -10641,6 +10953,18 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
   const markaAgg = new Map();
   const hacimSegAgg = new Map();
   const gunlukTrend = new Map();
+  // Malzeme Kodu bazlı günlük litre — "Stok Gün" raporunun 1. Aşama (geçmiş pay tespiti) ve
+  // 2. Aşama (en yoğun hafta / yoğun dönem günlük hızı) hesaplarının TEK veri kaynağı. Her
+  // ürün için {gunKey -> litre} tutuluyor; ayrı bir toplam da (malzemeUrunAdi eşlemesi için).
+  const malzemeGunlukAgg = new Map(); // malzemeKodu -> Map(gunKey -> {litre, miktar})
+  const malzemeUrunAdi = new Map(); // malzemeKodu -> Malzeme Tnm.
+  const malzemeMarka = new Map(); // malzemeKodu -> Mal Grubu Tnm. (Stok Gün raporundaki marka filtresi için)
+  // malzemeKodu -> Map(temsilciAdi -> litre) — Stok Gün'deki "kritik üründe en çok satan
+  // temsilciler kimler ve tahsilat performansları nasıl" bağlantısı için (bkz.
+  // urunTemsilciRiskDetayi / computeStokGunRaporu). Sadece BU AYIN canlı verisi tutulur —
+  // arşivlenmiş geçmiş aylara taşınmaz, çünkü risk sinyali güncel (bugünkü) tahsilat karnesiyle
+  // eşleştirilir, geçmiş ayların temsilci dağılımı bugün için anlamlı değildir.
+  const malzemeTemsilciAgg = new Map();
   let toplamNet=0, toplamLitre=0, acikNetToplam=0, kapaliNetToplam=0;
   let blokajTutar=0, blokajAdet=0;
   const belgeSetGenel = new Set();
@@ -10652,6 +10976,7 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     const ssmHam = String(r['Satış Müdürü Adı']||'').trim();
     const net = Number(r['Net'])||0;
     const litre = Number(r['Litre'])||0;
+    const miktar = Number(r['Miktar'])||0;
     const kanal = sellOutKanalSinifla(r['Müşteri Kanalı Tnm.'], r['Açık/Otel Tnm.']);
     const marka = String(r['Mal Grubu Tnm.']||'').trim() || 'Diğer';
     const hacimSeg = String(r['Hacim Segmenti Tnm.']||'').trim() || 'Tanımsız';
@@ -10662,6 +10987,8 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     // tarihleri 1 gün geriye kayabiliyor; bu düzeltme olmadan Günlük Trend grafiği bir gün ERKEN
     // gösteriyordu (ör. dosyada 01-04 Temmuz varken grafik 30 Haziran-03 Temmuz gösteriyordu).
     const trendTarihi = excelDateToJSArti1Gun(r['Girilen Faturalama Tarihi']);
+    const malzemeKodu = String(r['Malzeme Kodu']||'').trim();
+    const malzemeTnm = String(r['Malzeme Tnm.']||'').trim();
 
     toplamNet += net; toplamLitre += litre;
     if(kanal==='Açık Kanal') acikNetToplam += net; else kapaliNetToplam += net;
@@ -10678,6 +11005,24 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
         if(!gunlukTrend.has(gk)) gunlukTrend.set(gk, {net:0, litre:0});
         const g = gunlukTrend.get(gk);
         g.net += net; g.litre += litre;
+        // Malzeme Kodu bazlı günlük litre — Stok Gün raporunun tek veri kaynağı. "2" ile
+        // başlayan malzeme kodları (ör. 222467) gerçek stoklu ürün değil, farklı bir kategori
+        // (iade/numune/promosyon vb.) olduğu için Stok Gün hesaplamasına hiç dahil edilmez.
+        if(malzemeKodu && !malzemeKodu.startsWith('2')){
+          if(!malzemeGunlukAgg.has(malzemeKodu)) malzemeGunlukAgg.set(malzemeKodu, new Map());
+          const mg = malzemeGunlukAgg.get(malzemeKodu);
+          if(!mg.has(gk)) mg.set(gk, {litre:0, miktar:0});
+          const mgGun = mg.get(gk);
+          mgGun.litre += litre;
+          mgGun.miktar += miktar;
+          if(malzemeTnm && !malzemeUrunAdi.has(malzemeKodu)) malzemeUrunAdi.set(malzemeKodu, malzemeTnm);
+          if(marka && !malzemeMarka.has(malzemeKodu)) malzemeMarka.set(malzemeKodu, sellOutMarkaGrubu(marka));
+          if(temsilciHam){
+            if(!malzemeTemsilciAgg.has(malzemeKodu)) malzemeTemsilciAgg.set(malzemeKodu, new Map());
+            const mt = malzemeTemsilciAgg.get(malzemeKodu);
+            mt.set(temsilciHam, (mt.get(temsilciHam)||0) + litre);
+          }
+        }
       }
     }
 
@@ -10734,6 +11079,29 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     .map(([gunKey,v])=>({gunKey, net:v.net, litre:v.litre}))
     .sort((a,b)=>a.gunKey.localeCompare(b.gunKey));
 
+  // Malzeme kodu -> {urunAdi, marka, gunler:[{gunKey,litre,miktar}]} — Stok Gün raporunun ham
+  // girdisi. Her ürünün gün dizisi ayrı ayrı sıralı tutuluyor ki arşivlenen aylar
+  // birleştirildiğinde (bkz. sellOutArsivUrunBirlestir) doğrudan uç uca eklenebilsin.
+  const malzemelerDizi = Array.from(malzemeGunlukAgg.entries()).map(([kod, gunMap])=>({
+    kod,
+    urunAdi: malzemeUrunAdi.get(kod) || kod,
+    marka: malzemeMarka.get(kod) || 'Diğer',
+    gunler: Array.from(gunMap.entries()).map(([gunKey,v])=>({gunKey, litre:v.litre, miktar:v.miktar})).sort((a,b)=>a.gunKey.localeCompare(b.gunKey)),
+    // Bu ürünü bu ay en çok satan temsilciler, litre payına göre sıralı (en çok 5) — Stok Gün
+    // raporundaki ürün×temsilci risk detayının ham girdisi. ÖNEMLİ: pay yüzdesi, listeyi top-5'e
+    // KESMEDEN ÖNCE tüm temsilciler üzerinden hesaplanan gerçek toplama göre bulunuyor — yoksa
+    // (5'ten fazla temsilci satan ürünlerde) top-5'in kendi içindeki toplama bölünüp yüzdeler
+    // olduğundan yüksek çıkardı.
+    temsilciPay: (()=>{
+      const liste = Array.from((malzemeTemsilciAgg.get(kod)||new Map()).entries()).map(([ad,litre])=>({ad,litre}));
+      const gercekToplam = liste.reduce((a,t)=>a+t.litre,0);
+      return liste
+        .map(t=>({ad:t.ad, litre:t.litre, pay: gercekToplam>0 ? (t.litre/gercekToplam*100) : 0}))
+        .sort((a,b)=>b.litre-a.litre)
+        .slice(0,5);
+    })(),
+  }));
+
   return {
     toplamNet, toplamLitre, belgeSayisi: belgeSetGenel.size, aktifNoktaSayisi, durumVarMi,
     ssmSayisi: new Set(temsilciler.map(t=>t.ssm||'Tanımsız').filter(s=>s!=='Tanımsız')).size,
@@ -10744,6 +11112,7 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     hacimSegmentleri: Array.from(hacimSegAgg.entries()).map(([ad,net])=>({ad,net})).sort((a,b)=>b.net-a.net),
     kanalNet: {acik:acikNetToplam, kapali:kapaliNetToplam},
     gunlukTrend: gunlukTrendDizi,
+    malzemeler: malzemelerDizi,
   };
 }
 
@@ -10932,24 +11301,234 @@ async function sellOutArsivYenile(zorla){
   await saveSellOutArsivToLocal(state.sellOutArsivCache).catch(()=>{});
   return state.sellOutArsivCache;
 }
+// ============================================================================
+// MODERN KANAL — cloud/local kalıcılık (hedef, güncel rapor, aylık arşiv)
+// ============================================================================
+// Geleneksel Kanal (Sell Out) ile birebir aynı desen kopyalanmıştır; tek fark, hedefin
+// Açık/Kapalı ayrımı olmayan TEK bir "Key Account Hedef" sayısı olmasıdır (modernKanalHedef
+// bir obje değil doğrudan sayı olarak saklanır).
+const MODERNKANAL_HEDEF_CLOUD_PATH = CLOUD.path + '_modernKanalHedef';
+const MODERNKANAL_HEDEF_LOCAL_KEY = 'noktaCariTakip_modernKanalHedef_v1';
+const MODERNKANAL_REPORT_CLOUD_PATH = CLOUD.path + '_modernKanalReport';
+const MODERNKANAL_REPORT_LOCAL_KEY = 'noktaCariTakip_modernKanalReport_v1';
+const MODERNKANAL_ARSIV_CLOUD_PATH = CLOUD.path + '_modernKanalArsiv';
+const MODERNKANAL_ARSIV_LOCAL_KEY = 'noktaCariTakip_modernKanalArsiv_v1';
+
+async function saveModernKanalHedefToCloud(deger){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_HEDEF_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(deger),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal hedef buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadModernKanalHedefFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_HEDEF_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Modern Kanal hedef buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalHedefToLocal(deger){
+  const ok = await idbSet(MODERNKANAL_HEDEF_LOCAL_KEY, deger);
+  if(!ok) console.error('Modern Kanal hedef cihaza kaydedilemedi.');
+}
+async function loadModernKanalHedefFromLocal(){
+  try{ return await idbGet(MODERNKANAL_HEDEF_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function modernKanalHedefYenile(){
+  let deger = null;
+  if(cloudEnabled()) deger = await loadModernKanalHedefFromCloud();
+  if(deger==null) deger = await loadModernKanalHedefFromLocal();
+  state.modernKanalHedef = Number(deger)||0;
+  return state.modernKanalHedef;
+}
+async function modernKanalHedefKaydet(deger){
+  state.modernKanalHedef = Number(deger)||0;
+  await saveModernKanalHedefToLocal(state.modernKanalHedef);
+  if(cloudEnabled()) await saveModernKanalHedefToCloud(state.modernKanalHedef);
+}
+
+async function saveModernKanalReportToCloud(rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_REPORT_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal raporu buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadModernKanalReportFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_REPORT_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Modern Kanal raporu buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalReportToLocal(rapor){
+  const ok = await idbSet(MODERNKANAL_REPORT_LOCAL_KEY, rapor);
+  if(!ok) console.error('Modern Kanal raporu cihaza kaydedilemedi.');
+}
+async function loadModernKanalReportFromLocal(){
+  try{ return await idbGet(MODERNKANAL_REPORT_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function modernKanalYenile(){
+  let rapor = null;
+  if(cloudEnabled()) rapor = await loadModernKanalReportFromCloud();
+  if(!rapor) rapor = await loadModernKanalReportFromLocal();
+  state.modernKanalReport = rapor;
+  return rapor;
+}
+async function modernKanalKaydet(rapor){
+  state.modernKanalReport = rapor;
+  await saveModernKanalReportToLocal(rapor);
+  if(cloudEnabled()) await saveModernKanalReportToCloud(rapor);
+}
+
+async function saveModernKanalArsivAyToCloud(ayKey, rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_ARSIV_CLOUD_PATH}/${encodeURIComponent(ayKey)}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal ay arşivi buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadModernKanalArsivFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return {};
+    return JSON.parse(text) || {};
+  }catch(err){ console.error('Modern Kanal ay arşivi buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalArsivToLocal(arsiv){
+  const ok = await idbSet(MODERNKANAL_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Modern Kanal ay arşivi cihaza kaydedilemedi.');
+}
+async function loadModernKanalArsivFromLocal(){
+  try{ return (await idbGet(MODERNKANAL_ARSIV_LOCAL_KEY)) || {}; }catch(err){ console.error(err); return {}; }
+}
+let modernKanalArsivYuklendiMi = false;
+async function modernKanalArsivYenile(zorla){
+  if(modernKanalArsivYuklendiMi && !zorla) return state.modernKanalArsivCache;
+  let arsiv = null;
+  if(cloudEnabled()) arsiv = await loadModernKanalArsivFromCloud();
+  if(!arsiv) arsiv = await loadModernKanalArsivFromLocal();
+  state.modernKanalArsivCache = arsiv || {};
+  modernKanalArsivYuklendiMi = true;
+  await saveModernKanalArsivToLocal(state.modernKanalArsivCache).catch(()=>{});
+  return state.modernKanalArsivCache;
+}
+
+function sellOutBaskinAy(rows){
+  const ayCounts = new Map();
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['Girilen Faturalama Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    ayCounts.set(ayKey, (ayCounts.get(ayKey)||0) + 1);
+  });
+  let baskinAy = null, maksSayi = 0;
+  ayCounts.forEach((sayi, ay)=>{ if(sayi > maksSayi){ maksSayi = sayi; baskinAy = ay; } });
+  return baskinAy;
+}
+
+// ============================================================================
+// MODERN KANAL — İrsaliye Listesi (Key Account/Modern Kanal sevkiyat dökümü)
+// ============================================================================
+// Geleneksel Kanal (Sell Out) ile aynı "ürün bazlı günlük litre/miktar" mantığını kullanır,
+// ama çok daha basittir: temsilci/SSM/kanal ayrımı yok, tek bir "İbrahim Işık" girdisi var,
+// tek bir Key Account Hedefi (Açık/Kapalı ayrımsız) girilir. Bu kanalın satışı, tahsilat
+// henüz gerçekleşmemiş olsa da anlık tahsil edilmiş kabul edilir; bu yüzden bu fonksiyon
+// hiçbir tahsilat/FKNS/DSO hesabına veri üretmez — yalnızca ürün bazlı litre/miktar ve
+// toplam litre döndürür (Stok Gün ve genel toplam sayılarda kullanılmak üzere).
+function buildIrsaliyeReport(rows){
+  let toplamLitre = 0;
+  const malzemeGunlukAgg = new Map(); // malzemeKodu -> Map(gunKey -> {litre, miktar})
+  const malzemeUrunAdi = new Map();
+
+  (rows||[]).forEach(r=>{
+    const litre = Number(r['Litre'])||0;
+    const miktar = Number(r['Miktar'])||0;
+    const malzemeKodu = String(r['Ürün Kodu']||'').trim();
+    const malzemeTnm = String(r['Malzeme kısa metni']||'').trim();
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const gk = dateKeyLocal(tarih);
+    if(!gk) return;
+
+    toplamLitre += litre;
+
+    // "2" ile başlayan malzeme kodları (ör. 225899) Sell Out'taki ile aynı sebeple hariç
+    // tutulur — gerçek stoklu ürün değil, farklı bir kategori (iade/numune/promosyon vb.).
+    if(malzemeKodu && !malzemeKodu.startsWith('2')){
+      if(!malzemeGunlukAgg.has(malzemeKodu)) malzemeGunlukAgg.set(malzemeKodu, new Map());
+      const mg = malzemeGunlukAgg.get(malzemeKodu);
+      if(!mg.has(gk)) mg.set(gk, {litre:0, miktar:0});
+      const mgGun = mg.get(gk);
+      mgGun.litre += litre;
+      mgGun.miktar += miktar;
+      if(malzemeTnm && !malzemeUrunAdi.has(malzemeKodu)) malzemeUrunAdi.set(malzemeKodu, malzemeTnm);
+    }
+  });
+
+  const malzemelerDizi = Array.from(malzemeGunlukAgg.entries()).map(([kod, gunMap])=>({
+    kod,
+    urunAdi: malzemeUrunAdi.get(kod) || kod,
+    marka: 'Diğer', // İrsaliye Listesi'nde marka/Mal Grubu bilgisi yok; Stok Gün marka filtresinde "Diğer" altında görünür.
+    gunler: Array.from(gunMap.entries()).map(([gunKey,v])=>({gunKey, litre:v.litre, miktar:v.miktar})).sort((a,b)=>a.gunKey.localeCompare(b.gunKey)),
+  }));
+
+  return { toplamLitre, malzemeler: malzemelerDizi };
+}
+
+// İrsaliye dosyasındaki satırların hangi aylara dağıldığını (ayKey -> satır sayısı) döndürür —
+// hem "Bu Ayı Arşivle" (baskın ay tespiti) hem "Tüm Ayları Toplu Arşivle" (her ayı ayrı ayrı
+// filtreleyip arşivlemek) için kullanılır.
+function irsaliyeAylaraGoreGrupla(rows){
+  const gruplar = new Map(); // ayKey -> rows[]
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    if(!gruplar.has(ayKey)) gruplar.set(ayKey, []);
+    gruplar.get(ayKey).push(r);
+  });
+  return gruplar;
+}
+
 async function sellOutArsivleButonu(){
   const btn = document.getElementById('sellOutArsivleBtn');
   const baseRapor = state.sellOutReport;
   if(!baseRapor){
-    alert('Arşivlenecek bir Sell Out Raporu yok — önce ana yükleme sayfasından dosyayı yükleyip raporu oluşturmalısınız.');
+    alert('Arsivlenecek bir Geleneksel Kanal raporu yok - once Geleneksel Kanal sekmesindeki dosya yukleme alanindan veya ana yukleme sayfasindan dosyayi yukleyip hesaplatmalisiniz.');
     return;
   }
-  const ayKey = dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const hamVeri = (state.sellOutKendiDosya && state.sellOutKendiDosya.data) || (state.files.sellOut && state.files.sellOut.data);
+  const ayKey = (hamVeri && sellOutBaskinAy(hamVeri)) || dateKeyLocal(turkiyeBugun()).slice(0,7);
   const ayEtiket = fmtDate(new Date(ayKey+'-01'));
   const zatenVar = Object.prototype.hasOwnProperty.call(state.sellOutArsivCache||{}, ayKey);
   const soru = zatenVar
-    ? `${ayEtiket} için arşiv zaten var. Üzerine yazılsın mı? (Şu anki güncel veriyle değiştirilecek)`
-    : `${ayEtiket} ayının GÜNCEL Sell Out verisi kalıcı olarak arşivlensin mi? Daha sonra "Dönem" filtresinden bu ayı seçerek görebilirsiniz.`;
+    ? (ayEtiket + ' icin arsiv zaten var (dosya icerigine gore bu veri ' + ayEtiket + ' ayina ait). Uzerine yazilsin mi?')
+    : ('Dosya icerigine gore bu veri ' + ayEtiket + ' ayina ait gorunuyor. GUNCEL Sell Out verisi bu ayin altina kalici olarak arsivlensin mi?');
   if(!confirm(soru)) return;
 
   btn.disabled = true;
   const eskiText = btn.textContent;
-  btn.textContent = '🗄️ Arşivleniyor…';
+  btn.textContent = 'Arsivleniyor...';
   try{
     const raporSnapshot = Object.assign({}, applySellOutHedef(baseRapor, state.sellOutHedef), {
       arsivAyKey: ayKey,
@@ -10959,15 +11538,15 @@ async function sellOutArsivleButonu(){
     await saveSellOutArsivToLocal(state.sellOutArsivCache);
     const sonuc = await saveSellOutArsivAyToCloud(ayKey, raporSnapshot);
     if(cloudEnabled() && !sonuc.ok){
-      alert('Arşiv cihaza kaydedildi ama buluta yazılamadı: ' + (sonuc.reason||'bilinmeyen hata'));
+      alert('Arsiv cihaza kaydedildi ama buluta yazilamadi: ' + (sonuc.reason||'bilinmeyen hata'));
     }
     populateSellOutAySelect();
     document.getElementById('sellOutAySelect').value = ayKey;
     state.sellOutSeciliAy = ayKey;
     await renderSellOutView();
   }catch(err){
-    console.error('Sell Out arşivleme hatası:', err);
-    alert('Arşivleme sırasında bir hata oluştu: ' + err.message);
+    console.error('Sell Out arsivleme hatasi:', err);
+    alert('Arsivleme sirasinda bir hata olustu: ' + err.message);
   }finally{
     btn.disabled = false;
     btn.textContent = eskiText;
@@ -10980,6 +11559,85 @@ function populateSellOutAySelect(){
   sel.innerHTML = '<option value="">Güncel (canlı)</option>' + aylar.map(a=>`<option value="${a}">${fmtDate(new Date(a+'-01'))}</option>`).join('');
   sel.value = (mevcutSecim && aylar.includes(mevcutSecim)) ? mevcutSecim : '';
   state.sellOutSeciliAy = sel.value || null;
+}
+
+function populateModernKanalAySelect(){
+  const sel = document.getElementById('modernKanalAySelect');
+  if(!sel) return;
+  const aylar = Object.keys(state.modernKanalArsivCache||{}).sort().reverse();
+  const mevcutSecim = state.modernKanalSeciliAy;
+  sel.innerHTML = '<option value="">Güncel (canlı)</option>' + aylar.map(a=>`<option value="${a}">${fmtDate(new Date(a+'-01'))}</option>`).join('');
+  sel.value = (mevcutSecim && aylar.includes(mevcutSecim)) ? mevcutSecim : '';
+  state.modernKanalSeciliAy = sel.value || null;
+}
+
+// Modern Kanal (İbrahim Işık) için render — Geleneksel Kanal'ın SSM kartıyla aynı görsel
+// dilde ama tek bir kişilik: kendi Key Account Hedefi ve kendi toplam litresine göre kendi
+// gerçekleşme oranı hesaplanır. Bu değer Toplam LT göstergesinin altında gösterilir.
+async function renderModernKanalView(){
+  const bosPanel = document.getElementById('modernKanalBosPanel');
+  const icerik = document.getElementById('modernKanalIcerik');
+  populateModernKanalAySelect();
+  const seciliAy = state.modernKanalSeciliAy;
+  const baseRapor = state.modernKanalReport;
+
+  let report, isArsivGoruntuleme;
+  if(seciliAy){
+    report = state.modernKanalArsivCache[seciliAy] || null;
+    isArsivGoruntuleme = true;
+    if(!report){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('modernKanalAsOf').textContent = fmtDate(new Date(seciliAy+'-01'))+' ayına ait arşiv verisi bulunamadı.';
+      return;
+    }
+  }else{
+    isArsivGoruntuleme = false;
+    if(!baseRapor){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('modernKanalAsOf').textContent = 'Veri kaynağı: İrsaliye Listesi (Key Account/Modern Kanal) — henüz yüklenmedi';
+      return;
+    }
+    report = baseRapor;
+  }
+  bosPanel.style.display='none';
+  icerik.style.display='block';
+
+  document.getElementById('modernKanalAsOf').textContent = isArsivGoruntuleme
+    ? ('Arşiv: '+fmtDate(new Date(seciliAy+'-01'))+' ayının ('+fmtDate(new Date(report.arsivZamani))+' tarihinde arşivlenmiş) verisi gösteriliyor')
+    : 'Veri kaynağı: İrsaliye Listesi (Key Account/Modern Kanal)';
+
+  // Hedef alanı yalnızca güncel/canlı görünümde düzenlenebilir; arşiv görüntülemede salt okunur.
+  const hedefInput = document.getElementById('modernKanalHedefInput');
+  const hedefPanel = document.getElementById('modernKanalHedefPanel');
+  if(hedefPanel) hedefPanel.style.display = isArsivGoruntuleme ? 'none' : 'block';
+  if(hedefInput && !isArsivGoruntuleme) hedefInput.value = state.modernKanalHedef || '';
+
+  const hedef = isArsivGoruntuleme ? (report.hedefAnlikGoruntu||0) : (state.modernKanalHedef||0);
+  const toplamLitre = report.toplamLitre||0;
+  const gercek = hedef>0 ? (toplamLitre/hedef*100) : null;
+  const renk = sellOutRenk(gercek);
+
+  document.getElementById('modernKanalKartGrid').innerHTML = `
+    <div class="ssm-karne-card" style="border-left:4px solid ${renk};">
+      <div class="ssm-karne-top">
+        <div class="cust-avatar">${escapeHtml(avatarBaslangic('İbrahim Işık'))}</div>
+        <div>
+          <div class="ssm-karne-name">İBRAHİM IŞIK <span class="badge ssm-hiyerarsi-badge"><i class="fa-solid fa-user-tie" aria-hidden="true"></i> Key Account</span></div>
+          <div class="ssm-karne-sub">Modern Kanal</div>
+        </div>
+        <div class="ssm-fkns-ring-wrap">
+          ${fknsRingSvg(gercek)}
+          <div class="ssm-fkns-ring-label">Hedef</div>
+        </div>
+      </div>
+      ${ssmKanalRowHtml('Toplam Litre', toplamLitre, hedef, 'fa-boxes-stacked')}
+      <div class="ssm-karne-foot">
+        <span class="g-lbl">Hedef Gerçekleşme</span>
+        <span class="g-val" style="color:${renk};">${gercek!=null ? fmtYuzde(gercek) : '—'}</span>
+      </div>
+    </div>`;
 }
 
 function sellOutRenk(oran){
@@ -11022,86 +11680,6 @@ function ssmKanalRowHtml(label, satis, hedef, icon){
   </div>`;
 }
 
-function renderSellOutBarRows(items, key, fmt){
-  key = key || 'net'; fmt = fmt || TL;
-  if(!items || !items.length) return '<div class="empty-state">Kayıt yok</div>';
-  const maks = Math.max(...items.map(i=>i[key]), 1);
-  return items.map(i=>{
-    const pct = Math.max(2, i[key]/maks*100);
-    return `<div class="bar-row"><div class="bar-label" title="${escapeHtml(i.ad)}">${escapeHtml(i.ad)}</div><div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%"></div></div><div class="bar-value">${fmt(i[key])}</div></div>`;
-  }).join('');
-}
-
-function gunKeyGoster(gunKey){
-  if(!gunKey) return '—';
-  const parts = String(gunKey).split('-');
-  return parts.length===3 ? (parts[2]+'.'+parts[1]) : gunKey;
-}
-function gunKeyGosterUzun(gunKey){
-  if(!gunKey) return '—';
-  const parts = String(gunKey).split('-');
-  return parts.length===3 ? (parts[2]+'.'+parts[1]+'.'+parts[0]) : gunKey;
-}
-
-function sellOutMiniChart(gunlukTrend, key, renk, koyuRenk, fmt){
-  const w=300, h=124, padX=22, padTop=26, padBottom=28;
-  const vals = gunlukTrend.map(g=>g[key]);
-  const maks = Math.max(...vals, 1);
-  const mins = Math.min(...vals, 0);
-  const span = (maks-mins)||1;
-  const n = gunlukTrend.length;
-  const stepX = n>1 ? (w-2*padX)/(n-1) : 0;
-  const pts = gunlukTrend.map((g,i)=>{
-    const x = padX + i*stepX;
-    const y = padTop + (1-((g[key]-mins)/span))*(h-padTop-padBottom);
-    return {x,y,g,i};
-  });
-  const polyline = pts.map(p=>p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
-  const circles = pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${koyuRenk}"><title>${escapeHtml(gunKeyGosterUzun(p.g.gunKey))}: ${escapeHtml(fmt(p.g[key]))}</title></circle>`).join('');
-
-  // Gün etiketleri: çok fazla nokta varsa çakışmayı önlemek için bir atlayarak gösterilir.
-  const gunAtlama = n>8 ? 2 : 1;
-  const labels = pts.filter(p=> p.i%gunAtlama===0 || p.i===n-1).map(p=>`<text x="${p.x.toFixed(1)}" y="${h-10}" font-size="10" fill="#71809A" text-anchor="middle">${escapeHtml(gunKeyGoster(p.g.gunKey))}</text>`).join('');
-
-  // Değer etiketleri: HER noktaya basmak dar aralıkta çakışmaya yol açtığından, yalnızca ilk, son,
-  // en yüksek ve en düşük değerli noktalar (birbirine çok yakın değillerse) etiketlenir; tüm
-  // noktaların tam değeri zaten daireye gelindiğinde (hover/tooltip) görünür.
-  const gercekMaks = Math.max(...vals);
-  const gercekMins = Math.min(...vals);
-  let adaylar = Array.from(new Set([0, n-1, vals.indexOf(gercekMaks), vals.indexOf(gercekMins)])).sort((a,b)=>a-b);
-  const minPikselAralik = 42;
-  const secilenler = [];
-  adaylar.forEach(idx=>{
-    const p = pts[idx];
-    if(secilenler.length===0 || Math.abs(p.x - secilenler[secilenler.length-1].x) >= minPikselAralik){
-      secilenler.push(p);
-    }
-  });
-  const vlabels = secilenler.map(p=>`<text x="${p.x.toFixed(1)}" y="${(p.y-9).toFixed(1)}" font-size="9.5" fill="#152238" text-anchor="middle" font-weight="700">${escapeHtml(fmt(p.g[key]))}</text>`).join('');
-
-  return `<svg viewBox="0 0 ${w} ${h}"><polyline points="${polyline}" fill="none" stroke="${renk}" stroke-width="2.5"/>${circles}${labels}${vlabels}</svg>`;
-}
-
-function renderSellOutTrendCharts(gunlukTrendTam){
-  const gunlukTrend = (gunlukTrendTam||[]).slice(-14);
-  if(gunlukTrend.length < 2) return '<div class="empty-state">Trend için yeterli gün verisi yok</div>';
-  const netVals = gunlukTrend.map(g=>g.net);
-  const litreVals = gunlukTrend.map(g=>g.litre);
-  const ortNet = netVals.reduce((a,b)=>a+b,0)/netVals.length;
-  const ortLitre = litreVals.reduce((a,b)=>a+b,0)/litreVals.length;
-  return `
-    <div class="trend-chart-card">
-      <div class="trend-chart-title">Net Ciro (₺)</div>
-      ${sellOutMiniChart(gunlukTrend,'net','#1B5FAE','#123E73', TL)}
-      <div class="trend-chart-ortalama">Günlük ortalama: ${TL(ortNet)}</div>
-    </div>
-    <div class="trend-chart-card">
-      <div class="trend-chart-title">Hacim (L)</div>
-      ${sellOutMiniChart(gunlukTrend,'litre','#B8862E','#8a6620', LT)}
-      <div class="trend-chart-ortalama">Günlük ortalama: ${LT(ortLitre)}</div>
-    </div>`;
-}
-
 // Açık/Kapalı Kanal LT özeti — hem Sell Out Raporu'nun kendi üst KPI şeridi hem Genel Bakış'ın
 // "Güncel Durum" kartı bu TEK fonksiyonu çağırır; böylece iki yerde ayrı hesap yapılıp
 // aralarında tutarsızlık (farklı formül/eksik hedef verisi vb.) oluşma riski kalmaz.
@@ -11121,6 +11699,754 @@ function sellOutKanalOzeti(report){
   const toplamHedef = toplamAcikHedef + toplamKapaliHedef;
   const gerceklesmeOrani = toplamHedef>0 ? ((toplamAcikLitre+toplamKapaliLitre)/toplamHedef*100) : null;
   return {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, gerceklesmeOrani, toplamLitre: report.toplamLitre||0};
+}
+
+// ============================================================================
+// STOK GÜN — Hedefli ve Dinamik Stok Yönetimi Metodolojisi
+// ============================================================================
+// 1. Aşama: son 6 ayın arşivlenmiş Sell Out verisinden (sellOutArsivCache), her ürünün
+// (Malzeme Kodu) toplam litre payı çıkarılır; üst yönetim hedefi (temsilci Açık+Kapalı Kanal
+// hedeflerinin toplamı) bu paylara göre ürünlere dağıtılır ("Gerekli Litre").
+// 2. Aşama: her ürünün 6 aylık günlük satış verisi, o ayın 4 sabit haftalık dilimine
+// (1-7 / 8-14 / 15-21 / 22-ay sonu) ayrılır; en yüksek toplam satışı olan dilim "yoğun hafta"
+// seçilir, o dilimin GÜNLÜK ORTALAMASI ("Yoğun Dönem Günlük Hız") hesaplanır. Anlık depo stoğu
+// (Malzemeler dosyası) bu hıza bölünerek "Dinamik Stok Günü" elde edilir.
+
+const STOK_GUN_AY_SAYISI = 6; // "son 6 ay" — arşivden geriye doğru kaç ay taranacağı
+
+// İSTATİSTİKSEL GÜVENLİK STOĞU sabitleri: SS = Z × σ_D × √LT
+//  Z: hedeflenen servis seviyesi çarpanı (%95 bulunurluk ≈ 1.65). Ürün sınıfına göre
+//     farklılaştırmak isterseniz (A/B/C sınıfı) bu sabiti ürün bazlı bir haritaya çevirebilirsiniz.
+//  σ_D: günlük talebin standart sapması — artık MÜMKÜN OLDUĞUNDA gerçek gün-gün satış
+//     verisinden ölçülüyor (bkz. stokGunGercekGunlukIstatistik). Yeterli günlük veri yoksa
+//     (yeni/az geçmişli ürün) aylık değişkenlik katsayısına (cv) geri düşer.
+//  LT: ortalama tedarik süresi (gün) — 3 gün olarak girildi (gerçek ortalama teslimat süreniz).
+//     Tedarikçiye göre farklılık varsa (ör. bazı ürünler 3, bazıları 10 gün) bunu ürün/tedarikçi
+//     bazlı bir haritaya çevirip haftaGunlukHizlari hesaplandığı yerde kullanabiliriz.
+const STOK_GUN_SERVIS_SEVIYESI_Z = 1.65; // ~%95 hedef bulunurluk oranı
+const STOK_GUN_VARSAYILAN_LEAD_TIME_GUN = 3; // Gerçek ortalama tedarik süresi
+
+// Bir ayKey (YYYY-MM) için, o ayın 4 sabit haftalık dilimini (başlangıç/bitiş gün numarası ve
+// dilimdeki gün sayısı) döndürür. Son dilim ayın gerçek gün sayısına göre 8-10 gün olabilir.
+// TAKVİM ETKİSİ İNDEKSİ (E_t): resmi/dini tatil ve arife günlerinde B2B dağıtım hacmi normal
+// güne göre nasıl değişiyor. Bunlar SATIŞ YASAĞI değil — Türkiye'de bayram günlerinde alkol
+// satışını tamamen durduran bir yasal düzenleme yok (sadece 22:00-06:00 arası günlük satış
+// saati kısıtı her gün geçerli). Buradaki düşük katsayılar, bayram günlerinde işyerlerinin/
+// noktaların kapalı olması nedeniyle FATURALAMA/DAĞITIM hacminin fiilen durmasını yansıtır;
+// yüksek katsayılar ise arife öncesi stoklama talebini yansıtır. DEĞERLER VARSAYIMDIR — ideal
+// olan, geçen yılın aynı tarihlerindeki gerçek düşüş/artışın arşiv verisinden ölçülmesidir;
+// yeterli geçmiş veri birikince stokGunGecmisTenOlcumluEt() ile güncellenebilir.
+const STOK_GUN_TAKVIM_ETKISI_2026 = {
+  '2026-01-01': 0.4,  // Yılbaşı
+  '2025-12-30': 1.3, '2025-12-31': 1.5, // Yılbaşı öncesi stoklama
+  '2026-03-18': 1.3, // Ramazan Bayramı öncesi stoklama
+  '2026-03-19': 0.5, // Arife (yarım gün)
+  '2026-03-20': 0.2, '2026-03-21': 0.2, '2026-03-22': 0.2, // Ramazan Bayramı
+  '2026-04-23': 0.4, // Ulusal Egemenlik ve Çocuk Bayramı
+  '2026-05-01': 0.4, // Emek ve Dayanışma Günü
+  '2026-05-19': 0.4, // Atatürk'ü Anma, Gençlik ve Spor Bayramı
+  '2026-05-25': 1.4, // Kurban Bayramı öncesi stoklama
+  '2026-05-26': 0.5, // Arife (yarım gün)
+  '2026-05-27': 0.15, '2026-05-28': 0.15, '2026-05-29': 0.15, '2026-05-30': 0.15, // Kurban Bayramı
+  '2026-07-15': 0.4, // Demokrasi ve Millî Birlik Günü
+  '2026-08-30': 0.4, // Zafer Bayramı
+  '2026-10-28': 0.6, // Cumhuriyet Bayramı arifesi (öğleden sonra yarım gün)
+  '2026-10-29': 0.4, // Cumhuriyet Bayramı
+};
+
+// Verilen bir Date için takvim etkisi katsayısını döndürür; tanımlı değilse 1.0 (etkisiz).
+function stokGunTakvimEtkisi(tarih){
+  const gk = dateKeyLocal(tarih);
+  return STOK_GUN_TAKVIM_ETKISI_2026[gk] != null ? STOK_GUN_TAKVIM_ETKISI_2026[gk] : 1.0;
+}
+
+function stokGunHaftaDilimleri(ayKey){
+  const [yil, ay] = ayKey.split('-').map(Number);
+  const ayinGunSayisi = new Date(yil, ay, 0).getDate();
+  return [
+    {baslangic:1, bitis:7, gunSayisi:7},
+    {baslangic:8, bitis:14, gunSayisi:7},
+    {baslangic:15, bitis:21, gunSayisi:7},
+    {baslangic:22, bitis:ayinGunSayisi, gunSayisi: ayinGunSayisi-22+1},
+  ];
+}
+
+// Son STOK_GUN_AY_SAYISI ay için arşivlenmiş Sell Out raporlarını (sellOutArsivCache) toplar,
+// yoksa boş döner. Her ürün için: {kod, urunAdi, toplamLitre6Ay, toplamMiktar6Ay, gunler:[{gunKey,litre,miktar}]}.
+function stokGunUrunVerileriniTopla(){
+  const sellOutArsiv = state.sellOutArsivCache || {};
+  const modernKanalArsiv = state.modernKanalArsivCache || {};
+  const buAyKey = dateKeyLocal(turkiyeBugun()).slice(0,7);
+  // İçinde bulunduğumuz ay yanlışlıkla (henüz tamamlanmadan) arşivlenmiş olsa bile burada
+  // her zaman hariç tutulur — "geçmiş 6 ay" mantığı yalnızca TAMAMLANMIŞ aylarla anlamlı;
+  // yarım kalmış bir ayın haftalık dağılımı gerçek deseni yanıltır. Geleneksel Kanal ve
+  // Modern Kanal'ın arşivlenmiş ayları AYRI tutulur (ikisi farklı ritimde arşivlenebilir),
+  // ama her ikisi de aynı "son 6 tamamlanmış ay" penceresine (kendi ay listesine göre) tabidir.
+  const sellOutAylar = Object.keys(sellOutArsiv).filter(ay=> ay !== buAyKey).sort().slice(-STOK_GUN_AY_SAYISI);
+  const modernKanalAylar = Object.keys(modernKanalArsiv).filter(ay=> ay !== buAyKey).sort().slice(-STOK_GUN_AY_SAYISI);
+  // "sonAylar" (raporun üst bilgisinde gösterilen "6 ay: ...") iki kaynağın aylarının
+  // BİRLEŞİMİDİR — kullanıcı hangi ayların hesaba katıldığını görebilsin diye.
+  const sonAylar = Array.from(new Set([...sellOutAylar, ...modernKanalAylar])).sort();
+  const urunMap = new Map(); // kod -> {urunAdi, marka, toplamLitre6Ay, toplamMiktar6Ay, gunler:[], aktifAylar:Set, kapsananAylar:Set}
+
+  // Her iki kaynaktan (Geleneksel Kanal + Modern Kanal) gelen ürün listelerini AYNI urunMap'e
+  // TOPLAYARAK birleştirir — bir ürün her iki kanaldan da satılıyorsa (aynı Malzeme/Ürün Kodu),
+  // litre/miktar/gün verileri toplanır; sadece bir kanaldan satılıyorsa o kanalın verisiyle
+  // tek başına yer alır. Bu fonksiyon iki kere (biri Sell Out ayları, biri Modern Kanal ayları
+  // için) çağrılır. "kapsananAylar", bu ürün için GERÇEKTEN veri toplanan ayların birleşimidir
+  // (o ürünün geldiği kaynağın arşivlediği aylar) — birleşik "sonAylar"dan FARKLI olabilir:
+  // ör. bir ürün sadece Modern Kanal'dan satılıyorsa ve Modern Kanal yalnızca 2 ay arşivliyse,
+  // bu ürünün kapsananAylar'ı sadece o 2 ay olur, Sell Out'un 6 ayı değil. Bu ayrım kritiktir:
+  // "gerçek günlük istatistik" (stokGunGercekGunlukIstatistik) hesabı, veri toplanmamış ayları
+  // yanlışlıkla "0 satış günü" saymasın diye bu ürüne özgü pencereyi kullanır.
+  function isle(arsiv, aylar){
+    aylar.forEach(ayKey=>{
+      const rapor = arsiv[ayKey];
+      if(!rapor || !Array.isArray(rapor.malzemeler)) return;
+      rapor.malzemeler.forEach(u=>{
+        if(!urunMap.has(u.kod)) urunMap.set(u.kod, {kod:u.kod, urunAdi:u.urunAdi, marka:u.marka||'Diğer', toplamLitre6Ay:0, toplamMiktar6Ay:0, gunler:[], aktifAylar:new Set(), kapsananAylar:new Set()});
+        const hedef = urunMap.get(u.kod);
+        if(u.urunAdi && (!hedef.urunAdi || hedef.urunAdi===u.kod)) hedef.urunAdi = u.urunAdi;
+        if(u.marka && (!hedef.marka || hedef.marka==='Diğer')) hedef.marka = u.marka;
+        hedef.kapsananAylar.add(ayKey);
+        let buAyToplamLitre = 0;
+        (u.gunler||[]).forEach(g=>{
+          hedef.toplamLitre6Ay += g.litre;
+          hedef.toplamMiktar6Ay += (g.miktar||0);
+          hedef.gunler.push(g);
+          buAyToplamLitre += g.litre;
+        });
+        if(buAyToplamLitre>0) hedef.aktifAylar.add(ayKey);
+      });
+    });
+  }
+  isle(sellOutArsiv, sellOutAylar);
+  isle(modernKanalArsiv, modernKanalAylar);
+
+  const urunler = Array.from(urunMap.values()).map(u=>{
+    const aktifAylarSirali = Array.from(u.aktifAylar).sort();
+    const kapsananAylarSirali = Array.from(u.kapsananAylar).sort();
+    const ilkSatisAy = aktifAylarSirali[0] || null;
+    const aktifAySayisi = aktifAylarSirali.length;
+    // "Yeni ürün": incelenen pencerenin (sonAylar) İLK ayında satışı yokken, sonraki bir ayda
+    // satışa başlamış ürün — yani portföye pencere içinde sonradan girmiş demektir. Pencerenin
+    // ilk ayından beri satılan ama arada satışsız ayı olan (mevsimsel/düzensiz) ürünler bu
+    // etiketi almaz, ama onlar için de aktifAySayisi zaten doğru şekilde düşük çıkar.
+    // "Yeni ürün" tespiti de ürünün KENDİ kapsananAylar penceresinin ilk ayına göre yapılır —
+    // birleşik sonAylar[0]'a göre değil. Aksi halde sadece Modern Kanal'dan (daha kısa/farklı
+    // takvimde arşivlenen) satılan aktif bir ürün, Sell Out'un daha eski bir ayı yüzünden
+    // haksız yere "yeni ürün" damgalanabilirdi.
+    const yeniUrun = !!(ilkSatisAy && kapsananAylarSirali.length && ilkSatisAy !== kapsananAylarSirali[0]);
+    let veriGuveni = 'Yüksek';
+    if(aktifAySayisi<=1) veriGuveni='Düşük';
+    else if(aktifAySayisi<=3) veriGuveni='Orta';
+    return Object.assign({}, u, {aktifAylar:aktifAylarSirali, kapsananAylar:kapsananAylarSirali, ilkSatisAy, aktifAySayisi, yeniUrun, veriGuveni});
+  });
+  return {sonAylar, urunler};
+}
+
+// Bir marka (mal grubu) için, o markadaki TÜM ürünlerin gün dizilerini birleştirip tek bir
+// "marka geneli haftalık dağılım şekli" (4 dilimin toplam litre içindeki oranı) çıkarır.
+// Yeni/az geçmişli ürünlerde kendi haftalık deseni (tek bir ayın gürültüsünden ibaret
+// olabilir) yerine, aynı markadaki daha köklü ürünlerin ORTAK deseni referans alınarak daha
+// istikrarlı bir tahmin elde edilir (bkz. stokGunOwnVeMarkaShapeKarisimi).
+function stokGunMarkaHaftaSekilleri(urunler){
+  const markaDilim = new Map(); // marka -> [4 dilim toplam litre]
+  urunler.forEach(u=>{
+    const d = stokGunHaftaDagilimi(u.gunler);
+    if(!markaDilim.has(u.marka)) markaDilim.set(u.marka, [0,0,0,0]);
+    const acc = markaDilim.get(u.marka);
+    for(let i=0;i<4;i++) acc[i]+=d.litre[i];
+  });
+  const markaSekil = new Map(); // marka -> [4 dilim ORAN (toplam=1)]
+  markaDilim.forEach((dilim, marka)=>{
+    const toplam = dilim.reduce((a,b)=>a+b,0);
+    markaSekil.set(marka, toplam>0 ? dilim.map(v=>v/toplam) : [0.25,0.25,0.25,0.25]);
+  });
+  return markaSekil;
+}
+
+// Bir ürünün KENDİ haftalık dağılım şeklini, veri güvenine göre markasının genel şekliyle
+// harmanlar. aktifAySayisi arttıkça kendi verisine olan güven artar (3 aya ulaşınca %100 kendi
+// verisi kullanılır); az geçmişli/yeni ürünlerde marka deseni ağırlık kazanarak tahmini
+// gürültüden (tek bir ayın rastgele dalgalanmasından) korur. Dönüş: bu ürünün toplamLitre6Ay'ı
+// üzerinden ölçeklenmiş, harmanlanmış 4 dilimlik litre dizisi (stokGunHaftaDagilimi ile aynı
+// formatta) — böylece geri kalan hesap akışı değişmeden kullanılabilir.
+function stokGunOwnVeMarkaShapeKarisimi(u, markaSekilleri){
+  const ownDilim = stokGunHaftaDagilimi(u.gunler);
+  const toplam = u.toplamLitre6Ay || ownDilim.litre.reduce((a,b)=>a+b,0);
+  if(toplam<=0) return ownDilim;
+  const ownSekil = ownDilim.litre.map(v=>v/toplam);
+  const markaSekil = markaSekilleri.get(u.marka) || [0.25,0.25,0.25,0.25];
+  const kendiAgirlik = Math.min(1, (u.aktifAySayisi||0)/3);
+  const harmanSekil = ownSekil.map((v,i)=> kendiAgirlik*v + (1-kendiAgirlik)*markaSekil[i]);
+  // ÖNEMLİ DÜZELTME: miktar dizisi önceden harmanlanmadan (ham ownDilim.miktar) dönüyordu —
+  // litre dizisi marka şekliyle harmanlanmışken miktar harmanlanmamış kalması, ikisinin
+  // birbirine göre tutarsız (farklı oranlarda ölçeklenmiş) olmasına yol açıyordu. Artık miktar
+  // da AYNI dilim bazında, litredeki değişim oranıyla ölçekleniyor — böylece iki dizi arasındaki
+  // litre/miktar oranı her dilimde tutarlı kalır.
+  const harmanMiktar = ownDilim.litre.map((ownLitreDeger, i)=>{
+    const yeniLitre = harmanSekil[i]*toplam;
+    const oran = ownLitreDeger>0 ? (yeniLitre/ownLitreDeger) : 1;
+    return (ownDilim.miktar[i]||0) * oran;
+  });
+  return {litre: harmanSekil.map(v=>v*toplam), miktar: harmanMiktar};
+}
+
+// Bir ürünün gün dizisini AY bazında toplayıp {ayKey -> litre} haritasına çevirir. Aşağıdaki
+// üç fonksiyonun (ağırlıklı ortalama, değişkenlik katsayısı, ölü ürün tespiti) ortak girdisi.
+function stokGunAylikOzet(u){
+  const aylikLitre = new Map();
+  (u.gunler||[]).forEach(g=>{
+    const ayKey = g.gunKey.slice(0,7);
+    aylikLitre.set(ayKey, (aylikLitre.get(ayKey)||0)+g.litre);
+  });
+  return aylikLitre;
+}
+
+// sonAylar dizisindeki her aya, sıradaki konumuna göre artan bir ağırlık atar (en eski ay=1,
+// en güncel ay=sonAylar.length). ÖNEMLİ: Bu uygulamanın gerçek verisinde 6 ayda toplam satış
+// hacmi ~4 katına çıkmış (Ocak 144binL → Haziran 600binL) — düz ortalama bu güncel ivmeyi
+// maskeliyordu. Doğrusal artan ağırlık, güncel aylara daha fazla pay vererek hem "pay" hem
+// "haftalık hız" hesabını şu anki satış temposuna daha yakın tutar.
+function stokGunAyAgirlikHaritasi(sonAylar){
+  const harita = new Map();
+  sonAylar.forEach((ay,idx)=> harita.set(ay, idx+1));
+  return harita;
+}
+
+// Bir ürünün aylık litrelerinin AĞIRLIKLI ortalamasını döndürür (düz ortalama yerine) — yalnızca
+// ürünün gerçekten aktif olduğu aylar (aylikLitre içindeki) ve o ayların ağırlıkları kullanılır;
+// böylece hem "yeni ürün" (az ay) hem "trend" (güncel aya yakınlık) etkisi birlikte hesaba katılır.
+function stokGunAgirlikliAylikOrtalama(aylikLitre, ayAgirlik){
+  let toplamAgirlikliLitre=0, toplamAgirlik=0;
+  aylikLitre.forEach((litre, ayKey)=>{
+    const w = ayAgirlik.get(ayKey) || 1;
+    toplamAgirlikliLitre += litre*w;
+    toplamAgirlik += w;
+  });
+  return toplamAgirlik>0 ? toplamAgirlikliLitre/toplamAgirlik : 0;
+}
+
+// Ürünün ay-ay satış hacmindeki OYNAKLIĞI (değişkenlik katsayısı = std sapma / ortalama)
+// ölçer — güvenlik stoğu payının temeli. Tek aylık geçmişte gerçek varyans hesaplanamayacağı
+// için, yeni/az geçmişli ürünlerde temkinli bir varsayılan (0.35) kullanılır. Üst sınır 1.5
+// ile sınırlanır ki aşırı uç bir ay (ör. tek seferlik dev sipariş) hesabı komple bozmasın.
+// GERÇEK GÜNLÜK DEĞİŞKENLİK: u.gunler'daki her kayıt bir SATIŞ OLAN gün — satış olmayan
+// günler dizide hiç yer almıyor (o gün için satır üretilmediği için). Bu yüzden doğrudan
+// gunler.map(g=>g.litre) üzerinden std sapma almak YANLIŞ olur: satışsız günleri (=0 litre)
+// yok sayıp ortalamayı olduğundan yüksek, değişkenliği olduğundan düşük gösterir. Doğrusu,
+// pencere içindeki (sonAylar) HER takvim gününü (satışlı/satışsız fark etmeksizin) sayıp
+// eksik günleri 0 kabul ederek gerçek bir günlük seri oluşturmak. Dönüş: {ortalama, sigma,
+// gunSayisi, cv} — cv, mevcut (aylık-türetilmiş) yaklaşık değerin yerine geçecek gerçek değer.
+function stokGunGercekGunlukIstatistik(gunler, sonAylar){
+  if(!gunler || !gunler.length || !sonAylar || !sonAylar.length) return {ortalama:0, sigma:0, gunSayisi:0, cv:null};
+  const litreMap = new Map(gunler.map(g=>[g.gunKey, g.litre]));
+  const seri = [];
+  sonAylar.forEach(ayKey=>{
+    const [yil, ay] = ayKey.split('-').map(Number);
+    const ayinGunSayisi = new Date(yil, ay, 0).getDate();
+    for(let gun=1; gun<=ayinGunSayisi; gun++){
+      const gk = ayKey + '-' + String(gun).padStart(2,'0');
+      seri.push(litreMap.get(gk) || 0);
+    }
+  });
+  const n = seri.length;
+  if(n<2) return {ortalama:0, sigma:0, gunSayisi:n, cv:null};
+  const ortalama = seri.reduce((a,b)=>a+b,0)/n;
+  if(ortalama<=0) return {ortalama:0, sigma:0, gunSayisi:n, cv:null};
+  const varyans = seri.reduce((a,v)=>a+Math.pow(v-ortalama,2),0)/n;
+  const sigma = Math.sqrt(varyans);
+  return {ortalama, sigma, gunSayisi:n, cv: sigma/ortalama};
+}
+
+function stokGunDegiskenlikKatsayisi(aylikLitre){
+  const degerler = Array.from(aylikLitre.values());
+  if(degerler.length<2) return 0.35;
+  const ort = degerler.reduce((a,b)=>a+b,0)/degerler.length;
+  if(ort<=0) return 0.35;
+  const varyans = degerler.reduce((a,v)=>a+Math.pow(v-ort,2),0)/degerler.length;
+  return Math.min(1.5, Math.sqrt(varyans)/ort);
+}
+
+// "Ölü ürün": geçmişte satışı olduğu halde, incelenen pencerenin SON 1-2 ayında hiç satışı
+// olmayan ürün — "yeni ürün"ün tam tersi bir durum. Bu ürünler artık hedef dağıtımından
+// (pay) çıkarılır — geçmiş hacimleri güncel talebi temsil etmediği için onlara sipariş hedefi
+// üretmek yanlış olur; yine de tablo'da eski (organik) hızlarıyla referans amaçlı gösterilir.
+function stokGunOluUrunMu(aylikLitre, sonAylar){
+  if(!aylikLitre.size || !sonAylar.length) return false;
+  const sonN = sonAylar.slice(-Math.min(2, sonAylar.length));
+  return sonN.every(ay => !(aylikLitre.get(ay) > 0));
+}
+
+// Bir ürünün gün dizisinden (birden fazla ayı kapsayabilir), en yoğun haftalık dilimi ve o
+// dilimin günlük ortalama hızını bulur. Her gün kendi ayının dilim sınırlarına göre
+// gruplanır (ör. Mayıs'ın 3. haftası ile Haziran'ın 3. haftası ayrı dilimlerdir).
+function stokGunBugununDilimIndex(){
+  const bugun = turkiyeBugun();
+  const gunNo = bugun.getDate();
+  const ayKey = dateKeyLocal(bugun).slice(0,7);
+  const dilimler = stokGunHaftaDilimleri(ayKey);
+  const idx = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+  return idx>=0 ? idx : 0;
+}
+
+// Bir urunun 6 aylik gun dizisini, AY BAGIMSIZ 4 hafta dilimine (0:1-7, 1:8-14, 2:15-21,
+// 3:22-ay sonu) gore toplar - her ay kendi gun sayisina gore 4. dilime katkida bulunur ama
+// hepsi tek bir "hafta 0/1/2/3" toplaminda birlesir. Boylece "6 ayin toplaminin yuzde kaci
+// hangi haftaya ait" sorusu ay ay degil, TUM 6 ay uzerinden tek bir dagilim olarak cikar.
+function stokGunHaftaDagilimi(gunler){
+  const litreDilim = [0,0,0,0];
+  const miktarDilim = [0,0,0,0];
+  gunler.forEach(g=>{
+    const ayKey = g.gunKey.slice(0,7);
+    const gunNo = Number(g.gunKey.slice(8,10));
+    const dilimler = stokGunHaftaDilimleri(ayKey);
+    const idx = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+    if(idx>=0){
+      litreDilim[idx] += g.litre;
+      miktarDilim[idx] += (g.miktar||0);
+    }
+  });
+  return {litre:litreDilim, miktar:miktarDilim};
+}
+
+// Bugünden başlayarak, anlık stoğu GÜN GÜN düşüren simülasyon: her gün, o günün ait olduğu
+// hafta diliminin (1-7/8-14/15-21/22-ay sonu) KENDİ günlük hızıyla tüketilir — haftalar
+// arası geçişte hız değişir (ör. bugün 3. haftanın son 2 günündeyse önce 3. haftanın hızıyla,
+// sonra 4. haftaya geçince 4. haftanın hızıyla devam eder). Stok sıfıra düştüğü gün sayısı
+// (kesirli kısım dahil) döndürülür. haftaGunlukHizlari: [hafta0Hız, hafta1Hız, hafta2Hız, hafta3Hız]
+// (litre/gün, her biri kendi haftasının kalan-hedefe göre ölçeklenmiş hızı).
+// esikLitre (varsayılan 0): simülasyonun "bittiği" kabul edilen stok seviyesi. 0 ile
+// çağrıldığında davranış eskisiyle birebir aynıdır (stok tamamen tükenene kadar sayar).
+// Pozitif bir değer verilirse (örn. güvenlik stoğu litresi), stok o eşiğin ALTINA düştüğü
+// gün sayısını döndürür — yani "kaç gün sonra yeniden sipariş noktasına düşer" sorusuna
+// cevap verir (bkz. computeStokGunRaporu'daki stokGunuGuvenlikli hesabı).
+function stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari, maksGunSiniri, esikLitre){
+  esikLitre = esikLitre || 0;
+  if(anlikStokLitre==null || anlikStokLitre<=esikLitre) return 0;
+  let kalanStok = anlikStokLitre;
+  let gun = turkiyeBugun();
+  const siniir = maksGunSiniri || 400; // sonsuz döngüye karşı güvenlik (stok hiç bitmiyorsa)
+  for(let i=0; i<siniir; i++){
+    const ayKey = dateKeyLocal(gun).slice(0,7);
+    const gunNo = gun.getDate();
+    const dilimler = stokGunHaftaDilimleri(ayKey);
+    const dilimIndex = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+    // Haftalık dilim hızı, o GÜNE ÖZEL takvim etkisiyle (tatil/arife/kampanya) ölçeklenir —
+    // bkz. STOK_GUN_TAKVIM_ETKISI_2026. Böylece örn. bir bayram haftasının ortasındaki gün,
+    // haftanın geri kalanından farklı (çok daha düşük) bir hızla tüketilir.
+    const gunlukHiz = (haftaGunlukHizlari[dilimIndex>=0?dilimIndex:0] || 0) * stokGunTakvimEtkisi(gun);
+    if(gunlukHiz<=0){
+      // Bu haftanın hızı sıfırsa (o dilimde hiç geçmiş satış yoksa), o günü es geçip bir
+      // sonraki güne devam edilir — sıfıra bölme veya sonsuz döngü oluşmaz.
+      gun = new Date(gun.getTime()+86400000);
+      continue;
+    }
+    if(kalanStok - gunlukHiz <= esikLitre){
+      // Stok bu günün ortasında eşiğe (varsayılan: sıfır) iniyor — kesirli gün olarak ekle.
+      return i + ((kalanStok-esikLitre)/gunlukHiz);
+    }
+    kalanStok -= gunlukHiz;
+    gun = new Date(gun.getTime()+86400000);
+  }
+  return siniir; // 400 günden fazla yetiyorsa (pratik olarak "tükenmiyor" demek), tavan değer.
+}
+
+// Ürün×temsilci risk detayındaki temsilci adını (Sell Out kaynaklı, "Satış Temsilcisi Adı")
+// Tahsilat Karnesi'ndeki temsilci adıyla (Cari/Aging kaynaklı, m.temsilci) eşleştirir. İki
+// kaynak farklı dosyalardan geldiği için birebir aynı yazılmayabilir (büyük/küçük harf, fazla
+// boşluk vb.) — bu yüzden önce tam eşleşme, olmazsa uygulamanın zaten kullandığı
+// normalizeAdSoyad standardıyla (bkz. getSahaMuduru) karşılaştırma yapılır.
+function karneTemsilciGerceklesmeBul(temsilciAdi){
+  if(!state.karneTemsilciMap || !state.karneTemsilciMap.size || !temsilciAdi) return null;
+  const direkt = state.karneTemsilciMap.get(temsilciAdi);
+  if(direkt) return direkt.gerceklesme;
+  const hedefKey = normalizeAdSoyad(temsilciAdi);
+  for(const [k,v] of state.karneTemsilciMap.entries()){
+    if(normalizeAdSoyad(k)===hedefKey) return v.gerceklesme;
+  }
+  return null;
+}
+
+function computeStokGunRaporu(){
+  const {sonAylar, urunler} = stokGunUrunVerileriniTopla();
+  if(!urunler.length || !state.malzemelerStok || !state.malzemelerStok.size){
+    return {yok:true, sonAylar};
+  }
+  const toplamLitre6Ay = urunler.reduce((a,u)=>a+u.toplamLitre6Ay, 0);
+  if(toplamLitre6Ay<=0) return {yok:true, sonAylar};
+
+  // ÖNEMLİ DÜZELTME 1 (yeni ürün / kısmi geçmiş): "pay" eskiden doğrudan 6 aylık TOPLAM litre
+  // üzerinden hesaplanıyordu — ama 6 ayın tamamında satan köklü bir ürün ile, pencereye
+  // sonradan girip sadece 1 ayda satan yeni bir ürün aynı havuzda karşılaştırıldığında, yeni
+  // ürünün toplamı sırf daha az aya yayıldığı için küçük çıkıyor ve payı olduğundan düşük
+  // hesaplanıyordu.
+  // ÖNEMLİ DÜZELTME 2 (trend/ivme): Ayrıca düz ortalama, aylar arası büyük hacim değişimini
+  // (bu veri setinde 6 ayda toplam satış ~4 katına çıkmış) maskeliyordu — eski/yeni ay farkı
+  // gözetmeden eşit ağırlıklandırıyordu. Artık her ürünün aktif olduğu ayların litresi,
+  // GÜNCELE YAKINLIĞA göre ağırlıklandırılmış ortalamayla birleştiriliyor (bkz.
+  // stokGunAyAgirlikHaritasi/stokGunAgirlikliAylikOrtalama) — hem "az ay" hem "eski ay"
+  // etkisi aynı anda düzeltilmiş oluyor.
+  const ayAgirlik = stokGunAyAgirlikHaritasi(sonAylar);
+  const urunEk = urunler.map(u=>{
+    const aylikLitre = stokGunAylikOzet(u);
+    const agirlikliOrtalama = stokGunAgirlikliAylikOrtalama(aylikLitre, ayAgirlik);
+    const cv = stokGunDegiskenlikKatsayisi(aylikLitre);
+    // Gerçek günlük satış verisinden (aylık ortalamadan türetilmiş yaklaşık cv YERİNE) doğrudan
+    // ölçülmüş değişkenlik katsayısı — bkz. stokGunGercekGunlukIstatistik. Yeterli veri yoksa
+    // (gercekGunlukCV.cv==null) aşağıda güvenlik stoğu hesabı aylık cv'ye geri düşer.
+    // ÖNEMLİ DÜZELTME (farklı arşivleme takvimi): "sonAylar" iki kanalın (Sell Out + Modern
+    // Kanal) arşivlenen aylarının BİRLEŞİMİdir — ama bir ürün sadece TEK bir kanaldan
+    // satılıyorsa ve o kanal diğerinden daha az ay arşivlemişse, birleşik pencereyi kullanmak
+    // veri toplanmamış ayları yanlışlıkla "0 satış günü" sayardı (gerçek hızı olduğundan çok
+    // düşük gösterirdi). Bunun yerine, bu ürün için GERÇEKTEN veri toplanan aylar (u.kapsananAylar)
+    // kullanılır.
+    const gercekGunlukIstatistik = stokGunGercekGunlukIstatistik(u.gunler, u.kapsananAylar);
+    // ÖNEMLİ DÜZELTME 3 (ölü ürün): "yeni ürün"ün tam tersi — son 1-2 ayda hiç satmayan ama
+    // geçmişte satmış ürünler artık hedef dağıtımından (pay) TAMAMEN çıkarılır; eski
+    // hacimleriyle sipariş hedefi üretmek yanlış olur. Yine de tabloda eski (organik)
+    // hızlarıyla referans amaçlı gösterilmeye devam ederler (bkz. aşağıdaki olcekOrani dalı).
+    // Aynı düzeltme burada da geçerli: "son 2 ay" birleşik sonAylar üzerinden değil, bu
+    // ürünün GERÇEKTEN veri toplanan aylarının (kapsananAylar) son 2'si üzerinden bakılmalı —
+    // aksi halde farklı arşivleme takvimine sahip bir kanaldan gelen aktif bir ürün, diğer
+    // kanalın arşivlediği ama bu ürünün hiç var olmadığı sonraki aylar yüzünden yanlışlıkla
+    // "ölü ürün" damgalanıp hedef dağıtımından haksız yere çıkarılabilirdi.
+    const oluUrun = stokGunOluUrunMu(aylikLitre, u.kapsananAylar);
+    return Object.assign({}, u, {aylikLitre, agirlikliOrtalama, cv, gunlukCV: gercekGunlukIstatistik.cv, oluUrun});
+  });
+  const toplamAgirlikliOrtalama = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalama), 0);
+  const markaSekilleri = stokGunMarkaHaftaSekilleri(urunler);
+
+  const guncelRapor = state.sellOutReport ? applySellOutHedef(state.sellOutReport, state.sellOutHedef) : null;
+  // ÖNEMLİ DÜZELTME: Önceden sellOutKanalOzeti'nin acikKalan/kapaliKalan alanları üzerinden
+  // (toplamLitre + kalan) formülüyle hedefi türetiyorduk — ama hedef hiç girilmemişse
+  // (acikHedef=kapaliHedef=0), Math.max(0, 0-satış) sıfıra düştüğü için formül "hedef =
+  // mevcut satış" gibi yanlış bir sonuç veriyordu. Artık hedef doğrudan temsilcilerin
+  // acikHedef/kapaliHedef alanlarının toplamından okunuyor — hedef gerçekten girilmemişse
+  // 0 kalır ve rapor "hedef girilmemiş" boş durumunu gösterir, mevcut satışı hedef sanmaz.
+  const ustYonetimHedefi = (guncelRapor && Array.isArray(guncelRapor.temsilciler)
+    ? guncelRapor.temsilciler.reduce((a,t)=> a + (t.acikHedef||0) + (t.kapaliHedef||0), 0)
+    : 0) + (state.modernKanalHedef||0);
+
+  // Bu ayın GÜNCEL/CANLI Sell Out (+ Modern Kanal) verisinden, ürün (Malzeme/Ürün Kodu)
+  // bazlı bu ay şimdiye kadar satılan litre çıkarılır — "Gerekli Litre" artık hedefin TAMAMI
+  // değil, bu ana kadar satılan kısım düşüldükten sonra KALAN hedef üzerinden hesaplanır
+  // (ör. hedefin %70'i zaten satıldıysa, kalan %30'a göre günlük hız/stok günü belirlenir).
+  // Aynı ürün her iki kanaldan da satılıyorsa (aynı kod), ikisinin bu ayki satışı TOPLANIR.
+  const buAySatilanMap = new Map();
+  if(guncelRapor && Array.isArray(guncelRapor.malzemeler)){
+    guncelRapor.malzemeler.forEach(u=>{
+      const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
+      buAySatilanMap.set(u.kod, (buAySatilanMap.get(u.kod)||0) + toplam);
+    });
+  }
+  if(state.modernKanalReport && Array.isArray(state.modernKanalReport.malzemeler)){
+    state.modernKanalReport.malzemeler.forEach(u=>{
+      const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
+      buAySatilanMap.set(u.kod, (buAySatilanMap.get(u.kod)||0) + toplam);
+    });
+  }
+
+  // Ürün kodu -> bu ayı en çok satan temsilciler (litre payına göre) — ürün×temsilci risk
+  // detayının ham girdisi, sadece BU AYIN canlı Sell Out verisinden (guncelRapor) gelir.
+  const malzemeTemsilciPayMap = new Map();
+  if(guncelRapor && Array.isArray(guncelRapor.malzemeler)){
+    guncelRapor.malzemeler.forEach(u=> malzemeTemsilciPayMap.set(u.kod, u.temsilciPay||[]));
+  }
+
+  const bugunHaftaIndex = stokGunBugununDilimIndex();
+  const haftaEtiketleri = ['1-7','8-14','15-21','22-ay sonu'];
+
+  const rows = urunEk.map(u=>{
+    const pay = (!u.oluUrun && toplamAgirlikliOrtalama>0) ? (u.agirlikliOrtalama / toplamAgirlikliOrtalama) : 0;
+    const toplamGerekliLitre = (!u.oluUrun && ustYonetimHedefi>0) ? ustYonetimHedefi * pay : null;
+    // Bu ürünün bu ay şimdiye kadar gerçekleşen satışı (güncel Sell Out'tan), toplam
+    // gerekli litreden düşülerek KALAN gerekli litre bulunur — negatife düşmez (hedef
+    // zaten aşılmışsa 0 kalır, "artık bu üründen almanıza gerek yok" anlamına gelir).
+    const buAySatilan = buAySatilanMap.get(u.kod) || 0;
+    const gerekliLitre = toplamGerekliLitre!=null ? Math.max(0, toplamGerekliLitre - buAySatilan) : null;
+    // Litre/Miktar oranı (bir "miktar" biriminin kaç litreye denk geldiği) — Sell Out
+    // verisindeki aynı satırlarda hem Litre hem Miktar birlikte geldiği için, 6 aylık
+    // toplamlardan çıkarılan bu oran ürüne özgü sabit bir çevrim katsayısı olarak kullanılır.
+    const litreMiktarOrani = u.toplamMiktar6Ay>0 ? (u.toplamLitre6Ay/u.toplamMiktar6Ay) : null;
+    const gerekliMiktar = (gerekliLitre!=null && litreMiktarOrani>0) ? (gerekliLitre/litreMiktarOrani) : null;
+
+    // Bu urunun 6 aylik toplaminin, 4 hafta dilimine gore yuzdesel dagilimi. Bugun hangi
+    // dilimdeysek onu ayri gostermek yerine, ARTIK T\u00dcM 4 haftanin kendi gunluk hizi
+    // ayri ayri hesaplaniyor - cunku stok tukenene kadar gecen sure genelde birden fazla
+    // haftaya yayiliyor (or. bugun 3. haftanin son 2 gunundeyse, stok o 2 gunden sonra
+    // 4. haftaya gecip FARKLI bir hizla tukenmeye devam ediyor).
+    // Az geçmişli/yeni ürünlerde (aktifAySayisi<3) kendi haftalık deseni tek başına
+    // gürültülü olabileceğinden, markanın genel deseniyle harmanlanmış hali kullanılır
+    // (bkz. stokGunOwnVeMarkaShapeKarisimi) — 3+ aylık geçmişi olan ürünlerde bu, kendi
+    // gerçek deseniyle pratikte aynı sonucu verir (kendiAgirlik=1).
+    const haftaDagilimi = stokGunOwnVeMarkaShapeKarisimi(u, markaSekilleri);
+    // Her haftanin litresi, GECMIS 6 aylik gercek satis yerine YENI (KALAN) hedefe gore
+    // olceklendirilir: olcek orani = (bu urunun KALAN hedefteki payi) / (bu urunun gecmis
+    // 6 aylik toplami). Kalan hedef ne kadar buyuk/kucukse, T\u00dcM haftalarin hizi da o
+    // oranda buyur/kuculur - haftalik dagilim SEKLINI (3. hafta yine en yogun kalir) koruyarak.
+    // ÖLÜ ÜRÜN istisnası: hedefe dahil olmadığı için (gerekliLitre=null) olcekOrani=1 kalır —
+    // yani hedefe göre büyütülüp küçültülmez, ürünün KENDİ eski (organik) hızıyla gösterilir.
+    // Bu sayede stok günü "artık pratikte tükenmiyor" gibi yapay bir değer değil, "eski
+    // hızıyla devam etseydi kaç günde biterdi" gibi anlamlı bir referans değer olur.
+    const olcekOrani = (!u.oluUrun && gerekliLitre!=null && u.toplamLitre6Ay>0) ? (gerekliLitre/u.toplamLitre6Ay) : 1;
+    const haftaGunlukHizlari = haftaDagilimi.litre.map(litre => (litre*olcekOrani)/7);
+    const gunlukHiz = haftaGunlukHizlari[bugunHaftaIndex] || 0; // tabloda "bugünün hızı" olarak gösterilmeye devam eder
+    const gunlukMiktar = litreMiktarOrani>0 ? (gunlukHiz/litreMiktarOrani) : null;
+    // ÖNEMLİ DÜZELTME: Malzemeler dosyasındaki "Tahditsiz Kullanılabilir" değeri MİKTAR
+    // (koli/adet) cinsindendir, litre değil — bu yüzden doğrudan gunlukHiz'e (litre/gün)
+    // bölmek birim uyuşmazlığı yüzünden anlamsız bir sonuç veriyordu (ör. 1116 miktar / 268
+    // litre-gün). Anlık stok önce litreMiktarOrani ile litreye çevrilip (1116 × 12 = 13.392 L),
+    // ancak öyle günlük litre hızına bölünüyor.
+    const anlikStokMiktar = state.malzemelerStok.get(u.kod);
+    const anlikStokLitre = (anlikStokMiktar!=null && litreMiktarOrani>0) ? (anlikStokMiktar*litreMiktarOrani) : null;
+    const anlikStok = anlikStokMiktar;
+    // STOK GÜNÜ artık tek bir sabit hıza bölünmüyor — bugünden başlayarak GÜN GÜN
+    // düşürülüyor, her gün kendi haftasının hızıyla tüketiliyor (bkz. stokGunSimulasyonuYap).
+    // Böylece stok günü 7'yi aşıp başka bir haftaya taştığında, o sonraki haftanın
+    // (muhtemelen farklı) hızına doğru şekilde geçiş yapılmış olur.
+    const stokGunu = anlikStokLitre!=null ? stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari) : null;
+    // İSTATİSTİKSEL GÜVENLİK STOĞU: SS = Z × σ_D × √LT (bkz. dosya başındaki sabit tanımları).
+    // σ_D artık MÜMKÜN OLDUĞUNDA gerçek gün-gün satış verisinden ölçülüyor (u.gunlukCV, bkz.
+    // stokGunGercekGunlukIstatistik) — aylık toplamlardan türetilen yaklaşık cv SADECE yeterli
+    // günlük veri yoksa (yeni ürün, kısa geçmiş) yedek olarak kullanılır. Ölçülen CV, güncel
+    // (bugünkü) günlük hıza uygulanarak bugünün ölçeğinde bir σ_D elde edilir — böylece hem
+    // "gerçek oynaklık" hem "güncel satış temposu" birlikte yansıtılmış olur.
+    const kullanilanCV = u.gunlukCV!=null ? u.gunlukCV : u.cv;
+    const gunlukCVKaynagi = u.gunlukCV!=null ? 'gerçek günlük veriden ölçüldü' : 'yeterli günlük veri yok, aylık yaklaşık değer kullanıldı';
+    const gunlukHizOrtalamasi = haftaGunlukHizlari.reduce((a,b)=>a+b,0)/4;
+    const sigmaD = gunlukHizOrtalamasi * kullanilanCV;
+    const guvenlikStoguLitre = STOK_GUN_SERVIS_SEVIYESI_Z * sigmaD * Math.sqrt(STOK_GUN_VARSAYILAN_LEAD_TIME_GUN);
+    const stokGunuGuvenlikli = anlikStokLitre!=null
+      ? stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari, null, guvenlikStoguLitre)
+      : null;
+
+    // ÜRÜN×TEMSİLCİ RİSK DETAYI: bu ürünü bu ay en çok satan temsilciler + (varsa) tahsilat
+    // karnesi gerçekleşme yüzdeleri. state.karneTemsilciMap, kullanıcı "Temsilci Karnesi"
+    // sekmesini en az bir kez açtığında dolar (bkz. computeTemsilciKarnesi) — o ana kadar
+    // tahsilatGerceklesme alanı null döner ve arayüzde "tahsilat verisi yok" olarak gösterilir.
+    // NOT: t.pay burada YENİDEN hesaplanmıyor — buildSellOutRaporu'da top-5'e kesilmeden ÖNCE,
+    // ürünün TÜM temsilcileri üzerinden hesaplanmış gerçek pay kullanılıyor (bkz. temsilciPay
+    // tanımı). Sadece burada top-5'ten en çok satan ilk 3'ü gösteriyoruz.
+    const temsilciPay = malzemeTemsilciPayMap.get(u.kod) || [];
+    const temsilciRiskDetayi = temsilciPay.slice(0,3).map(t=>({
+      temsilci: t.ad,
+      pay: t.pay,
+      tahsilatGerceklesme: karneTemsilciGerceklesmeBul(t.ad),
+    }));
+
+    return {
+      kod: u.kod, urunAdi: u.urunAdi, marka: u.marka, pay: pay*100, gerekliLitre, gerekliMiktar,
+      yogunHaftaEtiket: haftaEtiketleri[bugunHaftaIndex] + ' (bugünün dilimi)',
+      gunlukHiz, gunlukMiktar, anlikStok, stokGunu, stokGunuGuvenlikli, guvenlikStoguLitre, gunlukCVKaynagi, cv: u.cv,
+      aktifAySayisi: u.aktifAySayisi, ilkSatisAy: u.ilkSatisAy, yeniUrun: u.yeniUrun, veriGuveni: u.veriGuveni,
+      oluUrun: u.oluUrun, temsilciRiskDetayi,
+    };
+  }).sort((a,b)=>{
+    if(a.stokGunu==null && b.stokGunu==null) return b.pay-a.pay;
+    if(a.stokGunu==null) return 1;
+    if(b.stokGunu==null) return -1;
+    return a.stokGunu-b.stokGunu;
+  });
+
+  return {yok:false, sonAylar, rows, ustYonetimHedefi, toplamLitre6Ay};
+}
+
+function stokGunRenkSeviyesi(stokGunu){
+  if(stokGunu==null) return {renk:'var(--ink-faint)', bg:'var(--line-soft)'};
+  if(stokGunu < 7) return {renk:'var(--danger)', bg:'var(--danger-soft)'};
+  if(stokGunu < 14) return {renk:'var(--warn)', bg:'var(--warn-soft)'};
+  return {renk:'var(--success)', bg:'var(--success-soft)'};
+}
+
+function renderStokGunView(){
+  const bosPanel = document.getElementById('stokGunBosPanel');
+  const bosMesaj = document.getElementById('stokGunBosMesaj');
+  const icerik = document.getElementById('stokGunIcerik');
+  const veri = computeStokGunRaporu();
+
+  if(veri.yok){
+    icerik.style.display = 'none';
+    bosPanel.style.display = 'block';
+    if(!veri.sonAylar || !veri.sonAylar.length){
+      bosMesaj.textContent = 'Bu rapor için önce Geleneksel Kanal sekmesinde en az bir ayı arşivlemeniz gerekir ("Bu Ayı Arşivle" butonu) — arşivlenen her ay burada 6 aya kadar birikir.';
+    } else if(!state.malzemelerStok || !state.malzemelerStok.size){
+      bosMesaj.textContent = 'Sell Out arşiv verisi bulundu (' + veri.sonAylar.length + ' ay) ama Malzemeler dosyası henüz yüklenmedi — yukarıdan yükleyip "Verileri Güncelle"ye basın.';
+    } else {
+      bosMesaj.textContent = 'Arşivlenmiş Sell Out verisinde ürün bazlı litre bilgisi bulunamadı.';
+    }
+    return;
+  }
+
+  bosPanel.style.display = 'none';
+  icerik.style.display = 'block';
+  const hedefUyarisi = veri.ustYonetimHedefi>0
+    ? ''
+    : ' — ⚠️ Bu ay için henüz hiçbir temsilciye Açık/Kapalı Kanal hedefi girilmemiş; "Gerekli Litre" hesaplanamıyor, günlük hız geçmiş gerçek satışa göre (hedefsiz) gösteriliyor.';
+  document.getElementById('stokGunAsOf').textContent = 'Veri kaynağı: Sell Out arşivi (' + veri.sonAylar.length + ' ay: ' + veri.sonAylar.map(ayEtiketi).join(', ') + ') + Malzemeler (anlık stok) — Üst yönetim hedefi: ' + Math.round(veri.ustYonetimHedefi).toLocaleString('tr-TR') + ' L' + hedefUyarisi;
+
+  // Arama kutusu (ürün adı veya kodu, büyük/küçük harf duyarsız — Türkçe İ/ı ayrımı için
+  // toLocaleLowerCase('tr-TR') kullanılıyor, sistemin geri kalanındaki arama kutularıyla tutarlı).
+  state.stokGunTumRows = veri.rows;
+
+  // Mal Grubu (marka) filtre dropdown'ını mevcut ürün listesindeki benzersiz markalarla
+  // doldur — seçili değeri (varsa) korur, listeyi tekrar oluşturunca sıfırlamaz.
+  const markaSel = document.getElementById('stokGunMarkaFilter');
+  if(markaSel){
+    const oncekiSecim = markaSel.value;
+    const markalar = Array.from(new Set(veri.rows.map(r=>r.marka).filter(Boolean))).sort((a,b)=>a.localeCompare(b,'tr'));
+    markaSel.innerHTML = '<option value="">Tüm mal grupları</option>' + markalar.map(m=>`<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join('');
+    if(oncekiSecim && markalar.includes(oncekiSecim)) markaSel.value = oncekiSecim;
+  }
+
+  stokGunKritikUyariGuncelle(veri.rows);
+  stokGunSekmeSayilariniGuncelle(veri.rows);
+  stokGunTabloyuFiltreleyipCiz();
+}
+
+// KRİTİK EŞİK BİLDİRİMİ: stok günü eşiğin altına düşen (ve hedefe dahil, yani ölü olmayan)
+// ürünleri sidebar/tab menüsündeki rozetlerde ve panel üstündeki banner'da gösterir. Gerçek
+// push bildirimi (sekme kapalıyken de ulaşan) sunucu taraflı altyapı gerektirir; burada panel
+// açıkken görünen bir uyarı + tarayıcı izni varsa Notification API kullanılır.
+const STOK_GUN_KRITIK_ESIK_GUN = 7; // stokGunRenkSeviyesi'ndeki kırmızı (danger) eşiğiyle aynı
+let stokGunSonBildirimAnahtari = null; // aynı kritik listesi için tekrar tekrar bildirim göndermemek için
+function stokGunKritikUyariGuncelle(rows){
+  const kritikler = (rows||[]).filter(r => r.stokGunu!=null && r.stokGunu <= STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun)
+    .sort((a,b)=>a.stokGunu-b.stokGunu);
+
+  ['sbbtn-stokGun','tabbtn-stokGun'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(kritikler.length) el.setAttribute('data-badge', kritikler.length>99?'99+':kritikler.length);
+    else el.removeAttribute('data-badge');
+  });
+
+  const banner = document.getElementById('stokGunKritikBanner');
+  if(banner){
+    if(!kritikler.length){
+      banner.innerHTML = '';
+    } else {
+      const ilkUc = kritikler.slice(0,3).map(r=>`${escapeHtml(r.urunAdi)} (${Math.round(r.stokGunu)} gün)`).join(', ');
+      const kalanMetin = kritikler.length>3 ? ` ve ${kritikler.length-3} ürün daha` : '';
+      banner.innerHTML = `<div class="alert-banner" id="stokGunKritikBannerIc" style="margin-bottom:16px;">
+        <div class="alert-banner-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+        <div class="alert-banner-text"><strong>${kritikler.length} ürün kritik stok seviyesinde</strong> (${STOK_GUN_KRITIK_ESIK_GUN} günden az) — ${ilkUc}${kalanMetin}.</div>
+        <div class="alert-banner-cta" id="stokGunKritikGorBtn">Kritik Sekmesini Aç</div>
+      </div>`;
+      document.getElementById('stokGunKritikGorBtn')?.addEventListener('click', ()=> stokGunSekmeDegistir('kritik'));
+    }
+  }
+
+  // Tarayıcı bildirimi: yalnızca kritik liste bir öncekinden FARKLIYSA gönderilir (aynı durum
+  // için panelde kalındığı sürece tekrar tekrar bildirim düşmesin diye).
+  const anahtar = kritikler.map(r=>r.kod).sort().join(',');
+  if(anahtar && anahtar!==stokGunSonBildirimAnahtari && typeof Notification!=='undefined' && Notification.permission==='granted'){
+    try{
+      new Notification(`${kritikler.length} ürün kritik stok seviyesinde`, {
+        body: kritikler.slice(0,5).map(r=>`${r.urunAdi}: ${Math.round(r.stokGunu)} gün`).join('\n'),
+      });
+    }catch(e){ /* bazı ortamlarda Notification kısıtlı olabilir — sessizce yut */ }
+  }
+  stokGunSonBildirimAnahtari = anahtar;
+}
+
+// Sekme başlıklarındaki sayıları (Tümü/Kritik/Yeni/Ölü) güncelle.
+function stokGunSekmeSayilariniGuncelle(rows){
+  const kritikSayi = (rows||[]).filter(r=>r.stokGunu!=null && r.stokGunu<=STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun).length;
+  const yeniSayi = (rows||[]).filter(r=>r.yeniUrun).length;
+  const oluSayi = (rows||[]).filter(r=>r.oluUrun).length;
+  const setTxt = (id, etiket, sayi)=>{ const el=document.getElementById(id); if(el) el.innerHTML = `${etiket} <span class="sekme-count">${sayi}</span>`; };
+  setTxt('stokGunSekmeTumu', 'Tümü', (rows||[]).length);
+  setTxt('stokGunSekmeKritik', `Kritik (<${STOK_GUN_KRITIK_ESIK_GUN} gün)`, kritikSayi);
+  setTxt('stokGunSekmeYeni', 'Yeni Ürünler', yeniSayi);
+  setTxt('stokGunSekmeOlu', 'Ölü Ürünler', oluSayi);
+}
+
+function stokGunSekmeDegistir(sekme){
+  state.stokGunSekme = sekme;
+  document.querySelectorAll('.stokgun-sekme-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.sekme===sekme);
+  });
+  stokGunTabloyuFiltreleyipCiz();
+}
+
+function stokGunTabloyuFiltreleyipCiz(){
+  const rows = state.stokGunTumRows || [];
+  const q = (document.getElementById('stokGunSearchInput')?.value || '').trim().toLocaleLowerCase('tr-TR');
+  const markaFiltre = document.getElementById('stokGunMarkaFilter')?.value || '';
+  const sekme = state.stokGunSekme || 'tumu';
+  let filtreli = rows.filter(r=>{
+    if(q && !(String(r.urunAdi).toLocaleLowerCase('tr-TR').includes(q) || String(r.kod).toLocaleLowerCase('tr-TR').includes(q))) return false;
+    if(markaFiltre && r.marka !== markaFiltre) return false;
+    if(sekme==='kritik' && !(r.stokGunu!=null && r.stokGunu<=STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun)) return false;
+    if(sekme==='yeni' && !r.yeniUrun) return false;
+    if(sekme==='olu' && !r.oluUrun) return false;
+    return true;
+  });
+
+  const {key, dir} = state.stokGunSort;
+  filtreli = filtreli.slice().sort((a,b)=>{
+    const av = a[key], bv = b[key];
+    // null/undefined değerler (hesaplanamayan satırlar) sıralama yönünden bağımsız
+    // olarak HER ZAMAN en sonda kalır — aksi halde "büyükten küçüğe" sıralamada
+    // en üste çıkıp anlamsız görünürlerdi.
+    if(av==null && bv==null) return 0;
+    if(av==null) return 1;
+    if(bv==null) return -1;
+    if(typeof av==='string') return dir * String(av).localeCompare(String(bv), 'tr');
+    return dir * (av - bv);
+  });
+
+  document.getElementById('stokGunTbody').innerHTML = filtreli.map(r=>{
+    const renk = stokGunRenkSeviyesi(r.stokGunu);
+    // Yeni ürün rozeti + veri güveni ipucu: pencere içinde sonradan satışa başlayan ürünler
+    // "Yeni" etiketiyle, az geçmişli (Düşük/Orta güven) ürünler ise gri bir güven notuyla
+    // işaretlenir — kullanıcı bu satırlardaki rakamların daha az veriye dayandığını görür.
+    const yeniRozet = r.yeniUrun ? ' <span title="Bu ürün son 6 aylık pencerede sonradan satışa başladı (ilk satış: '+escapeHtml(ayEtiketi(r.ilkSatisAy)||'')+')" style="display:inline-block;padding:1px 7px;border-radius:100px;font-size:9.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);margin-left:5px;">YENİ</span>' : '';
+    // Ölü ürün rozeti: son 1-2 ayda hiç satışı olmayan ama geçmişte satmış ürünler — bu
+    // satırlarda "Gerekli Litre" bilinçli olarak boş (—) kalır, çünkü artık hedefe dahil
+    // edilmiyor; Stok Gün ise eski (organik) hızıyla referans amaçlı gösterilmeye devam eder.
+    const oluRozet = r.oluUrun ? ' <span title="Son 1-2 ayda satışı yok — hedeften çıkarıldı, Stok Gün eski hızıyla referans amaçlı gösteriliyor" style="display:inline-block;padding:1px 7px;border-radius:100px;font-size:9.5px;font-weight:700;color:#fff;background:var(--danger);margin-left:5px;">ÖLÜ ÜRÜN</span>' : '';
+    const guvenRenk = r.veriGuveni==='Düşük' ? 'var(--danger)' : (r.veriGuveni==='Orta' ? 'var(--warn)' : 'var(--ink-faint)');
+    // Güvenlik stoğu ipucu: Z×σ×√LT formülüyle hesaplanan tampon (bkz. computeStokGunRaporu).
+    // stokGunuGuvenlikli artık "stok ne zaman biter" değil, "stok ne zaman güvenlik stoğu
+    // eşiğinin (guvenlikStoguLitre) altına iner" sorusuna cevap verir — yeniden sipariş noktası.
+    const guvenlikIpucu = (r.guvenlikStoguLitre!=null && r.stokGunuGuvenlikli!=null)
+      ? `%95 servis seviyesi hedefiyle güvenlik stoğu: ${Math.round(r.guvenlikStoguLitre).toLocaleString('tr-TR')} L (${STOK_GUN_VARSAYILAN_LEAD_TIME_GUN} günlük ortalama tedarik süresine göre, değişkenlik ${r.gunlukCVKaynagi}). Stok bu seviyenin altına ${Math.round(r.stokGunuGuvenlikli)} gün sonra iner — yeniden sipariş bu tarihten önce verilmeli.`
+      : 'Güvenlik stoğu hesaplanamadı';
+    // Ürün×temsilci risk detayı: bu ürünü en çok satan temsilciler + tahsilat gerçekleşmesi
+    // (bkz. computeStokGunRaporu / state.karneTemsilciMap). Satır varsa küçük bir genişletme
+    // ikonu gösterilir; tıklanınca detay satırı açılır/kapanır (bkz. delegated click listener).
+    const riskVarMi = r.temsilciRiskDetayi && r.temsilciRiskDetayi.length>0;
+    const acikMi = state.stokGunAcikRiskSatirlar.has(r.kod);
+    const riskToggle = riskVarMi
+      ? ` <button type="button" class="stokgun-risk-toggle" data-risk-kod="${escapeHtml(r.kod)}" title="Bu ürünü en çok satan temsilciler ve tahsilat performansları"><i class="fa-solid fa-chevron-${acikMi?'up':'down'}" aria-hidden="true"></i> Kim satıyor?</button>`
+      : '';
+    const anaSatir = `<tr class="data-row">
+      <td>${escapeHtml(r.kod)}</td>
+      <td>${escapeHtml(r.urunAdi)}${yeniRozet}${oluRozet}${riskToggle}</td>
+      <td class="num">${r.anlikStok!=null ? r.anlikStok.toLocaleString('tr-TR') : '—'}</td>
+      <td class="num">%${r.pay.toFixed(1).replace('.',',')}</td>
+      <td class="num" title="Veri güveni: ${r.veriGuveni}"><span style="color:${guvenRenk};font-weight:700;">${r.aktifAySayisi}</span> ay</td>
+      <td class="num" title="${escapeHtml(guvenlikIpucu)}"><span style="display:inline-block;padding:3px 10px;border-radius:100px;font-weight:700;color:${renk.renk};background:${renk.bg};">${r.stokGunu!=null ? Math.round(r.stokGunu)+' gün' : '—'}</span></td>
+      <td class="num">${r.gunlukMiktar!=null ? r.gunlukMiktar.toLocaleString('tr-TR',{maximumFractionDigits:1}) + '/gün' : '—'}</td>
+      <td class="num">${LT(r.gunlukHiz)}/gün</td>
+      <td class="num">${r.gerekliMiktar!=null ? r.gerekliMiktar.toLocaleString('tr-TR',{maximumFractionDigits:0}) : '—'}</td>
+      <td class="num">${r.gerekliLitre!=null ? LT(r.gerekliLitre) : '—'}</td>
+    </tr>`;
+    if(!riskVarMi || !acikMi) return anaSatir;
+    const chips = r.temsilciRiskDetayi.map(t=>{
+      const tahsilatSinifi = t.tahsilatGerceklesme==null ? 'tahsilat-yok' : (t.tahsilatGerceklesme<70 ? 'tahsilat-dusuk' : 'tahsilat-iyi');
+      const tahsilatMetin = t.tahsilatGerceklesme==null ? 'tahsilat verisi yok' : `tahsilat %${Math.round(t.tahsilatGerceklesme)}`;
+      return `<span class="stokgun-risk-chip"><b>${escapeHtml(t.temsilci)}</b> <span class="pay">%${t.pay.toFixed(0)} pay</span> · <span class="${tahsilatSinifi}">${tahsilatMetin}</span></span>`;
+    }).join('');
+    const detaySatir = `<tr class="stokgun-risk-detay"><td colspan="10">
+      <div style="font-size:11px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;">Bu ayki satışa göre en çok satan temsilciler</div>
+      ${chips}
+    </td></tr>`;
+    return anaSatir + detaySatir;
+  }).join('') || `<tr><td colspan="10" class="empty-state">${q ? 'Aramanızla eşleşen ürün bulunamadı.' : 'Ürün bulunamadı.'}</td></tr>`;
 }
 
 async function renderSellOutView(){
@@ -11145,7 +12471,7 @@ async function renderSellOutView(){
     if(!baseRapor){
       bosPanel.style.display='block';
       icerik.style.display='none';
-      document.getElementById('sellOutAsOf').textContent = 'Veri kaynağı: Sell Out Raporu (SAPUI5 dışa aktarımı) — henüz yüklenmedi';
+      document.getElementById('sellOutAsOf').textContent = 'Veri kaynağı: Geleneksel Kanal (SAPUI5 dışa aktarımı) — henüz yüklenmedi';
       return;
     }
     report = applySellOutHedef(baseRapor, state.sellOutHedef);
@@ -11251,26 +12577,6 @@ async function renderSellOutView(){
     el.addEventListener('click', e=>e.stopPropagation());
   });
 
-  document.getElementById('sellOutMarkaBar').innerHTML = renderSellOutBarRows(report.markalar, 'litre', LT);
-  document.getElementById('sellOutHacimBar').innerHTML = renderSellOutBarRows(report.hacimSegmentleri, 'net', TL);
-
-  const acikNet = report.kanalNet.acik, kapaliNet = report.kanalNet.kapali;
-  const toplamKanalNet = (acikNet+kapaliNet) || 1;
-  const acikPct = acikNet/toplamKanalNet*100, kapaliPct = kapaliNet/toplamKanalNet*100;
-  document.getElementById('sellOutKanalBar').innerHTML = `
-    <div class="channel-bar">
-      <span style="width:${kapaliPct.toFixed(1)}%;background:var(--accent-deep);">${kapaliPct>=8?('Kapalı Kanal %'+kapaliPct.toFixed(1).replace('.',',')):''}</span>
-      <span style="width:${acikPct.toFixed(1)}%;background:var(--accent);">${acikPct>=8?('Açık Kanal %'+acikPct.toFixed(1).replace('.',',')):''}</span>
-    </div>
-    <div class="legend">
-      <span><i style="background:var(--accent-deep)"></i>Kapalı Kanal — ${TL(kapaliNet)}</span>
-      <span><i style="background:var(--accent)"></i>Açık Kanal — ${TL(acikNet)}</span>
-    </div>`;
-
-  const gt = report.gunlukTrend||[];
-  document.getElementById('sellOutTrendBaslik').textContent = 'Günlük Trend'+(gt.length ? (' — '+gunKeyGosterUzun(gt[Math.max(0,gt.length-14)].gunKey)+' – '+gunKeyGosterUzun(gt[gt.length-1].gunKey)) : '');
-  document.getElementById('sellOutTrendGrid').innerHTML = renderSellOutTrendCharts(gt);
-
   document.querySelectorAll('.hedef-kaydet-btn').forEach(btn=>{
     btn.addEventListener('click', sellOutHedefKaydetHandler);
   });
@@ -11313,6 +12619,355 @@ document.getElementById('sellOutAySelect').addEventListener('change', (e)=>{
   state.sellOutSeciliAy = e.target.value || null;
   renderSellOutView();
 });
+
+// Modern Kanal — Key Account Hedef kaydetme (şifre korumalı, Geleneksel Kanal ile aynı şifre).
+document.getElementById('modernKanalHedefKaydetBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalHedefKaydetBtn');
+  const input = document.getElementById('modernKanalHedefInput');
+  const deger = Number(input.value)||0;
+  const girilenSifre = prompt('Key Account Hedefini değiştirmek için şifreyi girin:');
+  if(girilenSifre===null) return;
+  if(girilenSifre !== FATURA_ARSIV_TEMIZLEME_SIFRESI){
+    alert('Şifre hatalı — hedef kaydedilmedi.');
+    return;
+  }
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '⏳ Kaydediliyor…';
+  try{
+    await modernKanalHedefKaydet(deger);
+    await renderModernKanalView();
+  }catch(err){
+    console.error('Modern Kanal hedefi kaydedilemedi:', err);
+    alert('Hedef kaydedilirken bir hata oluştu: '+err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+document.getElementById('modernKanalAySelect')?.addEventListener('change', (e)=>{
+  state.modernKanalSeciliAy = e.target.value || null;
+  renderModernKanalView();
+});
+
+// Modern Kanal — "Bu Ayı Arşivle": İrsaliye dosyasındaki satırların çoğunluğu hangi aya
+// aitse (İrsaliye Tarihi baz alınarak) arşiv o ayın altına yazılır — Geleneksel Kanal'daki
+// sellOutBaskinAy ile aynı mantık, ama tarih kolonu farklı olduğu için ayrı bir tespit
+// fonksiyonu (irsaliyeBaskinAy) kullanılır.
+function irsaliyeBaskinAy(rows){
+  const ayCounts = new Map();
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    ayCounts.set(ayKey, (ayCounts.get(ayKey)||0) + 1);
+  });
+  let baskinAy = null, maksSayi = 0;
+  ayCounts.forEach((sayi, ay)=>{ if(sayi > maksSayi){ maksSayi = sayi; baskinAy = ay; } });
+  return baskinAy;
+}
+
+document.getElementById('modernKanalArsivleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalArsivleBtn');
+  const baseRapor = state.modernKanalReport;
+  if(!baseRapor){
+    alert('Arşivlenecek bir Modern Kanal raporu yok — önce İrsaliye dosyasını yükleyip "Verileri Güncelle"ye basmanız gerekir.');
+    return;
+  }
+  const hamVeri = state.modernKanalKendiDosya && state.modernKanalKendiDosya.data;
+  const ayKey = (hamVeri && irsaliyeBaskinAy(hamVeri)) || dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const ayEtiket = fmtDate(new Date(ayKey+'-01'));
+  const zatenVar = Object.prototype.hasOwnProperty.call(state.modernKanalArsivCache||{}, ayKey);
+  const soru = zatenVar
+    ? (ayEtiket+' için arşiv zaten var (dosya içeriğine göre bu veri '+ayEtiket+' ayına ait). Üzerine yazılsın mı?')
+    : ('Dosya içeriğine göre bu veri '+ayEtiket+' ayına ait görünüyor. GÜNCEL Modern Kanal verisi bu ayın altına kalıcı olarak arşivlensin mi?');
+  if(!confirm(soru)) return;
+
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '🗄️ Arşivleniyor…';
+  try{
+    const raporSnapshot = Object.assign({}, baseRapor, {
+      hedefAnlikGoruntu: state.modernKanalHedef||0,
+      arsivAyKey: ayKey,
+      arsivZamani: new Date().toISOString(),
+    });
+    state.modernKanalArsivCache = Object.assign({}, state.modernKanalArsivCache, {[ayKey]: raporSnapshot});
+    await saveModernKanalArsivToLocal(state.modernKanalArsivCache);
+    const sonuc = await saveModernKanalArsivAyToCloud(ayKey, raporSnapshot);
+    if(cloudEnabled() && !sonuc.ok){
+      alert('Arşiv cihaza kaydedildi ama buluta yazılamadı: ' + (sonuc.reason||'bilinmeyen hata'));
+    }
+    populateModernKanalAySelect();
+    document.getElementById('modernKanalAySelect').value = ayKey;
+    state.modernKanalSeciliAy = ayKey;
+    await renderModernKanalView();
+  }catch(err){
+    console.error('Modern Kanal arşivleme hatası:', err);
+    alert('Arşivleme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+// Modern Kanal — "Tüm Ayları Toplu Arşivle": yüklenen İrsaliye dosyasındaki TÜM satırları
+// İrsaliye Tarihi'ne göre kaç farklı aya ayrışıyorsa, hepsini TEK TEK kendi ayına arşivler —
+// kullanıcı 6 ayı tek tek yükleyip arşivlemek zorunda kalmadan, 6 aylık tek bir dosyayı bir
+// kerede tüm aylarına dağıtabilir.
+document.getElementById('modernKanalTopluArsivleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalTopluArsivleBtn');
+  const hamVeri = state.modernKanalKendiDosya && state.modernKanalKendiDosya.data;
+  if(!hamVeri || !hamVeri.length){
+    alert('Toplu arşivlemek için önce bir İrsaliye dosyası yükleyip "Verileri Güncelle"ye basmanız gerekir.');
+    return;
+  }
+  const gruplar = irsaliyeAylaraGoreGrupla(hamVeri);
+  const aylar = Array.from(gruplar.keys()).sort();
+  if(!aylar.length){
+    alert('Dosyada geçerli bir İrsaliye Tarihi bulunamadı.');
+    return;
+  }
+  const ayEtiketleri = aylar.map(a=>fmtDate(new Date(a+'-01'))).join(', ');
+  if(!confirm('Dosyadaki veriler şu '+aylar.length+' aya ayrıştırılıp HEPSİ TEK TEK arşivlenecek: '+ayEtiketleri+'. Devam edilsin mi?')) return;
+
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '🗄️ Toplu arşivleniyor…';
+  try{
+    const yeniCache = Object.assign({}, state.modernKanalArsivCache);
+    for(const ayKey of aylar){
+      const ayRows = gruplar.get(ayKey);
+      const ayRapor = buildIrsaliyeReport(ayRows);
+      const raporSnapshot = Object.assign({}, ayRapor, {
+        hedefAnlikGoruntu: state.modernKanalHedef||0,
+        arsivAyKey: ayKey,
+        arsivZamani: new Date().toISOString(),
+      });
+      yeniCache[ayKey] = raporSnapshot;
+      await saveModernKanalArsivAyToCloud(ayKey, raporSnapshot);
+    }
+    state.modernKanalArsivCache = yeniCache;
+    await saveModernKanalArsivToLocal(state.modernKanalArsivCache);
+    populateModernKanalAySelect();
+    await renderModernKanalView();
+    alert(aylar.length+' ay başarıyla arşivlendi: '+ayEtiketleri);
+  }catch(err){
+    console.error('Modern Kanal toplu arşivleme hatası:', err);
+    alert('Toplu arşivleme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+// Sell Out Raporu'nun ana "Raporu Oluştur" akışından TAMAMEN bağımsız kendi yükleme alanı —
+// kullanıcı diğer raporlar (Kalemler, Sipariş vb.) için dosya yüklemeden, yalnızca Sell Out
+// verisini burada seçip "Verileri Güncelle"ye basarak hesaplatabilir. state.files.sellOut'a hiç
+// dokunmaz; doğrudan kendi state.sellOutKendiDosya değişkenini kullanır.
+(function(){
+  const dosyaInput = document.getElementById('sellOutKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('sellOutKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('sellOutKendiGuncelleBtn');
+  const durumEl = document.getElementById('sellOutKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    guncelleBtn.disabled = false;
+    durumEl.textContent = '';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        state.sellOutKendiDosya = {data, ad:file.name};
+      }catch(err){
+        console.error('Sell Out dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.sellOutKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      // Müşteri Master, temsilci/SSM eşlemesi için burada da (ana akıştan bağımsız olarak) tazelenir —
+      // kullanıcı ana ekrana hiç gitmese bile FKNS ve temsilci isimleri doğru gelsin diye.
+      await musteriMasterYenile();
+      const baseRapor = buildSellOutReport(state.sellOutKendiDosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay);
+      await sellOutKaydet(baseRapor);
+      await renderSellOutView();
+      durumEl.textContent = '✓ Güncellendi — ' + fmtDate(new Date());
+    }catch(err){
+      console.error('Sell Out raporu hesaplanamadı:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Modern Kanal (İrsaliye Listesi) sekmesindeki bağımsız dosya yükleme alanı — Geleneksel
+// Kanal ile aynı desende, ana yükleme akışından tamamen ayrı çalışır.
+(function(){
+  const dosyaInput = document.getElementById('modernKanalKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('modernKanalKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('modernKanalKendiGuncelleBtn');
+  const durumEl = document.getElementById('modernKanalKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    guncelleBtn.disabled = false;
+    durumEl.textContent = '';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        state.modernKanalKendiDosya = {data, ad:file.name};
+      }catch(err){
+        console.error('İrsaliye dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.modernKanalKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      const rapor = buildIrsaliyeReport(state.modernKanalKendiDosya.data);
+      await modernKanalKaydet(rapor);
+      await renderModernKanalView();
+      durumEl.textContent = '✓ Güncellendi — ' + fmtDate(new Date());
+    }catch(err){
+      console.error('Modern Kanal raporu hesaplanamadı:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Stok Gün sekmesindeki bağımsız Malzemeler (anlık depo stoğu) yükleme alanı — aynı desende,
+// ana akıştan tamamen ayrı. Malzeme numarası -> Tahditsiz kullanılabilir stok eşlemesini
+// state.malzemelerStok Map'ine yazar (kalıcı saklanmaz, her oturumda/sekmede yeniden yüklenir —
+// zaten anlık bir stok görüntüsü olduğu için kalıcılığın pratik faydası yok).
+(function(){
+  const dosyaInput = document.getElementById('stokGunKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('stokGunKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('stokGunKendiGuncelleBtn');
+  const durumEl = document.getElementById('stokGunKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    guncelleBtn.disabled = false;
+    durumEl.textContent = '';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        state.stokGunKendiDosya = {data, ad:file.name};
+      }catch(err){
+        console.error('Malzemeler dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.stokGunKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      const stokMap = new Map();
+      (state.stokGunKendiDosya.data||[]).forEach(r=>{
+        const kod = String(r['Malzeme numarası']||'').trim();
+        if(!kod) return;
+        stokMap.set(kod, Number(r['Tahditsiz kullanılabilir'])||0);
+      });
+      // Son yüklenen Malzemeler dosyası buluta (ve cihaza) kaydedilir — Müşteri Master ile
+      // aynı desen: yeni bir dosya yüklenip güncellenene kadar bu kayıt kullanılmaya devam
+      // eder, sayfa yenilendiğinde/sekmeye tekrar girildiğinde otomatik geri yüklenir.
+      await malzemelerStokKaydet(stokMap);
+      renderStokGunView();
+      durumEl.textContent = '✓ Güncellendi ve buluta kaydedildi — ' + fmtDate(new Date()) + ' (' + stokMap.size.toLocaleString('tr-TR') + ' ürün)';
+    }catch(err){
+      console.error('Malzemeler verisi işlenemedi:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Stok Gün tablosu arama kutusu — büyük/küçük harf duyarsız (Türkçe İ/ı için tr-TR locale),
+// ürün adı veya kodu üzerinden filtreler. Sistemin diğer sekmelerindeki arama kutularıyla
+// aynı wireSearchInput/wireSearchClear yardımcı fonksiyonlarını kullanır.
+if(document.getElementById('stokGunSearchInput')){
+  const debouncedStokGunFiltre = debounce(stokGunTabloyuFiltreleyipCiz);
+  wireSearchInput('stokGunSearchInput', 'stokGunSearchClearBtn', debouncedStokGunFiltre);
+  wireSearchClear('stokGunSearchInput', 'stokGunSearchClearBtn', stokGunTabloyuFiltreleyipCiz);
+}
+wireSortableTable('stokGunTable', 'stokGunSort', stokGunTabloyuFiltreleyipCiz);
+document.getElementById('stokGunMarkaFilter')?.addEventListener('change', stokGunTabloyuFiltreleyipCiz);
+
+// Tümü/Kritik/Yeni/Ölü sekme butonları
+document.querySelectorAll('.stokgun-sekme-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=> stokGunSekmeDegistir(btn.dataset.sekme));
+});
+
+// Ürün×temsilci risk detayı "Kim satıyor?" toggle — tbody her render'da yeniden oluştuğu için
+// delegated (üst tbody üzerinden) bir click listener kullanılıyor.
+document.getElementById('stokGunTbody')?.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.stokgun-risk-toggle');
+  if(!btn) return;
+  const kod = btn.dataset.riskKod;
+  if(state.stokGunAcikRiskSatirlar.has(kod)) state.stokGunAcikRiskSatirlar.delete(kod);
+  else state.stokGunAcikRiskSatirlar.add(kod);
+  stokGunTabloyuFiltreleyipCiz();
+});
+
+// Panel açıkken kritik stok uyarılarının tarayıcı bildirimi olarak da gösterilebilmesi için
+// (izin daha önce reddedilmediyse) bir kerelik izin isteği — sessizce başarısız olabilir.
+if(typeof Notification!=='undefined' && Notification.permission==='default'){
+  document.getElementById('sbbtn-stokGun')?.addEventListener('click', function stokGunBildirimIzniIste(){
+    Notification.requestPermission();
+    document.getElementById('sbbtn-stokGun')?.removeEventListener('click', stokGunBildirimIzniIste);
+  }, {once:true});
+}
 
 document.getElementById('sellOutYenileBtn').addEventListener('click', async ()=>{
   const btn = document.getElementById('sellOutYenileBtn');
