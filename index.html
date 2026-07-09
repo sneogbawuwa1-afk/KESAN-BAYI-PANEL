@@ -3384,6 +3384,41 @@
       </div>
     </div>
 
+    <div class="modal-overlay" id="kalemlerKilitModalOverlay" style="z-index:1030;">
+      <div class="modal" id="kalemlerKilitModal" role="dialog" aria-modal="true" aria-labelledby="kalemlerKilitModalTitle" style="max-width:400px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="kalemlerKilitModalTitle">Kalemler Bugün Zaten Yüklendi</div>
+              <div class="modal-head-navy-sub">Yeniden yükleme bugün için kilitli</div>
+            </div>
+          </div>
+          <button class="modal-close" id="kalemlerKilitModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px;">
+            <div style="font-size:13.5px;line-height:1.55;color:var(--ink-soft);">
+              Bugün için Kalemler dosyası zaten yüklendi ve müşteri kartları bu veriye göre oluşturuldu.
+              Kalemler'i tekrar yüklemek, o günkü tüm müşteri kartlarını sıfırlayıp yeni dosyaya göre baştan kurar —
+              yeni dosyada bulunmayan müşterilerin kartları kaybolur.
+            </div>
+            <div style="font-size:13.5px;line-height:1.55;color:var(--ink-soft);">
+              Sipariş, Tahsilat, Fatura, Çek/Senet gibi diğer verileri gün içinde istediğiniz kadar
+              <b>"Veri Yükle"</b> panelinden güncelleyebilirsiniz — Kalemler'e tekrar dokunmanıza gerek yok.
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);">
+              <div style="font-size:12px;color:var(--ink-soft);">Kilit açılana kadar</div>
+              <div id="kalemlerKilitGeriSayim" style="font-size:17px;font-weight:700;color:var(--navy);letter-spacing:0.5px;font-variant-numeric:tabular-nums;">00:00:00</div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;">
+              <button type="button" class="btn small primary" id="kalemlerKilitModalTamamBtn">Anladım</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="faturaModalOverlay">
       <div class="modal" id="faturaModal" role="dialog" aria-modal="true" aria-labelledby="faturaModalTitle" style="max-width:520px;">
         <div class="panel-head modal-head-navy">
@@ -4065,11 +4100,27 @@ async function faturaKontrolArsivineKaydetVeSenkronizeEt(report){
   const {arsiv: bozukIadeIslenmisArsiv} = tahsilatKredisiGunlereEkleVeDegistir(hakedisIslenmisArsiv, report.bozukIadeTahsilat || [], 'FaturaIade');
   const {arsiv: depozitoIslenmisArsiv} = tahsilatKredisiGunlereEkleVeDegistir(bozukIadeIslenmisArsiv, report.depozitoTahsilat || [], 'DepozitoTahsilat');
 
+  // ÖNEMLİ: Sipariş/Fatura/Bayi Hak Ediş/Bozuk İade/Depozito Tahsilat verileri BUGÜNÜN altına değil,
+  // kendi tarihlerine göre FARKLI arşiv günlerine dağıtılabiliyor (yukarıdaki dağıtım adımları).
+  // "Arşiv Verisi" panelindeki "Son güncelleme" göstergesi bu tipler için doğru çalışabilsin diye,
+  // kayitZamani SADECE bugünün kaydına değil, bu yüklemede GERÇEKTEN İÇERİĞİ DEĞİŞEN tüm günlere
+  // yazılır — böylece bir dosya bugün yüklense bile içindeki satırlar geçmiş bir tarihe (örn. Fatura
+  // Tarihi 3 gün önceyse) dağıtılmış olsa dahi, o günün kaydında da doğru "ne zaman yüklendi" bilgisi
+  // bulunur (bkz. gvyTipiIcinSonKayitZamani).
+  const simdiIso = new Date().toISOString();
+  const dagitimdaDegisenGunler = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, depozitoIslenmisArsiv);
+  const depozitoIslenmisArsivZamanDamgali = Object.assign({}, depozitoIslenmisArsiv);
+  Object.keys(dagitimdaDegisenGunler).forEach(gunKey=>{
+    if(gunKey === bugunKey) return; // bugünün kaydına zaten aşağıda ayrıca yazılıyor
+    if(!depozitoIslenmisArsivZamanDamgali[gunKey]) return; // silinmiş (null) günlere dokunma
+    depozitoIslenmisArsivZamanDamgali[gunKey] = Object.assign({}, depozitoIslenmisArsivZamanDamgali[gunKey], {kayitZamani: simdiIso});
+  });
+
   // Müşteri Snapshot: bu SADECE bugünün altına yazılmaya devam eder — çünkü bu, Kalemler
   // dosyasının o ANKİ (rapor oluşturma anındaki) donmuş bakiye özetidir; geçmiş bir tarihe
   // dağıtılamaz (geçmişe dönük yeniden hesaplanamaz). Rapor oluşturmadığınız günler için bu alan
   // hâlâ boş kalır — bu, arşivin doğası gereği kaçınılmazdır.
-  const bugunGunOncesi = depozitoIslenmisArsiv[bugunKey] || {};
+  const bugunGunOncesi = depozitoIslenmisArsivZamanDamgali[bugunKey] || {};
   const bugununKaydiTaban = report.tahsilatFormatB
     ? bugunGunOncesi
     // Format A: SADECE bugünün 'A' etiketli kısmı bu yüklemenin yeni satırlarıyla değiştirilir;
@@ -4077,9 +4128,9 @@ async function faturaKontrolArsivineKaydetVeSenkronizeEt(report){
     : Object.assign({}, bugunGunOncesi, {tahsilatArsiv: (bugunGunOncesi.tahsilatArsiv||[]).filter(r=>r.formatKaynagi!=='A').concat(report.tahsilatArsiv || [])});
   const bugununKaydi = Object.assign({}, bugununKaydiTaban, {
     musteriSnapshot: musteriSnapshotUzun,
-    kayitZamani: new Date().toISOString(),
+    kayitZamani: simdiIso,
   });
-  const yeniArsivTumu = Object.assign({}, depozitoIslenmisArsiv, {[bugunKey]: bugununKaydi});
+  const yeniArsivTumu = Object.assign({}, depozitoIslenmisArsivZamanDamgali, {[bugunKey]: bugununKaydi});
 
   // Yerel önbellek her durumda güncellenir; Trend/Tahsilat Verimliliği gibi ekranlar bugünün
   // verisini hemen görsün.
@@ -6057,13 +6108,20 @@ syncBtn.addEventListener('click', async ()=>{
     fatura: 'faturaArsiv',
     bayiHakedis: 'bayiHakedisArsiv',
   };
+  // ÖNEMLİ: kayitZamani, faturaKontrolArsivineKaydetVeSenkronizeEt() içinde SADECE o günkü
+  // "Raporu Oluştur/Veri Güncelle" işleminin GERÇEKTEN çalıştığı günün altına yazılır (bugunKey).
+  // Yani bu değer, o dosyanın (Sipariş/Tahsilat/Fatura/…) EN SON HANGİ TARİH VE SAATTE fiilen
+  // yüklenip işlendiğini gösterir — verinin İÇİNDEKİ tarihi değil, YÜKLEME ANINI temsil eder.
+  // gunKey ile kayitZamani'nin ait olduğu gün FARKLI olabilir (örn. Fatura Dökümü'nde bir satır
+  // geçmiş bir Fatura Tarihi'ne dağıtılmış olabilir) — bu yüzden ikisi ayrı ayrı döndürülür.
   function gvyTipiIcinEnGuncelArsivGunu(tip){
     if(tip === 'yukleme'){
       const gunler = Object.keys(state.yuklemeArsivCache || {}).filter(g=>{
         const g2 = state.yuklemeArsivCache[g];
         return g2 && (g2.sevkiyatVerisiVarMi || g2.tahsilatVerisiVarMi);
       });
-      return gunler.length ? gunler.sort()[gunler.length-1] : null;
+      const enGuncelGun = gunler.length ? gunler.sort()[gunler.length-1] : null;
+      return { gunKey: enGuncelGun, kayitZamani: gvyTipiIcinSonKayitZamani(tip) };
     }
     if(tip === 'depozitoTahsilat'){
       const arsiv = state.faturaArsivCache || {};
@@ -6071,20 +6129,66 @@ syncBtn.addEventListener('click', async ()=>{
         const kayit = (arsiv[g] && arsiv[g].tahsilatArsiv) || [];
         return kayit.some(r=> r && r.formatKaynagi === 'DepozitoTahsilat');
       });
-      return gunler.length ? gunler.sort()[gunler.length-1] : null;
+      const enGuncelGun = gunler.length ? gunler.sort()[gunler.length-1] : null;
+      return { gunKey: enGuncelGun, kayitZamani: gvyTipiIcinSonKayitZamani(tip) };
     }
     const alan = GVY_ARSIV_ALAN_ESLEME[tip];
-    if(!alan) return null;
+    if(!alan) return { gunKey: null, kayitZamani: null };
     const arsiv = state.faturaArsivCache || {};
     const gunler = Object.keys(arsiv).filter(g=>{
       const kayit = arsiv[g] && arsiv[g][alan];
       return Array.isArray(kayit) ? kayit.length>0 : Boolean(kayit);
     });
-    return gunler.length ? gunler.sort()[gunler.length-1] : null;
+    const enGuncelGun = gunler.length ? gunler.sort()[gunler.length-1] : null;
+    return { gunKey: enGuncelGun, kayitZamani: gvyTipiIcinSonKayitZamani(tip) };
   }
-  function gvyGunKeyGoster(gunKey){
-    if(!gunKey) return '';
-    const d = new Date(gunKey + 'T00:00:00');
+  // Arşivdeki TÜM günleri tarayıp, o tipe ait veri içeren günlerden kayitZamani'si en güncel
+  // (en yeni ISO zaman damgalı) olanını döndürür — bu, o dosyanın gerçekte en son ne zaman
+  // yüklendiğini/işlendiğini gösterir. kayitZamani sadece "Raporu Oluştur/Veri Güncelle"
+  // işleminin GERÇEKTEN çalıştığı bugünün altına yazıldığı için (bkz.
+  // faturaKontrolArsivineKaydetVeSenkronizeEt), bu değer eski/geçmiş arşiv günlerinde bulunmaz —
+  // yalnızca o dosyanın en son işlendiği güne ait kayıtta vardır.
+  function gvyTipiIcinSonKayitZamani(tip){
+    if(tip === 'yukleme'){
+      // Yükleme Raporu kendi ayrı arşivinde (state.yuklemeArsivCache) tutulur; her günün
+      // kayitZamani'si yuklemeRaporlariniArsivineKaydet() içinde ayrıca yazılır.
+      const arsiv = state.yuklemeArsivCache || {};
+      let enGuncelIso = null;
+      Object.keys(arsiv).forEach(gunKey=>{
+        const gun = arsiv[gunKey];
+        if(gun && gun.kayitZamani && (!enGuncelIso || gun.kayitZamani > enGuncelIso)) enGuncelIso = gun.kayitZamani;
+      });
+      return enGuncelIso;
+    }
+    const alan = (tip==='depozitoTahsilat') ? null : GVY_ARSIV_ALAN_ESLEME[tip];
+    const arsiv = state.faturaArsivCache || {};
+    let enGuncelIso = null;
+    Object.keys(arsiv).forEach(gunKey=>{
+      const gun = arsiv[gunKey];
+      if(!gun || !gun.kayitZamani) return;
+      let buGundeVarMi;
+      if(tip === 'depozitoTahsilat'){
+        buGundeVarMi = ((gun.tahsilatArsiv)||[]).some(r=> r && r.formatKaynagi === 'DepozitoTahsilat');
+      }else{
+        const kayit = alan ? gun[alan] : null;
+        buGundeVarMi = Array.isArray(kayit) ? kayit.length>0 : Boolean(kayit);
+      }
+      if(buGundeVarMi && (!enGuncelIso || gun.kayitZamani > enGuncelIso)) enGuncelIso = gun.kayitZamani;
+    });
+    return enGuncelIso;
+  }
+  function gvyGunKeyGoster(bilgi){
+    if(!bilgi || !bilgi.gunKey) return '';
+    // Gerçek yükleme zamanı (tarih+saat) biliniyorsa onu göster; bilinmiyorsa (örn. eski
+    // kayıtlar kayitZamani alanından önce oluşturulmuşsa, ya da Yükleme Raporu için) eski
+    // "Son veri: gg.aa.yyyy" gösterimine geri düş.
+    if(bilgi.kayitZamani){
+      const zd = new Date(bilgi.kayitZamani);
+      if(!isNaN(zd.getTime())){
+        return 'Son güncelleme: ' + zd.toLocaleDateString('tr-TR') + ' ' + zd.toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+      }
+    }
+    const d = new Date(bilgi.gunKey + 'T00:00:00');
     if(isNaN(d.getTime())) return '';
     return 'Son veri: ' + d.toLocaleDateString('tr-TR');
   }
@@ -6387,7 +6491,66 @@ async function resetAll(){
   document.getElementById('yonetimOzetiView').style.display='none';
   document.getElementById('ceiView').style.display='none';
 }
+// "Yeni veri yükle" (resetBtn) için kilit kontrolü: bugün Kalemler zaten yüklenmişse (state.files.kalemler
+// bellekte doluysa VEYA bugunKalemlerDurumTazele() ile belirlenen state.bugunKalemlerHazir true ise) ana
+// yükleme ekranına geçiş engellenir, sadece bilgilendirici bir uyarı modalı gösterilir. Bu, Kalemler'in
+// gün içinde yanlışlıkla ikinci kez yüklenip müşteri kartlarının sıfırdan kurulmasını (ve yeni dosyada
+// olmayan müşterilerin kartlarının kaybolmasını) önlemek içindir — bkz. buildReport() ve GRUP_A_TEKIL_DOSYA_TANIMLARI.kalemler.
+function bugunKalemlerYuklendiMi(){
+  if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length) return true;
+  return !!state.bugunKalemlerHazir;
+}
+function kalemlerKilitModalAc(){
+  const overlay = document.getElementById('kalemlerKilitModalOverlay');
+  if(overlay) overlay.classList.add('open');
+  kalemlerKilitGeriSayimBaslat();
+}
+function kalemlerKilitModalKapat(){
+  const overlay = document.getElementById('kalemlerKilitModalOverlay');
+  if(overlay) overlay.classList.remove('open');
+  kalemlerKilitGeriSayimDurdur();
+}
+// Kilit, Türkiye saatiyle gece yarısında (00:00, yeni gün) otomatik açılır — çünkü
+// bugunKalemlerVarMi()/bugunKalemlerDurumTazele() de tek-slot Kalemler kaydının TARİHİNİ
+// "bugüne ait mi" diye kontrol ediyor (dateKeyLocal ile), gün değişince otomatik false döner.
+// Bu geri sayım o ana kadar kalan süreyi (sa:dk:sn) canlı gösterir, salt bilgilendirme amaçlıdır.
+let kalemlerKilitGeriSayimTimer = null;
+function kalemlerKilitGeriSayimGuncelle(){
+  const el = document.getElementById('kalemlerKilitGeriSayim');
+  if(!el) return;
+  const simdiTR = turkiyeSimdi();
+  const yariniTR = new Date(Date.UTC(simdiTR.getUTCFullYear(), simdiTR.getUTCMonth(), simdiTR.getUTCDate()+1));
+  let kalanMs = yariniTR.getTime() - simdiTR.getTime();
+  if(kalanMs < 0) kalanMs = 0;
+  const kalanSn = Math.floor(kalanMs/1000);
+  const sa = Math.floor(kalanSn/3600);
+  const dk = Math.floor((kalanSn%3600)/60);
+  const sn = kalanSn%60;
+  const pad = (n)=> String(n).padStart(2,'0');
+  el.textContent = pad(sa)+':'+pad(dk)+':'+pad(sn);
+}
+function kalemlerKilitGeriSayimBaslat(){
+  kalemlerKilitGeriSayimGuncelle();
+  kalemlerKilitGeriSayimDurdur();
+  kalemlerKilitGeriSayimTimer = setInterval(kalemlerKilitGeriSayimGuncelle, 1000);
+}
+function kalemlerKilitGeriSayimDurdur(){
+  if(kalemlerKilitGeriSayimTimer){ clearInterval(kalemlerKilitGeriSayimTimer); kalemlerKilitGeriSayimTimer = null; }
+}
+(function(){
+  const overlay = document.getElementById('kalemlerKilitModalOverlay');
+  const closeBtn = document.getElementById('kalemlerKilitModalClose');
+  const tamamBtn = document.getElementById('kalemlerKilitModalTamamBtn');
+  if(closeBtn) closeBtn.addEventListener('click', kalemlerKilitModalKapat);
+  if(tamamBtn) tamamBtn.addEventListener('click', kalemlerKilitModalKapat);
+  if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) kalemlerKilitModalKapat(); });
+})();
 resetBtn.addEventListener('click', async ()=>{
+  // Kalemler bugün için zaten yüklenmişse: ekran hiç değişmez, sadece uyarı gösterilir.
+  if(bugunKalemlerYuklendiMi()){
+    kalemlerKilitModalAc();
+    return;
+  }
   if(!(await ortakSifreDogrula('Yeni veri yüklemek için şifreyi girin:'))) return;
   await resetAll();
 });
@@ -6477,6 +6640,10 @@ async function uygulamayiBaslat(){
     document.getElementById('reportSection').style.display='block';
     document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
+    // resetBtn'in "bugün Kalemler yüklendi mi?" kilidi doğru karar verebilsin diye, uygulama
+    // açılışında da state.bugunKalemlerHazir tazelenir (aksi halde ilk açılışta bu bayrak
+    // henüz hiç hesaplanmamış/false kalabilir ve kilit yanlışlıkla devre dışı görünebilir).
+    try{ if(typeof bugunKalemlerDurumTazele === 'function') await bugunKalemlerDurumTazele(); }catch(_){}
     document.getElementById('storageNote').style.display='block';
     if(cloudEnabled()){
       syncBtn.style.display='inline-block';
@@ -10721,8 +10888,12 @@ async function yuklemeRaporlariniArsivineKaydet(sonuc){
   } else {
     arsiv = (await loadYuklemeArsivFromLocal()) || {};
   }
+  // Bu yüklemede GERÇEKTEN işlenen (Tahsilat Dökümü/Yükleme Raporu'ndan gelen) her gün için,
+  // dosyanın gerçekte ne zaman yüklenip işlendiğini gösteren bir kayitZamani damgası eklenir —
+  // Arşiv Verisi panelindeki "Son güncelleme" gösterimi bunu kullanır (bkz. gvyTipiIcinSonKayitZamani).
+  const simdiIso = new Date().toISOString();
   gunAnahtarlari.forEach(gunKey=>{
-    arsiv[gunKey] = yuklemeGununuArsivIleBirlestir(sonuc.gunler[gunKey], arsiv[gunKey]);
+    arsiv[gunKey] = Object.assign({}, yuklemeGununuArsivIleBirlestir(sonuc.gunler[gunKey], arsiv[gunKey]), {kayitZamani: simdiIso});
   });
   state.yuklemeArsivCache = arsiv;
   if(cloudEnabled()){
