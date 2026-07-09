@@ -779,12 +779,37 @@
   .urun-stat-chip{background:var(--bg);border-radius:9px;padding:7px 6px;text-align:center;}
   .urun-stat-chip .l{font-size:9px;color:var(--ink-faint);font-weight:700;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .urun-stat-chip .v{font-family:var(--font-figures);font-size:12.5px;font-weight:700;margin-top:3px;color:var(--ink);}
+  .urun-stat-chip-split{cursor:help;}
+  .urun-stat-chip-split-row{display:flex;gap:0;margin-top:4px;justify-content:center;align-items:center;}
+  .urun-stat-chip-split-item{display:flex;flex-direction:column;align-items:center;line-height:1.2;padding:2px 9px;}
+  .urun-stat-chip-split-divider{width:1px;align-self:stretch;background:var(--line);opacity:.7;margin:1px 0;}
+  .urun-stat-chip-split-item .k{font-size:8px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
+  .urun-stat-chip-split-item.gel .k{color:#B8541A;}
+  .urun-stat-chip-split-item.mod .k{color:#1D5FB8;}
+  .urun-stat-chip-split-item .v{font-family:var(--font-figures);font-size:13px;font-weight:800;margin-top:2px;}
+  .urun-stat-chip-split-item.gel .v{color:#B8541A;}
+  .urun-stat-chip-split-item.mod .v{color:#1D5FB8;}
 
-  .urun-hedef-row{display:flex;gap:8px;background:var(--accent-soft);border-radius:9px;padding:8px 10px;}
+  .urun-hedef-row{
+    background:var(--surface);border:1px solid #E6DBB8;border-left:4px solid #C9962C;
+    border-radius:10px;padding:10px 12px;
+  }
+  .urun-hedef-baslik{
+    font-size:10px;font-weight:800;letter-spacing:.03em;color:#8A6D1F;text-transform:uppercase;
+    margin-bottom:8px;display:flex;align-items:center;gap:5px;
+  }
+  .urun-hedef-baslik i{font-size:13px;}
+  .urun-hedef-degerler{display:flex;gap:18px;}
   .urun-hedef-item{flex:1;min-width:0;}
-  .urun-hedef-item .l{font-size:9.5px;color:var(--accent-deep);font-weight:700;letter-spacing:.02em;opacity:.8;}
-  .urun-hedef-item .v{font-family:var(--font-figures);font-size:13px;font-weight:700;color:var(--accent-deep);margin-top:2px;}
-  .urun-hedef-divider{width:1px;background:rgba(138,109,31,0.25);}
+  .urun-hedef-item .l{font-size:9px;color:var(--ink-faint);font-weight:700;letter-spacing:.01em;}
+  .urun-hedef-item .v{font-family:var(--font-figures);font-size:17px;font-weight:800;color:var(--ink);margin-top:2px;}
+  .urun-hedef-item .v .birim{font-size:11px;font-weight:600;color:var(--ink-soft);}
+  .urun-hedef-hiz-notu{
+    border-top:0.5px solid #E6DBB8;margin-top:9px;padding-top:7px;
+    font-size:10px;color:var(--ink-soft);display:flex;align-items:center;gap:4px;
+  }
+  .urun-hedef-hiz-notu i{font-size:12px;flex-shrink:0;}
+  .urun-hedef-hiz-notu b{color:var(--ink);font-weight:700;}
   @media(max-width:480px){.urun-stat-grid{grid-template-columns:repeat(3,1fr);}}
 
   .modal-overlay{
@@ -8486,9 +8511,12 @@ async function analizModalAc(musteriKod, musteriAdi){
     return;
   }
   const toplamTahsilatPay = ozet.aylikTahsilat>0 ? ozet.aylikTahsilat : 1;
-  const normalPay = Math.max(0, ozet.aylikNormalTahsilat + ozet.aylikHakedisTahsilat);
+  const normalPay = Math.max(0, ozet.aylikNormalTahsilat);
+  const hakedisPay = Math.max(0, ozet.aylikHakedisTahsilat);
   const krediPay = Math.max(0, ozet.aylikKrediTahsilat);
   const normalYuzde = (normalPay/toplamTahsilatPay*100);
+  const hakedisYuzde = (hakedisPay/toplamTahsilatPay*100);
+  const krediYuzde = (krediPay/toplamTahsilatPay*100);
   const geriDonusRenk = ozet.geriDonusGun==null ? {renk:'var(--ink-faint)', soft:'var(--line-soft)'} : donusRenk(ozet.geriDonusGun);
   body.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;">
@@ -8512,10 +8540,12 @@ async function analizModalAc(musteriKod, musteriAdi){
     ${ozet.aylikTahsilat>0 ? `
     <div style="height:8px;border-radius:5px;background:var(--line-soft);margin-top:8px;overflow:hidden;display:flex;">
       <div style="width:${normalYuzde.toFixed(2)}%;background:var(--accent);"></div>
-      <div style="width:${(100-normalYuzde).toFixed(2)}%;background:var(--danger);"></div>
+      <div style="width:${hakedisYuzde.toFixed(2)}%;background:#1D5FB8;"></div>
+      <div style="width:${krediYuzde.toFixed(2)}%;background:var(--danger);"></div>
     </div>
     <div style="display:flex;gap:14px;margin-top:7px;font-size:10.5px;color:var(--ink-soft);flex-wrap:wrap;">
       <span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--accent);margin-right:4px;"></span>Normal ${TL(normalPay)}</span>
+      ${hakedisPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:#1D5FB8;margin-right:4px;"></span>Hakediş ${TL(hakedisPay)}</span>` : ''}
       ${krediPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--danger);margin-right:4px;"></span>İade/Depozito ${TL(krediPay)}</span>` : ''}
     </div>` : ''}
 
@@ -13647,6 +13677,7 @@ function computeStokGunRaporu(){
 
     return {
       kod: u.kod, urunAdi: u.urunAdi, marka: u.marka, pay: pay*100, gerekliLitre, gerekliMiktar,
+      paySellOut: paySellOut*100, payModernKanal: payModernKanal*100,
       yogunHaftaEtiket: haftaEtiketleri[bugunHaftaIndex] + ' (bugünün dilimi)',
       gunlukHiz, gunlukMiktar, anlikStok, stokGunu, stokGunuGuvenlikli, guvenlikStoguLitre, gunlukCVKaynagi, cv: u.cv,
       aktifAySayisi: u.aktifAySayisi, ilkSatisAy: u.ilkSatisAy, yeniUrun: u.yeniUrun, veriGuveni: u.veriGuveni,
@@ -13816,6 +13847,15 @@ function stokGunTabloyuFiltreleyipCiz(){
     return 'stokgun-ok';
   }
 
+  // Hedef kutusundaki "ayın X. günü hızıyla hesaplandı" notu için yogunHaftaEtiket'i
+  // ("1-7 (bugünün dilimi)" gibi) okunabilir kısa metne çevirir. Sayısal aralıklarda
+  // ("1-7", "8-14"...) sonuna "günü" eklenir; "22-ay sonu" gibi sayısal olmayan son
+  // dilimde "günü" eklenmez, çünkü "22-ay sonu. günü" anlamsız olurdu.
+  function stokGunHizDilimMetni(yogunHaftaEtiket){
+    const temiz = String(yogunHaftaEtiket||'').replace(' (bugünün dilimi)','').trim();
+    return /^\d+-\d+$/.test(temiz) ? (temiz + '. günü') : temiz;
+  }
+
   document.getElementById('stokGunKartListe').innerHTML = filtreli.map(r=>{
     const renk = stokGunRenkSeviyesi(r.stokGunu);
     const seviyeSinifi = stokGunSeviyeSinifi(r.stokGunu);
@@ -13869,7 +13909,14 @@ function stokGunTabloyuFiltreleyipCiz(){
       </div>
       <div class="urun-stat-grid">
         <div class="urun-stat-chip"><div class="l">DEPO STOK</div><div class="v">${r.anlikStok!=null ? r.anlikStok.toLocaleString('tr-TR') : '—'}</div></div>
-        <div class="urun-stat-chip"><div class="l">SATIŞ PAYI</div><div class="v">%${r.pay.toFixed(1).replace('.',',')}</div></div>
+        <div class="urun-stat-chip urun-stat-chip-split" title="Geleneksel Kanal payı %${r.paySellOut.toFixed(1).replace('.',',')} · Modern Kanal payı %${r.payModernKanal.toFixed(1).replace('.',',')}">
+          <div class="l">SATIŞ PAYI</div>
+          <div class="urun-stat-chip-split-row">
+            <div class="urun-stat-chip-split-item gel"><span class="k">Gel.</span><span class="v">%${r.paySellOut.toFixed(1).replace('.',',')}</span></div>
+            <div class="urun-stat-chip-split-divider"></div>
+            <div class="urun-stat-chip-split-item mod"><span class="k">Mod.</span><span class="v">%${r.payModernKanal.toFixed(1).replace('.',',')}</span></div>
+          </div>
+        </div>
         <div class="urun-stat-chip" title="Veri güveni: ${escapeHtml(r.veriGuveni)}"><div class="l">AKTİF AY</div><div class="v" style="color:${guvenRenk};">${r.aktifAySayisi} ay</div></div>
       </div>
       <div class="urun-stat-grid urun-stat-grid-2">
@@ -13877,9 +13924,12 @@ function stokGunTabloyuFiltreleyipCiz(){
         <div class="urun-stat-chip"><div class="l">GÜNLÜK LİTRE</div><div class="v">${LT(r.gunlukHiz)}/gün</div></div>
       </div>
       <div class="urun-hedef-row">
-        <div class="urun-hedef-item"><div class="l">HEDEF GEREKEN MİKTAR</div><div class="v">${r.gerekliMiktar!=null ? r.gerekliMiktar.toLocaleString('tr-TR',{maximumFractionDigits:0}) : '—'}</div></div>
-        <div class="urun-hedef-divider"></div>
-        <div class="urun-hedef-item"><div class="l">HEDEF GEREKEN LİTRE</div><div class="v">${r.gerekliLitre!=null ? LT(r.gerekliLitre) : '—'}</div></div>
+        <div class="urun-hedef-baslik"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Hedef gereken sipariş</div>
+        <div class="urun-hedef-degerler">
+          <div class="urun-hedef-item"><div class="l">MİKTAR</div><div class="v">${r.gerekliMiktar!=null ? r.gerekliMiktar.toLocaleString('tr-TR',{maximumFractionDigits:0}) : '—'}</div></div>
+          <div class="urun-hedef-item"><div class="l">LİTRE</div><div class="v">${r.gerekliLitre!=null ? LT(r.gerekliLitre).replace(/\s*Lt\.?$/,'') : '—'} <span class="birim">Lt.</span></div></div>
+        </div>
+        <div class="urun-hedef-hiz-notu"><i class="fa-regular fa-calendar" aria-hidden="true"></i> Stok günü, ayın <b>${escapeHtml(stokGunHizDilimMetni(r.yogunHaftaEtiket))}</b> hızıyla hesaplandı</div>
       </div>
       ${riskDetay}
     </div>`;
