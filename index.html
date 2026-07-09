@@ -2033,6 +2033,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" id="faturaArsivTemizleBtn" title="Eski (bugünden önceki) tüm Fatura Dökümü arşiv kayıtlarını sil" aria-label="Eski Fatura Dökümü arşiv kayıtlarını sil"><i class="fa-solid fa-broom" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="depozitoTahsilat">
@@ -2047,6 +2048,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" id="bayiHakedisArsivTemizleBtn" title="Eski (bugünden önceki) tüm Bayi Hak Ediş arşiv kayıtlarını sil" aria-label="Eski Bayi Hak Ediş arşiv kayıtlarını sil"><i class="fa-solid fa-broom" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="yukleme">
@@ -2619,6 +2621,7 @@
                 <option value="temsilci">Satış Temsilcisi</option>
                 <option value="seciliSiparis">Seçili Tarihte Sipariş</option>
                 <option value="seciliTahsilat">Seçili Tarihte Tahsilat</option>
+                <option value="oncekiGunTahsilat">Önceki Gün Tahsilatı</option>
                 <option value="kalanBorc">Kalan Borç</option>
                 <option value="avgVadeGun">Ortalama Vade</option>
                 <option value="cekSenet">Çek/Senet</option>
@@ -6052,9 +6055,13 @@ syncBtn.addEventListener('click', async ()=>{
     if(gc) gc.disabled = kalemlerYok || GRUP_C_HAZIR_SAYISI()===0;
   }
   window.gvyKalemlerUyariGuncelle = gvyKalemlerUyariGuncelle;
-  toggleBtn.addEventListener('click', (e)=>{
+  toggleBtn.addEventListener('click', async (e)=>{
     e.stopPropagation();
-    if(panel.classList.contains('open')) closePanel(); else openPanel();
+    if(panel.classList.contains('open')){ closePanel(); return; }
+    // Panel her açılışta şifre ister (kapatmak şifresizdir). Bu, "Veri Yükle" (Günlük Veri +
+    // Arşiv Verisi) panelinin yetkisiz kişilerce açılıp dosya yüklenmesini/değiştirilmesini önler.
+    if(!(await ortakSifreDogrula('Veri Yükle panelini açmak için şifreyi girin:'))) return;
+    openPanel();
   });
   // Panel dışında herhangi bir yere tıklanınca, farenin konumuna bakılmaksızın kapanır.
   document.addEventListener('click', (e)=>{
@@ -6545,6 +6552,119 @@ function kalemlerKilitGeriSayimDurdur(){
   if(tamamBtn) tamamBtn.addEventListener('click', kalemlerKilitModalKapat);
   if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) kalemlerKilitModalKapat(); });
 })();
+// Bayi Hak Ediş arşiv temizliği: arşivdeki HER günün bayiHakedisArsiv alanını (bugün dahil
+// istenirse hariç tutulabilir — burada "bugünden önceki tüm günler" temizlenir) boşaltır. Bu,
+// geçmişte yanlışlıkla/tekrar yüklenmiş eski Bayi Hak Ediş kayıtlarının Trend Analizi'ndeki
+// "Aylık Ortalama Hakediş" hesabını (computeMusteriAylikOzet) yanlış genişletmesini önlemek
+// içindir — o hesap, müşterinin en eski ve en yeni fatura/tahsilat/hakediş kaydı arasındaki gün
+// farkına göre bir "ay sayısı" bulup toplamı buna bölüyor; arşivde kalan eski/hayalet bir hakediş
+// kaydı bu aralığı gereksiz yere genişletip aylık ortalamayı olduğundan küçük gösterebiliyor.
+// Diğer arşiv alanlarına (fatura, tahsilat, sipariş, musteriSnapshot vb.) HİÇ dokunulmaz.
+async function bayiHakedisArsivEskiKayitlariTemizle(){
+  await faturaArsivYenile();
+  const eskiArsivTumu = state.faturaArsivCache || {};
+  const bugunKey = dateKeyLocal(new Date());
+  const yeniArsivTumu = Object.assign({}, eskiArsivTumu);
+  let etkilenenGunSayisi = 0;
+  Object.keys(yeniArsivTumu).forEach(gunKey=>{
+    if(gunKey >= bugunKey) return; // bugün ve sonrası (varsa) korunur
+    const gun = yeniArsivTumu[gunKey];
+    if(gun && Array.isArray(gun.bayiHakedisArsiv) && gun.bayiHakedisArsiv.length){
+      yeniArsivTumu[gunKey] = Object.assign({}, gun, {bayiHakedisArsiv: []});
+      etkilenenGunSayisi++;
+    }
+  });
+  if(!etkilenenGunSayisi) return {temizlenenGunSayisi: 0};
+  state.faturaArsivCache = yeniArsivTumu;
+  await saveFaturaKontrolArsivToLocal(state.faturaArsivCache).catch(()=>{});
+  if(cloudEnabled()){
+    const fark = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, yeniArsivTumu);
+    try{ await saveFaturaKontrolArsivGunleriToCloud(fark); }
+    catch(err){ console.error('Bayi Hak Ediş arşiv temizliği buluta yazılamadı:', err); }
+  }
+  return {temizlenenGunSayisi: etkilenenGunSayisi};
+}
+(function(){
+  const btn = document.getElementById('bayiHakedisArsivTemizleBtn');
+  if(!btn) return;
+  btn.addEventListener('click', async ()=>{
+    if(!(await ortakSifreDogrula('Eski Bayi Hak Ediş kayıtlarını silmek için şifreyi girin:'))) return;
+    const onayli = window.confirm('Bugünden önceki TÜM Bayi Hak Ediş arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?');
+    if(!onayli) return;
+    const oncekiMetin = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+    try{
+      const sonuc = await bayiHakedisArsivEskiKayitlariTemizle();
+      if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+      window.alert(sonuc.temizlenenGunSayisi
+        ? sonuc.temizlenenGunSayisi + ' günün eski Bayi Hak Ediş kaydı temizlendi.'
+        : 'Temizlenecek eski Bayi Hak Ediş kaydı bulunamadı.');
+    }catch(err){
+      console.error(err);
+      window.alert('Temizleme sırasında bir hata oluştu, lütfen tekrar deneyin.');
+    }finally{
+      btn.disabled = false;
+      btn.innerHTML = oncekiMetin;
+    }
+  });
+})();
+
+// Fatura Dökümü arşiv temizliği: BAYİ HAK EDİŞ temizliğiyle AYNI mantık, sadece hedef alan
+// faturaArsiv'dir (bayiHakedisArsiv değil). Arşivdeki HER günün faturaArsiv alanını (bugünden
+// önceki tüm günler için) boşaltır — eski/yanlışlıkla tekrar yüklenmiş Fatura Dökümü kayıtlarının
+// "Fatura · Aylık Ortalama" (computeMusteriAylikOzet) hesabını yanlış genişletmesini önlemek
+// içindir. Diğer arşiv alanlarına (tahsilat, sipariş, bayiHakedis, musteriSnapshot vb.) HİÇ
+// dokunulmaz.
+async function faturaArsivEskiKayitlariTemizle(){
+  await faturaArsivYenile();
+  const eskiArsivTumu = state.faturaArsivCache || {};
+  const bugunKey = dateKeyLocal(new Date());
+  const yeniArsivTumu = Object.assign({}, eskiArsivTumu);
+  let etkilenenGunSayisi = 0;
+  Object.keys(yeniArsivTumu).forEach(gunKey=>{
+    if(gunKey >= bugunKey) return; // bugün ve sonrası (varsa) korunur
+    const gun = yeniArsivTumu[gunKey];
+    if(gun && Array.isArray(gun.faturaArsiv) && gun.faturaArsiv.length){
+      yeniArsivTumu[gunKey] = Object.assign({}, gun, {faturaArsiv: []});
+      etkilenenGunSayisi++;
+    }
+  });
+  if(!etkilenenGunSayisi) return {temizlenenGunSayisi: 0};
+  state.faturaArsivCache = yeniArsivTumu;
+  await saveFaturaKontrolArsivToLocal(state.faturaArsivCache).catch(()=>{});
+  if(cloudEnabled()){
+    const fark = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, yeniArsivTumu);
+    try{ await saveFaturaKontrolArsivGunleriToCloud(fark); }
+    catch(err){ console.error('Fatura Dökümü arşiv temizliği buluta yazılamadı:', err); }
+  }
+  return {temizlenenGunSayisi: etkilenenGunSayisi};
+}
+(function(){
+  const btn = document.getElementById('faturaArsivTemizleBtn');
+  if(!btn) return;
+  btn.addEventListener('click', async ()=>{
+    if(!(await ortakSifreDogrula('Eski Fatura Dökümü kayıtlarını silmek için şifreyi girin:'))) return;
+    const onayli = window.confirm('Bugünden önceki TÜM Fatura Dökümü arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?');
+    if(!onayli) return;
+    const oncekiMetin = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+    try{
+      const sonuc = await faturaArsivEskiKayitlariTemizle();
+      if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+      window.alert(sonuc.temizlenenGunSayisi
+        ? sonuc.temizlenenGunSayisi + ' günün eski Fatura Dökümü kaydı temizlendi.'
+        : 'Temizlenecek eski Fatura Dökümü kaydı bulunamadı.');
+    }catch(err){
+      console.error(err);
+      window.alert('Temizleme sırasında bir hata oluştu, lütfen tekrar deneyin.');
+    }finally{
+      btn.disabled = false;
+      btn.innerHTML = oncekiMetin;
+    }
+  });
+})();
 resetBtn.addEventListener('click', async ()=>{
   // Kalemler bugün için zaten yüklenmişse: ekran hiç değişmez, sadece uyarı gösterilir.
   if(bugunKalemlerYuklendiMi()){
@@ -6848,9 +6968,29 @@ function buildReport(files, musteriMasterMap){
       // bir iade/mahsup tutarıdır) — bu yüzden SATIŞ/FATURA tutarı olarak değil, müşteri TAHSİLATI
       // olarak sayılır ve tüm analiz raporlarına (Trend Analiz, DSO, CEI, Yönetim Özeti, Şüpheli
       // Alacak, Temsilci Karnesi vb.) tahsilatArsiv üzerinden aynı şekilde yansır (bkz.
-      // bozukIadeTahsilatGunlereEkleVeDegistir). Diğer fatura türleri (Satış Fatura, Depozito İade,
-      // KA Sanal İade Sip., Boş Kap İade vb.) eskisi gibi faturaArsiv'e (satış tutarı) eklenir.
-      if(faturaTuru === 'Bozuk İade Faturası'){
+      // bozukIadeTahsilatGunlereEkleVeDegistir).
+      //
+      // "Depozito İade" (örn. "Depozito İade Faturası" gibi varyasyonlar da dahil — SAP'ın tam
+      // metni değişebildiği için "depozito" VE "iade" kelimelerinin ikisini birden içeren fatura
+      // türleri eşleşir): bu da bir SATIŞ değil, müşteriye yapılan bir PARA İADESİDİR — Trend
+      // Analizi'ndeki "Fatura · Aylık Ortalama" KPI'sına satış gibi dahil edilmemesi, sadece
+      // "Tahsilat · Aylık Ortalama" altında İade/Depozito kalemi olarak görünmesi gerekir. Bu
+      // yüzden Bozuk İade Faturası ile AYNI şekilde bozukIadeTahsilat listesine (FaturaIade
+      // etiketiyle) yönlendirilir, faturaArsiv'e HİÇ eklenmez.
+      //
+      // Diğer fatura türleri (Satış Fatura, Boş Kap İade vb.) eskisi gibi faturaArsiv'e (satış
+      // tutarı) eklenmeye devam eder.
+      const faturaTuruKucuk = faturaTuru.toLocaleLowerCase('tr');
+      const depozitoIadeMi = faturaTuruKucuk.includes('depozito') && faturaTuruKucuk.includes('iade');
+
+      // "KA Sanal İade Sip.": HİÇBİR hesaplamaya dahil edilmez — ne satış/fatura tutarı olarak
+      // faturaArsiv'e, ne müşteri tahsilatı olarak bozukIadeTahsilat'a. Bu satırlar tamamen göz
+      // ardı edilir (Trend Analiz, DSO, CEI, Yönetim Özeti, Şüpheli Alacak, Temsilci Karnesi vb.
+      // hiçbirine yansımaz).
+      const kaSanalIadeMi = faturaTuruKucuk.includes('ka sanal') && faturaTuruKucuk.includes('iade');
+      if(kaSanalIadeMi) return;
+
+      if(faturaTuru === 'Bozuk İade Faturası' || depozitoIadeMi){
         bozukIadeTahsilat.push({musteri, musteriAdi, belgeTarihi: faturaTarihi, tutar: Math.abs(tutar), formatKaynagi:'FaturaIade', gecerli:true, faturaNo: r['Fatura Numarası']});
         return;
       }
@@ -9924,11 +10064,18 @@ document.getElementById('sevkMusteriDahaFazlaBtn').addEventListener('click', ()=
 async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, aramaMetni){
   if(!selectedDate) return [];
   const birlesikArsiv = await faturaKontrolArsivBirlestirCached(state.faturaArsivCache);
+  // Seçili tarihten bir önceki günün anahtarı (YYYY-MM-DD) — "Önceki Gün Tahsilatı" alanı için.
+  // dateVal input'u zaten yerel (Türkiye) takvim günü olarak geldiğinden, saat dilimi kaymasına
+  // yol açmaması için doğrudan Date(y,m,d) ile bir gün geriye gidilip dateKeyLocal ile anahtara çevrilir.
+  const [selY, selM, selD] = selectedDate.split('-').map(Number);
+  const oncekiGunDate = new Date(selY, (selM-1), selD-1);
+  const oncekiGunKey = dateKeyLocal(oncekiGunDate);
+
   const eslesen = new Map();
   (birlesikArsiv.siparisArsiv||[]).forEach(r=>{
     if(!r.istenilenTeslimTarihi) return;
     if(dateKeyLocal(r.istenilenTeslimTarihi) !== selectedDate) return;
-    if(!eslesen.has(r.musteri)) eslesen.set(r.musteri, {seciliSiparis:0, seciliTahsilat:0, musteriAdi:null, temsilci:null});
+    if(!eslesen.has(r.musteri)) eslesen.set(r.musteri, {seciliSiparis:0, seciliTahsilat:0, oncekiGunTahsilat:0, musteriAdi:null, temsilci:null});
     const e = eslesen.get(r.musteri);
     e.seciliSiparis += (r.tutar||0);
     // Arşivdeki sipariş kaydı, o günün KENDİ isim/temsilci bilgisini taşır — mevcut oturumda
@@ -9939,14 +10086,28 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
   });
   (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
     if(!r.belgeTarihi) return;
-    if(dateKeyLocal(r.belgeTarihi) !== selectedDate) return;
-    if(!eslesen.has(r.musteri)) eslesen.set(r.musteri, {seciliSiparis:0, seciliTahsilat:0, musteriAdi:null, temsilci:null, seciliTahsilatKaynak:{normal:0, bozukIade:0, depozito:0}});
-    const e = eslesen.get(r.musteri);
-    if(!e.seciliTahsilatKaynak) e.seciliTahsilatKaynak = {normal:0, bozukIade:0, depozito:0};
-    e.seciliTahsilat += (r.tutar||0);
-    if(r.formatKaynagi==='FaturaIade') e.seciliTahsilatKaynak.bozukIade += r.tutar||0;
-    else if(r.formatKaynagi==='DepozitoTahsilat') e.seciliTahsilatKaynak.depozito += r.tutar||0;
-    else e.seciliTahsilatKaynak.normal += r.tutar||0;
+    const rGunKey = dateKeyLocal(r.belgeTarihi);
+    if(rGunKey === selectedDate){
+      // YENİ KURAL: Fatura Kontrol'de kart, SADECE o gün siparişi olan müşteriler için gösterilir.
+      // Bu yüzden tahsilat kaydı, o müşteri için "eslesen" map'inde YENİ bir satır AÇMAZ — sadece
+      // sipariş bloğunda zaten eklenmiş olan müşterinin tahsilat bilgisini doldurur.
+      if(!eslesen.has(r.musteri)) return;
+      const e = eslesen.get(r.musteri);
+      if(!e.seciliTahsilatKaynak) e.seciliTahsilatKaynak = {normal:0, bozukIade:0, depozito:0};
+      e.seciliTahsilat += (r.tutar||0);
+      if(r.formatKaynagi==='FaturaIade') e.seciliTahsilatKaynak.bozukIade += r.tutar||0;
+      else if(r.formatKaynagi==='DepozitoTahsilat') e.seciliTahsilatKaynak.depozito += r.tutar||0;
+      else e.seciliTahsilatKaynak.normal += r.tutar||0;
+    } else if(rGunKey === oncekiGunKey){
+      // Bir önceki güne ait tahsilat: yeni "Önceki Gün Tahsilatı" alanı için ayrıca toplanır.
+      // YENİ KURAL: bu da yalnızca seçili günde zaten siparişi olup "eslesen" map'inde bulunan
+      // müşteriler için doldurulur; tek başına yeni bir satır/kart açmaz.
+      if(!eslesen.has(r.musteri)) return;
+      const e = eslesen.get(r.musteri);
+      e.oncekiGunTahsilat += (r.tutar||0);
+      if(!e.musteriAdi && r.musteriAdi) e.musteriAdi = r.musteriAdi;
+      if(!e.temsilci && r.temsilci) e.temsilci = r.temsilci;
+    }
   });
 
   const q = String(aramaMetni||'').trim().toLocaleLowerCase('tr-TR');
@@ -9973,7 +10134,7 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
     // Genel Rapor'un "bugüne en yakın gün" bazlı dökümü değil) o güne özgü kaynak dağılımıyla
     // gösterilir (bkz. renderMusteriDetail'daki alinanTahsilatKaynak kullanımı).
     const toplamRisk = m.__bakiyesiz ? v.seciliSiparis : m.toplamRisk;
-    rows.push(Object.assign({}, m, {seciliSiparis: v.seciliSiparis, seciliTahsilat: v.seciliTahsilat, alinanTahsilat: v.seciliTahsilat, alinanTahsilatKaynak: v.seciliTahsilatKaynak || null, toplamRisk}));
+    rows.push(Object.assign({}, m, {seciliSiparis: v.seciliSiparis, seciliTahsilat: v.seciliTahsilat, oncekiGunTahsilat: v.oncekiGunTahsilat||0, alinanTahsilat: v.seciliTahsilat, alinanTahsilatKaynak: v.seciliTahsilatKaynak || null, toplamRisk}));
   });
 
   const {key,dir} = state.fkSort;
@@ -10045,6 +10206,7 @@ async function renderFaturaKontrolTable(report, resetSayfa=true){
       <div class="htk-inline-stats">
         <div class="htk-stat-item"><span class="l">Sipariş</span><span class="v${m.seciliSiparis>0?' c-siparis':' zero'}">${m.seciliSiparis>0?TL(m.seciliSiparis):'—'}</span></div>
         <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.seciliTahsilat>0?' c-tahsilat':' zero'}">${m.seciliTahsilat>0?TL(m.seciliTahsilat):'—'}</span></div>
+        <div class="htk-stat-item"><span class="l">Önceki Gün Tahsilatı</span><span class="v${m.oncekiGunTahsilat>0?' c-tahsilat':' zero'}">${m.oncekiGunTahsilat>0?TL(m.oncekiGunTahsilat):'—'}</span></div>
       </div>
       <div class="htk-alt">
         <span class="htk-ceksenet">Çek/Senet: ${TL(m.cekSenet||0)}</span>
