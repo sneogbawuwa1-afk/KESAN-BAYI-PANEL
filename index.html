@@ -17,7 +17,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Bayi Takip">
 <title>Keşan Bayi Takip Paneli</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+<!-- xlsx: dosya okuma/yazma için KRİTİK bağımlılık. crossorigin eklendi; ayrıca alt-yüklenme
+     durumunda (CDN erişilemezse) uygulama sessizce çökmesin diye çalışma zamanında window.XLSX
+     kontrolü yapılır (bkz. handleFiles / xlsxHazirMi). Bütünlük (SRI) için: güvenli bir ortamda
+     `openssl dgst -sha384 -binary xlsx.full.min.js | openssl base64 -A` ile üretilen hash'i
+     integrity="sha384-..." olarak bu etikete ekleyebilirsiniz (hash sürüme özeldir). -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" defer onerror="window.__xlsxYuklenemedi=true;"></script>
 <!-- Firebase Authentication — MODÜLER (tree-shakable) SDK, compat modu yerine. Google, compat
      paketlerini gelecekte tamamen kaldıracağını duyurdu; bu yüzden namespaced (firebase.auth())
      API yerine modüler (getAuth(), onAuthStateChanged() vb.) API kullanılıyor. Modüler SDK
@@ -45,6 +50,19 @@
 <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet';">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
 <style>
+  /* ==========================================================================
+     KIRILIM NOKTALARI (BREAKPOINT) HARİTASI
+     Bakım kolaylığı için: aşağıdaki eşikler farklı bileşenlerin geçiş noktalarıdır.
+     Değerler birbirine yakın görünse de her biri AYRI bir bileşeni hedefler; bu yüzden
+     körlemesine tek değere birleştirilmemelidir (görsel regresyon riski).
+       • 980 / 981 px  → ANA eşik: sidebar (masaüstü) ↔ drawer (mobil) geçişi.
+       • 760 / 761 px  → app header, KPI grid, #app padding, modal zoom.
+       • 800 / 820 px  → trend grid kolonları, müşteri kartı (cust-card) stat şeridi.
+       • 640 / 680 px  → orta ölçek kart/tablo düzenlemeleri.
+       • 480 / 420 px  → küçük telefon ince ayarları.
+       • 1000–1900 px  → geniş ekranlarda içerik genişliği/ölçek üst sınırları.
+     Yeni bir eşik eklemeden önce mevcut bir eşiğe yaslanabilir misin diye kontrol et.
+     ========================================================================== */
   :root{
     --bg:#EEF1F6;
     --surface:#FFFFFF;
@@ -83,8 +101,10 @@
      kaydırmayı "sayfada geri git" jesti olarak yorumlama eğilimini azaltır — sidebar
      sürükleme jestinin (bkz. touchstart/touchmove kodu) tarayıcıyla çakışma ihtimalini düşürür.
      Not: bu, OS seviyesindeki (Safari'nin kendi edge-back jesti gibi) davranışları tam
-     engelleyemeyebilir; JS tarafındaki kenar payının (KENAR_BASLANGIC_PAYI) geniş tutulması
-     bu yüzden önemli. */
+     engelleyemeyebilir. Jest artık SAYFANIN HER YERİNDEN başlayabiliyor (eski "sadece sol
+     kenardaki dar bölge" kısıtlaması kaldırıldı, bkz. touchstart kodundaki açıklama) — bu
+     yüzden bu overscroll-behavior kuralı, kenar-jesti çakışma riskini azaltan tek koruma
+     olarak daha da önemli hale geldi. */
   html{overscroll-behavior-x:none;}
   html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable;}
   body{
@@ -408,12 +428,17 @@
   }
   .check-item:hover{border-color:var(--line);box-shadow:var(--shadow);transform:translateY(-1px);}
   .check-item.done{border-color:var(--success);border-left:3px solid var(--success);background:var(--success-soft);}
+  /* Dosya tipi tanındı ama içi boş (0 veri satırı) — "done" (yeşil) ile karıştırılmasın diye
+     ayrı bir uyarı rengi (--warn) kullanılıyor; kullanıcı bunu normal bir başarı durumuyla
+     yanlışlıkla eş tutmamalı. */
+  .check-item.bos-veri-uyari{border-color:var(--warn);border-left:3px solid var(--warn);background:var(--warn-soft);}
   .check-icon{
     width:24px;height:24px;border-radius:50%;flex-shrink:0;margin-top:1px;
     display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;
     background:var(--bg);border:1.5px solid var(--line);color:var(--ink-faint);
   }
   .check-item.done .check-icon{background:var(--success);border-color:var(--success);color:#fff;}
+  .check-item.bos-veri-uyari .check-icon{background:var(--warn);border-color:var(--warn);color:#fff;}
   .check-name{font-weight:700;font-size:13px;color:var(--ink);display:flex;align-items:center;flex-wrap:wrap;gap:7px;}
   .check-tag{font-size:9.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:100px;}
   .check-tag.req{background:var(--danger-soft);color:var(--danger);}
@@ -775,7 +800,7 @@
     border-radius:10px;padding:6px 11px;min-width:56px;cursor:help;
   }
   .stokgun-badge .n{font-family:var(--font-figures);font-weight:800;font-size:17px;line-height:1;}
-  .stokgun-badge .l{font-size:8.5px;font-weight:700;letter-spacing:.03em;margin-top:3px;opacity:.85;}
+  .stokgun-badge .l{font-size:10px;font-weight:700;letter-spacing:.03em;margin-top:3px;opacity:.85;}
 
   .urun-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;flex-shrink:0;}
   .urun-stat-grid.urun-stat-grid-2{grid-template-columns:repeat(2,1fr);}
@@ -786,7 +811,7 @@
   .urun-stat-chip-split-row{display:flex;gap:0;margin-top:4px;justify-content:center;align-items:center;}
   .urun-stat-chip-split-item{display:flex;flex-direction:column;align-items:center;line-height:1.2;padding:2px 9px;}
   .urun-stat-chip-split-divider{width:1px;align-self:stretch;background:var(--line);opacity:.7;margin:1px 0;}
-  .urun-stat-chip-split-item .k{font-size:8px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
+  .urun-stat-chip-split-item .k{font-size:9.5px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;}
   .urun-stat-chip-split-item.gel .k{color:#B8541A;}
   .urun-stat-chip-split-item.mod .k{color:#1D5FB8;}
   .urun-stat-chip-split-item .v{font-family:var(--font-figures);font-size:13px;font-weight:800;margin-top:2px;}
@@ -1321,7 +1346,7 @@
   }
   .senet-baslik{font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:.06em;color:#1F2E4A;border-bottom:2px solid var(--accent);padding-bottom:3px;display:inline-block;}
   .senet-alacakli{text-align:right;}
-  .senet-alacakli-label{font-size:8.5px;font-weight:700;color:#71809A;letter-spacing:.06em;}
+  .senet-alacakli-label{font-size:10px;font-weight:700;color:#71809A;letter-spacing:.06em;}
   .senet-alacakli-adi{font-size:11px;font-weight:700;color:#1F2E4A;max-width:260px;line-height:1.3;margin-top:1px;}
   .senet-ust-tablo{width:100%;border-collapse:collapse;margin-bottom:14px;}
   .senet-ust-tablo th{
@@ -1349,7 +1374,7 @@
   .senet-taraf-box p b{color:#5C6577;font-weight:600;}
   .senet-imza-blok{min-height:1px;}
   .senet-alt-bilgi{
-    display:flex;justify-content:space-between;font-size:7.5px;color:#B7BCC7;
+    display:flex;justify-content:space-between;font-size:9.5px;color:#B7BCC7;
     margin-top:8px;letter-spacing:.03em;
   }
   @page{size:A5 landscape;margin:0;}
@@ -1576,6 +1601,15 @@
   }
   .gvy-panel.open{display:block;}
   .gvy-panel-title{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);padding:2px 4px 10px;}
+  /* İki sekmeli panel: "Günlük Veri" (Grup C) ve "Arşiv Verisi" (Grup B) */
+  .gvy-tabs{display:flex;gap:6px;background:rgba(255,255,255,.08);padding:4px;border-radius:10px;margin-bottom:12px;}
+  .gvy-tab{flex:1;border:none;background:transparent;color:rgba(255,255,255,.6);font-weight:700;font-size:12px;padding:8px 6px;border-radius:7px;cursor:pointer;white-space:nowrap;}
+  .gvy-tab.active{background:#fff;color:var(--navy);}
+  .gvy-tab:hover:not(.active){color:#fff;}
+  .gvy-tabpane{display:none;}
+  .gvy-tabpane.active{display:block;}
+  .gvy-uyari{font-size:11.5px;color:#F3C969;background:rgba(243,201,105,.12);border:1px solid rgba(243,201,105,.25);border-radius:8px;padding:8px 10px;margin-bottom:10px;display:none;}
+  .gvy-uyari.goster{display:block;}
   .gvy-row{
     display:flex;align-items:center;justify-content:space-between;gap:10px;
     padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.08);
@@ -1661,7 +1695,7 @@
   .gb-donut-svg-wrap svg{width:100%;height:100%;}
   .gb-donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;}
   .gb-donut-center-val{font-family:var(--font-figures);font-size:15px;font-weight:700;color:var(--ink);line-height:1.15;}
-  .gb-donut-center-lbl{font-size:8.5px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:1px;}
+  .gb-donut-center-lbl{font-size:10px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-top:1px;}
   .gb-donut-center-big{font-family:var(--font-figures);font-size:18px;font-weight:700;line-height:1.1;}
   .gb-donut-legend{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1;}
   .gb-donut-legend-row{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink-soft);white-space:nowrap;}
@@ -1678,7 +1712,7 @@
     font-size:11.5px;font-weight:700;padding:6px 12px;border-radius:100px;cursor:pointer;
     display:inline-flex;align-items:center;gap:6px;transition:all .15s ease;
   }
-  .gb-chip i{font-size:7px;}
+  .gb-chip i{font-size:9px;}
   .gb-chip:hover{border-color:var(--accent);}
   .gb-chip[data-risk="ortVade"]:hover{border-color:var(--danger);color:var(--danger);}
   .gb-chip[data-risk="hakedis"]:hover{border-color:#1D5FB8;color:#1D5FB8;}
@@ -1743,7 +1777,7 @@
   .gb-realizasyon-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
   .gb-realizasyon-ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
   .gb-realizasyon-ring-pct{font-family:var(--font-figures);font-size:19px;font-weight:800;color:#F0DCA6;line-height:1.1;}
-  .gb-realizasyon-ring-lbl{font-size:8.5px;color:rgba(255,255,255,.6);font-weight:700;margin-top:2px;line-height:1.25;text-align:center;}
+  .gb-realizasyon-ring-lbl{font-size:10px;color:rgba(255,255,255,.6);font-weight:700;margin-top:2px;line-height:1.25;text-align:center;}
   .gb-realizasyon-info{min-width:0;flex:1;}
   .gb-realizasyon-label{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase;}
   .gb-realizasyon-value{font-family:var(--font-figures);font-size:28px;font-weight:800;color:#F0DCA6;margin-top:5px;line-height:1.1;}
@@ -1822,7 +1856,7 @@
     <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Excel dosyalarını sürükleyip bırakın veya seçmek için Enter'a basın">
       <i class="fa-solid fa-cloud-arrow-up" style="font-size:32px;color:#8A6D1F;" aria-hidden="true"></i>
       <div class="dz-title">Excel dosyalarını buraya sürükleyin ya da tıklayıp seçin</div>
-      <div class="dz-sub">Sistem her dosyayı <b>otomatik tanır</b> (Kalemler, Çek/Senet, Ticari Stok, Müşteri Master, Ciro Primi, Dönemsel İskonto). Sipariş/Tahsilat/Fatura/Depozito Tahsilat/Bayi Hak Ediş/Yükleme Raporu artık üst panelden ("Günlük Veri Yükle"), Sell Out Raporu ise Geleneksel Kanal sekmesinden yüklenir.</div>
+      <div class="dz-sub">Bu ekrandan <b>Kalemler</b> (zorunlu) ve <b>Müşteri Master</b> (opsiyonel) yüklenir. Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto artık üst menüdeki <b>"Veri Yükle → Günlük Veri"</b> sekmesinden; Sipariş/Tahsilat/Fatura/Depozito/Bayi Hak Ediş/Yükleme ve Kanal Raporları ise <b>"Veri Yükle → Arşiv Verisi"</b> sekmesinden yüklenir.</div>
     </div>
     <input type="file" id="fileInput" accept=".xlsx,.xls" multiple />
 
@@ -1835,43 +1869,11 @@
           <div class="check-meta"></div>
         </div>
       </div>
-      <div class="check-item" data-type="cekSenet">
-        <div class="check-icon"></div>
-        <div>
-          <div class="check-name">Çek / Senet Riski <span class="check-tag opt">Opsiyonel</span></div>
-          <div class="check-desc">Esas Borçlu, Çek/Senet Numarası kolonlarını içeren risk listesi — opsiyonel ve her gün yüklenmesi gerekmez; en son yüklenen dosya buluta kaydedilip yeni biri yüklenene kadar kullanılmaya devam eder</div>
-          <div class="check-meta"></div>
-        </div>
-      </div>
-      <div class="check-item" data-type="ticariStok">
-        <div class="check-icon"></div>
-        <div>
-          <div class="check-name">Ticari Stok <span class="check-tag opt">Opsiyonel</span></div>
-          <div class="check-desc">Malzeme Kodu, Depoda Kalan Mk./Lt. kolonlarını içeren nokta bazlı stok dökümü — opsiyonel ve her gün yüklenmesi gerekmez; en son yüklenen dosya buluta kaydedilip yeni biri yüklenene kadar kullanılmaya devam eder</div>
-          <div class="check-meta"></div>
-        </div>
-      </div>
       <div class="check-item" data-type="musteriMaster">
         <div class="check-icon"></div>
         <div>
           <div class="check-name">Müşteri Master <span class="check-tag opt">Opsiyonel</span></div>
           <div class="check-desc">Müşteri, Tabela Adı, Satış Temsilcisi Adı, Kredi limiti kolonlarını içeren müşteri ana veri dökümü — tüm raporlardaki müşteri→temsilci eşleşmesini bu dosya belirler (Satış Temsilcisi Adı boşsa otomatik "Key Account" yazılır). Bir "Durum" kolonu varsa (Aktif/Pasif), Sell Out Raporu'ndaki FKNS hesabı için de kullanılır. Opsiyonel ve her gün yüklenmesi gerekmez; en son yüklenen dosya buluta kaydedilip yeni biri yüklenene kadar kullanılmaya devam eder</div>
-          <div class="check-meta"></div>
-        </div>
-      </div>
-      <div class="check-item" data-type="ciroPrimi">
-        <div class="check-icon"></div>
-        <div>
-          <div class="check-name">Ciro Primi <span class="check-tag opt">Opsiyonel</span></div>
-          <div class="check-desc">Müşteri, Nokta Adı, Grup Tanım, Net Tutar kolonlarını içeren ciro primi dökümü — "Bayi Hakediş" raporunu oluşturur; opsiyonel ve her gün yüklenmesi gerekmez, en son yüklenen dosya buluta kaydedilip yeni biri yüklenene kadar kullanılmaya devam eder</div>
-          <div class="check-meta"></div>
-        </div>
-      </div>
-      <div class="check-item" data-type="donemselIskonto">
-        <div class="check-icon"></div>
-        <div>
-          <div class="check-name">Dönemsel İskonto <span class="check-tag opt">Opsiyonel</span></div>
-          <div class="check-desc">Nokta Kodu, Nokta Adı, Hakediş Tutar kolonlarını içeren dönemsel iskonto/bayi ödeme dökümü — Ciro Primi ile birleşerek "Bayi Hakediş" raporunu oluşturur; opsiyonel ve her gün yüklenmesi gerekmez, en son yüklenen dosya buluta kaydedilip yeni biri yüklenene kadar kullanılmaya devam eder</div>
           <div class="check-meta"></div>
         </div>
       </div>
@@ -1954,11 +1956,63 @@
         <span class="pill" id="statusPillMain" role="status" aria-live="polite"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMainMsg">Veri bekleniyor</span></span>
 
         <div class="gvy-wrap" id="gvyWrap">
-          <button type="button" class="gvy-btn" id="gvyToggleBtn" aria-haspopup="true" aria-expanded="false" aria-controls="gvyPanel" title="Sipariş, Tahsilat, Fatura, Depozito Tahsilat ve Bayi Hak Ediş dosyalarını buradan yükleyin">
-            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Günlük Veri Yükle
+          <button type="button" class="gvy-btn" id="gvyToggleBtn" aria-haspopup="true" aria-expanded="false" aria-controls="gvyPanel" title="Günlük güncelleme (Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto) ve arşiv verisi (Sipariş, Tahsilat, Fatura, Depozito, Bayi Hak Ediş, Yükleme + Kanal Raporları) dosyalarını buradan yükleyin">
+            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Veri Yükle
           </button>
-          <div class="gvy-panel" id="gvyPanel" role="dialog" aria-label="Günlük Veri Yükle">
-            <div class="gvy-panel-title">Günlük Veri Yükle</div>
+          <div class="gvy-panel" id="gvyPanel" role="dialog" aria-label="Veri Yükle">
+
+            <!-- İki sekmeli panel: Günlük Veri (Grup C) + Arşiv Verisi (Grup B) -->
+            <div class="gvy-tabs" role="tablist">
+              <button type="button" class="gvy-tab active" id="gvyTabGunluk" data-gvy-tab="gunluk" role="tab" aria-selected="true">Günlük Veri</button>
+              <button type="button" class="gvy-tab" id="gvyTabArsiv" data-gvy-tab="arsiv" role="tab" aria-selected="false">Arşiv Verisi</button>
+            </div>
+
+            <!-- Bugün Kalemler yüklenmemişse gösterilecek uyarı (JS ile açılır/kapanır) -->
+            <div class="gvy-uyari" id="gvyKalemlerUyari"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Güne başlamak için önce ana ekrandan bugünün <b>Kalemler</b> dosyasını yükleyip "Raporu Oluştur"a basın. Kalemler yüklenmeden veri güncellemesi yapılamaz.</div>
+
+            <!-- ===================== SEKME 1: GÜNLÜK VERİ (GRUP C) ===================== -->
+            <div class="gvy-tabpane active" id="gvyPaneGunluk" role="tabpanel" aria-labelledby="gvyTabGunluk">
+              <div class="gvy-panel-title">Günlük Veri Yükle</div>
+
+              <div class="gvy-row" data-gvc-type="cekSenet">
+                <div><div class="gvy-row-label">Çek / Senet Riski</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
+                <div class="gvy-row-btns">
+                  <button type="button" class="gvy-file-btn" data-gvc-filebtn>Dosya Seç</button>
+                  <button type="button" class="gvy-remove-btn" data-gvc-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="gvy-row" data-gvc-type="ticariStok">
+                <div><div class="gvy-row-label">Ticari Stok</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
+                <div class="gvy-row-btns">
+                  <button type="button" class="gvy-file-btn" data-gvc-filebtn>Dosya Seç</button>
+                  <button type="button" class="gvy-remove-btn" data-gvc-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="gvy-row" data-gvc-type="ciroPrimi">
+                <div><div class="gvy-row-label">Ciro Primi</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
+                <div class="gvy-row-btns">
+                  <button type="button" class="gvy-file-btn" data-gvc-filebtn>Dosya Seç</button>
+                  <button type="button" class="gvy-remove-btn" data-gvc-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <div class="gvy-row" data-gvc-type="donemselIskonto">
+                <div><div class="gvy-row-label">Dönemsel İskonto</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
+                <div class="gvy-row-btns">
+                  <button type="button" class="gvy-file-btn" data-gvc-filebtn>Dosya Seç</button>
+                  <button type="button" class="gvy-remove-btn" data-gvc-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                </div>
+              </div>
+              <input type="file" id="gvcFileInput" accept=".xlsx,.xls" multiple style="display:none;" />
+              <div class="gvy-actions">
+                <button type="button" class="gvy-update-btn" id="gvcUpdateBtn">Verileri Güncelle</button>
+              </div>
+              <div class="gvy-status-msg" id="gvcStatusMsg"></div>
+              <div class="gvy-last-sync" style="font-size:10.5px;">Dosyalar en son yüklenen Kalemler ile hesaplanır ve kartlar anında güncellenir — gün içinde tekrar Kalemler yüklemenize gerek yoktur.</div>
+            </div>
+
+            <!-- ===================== SEKME 2: ARŞİV VERİSİ (GRUP B) ===================== -->
+            <div class="gvy-tabpane" id="gvyPaneArsiv" role="tabpanel" aria-labelledby="gvyTabArsiv">
+            <div class="gvy-panel-title">Arşiv Verisi Yükle</div>
 
             <div class="gvy-row" data-gvy-type="siparis">
               <div><div class="gvy-row-label">Sipariş Dökümü</div><div class="gvy-row-sub" data-gvy-sub></div><div class="gvy-row-arsivgun" data-gvy-arsivgun></div></div>
@@ -2054,6 +2108,8 @@
             </div>
             <div class="gvy-status-msg" id="gvyStatusMsg"></div>
             <div class="gvy-last-sync" id="gvyLastSync">Son güncelleme: —</div>
+            </div><!-- /gvyPaneArsiv (Grup B) -->
+
           </div>
         </div>
 
@@ -2658,7 +2714,7 @@
 
       <div class="panel" id="sellOutKendiYuklemePanel">
         <div class="panel-body" style="font-size:11.5px;color:var(--ink-faint);">
-          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Geleneksel Kanal dosya yükleme alanı artık üst paneldeki <b>"Günlük Veri Yükle"</b> içinde ("Kanal Raporları" bölümü). "Bu Ayı Arşivle" işlemi burada, aşağıda kalmaya devam eder.
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Geleneksel Kanal dosya yükleme alanı artık üst menüdeki <b>"Veri Yükle → Arşiv Verisi"</b> sekmesinde ("Kanal Raporları" bölümü). "Bu Ayı Arşivle" işlemi burada, aşağıda kalmaya devam eder.
         </div>
       </div>
 
@@ -2722,7 +2778,7 @@
 
       <div class="panel" id="modernKanalKendiYuklemePanel">
         <div class="panel-body" style="font-size:11.5px;color:var(--ink-faint);">
-          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Modern Kanal dosya yükleme alanı artık üst paneldeki <b>"Günlük Veri Yükle"</b> içinde ("Kanal Raporları" bölümü). "Bu Ayı Arşivle" / "Tüm Ayları Toplu Arşivle" işlemleri burada, aşağıda kalmaya devam eder.
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Modern Kanal dosya yükleme alanı artık üst menüdeki <b>"Veri Yükle → Arşiv Verisi"</b> sekmesinde ("Kanal Raporları" bölümü). "Bu Ayı Arşivle" / "Tüm Ayları Toplu Arşivle" işlemleri burada, aşağıda kalmaya devam eder.
         </div>
       </div>
 
@@ -3522,6 +3578,18 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
+// Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
+// konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
+// bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
+const DEBUG = false;
+function dwarn(...a){ if(DEBUG) console.warn(...a); }
+
+// ---- KANAL TEŞHİS (üretimde KAPALI) ----
+// Sell Out (Geleneksel) ve Modern Kanal veri akışında ileride bir sorun olursa, aşağıdaki bayrağı
+// true yapıp tarayıcı konsolunda (F12 → Console) her adımın "[KANAL]" etiketli izini görebilirsiniz.
+// Normal kullanımda false — hiçbir şey konsola yazılmaz, performansa etkisi yoktur.
+const KANAL_TESHIS = false;
+function ktlog(...a){ if(KANAL_TESHIS) console.log('%c[KANAL]', 'background:#13233F;color:#F3C969;padding:1px 5px;border-radius:3px;', ...a); }
 const state = {
   files: { kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null },
   report: null,
@@ -3540,6 +3608,8 @@ const state = {
   faturaModalYedekMap: new Map(), // musteri kodu -> tam satır (bakiyesiz müşteriler için — report.musteriler'de kaydı olmayanların çek/senet detayını Detay popup'ında göstermek amacıyla)
   musteriMasterMap: new Map(),
   musteriMasterDetay: new Map(), // musteri kodu -> {tabelaAdi, musteriAdi, vergiNo, tcKimlikNo, adres, il, ilce} (senet basımı için)
+  filesC: {}, // Grup C ("Günlük Veri Yükle") panelinde o an SEÇİLİ ama henüz KAYDEDİLMEMİŞ dosyalar: {tip: {name,headers,data}}
+  bugunKalemlerHazir: false, // Bugün için Kalemler yüklendi mi? (bellekte VEYA bugüne ait tek-slot arşivinde) — Grup B/C kilidi bunu kullanır. bugunKalemlerDurumTazele() günceller.
   sellOutKendiDosya: null, // Sell Out sekmesindeki bağımsız yükleme alanından seçilen dosyanın ham verisi ({data, ad})
   stokGunKendiDosya: null, // Stok Gün sekmesindeki bağımsız yükleme alanından seçilen Malzemeler dosyasının ham verisi ({data, ad})
   stokGunTumRows: [], // Stok Gün tablosunun filtrelenmemiş tam veri seti (arama kutusu bunun üzerinde filtreler)
@@ -4382,7 +4452,7 @@ async function faturaKontrolArsivBirlestirCached(arsiv){
 // silinmemeli. Bu fonksiyon artık kasıtlı olarak hiçbir şey yapmayan güvenli bir no-op'tur;
 // başka bir yerden çağrılırsa bile arşive dokunmaz.
 async function clearFaturaKontrolArsiv(){
-  console.warn('clearFaturaKontrolArsiv() devre dışı bırakıldı — arşiv kalıcı olarak korunuyor.');
+  dwarn('clearFaturaKontrolArsiv() devre dışı bırakıldı — arşiv kalıcı olarak korunuyor.');
 }
 
 // Uygulamadaki TÜM şifre korumalı işlemler (hedef litre düzenleme, arşivleme, arşiv temizleme vb.)
@@ -4452,6 +4522,16 @@ function cloudEnabled(){ return !!(CLOUD.dbUrl && CLOUD.dbUrl.trim()); }
 // (hiç sonuçlanmamasına) yol açar. Bulut ile ilgili TÜM istekler bu sarmalayıcıdan geçer; belirli
 // bir süre (varsayılan 15 sn) içinde yanıt gelmezse istek iptal edilir ve normal bir hata olarak
 // fırlatılır, böylece çağıran taraftaki try/catch bloğu devreye girip yerel/mevcut veriye döner.
+// Bir Promise'i zaman aşımıyla yarıştırır: süre dolarsa verilen yedek değerle (varsayılan null)
+// çözülür — asla reddetmez. Açılış gibi kritik akışların, tek bir takılan bulut isteği yüzünden
+// SONSUZA KADAR beklememesi için kullanılır (donma yerine "elimizdekiyle devam et").
+function zamanAsimliYaris(promise, ms, yedekDeger){
+  return Promise.race([
+    Promise.resolve(promise).catch(()=> yedekDeger),
+    new Promise(resolve=> setTimeout(()=> resolve(yedekDeger), ms)),
+  ]);
+}
+
 async function cloudFetch(url, options, timeoutMs){
   timeoutMs = timeoutMs || 15000;
   const controller = new AbortController();
@@ -4566,16 +4646,47 @@ try{
   }
 }catch(err){ console.error('Firebase Authentication başlatılamadı:', err); }
 
+// PERFORMANS DÜZELTMESİ: Açılışta 10 bulut isteği paralel (Promise.all ile) tetiklendiğinde,
+// her biri authQuery() çağırıp KENDİ getIdToken(true) isteğini atıyordu — yani aynı anda 10 ayrı
+// "taze token" isteği Firebase Auth sunucusuna gidiyordu, hepsi de pratikte aynı token'ı
+// döndürecekken. Aşağıdaki kısa ömürlü paylaşımlı önbellek (AUTH_TOKEN_TAZELIK_MS içinde),
+// eşzamanlı/art arda gelen çağrıların TEK bir getIdToken(true) isteğini paylaşmasını sağlıyor.
+// 401 riskini azaltan asıl davranış (her birkaç saniyede bir taze token) korunuyor; sadece aynı
+// anda başlayan onlarca isteğin birbirini kopyalaması önleniyor.
+const AUTH_TOKEN_TAZELIK_MS = 4000;
+let authTokenOnbellek = null; // {token, alinanZaman}
+let authTokenBekleyenIstek = null; // devam eden getIdToken(true) Promise'i (varsa)
 async function authQuery(){
   if(!authAktif) return '';
   try{
     const user = window.firebaseAuthAPI.authInstance.currentUser;
     if(!user) return '';
-    // getIdToken() (parametresiz) SDK'nın önbellekteki token'ını döndürür; süresi dolmuşsa normalde
-    // otomatik yeniler ama nadiren (saat kayması, arka arkaya çok sayıda eşzamanlı çağrı vb.) bunu
-    // atlayıp süresi geçmiş bir token döndürebilir — bu da TÜM bulut isteklerinin aynı anda 401
-    // almasına yol açar. getIdToken(true) her seferinde sunucudan taze bir token ister, bu riski ortadan kaldırır.
-    const token = await user.getIdToken(true);
+    const simdi = Date.now();
+    if(authTokenOnbellek && (simdi - authTokenOnbellek.alinanZaman) < AUTH_TOKEN_TAZELIK_MS){
+      return '?auth=' + authTokenOnbellek.token;
+    }
+    // Zaten devam eden bir yenileme isteği varsa (paralel çağrılar), onun sonucunu paylaş —
+    // ikinci bir getIdToken(true) daha başlatma.
+    if(!authTokenBekleyenIstek){
+      // getIdToken() (parametresiz) SDK'nın önbellekteki token'ını döndürür; süresi dolmuşsa normalde
+      // otomatik yeniler ama nadiren (saat kayması, arka arkaya çok sayıda eşzamanlı çağrı vb.) bunu
+      // atlayıp süresi geçmiş bir token döndürebilir — bu da TÜM bulut isteklerinin aynı anda 401
+      // almasına yol açar. getIdToken(true) her seferinde sunucudan taze bir token ister, bu riski ortadan kaldırır.
+      //
+      // KRİTİK DÜZELTME (açılış donması): getIdToken(true) bir AĞ isteğidir ve kendi başına
+      // TIMEOUT'U YOKTUR. Ağ kötüyse / Firebase Auth yanıt vermezse bu Promise hiç resolve olmaz;
+      // authQuery her bulut isteğinde çağrıldığı için açılıştaki Promise.all SONSUZA KADAR asılı
+      // kalır (kullanıcıda "sürekli yükleniyor, hata yok" belirtisi). Aşağıdaki yarış (race), token
+      // AUTH_TOKEN_TIMEOUT_MS içinde gelmezse isteği reddeder — böylece bulut isteği "auth'suz"
+      // devam eder (veya üstteki catch boş döndürür) ve uygulama donmak yerine cihazdaki veriyle açılır.
+      const AUTH_TOKEN_TIMEOUT_MS = 10000;
+      const tokenIstegi = user.getIdToken(true)
+        .then(token=>{ authTokenOnbellek = {token, alinanZaman: Date.now()}; return token; });
+      const zamanAsimi = new Promise((_, reject)=> setTimeout(()=> reject(new Error('auth-token-timeout')), AUTH_TOKEN_TIMEOUT_MS));
+      authTokenBekleyenIstek = Promise.race([tokenIstegi, zamanAsimi])
+        .finally(()=>{ authTokenBekleyenIstek = null; });
+    }
+    const token = await authTokenBekleyenIstek;
     return '?auth=' + token;
   }catch(err){ return ''; }
 }
@@ -4599,7 +4710,7 @@ if(authAktif){
     if(user) girisEkraniGizle(); else girisEkraniGoster();
   });
 }else{
-  console.warn('Firebase Authentication yapılandırılmadı (FIREBASE_CONFIG.apiKey boş) — giriş ekranı devre dışı.');
+  dwarn('Firebase Authentication yapılandırılmadı (FIREBASE_CONFIG.apiKey boş) — giriş ekranı devre dışı.');
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('app').style.display = 'block';
 }
@@ -4921,19 +5032,47 @@ const GRUP_A_TEKIL_DOSYA_TANIMLARI = {
 async function grupATekilDosyaKaydet(tip, data, headers, adi){
   const tanim = GRUP_A_TEKIL_DOSYA_TANIMLARI[tip];
   if(!tanim) return;
+  // Cihaza (IndexedDB) düz obje olarak kaydedilir — orada anahtar kısıtlaması yoktur.
   const obj = { data: data||[], headers: headers||[], adi: adi||'', tarih: new Date().toISOString() };
   const ok = await idbSet(tanim.localKey, obj);
   if(!ok) console.error(LABELS[tip] + ' cihaza kaydedilemedi.');
   if(!cloudEnabled()) return;
   try{
+    // KRİTİK (HTTP 400 düzeltmesi): Firebase Realtime Database, ANAHTAR isimlerinde '.', '$', '#',
+    // '[', ']', '/' karakterlerini yasaklar. Excel kolon başlıkları (ör. "Faturadan Sonr.Gün",
+    // "Çek/Senet Numarası", "Depoda Kalan Mk.") doğrudan JSON anahtarı olarak yazılınca Firebase
+    // PUT'u 400 Bad Request ile REDDEDİYORDU — bu yüzden hiçbir Grup A/C dosyası buluta yazılamıyordu.
+    // Çözüm: data ve headers'ı tek bir JSON STRING olarak (dataJson/headersJson alanlarında) yaz —
+    // string bir DEĞERdir, içindeki noktalar/slash'lar anahtar olmadığı için Firebase'i ilgilendirmez.
+    const bulutObj = {
+      dataJson: JSON.stringify(data||[]),
+      headersJson: JSON.stringify(headers||[]),
+      adi: adi||'',
+      tarih: obj.tarih,
+      format: 'json-string-v1', // okuma tarafı bu bayrakla yeni formatı tanır (eski kayıtlar düz obje)
+    };
     const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${tanim.cloudPath}.json${await authQuery()}`, {
-      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bulutObj),
     });
     if(!res.ok) throw new Error('HTTP '+res.status);
     const simdi = Date.now();
     await cloudMetaYazUzaktan(tanim.cloudPath, simdi);
     await cloudMetaZamaniKaydet(tanim.cloudPath, simdi);
   }catch(err){ console.error(LABELS[tip] + ' buluta kaydedilemedi:', err); }
+}
+
+// Buluttan gelen Grup A tek-slot kaydını normalize eder: yeni format (dataJson/headersJson string)
+// VEYA eski format (düz data/headers dizisi) — ikisini de {data, headers, adi, tarih} olarak döndürür.
+function grupATekilKaydiCoz(ham){
+  if(!ham || typeof ham !== 'object') return null;
+  if(ham.format === 'json-string-v1' || typeof ham.dataJson === 'string'){
+    let data = [], headers = [];
+    try{ data = JSON.parse(ham.dataJson || '[]'); }catch(_){ data = []; }
+    try{ headers = JSON.parse(ham.headersJson || '[]'); }catch(_){ headers = []; }
+    return { data, headers, adi: ham.adi || '', tarih: ham.tarih || null };
+  }
+  // Eski (düz) format — geriye dönük uyumluluk.
+  return { data: ham.data || [], headers: ham.headers || [], adi: ham.adi || '', tarih: ham.tarih || null };
 }
 
 async function grupATekilDosyaYerelOku(tip){
@@ -4950,7 +5089,8 @@ async function grupATekilDosyaBuluttanOku(tip){
     if(!res.ok) throw new Error('HTTP '+res.status);
     const text = await res.text();
     if(!text || text==='null') return null;
-    return JSON.parse(text);
+    // Yeni (json-string-v1) VEYA eski (düz) formatı normalize et.
+    return grupATekilKaydiCoz(JSON.parse(text));
   }catch(err){ console.error(LABELS[tip] + ' buluttan okunamadı:', err); return null; }
 }
 
@@ -4973,6 +5113,31 @@ const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','cekSenet','ci
 // içindeki güvenlik kontrolü bunu yakalayıp net bir hata verir. Aynı GÜN içinde Kalemler bir kez
 // yüklendikten sonra ise (tek-slot kaydının tarihi bugüne aitse) o gün boyunca sınırsız sayıda Grup B
 // güncellemesi yapılabilir, Kalemler'in tekrar seçilmesine gerek kalmaz.
+// "Bugün Kalemler yüklendi mi?" durumunu güvenilir biçimde belirler ve state.bugunKalemlerHazir'a
+// yazar. İki kaynağa bakar: (1) bu oturumda bellekteki state.files.kalemler, (2) tek-slot Kalemler
+// arşivindeki kaydın TARİHİ bugüne aitse. Böylece kullanıcı Kalemler'i yükleyip rapor oluşturduktan
+// sonra (state.files bellekte boşalsa bile) Grup B/C panelleri "Kalemler yok" sanmaz.
+async function bugunKalemlerDurumTazele(){
+  // 1) Bellekte bu oturumda yüklü mü?
+  if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length){
+    state.bugunKalemlerHazir = true;
+    return true;
+  }
+  // 2) Tek-slot arşivinde BUGÜNE ait bir Kalemler kaydı var mı?
+  try{
+    const bugunKey = dateKeyLocal(new Date());
+    let kayit = cloudEnabled() ? await grupATekilDosyaBuluttanOku('kalemler') : null;
+    if(!kayit) kayit = await grupATekilDosyaYerelOku('kalemler');
+    const kayitGunKey = (kayit && kayit.tarih) ? dateKeyLocal(new Date(kayit.tarih)) : null;
+    const varMi = !!(kayit && kayit.data && kayit.data.length && kayitGunKey === bugunKey);
+    state.bugunKalemlerHazir = varMi;
+    return varMi;
+  }catch(_){
+    // Hata durumunda mevcut bilineni koru (yanlışlıkla kilitlememek için).
+    return state.bugunKalemlerHazir;
+  }
+}
+
 async function grupATekilDosyalariHazirla(){
   const tipler = Object.keys(GRUP_A_TEKIL_DOSYA_TANIMLARI);
   const bugunKey = dateKeyLocal(new Date());
@@ -5361,11 +5526,23 @@ const SIGNATURES = {
 };
 const LABELS = { kalemler:'Kalemler (Fatura / Bakiye)', siparis:'Sipariş Dökümü', tahsilat:'Tahsilat Dökümü', cekSenet:'Çek / Senet Riski', ticariStok:'Ticari Stok', fatura:'Fatura Dökümü', bayiHakedis:'Bayi Hak Ediş', yukleme:'Yükleme Raporu', musteriMaster:'Müşteri Master', ciroPrimi:'Ciro Primi', donemselIskonto:'Dönemsel İskonto', sellOut:'Sell Out Raporu', depozitoTahsilat:'Depozito Tahsilatı' };
 
+// "Vadesi gelmiş" fatura eşiği (TEK KAYNAK): bir faturanın "Faturadan Sonr. Gün" değeri bu eşik
+// ve üstündeyse kalan borcu "vadesi gelmiş" sayılır; altındaysa "vadesi gelmemiş" kabul edilir.
+// İş kuralı değişirse yalnızca burası güncellenir (önceden 23 sayısı üç ayrı yere gömülüydü).
+const VADE_ESIGI_GUN = 23;
+
 // GRUP B: bu dosya tipleri artık ana ekran dropzone/checklist'inde DEĞİL, üst panelde
 // ("Günlük Veri Yükle" — bkz. #gvyPanel) yükleniyor. Aynı state.files yapısı ve aynı
 // handleFiles/detectType mekanizması kullanılır — sadece dosya SEÇİMİNİN yapıldığı arayüz
 // ayrı bir yere taşınmıştır; buildReport ve arşivleme mantığına dokunulmamıştır.
 const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme'];
+// Grup C ("Günlük Veri Yükle"): gün içinde sürekli güncellenebilen, son yüklenen hali kalıcı
+// tek-slot arşivde saklanan dosyalar. Bunlar GRUP_A_TEKIL_DOSYA_TANIMLARI'nda zaten kayıtlı
+// (aynı kalıcı mekanizmayı kullanır) ve GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR üyesidir — yani
+// tarih fark etmeksizin en son yüklenen hali otomatik geri getirilir.
+const GRUP_C_DOSYA_TIPLERI = ['cekSenet','ticariStok','ciroPrimi','donemselIskonto'];
+// Grup C'de o an ekranda seçili (henüz kaydedilmemiş) dosya sayısı — buton kilidi için.
+function GRUP_C_HAZIR_SAYISI(){ return GRUP_C_DOSYA_TIPLERI.filter(t=>state.filesC && state.filesC[t]).length; }
 
 function detectType(headers){
   const set = new Set(headers.map(h=>String(h||'').trim()));
@@ -5476,22 +5653,53 @@ function showError(msg){
 }
 function clearError(){ uploadError.style.display='none'; uploadError.textContent=''; }
 
-function handleFiles(fileList){
-  clearError();
-  const files = Array.from(fileList);
-  let unmatched = [];
-  files.forEach(file=>{
+// Kabul edilen dosya uzantıları ve maksimum güvenli boyut (ana iş parçacığında okunduğu için
+// aşırı büyük dosyalar UI'ı dondurabilir — üstünde uyarı verilir ama okuma yine denenir).
+const KABUL_EDILEN_UZANTILAR = ['.xlsx', '.xls'];
+const MAKS_DOSYA_BOYUTU_MB = 25;
+
+// Bir çalışma kitabındaki TÜM sekmeleri sırayla deneyip başlıkları tanınabilen (detectType
+// bir tip döndüren) İLK sekmeyi döndürür. Böylece veri ilk sekmede değil de ikinci/üçüncü
+// sekmedeyse ya da ilk sekme boş bir kapak sayfasıysa dosya sessizce boş okunmaz.
+// Hiçbir sekme tanınamazsa, teşhis için ilk sekmenin başlıklarıyla birlikte null tip döner.
+function ilkUygunSayfayiSec(wb){
+  let ilkParse = null;
+  for(const sheetName of wb.SheetNames){
+    const ws = wb.Sheets[sheetName];
+    if(!ws) continue;
+    const parsed = sheetToObjects(ws);
+    if(ilkParse === null) ilkParse = {...parsed, sheetName};
+    const type = detectType(parsed.headers);
+    if(type) return {type, headers:parsed.headers, data:parsed.data, sheetName};
+  }
+  // Tanınan sekme yok: en azından ilk (boş olmayan) sekmenin başlıklarını teşhise geri ver.
+  return ilkParse ? {type:null, headers:ilkParse.headers, data:ilkParse.data, sheetName:ilkParse.sheetName}
+                  : {type:null, headers:[], data:[], sheetName:null};
+}
+
+// Tek bir dosyayı okur ve {file, durum, mesaj} döndürür (durum: 'ok' | 'bos' | 'taninmadi' | 'hata').
+// Hiçbir yan etki (state/DOM) YOK — çağıran, tüm dosyalar bitince tek seferde uygular ve özetler.
+function dosyaOku(file){
+  return new Promise(resolve=>{
+    // 1) Uzantı doğrulaması: .xlsx/.xls dışındaki dosyalar (ör. sürüklenen bir .pdf/.png) XLSX.read'e
+    //    hiç gitmeden erken, anlaşılır bir mesajla reddedilir.
+    const ad = String(file.name||'');
+    const uzantiUygun = KABUL_EDILEN_UZANTILAR.some(u=>ad.toLowerCase().endsWith(u));
+    if(!uzantiUygun){
+      resolve({file, durum:'hata', mesaj:'"'+ad+'" bir Excel dosyası değil (yalnızca '+KABUL_EDILEN_UZANTILAR.join(' / ')+' desteklenir).'});
+      return;
+    }
+    // 2) Boyut uyarısı (okuma yine denenir).
+    const buyukMu = file.size && file.size > MAKS_DOSYA_BOYUTU_MB*1024*1024;
+
     const reader = new FileReader();
+    reader.onerror = ()=> resolve({file, durum:'hata', mesaj:'Dosya okunamadı: '+ad});
     reader.onload = ev => {
       try{
         const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
-        const ws = wb.Sheets[wb.SheetNames[0]];
-        const {headers, data} = sheetToObjects(ws);
-        const type = detectType(headers);
+        const {type, headers, data} = ilkUygunSayfayiSec(wb);
         if(!type){
-          unmatched.push(file.name);
-          // Sadece "tanınamadı" demek yerine, en yakın eşleşen imzayı (en çok kolonu üst üste
-          // düşen dosya tipini) ve o imzada EKSİK olan kolonları göstererek teşhisi hızlandırır.
+          // En yakın imzayı ve eksik kolonları göstererek teşhisi hızlandır.
           const headerSet = new Set(headers.map(h=>String(h||'').trim()));
           let enYakinTip = null, enYakinEksik = null, enAzEksikSayisi = Infinity;
           Object.keys(SIGNATURES).forEach(tip=>{
@@ -5503,19 +5711,66 @@ function handleFiles(fileList){
             });
           });
           const ipucu = (enYakinTip && enAzEksikSayisi>0 && enAzEksikSayisi<=2)
-            ? ` "${LABELS[enYakinTip]||enYakinTip}" dosyasına en çok benziyor ama şu kolon(lar) eksik: ${enYakinEksik.join(', ')}.`
-            : ` Bulunan kolonlar: ${headers.slice(0,8).join(', ')}${headers.length>8?'…':''}.`;
-          showError('"' + file.name + '" tanınamadı ve atlandı.' + ipucu + ' Beklenen kolon başlıklarını içeren bir SAP dışa aktarım dosyası olduğundan emin olun.');
+            ? ' "'+(LABELS[enYakinTip]||enYakinTip)+'" dosyasına en çok benziyor ama şu kolon(lar) eksik: '+enYakinEksik.join(', ')+'.'
+            : ' Bulunan kolonlar: '+headers.slice(0,8).join(', ')+(headers.length>8?'…':'')+'.';
+          resolve({file, durum:'taninmadi', mesaj:'"'+ad+'" tanınamadı ve atlandı.'+ipucu+' Beklenen kolon başlıklarını içeren bir SAP dışa aktarım dosyası olduğundan emin olun.'});
           return;
         }
-        state.files[type] = {name:file.name, headers, data};
-        updateChecklist();
-        if(typeof updateGvyPanel === 'function') updateGvyPanel();
+        // Başarılı: veriyi taşı (state değişikliği burada yapılır; tek dosya = tek yazma, yarış yok).
+        state.files[type] = {name:ad, headers, data};
+        const bosMu = !data.length;
+        let mesaj = null;
+        if(bosMu){
+          mesaj = '"'+ad+'" '+(LABELS[type]||type)+' olarak tanındı ancak içinde hiç veri satırı yok (yalnızca başlık satırı bulundu). Dosyanın doğru/filtrelenmemiş SAP dışa aktarımı olduğundan emin olun.';
+        } else if(buyukMu){
+          mesaj = '"'+ad+'" '+(LABELS[type]||type)+' olarak işlendi (dosya '+MAKS_DOSYA_BOYUTU_MB+' MB üzerinde olduğundan işlem biraz sürebilir).';
+        }
+        resolve({file, durum:bosMu?'bos':'ok', tip:type, mesaj});
       }catch(err){
-        showError('Dosya okunamadı: ' + file.name + ' — ' + err.message);
+        resolve({file, durum:'hata', mesaj:'Dosya okunamadı: '+ad+' — '+err.message});
       }
     };
     reader.readAsArrayBuffer(file);
+  });
+}
+
+// Birden fazla dosya aynı anda yüklendiğinde her biri kendi asenkron onload'ında showError
+// çağırıp öncekini EZİYORDU (yalnızca son biten mesaj görünüyordu). Artık tüm okumalar
+// Promise.all ile toplanır ve bittiğinde TEK BİRLEŞİK özet gösterilir.
+// xlsx kütüphanesi yüklendi mi? (CDN erişilemezse veya onerror tetiklendiyse false.)
+function xlsxHazirMi(){
+  return typeof XLSX !== 'undefined' && !window.__xlsxYuklenemedi;
+}
+
+function handleFiles(fileList){
+  clearError();
+  const files = Array.from(fileList);
+  if(!files.length) return;
+  // KRİTİK: Excel okuma kütüphanesi (xlsx) yüklenemediyse, dosyalar sessizce/anlamsız hatayla
+  // çökmesin — kullanıcıya net bir açıklama göster ve işlemi durdur.
+  if(!xlsxHazirMi()){
+    showError('Excel okuma bileşeni (xlsx) yüklenemedi. İnternet bağlantınızı kontrol edip sayfayı yenileyin. Sorun sürerse ağ, CDN erişimini (cdnjs.cloudflare.com) engelliyor olabilir.');
+    return;
+  }
+  Promise.all(files.map(dosyaOku)).then(sonuclar=>{
+    const basarili = sonuclar.filter(s=>s.durum==='ok');
+    const bos      = sonuclar.filter(s=>s.durum==='bos');
+    const atlanan  = sonuclar.filter(s=>s.durum==='taninmadi');
+    const hatali   = sonuclar.filter(s=>s.durum==='hata');
+
+    // DOM'u tek seferde güncelle.
+    updateChecklist();
+    if(typeof updateGvyPanel === 'function') updateGvyPanel();
+
+    // Birleşik özet mesajı. Sorunlu (boş/atlanan/hatalı) dosyalar tek tek ayrıntılı listelenir;
+    // sadece başarı varsa hata alanı temiz bırakılır.
+    const sorunlar = [...bos, ...atlanan, ...hatali];
+    if(!sorunlar.length){ clearError(); return; }
+
+    const parcalar = [];
+    if(basarili.length) parcalar.push(basarili.length+' dosya sorunsuz tanındı.');
+    sorunlar.forEach(s=>{ if(s.mesaj) parcalar.push(s.mesaj); });
+    showError(parcalar.join(' '));
   });
 }
 
@@ -5529,27 +5784,40 @@ function updateChecklist(){
     const meta = item.querySelector('.check-meta');
     const info = state.files[type];
     if(info){
-      item.classList.add('done');
-      item.querySelector('.check-icon').innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
-      meta.textContent = info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır';
+      // 0 satırlık dosyalar teknik olarak "yüklendi" sayılsa da (kullanıcı bilerek devam
+      // edebilir, bkz. handleFiles'daki showError uyarısı), checklist'te normal bir "✓ tamam"
+      // ile aynı yeşil görünüme sahip olmaları kullanıcının bu satırı atlamasına neden
+      // olabiliyordu. Boşsa "done" yerine ayrı bir uyarı sınıfı ve ikonuyla gösteriyoruz.
+      const bosDosya = info.data.length === 0;
+      item.classList.toggle('done', !bosDosya);
+      item.classList.toggle('bos-veri-uyari', bosDosya);
+      item.querySelector('.check-icon').innerHTML = bosDosya
+        ? '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+      meta.textContent = info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır' + (bosDosya ? ' — ⚠️ veri boş' : '');
     }else{
       item.classList.remove('done');
     }
   });
-  // Ana ekrandaki "kaç dosya hazır" durumu artık SADECE ana ekranda gösterilen dosya tiplerini
-  // sayar — Sipariş/Tahsilat/Fatura/Depozito Tahsilat/Bayi Hak Ediş üst paneldeki "Günlük Veri
-  // Yükle" akışına taşındı (bkz. GVY_DOSYA_TIPLERI), Sell Out Raporu ise zaten Geleneksel Kanal
-  // sekmesindeki kendi bağımsız yükleme alanından (Modern Kanal ile aynı desen) yükleniyor —
-  // ana ekranda ayrıca zorunlu/sayılan bir dosya olarak görünmemeli.
-  const anaEkranTipleri = Object.keys(state.files).filter(t=> !GVY_DOSYA_TIPLERI.includes(t) && t!=='sellOut');
-  const allLoaded = anaEkranTipleri.every(t=> Boolean(state.files[t]));
+  // Ana ekran (Grup A) artık YALNIZCA Kalemler (zorunlu) + Müşteri Master (opsiyonel) gösterir.
+  // Sayaç bu iki dosyaya göre hesaplanır — Grup B (Sipariş/Tahsilat/… üst panel "Arşiv Verisi")
+  // ve Grup C (Çek/Senet/Stok/Ciro/İskonto üst panel "Günlük Veri") ile kanal dosyaları buraya
+  // dahil edilmez. Ana ekranda tek zorunlu dosya Kalemler'dir; Müşteri Master opsiyoneldir.
+  const anaEkranTipleri = ['kalemler','musteriMaster'];
   const kalemlerLoaded = Boolean(state.files.kalemler);
   const total = anaEkranTipleri.length;
   const loadedCount = anaEkranTipleri.filter(t=> Boolean(state.files[t])).length;
+  const allLoaded = loadedCount === total;
   buildBtn.disabled = !kalemlerLoaded;
-  buildBtn.textContent = allLoaded ? 'Raporu Oluştur' : (kalemlerLoaded ? 'Eksik dosyalarla devam et' : 'Raporu Oluştur');
-  statusPillMsg.textContent = allLoaded ? (total+'/'+total+' dosya hazır') : (loadedCount + '/' + total + ' dosya yüklendi');
-  if(allLoaded) statusPill.classList.add('ok');
+  // Kalemler zorunlu, Müşteri Master opsiyonel: Kalemler yüklüyse rapor oluşturulabilir. Buton
+  // metni kullanıcıyı yanıltmasın — Müşteri Master eksikse "opsiyonel" olduğu için engel yok.
+  buildBtn.textContent = 'Raporu Oluştur';
+  statusPillMsg.textContent = allLoaded
+    ? (total+'/'+total+' dosya hazır')
+    : (kalemlerLoaded
+        ? (loadedCount+'/'+total+' dosya · Kalemler hazır (Müşteri Master opsiyonel)')
+        : ('Kalemler bekleniyor (zorunlu)'));
+  if(kalemlerLoaded) statusPill.classList.add('ok');
 }
 
 // "Raporu Oluştur" (ana ekran) ve "Veri Güncelle" (Grup B / Günlük Veri Yükle paneli) AYNI akışı
@@ -5578,6 +5846,9 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
       throw new Error('Bugün için Kalemler dosyası henüz yüklenmedi. Diğer dosyalar (Sipariş/Tahsilat/Fatura vb.) işlenmeden önce bugün en az bir kez Kalemler dosyasını yüklemeniz gerekir.');
     }
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
+    // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle
+    // tek-slot arşivine kaydedildi — Grup B/C panellerinin "Kalemler yok" sanmaması için bayrağı set et.
+    state.bugunKalemlerHazir = true;
     await bayiHakedisRaporuOlustur();
     await sellOutRaporuOlustur();
     renderReport(state.report);
@@ -5639,6 +5910,7 @@ syncBtn.addEventListener('click', async ()=>{
     if(document.getElementById('sellOutView') && document.getElementById('sellOutView').style.display !== 'none') renderSellOutView();
     if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
     if(cloudReport && cloudReport.musteriler && cloudReport.musteriler.length){
+      raporuNormalizeEt(cloudReport); // eksik alanlara dayanıklılık
       state.report = cloudReport;
       state.expanded.clear();
       await saveReportToStorage(cloudReport);
@@ -5685,11 +5957,50 @@ syncBtn.addEventListener('click', async ()=>{
     panel.classList.add('open');
     toggleBtn.setAttribute('aria-expanded','true');
     if(typeof updateGvyPanel === 'function') updateGvyPanel();
+    if(typeof updateGvcPanel === 'function') updateGvcPanel();
+    gvyKalemlerUyariGuncelle();
   }
   function closePanel(){
     panel.classList.remove('open');
     toggleBtn.setAttribute('aria-expanded','false');
   }
+
+  // ---- Sekme geçişi (Günlük Veri / Arşiv Verisi) ----
+  const tabButtons = panel.querySelectorAll('.gvy-tab');
+  const tabPanes = panel.querySelectorAll('.gvy-tabpane');
+  tabButtons.forEach(tb=>{
+    tb.addEventListener('click', ()=>{
+      const hedef = tb.getAttribute('data-gvy-tab');
+      tabButtons.forEach(b=>{ const aktif=b===tb; b.classList.toggle('active',aktif); b.setAttribute('aria-selected', aktif?'true':'false'); });
+      tabPanes.forEach(p=>{
+        const aktif = (hedef==='gunluk' && p.id==='gvyPaneGunluk') || (hedef==='arsiv' && p.id==='gvyPaneArsiv');
+        p.classList.toggle('active', aktif);
+      });
+    });
+  });
+
+  // Bugün Kalemler yüklendi mi? (Grup C/B için ön koşul.) Ana ekrandaki state.files.kalemler O GÜN
+  // yüklenmiş bir dosya varsa doludur (grupATekilDosyalariHazirla yalnızca bugüne ait Kalemler'i geri
+  // yükler). Bu yüzden bugün Kalemler yoksa uyarı gösterilir ve güncelleme butonları kilitlenir.
+  // Senkron hızlı kontrol: bellekte VEYA (en son tazelemede belirlenen) bugüne ait tek-slot kaydı.
+  function bugunKalemlerVarMi(){
+    if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length) return true;
+    return !!state.bugunKalemlerHazir;
+  }
+  // Asenkron: önce tek-slot arşivini tazeler (bugüne ait Kalemler var mı?), sonra UI'ı günceller.
+  // Böylece rapor oluşturulmuş ama state.files bellekte boş olsa bile doğru sonucu verir.
+  async function gvyKalemlerUyariGuncelle(){
+    try{ if(typeof bugunKalemlerDurumTazele === 'function') await bugunKalemlerDurumTazele(); }catch(_){}
+    const uyari = document.getElementById('gvyKalemlerUyari');
+    const kalemlerYok = !bugunKalemlerVarMi();
+    if(uyari) uyari.classList.toggle('goster', kalemlerYok);
+    // Grup B ve Grup C güncelleme butonlarını da senkronla.
+    const gb = document.getElementById('gvyUpdateBtn');
+    const gc = document.getElementById('gvcUpdateBtn');
+    if(gb) gb.disabled = kalemlerYok || (GVY_DOSYA_TIPLERI.filter(t=>state.files[t]).length===0);
+    if(gc) gc.disabled = kalemlerYok || GRUP_C_HAZIR_SAYISI()===0;
+  }
+  window.gvyKalemlerUyariGuncelle = gvyKalemlerUyariGuncelle;
   toggleBtn.addEventListener('click', (e)=>{
     e.stopPropagation();
     if(panel.classList.contains('open')) closePanel(); else openPanel();
@@ -5803,7 +6114,8 @@ syncBtn.addEventListener('click', async ()=>{
     });
     const secilenSayisi = GVY_DOSYA_TIPLERI.filter(t=>state.files[t]).length;
     toggleBtn.classList.toggle('has-update', secilenSayisi>0);
-    updateBtn.disabled = secilenSayisi===0;
+    // Buton, dosya seçilmemişse VEYA bugün Kalemler yoksa kilitli (genel kural).
+    updateBtn.disabled = secilenSayisi===0 || !bugunKalemlerVarMi();
 
     // Kanal Raporları (Geleneksel/Modern) bölümü: bu ikisi diğer GVY tipleri gibi günlük
     // arşive değil, kendi "güncel/canlı" rapor nesnesine (state.sellOutReport/modernKanalReport)
@@ -5842,8 +6154,13 @@ syncBtn.addEventListener('click', async ()=>{
   // hiç rapor üretmediyse) bu panel kullanılamaz — önce ana ekrandan Kalemler ile ilk rapor
   // oluşturulmalıdır.
   updateBtn.addEventListener('click', async ()=>{
-    if(!state.files.kalemler && !state.report){
-      statusMsg.textContent = 'Önce ana ekrandan Kalemler dosyasıyla ilk raporu oluşturmalısınız.';
+    // Genel kural: güne mutlaka Kalemler ile başlanmalı. Bugün Kalemler yüklenmemişse (ne bu
+    // oturumda ne de bugüne ait tek-slot kaydından geri gelmişse) hiçbir güncellemeye izin yok.
+    // Basmadan önce durumu asenkron TAZELE (rapor oluşmuş olabilir, bellek boş olabilir).
+    if(typeof bugunKalemlerDurumTazele === 'function') await bugunKalemlerDurumTazele();
+    if(!bugunKalemlerVarMi()){
+      statusMsg.textContent = 'Önce bugünün Kalemler dosyasını ana ekrandan yükleyip "Raporu Oluştur"a basın.';
+      gvyKalemlerUyariGuncelle();
       return;
     }
     if(!(await ortakSifreDogrula('Veriyi güncellemek için şifreyi girin:'))) return;
@@ -5885,12 +6202,140 @@ syncBtn.addEventListener('click', async ()=>{
     }
   });
 
+  // ============================== GRUP C: "GÜNLÜK VERİ YÜKLE" SEKMESİ ==============================
+  // Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto — gün içinde sürekli güncellenebilir.
+  // "Verileri Kaydet"e basınca dosyalar KALICI tek-slot arşive yazılır (grupATekilDosyaKaydet) ve
+  // state.files'a da konur ki bir sonraki "Veri Güncelle/Raporu Oluştur" bunları kullansın.
+  // KASITLI OLARAK otomatik yeniden hesaplama YAPILMAZ — kullanıcı raporu elle yeniler.
+  const gvcFileInput = document.getElementById('gvcFileInput');
+  const gvcUpdateBtn = document.getElementById('gvcUpdateBtn');
+  const gvcStatusMsg = document.getElementById('gvcStatusMsg');
+  let gvcAktifSecimTipi = null;
+
+  panel.querySelectorAll('[data-gvc-filebtn]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const row = btn.closest('.gvy-row');
+      gvcAktifSecimTipi = row ? row.getAttribute('data-gvc-type') : null;
+      if(gvcFileInput){ gvcFileInput.value=''; gvcFileInput.click(); }
+    });
+  });
+  panel.querySelectorAll('[data-gvc-removebtn]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const row = btn.closest('.gvy-row');
+      const tip = row ? row.getAttribute('data-gvc-type') : null;
+      if(tip && state.filesC){ delete state.filesC[tip]; updateGvcPanel(); }
+    });
+  });
+
+  if(gvcFileInput){
+    gvcFileInput.addEventListener('change', (e)=>{
+      const files = Array.from(e.target.files||[]);
+      if(!files.length) return;
+      if(!xlsxHazirMi()){ gvcStatusMsg.textContent = 'Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.'; return; }
+      // Birden fazla dosya seçilebilir; her biri detectType ile tanınıp DOĞRU Grup C slotuna yazılır.
+      // "Dosya Seç"e basılan satır (gvcAktifSecimTipi) bir ipucudur ama tip otomatik doğrulanır.
+      let okunan = 0, sorun = [];
+      Promise.all(files.map(file=> new Promise(resolve=>{
+        const reader = new FileReader();
+        reader.onerror = ()=>{ sorun.push(file.name+': okunamadı'); resolve(); };
+        reader.onload = (ev)=>{
+          try{
+            const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+            const {type, headers, data} = ilkUygunSayfayiSec(wb);
+            if(!type || !GRUP_C_DOSYA_TIPLERI.includes(type)){
+              sorun.push('"'+file.name+'" bu sekmeye ait bir dosya değil (yalnızca Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto).');
+              resolve(); return;
+            }
+            state.filesC[type] = {name:file.name, headers, data};
+            okunan++;
+          }catch(err){ sorun.push(file.name+': '+err.message); }
+          resolve();
+        };
+        reader.readAsArrayBuffer(file);
+      }))).then(()=>{
+        updateGvcPanel();
+        gvcStatusMsg.textContent = (okunan? okunan+' dosya seçildi. ':'') + (sorun.length? sorun.join(' ') : '');
+      });
+    });
+  }
+
+  if(gvcUpdateBtn){
+    gvcUpdateBtn.addEventListener('click', async ()=>{
+      // Basmadan önce Kalemler durumunu asenkron tazele (rapor oluşmuş ama bellek boş olabilir).
+      if(typeof bugunKalemlerDurumTazele === 'function') await bugunKalemlerDurumTazele();
+      if(!bugunKalemlerVarMi()){
+        gvcStatusMsg.textContent = 'Önce bugünün Kalemler dosyasını ana ekrandan yükleyin.';
+        return;
+      }
+      if(GRUP_C_HAZIR_SAYISI()===0){ gvcStatusMsg.textContent = 'Önce en az bir dosya seçin.'; return; }
+      if(!(await ortakSifreDogrula('Verileri güncellemek için şifreyi girin:'))) return;
+      gvcUpdateBtn.disabled = true;
+      const oncekiMetin = gvcUpdateBtn.textContent;
+      gvcUpdateBtn.textContent = 'Güncelleniyor…';
+      try{
+        // 1) Her seçili Grup C dosyasını KALICI tek-slot arşive yaz ve state.files'a taşı.
+        for(const tip of GRUP_C_DOSYA_TIPLERI){
+          const f = state.filesC[tip];
+          if(!f) continue;
+          state.files[tip] = {name:f.name, headers:f.headers, data:f.data};
+          await grupATekilDosyaKaydet(tip, f.data, f.headers, f.name);
+        }
+        state.filesC = {}; // seçim kuyruğunu temizle (artık kalıcı kaydedildi)
+        updateGvcPanel();
+        // 2) Raporu YENİDEN HESAPLA: çek/senet, ticari stok vb. veri girişi olduğundan müşteri
+        //    kartlarındaki bilgiler ANINDA güncellensin. En son Kalemler arşivi kullanılır
+        //    (grupATekilDosyalariHazirla bunu otomatik getirir), tekrar Kalemler istenmez.
+        await raporuOlusturVeyaGuncelleAkisiniCalistir();
+        gvcStatusMsg.textContent = '✓ Güncellendi — ' + fmtDate(new Date()) + '. Kartlar yeni verilerle yenilendi.';
+        if(typeof closePanel === 'function') closePanel();
+      }catch(err){
+        console.error('Grup C güncelleme hatası:', err);
+        gvcStatusMsg.textContent = 'Hata: ' + err.message;
+      }finally{
+        gvcUpdateBtn.textContent = oncekiMetin;
+        gvcUpdateBtn.disabled = !bugunKalemlerVarMi() || GRUP_C_HAZIR_SAYISI()===0;
+      }
+    });
+  }
+
+  // Grup C panel görünümünü tazeler: seçili dosya adları, kalıcı arşivdeki son yüklenme tarihi,
+  // buton kilidi. window'a asılır ki openPanel ve dışarıdan çağrılabilsin.
+  window.updateGvcPanel = async function updateGvcPanel(){
+    for(const tip of GRUP_C_DOSYA_TIPLERI){
+      const row = panel.querySelector('.gvy-row[data-gvc-type="'+tip+'"]');
+      if(!row) continue;
+      const subEl = row.querySelector('[data-gvc-sub]');
+      const arsivEl = row.querySelector('[data-gvc-arsivgun]');
+      const removeBtn = row.querySelector('[data-gvc-removebtn]');
+      const secili = state.filesC && state.filesC[tip];
+      if(secili){
+        if(subEl) subEl.textContent = secili.name + ' (' + (secili.data?secili.data.length:0) + ' satır) — kaydedilmedi';
+        if(removeBtn) removeBtn.style.display = 'inline-flex';
+      }else{
+        if(subEl) subEl.textContent = 'Dosya seçilmedi';
+        if(removeBtn) removeBtn.style.display = 'none';
+      }
+      // Kalıcı arşivdeki son yüklenme tarihi (kaydedilmiş hali).
+      if(arsivEl){
+        try{
+          const kayit = await grupATekilDosyaYerelOku(tip);
+          arsivEl.textContent = (kayit && kayit.tarih)
+            ? 'Son kayıt: ' + new Date(kayit.tarih).toLocaleDateString('tr-TR') + ' ' + new Date(kayit.tarih).toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})
+            : '';
+        }catch(_){ arsivEl.textContent=''; }
+      }
+    }
+    if(gvcUpdateBtn) gvcUpdateBtn.disabled = !bugunKalemlerVarMi() || GRUP_C_HAZIR_SAYISI()===0;
+  };
+
   updateGvyPanel();
+  updateGvcPanel();
   gvyLastSyncGuncelle();
 })();
 
 async function resetAll(){
   state.files = {kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null};
+  state.filesC = {}; // Grup C seçim kuyruğu da sıfırlanır
   state.report = null;
   state.expanded.clear();
   state.yuklemeReport = null;
@@ -5970,6 +6415,12 @@ async function uygulamayiBaslat(){
   // değişmemiş olsa bile 9 ayrı gecikme üst üste binip açılışı yavaşlatıyordu. Promise.all ile
   // hepsi AYNI ANDA başlatılıyor — toplam süre artık en YAVAŞ tekil isteğe eşit, 9'unun
   // TOPLAMINA değil.
+  // GÜVENLİK AĞI (açılış donmasın): Bu 9 yardımcı veri isteği tek tek zaman aşımıyla sarılır —
+  // biri (ör. ağ/token sorunu) takılırsa 18 sn sonra o istek "yedek (null)" ile çözülür ve açılış
+  // devam eder. Böylece tek bir asılı kalan bulut isteği tüm uygulamayı sonsuza kadar bekletmez.
+  // Bu isteklerin her biri zaten kendi state alanına yazıyor; başarısız/geç kalan biri sadece o
+  // veri türünün bu açılışta cihazdaki son haliyle kalmasına yol açar (bir sonraki açılışta düzelir).
+  const ACILIS_ISTEK_TIMEOUT_MS = 18000;
   await Promise.all([
     musteriMasterYenile(),
     bayiHakedisYenile(),
@@ -5980,14 +6431,20 @@ async function uygulamayiBaslat(){
     modernKanalYenile(),
     modernKanalArsivYenile(),
     malzemelerStokYenile(),
-  ]);
+  ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';
     // Uygulama otomatik açılışında, buluttaki küçük zaman damgası cihazdakiyle aynıysa büyük
     // rapor verisi hiç indirilmez — cihazdaki (IndexedDB) kopya doğrudan kullanılır. Kullanıcı
     // "Diğer Cihazdan Güncelle" butonuna BİLEREK bastığında (yukarıdaki syncBtn handler'ı) bu
     // optimizasyon uygulanmaz, orada her zaman zorla tam indirme yapılır.
-    const yukleSonuc = await cloudVeriVerimliYukle(CLOUD.path, loadReportFromCloud, loadReportFromStorage);
+    // Güvenlik ağı: ana rapor yüklemesi de takılırsa (25 sn) açılış donmasın — yedek olarak
+    // cihazdaki (IndexedDB) kopyayı dener, o da yoksa boş sonuçla devam eder.
+    const yukleSonuc = await zamanAsimliYaris(
+      cloudVeriVerimliYukle(CLOUD.path, loadReportFromCloud, loadReportFromStorage),
+      25000,
+      null
+    ) || { data: (await loadReportFromStorage().catch(()=>null)), source: 'local' };
     const cloudReport = yukleSonuc.data;
     if(cloudReport && cloudReport.musteriler && cloudReport.musteriler.length){
       report = cloudReport;
@@ -6001,7 +6458,8 @@ async function uygulamayiBaslat(){
     // Arşivin TAMAMI değil, cihazdaki (IndexedDB) son bilinen hali + buluttaki farkı (delta)
     // yükleniyor — bu, uygulama her açıldığında/yenilendiğinde tekrar tekrar tam indirme
     // yapılmasını önler; ilk kurulumdan sonra pratikte yalnızca yeni eklenen gün(ler) iner.
-    await faturaArsivBaslangicYukle();
+    // Fatura arşivi yüklemesi de açılışı bloke etmesin (takılırsa 20 sn sonra devam).
+    await zamanAsimliYaris(faturaArsivBaslangicYukle(), 20000, null);
   }
   if(!report){
     const saved = await loadReportFromStorage();
@@ -6011,6 +6469,7 @@ async function uygulamayiBaslat(){
   }
 
   if(report){
+    raporuNormalizeEt(report); // eksik alanları güvenli varsayılanlarla doldur (eski/bozuk raporlara dayanıklılık)
     state.report = report;
     canliGunlerleGuncelle(report);
     renderReport(report);
@@ -6334,13 +6793,20 @@ function buildReport(files, musteriMasterMap){
     let kalanBorcToplam = 0, vAgirlikliToplam = 0, agirlikBorc = 0, vadesiGelmisBakiye = 0;
     m.invoices.forEach(inv=>{
       kalanBorcToplam += inv.kalanBorc;
-      if(inv.gunFatura!=null && inv.kalanBorc!==0){
+      // Ağırlıklı vade ortalaması YALNIZCA pozitif kalan borçlu faturalarla hesaplanır. Negatif
+      // kalan borç (iade / fazla ödeme) hem paya hem paydaya negatif katkı verip ortalamayı
+      // beklenmedik yöne kaydırabildiği için ağırlıklandırmaya alınmaz. (Kalan borç TOPLAMI,
+      // vadesi gelmiş/gelmemiş bakiye gibi gerçek tutarlar ise negatifler dahil hesaplanmaya
+      // devam eder — orada iade/fazla ödeme bakiyeyi doğru şekilde azaltmalıdır.)
+      if(inv.gunFatura!=null && inv.kalanBorc>0){
         vAgirlikliToplam += inv.kalanBorc * inv.gunFatura;
         agirlikBorc += inv.kalanBorc;
-        // Vadesi gelen fatura mantığı: fatura vadesi (Net Vade Tarihi) kriteri değil, açık faturanın
-        // kalan borcu + Faturadan Sonr. Gün verisi baz alınır — Faturadan Sonr. Gün 23 ve üstü ise
-        // o faturanın kalan borcu "vadesi gelmiş" sayılır.
-        if(inv.gunFatura>=23) vadesiGelmisBakiye += inv.kalanBorc;
+      }
+      // Vadesi gelen fatura mantığı: fatura vadesi (Net Vade Tarihi) kriteri değil, açık faturanın
+      // kalan borcu + Faturadan Sonr. Gün verisi baz alınır — Faturadan Sonr. Gün eşik ve üstü ise
+      // o faturanın kalan borcu "vadesi gelmiş" sayılır (negatifler dahil, gerçek bakiye).
+      if(inv.gunFatura!=null && inv.kalanBorc!==0 && inv.gunFatura>=VADE_ESIGI_GUN){
+        vadesiGelmisBakiye += inv.kalanBorc;
       }
     });
     m.kalanBorc = kalanBorcToplam;
@@ -6455,7 +6921,9 @@ function buildReport(files, musteriMasterMap){
     siparisArsiv, tahsilatArsiv, faturaArsiv, bayiHakedis, bozukIadeTahsilat, depozitoTahsilat, tahsilatFormatB,
   };
 }
-function sum(arr,key){ return arr.reduce((a,b)=>a+(b[key]||0),0); }
+// DAYANIKLILIK: arr undefined/null ise (ör. buluttan/cihazdan gelen ESKİ bir raporda 'bakiyesiz'
+// gibi sonradan eklenmiş bir alan hiç yoksa) 'undefined.reduce' ile çökmesin — boş toplam döndür.
+function sum(arr,key){ return Array.isArray(arr) ? arr.reduce((a,b)=>a+(b[key]||0),0) : 0; }
 const sumArr = sum; // sumArr, sum ile birebir aynı gövdeye sahipti — tekilleştirildi, çağrı yerleri değişmedi.
 
 // ---- Saf (pure) hesaplama fonksiyonları için basit önbellekleme yardımcısı ----
@@ -6496,12 +6964,15 @@ function canliGunlerleGuncelle(report){
       if(inv.gunVadeHam == null) inv.gunVadeHam = inv.gunVade;
       inv.gunFatura = farkGun > 0 && inv.gunFaturaHam != null ? inv.gunFaturaHam + farkGun : inv.gunFaturaHam;
       inv.gunVade = farkGun > 0 && inv.gunVadeHam != null ? inv.gunVadeHam + farkGun : inv.gunVadeHam;
-      if(inv.gunFatura != null && inv.kalanBorc !== 0){
+      // Ağırlıklı vade YALNIZCA pozitif kalan borçlu faturalarla (negatif iade/fazla ödeme
+      // ortalamayı çarpıtmasın diye); vadesi gelmiş bakiye ise gerçek tutar olarak negatifler
+      // dahil hesaplanır. (buildReport'taki hesapla birebir aynı mantık.)
+      if(inv.gunFatura != null && inv.kalanBorc > 0){
         vAgirlik += inv.kalanBorc * inv.gunFatura;
         aBorc += inv.kalanBorc;
-        // Vadesi gelen fatura mantığı burada da fatura vadesi (netVade) yerine kalan borç +
-        // Faturadan Sonr. Gün'e göre uygulanır: 23 gün ve üstü ise vadesi gelmiş sayılır.
-        if(inv.gunFatura>=23) vadesiGelmis += inv.kalanBorc;
+      }
+      if(inv.gunFatura != null && inv.kalanBorc !== 0 && inv.gunFatura>=VADE_ESIGI_GUN){
+        vadesiGelmis += inv.kalanBorc;
       }
     });
     m.avgVadeGun = aBorc !== 0 ? Math.round(vAgirlik / aBorc) : 0;
@@ -6514,12 +6985,16 @@ function canliGunlerleGuncelle(report){
   return report;
 }
 
+// TEK KAYNAK: Yaşlandırma kovaları hem Yaşlandırma sayfasında hem Genel Bakış donut'unda
+// bu ortak tanımdan okunur. Böylece iki ekran arasında kova sınırı tutarsızlığı oluşamaz.
+// (Önceden Genel Bakış "0-30 gün"ü tek parça alıp vadesi gelmemiş bakiyeyi de içine katıyordu;
+//  artık "Vadesinde" ayrı kova olarak her iki ekranda da aynı gösterilir.)
 const AGING_BUCKETS = [
-  {label:'Vadesinde', test:g=>g<=0},
-  {label:'1–30 gün', test:g=>g>0&&g<=30},
-  {label:'31–60 gün', test:g=>g>30&&g<=60},
-  {label:'61–90 gün', test:g=>g>60&&g<=90},
-  {label:'90+ gün', test:g=>g>90},
+  {label:'Vadesinde', test:g=>g<=0, color:'var(--success)'},
+  {label:'1–30 gün', test:g=>g>0&&g<=30, color:'#1B5FAE'},
+  {label:'31–60 gün', test:g=>g>30&&g<=60, color:'var(--warn)'},
+  {label:'61–90 gün', test:g=>g>60&&g<=90, color:'#C2571B'},
+  {label:'90+ gün', test:g=>g>90, color:'var(--danger)'},
 ];
 function computeAging(musteriler){
   const agingAmount = AGING_BUCKETS.map(b=>({label:b.label, value:0}));
@@ -6695,12 +7170,8 @@ function renderGenelBakisView(report){
   }
 
   // ---- Vade Dağılımı donut ----
-  const vadeBuckets = [
-    {label:'0 - 30 gün', test:g=>g<=30, color:'#1B5FAE'},
-    {label:'31 - 60 gün', test:g=>g>30&&g<=60, color:'var(--warn)'},
-    {label:'61 - 90 gün', test:g=>g>60&&g<=90, color:'#C2571B'},
-    {label:'90+ gün', test:g=>g>90, color:'var(--danger)'},
-  ];
+  // Kova sınırları ve renkleri ortak AGING_BUCKETS'tan gelir (Yaşlandırma sayfasıyla birebir aynı).
+  const vadeBuckets = AGING_BUCKETS;
   const vadeAmounts = vadeBuckets.map(()=>0);
   musteriler.forEach(m=>{
     if(m.kalanBorc<=0) return;
@@ -7007,7 +7478,40 @@ function renderGbSidePanels(report){
     </div>`;
 }
 
+// DAYANIKLILIK: Buluttan/cihazdan gelen bir rapor ESKİ bir sürümden kalmış olabilir ve o zamanlar
+// var olmayan alanlar (bakiyesiz, kpi, ticariStok, invoices vb.) içinde bulunmayabilir. Bu durumda
+// computeGenelKPI gibi fonksiyonlar 'undefined.reduce'/'undefined.toplamTahsilat' ile ÇÖKÜYORDU.
+// Aşağıdaki normalize, eksik alanları güvenli varsayılanlarla doldurur — böylece hangi sürümden
+// gelirse gelsin rapor render edilebilir (veri kaybı olmadan; sadece eksik alanlar boş sayılır).
+function raporuNormalizeEt(report){
+  if(!report || typeof report !== 'object') return report;
+  if(!Array.isArray(report.musteriler)) report.musteriler = [];
+  if(!Array.isArray(report.bakiyesiz)) report.bakiyesiz = [];
+  if(!Array.isArray(report.invoices)) report.invoices = [];
+  // ticariStok bir OBJEDİR ({rows:[], ozet:[]}) — dizi değil. Eksik/bozuksa güvenli obje yap.
+  if(!report.ticariStok || typeof report.ticariStok !== 'object' || Array.isArray(report.ticariStok)){
+    report.ticariStok = { rows: [], ozet: [] };
+  }else{
+    if(!Array.isArray(report.ticariStok.rows)) report.ticariStok.rows = [];
+    if(!Array.isArray(report.ticariStok.ozet)) report.ticariStok.ozet = [];
+  }
+  if(!Array.isArray(report.siparisArsiv)) report.siparisArsiv = [];
+  if(!Array.isArray(report.tahsilatArsiv)) report.tahsilatArsiv = [];
+  if(!Array.isArray(report.faturaArsiv)) report.faturaArsiv = [];
+  if(!Array.isArray(report.bayiHakedis)) report.bayiHakedis = [];
+  if(!Array.isArray(report.bozukIadeTahsilat)) report.bozukIadeTahsilat = [];
+  if(!Array.isArray(report.depozitoTahsilat)) report.depozitoTahsilat = [];
+  if(!report.kpi || typeof report.kpi !== 'object'){
+    report.kpi = { toplamTahsilat:0, tahsilatEslesmeyenToplam:0 };
+  }else{
+    if(report.kpi.toplamTahsilat == null) report.kpi.toplamTahsilat = 0;
+    if(report.kpi.tahsilatEslesmeyenToplam == null) report.kpi.tahsilatEslesmeyenToplam = 0;
+  }
+  return report;
+}
+
 function renderReport(report){
+  raporuNormalizeEt(report);
   refreshGenelKPIs(report);
   populateTemsilciFilter(report.musteriler, 'temsilciFilter');
   populateTemsilciFilter(report.musteriler, 'sevkTemsilciFilter');
@@ -8166,8 +8670,11 @@ function renderKPIs(kpi){
 
 function populateTemsilciFilter(musteriler, selectId){
   const sel = document.getElementById(selectId || 'temsilciFilter');
+  if(!sel) return; // select DOM'da yoksa sessizce çık
   const current = sel.value;
-  const set = Array.from(new Set(musteriler.map(m=>m.temsilci).filter(Boolean))).sort();
+  // DAYANIKLILIK: musteriler undefined/dizi değilse (ör. eksik report alanı) çökmesin.
+  const liste = Array.isArray(musteriler) ? musteriler : [];
+  const set = Array.from(new Set(liste.map(m=>m && m.temsilci).filter(Boolean))).sort();
   sel.innerHTML = '<option value="">Tüm temsilciler</option>' + set.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
   if(current && set.includes(current)) sel.value = current;
 }
@@ -10238,7 +10745,7 @@ async function yuklemeArsivYenile(){
 // Tüm arşivi silen özellik kaldırıldı — arşiv hiçbir koşulda silinmemeli. Artık kasıtlı olarak
 // hiçbir şey yapmayan güvenli bir no-op'tur.
 async function clearYuklemeArsiv(){
-  console.warn('clearYuklemeArsiv() devre dışı bırakıldı — arşiv kalıcı olarak korunuyor.');
+  dwarn('clearYuklemeArsiv() devre dışı bırakıldı — arşiv kalıcı olarak korunuyor.');
 }
 
 function populateYuklemeTarihSelect(){
@@ -11911,11 +12418,11 @@ async function computeCeiAy(report, ayKey, zorla){
 
   const bitisSnap = ((state.faturaArsivCache[tv.bitisGunu] && state.faturaArsivCache[tv.bitisGunu].musteriSnapshot) || []).filter(m=>musteriTvIcinGecerliMi(m.musteri));
   // Vadesi gelen fatura kriteri: fatura vadesi (Net Vade Tarihi) DEĞİL — açık faturaların kalan borcu +
-  // Faturadan Sonr. Gün verisi baz alınır (Faturadan Sonr. Gün >= 23 ise vadesi gelmiş sayılır). Bu
+  // Faturadan Sonr. Gün verisi baz alınır (Faturadan Sonr. Gün >= VADE_ESIGI_GUN ise vadesi gelmiş sayılır). Bu
   // dağılım müşteri bazında vadesizBakiye alanında saklanır (bkz. buildReport/canliGunlerleGuncelle).
   // Bu alanın henüz bulunmadığı eski arşiv günleri için, aynı 23 gün eşiği müşterinin genel rapordaki
   // ortalama vade hesaplamasına (avgVadeGun) uygulanarak yaklaşık bir değer üretilir.
-  const donemSonuVadesizBakiye = bitisSnap.reduce((a,m)=> a + (m.vadesizBakiye!=null ? m.vadesizBakiye : ((m.avgVadeGun||0)<23 ? (m.kalanBorc||0) : 0)), 0);
+  const donemSonuVadesizBakiye = bitisSnap.reduce((a,m)=> a + (m.vadesizBakiye!=null ? m.vadesizBakiye : ((m.avgVadeGun||0)<VADE_ESIGI_GUN ? (m.kalanBorc||0) : 0)), 0);
 
   const donemBasiBakiye = tv.cariDegisimVarMi ? tv.genel.toplamKalanBorcBaslangic : null;
   const donemSonuBakiye = tv.genel.toplamKalanBorc;
@@ -12478,6 +12985,7 @@ async function sellOutYenile(){
 async function sellOutKaydet(rapor){
   const zaman = new Date().toISOString();
   rapor = Object.assign({}, rapor, {__hesaplanmaZamani: zaman});
+  ktlog('sellOutKaydet → state.sellOutReport yazılıyor. toplamLitre=', rapor && rapor.toplamLitre, 'belgeSayisi=', rapor && rapor.belgeSayisi);
   state.sellOutReport = rapor;
   state.sellOutSonGuncelleme = zaman;
   await saveSellOutReportToLocal(rapor);
@@ -12660,6 +13168,7 @@ async function modernKanalYenile(){
 async function modernKanalKaydet(rapor){
   const zaman = new Date().toISOString();
   rapor = Object.assign({}, rapor, {__hesaplanmaZamani: zaman});
+  ktlog('modernKanalKaydet → state.modernKanalReport yazılıyor. toplamLitre=', rapor && rapor.toplamLitre, 'malzemeSayisi=', rapor && rapor.malzemeler && rapor.malzemeler.length);
   state.modernKanalReport = rapor;
   state.modernKanalSonGuncelleme = zaman;
   await saveModernKanalReportToLocal(rapor);
@@ -12870,6 +13379,7 @@ async function renderModernKanalView(){
   populateModernKanalAySelect();
   const seciliAy = state.modernKanalSeciliAy;
   const baseRapor = state.modernKanalReport;
+  ktlog('renderModernKanalView (MODERN ekran) → kaynak state.modernKanalReport. toplamLitre=', baseRapor&&baseRapor.toplamLitre, 'malzemeSayısı=', baseRapor&&baseRapor.malzemeler&&baseRapor.malzemeler.length, 'seçiliAy=', seciliAy||'(canlı)');
 
   let report, isArsivGoruntuleme;
   if(seciliAy){
@@ -13695,7 +14205,15 @@ function computeStokGunRaporu(){
     return a.stokGunu-b.stokGunu;
   });
 
-  return {yok:false, sonAylar, rows, ustYonetimHedefi, toplamLitre6Ay};
+  // KANAL BAZLI DAĞITILAMAYAN HEDEF UYARISI: Bir kanal için hedef girilmiş (>0) olsa bile, o
+  // kanaldan son 6 ayda HİÇ satış verisi yoksa (toplamAgirlikliOrtalama...=0), pay hesabı her
+  // üründe 0 döner ve hedef hiçbir ürüne dağıtılamaz — kullanıcı hedefi girer ama "Gerekli
+  // Litre" hiç değişmez, nedeni belirsiz kalır. Bu durumu burada tespit edip UI'da açıkça
+  // uyarı olarak göstermek için işaretliyoruz.
+  const sellOutHedefDagitilamadi = sellOutHedefKendi>0 && toplamAgirlikliOrtalamaSellOut<=0;
+  const modernKanalHedefDagitilamadi = modernKanalHedefKendi>0 && toplamAgirlikliOrtalamaModernKanal<=0;
+
+  return {yok:false, sonAylar, rows, ustYonetimHedefi, toplamLitre6Ay, sellOutHedefDagitilamadi, modernKanalHedefDagitilamadi};
 }
 
 function stokGunRenkSeviyesi(stokGunu){
@@ -13748,7 +14266,15 @@ async function renderStokGunView(){
   const hedefUyarisi = veri.ustYonetimHedefi>0
     ? ''
     : ' — ⚠️ Bu ay için henüz hiçbir temsilciye Açık/Kapalı Kanal hedefi girilmemiş; "Gerekli Litre" hesaplanamıyor, günlük hız geçmiş gerçek satışa göre (hedefsiz) gösteriliyor.';
-  document.getElementById('stokGunAsOf').textContent = 'Veri kaynağı: Sell Out arşivi (' + veri.sonAylar.length + ' ay: ' + veri.sonAylar.map(ayEtiketi).join(', ') + ') + Malzemeler (anlık stok) — Üst yönetim hedefi: ' + Math.round(veri.ustYonetimHedefi).toLocaleString('tr-TR') + ' L' + hedefUyarisi;
+  // Hedef girilmiş ama o kanaldan hiç geçmiş satış verisi yoksa, pay hesaplanamadığı için hedef
+  // hiçbir ürüne dağıtılamıyor — kullanıcı bunu fark edemeyebileceğinden ayrıca uyarıyoruz.
+  const kanalDagitimUyarilari = [];
+  if(veri.sellOutHedefDagitilamadi) kanalDagitimUyarilari.push('Geleneksel Kanal (Sell Out)');
+  if(veri.modernKanalHedefDagitilamadi) kanalDagitimUyarilari.push('Modern Kanal');
+  const kanalUyarisi = kanalDagitimUyarilari.length
+    ? ' — ⚠️ ' + kanalDagitimUyarilari.join(' ve ') + ' için hedef girilmiş ancak son 6 ayda bu kanal(lar)dan hiç satış verisi yok; bu hedef(ler) hiçbir ürüne dağıtılamadı ve "Gerekli Litre" hesabına yansımadı.'
+    : '';
+  document.getElementById('stokGunAsOf').textContent = 'Veri kaynağı: Sell Out arşivi (' + veri.sonAylar.length + ' ay: ' + veri.sonAylar.map(ayEtiketi).join(', ') + ') + Malzemeler (anlık stok) — Üst yönetim hedefi: ' + Math.round(veri.ustYonetimHedefi).toLocaleString('tr-TR') + ' L' + hedefUyarisi + kanalUyarisi;
 
   // Arama kutusu (ürün adı veya kodu, büyük/küçük harf duyarsız — Türkçe İ/ı ayrımı için
   // toLocaleLowerCase('tr-TR') kullanılıyor, sistemin geri kalanındaki arama kutularıyla tutarlı).
@@ -13958,6 +14484,7 @@ async function renderSellOutView(){
   populateSellOutAySelect();
   const seciliAy = state.sellOutSeciliAy;
   const baseRapor = state.sellOutReport;
+  ktlog('renderSellOutView (GELENEKSEL ekran) → kaynak state.sellOutReport. toplamLitre=', baseRapor&&baseRapor.toplamLitre, 'belgeSayisi=', baseRapor&&baseRapor.belgeSayisi, 'seçiliAy=', seciliAy||'(canlı)');
 
   let report, isArsivGoruntuleme;
   if(seciliAy){
@@ -13971,13 +14498,23 @@ async function renderSellOutView(){
     }
   }else{
     isArsivGoruntuleme = false;
-    if(!baseRapor){
+    let canliRapor = baseRapor;
+    // HATA 1 KORUMASI: Canlı görünümde bellekteki rapor boşsa (ör. başka bir işlem sonrası ya da
+    // sayfa yenilenmesinin ardından belleğe henüz yüklenmemişse), boş panel göstermeden ÖNCE
+    // diskten/buluttan bir kez tazelemeyi dene — böylece daha önce yüklenmiş güncel Sell Out
+    // verisi "kayboldu" gibi görünüp litre 0'a düşmez.
+    if(!canliRapor){
+      ktlog('renderSellOutView: bellekte sellOutReport YOK → diskten/buluttan tazeleme deneniyor…');
+      try{ if(typeof sellOutYenile==='function'){ await sellOutYenile(); canliRapor = state.sellOutReport; } }catch(e){ ktlog('sellOutYenile hata:', e && e.message); }
+      ktlog('renderSellOutView tazeleme sonrası:', canliRapor ? ('bulundu, toplamLitre='+canliRapor.toplamLitre) : 'hâlâ boş');
+    }
+    if(!canliRapor){
       bosPanel.style.display='block';
       icerik.style.display='none';
       document.getElementById('sellOutAsOf').textContent = 'Veri kaynağı: Geleneksel Kanal (SAPUI5 dışa aktarımı) — henüz yüklenmedi';
       return;
     }
-    report = applySellOutHedef(baseRapor, state.sellOutHedef);
+    report = applySellOutHedef(canliRapor, state.sellOutHedef);
   }
   bosPanel.style.display='none';
   icerik.style.display='block';
@@ -14341,9 +14878,11 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
     const reader = new FileReader();
     reader.onload = (ev)=>{
       try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
         const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
         const ws = wb.Sheets[wb.SheetNames[0]];
         const {data} = sheetToObjects(ws);
+        ktlog('GELENEKSEL input → state.sellOutKendiDosya. dosya="'+file.name+'" satır='+(data?data.length:0)+'. İlk satır kolonları:', data&&data[0]?Object.keys(data[0]).slice(0,6):'(boş)');
         state.sellOutKendiDosya = {data, ad:file.name};
       }catch(err){
         console.error('Sell Out dosyası okunamadı:', err);
@@ -14364,6 +14903,20 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
       // Müşteri Master, temsilci/SSM eşlemesi için burada da (ana akıştan bağımsız olarak) tazelenir —
       // kullanıcı ana ekrana hiç gitmese bile FKNS ve temsilci isimleri doğru gelsin diye.
       await musteriMasterYenile();
+      // SAVUNMACI KONTROL: Yanlışlıkla Modern Kanal (İrsaliye) dosyası bu alana seçildiyse, Sell Out
+      // olarak işlenmesi anlamsız/karışık sonuç verir. Dosyanın gerçekten Sell Out olduğunu ayırt
+      // edici kolonlarla doğrula; değilse net hata ver ve işlemeyi durdur (hata 2'nin önlenmesi).
+      {
+        const ilk = state.sellOutKendiDosya.data && state.sellOutKendiDosya.data[0];
+        const kolonlar = ilk ? Object.keys(ilk) : [];
+        const sellOutMu = kolonlar.includes('Müşteri Kanalı Tnm.') || kolonlar.includes('Açık/Otel Tnm.') || kolonlar.includes('Hacim Segmenti Tnm.');
+        const irsaliyeMi = kolonlar.includes('İrsaliye Tarihi') && kolonlar.includes('Ürün Kodu');
+        ktlog('GELENEKSEL doğrulama: sellOutMu=', sellOutMu, 'irsaliyeMi=', irsaliyeMi, 'kolonlar=', kolonlar.slice(0,8));
+        if(irsaliyeMi && !sellOutMu){
+          throw new Error('Bu dosya bir Modern Kanal (İrsaliye) dosyası gibi görünüyor — Geleneksel Kanal (Sell Out) alanına yüklendi. Lütfen Sell Out dosyasını bu alana, İrsaliye dosyasını Modern Kanal alanına yükleyin.');
+        }
+      }
+      ktlog('GELENEKSEL "Verileri Güncelle" → buildSellOutReport çağrılıyor. Kaynak: state.sellOutKendiDosya ('+(state.sellOutKendiDosya&&state.sellOutKendiDosya.ad)+', '+(state.sellOutKendiDosya&&state.sellOutKendiDosya.data?state.sellOutKendiDosya.data.length:0)+' satır)');
       const baseRapor = buildSellOutReport(state.sellOutKendiDosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay);
       await sellOutKaydet(baseRapor);
       await renderSellOutView();
@@ -14396,9 +14949,11 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
     const reader = new FileReader();
     reader.onload = (ev)=>{
       try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
         const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
         const ws = wb.Sheets[wb.SheetNames[0]];
         const {data} = sheetToObjects(ws);
+        ktlog('MODERN input → state.modernKanalKendiDosya. dosya="'+file.name+'" satır='+(data?data.length:0)+'. İlk satır kolonları:', data&&data[0]?Object.keys(data[0]).slice(0,6):'(boş)');
         state.modernKanalKendiDosya = {data, ad:file.name};
       }catch(err){
         console.error('İrsaliye dosyası okunamadı:', err);
@@ -14416,6 +14971,19 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
     guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
     durumEl.textContent = '';
     try{
+      // SAVUNMACI KONTROL (simetrik): Yanlışlıkla Sell Out dosyası bu Modern Kanal alanına
+      // seçildiyse durdur — İrsaliye olarak işlenirse 'İrsaliye Tarihi' bulunamaz ve litre 0 çıkar.
+      {
+        const ilk = state.modernKanalKendiDosya.data && state.modernKanalKendiDosya.data[0];
+        const kolonlar = ilk ? Object.keys(ilk) : [];
+        const irsaliyeMi = kolonlar.includes('İrsaliye Tarihi') && kolonlar.includes('Ürün Kodu');
+        const sellOutMu = kolonlar.includes('Müşteri Kanalı Tnm.') || kolonlar.includes('Açık/Otel Tnm.') || kolonlar.includes('Hacim Segmenti Tnm.');
+        ktlog('MODERN doğrulama: irsaliyeMi=', irsaliyeMi, 'sellOutMu=', sellOutMu, 'kolonlar=', kolonlar.slice(0,8));
+        if(sellOutMu && !irsaliyeMi){
+          throw new Error('Bu dosya bir Geleneksel Kanal (Sell Out) dosyası gibi görünüyor — Modern Kanal (İrsaliye) alanına yüklendi. Lütfen İrsaliye dosyasını bu alana, Sell Out dosyasını Geleneksel Kanal alanına yükleyin.');
+        }
+      }
+      ktlog('MODERN "Verileri Güncelle" → buildIrsaliyeReport çağrılıyor. Kaynak: state.modernKanalKendiDosya ('+(state.modernKanalKendiDosya&&state.modernKanalKendiDosya.ad)+', '+(state.modernKanalKendiDosya&&state.modernKanalKendiDosya.data?state.modernKanalKendiDosya.data.length:0)+' satır)');
       const rapor = buildIrsaliyeReport(state.modernKanalKendiDosya.data);
       await modernKanalKaydet(rapor);
       await renderModernKanalView();
@@ -14450,6 +15018,7 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
     const reader = new FileReader();
     reader.onload = (ev)=>{
       try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
         const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
         const ws = wb.Sheets[wb.SheetNames[0]];
         const {data} = sheetToObjects(ws);
