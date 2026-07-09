@@ -689,7 +689,8 @@
   .alert-banner{
     display:flex;align-items:center;gap:14px;
     background:var(--danger-soft);border:1px solid var(--danger);border-radius:var(--radius);
-    padding:14px 18px;margin-bottom:20px;cursor:pointer;transition:filter .12s ease;
+    padding:14px 18px;margin:4px 0 20px;cursor:pointer;transition:filter .12s ease;
+    box-shadow:0 2px 8px -2px rgba(197,48,48,0.18);
   }
   .alert-banner:hover{filter:brightness(0.97);}
   .alert-banner-icon{font-size:20px;flex-shrink:0;}
@@ -742,19 +743,22 @@
   /* Stok Gün ürün kart grid: mobilde 1, tablet 2, masaüstü 3 sütun */
   .urun-card-list{display:grid;grid-template-columns:1fr;gap:12px;}
   @media(min-width:640px){.urun-card-list{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:1000px){.urun-card-list{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:1000px){.urun-card-list{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}}
+  @media(min-width:1900px){.urun-card-list{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}}
 
   .urun-card{
     background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;
     padding:14px 15px;transition:box-shadow .15s ease,border-color .15s ease;min-width:0;
     border-left:3px solid var(--ink-faint);
+    display:flex;flex-direction:column;height:100%;
   }
+  .urun-hedef-row{margin-top:auto;}
   .urun-card:hover{box-shadow:var(--shadow);border-color:var(--line);}
   .urun-card.stokgun-crit{border-left-color:var(--danger);}
   .urun-card.stokgun-warn{border-left-color:var(--warn);}
   .urun-card.stokgun-ok{border-left-color:var(--success);}
 
-  .urun-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
+  .urun-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;flex-shrink:0;}
   .urun-id{min-width:0;}
   .urun-kod{font-size:10.5px;color:var(--ink-faint);font-weight:700;letter-spacing:.03em;}
   .urun-ad{
@@ -770,7 +774,8 @@
   .stokgun-badge .n{font-family:var(--font-figures);font-weight:800;font-size:17px;line-height:1;}
   .stokgun-badge .l{font-size:8.5px;font-weight:700;letter-spacing:.03em;margin-top:3px;opacity:.85;}
 
-  .urun-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+  .urun-stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px;flex-shrink:0;}
+  .urun-stat-grid.urun-stat-grid-2{grid-template-columns:repeat(2,1fr);}
   .urun-stat-chip{background:var(--bg);border-radius:9px;padding:7px 6px;text-align:center;}
   .urun-stat-chip .l{font-size:9px;color:var(--ink-faint);font-weight:700;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .urun-stat-chip .v{font-family:var(--font-figures);font-size:12.5px;font-weight:700;margin-top:3px;color:var(--ink);}
@@ -13867,7 +13872,7 @@ function stokGunTabloyuFiltreleyipCiz(){
         <div class="urun-stat-chip"><div class="l">SATIŞ PAYI</div><div class="v">%${r.pay.toFixed(1).replace('.',',')}</div></div>
         <div class="urun-stat-chip" title="Veri güveni: ${escapeHtml(r.veriGuveni)}"><div class="l">AKTİF AY</div><div class="v" style="color:${guvenRenk};">${r.aktifAySayisi} ay</div></div>
       </div>
-      <div class="urun-stat-grid">
+      <div class="urun-stat-grid urun-stat-grid-2">
         <div class="urun-stat-chip"><div class="l">GÜNLÜK MİKTAR</div><div class="v">${r.gunlukMiktar!=null ? r.gunlukMiktar.toLocaleString('tr-TR',{maximumFractionDigits:1}) + '/gün' : '—'}</div></div>
         <div class="urun-stat-chip"><div class="l">GÜNLÜK LİTRE</div><div class="v">${LT(r.gunlukHiz)}/gün</div></div>
       </div>
