@@ -723,8 +723,9 @@
   /* Ürün×temsilci risk detayı (Stok Gün kartında genişletilebilir alan) */
   .stokgun-risk-toggle{
     background:none;border:none;cursor:pointer;color:var(--accent);font-size:10.5px;font-weight:600;
-    padding:0;margin-top:3px;display:inline-block;font-family:inherit;
+    padding:0;margin-top:3px;display:inline-block;font-family:inherit;min-height:14px;
   }
+  .stokgun-risk-toggle-bosluk{height:14px;margin-top:3px;}
   .stokgun-risk-toggle:hover{color:var(--accent-deep);}
   .stokgun-risk-detay{background:var(--line-soft);border-radius:9px;padding:9px 11px;margin-top:10px;}
   .stokgun-risk-chip{
@@ -743,8 +744,9 @@
   /* Stok Gün ürün kart grid: mobilde 1, tablet 2, masaüstü 3 sütun */
   .urun-card-list{display:grid;grid-template-columns:1fr;gap:12px;}
   @media(min-width:640px){.urun-card-list{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:1000px){.urun-card-list{grid-template-columns:repeat(auto-fill,minmax(320px,1fr));}}
-  @media(min-width:1900px){.urun-card-list{grid-template-columns:repeat(auto-fill,minmax(340px,1fr));}}
+  @media(min-width:1000px){.urun-card-list{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:1500px){.urun-card-list{grid-template-columns:repeat(4,1fr);}}
+  @media(min-width:1900px){.urun-card-list{grid-template-columns:repeat(5,1fr);}}
 
   .urun-card{
     background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;
@@ -759,13 +761,14 @@
   .urun-card.stokgun-ok{border-left-color:var(--success);}
 
   .urun-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;flex-shrink:0;}
-  .urun-id{min-width:0;}
+  .urun-id{min-width:0;min-height:82px;}
   .urun-kod{font-size:10.5px;color:var(--ink-faint);font-weight:700;letter-spacing:.03em;}
   .urun-ad{
     font-family:'Space Grotesk';font-weight:700;font-size:13.5px;color:var(--ink);
     margin-top:2px;line-height:1.25;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
-  .urun-rozet-satir{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;}
+  .urun-rozet-satir{margin-top:4px;display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-height:16px;}
 
   .stokgun-badge{
     flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -1773,7 +1776,7 @@
 <div id="authGate" style="position:fixed;inset:0;background:var(--bg,#EEF1F6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:380px;width:100%;border:1px solid var(--line,#DBE2EC);border-top:3px solid #8A6D1F;">
     <div class="app-header-brand" style="justify-content:center;margin-bottom:26px;">
-      <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+      <div class="app-header-mark app-version-label" translate="no">V3.4</div>
       <div class="app-header-title-wrap">
         <h1 class="app-header-title" translate="no" style="font-size:19px;white-space:normal;"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
         <div class="app-header-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
@@ -1797,7 +1800,7 @@
 
   <div class="topbar">
     <div class="app-header-brand">
-      <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+      <div class="app-header-mark app-version-label" translate="no">V3.4</div>
       <div class="app-header-title-wrap">
         <h1 class="app-header-title" translate="no"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
         <div class="app-header-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
@@ -1941,7 +1944,7 @@
 
     <div class="app-header">
       <div class="app-header-brand">
-        <div class="app-header-mark app-version-label" translate="no">V2.4</div>
+        <div class="app-header-mark app-version-label" translate="no">V3.4</div>
         <div class="app-header-title-wrap">
           <h1 class="app-header-title" translate="no"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
           <div class="app-header-breadcrumb" id="gbSubeWrap"><span id="gbSubeAdi">Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
@@ -13662,9 +13665,11 @@ function computeStokGunRaporu(){
       : null;
 
     // ÜRÜN×TEMSİLCİ RİSK DETAYI: bu ürünü bu ay en çok satan temsilciler + (varsa) tahsilat
-    // karnesi gerçekleşme yüzdeleri. state.karneTemsilciMap, kullanıcı "Temsilci Karnesi"
-    // sekmesini en az bir kez açtığında dolar (bkz. computeTemsilciKarnesi) — o ana kadar
-    // tahsilatGerceklesme alanı null döner ve arayüzde "tahsilat verisi yok" olarak gösterilir.
+    // karnesi gerçekleşme yüzdeleri. state.karneTemsilciMap artık "Temsilci Karnesi" sekmesi
+    // ziyaret edilmeden de doludur — renderStokGunView, computeStokGunRaporu'yu çağırmadan
+    // ÖNCE bu haritayı bağımsız olarak (Sell Out raporu üzerinden) doldurur (bkz.
+    // renderStokGunView). Sell Out raporu hiç yoksa (henüz veri yüklenmemişse) harita boş
+    // kalır ve tahsilatGerceklesme null döner, arayüzde "tahsilat verisi yok" gösterilir.
     // NOT: t.pay burada YENİDEN hesaplanmıyor — buildSellOutRaporu'da top-5'e kesilmeden ÖNCE,
     // ürünün TÜM temsilcileri üzerinden hesaplanmış gerçek pay kullanılıyor (bkz. temsilciPay
     // tanımı). Sadece burada top-5'ten en çok satan ilk 3'ü gösteriyoruz.
@@ -13700,10 +13705,29 @@ function stokGunRenkSeviyesi(stokGunu){
   return {renk:'var(--success)', bg:'var(--success-soft)'};
 }
 
-function renderStokGunView(){
+async function renderStokGunView(){
   const bosPanel = document.getElementById('stokGunBosPanel');
   const bosMesaj = document.getElementById('stokGunBosMesaj');
   const icerik = document.getElementById('stokGunIcerik');
+
+  // "Kim satıyor?" detayındaki tahsilat gerçekleşme yüzdesi (state.karneTemsilciMap) eskiden
+  // SADECE kullanıcı "Temsilci Karnesi" sekmesini en az bir kez ziyaret ettiğinde doluyordu —
+  // aksi halde kartlarda hep "tahsilat verisi yok" görünüyordu. Artık Stok Gün paneli bu veriye
+  // BAĞIMSIZ olarak kendi ihtiyacı için ulaşır: harita boşsa ve hesaplamak için gereken ana rapor
+  // (state.report — Fatura/Kalemler/Tahsilat verisi, computeTemsilciKarnesi'nin gerçekte
+  // beklediği kaynak; Sell Out raporu DEĞİL) mevcutsa, kart listesi çizilmeden önce burada bir
+  // kere hesaplanıp doldurulur.
+  if((!state.karneTemsilciMap || !state.karneTemsilciMap.size) && state.report){
+    try{
+      const karne = await computeTemsilciKarnesi(state.report, false);
+      if(karne && !karne.yok && karne.rows){
+        state.karneTemsilciMap = new Map(karne.rows.map(r=>[r.temsilci, r]));
+      }
+    }catch(err){
+      console.error('Stok Gün: temsilci karnesi bağımsız hesaplanırken hata:', err);
+    }
+  }
+
   const veri = computeStokGunRaporu();
 
   if(veri.yok){
@@ -13750,7 +13774,8 @@ function renderStokGunView(){
 // push bildirimi (sekme kapalıyken de ulaşan) sunucu taraflı altyapı gerektirir; burada panel
 // açıkken görünen bir uyarı + tarayıcı izni varsa Notification API kullanılır.
 const STOK_GUN_KRITIK_ESIK_GUN = 7; // stokGunRenkSeviyesi'ndeki kırmızı (danger) eşiğiyle aynı
-let stokGunSonBildirimAnahtari = null; // aynı kritik listesi için tekrar tekrar bildirim göndermemek için
+// (Not: eskiden burada bildirim tekrarını önlemek için bir "son bildirim anahtarı" tutuluyordu;
+// Notification API kaldırıldığı için o değişkene artık gerek yok.)
 function stokGunKritikUyariGuncelle(rows){
   const kritikler = (rows||[]).filter(r => r.stokGunu!=null && r.stokGunu <= STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun)
     .sort((a,b)=>a.stokGunu-b.stokGunu);
@@ -13778,17 +13803,8 @@ function stokGunKritikUyariGuncelle(rows){
     }
   }
 
-  // Tarayıcı bildirimi: yalnızca kritik liste bir öncekinden FARKLIYSA gönderilir (aynı durum
-  // için panelde kalındığı sürece tekrar tekrar bildirim düşmesin diye).
-  const anahtar = kritikler.map(r=>r.kod).sort().join(',');
-  if(anahtar && anahtar!==stokGunSonBildirimAnahtari && typeof Notification!=='undefined' && Notification.permission==='granted'){
-    try{
-      new Notification(`${kritikler.length} ürün kritik stok seviyesinde`, {
-        body: kritikler.slice(0,5).map(r=>`${r.urunAdi}: ${Math.round(r.stokGunu)} gün`).join('\n'),
-      });
-    }catch(e){ /* bazı ortamlarda Notification kısıtlı olabilir — sessizce yut */ }
-  }
-  stokGunSonBildirimAnahtari = anahtar;
+  // Not: Kritik stok listesi değiştiğinde tarayıcı bildirimi (Notification API) gösterme
+  // özelliği kaldırıldı — panel üstündeki banner ve sekme rozetleri yeterli uyarıyı veriyor.
 }
 
 // Sekme başlıklarındaki sayıları (Tümü/Kritik/Yeni/Ölü) güncelle.
@@ -13881,7 +13897,7 @@ function stokGunTabloyuFiltreleyipCiz(){
     const acikMi = state.stokGunAcikRiskSatirlar.has(r.kod);
     const riskToggle = riskVarMi
       ? `<button type="button" class="stokgun-risk-toggle" data-risk-kod="${escapeHtml(r.kod)}" title="Bu ürünü en çok satan temsilciler ve tahsilat performansları"><i class="fa-solid fa-chevron-${acikMi?'up':'down'}" aria-hidden="true"></i> Kim satıyor?</button>`
-      : '';
+      : `<div class="stokgun-risk-toggle-bosluk"></div>`;
     const riskDetay = (riskVarMi && acikMi) ? (function(){
       const chips = r.temsilciRiskDetayi.map(t=>{
         const tahsilatSinifi = t.tahsilatGerceklesme==null ? 'tahsilat-yok' : (t.tahsilatGerceklesme<70 ? 'tahsilat-dusuk' : 'tahsilat-iyi');
@@ -13898,7 +13914,7 @@ function stokGunTabloyuFiltreleyipCiz(){
       <div class="urun-card-top">
         <div class="urun-id">
           <div class="urun-kod">${escapeHtml(r.kod)}</div>
-          <div class="urun-ad">${escapeHtml(r.urunAdi)}</div>
+          <div class="urun-ad" title="${escapeHtml(r.urunAdi)}">${escapeHtml(r.urunAdi)}</div>
           <div class="urun-rozet-satir">${yeniRozet}${oluRozet}</div>
           ${riskToggle}
         </div>
@@ -14515,14 +14531,9 @@ document.getElementById('stokGunKartListe')?.addEventListener('click', (e)=>{
   stokGunTabloyuFiltreleyipCiz();
 });
 
-// Panel açıkken kritik stok uyarılarının tarayıcı bildirimi olarak da gösterilebilmesi için
-// (izin daha önce reddedilmediyse) bir kerelik izin isteği — sessizce başarısız olabilir.
-if(typeof Notification!=='undefined' && Notification.permission==='default'){
-  document.getElementById('sbbtn-stokGun')?.addEventListener('click', function stokGunBildirimIzniIste(){
-    Notification.requestPermission();
-    document.getElementById('sbbtn-stokGun')?.removeEventListener('click', stokGunBildirimIzniIste);
-  }, {once:true});
-}
+// Not: Kritik stok uyarıları için tarayıcı bildirimi (Notification API) özelliği
+// kaldırıldı — panel içi banner ve rozet uyarıları yeterli görüldü, ayrıca izin
+// istemi kullanıcı deneyimini bozuyordu.
 
 document.getElementById('sellOutYenileBtn').addEventListener('click', async ()=>{
   const btn = document.getElementById('sellOutYenileBtn');
@@ -14797,7 +14808,7 @@ if('serviceWorker' in navigator){
   });
 
   window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('sw.js').then((reg)=>{
+    navigator.serviceWorker.register('sw.js', {updateViaCache: 'none'}).then((reg)=>{
 
       const banner = document.getElementById('pwaUpdateBanner');
       const updateBtn = document.getElementById('pwaUpdateBtn');
