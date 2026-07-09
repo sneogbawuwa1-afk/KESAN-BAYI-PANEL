@@ -8285,11 +8285,11 @@ window.addEventListener('resize', ()=>{
   // Kendi yatay kaydırması olan alanlar — bu seçicilerin İÇİNDE başlayan dokunuşlarda menü
   // sürükleme jesti hiç devreye girmez (tablo/sekme kendi doğal yatay scroll'unu yapar).
   const KAYDIRMALI_ALAN_SECICI = '.table-scroll, .aging-table-scroll, .tabbar';
-  const OLU_BOLGE_PX = 14; // bu kadar px hareket edilmeden menü GÖRSEL OLARAK hiç takip etmeye başlamaz — küçük/istemsiz dokunuşları eler
-  const AC_KAPA_ORANI = 0.5; // sürüklenen mesafe, menü genişliğinin bu oranını (yarısını) geçerse bırakınca o konumda kalır
-  const FLICK_SURE_MS = 200; // bu süreden kısa bir dokunuşta...
-  const FLICK_MESAFE_PX = 34; // ...bu kadar (veya fazla) hareket varsa, oran şartı aranmadan hızlı geçiş sayılır
-  const DIKEY_TOLERANS = 40; // bu kadardan fazla dikey kayarsa jest iptal edilir (sayfa scroll'uyla çakışmasın) — normal dikey kaydırmayla çakışmayı azaltmak için düşürüldü
+  const OLU_BOLGE_PX = 8; // bu kadar px hareket edilmeden menü GÖRSEL OLARAK hiç takip etmeye başlamaz — küçük/istemsiz dokunuşları eler (önceden 14px, biraz daha duyarlı olsun diye düşürüldü)
+  const AC_KAPA_ORANI = 0.28; // sürüklenen mesafe, menü genişliğinin bu oranını geçerse bırakınca o konumda kalır (önceden 0.5/yarı genişlik gerekiyordu — mobilde bu kadar uzun kaydırmak zor geliyordu, bu yüzden düşürüldü)
+  const FLICK_SURE_MS = 260; // bu süreden kısa bir dokunuşta... (önceden 200ms, biraz daha rahat bir "hızlı" tanımı için artırıldı)
+  const FLICK_MESAFE_PX = 20; // ...bu kadar (veya fazla) hareket varsa, oran şartı aranmadan hızlı geçiş sayılır (önceden 34px — çok fazla mesafe istiyordu, düşürüldü)
+  const DIKEY_TOLERANS = 60; // bu kadardan fazla dikey kayarsa jest iptal edilir (sayfa scroll'uyla çakışmasın) — hafif çapraz/titrek dokunuşların jesti erken iptal etmesini azaltmak için artırıldı
 
   let genislik = 0, baslangicX = null, baslangicY = null, baslangicZaman = 0;
   let sonX = null, surukluyor = false, acilisDurumu = false;
