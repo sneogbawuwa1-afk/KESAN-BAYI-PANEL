@@ -1,55 +1,93 @@
-// Keşan Bayi Takip Paneli - basit service worker
-// Amaç: PWA "yüklenebilir" kriterlerini karşılamak ve son açılan sayfayı
-// cihazda önbelleğe alarak internet olmadan da uygulamanın açılabilmesini sağlamak.
+// sw.js — Keşan Bayi Takip Paneli Service Worker
 //
-// GÜNCELLEME NOTU: Her yeni deploy'da CACHE_NAME değerini artırın (v1 -> v2 -> v3...).
-// Bu, tarayıcının yeni bir service worker sürümü olduğunu fark etmesini sağlar.
-// Yeni sürüm hemen devreye girmez; kullanıcı index.html'deki "güncelleme var" bildirimine
-// dokunana kadar "waiting" (bekleme) durumunda kalır — böylece kullanıcı işini yaparken
-// panel aniden yenilenip yarım kalan bir işlemi bozmaz.
-const CACHE_NAME = 'bayi-takip-cache-v3.3';
-const CORE_ASSETS = [
+// VERSİYON NUMARALANDIRMA KURALI: APP_VERSION bu dosyada güncellendiğinde, index.html
+// üzerindeki tüm ".app-version-label" rozetleri (ör. "V3.4") otomatik olarak buradaki
+// değerle eşleşir — index.html'i elle düzenlemeye GEREK YOKTUR. Eşleşme, index.html'deki
+// script'in bu worker'a postMessage({type:'GET_VERSION'}) göndermesi ve buradaki mesaj
+// dinleyicisinin postMessage({type:'VERSION', version:APP_VERSION}) ile cevap vermesiyle
+// sağlanır (bkz. dosya sonundaki 'message' olay dinleyicisi).
+//
+// Yeni bir sürüm yayınlarken yapılması gereken TEK şey: APP_VERSION'ı artırmak.
+// CACHE_NAME de APP_VERSION'dan türediği için otomatik olarak yeni bir cache alanı açılır
+// ve activate aşamasında eski sürümün cache'i silinir — statik dosyalarda manuel cache
+// temizliği gerekmez.
+const APP_VERSION = '3.4';
+const CACHE_NAME = 'kesan-bayi-takip-v' + APP_VERSION;
+
+// Uygulama kabuğu: ilk yüklemede önbelleğe alınır, çevrimdışı açılışı mümkün kılar.
+// Yalnızca AYNI ORİJİNDEN (bu sunucudan) servis edilen dosyalar burada listelenir —
+// Firebase/Google Fonts/FontAwesome/xlsx gibi dış CDN kaynakları bilerek DAHİL EDİLMEZ
+// (bkz. aşağıdaki fetch stratejisi notu).
+const APP_SHELL = [
+  './',
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
 ];
 
+// --- INSTALL: yeni sürüm indirilir indirilmez uygulama kabuğunu önbelleğe alır ---
 self.addEventListener('install', (event) => {
-  // Not: Kasıtlı olarak self.skipWaiting() ÇAĞRILMIYOR — yeni sürüm, kullanıcı
-  // onay verene kadar (bkz. SKIP_WAITING mesajı) beklemede kalsın istiyoruz.
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).catch(() => {
+      // Bir dosya (ör. henüz yüklenmemiş bir ikon) eksikse install'ın tamamen
+      // başarısız olup worker'ın hiç etkinleşmemesini önlemek için hatayı yutuyoruz —
+      // eksik dosya sonraki fetch'te ağdan normal şekilde alınır.
+    })
   );
 });
 
-// index.html tarafından "şimdi güncelle" butonuna basıldığında gönderilen mesaj.
-self.addEventListener('message', (event) => {
-  if (event.data === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
-});
-
+// --- ACTIVATE: eski sürümlere ait cache'leri temizler, yeni worker'ı hemen devreye alır ---
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
-    )
+    caches.keys().then((isimler) =>
+      Promise.all(
+        isimler
+          .filter((isim) => isim.startsWith('kesan-bayi-takip-v') && isim !== CACHE_NAME)
+          .map((isim) => caches.delete(isim))
+      )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Ağ öncelikli (network-first): panel canlı veri kullandığı için önce internetten
-// yüklemeyi dener, başarısız olursa (çevrimdışıysa) önbellekten döner.
+// --- FETCH STRATEJİSİ ---
+// index.html sık güncellenen, canlı veriyle çalışan bir tek-sayfa uygulama olduğundan
+// KENDİ ORİJİNİMİZDEN gelen istekler için "network-first, cache fallback" kullanılır:
+// önce ağdan güncel dosya denenir, başarılı olursa hem kullanıcıya verilir hem cache
+// güncellenir; ağ yoksa (çevrimdışı) en son önbelleğe alınmış sürüm gösterilir.
+// Dış CDN istekleri (Firebase, Google Fonts, FontAwesome, xlsx vb.) service worker'a
+// hiç dokunulmadan tarayıcının kendi ağ/HTTP cache davranışına bırakılır — bu yüzden
+// event.respondWith çağrılmadan erken return edilir.
 self.addEventListener('fetch', (event) => {
+  const istekUrl = new URL(event.request.url);
+  if (istekUrl.origin !== self.location.origin) return;
   if (event.request.method !== 'GET') return;
+
   event.respondWith(
     fetch(event.request)
-      .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
-        return response;
+      .then((yanit) => {
+        const kopya = yanit.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, kopya)).catch(() => {});
+        return yanit;
       })
-      .catch(() => caches.match(event.request).then((cached) => cached || caches.match('./index.html')))
+      .catch(() =>
+        caches.match(event.request).then((onbellek) => onbellek || caches.match('./index.html'))
+      )
   );
+});
+
+// --- MESAJLAŞMA: index.html ile sürüm sorgusu / güncelleme tetikleme protokolü ---
+self.addEventListener('message', (event) => {
+  if (event.data === 'SKIP_WAITING') {
+    // Kullanıcı "Şimdi yenile" butonuna bastığında index.html bu mesajı gönderir;
+    // bekleyen (waiting) worker hemen aktifleşir → controllerchange tetiklenir →
+    // index.html sayfayı otomatik yeniler.
+    self.skipWaiting();
+    return;
+  }
+  if (event.data && event.data.type === 'GET_VERSION') {
+    // index.html hem sayfa yüklendiğinde (aktif worker için) hem yeni bir worker
+    // "waiting" durumuna geçtiğinde (güncelleme bildirimi için) bu isteği gönderir.
+    event.source.postMessage({ type: 'VERSION', version: APP_VERSION });
+  }
 });
