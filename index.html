@@ -2019,6 +2019,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="siparis" title="Sipariş Dökümü arşiv kayıtlarını tarihe göre sil" aria-label="Sipariş Dökümü arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="tahsilat">
@@ -2026,6 +2027,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="tahsilat" title="Tahsilat Dökümü arşiv kayıtlarını tarihe göre sil" aria-label="Tahsilat Dökümü arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="fatura">
@@ -2033,7 +2035,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                <button type="button" class="gvy-remove-btn" id="faturaArsivTemizleBtn" title="Eski (bugünden önceki) tüm Fatura Dökümü arşiv kayıtlarını sil" aria-label="Eski Fatura Dökümü arşiv kayıtlarını sil"><i class="fa-solid fa-broom" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="fatura" title="Fatura Dökümü arşiv kayıtlarını tarihe göre sil" aria-label="Fatura Dökümü arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="depozitoTahsilat">
@@ -2041,6 +2043,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="depozitoTahsilat" title="Depozito Tahsilat arşiv kayıtlarını tarihe göre sil" aria-label="Depozito Tahsilat arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="bayiHakedis">
@@ -2048,7 +2051,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                <button type="button" class="gvy-remove-btn" id="bayiHakedisArsivTemizleBtn" title="Eski (bugünden önceki) tüm Bayi Hak Ediş arşiv kayıtlarını sil" aria-label="Eski Bayi Hak Ediş arşiv kayıtlarını sil"><i class="fa-solid fa-broom" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="bayiHakedis" title="Bayi Hak Ediş arşiv kayıtlarını tarihe göre sil" aria-label="Bayi Hak Ediş arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="yukleme">
@@ -2056,6 +2059,7 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="yukleme" title="Yükleme Raporu arşiv kayıtlarını tarihe göre sil" aria-label="Yükleme Raporu arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
 
@@ -3416,6 +3420,77 @@
             </div>
             <div style="display:flex;justify-content:flex-end;">
               <button type="button" class="btn small primary" id="kalemlerKilitModalTamamBtn">Anladım</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arşiv verisi (Sipariş/Tahsilat/Fatura/Depozito/Bayi Hak Ediş/Yükleme Raporu) için tarih
+         aralığı seçmeli silme modalı. Tek/aynı ay/aralık/tüm günler seçimini destekler. -->
+    <div class="modal-overlay" id="arsivSilModalOverlay" style="z-index:1040;">
+      <div class="modal" id="arsivSilModal" role="dialog" aria-modal="true" aria-labelledby="arsivSilModalTitle" style="max-width:420px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="arsivSilModalTitle">Arşiv Kaydı Sil</div>
+              <div class="modal-head-navy-sub" id="arsivSilModalSub">Silmek istediğiniz tarih aralığını seçin</div>
+            </div>
+          </div>
+          <button class="modal-close" id="arsivSilModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:20px 22px 22px;display:flex;flex-direction:column;gap:14px;">
+
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <label style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">Kapsam</label>
+              <div id="arsivSilKapsamGrup" style="display:flex;flex-direction:column;gap:7px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);cursor:pointer;">
+                  <input type="radio" name="arsivSilKapsam" value="gun" checked> Tek bir gün
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);cursor:pointer;">
+                  <input type="radio" name="arsivSilKapsam" value="ay"> Belirli bir ay
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);cursor:pointer;">
+                  <input type="radio" name="arsivSilKapsam" value="aralik"> Tarih aralığı
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink);cursor:pointer;">
+                  <input type="radio" name="arsivSilKapsam" value="hepsi"> Bugünden önceki tüm kayıtlar
+                </label>
+              </div>
+            </div>
+
+            <div id="arsivSilAlanGun" style="display:flex;flex-direction:column;gap:6px;">
+              <label for="arsivSilGunInput" style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">Tarih</label>
+              <input type="date" id="arsivSilGunInput" style="width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;">
+            </div>
+
+            <div id="arsivSilAlanAy" style="display:none;flex-direction:column;gap:6px;">
+              <label for="arsivSilAyInput" style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">Ay</label>
+              <input type="month" id="arsivSilAyInput" style="width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;">
+            </div>
+
+            <div id="arsivSilAlanAralik" style="display:none;flex-direction:column;gap:10px;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label for="arsivSilBaslangicInput" style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">Başlangıç tarihi</label>
+                <input type="date" id="arsivSilBaslangicInput" style="width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label for="arsivSilBitisInput" style="font-size:11.5px;font-weight:700;color:var(--ink-soft);">Bitiş tarihi</label>
+                <input type="date" id="arsivSilBitisInput" style="width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;box-sizing:border-box;">
+              </div>
+            </div>
+
+            <div id="arsivSilAlanHepsi" style="display:none;font-size:12.5px;line-height:1.5;color:var(--ink-soft);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px;">
+              Bugünden önceki (bugün hariç) bu dosya türüne ait <b>tüm</b> arşiv kayıtları silinecek.
+            </div>
+
+            <div id="arsivSilHata" style="font-size:12px;color:var(--danger, #C0392B);min-height:16px;"></div>
+
+            <div style="display:flex;gap:10px;justify-content:flex-end;">
+              <button type="button" class="btn small" id="arsivSilIptalBtn">İptal</button>
+              <button type="button" class="btn small primary" id="arsivSilOnayBtn">Sil</button>
             </div>
           </div>
         </div>
@@ -6552,119 +6627,213 @@ function kalemlerKilitGeriSayimDurdur(){
   if(tamamBtn) tamamBtn.addEventListener('click', kalemlerKilitModalKapat);
   if(overlay) overlay.addEventListener('click', (e)=>{ if(e.target===overlay) kalemlerKilitModalKapat(); });
 })();
-// Bayi Hak Ediş arşiv temizliği: arşivdeki HER günün bayiHakedisArsiv alanını (bugün dahil
-// istenirse hariç tutulabilir — burada "bugünden önceki tüm günler" temizlenir) boşaltır. Bu,
-// geçmişte yanlışlıkla/tekrar yüklenmiş eski Bayi Hak Ediş kayıtlarının Trend Analizi'ndeki
-// "Aylık Ortalama Hakediş" hesabını (computeMusteriAylikOzet) yanlış genişletmesini önlemek
-// içindir — o hesap, müşterinin en eski ve en yeni fatura/tahsilat/hakediş kaydı arasındaki gün
-// farkına göre bir "ay sayısı" bulup toplamı buna bölüyor; arşivde kalan eski/hayalet bir hakediş
-// kaydı bu aralığı gereksiz yere genişletip aylık ortalamayı olduğundan küçük gösterebiliyor.
-// Diğer arşiv alanlarına (fatura, tahsilat, sipariş, musteriSnapshot vb.) HİÇ dokunulmaz.
-async function bayiHakedisArsivEskiKayitlariTemizle(){
+// ===================== ARŞİV VERİSİ: TARİH ARALIKLI SİLME (GENEL) =====================
+// Sipariş/Tahsilat/Fatura/Depozito Tahsilat/Bayi Hak Ediş/Yükleme Raporu arşiv satırlarındaki
+// çöp kutusu ikonlarının hepsi bu tek modalı ve tek genel silme fonksiyonunu kullanır. Kullanıcı
+// "Tek bir gün / Belirli bir ay / Tarih aralığı / Bugünden önceki tüm kayıtlar" seçeneklerinden
+// birini seçip [baslangicKey, bitisKey] (dahil-dahil, YYYY-MM-DD) aralığını belirler; silme bu
+// aralıktaki günlerin SADECE ilgili tipe ait alanını temizler, diğer tiplere dokunmaz.
+//
+// Veri yapısı özeti (state.faturaArsivCache[gunKey] = {...}):
+//   siparis      -> gun.siparisArsiv (dizi)
+//   tahsilat     -> gun.tahsilatArsiv (dizi) — formatKaynagi 'DepozitoTahsilat'/'FaturaIade' OLMAYAN satırlar
+//   fatura       -> gun.faturaArsiv (dizi)
+//   bayiHakedis  -> gun.bayiHakedisArsiv (dizi)
+//   depozitoTahsilat -> gun.tahsilatArsiv İÇİNDEKİ formatKaynagi==='DepozitoTahsilat' satırları
+//                       (bkz. tahsilatKredisiGunlereEkleVeDegistir) — ayrı bir alan DEĞİL.
+//   yukleme      -> state.yuklemeArsivCache[gunKey] (AYRI bir arşiv, faturaArsivCache'te değil)
+const ARSIV_SIL_TIP_ETIKET = {
+  siparis:'Sipariş Dökümü', tahsilat:'Tahsilat Dökümü', fatura:'Fatura Dökümü',
+  depozitoTahsilat:'Depozito Tahsilat', bayiHakedis:'Bayi Hak Ediş', yukleme:'Yükleme Raporu',
+};
+async function arsivTarihAraligindaSil(tip, baslangicKey, bitisKey){
+  if(tip === 'yukleme'){
+    let arsiv = null;
+    if(cloudEnabled()) arsiv = await loadYuklemeArsivFromCloud();
+    if(!arsiv) arsiv = await loadYuklemeArsivFromLocal();
+    arsiv = arsiv || {};
+    const yeniArsiv = Object.assign({}, arsiv);
+    let etkilenenGunSayisi = 0;
+    Object.keys(yeniArsiv).forEach(gunKey=>{
+      if(gunKey < baslangicKey || gunKey > bitisKey) return;
+      delete yeniArsiv[gunKey];
+      etkilenenGunSayisi++;
+    });
+    if(!etkilenenGunSayisi) return {temizlenenGunSayisi: 0};
+    state.yuklemeArsivCache = yeniArsiv;
+    await saveYuklemeArsivToLocal(yeniArsiv);
+    if(cloudEnabled()) await saveYuklemeArsivToCloud(yeniArsiv);
+    return {temizlenenGunSayisi: etkilenenGunSayisi};
+  }
+
   await faturaArsivYenile();
   const eskiArsivTumu = state.faturaArsivCache || {};
-  const bugunKey = dateKeyLocal(new Date());
   const yeniArsivTumu = Object.assign({}, eskiArsivTumu);
   let etkilenenGunSayisi = 0;
+
   Object.keys(yeniArsivTumu).forEach(gunKey=>{
-    if(gunKey >= bugunKey) return; // bugün ve sonrası (varsa) korunur
+    if(gunKey < baslangicKey || gunKey > bitisKey) return;
     const gun = yeniArsivTumu[gunKey];
-    if(gun && Array.isArray(gun.bayiHakedisArsiv) && gun.bayiHakedisArsiv.length){
-      yeniArsivTumu[gunKey] = Object.assign({}, gun, {bayiHakedisArsiv: []});
+    if(!gun) return;
+
+    if(tip === 'depozitoTahsilat'){
+      const eski = gun.tahsilatArsiv || [];
+      const kalan = eski.filter(r=> !(r && r.formatKaynagi === 'DepozitoTahsilat'));
+      if(kalan.length !== eski.length){
+        yeniArsivTumu[gunKey] = Object.assign({}, gun, {tahsilatArsiv: kalan});
+        etkilenenGunSayisi++;
+      }
+      return;
+    }
+
+    const alan = {siparis:'siparisArsiv', tahsilat:'tahsilatArsiv', fatura:'faturaArsiv', bayiHakedis:'bayiHakedisArsiv'}[tip];
+    if(!alan) return;
+    if(tip === 'tahsilat'){
+      // Tahsilat Dökümü sadece "gerçek" tahsilat satırlarını kapsar; Depozito Tahsilat/Bozuk İade
+      // Faturası etiketli satırlar bu tipin silme kapsamına dahil edilmez (kendi butonları vardır) —
+      // bu yüzden SADECE o iki etiketli satırlar korunur (kalan), etiketsiz/normal tahsilat satırları silinir.
+      const eski = gun.tahsilatArsiv || [];
+      const kalan = eski.filter(r=> r && (r.formatKaynagi === 'DepozitoTahsilat' || r.formatKaynagi === 'FaturaIade'));
+      if(kalan.length !== eski.length){
+        yeniArsivTumu[gunKey] = Object.assign({}, gun, {tahsilatArsiv: kalan});
+        etkilenenGunSayisi++;
+      }
+      return;
+    }
+    if(Array.isArray(gun[alan]) && gun[alan].length){
+      yeniArsivTumu[gunKey] = Object.assign({}, gun, {[alan]: []});
       etkilenenGunSayisi++;
     }
   });
+
   if(!etkilenenGunSayisi) return {temizlenenGunSayisi: 0};
   state.faturaArsivCache = yeniArsivTumu;
   await saveFaturaKontrolArsivToLocal(state.faturaArsivCache).catch(()=>{});
   if(cloudEnabled()){
     const fark = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, yeniArsivTumu);
     try{ await saveFaturaKontrolArsivGunleriToCloud(fark); }
-    catch(err){ console.error('Bayi Hak Ediş arşiv temizliği buluta yazılamadı:', err); }
+    catch(err){ console.error(ARSIV_SIL_TIP_ETIKET[tip]+' arşiv silme buluta yazılamadı:', err); }
   }
   return {temizlenenGunSayisi: etkilenenGunSayisi};
 }
+
 (function(){
-  const btn = document.getElementById('bayiHakedisArsivTemizleBtn');
-  if(!btn) return;
-  btn.addEventListener('click', async ()=>{
-    if(!(await ortakSifreDogrula('Eski Bayi Hak Ediş kayıtlarını silmek için şifreyi girin:'))) return;
-    const onayli = window.confirm('Bugünden önceki TÜM Bayi Hak Ediş arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?');
-    if(!onayli) return;
-    const oncekiMetin = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
+  const overlay = document.getElementById('arsivSilModalOverlay');
+  const closeBtn = document.getElementById('arsivSilModalClose');
+  const iptalBtn = document.getElementById('arsivSilIptalBtn');
+  const onayBtn = document.getElementById('arsivSilOnayBtn');
+  const subEl = document.getElementById('arsivSilModalSub');
+  const hataEl = document.getElementById('arsivSilHata');
+  const kapsamGrup = document.getElementById('arsivSilKapsamGrup');
+  const alanGun = document.getElementById('arsivSilAlanGun');
+  const alanAy = document.getElementById('arsivSilAlanAy');
+  const alanAralik = document.getElementById('arsivSilAlanAralik');
+  const alanHepsi = document.getElementById('arsivSilAlanHepsi');
+  const gunInput = document.getElementById('arsivSilGunInput');
+  const ayInput = document.getElementById('arsivSilAyInput');
+  const baslangicInput = document.getElementById('arsivSilBaslangicInput');
+  const bitisInput = document.getElementById('arsivSilBitisInput');
+  if(!overlay || !kapsamGrup) return;
+
+  let aktifTip = null;
+
+  function kapsamiGuncelle(){
+    const secili = kapsamGrup.querySelector('input[name="arsivSilKapsam"]:checked');
+    const deger = secili ? secili.value : 'gun';
+    alanGun.style.display = deger==='gun' ? 'flex' : 'none';
+    alanAy.style.display = deger==='ay' ? 'flex' : 'none';
+    alanAralik.style.display = deger==='aralik' ? 'flex' : 'none';
+    alanHepsi.style.display = deger==='hepsi' ? 'block' : 'none';
+    hataEl.textContent = '';
+  }
+  kapsamGrup.querySelectorAll('input[name="arsivSilKapsam"]').forEach(r=> r.addEventListener('change', kapsamiGuncelle));
+
+  function ac(tip){
+    aktifTip = tip;
+    const etiket = ARSIV_SIL_TIP_ETIKET[tip] || tip;
+    subEl.textContent = etiket + ' arşiv kayıtlarını silmek için tarih seçin';
+    hataEl.textContent = '';
+    const bugun = dateKeyLocal(new Date());
+    gunInput.value = ''; gunInput.max = bugun;
+    ayInput.value = ''; ayInput.max = bugun.slice(0,7);
+    baslangicInput.value = ''; baslangicInput.max = bugun;
+    bitisInput.value = ''; bitisInput.max = bugun;
+    kapsamGrup.querySelector('input[name="arsivSilKapsam"][value="gun"]').checked = true;
+    kapsamiGuncelle();
+    overlay.classList.add('open');
+  }
+  function kapat(){ overlay.classList.remove('open'); aktifTip = null; }
+
+  document.querySelectorAll('[data-gvy-arsivsilbtn]').forEach(btn=>{
+    btn.addEventListener('click', ()=> ac(btn.getAttribute('data-gvy-arsivsilbtn')));
+  });
+  if(closeBtn) closeBtn.addEventListener('click', kapat);
+  if(iptalBtn) iptalBtn.addEventListener('click', kapat);
+  overlay.addEventListener('click', (e)=>{ if(e.target===overlay) kapat(); });
+
+  onayBtn.addEventListener('click', async ()=>{
+    if(!aktifTip) return;
+    const secili = kapsamGrup.querySelector('input[name="arsivSilKapsam"]:checked');
+    const deger = secili ? secili.value : 'gun';
+    const bugunKey = dateKeyLocal(new Date());
+    let baslangicKey, bitisKey, aciklama;
+
+    if(deger === 'gun'){
+      if(!gunInput.value){ hataEl.textContent = 'Lütfen bir tarih seçin.'; return; }
+      baslangicKey = bitisKey = gunInput.value;
+      aciklama = new Date(gunInput.value+'T00:00:00').toLocaleDateString('tr-TR');
+    }else if(deger === 'ay'){
+      if(!ayInput.value){ hataEl.textContent = 'Lütfen bir ay seçin.'; return; }
+      baslangicKey = ayInput.value + '-01';
+      const [yy, mm] = ayInput.value.split('-').map(Number);
+      const ayinSonGunu = new Date(yy, mm, 0).getDate();
+      bitisKey = ayInput.value + '-' + String(ayinSonGunu).padStart(2,'0');
+      aciklama = ayInput.value + ' ayı';
+    }else if(deger === 'aralik'){
+      if(!baslangicInput.value || !bitisInput.value){ hataEl.textContent = 'Lütfen başlangıç ve bitiş tarihlerini seçin.'; return; }
+      if(baslangicInput.value > bitisInput.value){ hataEl.textContent = 'Başlangıç tarihi bitiş tarihinden sonra olamaz.'; return; }
+      baslangicKey = baslangicInput.value; bitisKey = bitisInput.value;
+      aciklama = new Date(baslangicKey+'T00:00:00').toLocaleDateString('tr-TR') + ' – ' + new Date(bitisKey+'T00:00:00').toLocaleDateString('tr-TR');
+    }else{ // hepsi
+      baslangicKey = '0000-00-00';
+      bitisKey = bugunKey; // bugün dahil değil; aşağıda '<' ile hariç tutulur
+      aciklama = 'bugünden önceki tüm kayıtlar';
+    }
+    if(deger !== 'hepsi' && bitisKey > bugunKey){ hataEl.textContent = 'Bugünden sonraki bir tarih seçilemez.'; return; }
+
+    if(!(await ortakSifreDogrula((ARSIV_SIL_TIP_ETIKET[aktifTip]||aktifTip)+' arşiv kayıtlarını silmek için şifreyi girin:'))) return;
+    const onayMesaji = deger==='hepsi'
+      ? 'Bugünden önceki TÜM '+(ARSIV_SIL_TIP_ETIKET[aktifTip]||aktifTip)+' arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?'
+      : (ARSIV_SIL_TIP_ETIKET[aktifTip]||aktifTip)+' için '+aciklama+' tarih(ler)ine ait arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?';
+    if(!window.confirm(onayMesaji)) return;
+
+    const oncekiMetin = onayBtn.innerHTML;
+    onayBtn.disabled = true;
+    onayBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
     try{
-      const sonuc = await bayiHakedisArsivEskiKayitlariTemizle();
+      // "hepsi" durumunda bugünkü kayıt korunmalı: bitisKey'i bugünden bir gün öncesine çekiyoruz.
+      let etkinBitis = bitisKey;
+      if(deger === 'hepsi'){
+        const d = new Date(bugunKey+'T00:00:00'); d.setDate(d.getDate()-1);
+        etkinBitis = dateKeyLocal(d);
+      }
+      const sonuc = await arsivTarihAraligindaSil(aktifTip, baslangicKey, etkinBitis);
       if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+      if(typeof updateGvyPanel === 'function') updateGvyPanel();
       window.alert(sonuc.temizlenenGunSayisi
-        ? sonuc.temizlenenGunSayisi + ' günün eski Bayi Hak Ediş kaydı temizlendi.'
-        : 'Temizlenecek eski Bayi Hak Ediş kaydı bulunamadı.');
+        ? sonuc.temizlenenGunSayisi + ' günün ' + (ARSIV_SIL_TIP_ETIKET[aktifTip]||aktifTip) + ' kaydı silindi.'
+        : 'Seçilen tarih aralığında silinecek ' + (ARSIV_SIL_TIP_ETIKET[aktifTip]||aktifTip) + ' kaydı bulunamadı.');
+      kapat();
     }catch(err){
       console.error(err);
-      window.alert('Temizleme sırasında bir hata oluştu, lütfen tekrar deneyin.');
+      hataEl.textContent = 'Silme sırasında bir hata oluştu, lütfen tekrar deneyin.';
     }finally{
-      btn.disabled = false;
-      btn.innerHTML = oncekiMetin;
+      onayBtn.disabled = false;
+      onayBtn.innerHTML = oncekiMetin;
     }
   });
 })();
 
-// Fatura Dökümü arşiv temizliği: BAYİ HAK EDİŞ temizliğiyle AYNI mantık, sadece hedef alan
-// faturaArsiv'dir (bayiHakedisArsiv değil). Arşivdeki HER günün faturaArsiv alanını (bugünden
-// önceki tüm günler için) boşaltır — eski/yanlışlıkla tekrar yüklenmiş Fatura Dökümü kayıtlarının
-// "Fatura · Aylık Ortalama" (computeMusteriAylikOzet) hesabını yanlış genişletmesini önlemek
-// içindir. Diğer arşiv alanlarına (tahsilat, sipariş, bayiHakedis, musteriSnapshot vb.) HİÇ
-// dokunulmaz.
-async function faturaArsivEskiKayitlariTemizle(){
-  await faturaArsivYenile();
-  const eskiArsivTumu = state.faturaArsivCache || {};
-  const bugunKey = dateKeyLocal(new Date());
-  const yeniArsivTumu = Object.assign({}, eskiArsivTumu);
-  let etkilenenGunSayisi = 0;
-  Object.keys(yeniArsivTumu).forEach(gunKey=>{
-    if(gunKey >= bugunKey) return; // bugün ve sonrası (varsa) korunur
-    const gun = yeniArsivTumu[gunKey];
-    if(gun && Array.isArray(gun.faturaArsiv) && gun.faturaArsiv.length){
-      yeniArsivTumu[gunKey] = Object.assign({}, gun, {faturaArsiv: []});
-      etkilenenGunSayisi++;
-    }
-  });
-  if(!etkilenenGunSayisi) return {temizlenenGunSayisi: 0};
-  state.faturaArsivCache = yeniArsivTumu;
-  await saveFaturaKontrolArsivToLocal(state.faturaArsivCache).catch(()=>{});
-  if(cloudEnabled()){
-    const fark = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, yeniArsivTumu);
-    try{ await saveFaturaKontrolArsivGunleriToCloud(fark); }
-    catch(err){ console.error('Fatura Dökümü arşiv temizliği buluta yazılamadı:', err); }
-  }
-  return {temizlenenGunSayisi: etkilenenGunSayisi};
-}
-(function(){
-  const btn = document.getElementById('faturaArsivTemizleBtn');
-  if(!btn) return;
-  btn.addEventListener('click', async ()=>{
-    if(!(await ortakSifreDogrula('Eski Fatura Dökümü kayıtlarını silmek için şifreyi girin:'))) return;
-    const onayli = window.confirm('Bugünden önceki TÜM Fatura Dökümü arşiv kayıtları kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?');
-    if(!onayli) return;
-    const oncekiMetin = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>';
-    try{
-      const sonuc = await faturaArsivEskiKayitlariTemizle();
-      if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
-      window.alert(sonuc.temizlenenGunSayisi
-        ? sonuc.temizlenenGunSayisi + ' günün eski Fatura Dökümü kaydı temizlendi.'
-        : 'Temizlenecek eski Fatura Dökümü kaydı bulunamadı.');
-    }catch(err){
-      console.error(err);
-      window.alert('Temizleme sırasında bir hata oluştu, lütfen tekrar deneyin.');
-    }finally{
-      btn.disabled = false;
-      btn.innerHTML = oncekiMetin;
-    }
-  });
-})();
 resetBtn.addEventListener('click', async ()=>{
   // Kalemler bugün için zaten yüklenmişse: ekran hiç değişmez, sadece uyarı gösterilir.
   if(bugunKalemlerYuklendiMi()){
@@ -7018,16 +7187,15 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
-  // Genel Rapor/Sevk Raporu'ndaki tahsilat KPI'sı artık ne "dosyadaki en güncel gün"e ne de sadece
-  // "bu dosyadaki günler"e göre değil, bu yüklemenin arşive yansıyacağı haliyle ARŞİVDEKİ TÜM
-  // tahsilat günleri arasından bugüne EN YAKIN olan güne göre gösterilir — Format A/Format B farkı
-  // gözetilmeksizin, hangi formatın kaydı arşivde en güncelse o gösterilir. Artık Fatura
-  // Dökümü'ndeki "Bozuk İade Faturası" ve Depozito Tahsilatı'ndaki (Fatura Belge No'lu) satırlardan
-  // türeyen tahsilat kredileri de (bkz. bozukIadeTahsilat, depozitoTahsilat) bu hesaba dahildir —
-  // bunlar Tahsilat Dökümü'nden gelmese bile aynı KPI'ya katkı sağlar. Bunun için, arşive gerçekten
-  // kaydedilecek durumun AYNISI (bkz. tahsilatEfektifGunMapHesapla) burada da -henüz kaydetmeden-
-  // simüle edilip, üzerine bu krediler eklenir, sonra dolu (veri içeren) tüm günler arasından bugüne
-  // en yakın olan seçilir.
+  // Genel Rapor/Sevk Raporu'ndaki tahsilat KPI'sı: ARTIK "bugüne en yakın dolu gün" değil, HER ZAMAN
+  // SABİT olarak bugünden bir gün önceki takvim gününe göre gösterilir — o günde arşivde/bu
+  // yüklemede hiç veri yoksa KPI 0/boş görünür (başka bir güne kaymaz). Format A/Format B farkı
+  // gözetilmeksizin, hangi formatın kaydı o güne aitse o kullanılır. Fatura Dökümü'ndeki "Bozuk
+  // İade Faturası" ve Depozito Tahsilatı'ndaki (Fatura Belge No'lu) satırlardan türeyen tahsilat
+  // kredileri de (bkz. bozukIadeTahsilat, depozitoTahsilat) bu hesaba dahildir — bunlar Tahsilat
+  // Dökümü'nden gelmese bile aynı KPI'ya katkı sağlar. Bunun için, arşive gerçekten kaydedilecek
+  // durumun AYNISI (bkz. tahsilatEfektifGunMapHesapla) burada da -henüz kaydetmeden- simüle edilip,
+  // üzerine bu krediler eklenir, sonra SABİT "dün" gününe ait satırlar okunur.
   const bugunGunKeyTahsilat = dateKeyLocal(today);
   const efektifGunMap = tahsilatEfektifGunMapHesapla(state.faturaArsivCache || {}, tahsilatArsiv, tahsilatFormatB, bugunGunKeyTahsilat);
   bozukIadeTahsilat.forEach(r=>{
@@ -7042,8 +7210,8 @@ function buildReport(files, musteriMasterMap){
     const mevcut = (efektifGunMap.get(gk) || []).filter(x=>x.formatKaynagi!=='DepozitoTahsilat');
     efektifGunMap.set(gk, mevcut.concat([r]));
   });
-  const doluGunler = Array.from(efektifGunMap.keys()).filter(gk=> (efektifGunMap.get(gk)||[]).length > 0);
-  const hedefTahsilatGunKey = enYakinGunKey(doluGunler, bugunGunKeyTahsilat);
+  const dunTarihi = new Date(bugunGunKeyTahsilat+'T00:00:00'); dunTarihi.setDate(dunTarihi.getDate()-1);
+  const hedefTahsilatGunKey = dateKeyLocal(dunTarihi);
 
   const tahsilatKaynakMap = new Map(); // musteri -> {normal, bozukIade, depozito}
   if(hedefTahsilatGunKey){
