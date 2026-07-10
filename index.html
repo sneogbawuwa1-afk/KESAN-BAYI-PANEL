@@ -1974,13 +1974,6 @@
             <div class="gvy-tabpane active" id="gvyPaneGunluk" role="tabpanel" aria-labelledby="gvyTabGunluk">
               <div class="gvy-panel-title">Günlük Veri Yükle</div>
 
-              <div class="gvy-row" data-gvc-type="cekSenet">
-                <div><div class="gvy-row-label">Çek / Senet Riski</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
-                <div class="gvy-row-btns">
-                  <button type="button" class="gvy-file-btn" data-gvc-filebtn>Dosya Seç</button>
-                  <button type="button" class="gvy-remove-btn" data-gvc-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                </div>
-              </div>
               <div class="gvy-row" data-gvc-type="ticariStok">
                 <div><div class="gvy-row-label">Ticari Stok</div><div class="gvy-row-sub" data-gvc-sub>Dosya seçilmedi</div><div class="gvy-row-arsivgun" data-gvc-arsivgun></div></div>
                 <div class="gvy-row-btns">
@@ -2062,6 +2055,13 @@
                 <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="yukleme" title="Yükleme Raporu arşiv kayıtlarını tarihe göre sil" aria-label="Yükleme Raporu arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
+            <div class="gvy-row" data-gvy-type="cariEkstre">
+              <div><div class="gvy-row-label">Cari Hesap Ekstre</div><div class="gvy-row-sub" data-gvy-sub></div><div class="gvy-row-arsivgun" data-gvy-arsivgun></div></div>
+              <div class="gvy-row-btns">
+                <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
+                <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+              </div>
+            </div>
 
             <div class="gvy-panel-title" style="margin-top:6px;">Kanal Raporları</div>
 
@@ -2114,6 +2114,7 @@
             </div>
             <div class="gvy-status-msg" id="gvyStatusMsg"></div>
             <div class="gvy-last-sync" id="gvyLastSync">Son güncelleme: —</div>
+
             </div><!-- /gvyPaneArsiv (Grup B) -->
 
           </div>
@@ -2158,8 +2159,9 @@
 
               <div class="gb-donut-row">
                 <div class="gb-donut-card">
-                  <div class="gb-donut-card-title">Vade Dağılımı</div>
+                  <div class="gb-donut-card-title" title="Bu grafiğin toplamı, yalnızca kalan borcu pozitif (gerçekten açık borçlu) müşterileri kapsar. 'Toplam Kalan Borç' KPI'sı ise negatif bakiyeli (iade/fazla ödeme/alacaklı) müşterileri de net olarak toplama dahil eder — bu yüzden iki toplam bilerek farklı çıkabilir; aradaki fark negatif bakiyeli müşterilerin toplamı kadardır.">Vade Dağılımı <i class="fa-solid fa-circle-info" aria-hidden="true" style="font-size:11px;color:var(--ink-faint);"></i></div>
                   <div class="gb-donut-body" id="gbVadeDonutBody"></div>
+                  <div id="gbVadeDonutNot" style="font-size:10.5px;color:var(--ink-faint);margin-top:6px;line-height:1.4;"></div>
                 </div>
                 <div class="gb-donut-card">
                   <div class="gb-donut-card-title">Risk Dağılımı</div>
@@ -3555,6 +3557,7 @@
                 <th>Belge Tarihi</th>
                 <th>Vade Tarihi</th>
                 <th class="num">Tutar</th>
+                <th>Durum</th>
               </tr></thead>
               <tbody id="cekSenetModalTbody"></tbody>
             </table>
@@ -3704,7 +3707,7 @@ function dwarn(...a){ if(DEBUG) console.warn(...a); }
 const KANAL_TESHIS = false;
 function ktlog(...a){ if(KANAL_TESHIS) console.log('%c[KANAL]', 'background:#13233F;color:#F3C969;padding:1px 5px;border-radius:3px;', ...a); }
 const state = {
-  files: { kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null },
+  files: { kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null, cariEkstre:null },
   report: null,
   sort: { key:'kalanBorc', dir:-1 },
   sevkSort: { key:'toplamRisk', dir:-1 },
@@ -3712,6 +3715,12 @@ const state = {
   ySort: { key:'toplam', dir:-1 },
   tSort: { key:'depodaKalanLt', dir:-1 },
   expanded: new Set(),
+  // Manuel "Tahsil Edildi mi?" onayları — hem Alınan Çek hem Alınan Senet kayıtları OTOMATİK
+  // tahsilat sayılmaz (ikisi de risk olarak kalır); kullanıcı Çek/Senet Detayı popup'ında ilgili
+  // çek/senet için "Tahsil Edildi" butonuna tıklarsa o kaydın anahtarı (senetAnahtari alanı, hem
+  // çek hem senet için kullanılır) bu Set'e eklenir ve buildReport bir sonraki çalışmasında o
+  // kaydı tahsilat sayar. idb ile cihaza kalıcı kaydedilir.
+  cekSenetTahsilOnaylari: new Set(),
   faturaArsivCache: {},
   yuklemeReport: null,
   yuklemeSort: { key:'temsilci', dir:1 },
@@ -3774,62 +3783,45 @@ const DATE_KEYS = new Set(['faturaTarihi','netVade','vade','belgeTarihi','asOf',
 const IDB_DB_NAME = 'noktaCariTakipDB';
 const IDB_STORE = 'kv';
 let idbOpenPromise = null;
+// ================= CİHAZ (IndexedDB) DEPOLAMA TAMAMEN DEVRE DIŞI (kullanıcı isteği) =================
+// "Uygulama hiçbir şekilde local kullanmasın, sadece cloud verilerini kullansın" — bu üç fonksiyon
+// (idbOpen/idbSet/idbGet/idbDelete) uygulamanın HER YERİNDE cihaz okuma/yazma için TEK giriş
+// noktasıdır (grep ile doğrulandı: tüm saveXToLocal/loadXFromLocal fonksiyonları sadece bunları
+// çağırır). Bu yüzden gerçek IndexedDB erişimini burada, MERKEZİ olarak kapatmak yeterlidir —
+// onlarca ayrı save/load fonksiyonunu tek tek değiştirmeye gerek kalmaz:
+//   - idbSet: hiçbir şey yazmaz, her zaman "başarılı" (true) döner (çağıran kodun akışını bozmasın
+//     diye) — ama veri gerçekte HİÇBİR YERE kaydedilmez.
+//   - idbGet: her zaman null döner — yani "cihazda kayıtlı veri yok" gibi davranır. Bu sayede
+//     mevcut "önce buluttan dene, o da yoksa cihazdakine düş" mantığı otomatik olarak sadece
+//     "buluttan dene, o da yoksa boş" hâline gelir; ayrı bir kod değişikliği gerekmez.
+//   - idbDelete/idbOpen: no-op / hiç açılmayan sahte bir promise.
+// Not: Bu, önceki "Çek/Senet Tahsil Edildi buluta yazmıyor" sorununu da kökten çözer — artık
+// cihaza yazma diye bir şey OLMADIĞI için o fonksiyonlardaki bulut yazma adımları hatasız çalışırsa
+// veri sadece (ve her zaman) buluttadır, cihazda "takılı kalmış" eski bir kopya asla olmaz.
 function idbOpen(){
-  if(idbOpenPromise) return idbOpenPromise;
-  idbOpenPromise = new Promise((resolve, reject)=>{
-    if(!window.indexedDB){ reject(new Error('Bu tarayıcı IndexedDB desteklemiyor')); return; }
-    const req = indexedDB.open(IDB_DB_NAME, 1);
-    req.onupgradeneeded = ()=>{ if(!req.result.objectStoreNames.contains(IDB_STORE)) req.result.createObjectStore(IDB_STORE); };
-    req.onsuccess = ()=> resolve(req.result);
-    req.onerror = ()=> reject(req.error);
-  });
-  return idbOpenPromise;
+  return Promise.reject(new Error('IndexedDB devre dışı — uygulama yalnızca bulut (Firebase) kullanır.'));
 }
 async function idbSet(key, value){
-  try{
-    const db = await idbOpen();
-    return await new Promise((resolve, reject)=>{
-      const tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE).put(value, key);
-      tx.oncomplete = ()=> resolve(true);
-      tx.onerror = ()=> reject(tx.error);
-    });
-  }catch(err){ console.error('IndexedDB yazma hatası ('+key+'):', err); return false; }
+  return true;
 }
 async function idbGet(key){
-  try{
-    const db = await idbOpen();
-    return await new Promise((resolve, reject)=>{
-      const tx = db.transaction(IDB_STORE, 'readonly');
-      const req = tx.objectStore(IDB_STORE).get(key);
-      req.onsuccess = ()=> resolve(req.result===undefined ? null : req.result);
-      req.onerror = ()=> reject(req.error);
-    });
-  }catch(err){ console.error('IndexedDB okuma hatası ('+key+'):', err); return null; }
+  return null;
 }
 async function idbDelete(key){
-  try{
-    const db = await idbOpen();
-    return await new Promise((resolve, reject)=>{
-      const tx = db.transaction(IDB_STORE, 'readwrite');
-      tx.objectStore(IDB_STORE).delete(key);
-      tx.oncomplete = ()=> resolve(true);
-      tx.onerror = ()=> reject(tx.error);
-    });
-  }catch(err){ console.error('IndexedDB silme hatası ('+key+'):', err); return false; }
+  return true;
 }
 // Eskiden localStorage'a yazılmış veriyi bir kereliğine IndexedDB'ye taşır (geriye dönük uyumluluk).
+// CİHAZ DEPOLAMA TAMAMEN KAPALI (kullanıcı isteği: "hiçbir işlem cihaza yazılmasın") — bu fonksiyon
+// eskiden localStorage'daki (IndexedDB öncesi dönemden kalma) veriyi IndexedDB'ye taşıyıp
+// localStorage'daki kopyayı SİLİYORDU. idbSet artık gerçekte hiçbir şey yazmadığı için, bu taşıma
+// eskiden olduğu gibi çalıştırılırsa veri hiçbir yere gitmeden localStorage'dan silinir ve GERÇEK
+// VERİ KAYBINA yol açar. Bu yüzden fonksiyon artık KASITLI OLARAK no-op'tur: localStorage'daki
+// olası eski veriye DOKUNMAZ (ne okur ne siler) — en azından orada durur, kaybolmaz. Bu uygulamanın
+// güncel veri kaynağı zaten yalnızca buluttur (bkz. cloudVeriVerimliYukle); bu fonksiyon çağıran
+// loadXFromLocal fonksiyonları yalnızca bulut erişilemezse devreye giren YEDEK yoldu, artık o yedek
+// yol da anlamsız (idbGet zaten her zaman null döner) ama zararsız bırakılmıştır.
 async function idbMigrateFromLocalStorageOnce(key, reviver){
-  try{
-    const legacy = localStorage.getItem(key);
-    if(legacy===null || legacy===undefined) return;
-    const existing = await idbGet(key);
-    if(existing===null){
-      const parsed = reviver ? JSON.parse(legacy, reviver) : JSON.parse(legacy);
-      await idbSet(key, parsed);
-    }
-    localStorage.removeItem(key);
-  }catch(err){ console.error('Eski veri IndexedDB\'ye taşınamadı ('+key+'):', err); }
+  // Kasıtlı no-op.
 }
 function reportDateReviver(key, value){
   if(DATE_KEYS.has(key) && typeof value === 'string'){
@@ -3869,10 +3861,11 @@ function buildMusteriSnapshot(report){
   // hesaplanıyor (bkz. buildReport'taki "bakiyesiz" dizisi). Önceden bu müşteriler günlük arşive
   // hiç yazılmıyordu; bu yüzden Trend Analizi'nde ne arama listesinde çıkıyorlardı ne de geçmiş
   // günlerdeki sipariş/risk verileri grafiğe yansıyordu. Kalan Borç/Ort. Vade bu müşteriler için
-  // anlamsız olduğundan 0/null olarak, Toplam Risk ise o günkü açık sipariş tutarı olarak yazılır.
+  // anlamsız olduğundan 0/null olarak yazılır. Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı
+  // isteği) — yalnızca çek/senet riski yazılır; sipariş tutarı ayrı alanda (Sevk/liste ekranlarında) görünür.
   const bakiyesiz = (report.bakiyesiz||[]).map(b=>({
     musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
-    kalanBorc: 0, avgVadeGun: null, cekSenet: b.cekSenet||0, toplamRisk: (b.siparisTutari||0)+(b.cekSenet||0),
+    kalanBorc: 0, avgVadeGun: null, cekSenet: b.cekSenet||0, toplamRisk: (b.cekSenet||0),
     vadesizBakiye: 0,
   }));
   return normal.concat(bakiyesiz);
@@ -4640,10 +4633,17 @@ function ortakSifreDogrula(mesaj){
 }
 
 const CLOUD = {
-  dbUrl: 'https://ortalama-vade-gun-default-rtdb.firebaseio.com',
+  dbUrl: 'https://test-82b8f-default-rtdb.europe-west1.firebasedatabase.app',
   path: 'nokta_cari_rapor_v1',
 };
-function cloudEnabled(){ return !!(CLOUD.dbUrl && CLOUD.dbUrl.trim()); }
+// ================= BULUTSUZ TEST MODU =================
+// Bu bayrak TRUE iken: hiçbir Firebase/bulut isteği yapılmaz (okuma/yazma/senkronizasyon/auth
+// hepsi atlanır). Uygulama YALNIZCA cihazdaki (IndexedDB) veriyle çalışır — giriş ekranı istemez,
+// doğrudan açılır. Test bittiğinde bu satırı `false` yapmak (veya bu bloğu silmek) bulutu geri
+// getirir; başka HİÇBİR yerde değişiklik gerekmez.
+// GÜNCELLEME: Yeni Firebase projesiyle (test-82b8f) bulut testine geçilecek — bulut AÇIK.
+const BULUTSUZ_TEST = false;
+function cloudEnabled(){ if(BULUTSUZ_TEST) return false; return !!(CLOUD.dbUrl && CLOUD.dbUrl.trim()); }
 
 // Çıplak fetch() çağrılarının varsayılan bir zaman aşımı yoktur: ağ yavaşsa, DNS/ISP tarafında
 // bulut adresi engelleniyorsa veya bağlantı sessizce düşüyorsa, tarayıcı isteği süresiz olarak
@@ -4666,7 +4666,17 @@ async function cloudFetch(url, options, timeoutMs){
   const controller = new AbortController();
   const timer = setTimeout(()=> controller.abort(), timeoutMs);
   try{
-    return await fetch(url, Object.assign({}, options||{}, {signal: controller.signal}));
+    // ÖNEMLİ: cache:'no-store' ZORUNLUDUR. Tarayıcı, Firebase Realtime Database REST API'sinin
+    // GET yanıtlarını (bazı durumlarda döndürdüğü Cache-Control başlıklarına göre) HTTP
+    // önbelleğinde tutabiliyor — bu da F5/normal sayfa yenilemesinde (hard-refresh/Ctrl+Shift+R
+    // DEĞİL) fetch()'in ağa hiç gitmeden ESKİ, önbellekteki yanıtı döndürmesine yol açabiliyor.
+    // Sonuç: 2. cihazda F5 yapılsa bile bulutta yeni girilen veri (ör. çek/senet onayı sonrası
+    // güncellenmiş rapor) görünmüyordu — "Diğer Cihazdan Güncelle" bazen çalışıyor gibi görünmesi
+    // de zamanlama/önbellek geçerlilik süresinin rastgele dolmuş olmasından kaynaklanıyor olabilir,
+    // güvenilir bir davranış değildi. cache:'no-store' ile HER istek ağa gider, tarayıcı önbelleği
+    // asla devreye girmez — hem GET (okuma) hem PUT/PATCH (yazma) istekleri için geçerlidir.
+    const nihaiOptions = Object.assign({cache: 'no-store'}, options||{}, {signal: controller.signal});
+    return await fetch(url, nihaiOptions);
   }catch(err){
     if(err && err.name === 'AbortError'){
       throw new Error('Bulut isteği zaman aşımına uğradı (' + Math.round(timeoutMs/1000) + ' sn)');
@@ -4705,6 +4715,7 @@ async function cloudMetaZamaniKaydet(veriTuru, zaman){
 }
 // Buluttaki küçük meta kaydını okur ({updatedAt: number} formatında). Ağ hatasında null döner.
 async function cloudMetaOkuUzaktan(cloudPath){
+  if(!cloudEnabled()) return null; // BULUTSUZ modda hiç istek atma
   try{
     const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/_meta/${cloudPath}.json${await authQuery()}`);
     if(!res.ok) throw new Error('HTTP '+res.status);
@@ -4719,6 +4730,7 @@ async function cloudMetaOkuUzaktan(cloudPath){
 // Meta kaydını buluta yazar — asıl veriyi kaydeden fonksiyonlar (saveXToCloud), veriyi
 // yazdıktan hemen sonra bunu çağırır.
 async function cloudMetaYazUzaktan(cloudPath, zaman){
+  if(!cloudEnabled()) return; // BULUTSUZ modda hiç istek atma
   try{
     await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/_meta/${cloudPath}.json${await authQuery()}`, {
       method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({updatedAt: zaman}),
@@ -4754,16 +4766,19 @@ async function cloudVeriVerimliYukle(veriTuru, loadCloudDataFn, loadLocalDataFn)
 }
 
 const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyB3v7dzM9OVf-NfR7Kj5pRHVrnjXaRM75s',
-  authDomain: 'ortalama-vade-gun.firebaseapp.com',
+  apiKey: 'AIzaSyCfHJE6Pcqx92NFgV_1JnB7i6RPGGgQKQg',
+  authDomain: 'test-82b8f.firebaseapp.com',
   databaseURL: CLOUD.dbUrl,
-  projectId: 'ortalama-vade-gun',
-  storageBucket: 'ortalama-vade-gun.firebasestorage.app',
-  messagingSenderId: '498547595660',
-  appId: '1:498547595660:web:16a39ed793aa166beddea9',
+  projectId: 'test-82b8f',
+  storageBucket: 'test-82b8f.firebasestorage.app',
+  messagingSenderId: '59490268572',
+  appId: '1:59490268572:web:a451913a8b70f7671f8459',
+  measurementId: 'G-F7EEVZ8R28',
 };
 
 let authAktif = false;
+// BULUTSUZ TEST MODU: Firebase auth'u hiç başlatma — giriş ekranı istenmez, uygulama doğrudan açılır.
+if(!BULUTSUZ_TEST){
 try{
   if(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey !== 'BURAYA_FIREBASE_API_KEY_YAPIŞTIRIN' && window.firebaseAuthAPI){
     // Modüler SDK: initializeApp/getAuth doğrudan çağrılan fonksiyonlardır (namespaced
@@ -4774,6 +4789,7 @@ try{
     authAktif = true;
   }
 }catch(err){ console.error('Firebase Authentication başlatılamadı:', err); }
+}
 
 // PERFORMANS DÜZELTMESİ: Açılışta 10 bulut isteği paralel (Promise.all ile) tetiklendiğinde,
 // her biri authQuery() çağırıp KENDİ getIdToken(true) isteğini atıyordu — yani aynı anda 10 ayrı
@@ -4839,9 +4855,11 @@ if(authAktif){
     if(user) girisEkraniGizle(); else girisEkraniGoster();
   });
 }else{
-  dwarn('Firebase Authentication yapılandırılmadı (FIREBASE_CONFIG.apiKey boş) — giriş ekranı devre dışı.');
+  dwarn('Firebase Authentication yapılandırılmadı veya BULUTSUZ_TEST açık — giriş ekranı devre dışı.');
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+  // Auth atlandığında uygulamayı doğrudan başlat (girisEkraniGizle normalde bunu yapardı).
+  uygulamayiBaslat();
 }
 
 const KULLANICI_KODU_UZANTISI = '@kullanici.noktacari';
@@ -4894,6 +4912,10 @@ async function saveReportToCloud(report){
     const simdi = Date.now();
     await cloudMetaYazUzaktan(CLOUD.path, simdi);
     await cloudMetaZamaniKaydet(CLOUD.path, simdi);
+    // Otomatik arka plan senkronizasyonuna (bkz. otomatikBulutSenkronizasyonuKontrolEt) bu
+    // yazmanın KENDİ cihazımızdan geldiğini bildiriyoruz — aksi halde bir sonraki polling turu
+    // "değişiklik var" sanıp raporu gereksiz yere tekrar indirir (zararsız ama gereksiz trafik).
+    if(typeof otomatikSenkronBilinenZaman !== 'undefined') otomatikSenkronBilinenZaman = simdi;
     return {ok:true};
   }catch(err){
     console.error('Rapor buluta kaydedilemedi:', err);
@@ -5081,6 +5103,67 @@ async function loadMusteriMasterDetayFromLocal(){
   }catch(err){ console.error(err); return null; }
 }
 
+// Çek/Senet Tahsil Edildi onayları — cihaza (IndexedDB) VE bulut açıksa (BULUTSUZ_TEST=false)
+// Firebase'e de kaydedilir. Set halinde tutulan senetAnahtari değerleri (hem çek hem senet
+// kayıtları için), kayıt için diziye çevrilip saklanır. Eski anahtar adı (v1) geriye dönük
+// okunur, yeni anahtarla (v2) yazılır.
+const CEK_SENET_TAHSIL_ONAY_LOCAL_KEY = 'noktaCariTakip_cekSenetTahsilOnaylari_v2';
+const CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI = 'noktaCariTakip_senetTahsilOnaylari_v1';
+const CEK_SENET_TAHSIL_ONAY_CLOUD_PATH = CLOUD.path + '_cekSenetTahsilOnaylari';
+async function saveSenetTahsilOnaylariToCloud(arr){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_TAHSIL_ONAY_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arr),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Çek/Senet tahsil onayları buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadSenetTahsilOnaylariFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_TAHSIL_ONAY_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Çek/Senet tahsil onayları buluttan okunamadı:', err); return null; }
+}
+async function saveSenetTahsilOnaylariToLocal(){
+  const arr = Array.from(state.cekSenetTahsilOnaylari||[]);
+  try{
+    const ok = await idbSet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY, arr);
+    if(!ok) console.error('Çek/Senet tahsil onayları cihaza kaydedilemedi.');
+  }catch(err){ console.error(err); }
+  // Bulut açıksa aynı anda oraya da yazılır — cihaz kaydı başarısız olsa bile bulut denemesi
+  // ayrıca yapılır (biri diğerini engellemesin diye ayrı try/catch, Promise.all ile paralel).
+  if(cloudEnabled()){
+    const sonuc = await saveSenetTahsilOnaylariToCloud(arr);
+    if(!sonuc.ok) console.error('UYARI: Çek/Senet tahsil onayı buluta yazılamadı, sadece cihazda kaldı.');
+    return sonuc.ok;
+  }
+  return true;
+}
+async function loadSenetTahsilOnaylariFromLocal(){
+  try{
+    // Bulut açıksa ÖNCE bulut denenir (diğer cihazlarda/tarayıcılarda yapılan onaylar da görünsün);
+    // bulut yoksa/erişilemezse cihazdaki (IndexedDB) son bilinen haline düşülür.
+    let arr = cloudEnabled() ? await loadSenetTahsilOnaylariFromCloud() : null;
+    if(!Array.isArray(arr) || !arr.length){
+      arr = await idbGet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY);
+    }
+    if(!Array.isArray(arr) || !arr.length){
+      // Geriye dönük uyumluluk: önceden sadece Senet onayları bu eski anahtarla kaydedilmişti.
+      const eski = await idbGet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI);
+      if(Array.isArray(eski) && eski.length) arr = eski;
+    }
+    state.cekSenetTahsilOnaylari = new Set(Array.isArray(arr) ? arr : []);
+    // Cihazdaki kopyayı bulutla/eski anahtarla senkron tut (bir sonraki açılış hızlı olsun).
+    if(Array.isArray(arr) && arr.length) idbSet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY, arr).catch(()=>{});
+  }catch(err){ console.error(err); state.cekSenetTahsilOnaylari = new Set(); }
+}
+
 // Malzemeler (anlık depo stoğu) — son yüklenen dosya buluta kaydedilir, yeni biri yüklenene
 // kadar kullanılmaya devam eder (Müşteri Master ile aynı desen). Stok Gün sekmesi açıldığında
 // bu kayıt otomatik geri yüklenir, kullanıcı her seferinde dosyayı tekrar yüklemek zorunda kalmaz.
@@ -5130,7 +5213,14 @@ async function malzemelerStokKaydet(map){
   state.malzemelerStok = map;
   const obj = musteriMasterMapToObj(map);
   await saveMalzemelerStokToLocal(obj);
-  if(cloudEnabled()) await saveMalzemelerStokToCloud(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveMalzemelerStokToCloud(obj);
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez.
+      console.error('Malzemeler Stok buluta kaydedilemedi:', sonuc.reason);
+      alert('UYARI: Malzemeler Stok verisi buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur: ' + (sonuc.reason||'bilinmeyen hata'));
+    }
+  }
 }
 
 // ============================== GRUP A "TEK-SLOT" DOSYA KALICILIĞI ==============================
@@ -5156,6 +5246,22 @@ const GRUP_A_TEKIL_DOSYA_TANIMLARI = {
   // devam eder, hiçbir zaman silinmez/üzerine yazılmaz. Buradaki tek-slot kayıt SADECE
   // "buildReport()'un çalışabilmesi için gereken EN GÜNCEL HAM Kalemler verisi"ni saklar.
   kalemler: { cloudPath: CLOUD.path + '_kalemlerDosya', localKey: 'noktaCariTakip_kalemlerDosya_v1' },
+  // GRUP B (Sipariş/Tahsilat/Fatura/Depozito/Bayi Hakediş/Yükleme): Bu dosyalar da artık kalıcı
+  // tek-slot arşivinde tutulur. Önceden yalnızca bellekteydi (state.files); sayfa yenilenip yeni
+  // Kalemler yüklenince buildReport bunları bulamayıp müşteri kartlarından SİLİYORDU. Artık EN SON
+  // yüklenen hali (tarih fark etmeksizin — toplu/çok-günlü dosyalar dahil, olduğu gibi) kalıcı
+  // saklanır ve buildReport'a otomatik geri yüklenir. Bu, GÜN-GÜN faturaArsiv arşivini HİÇ ETKİLEMEZ
+  // (o ayrı mekanizma; her satırı kendi gününe dağıtıp Belge No bazlı temizlikle biriktirmeye devam
+  // eder). Buradaki tek-slot sadece "canlı kartların (Genel Rapor/Sevk) en son yüklenen dosyayı
+  // yansıtabilmesi" içindir — kullanıcının onayladığı davranış: canlı kartlar en son yüklenen dosyayı
+  // gösterir, geçmiş günler zaten arşivde/Fatura Kontrol'de kalıcı durur.
+  siparis: { cloudPath: CLOUD.path + '_siparisDosya', localKey: 'noktaCariTakip_siparisDosya_v1' },
+  tahsilat: { cloudPath: CLOUD.path + '_tahsilatDosya', localKey: 'noktaCariTakip_tahsilatDosya_v1' },
+  fatura: { cloudPath: CLOUD.path + '_faturaDosya', localKey: 'noktaCariTakip_faturaDosya_v1' },
+  depozitoTahsilat: { cloudPath: CLOUD.path + '_depozitoTahsilatDosya', localKey: 'noktaCariTakip_depozitoTahsilatDosya_v1' },
+  bayiHakedis: { cloudPath: CLOUD.path + '_bayiHakedisHamDosya', localKey: 'noktaCariTakip_bayiHakedisHamDosya_v1' },
+  yukleme: { cloudPath: CLOUD.path + '_yuklemeDosya', localKey: 'noktaCariTakip_yuklemeDosya_v1' },
+  cariEkstre: { cloudPath: CLOUD.path + '_cariEkstreDosya', localKey: 'noktaCariTakip_cariEkstreDosya_v1' },
 };
 
 async function grupATekilDosyaKaydet(tip, data, headers, adi){
@@ -5226,7 +5332,10 @@ async function grupATekilDosyaBuluttanOku(tip){
 // Ticari Stok/Çek-Senet/Ciro Primi/Dönemsel İskonto için: bugün yeniden seçilmemişse, ne kadar eski
 // olursa olsun en son bilinen hal sorgusuz kullanılır (bu dosyalar "her gün yüklenmesi gerekmez").
 // Kalemler için ise bu, KASITLI OLARAK farklıdır — bkz. KALEMLER_BUGUN_ZORUNLU aşağıda.
-const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','cekSenet','ciroPrimi','donemselIskonto']);
+const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','ciroPrimi','donemselIskonto',
+  // Grup B de tarih kısıtlaması OLMADAN saklanır: en son yüklenen (çok-günlü/toplu dosyalar dahil)
+  // tarih fark etmeksizin geri yüklenir. Yalnızca Kalemler bugüne-özeldir.
+  'siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme','cariEkstre']);
 
 // Bu dosyaların hepsini paralel olarak yükler; her biri için o gün ekranda yeni bir dosya SEÇİLMİŞSE
 // (state.files[tip] doluysa) o veri KULLANILIR ve aynı zamanda yeni "son bilinen hal" olarak kaydedilir;
@@ -5348,25 +5457,41 @@ async function musteriMasterYenile(){
   return state.musteriMasterMap;
 }
 
+// Dönüş: {map, hatalar: string[]} — cihaz depolama kapalı olduğundan (kullanıcı isteği), buluta
+// yazma başarısız olan alt-veriler artık HİÇBİR YERE kalıcı kaydedilmez. Eskiden bu hatalar
+// sessizce yutulup sadece console.error'a düşüyordu; artık çağıran tarafa (raporuOlusturVeyaGuncelleAkisiniCalistir)
+// bildirilip kullanıcıya gösterilebiliyor.
 async function musteriMasterKaydet(rows, headers){
+  const hatalar = [];
   const map = buildMusteriMasterMap(rows);
   state.musteriMasterMap = map;
   const obj = musteriMasterMapToObj(map);
   await saveMusteriMasterToLocal(obj);
-  if(cloudEnabled()) await saveMusteriMasterToCloud(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterToCloud(obj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
 
   const detayMap = buildMusteriMasterDetay(rows);
   state.musteriMasterDetay = detayMap;
   const detayObj = musteriMasterMapToObj(detayMap);
   await saveMusteriMasterDetayToLocal(detayObj);
-  if(cloudEnabled()) await saveMusteriMasterDetayToCloud(detayObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterDetayToCloud(detayObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Detay buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
 
   const durumMap = buildMusteriMasterDurumMap(rows, headers);
   state.musteriMasterDurum = durumMap;
   const durumObj = musteriMasterMapToObj(durumMap);
   await saveMusteriMasterDurumToLocal(durumObj);
-  if(cloudEnabled()) await saveMusteriMasterDurumToCloud(durumObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterDurumToCloud(durumObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Durum buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
 
+  if(hatalar.length) console.error('musteriMasterKaydet: bazı veriler buluta yazılamadı:', hatalar);
+  map.__kaydetmeHatalari = hatalar;
   return map;
 }
 
@@ -5425,7 +5550,16 @@ async function bayiHakedisYenile(){
 }
 async function bayiHakedisKaydet(rapor){
   await saveBayiHakedisToLocal(rapor);
-  if(cloudEnabled()) await saveBayiHakedisToCloud(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveBayiHakedisToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Bayi Hakediş raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Bayi Hakediş raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
 }
 
 const FATURA_ARSIV_CLOUD_PATH = CLOUD.path + '_faturaKontrolArsiv';
@@ -5652,8 +5786,11 @@ const SIGNATURES = {
   donemselIskonto: [['Nokta Kodu','Hakediş Tutar','Perid']],
   sellOut: [['Müşteri Kanalı Tnm.','Açık/Otel Tnm.','Hacim Segmenti Tnm.']],
   depozitoTahsilat: [['Fatura Belge No','Sipariş Net Tutar','İstenilen Sevk Tarihi']],
+  // Cari Hesap Ekstre Özet: müşteri bazlı gerçek cari bakiye (Borç/Alacak/Bakiye). "Müşteri Ünvan"
+  // + "Bakiye" kombinasyonu bu dosyaya özgüdür — başka hiçbir dosyada birlikte bulunmaz.
+  cariEkstre: [['Müşteri Ünvan','Bakiye','Müşteri Ad']],
 };
-const LABELS = { kalemler:'Kalemler (Fatura / Bakiye)', siparis:'Sipariş Dökümü', tahsilat:'Tahsilat Dökümü', cekSenet:'Çek / Senet Riski', ticariStok:'Ticari Stok', fatura:'Fatura Dökümü', bayiHakedis:'Bayi Hak Ediş', yukleme:'Yükleme Raporu', musteriMaster:'Müşteri Master', ciroPrimi:'Ciro Primi', donemselIskonto:'Dönemsel İskonto', sellOut:'Sell Out Raporu', depozitoTahsilat:'Depozito Tahsilatı' };
+const LABELS = { kalemler:'Kalemler (Fatura / Bakiye)', siparis:'Sipariş Dökümü', tahsilat:'Tahsilat Dökümü', cekSenet:'Çek / Senet Riski', ticariStok:'Ticari Stok', fatura:'Fatura Dökümü', bayiHakedis:'Bayi Hak Ediş', yukleme:'Yükleme Raporu', musteriMaster:'Müşteri Master', ciroPrimi:'Ciro Primi', donemselIskonto:'Dönemsel İskonto', sellOut:'Sell Out Raporu', depozitoTahsilat:'Depozito Tahsilatı', cariEkstre:'Cari Hesap Ekstre' };
 
 // "Vadesi gelmiş" fatura eşiği (TEK KAYNAK): bir faturanın "Faturadan Sonr. Gün" değeri bu eşik
 // ve üstündeyse kalan borcu "vadesi gelmiş" sayılır; altındaysa "vadesi gelmemiş" kabul edilir.
@@ -5664,12 +5801,15 @@ const VADE_ESIGI_GUN = 23;
 // ("Günlük Veri Yükle" — bkz. #gvyPanel) yükleniyor. Aynı state.files yapısı ve aynı
 // handleFiles/detectType mekanizması kullanılır — sadece dosya SEÇİMİNİN yapıldığı arayüz
 // ayrı bir yere taşınmıştır; buildReport ve arşivleme mantığına dokunulmamıştır.
-const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme'];
+const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme','cariEkstre'];
 // Grup C ("Günlük Veri Yükle"): gün içinde sürekli güncellenebilen, son yüklenen hali kalıcı
 // tek-slot arşivde saklanan dosyalar. Bunlar GRUP_A_TEKIL_DOSYA_TANIMLARI'nda zaten kayıtlı
 // (aynı kalıcı mekanizmayı kullanır) ve GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR üyesidir — yani
 // tarih fark etmeksizin en son yüklenen hali otomatik geri getirilir.
-const GRUP_C_DOSYA_TIPLERI = ['cekSenet','ticariStok','ciroPrimi','donemselIskonto'];
+// "cekSenet" ARTIK Grup C'de DEĞİL (kullanıcı isteği) — Çek/Senet Riski dosyası kaldırıldı; bu
+// bilgi artık doğrudan Tahsilat Dökümü'ndeki "Alınan Çek"/"Alınan Senet" satırlarından (bkz.
+// buildReport'taki tahsilatArsiv/cekSenetMap) besleniyor, ayrı bir dosya yüklemeye gerek yok.
+const GRUP_C_DOSYA_TIPLERI = ['ticariStok','ciroPrimi','donemselIskonto'];
 // Grup C'de o an ekranda seçili (henüz kaydedilmemiş) dosya sayısı — buton kilidi için.
 function GRUP_C_HAZIR_SAYISI(){ return GRUP_C_DOSYA_TIPLERI.filter(t=>state.filesC && state.filesC[t]).length; }
 
@@ -5697,10 +5837,27 @@ function sheetToObjects(ws){
 }
 
 function excelDateToJS(v){
-  if(v instanceof Date) return v;
+  if(v instanceof Date) return isNaN(v.getTime()) ? null : v;
   if(typeof v === 'number'){
     const d = XLSX.SSF.parse_date_code(v);
     if(d) return new Date(Date.UTC(d.y,d.m-1,d.d));
+  }
+  // GÜVENLİK AĞI: bazı satırlarda SheetJS'in cellDates dönüşümü (kaynak SAP dosyasındaki karma/
+  // özel hücre biçimleri nedeniyle) tarihi Date/sayı yerine METİN olarak bırakabiliyor — bu
+  // durumda "Tarih" sütunu sessizce "—" görünüyordu (Gün/Vade sütunları zaten dosyadaki hazır
+  // sayısal alanlardan geldiği için etkilenmiyordu). Böyle bir string gelirse önce ISO/olağan
+  // tarih biçimleriyle, olmazsa gün.ay.yıl (tr) biçimiyle ayrıştırmayı dener.
+  if(typeof v === 'string' && v.trim()){
+    const s = v.trim();
+    const isoDenemesi = new Date(s);
+    if(!isNaN(isoDenemesi.getTime())) return isoDenemesi;
+    const trEslesme = s.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})$/);
+    if(trEslesme){
+      let [, gun, ay, yil] = trEslesme;
+      if(yil.length===2) yil = '20'+yil;
+      const d = new Date(Date.UTC(Number(yil), Number(ay)-1, Number(gun)));
+      if(!isNaN(d.getTime())) return d;
+    }
   }
   return null;
 }
@@ -5958,7 +6115,13 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     if(state.files.musteriMaster){
       musteriMasterMapKullanilacak = buildMusteriMasterMap(state.files.musteriMaster.data);
       state.musteriMasterMap = musteriMasterMapKullanilacak;
-      await musteriMasterKaydet(state.files.musteriMaster.data, state.files.musteriMaster.headers);
+      const kaydedilenMap = await musteriMasterKaydet(state.files.musteriMaster.data, state.files.musteriMaster.headers);
+      if(kaydedilenMap.__kaydetmeHatalari && kaydedilenMap.__kaydetmeHatalari.length){
+        // Cihaz depolama kapalı — Müşteri Master buluta yazılamazsa bu veri HİÇBİR YERDE
+        // kalıcı değildir, sayfa yenilenirse kaybolur. Rapor oluşturmayı durdurmuyoruz (Kalemler
+        // zaten işlenecek) ama kullanıcıyı açıkça uyarıyoruz.
+        alert('UYARI: Müşteri Master verisi buluta kaydedilemedi (cihaza da kaydedilmiyor, bu özellik kapalı) — sayfa yenilenirse bu veri kaybolur:\n\n' + kaydedilenMap.__kaydetmeHatalari.join('\n'));
+      }
     }
     // Ticari Stok/Çek-Senet/Ciro Primi/Dönemsel İskonto: bugün yeniden seçilmemişse en son bilinen
     // hali (ne kadar eski olursa olsun) otomatik getirir. Kalemler için ise SADECE BUGÜNE ait bir
@@ -5985,30 +6148,39 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     document.getElementById('reportSection').style.display='block';
     document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
-    const saved = await saveReportToStorage(state.report);
+    // ÖNEMLİ: Cihaz depolama (IndexedDB) tamamen devre dışı (kullanıcı isteği) — saveReportToStorage
+    // artık gerçekte HİÇBİR YERE yazmayan bir no-op'tur, her zaman true döner. Bu yüzden onun
+    // sonucuna güvenip "kaydedildi" demek YANLIŞ OLURDU; gerçek kalıcılık YALNIZCA bulut yazması
+    // (saveReportToCloud) başarılı olursa vardır. Aşağıdaki mesajlar buna göre düzenlenmiştir.
+    await saveReportToStorage(state.report);
     faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
     await yuklemeRaporuOlusturVeArsivle();
-    document.getElementById('storageNote').style.display = saved ? 'block' : 'none';
-    if(saved){
-      statusPillMsg.textContent = 'Rapor oluşturuldu ve cihaza kaydedildi';
-      statusPill.classList.add('ok');
-      // iOS'ta kullanıcı ilk raporunu başarıyla oluşturduğunda — uygulamayı ana ekrana
-      // eklemeye en istekli olduğu an — kurulum ipucunu (bir kereye mahsus) gösteriyoruz.
-      if(typeof window.iosKurulumIpucunuGoster === 'function') window.iosKurulumIpucunuGoster(true);
-    }
+    document.getElementById('storageNote').style.display = 'block';
     if(cloudEnabled()){
       syncBtn.style.display = 'inline-block';
       statusPillMsg.textContent = 'Rapor oluşturuldu, buluta yükleniyor…';
-      saveReportToCloud(state.report).then(res=>{
-        if(res.ok){
-          statusPillMsg.textContent = 'Rapor buluta yüklendi — diğer cihazlarda da görünecek';
-          statusPill.classList.add('ok');
-          document.getElementById('storageNoteMsg').textContent = 'Bu rapor buluta yüklendi; aynı bağlantıyı kullanan diğer cihazlar sayfayı açtığında (veya "Diğer Cihazdan Güncelle" ile) otomatik görecek.';
-        }else{
-          statusPillMsg.textContent = 'Rapor cihaza kaydedildi (bulut yüklemesi başarısız)';
-          statusPill.classList.remove('ok');
-        }
-      });
+      const res = await saveReportToCloud(state.report);
+      if(res.ok){
+        statusPillMsg.textContent = 'Rapor buluta yüklendi — diğer cihazlarda da görünecek';
+        statusPill.classList.add('ok');
+        document.getElementById('storageNoteMsg').textContent = 'Bu rapor buluta yüklendi; aynı bağlantıyı kullanan diğer cihazlar sayfayı açtığında (veya "Diğer Cihazdan Güncelle" ile) otomatik görecek.';
+        // iOS'ta kullanıcı ilk raporunu başarıyla oluşturduğunda — uygulamayı ana ekrana
+        // eklemeye en istekli olduğu an — kurulum ipucunu (bir kereye mahsus) gösteriyoruz.
+        if(typeof window.iosKurulumIpucunuGoster === 'function') window.iosKurulumIpucunuGoster(true);
+      }else{
+        // Cihaz depolama olmadığı için bulut yazması başarısız olursa rapor HİÇBİR YERDE kalıcı
+        // DEĞİLDİR — sayfa yenilenirse kaybolur. Bunu kullanıcıdan gizlemek yerine açıkça belirtiyoruz.
+        statusPillMsg.textContent = 'UYARI: Rapor buluta kaydedilemedi — sayfa yenilenirse kaybolur!';
+        statusPill.classList.remove('ok');
+        document.getElementById('storageNoteMsg').textContent = 'Bulut bağlantısı/yetkisi başarısız olduğu için bu rapor HİÇBİR YERE kalıcı kaydedilmedi (cihaz depolama kapalı). Lütfen giriş durumunuzu ve internet bağlantınızı kontrol edip "Diğer Cihazdan Güncelle" veya tekrar "Raporu Oluştur" ile yeniden deneyin.';
+        alert('UYARI: Rapor buluta kaydedilemedi. Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfayı yenilerseniz bu rapor kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+      }
+    }else{
+      // Bulut kapalıyken (BULUTSUZ_TEST açık veya CLOUD yapılandırması eksik) veri kesinlikle
+      // hiçbir yere kalıcı yazılamaz — kullanıcıyı yanıltmamak için net şekilde uyarıyoruz.
+      statusPillMsg.textContent = 'UYARI: Bulut bağlantısı kapalı — rapor kalıcı kaydedilmedi!';
+      statusPill.classList.remove('ok');
+      document.getElementById('storageNoteMsg').textContent = 'Bulut bağlantısı şu an kapalı (cihaz depolama da devre dışı) — bu rapor hiçbir yere kalıcı kaydedilmedi, sayfa yenilenirse kaybolur.';
     }
   }catch(err){
     showError('Rapor oluşturulurken hata oluştu: ' + err.message);
@@ -6520,7 +6692,7 @@ syncBtn.addEventListener('click', async ()=>{
 })();
 
 async function resetAll(){
-  state.files = {kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null};
+  state.files = {kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, depozitoTahsilat:null, cariEkstre:null};
   state.filesC = {}; // Grup C seçim kuyruğu da sıfırlanır
   state.report = null;
   state.expanded.clear();
@@ -6835,11 +7007,10 @@ async function arsivTarihAraligindaSil(tip, baslangicKey, bitisKey){
 })();
 
 resetBtn.addEventListener('click', async ()=>{
-  // Kalemler bugün için zaten yüklenmişse: ekran hiç değişmez, sadece uyarı gösterilir.
-  if(bugunKalemlerYuklendiMi()){
-    kalemlerKilitModalAc();
-    return;
-  }
+  // NOT: "Günde sadece 1 Kalemler" kilidi KALDIRILDI. Grup B artık kalıcı arşivlendiği için
+  // (siparis/tahsilat/fatura/... tek-slot'ta saklanıyor), gün içinde birden çok kez Kalemler
+  // yüklenebilir — her yeni Kalemler öncekinin ÜZERİNE yazılır ve kartlar yeniden şekillenir.
+  // Veri kaybı riski olmadığından kilit modalı artık tetiklenmez.
   if(!(await ortakSifreDogrula('Yeni veri yüklemek için şifreyi girin:'))) return;
   await resetAll();
 });
@@ -6883,6 +7054,7 @@ async function uygulamayiBaslat(){
     modernKanalYenile(),
     modernKanalArsivYenile(),
     malzemelerStokYenile(),
+    loadSenetTahsilOnaylariFromLocal(),
   ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';
@@ -6936,19 +7108,80 @@ async function uygulamayiBaslat(){
     document.getElementById('storageNote').style.display='block';
     if(cloudEnabled()){
       syncBtn.style.display='inline-block';
+      // Cihaz depolama kapalı (kullanıcı isteği) — source artık pratikte hep 'cloud' olur (ya da
+      // rapor hiç yoktur); 'local' dalı yalnızca eski bir kod yolunda teorik olarak kalmıştır.
       document.getElementById('storageNoteMsg').textContent = source==='cloud'
-        ? 'Bu rapor buluttan alındı; tüm cihazlarda ortak görünür. Güncellemek için "Diğer Cihazdan Güncelle"ye basın.'
-        : 'Buluta henüz erişilemedi, cihazda kayıtlı son rapor gösteriliyor.';
+        ? 'Bu rapor buluttan alındı; tüm cihazlarda ortak görünür ve otomatik olarak güncel tutulur.'
+        : 'UYARI: Bu rapor buluttan alınamadı ve cihaz depolama kapalı olduğu için güncel olmayabilir.';
     }
-    statusPillMsg.textContent = (source==='cloud' ? 'Buluttan güncel rapor açıldı (' : 'Cihazda kayıtlı rapor açıldı (') + fmtDate(report.asOf) + ')';
+    statusPillMsg.textContent = (source==='cloud' ? 'Buluttan güncel rapor açıldı (' : 'UYARI: Rapor buluttan alınamadı (') + fmtDate(report.asOf) + ')';
     statusPill.classList.add('ok');
   }else if(cloudEnabled()){
     statusPillMsg.textContent = 'Veri bekleniyor';
   }
+  // Açılıştaki bilinen "son değişiklik zamanı" ile otomatik arka plan senkronizasyonuna başla —
+  // bkz. otomatikBulutSenkronizasyonuBaslat() tanımı ve açıklaması.
+  if(cloudEnabled()) otomatikBulutSenkronizasyonuBaslat();
 }
 window.addEventListener('DOMContentLoaded', async ()=>{
   if(!authAktif) await uygulamayiBaslat();
 });
+
+// ================= OTOMATİK ARKA PLAN SENKRONİZASYONU (kullanıcı isteği) =================
+// "En ufak bir veri değişikliğinde diğer cihazlardan güncelle fonksiyonu otomatik devreye girsin"
+// — cihaz depolama tamamen kapalı olduğundan (bkz. idbGet/idbSet no-op), her cihaz artık YALNIZCA
+// kendi belleğindeki state.report'a güveniyor; başka bir cihaz/tarayıcı bulutta değişiklik
+// yaptığında bu cihaz sayfa manuel yenilenmeden veya "Diğer Cihazdan Güncelle"ye elle basılmadan
+// bunu ASLA öğrenmiyordu. Aşağıdaki mekanizma bunu otomatikleştirir:
+//   1) Periyodik olarak (POLL_ARALIK_MS) SADECE küçük "_meta/{path}" zaman damgasını okur (ana
+//      raporun TAMAMINI değil — bkz. cloudMetaOkuUzaktan, hafif bir istektir).
+//   2) Zaman damgası son bilinenden farklıysa, o zaman GERÇEK (büyük) raporu indirir ve ekranı
+//      sessizce (şifre sormadan, kullanıcıyı kesmeden) günceller.
+//   3) Sekme arka plana alınıp tekrar öne geldiğinde (visibilitychange) de aynı kontrol hemen
+//      tetiklenir — kullanıcı sekmeye döndüğü an en güncel veriyi görsün diye.
+// Not: Fatura/Arşiv verisi (state.faturaArsivCache) bu döngüye DAHİL EDİLMEMİŞTİR — o veri seti
+// çok daha büyük olduğundan her polling turunda indirmek gereksiz ağ trafiği yaratır; çek/senet
+// onayı zaten güncellenmiş ANA RAPOR üzerinden karta yansır (cekSenetDetay orada tutuluyor), bu
+// yüzden bu mekanizma kullanıcının bildirdiği sorunu (kart diğer cihazda güncellenmiyor) çözmek
+// için yeterlidir. Arşiv/Trend Analizi ekranları hâlâ "Diğer Cihazdan Güncelle" ile tazelenir.
+const OTOMATIK_SENKRON_POLL_ARALIK_MS = 20000; // 20 saniyede bir hafif kontrol
+let otomatikSenkronBilinenZaman = null; // en son görülen _meta/{CLOUD.path}.updatedAt değeri
+let otomatikSenkronTimerId = null;
+let otomatikSenkronCalisiyorMu = false; // aynı anda iki kontrolün üst üste binmesini önler
+async function otomatikBulutSenkronizasyonuKontrolEt(){
+  if(!cloudEnabled() || otomatikSenkronCalisiyorMu) return;
+  otomatikSenkronCalisiyorMu = true;
+  try{
+    const uzakMeta = await cloudMetaOkuUzaktan(CLOUD.path);
+    const uzakZaman = uzakMeta ? uzakMeta.updatedAt : null;
+    if(uzakZaman == null) return; // buluttan meta okunamadıysa (ağ hatası vb.) sessizce vazgeç, bir sonraki turda tekrar denenir
+    if(otomatikSenkronBilinenZaman !== null && uzakZaman === otomatikSenkronBilinenZaman) return; // değişiklik yok
+    const yeniRapor = await loadReportFromCloud();
+    if(yeniRapor && yeniRapor.musteriler && yeniRapor.musteriler.length){
+      raporuNormalizeEt(yeniRapor);
+      state.report = yeniRapor;
+      canliGunlerleGuncelle(yeniRapor);
+      renderReport(yeniRapor);
+      statusPillMsg.textContent = 'Bulutta değişiklik algılandı, otomatik güncellendi (' + fmtDate(yeniRapor.asOf) + ')';
+      statusPill.classList.add('ok');
+    }
+    otomatikSenkronBilinenZaman = uzakZaman;
+  }catch(err){
+    console.error('Otomatik bulut senkronizasyonu kontrolü başarısız:', err);
+  }finally{
+    otomatikSenkronCalisiyorMu = false;
+  }
+}
+function otomatikBulutSenkronizasyonuBaslat(){
+  if(otomatikSenkronTimerId) return; // zaten çalışıyor
+  // İlk turda "değişiklik var mı" karşılaştırması yapmadan, o anki zaman damgasını sessizce
+  // biliniyor olarak işaretler (açılışta zaten en güncel rapor yüklendi, tekrar indirmeye gerek yok).
+  cloudMetaOkuUzaktan(CLOUD.path).then(meta=>{ if(meta) otomatikSenkronBilinenZaman = meta.updatedAt; });
+  otomatikSenkronTimerId = setInterval(otomatikBulutSenkronizasyonuKontrolEt, OTOMATIK_SENKRON_POLL_ARALIK_MS);
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState==='visible') otomatikBulutSenkronizasyonuKontrolEt();
+  });
+}
 
 function buildReport(files, musteriMasterMap){
   musteriMasterMap = musteriMasterMap || new Map();
@@ -7088,26 +7321,49 @@ function buildReport(files, musteriMasterMap){
     const tarihKolonu = formatA ? 'Tarih' : 'Belge Tarihi';
 
     files.tahsilat.data.forEach(r=>{
-      const belgeTarihi = excelDateToJSArti1Gun(r[tarihKolonu]);
       const musteriArsiv = String((formatA ? r['Müşteri'] : r['Müşt. Kodu'])||'').trim();
       const tutarArsiv = Math.abs(Number(formatA ? r['Tutar'] : r['Belge Tutarı'])||0);
       if(musteriArsiv && musteriGecerliMi(musteriArsiv)){
-        // "gecerli": bu satırın Genel Rapor/Sevk Raporu KPI'sında sayılıp sayılmayacağını (Belge
-        // Türü/Ödeme Tipi/Çek-Senet Durumu/Belge Tipi filtreleri) önceden hesaplayıp satıra
-        // etiketler; böylece bu gün ileride (başka bir yüklemede, arşivden okunarak) gösterilecek
-        // olsa bile aynı filtre uygulanmış olur. Etiket taşımayan (bu değişiklikten ÖNCE arşive
-        // girmiş) eski kayıtlar gösterimde geriye dönük uyumluluk için geçerli sayılır.
+        // TAHSİLAT TÜRÜ SINIFLANDIRMASI (kullanıcı isteği): "Ödeme Tipi" kolonuna göre dört kategori:
+        //   Normal -> Nakit / Kredi Kartı / Banka havalesi (ve tanımadığımız diğer tipler, güvenli varsayılan)
+        //   Cek    -> Alınan Çek   (OTOMATİK SAYILMAZ — kullanıcı manuel "Tahsil Edildi" onayı
+        //   Senet  -> Alınan Senet  vermeden risk olarak kalır; bkz. state.cekSenetTahsilOnaylari / satır altı not)
+        //   SanalPos -> Sanal Pos
+        const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
+        const odemeTipi = odemeTipiHam.toLocaleLowerCase('tr-TR');
+        const cekMi = odemeTipi.includes('çek');
+        const senetMi = odemeTipi.includes('senet');
+        const sanalPosMu = odemeTipi.includes('sanal');
+        const tahsilatTuru = cekMi ? 'Cek' : (senetMi ? 'Senet' : (sanalPosMu ? 'SanalPos' : 'Normal'));
+        // ÇEK/SENET İÇİN TARİH: kullanıcı isteği üzerine, çek/senet kayıtlarının TÜM hesaplamalarında
+        // (tahsilat arşivi günlere dağıtma, Genel Rapor/Sevk KPI'ları, Trend Analizi/Aylık Ortalama)
+        // belge/alınan tarihi değil, "Vade Tarihi" kolonu baz alınır — bu tarih, çekin/senedin fiilen
+        // paraya döneceği (vadesinin geldiği) günü yansıttığından tahsilat gerçekleşme zamanlaması
+        // olarak daha doğrudur. Normal/Sanal Pos kayıtlar eskisi gibi belge tarihini kullanmaya devam eder.
+        const vadeTarihiHam = r['Vade Tarihi'];
+        const vadeTarihi = vadeTarihiHam!=null ? excelDateToJSArti1Gun(vadeTarihiHam) : null;
+        const belgeTarihiHam = excelDateToJSArti1Gun(r[tarihKolonu]);
+        const belgeTarihi = ((cekMi||senetMi) && vadeTarihi) ? vadeTarihi : belgeTarihiHam;
+        // Çek/Senet için benzersiz anahtar: manuel "Tahsil Edildi" onayının hangi çek/senede ait
+        // olduğunu (state.cekSenetTahsilOnaylari Set'inde) eşleştirmek için kullanılır. Çek/Senet No
+        // varsa o baz alınır (en güvenilir); yoksa müşteri+tutar+vade kombinasyonuna düşülür.
+        const cekSenetNo = r['Çek/Senet No']||null;
+        const cekSenetAnahtari = (cekMi||senetMi) ? ('musteri:'+musteriArsiv+'|no:'+(cekSenetNo||'')+'|tutar:'+tutarArsiv+'|vade:'+(vadeTarihi?dateKeyLocal(vadeTarihi):'')) : null;
+        // "gecerli": bu satırın Genel Rapor/Sevk Raporu KPI'sında sayılıp sayılmayacağını önceden
+        // hesaplayıp satıra etiketler. ÖNEMLİ (kullanıcı isteği): hem Çek hem Senet OTOMATİK SAYILMAZ
+        // — kullanıcı bu çek/senedi state.cekSenetTahsilOnaylari setinde MANUEL olarak
+        // "Tahsil Edildi" işaretlemediği sürece gecerli=false kalır (yani risk olarak görünmeye
+        // devam eder, tahsilat toplamına girmez). Normal/Sanal Pos kayıtlar etkilenmez.
         let gecerli = true;
-        if(r['Belge Türü'] && r['Belge Türü'] !== 'Müşteri Tahsilat') gecerli = false;
-        const odemeTipi = String(r['Ödeme Tipi']||'').trim().toLocaleLowerCase('tr-TR');
-        if(odemeTipi.includes('çek') || odemeTipi.includes('senet')) gecerli = false;
-        const cekSenetDurumu = String(r['Çek/Senet Durumu']||'').trim();
-        if(cekSenetDurumu !== '') gecerli = false;
+        if(r['Belge Türü'] && r['Belge Türü'] !== 'Müşteri Tahsilat' && r['Belge Türü'] !== 'Müşteri Çek Tahsilat') gecerli = false;
         if(formatA && String(r['Belge Tipi']||'').trim() !== 'Ön Kayıt') gecerli = false;
+        if((cekMi||senetMi) && !(state.cekSenetTahsilOnaylari && state.cekSenetTahsilOnaylari.has(cekSenetAnahtari))) gecerli = false;
         // formatKaynagi: bu kayıt Format A (geçici Ön Kayıt) mı yoksa Format B (nihai) mı ile mi
         // arşivlendi — Format B yüklendiğinde, kendi Belge Tarihi günlerine denk gelen Format A
         // kayıtlarının silinebilmesi için gerekli (bkz. tahsilatEfektifGunMapHesapla).
-        tahsilatArsiv.push({musteri: musteriArsiv, belgeTarihi, tutar: tutarArsiv, formatKaynagi: formatA ? 'A' : 'B', gecerli});
+        tahsilatArsiv.push({musteri: musteriArsiv, belgeTarihi, tutar: tutarArsiv, formatKaynagi: formatA ? 'A' : 'B', gecerli,
+          tahsilatTuru, cekSenetNo, cekSenetDurumu: r['Çek/Senet Durumu']||null, senetAnahtari: cekSenetAnahtari,
+          vadeTarihi, belgeTarihiHam, odemeTipiHam});
       }
     });
   }
@@ -7226,18 +7482,66 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
+  // ÇEK/SENET BİLGİSİ ARTIK AYRI "Çek/Senet Riski" DOSYASINDAN DEĞİL (kullanıcı isteği), doğrudan
+  // Tahsilat Dökümü'ndeki "Alınan Çek"/"Alınan Senet" satırlarından besleniyor — ayrı bir Grup B
+  // dosyası yüklemeye gerek kalmaz, müşteri kartlarındaki Çek/Senet bilgisi Tahsilat Dökümü ile
+  // otomatik güncel kalır. cekSenetDetayMap TÜM çek+senet satırlarını (tahsil edilmiş/edilmemiş
+  // fark etmeksizin) listeler — kart üzerindeki detay tablosunda hepsi görünür, "Durum" kolonuyla
+  // ayırt edilir. cekSenetMap (Toplam Risk'e eklenen tutar) ise SADECE HENÜZ TAHSİL EDİLMEMİŞ
+  // ÇEK/SENETLERİ toplar (kullanıcı isteği — GÜNCELLEME: Çek de Senet gibi artık OTOMATİK
+  // tahsilat sayılmaz; ikisi de risk olarak kalır ve kullanıcı ilgili çek/senet için "Tahsil
+  // Edildi" onayı verince (gecerli=true) risk olmaktan çıkar). Onaylanmamış çek/senetler
+  // (gecerli=false) hâlâ riskli/portföydeki alacak olarak kalır.
   const cekSenetMap = new Map();
   const cekSenetDetayMap = new Map();
-  if(files.cekSenet){
-    files.cekSenet.data.forEach(r=>{
-      const musteri = String(r['Müşteri Kodu']||'').trim();
-      if(!musteri) return;
-      const tutar = Number(r['Tutar'])||0;
-      cekSenetMap.set(musteri, (cekSenetMap.get(musteri)||0) + tutar);
-      if(!cekSenetDetayMap.has(musteri)) cekSenetDetayMap.set(musteri, []);
-      cekSenetDetayMap.get(musteri).push({
-        no:r['Çek/Senet Numarası'], tip:r['Ödeme Tipi'], tutar,
-        vade:excelDateToJS(r['Net Vade Tarihi']), belgeTarihi:excelDateToJS(r['Belge Tarihi']),
+  tahsilatArsiv.forEach(r=>{
+    if(r.tahsilatTuru !== 'Cek' && r.tahsilatTuru !== 'Senet') return;
+    const musteri = r.musteri;
+    if(!musteri) return;
+    if(!r.gecerli){
+      cekSenetMap.set(musteri, (cekSenetMap.get(musteri)||0) + r.tutar);
+    }
+    if(!cekSenetDetayMap.has(musteri)) cekSenetDetayMap.set(musteri, []);
+    cekSenetDetayMap.get(musteri).push({
+      no: r.cekSenetNo, tip: r.odemeTipiHam, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru,
+      tahsilEdildiMi: !!r.gecerli, senetAnahtari: r.senetAnahtari,
+      vade: r.vadeTarihi || r.belgeTarihi, belgeTarihi: r.belgeTarihiHam || r.belgeTarihi,
+    });
+  });
+
+  // ===== CARİ HESAP EKSTRE PİVOT =====
+  // Müşteri kodu bazında GERÇEK cari bakiyeyi (Borç/Alacak sonrası Bakiye) toplar. Aynı müşterinin
+  // birden fazla satırı (ör. Bira + Distile) olabilir; hepsi tek bakiyede birleşir. Ayrıca müşteri
+  // adı + ünvanı da buradan alınır (karta bunlar yazılacak). İlk satırdaki (müşterisiz) genel toplam
+  // atlanır. Bu dosya yüklüyse: müşterinin açık fatura toplamı ile bu bakiye arasındaki FARK,
+  // en eski faturadan başlayarak düşülür (aşağıda) — böylece açık faturalar/vade/yaşlandırma bu
+  // gerçek cari bakiyeye göre yeniden şekillenir. Çek/senet mahsubu bu durumda ATLANIR (çift düşme
+  // olmasın; cari bakiye zaten tüm tahsilatları içerir).
+  const cariEkstreMap = new Map(); // musteriKodu -> {bakiye, ad, unvan}
+  const cariEkstreVar = !!(files.cariEkstre && files.cariEkstre.data && files.cariEkstre.data.length);
+  if(cariEkstreVar){
+    files.cariEkstre.data.forEach(r=>{
+      const kod = String(r['Müşteri']||'').trim();
+      if(!kod) return; // müşterisiz (genel toplam) satırı atla
+      const bakiye = Number(r['Bakiye'])||0;
+      let kayit = cariEkstreMap.get(kod);
+      if(!kayit){ kayit = {bakiye:0, ad:null, unvan:null}; cariEkstreMap.set(kod, kayit); }
+      kayit.bakiye += bakiye;
+      const ad = r['Müşteri Ad'] ? String(r['Müşteri Ad']).trim() : '';
+      const unvan = r['Müşteri Ünvan'] ? String(r['Müşteri Ünvan']).trim() : '';
+      if(kayit.ad==null && ad) kayit.ad = ad;
+      if(kayit.unvan==null && unvan) kayit.unvan = unvan;
+    });
+    // Cari Ekstre'de olup Kalemler'de OLMAYAN müşteriler için yeni kart oluştur (açık faturası yok
+    // ama gerçek cari bakiyesi var). invoices boş → açık fatura 0; kalanBorc aşağıdaki döngüde
+    // cari bakiyeye eşitlenir (fark tüm açık faturalardan düşülür, açık fatura 0 olduğundan kalanBorc
+    // doğrudan cari bakiye olur — ama fatura olmadığı için vade/yaşlandırma hesaplanmaz, sadece bakiye görünür).
+    cariEkstreMap.forEach((kayit, kod)=>{
+      if(musteriMap.has(kod)) return;
+      musteriMap.set(kod, {
+        musteri: kod, musteriAdi: kayit.ad || kod, kalanBorc:0, faturaSayisi:0,
+        vadeAgirlikliToplam:0, agirlikBorc:0, avgVadeGun:0, invoices:[], temsilci:null,
+        cekSenet:0, cekSenetDetay:[], siparisTutari:0, emanetSiparis:0, alinanTahsilat:0,
       });
     });
   }
@@ -7250,20 +7554,74 @@ function buildReport(files, musteriMasterMap){
     m.alinanTahsilatKaynak = tahsilatKaynakMap.get(musteri)||null;
     m.cekSenetDetay = cekSenetDetayMap.get(musteri)||[];
 
+    // Cari Ekstre'den müşteri adı + ünvan (varsa karta bunlar yazılır).
+    const cariKayit = cariEkstreVar ? cariEkstreMap.get(musteri) : null;
+    if(cariKayit){
+      if(cariKayit.ad) m.musteriAdi = cariKayit.ad;
+      m.musteriUnvan = cariKayit.unvan || '';
+      m.cariEkstreBakiye = cariKayit.bakiye;
+    }
+
     const sortedOldestFirst = m.invoices.slice().sort((a,b)=>{
       const at = a.faturaTarihi ? a.faturaTarihi.getTime() : Infinity;
       const bt = b.faturaTarihi ? b.faturaTarihi.getTime() : Infinity;
       return at - bt;
     });
-    let kalanCek = m.cekSenet;
-    sortedOldestFirst.forEach(inv=>{
-      inv.kalanBorcHam = inv.kalanBorc;
-      if(kalanCek>0 && inv.kalanBorc>0){
-        const dus = Math.min(inv.kalanBorc, kalanCek);
-        inv.kalanBorc -= dus;
-        kalanCek -= dus;
+
+    if(cariEkstreVar){
+      // CARİ EKSTRE MODU: açık fatura toplamı ile gerçek cari bakiye arasındaki farkı, en eski
+      // faturadan başlayarak düş — böylece kalan açık faturalar toplamı cari bakiyeye eşitlenir.
+      // Çek/senet mahsubu YAPILMAZ (cari bakiye zaten tahsilatları içerir; çift düşme önlenir).
+      const acikFaturaToplam = sortedOldestFirst.reduce((s,inv)=> s + (inv.kalanBorc>0 ? inv.kalanBorc : 0), 0);
+      const hedefBakiye = cariKayit ? cariKayit.bakiye : acikFaturaToplam;
+      // Düşülecek fark: açık fatura toplamı hedeften fazlaysa aradaki tutar (negatif olamaz).
+      let dusulecek = Math.max(0, acikFaturaToplam - hedefBakiye);
+      sortedOldestFirst.forEach(inv=>{
+        inv.kalanBorcHam = inv.kalanBorc;
+        if(dusulecek>0 && inv.kalanBorc>0){
+          const dus = Math.min(inv.kalanBorc, dusulecek);
+          inv.kalanBorc -= dus;
+          dusulecek -= dus;
+        }
+        // Mahsup sonrası kuruş/ondalık artığı ("0 ₺" olarak görünen ama teknik olarak 0'dan farklı
+        // kalan borç) her yerde "kapalı fatura" gibi davransın diye 1 ₺'nin altındaki kalıntılar
+        // tam olarak 0'a sabitlenir. Bunu yapmazsak kart "Toplam Kalan Borç: 0 ₺" gösterirken, bu
+        // ufak artık hâlâ "açık fatura" sayılıp Ort. Vade / yaşlandırma hesaplarına dahil oluyor —
+        // kullanıcının bildirdiği "borcu yok ama ortalama vadesi var" çelişkisinin kök nedeni buydu.
+        if(Math.abs(inv.kalanBorc) < 1) inv.kalanBorc = 0;
+      });
+      // TERS DURUM: Cari Ekstre'deki gerçek bakiye (hedefBakiye), açık faturalar toplamından
+      // FAZLAYSA (kalemlerde henüz görünmeyen bir borç varsa), aradaki fark bugünün tarihiyle
+      // YENİ bir "açık fatura" satırı olarak eklenir — böylece kalanBorcToplam (ve buna bağlı
+      // vade/yaşlandırma hesapları) da GERÇEK cari bakiyeye eşitlenir; sadece görünen üst bakiye
+      // (m.kalanBorc) değil, açık fatura listesinin kendisi de bu farkı yansıtır. Belge No'suz/
+      // sanal bu satır "Cari Ekstre Farkı" olarak etiketlenir, bugünün tarihini taşır (gunFatura=0,
+      // henüz vadesi gelmemiş sayılır) ve normal bir açık fatura gibi listeye/döngüye dahil olur.
+      const eklenecekHam = Math.max(0, hedefBakiye - acikFaturaToplam);
+      // Aynı kuruş/ondalık artığı mantığı: 1 ₺'nin altındaki farklar için sanal "Cari Ekstre Farkı"
+      // satırı eklenmez (görünmez bir 0,xx ₺'lik satır açık fatura gibi Ort. Vade'yi etkilemesin).
+      const eklenecek = eklenecekHam < 1 ? 0 : eklenecekHam;
+      if(eklenecek > 0){
+        const bugunInv = {
+          musteri, musteriAdi: m.musteriAdi, belgeNo:'', belgeTuru:'Cari Ekstre Farkı',
+          tutar: eklenecek, kalanBorc: eklenecek, kalanBorcHam: eklenecek,
+          faturaTarihi: today, netVade: today,
+          gunFatura: 0, gunVade: 0, gunFaturaHam: 0, gunVadeHam: 0,
+          cariEkstreFarkSatiri: true,
+        };
+        m.invoices.push(bugunInv);
+        sortedOldestFirst.push(bugunInv);
+        m.faturaSayisi += 1;
       }
-    });
+    }else{
+      // NORMAL MOD (Cari Ekstre yok): Çek/Senet ARTIK açık faturalardan MAHSUP EDİLMEZ (kullanıcı
+      // isteği) — Çek/Senet bilgisi artık Tahsilat Dökümü'ndeki "Alınan Çek"/"Alınan Senet"
+      // satırlarından (tahsilatTuru==='CekSenet') geliyor ve bu tutarlar zaten normal tahsilat
+      // hesabına (m.alinanTahsilat, tahsilatMap) vade tarihiyle dahil ediliyor. Burada AYRICA kalan
+      // borçtan düşülürse aynı tutar iki kez sayılmış olur (hem tahsilat hem mahsup). m.cekSenet
+      // artık sadece bilgi amaçlı — kart üzerinde "Çek/Senet" olarak gösterilir, borç hesabına girmez.
+      m.invoices.forEach(inv=>{ inv.kalanBorcHam = inv.kalanBorc; });
+    }
 
     let kalanBorcToplam = 0, vAgirlikliToplam = 0, agirlikBorc = 0, vadesiGelmisBakiye = 0;
     m.invoices.forEach(inv=>{
@@ -7284,14 +7642,22 @@ function buildReport(files, musteriMasterMap){
         vadesiGelmisBakiye += inv.kalanBorc;
       }
     });
-    m.kalanBorc = kalanBorcToplam;
+    // Kartta görünen BAKİYE: Cari Ekstre yüklüyse GERÇEK cari bakiye (kullanıcı isteği), yoksa
+    // açık faturaların (mahsup sonrası) toplamı. Açık faturaların düşürülmüş hali (kalanBorcToplam)
+    // vade/yaşlandırma hesabı için zaten kullanıldı; ama gösterilen bakiye cari ekstreye eşitlenir.
+    m.kalanBorc = cariEkstreVar
+      ? (cariKayit ? cariKayit.bakiye : kalanBorcToplam)
+      : kalanBorcToplam;
     m.vadeAgirlikliToplam = vAgirlikliToplam;
     m.agirlikBorc = agirlikBorc;
     m.avgVadeGun = agirlikBorc!==0 ? Math.round(vAgirlikliToplam / agirlikBorc) : 0;
     m.vadesiGelmisBakiye = vadesiGelmisBakiye;
-    m.vadesizBakiye = kalanBorcToplam - vadesiGelmisBakiye;
+    m.vadesizBakiye = m.kalanBorc - vadesiGelmisBakiye;
 
-    m.toplamRisk = m.kalanBorc + m.siparisTutari + m.cekSenet;
+    // Sipariş tutarı Toplam Risk hesabına DAHİL EDİLMEZ (kullanıcı isteği) — açık sipariş henüz
+    // faturalanmamış, tahakkuk etmemiş bir borç olmadığından risk toplamını şişirmemesi istendi.
+    // Toplam Risk artık sadece gerçek borç (Kalan Borç) ve çek/senet riskinden oluşur.
+    m.toplamRisk = m.kalanBorc + m.cekSenet;
     const sp = siparisMusterileri.get(musteri);
     m.temsilci = musteriMasterMap.get(musteri) || m.temsilciFromKalemler || (sp && sp.temsilci) || '—';
     m.invoices.sort((a,b)=> (b.faturaTarihi||0) - (a.faturaTarihi||0));
@@ -7331,10 +7697,12 @@ function buildReport(files, musteriMasterMap){
     const r = repMap.get(key);
     r.musteriSayisi += 1; r.kalanBorc += m.kalanBorc; r.toplamRisk += m.toplamRisk;
   });
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — bakiyesiz müşterilerin yalnızca
+  // çek/senet riski (varsa) temsilci risk toplamına eklenir.
   bakiyesiz.forEach(b=>{
     const key = b.temsilci || '—';
     if(!repMap.has(key)) repMap.set(key, {temsilci:key, musteriSayisi:0, kalanBorc:0, toplamRisk:0});
-    repMap.get(key).toplamRisk += (b.siparisTutari||0);
+    repMap.get(key).toplamRisk += (b.cekSenet||0);
   });
 
   const ticariStokRows = [];
@@ -7390,10 +7758,18 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
+  // Cari Ekstre ünvan lookup'ı (kod -> ünvan) — arama fonksiyonu (musteriCariUnvan) bunu kullanır.
+  // Düz obje olarak saklanır ki buluta/cihaza sorunsuz serileştirilebilsin (Map değil).
+  const cariEkstreUnvanMap = {};
+  if(cariEkstreVar){
+    cariEkstreMap.forEach((kayit, kod)=>{ if(kayit && kayit.unvan) cariEkstreUnvanMap[kod] = kayit.unvan; });
+  }
+
   return {
     asOf: today, musteriler, invoices, bakiyesiz, kpi, ticariStok,
     temsilciler: Array.from(repMap.values()).sort((a,b)=>b.kalanBorc-a.kalanBorc),
     siparisArsiv, tahsilatArsiv, faturaArsiv, bayiHakedis, bozukIadeTahsilat, depozitoTahsilat, tahsilatFormatB,
+    cariEkstreUnvanMap,
   };
 }
 // DAYANIKLILIK: arr undefined/null ise (ör. buluttan/cihazdan gelen ESKİ bir raporda 'bakiyesiz'
@@ -7475,6 +7851,9 @@ function computeAging(musteriler){
   const agingAmount = AGING_BUCKETS.map(b=>({label:b.label, value:0}));
   const agingCount = AGING_BUCKETS.map(b=>({label:b.label, value:0}));
   musteriler.forEach(m=>{
+    // Kullanıcı isteği: bakiyesi (kalan borcu) olmayan müşteriler Yaşlandırma raporuna dahil
+    // edilmesin — ne tutar toplamına ne de müşteri sayısına katkı versinler.
+    if(Math.abs(m.kalanBorc||0) < 1) return;
     const g = m.avgVadeGun||0;
     const idx = AGING_BUCKETS.findIndex(b=>b.test(g));
     if(idx>=0){ agingAmount[idx].value += m.kalanBorc; agingCount[idx].value += 1; }
@@ -7493,7 +7872,9 @@ function computeSevkOzet(report, temsilciFilter){
   const toplamEmanet = sum(musteriler,'emanetSiparis') + sumArr(bakiyesiz,'emanetSiparis');
   const toplamTahsilat = sum(musteriler,'alinanTahsilat');
   const toplamKalanBorc = sum(musteriler,'kalanBorc');
-  const toplamRisk = sum(musteriler,'toplamRisk') + sumArr(bakiyesiz,'siparisTutari');
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — bakiyesiz müşterilerin yalnızca
+  // çek/senet riski eklenir (musteriler'deki toplamRisk zaten sipariş içermiyor, bkz. buildReport).
+  const toplamRisk = sum(musteriler,'toplamRisk') + sumArr(bakiyesiz,'cekSenet');
   const vAgirlikli = sum(musteriler,'vadeAgirlikliToplam');
   const vBorc = sum(musteriler,'agirlikBorc');
   const ortalamaVade = vBorc!==0 ? Math.round(vAgirlikli/vBorc) : null;
@@ -7513,7 +7894,9 @@ function computeGenelKPI(report, temsilciFilter){
   const toplamCekSenet = sum(musteriler,'cekSenet');
   const toplamTahsilat = temsilciFilter ? sum(musteriler,'alinanTahsilat') : report.kpi.toplamTahsilat;
   const tahsilatEslesmeyenToplam = temsilciFilter ? 0 : report.kpi.tahsilatEslesmeyenToplam;
-  const toplamRisk = sum(musteriler,'toplamRisk') + sumArr(bakiyesiz,'siparisTutari');
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — bakiyesiz müşterilerin yalnızca
+  // çek/senet riski eklenir (musteriler'deki toplamRisk zaten sipariş içermiyor, bkz. buildReport).
+  const toplamRisk = sum(musteriler,'toplamRisk') + sumArr(bakiyesiz,'cekSenet');
   const vAgirlikli = sum(musteriler,'vadeAgirlikliToplam');
   const vBorc = sum(musteriler,'agirlikBorc');
   const ortalamaVade = vBorc!==0 ? Math.round(vAgirlikli/vBorc) : null;
@@ -7542,10 +7925,11 @@ const GB_RISK_META = {
 };
 
 function gbTumMusteriler(report){
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — yalnızca çek/senet riski yazılır.
   const bakiyesizSatirlari = (report.bakiyesiz||[]).map(b=>({
     musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
     kalanBorc: 0, avgVadeGun: null, siparisTutari: b.siparisTutari||0, emanetSiparis: b.emanetSiparis||0,
-    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.siparisTutari||0)+(b.cekSenet||0),
+    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.cekSenet||0),
     invoices: [], __bakiyesiz: true,
   }));
   return report.musteriler.concat(bakiyesizSatirlari);
@@ -7646,10 +8030,17 @@ function renderGenelBakisView(report){
 
   // ---- Vade Dağılımı donut ----
   // Kova sınırları ve renkleri ortak AGING_BUCKETS'tan gelir (Yaşlandırma sayfasıyla birebir aynı).
+  // NOT (bilinçli tasarım farkı): Bu donut SADECE kalanBorc>0 (gerçekten açık borçlu) müşterileri
+  // kapsar — negatif bakiyeli (iade/fazla ödeme/alacaklı) müşteriler buraya hiç girmez. "Toplam
+  // Kalan Borç" KPI kartı ise TÜM müşterilerin net bakiyesini (negatifler dahil) toplar. Bu yüzden
+  // donut'un toplamı KPI'daki tutardan FARKLI (genelde daha yüksek) çıkabilir — bu bir hata değil,
+  // aradaki fark tam olarak negatif bakiyeli müşterilerin toplamı kadardır (aşağıda hesaplanıp
+  // kullanıcıya bilgi notu olarak gösterilir).
   const vadeBuckets = AGING_BUCKETS;
   const vadeAmounts = vadeBuckets.map(()=>0);
+  let negatifBakiyeToplam = 0;
   musteriler.forEach(m=>{
-    if(m.kalanBorc<=0) return;
+    if(m.kalanBorc<=0){ negatifBakiyeToplam += m.kalanBorc; return; }
     const g = m.avgVadeGun==null ? 0 : m.avgVadeGun;
     const idx = vadeBuckets.findIndex(b=>b.test(g));
     if(idx>=0) vadeAmounts[idx] += m.kalanBorc;
@@ -7666,6 +8057,12 @@ function renderGenelBakisView(report){
     <div class="gb-donut-legend">
       ${vadeBuckets.map((b,i)=>`<div class="gb-donut-legend-row"><span class="dot" style="background:${b.color}"></span>${b.label}<span class="amt">${gbKisaTL(vadeAmounts[i])} (${vadeToplam>0?(vadeAmounts[i]/vadeToplam*100).toFixed(1):'0'}%)</span></div>`).join('')}
     </div>`;
+  const gbVadeDonutNotEl = document.getElementById('gbVadeDonutNot');
+  if(gbVadeDonutNotEl){
+    gbVadeDonutNotEl.textContent = negatifBakiyeToplam < 0
+      ? `ℹ️ Bu toplam yalnızca açık (pozitif) bakiyeli müşterileri kapsar; ${TL(Math.abs(negatifBakiyeToplam))} tutarındaki negatif bakiyeli (iade/alacaklı) müşteriler "Toplam Kalan Borç" KPI'sında var ama buraya dahil değildir — aradaki fark bundandır.`
+      : '';
+  }
 
   // ---- Risk Dağılımı donut ----
   const riskKeys = ['yuksek','orta','dusuk'];
@@ -7742,7 +8139,7 @@ function renderGbMusteriGrid(report){
   }
 
   let rows = gbTumMusteriler(report).filter(m=>{
-    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     // Hakediş/Emanet çipleri seçiliyken, ilgili raporda hiç kaydı olmayan müşteriler
     // listeden tamamen çıkarılıyor.
@@ -8582,7 +8979,12 @@ function computeNoktaYaslandirma(report){
 
     const toplam = AGING_DAY_BUCKETS.reduce((s,b)=>s+buckets[b.key],0);
     return {musteri:m.musteri, musteriAdi:m.musteriAdi, temsilci:m.temsilci||'—', buckets, toplam};
-  });
+  // Kullanıcı isteği: Yaşlandırma raporuna (hem temsilci/müdür toplamlarına hem müşteri bazlı
+  // akordiyon listesine) bakiyesi (kalan borcu) olmayan müşteriler dahil edilmesin. "Bakiyesi yok"
+  // burada yaşlandırma kovalarının toplamı (m.kalanBorc değil, invoices'tan hesaplanan toplam) 0'a
+  // eşit demek — mahsup sonrası kuruş artıklarının 0'a sabitlenmesiyle (buildReport'taki düzeltme)
+  // bu artık gerçek anlamda "borcu olmayan" müşterileri de doğru şekilde dışarıda bırakıyor.
+  }).filter(row => Math.abs(row.toplam) >= 1);
 }
 computeNoktaYaslandirma = memoizePure(computeNoktaYaslandirma);
 
@@ -9135,7 +9537,7 @@ function renderKPIs(kpi){
   const items = [
     {label:'Toplam Kalan Borç', icon:'<i class="fa-solid fa-coins" aria-hidden="true"></i>', value:kpi.toplamBakiye, sub:kpi.musteriSayisi.toLocaleString('tr-TR')+' Müşteri'},
     {label:'Ort. Vade', icon:'<i class="fa-solid fa-calendar" aria-hidden="true"></i>', cls:'neutral', value:null, display: kpi.ortalamaVade!=null ? kpi.ortalamaVade+' gün' : '—', sub:kpi.musteriSayisi.toLocaleString('tr-TR')+' Müşteri'},
-    {label:'Toplam Risk', icon:'<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>', cls:'warn', value:kpi.toplamRisk, sub:'Kalan Borç + Sipariş + Çek/Senet'},
+    {label:'Toplam Risk', icon:'<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>', cls:'warn', value:kpi.toplamRisk, sub:'Kalan Borç + Çek/Senet'},
     {label:'Çek / Senet Riski', icon:'<i class="fa-solid fa-file-lines" aria-hidden="true"></i>', cls:'danger', value:kpi.toplamCekSenet, sub:'Vadesi Gelmemiş'},
     {label:'Alınan Tahsilat', icon:'<i class="fa-solid fa-circle-check" aria-hidden="true"></i>', cls:'success', value:kpi.toplamTahsilat, sub: kpi.tahsilatEslesmeyenToplam>0 ? (TL(kpi.tahsilatEslesmeyenToplam)+' Bakiyesi Kapalı Müşteriden') : 'Son Dönem'},
     {label:'Tahsilat Oranı', icon:'<i class="fa-solid fa-bullseye" aria-hidden="true"></i>', cls:'accent', value:null, display: fmtYuzde(tahsilatOrani), sub:'Tahsilat / (Tahsilat + Kalan Borç)'},
@@ -9165,13 +9567,27 @@ function musteriTabelaAdi(musteriKod){
 // Arama kutusundaki metnin (q, zaten toLowerCase yapılmış) bir müşteri kaydıyla eşleşip
 // eşleşmediğini kontrol eder — müşteri adı, kodu ve varsa Tabela Adı'na bakar. Büyük/küçük
 // harf duyarlılığı olmaması için hem q hem de karşılaştırılan alanlar toLowerCase kullanır.
-function musteriAramaEslesiyorMu(q, musteriAdi, musteriKod){
+function musteriAramaEslesiyorMu(q, musteriAdi, musteriKod, musteriUnvan){
   if(!q) return true;
   if(String(musteriAdi||'').toLocaleLowerCase('tr-TR').includes(q)) return true;
   if(String(musteriKod||'').toLocaleLowerCase('tr-TR').includes(q)) return true;
   const tabela = musteriTabelaAdi(musteriKod);
   if(tabela && tabela.toLocaleLowerCase('tr-TR').includes(q)) return true;
+  // Cari Hesap Ekstre'den gelen müşteri ünvanı da aramaya dahildir (kullanıcı isteği): ör. "OSMAN
+  // ÖKTEN" (ünvan) diye arayınca "ÖKTEN BAKKAL" (müşteri adı) kartı da bulunur. Ünvan hem parametre
+  // olarak (kart m.musteriUnvan) hem de Cari Ekstre lookup'ından (state) kontrol edilir.
+  if(musteriUnvan && String(musteriUnvan).toLocaleLowerCase('tr-TR').includes(q)) return true;
+  const unvanState = musteriCariUnvan(musteriKod);
+  if(unvanState && unvanState.toLocaleLowerCase('tr-TR').includes(q)) return true;
   return false;
+}
+// Cari Hesap Ekstre'den bir müşterinin ünvanını (kod bazında) döndürür — arama için. buildReport
+// çıktısındaki report.cariEkstreUnvanMap üzerinden çalışır (yoksa boş).
+function musteriCariUnvan(musteriKod){
+  const map = state.report && state.report.cariEkstreUnvanMap;
+  if(!map) return '';
+  const v = (map instanceof Map) ? map.get(String(musteriKod||'')) : map[String(musteriKod||'')];
+  return v || '';
 }
 
 // Bir kart açıldığında (expand), içine eklenen detay/tablo satırları kartın boyunu uzatır; bu da
@@ -9203,14 +9619,15 @@ function getFilteredSorted(report){
   // (bakiyesiz) müşteriler — Sevk Raporu'ndaki (getSevkFilteredSorted) ile AYNI mantık: bu
   // müşteriler daha önce burada hiç gösterilmiyordu, bu yüzden "Açık siparişi olan" filtresi ve
   // arama, KPI toplamlarında sayılan bu müşterileri hiçbir zaman listelemiyordu.
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — yalnızca çek/senet riski yazılır.
   const bakiyesizSatirlari = (report.bakiyesiz||[]).map(b=>({
     musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
     kalanBorc: 0, avgVadeGun: null, siparisTutari: b.siparisTutari||0, emanetSiparis: b.emanetSiparis||0,
-    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.siparisTutari||0)+(b.cekSenet||0),
+    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.cekSenet||0),
     invoices: [], cekSenetDetay: b.cekSenetDetay||[], __bakiyesiz: true,
   }));
   let rows = report.musteriler.concat(bakiyesizSatirlari).filter(m=>{
-    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over60' && !(m.avgVadeGun>60)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -9352,8 +9769,21 @@ document.getElementById('faturaModalOverlay').addEventListener('click', (e)=>{
   if(e.target.id==='faturaModalOverlay') faturaModalKapat();
 });
 
+function cekSenetModalSatirDurumHtml(c){
+  // Hem Çek hem Senet: kullanıcı elle "Tahsil Edildi" demeden risk olarak kalır (otomatik
+  // tahsilat sayılmaz) — kullanıcı isteği: "çekte de riskten sayılsın, en mantıklı çözüm buydu".
+  if(c.tahsilatTuru === 'Cek' || c.tahsilatTuru === 'Senet'){
+    if(c.tahsilEdildiMi){
+      return `<span class="badge" style="background:var(--good-soft,#e6f6ec);color:var(--good,#1a8a4c);">Tahsil Edildi</span>`;
+    }
+    const etiket = c.tahsilatTuru === 'Cek' ? 'Çek Tahsil Edildi mi?' : 'Senet Tahsil Edildi mi?';
+    return `<button type="button" class="btn small senet-tahsil-btn" data-senet-anahtari="${escapeHtml(c.senetAnahtari||'')}">${etiket}</button>`;
+  }
+  return '—';
+}
 function cekSenetModalAc(musteriKod, musteriAdi){
   const kod = String(musteriKod||'').trim();
+  state.cekSenetModalMevcut = {kod, adi: musteriAdi};
   const report = state.report;
   const m = (report && report.musteriler ? report.musteriler.find(x=>String(x.musteri||'').trim()===kod) : null)
     || state.faturaModalYedekMap.get(kod) || null;
@@ -9364,7 +9794,8 @@ function cekSenetModalAc(musteriKod, musteriAdi){
   document.getElementById('cekSenetModalTbody').innerHTML = detay.length ? detay.map(c=>`<tr>
     <td>${escapeHtml(c.no||'—')}</td><td>${escapeHtml(c.tip||'—')}</td>
     <td>${fmtDate(c.belgeTarihi)}</td><td>${fmtDate(c.vade)}</td><td class="num">${TL(c.tutar)}</td>
-  </tr>`).join('') : `<tr><td colspan="5" class="empty-state">Çek/Senet kaydı bulunamadı.</td></tr>`;
+    <td>${cekSenetModalSatirDurumHtml(c)}</td>
+  </tr>`).join('') : `<tr><td colspan="6" class="empty-state">Çek/Senet kaydı bulunamadı.</td></tr>`;
   document.getElementById('cekSenetModalOverlay').classList.add('open');
 }
 function cekSenetModalKapat(){
@@ -9374,6 +9805,125 @@ document.getElementById('cekSenetModalClose').addEventListener('click', cekSenet
 document.getElementById('cekSenetModalOverlay').addEventListener('click', (e)=>{
   if(e.target.id==='cekSenetModalOverlay') cekSenetModalKapat();
 });
+// "Çek/Senet Tahsil Edildi mi?" butonu — tıklanınca ilgili kaydın anahtarı kalıcı onay listesine
+// eklenir, rapor bu müşteri için yeniden hesaplanır (tam yeniden yükleme YAPILMADAN — yalnızca
+// tahsilatArsiv içindeki gecerli bayrağı ve türetilmiş alanlar güncellenir) ve hem popup hem de
+// arkadaki tüm ekranlar (Toplam Risk, Alınan Tahsilat, KPI'lar vb.) tazelenir.
+document.getElementById('cekSenetModalTbody').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('.senet-tahsil-btn');
+  if(!btn) return;
+  const anahtar = btn.getAttribute('data-senet-anahtari');
+  if(!anahtar) return;
+  const onayli = confirm('Bu çek/senedin tahsil edildiğini onaylıyor musunuz? Onaylarsanız bu kayıt artık risk olarak değil, tahsilat olarak sayılacaktır.');
+  if(!onayli) return;
+  state.cekSenetTahsilOnaylari.add(anahtar);
+  const onayBuluttaKaydedildi = await saveSenetTahsilOnaylariToLocal();
+  if(cloudEnabled() && !onayBuluttaKaydedildi){
+    // Cihaz depolama kapalı — onay buluta yazılamazsa hiçbir yerde kalıcı değildir, sayfa
+    // yenilenirse "Tahsil Edildi" durumu sıfırlanmış gibi görünür. Kullanıcıyı açıkça uyarıyoruz.
+    alert('UYARI: Bu onay buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse "Tahsil Edildi" durumu kaybolabilir. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+  }
+  await cekSenetOnayiUyguladiktanSonraRaporuTazele();
+  const mevcut = state.cekSenetModalMevcut;
+  if(mevcut) cekSenetModalAc(mevcut.kod, mevcut.adi);
+  // Arkada açık olan Fatura modalı (Toplam Kalan Borç / Risk başlığı) aynı müşteriye aitse onu da
+  // tazele — aksi halde kullanıcı modalı kapatıp tekrar açana kadar eski (onay öncesi) Toplam Risk
+  // değerini görmeye devam eder.
+  const faturaMevcut = state.faturaModalMevcut;
+  if(faturaMevcut && mevcut && String(faturaMevcut.kod).trim()===String(mevcut.kod).trim()){
+    faturaModalAc(faturaMevcut.kod, faturaMevcut.adi);
+  }
+});
+// Rapor zaten bellekteyken (state.report) yeni bir dosya yüklemesi olmadan çek/senet onayını
+// yansıtmak için: tahsilatArsiv'deki ilgili çek/senet satır(lar)ını "gecerli" yapar, cekSenetMap /
+// cekSenetDetay / m.cekSenet / m.toplamRisk / m.alinanTahsilat / m.kalanBorc değerlerini o
+// müşteri için yeniden türetir ve ekranı tazeler. buildReport'un ilgili bölümüyle aynı formülleri
+// izler (bkz. buildReport içindeki cekSenetMap/cekSenetDetayMap ve toplamRisk hesaplamaları).
+// Onaylanan çek/senedin GEÇMİŞ günlük arşiv kopyalarını da günceller (bkz. cekSenetOnayiUyguladiktanSonraRaporuTazele
+// yorumu) — aksi halde Trend Analizi/Aylık Ortalama Tahsilat gibi state.faturaArsivCache üzerinden
+// hesaplanan ekranlar, arşive o gün yazılmış ESKİ (gecerli:false) hâli okumaya devam eder; sadece
+// state.report.musteriler[].cekSenetDetay'ı güncellemek YETERLİ DEĞİLDİR, çünkü bu iki veri kaynağı
+// (canlı rapor ile arşiv) birbirinden bağımsız kopyalardır.
+async function cekSenetArsivGecerliBayragiGuncelle(){
+  const arsiv = state.faturaArsivCache || {};
+  const degisenGunler = {}; // gun -> gunKaydi (yalnızca gerçekten değişen günler — kısmi PATCH için)
+  Object.keys(arsiv).forEach(gun=>{
+    const gunKaydi = arsiv[gun];
+    if(!gunKaydi || !Array.isArray(gunKaydi.tahsilatArsiv)) return;
+    let buGunDegisti = false;
+    gunKaydi.tahsilatArsiv.forEach(r=>{
+      if(r.tahsilatTuru !== 'Cek' && r.tahsilatTuru !== 'Senet') return;
+      const onaylandi = state.cekSenetTahsilOnaylari.has(r.senetAnahtari);
+      if(onaylandi !== r.gecerli){ r.gecerli = onaylandi; buGunDegisti = true; }
+    });
+    if(buGunDegisti) degisenGunler[gun] = gunKaydi;
+  });
+  if(Object.keys(degisenGunler).length){
+    // Arşiv içeriği değişti — cihaza kalıcı kaydet, bulut açıksa SADECE değişen günleri (kısmi
+    // PATCH) oraya da yazar, ve birleştirme önbelleğini (faturaBirlesikCache, referans bazlı)
+    // geçersiz kılar ki bir sonraki okuma güncel veriyi worker'da yeniden hesaplasın.
+    saveFaturaKontrolArsivToLocal(arsiv).catch(()=>{});
+    if(cloudEnabled()){
+      const sonuc = await saveFaturaKontrolArsivGunleriToCloud(degisenGunler);
+      if(!sonuc.ok) console.error('UYARI: Çek/Senet onayı sonrası arşiv buluta yazılamadı, sadece cihazda kaldı.', sonuc.reason);
+    }
+    faturaBirlesikCache = { kaynak: null, promise: null };
+  }
+}
+async function cekSenetOnayiUyguladiktanSonraRaporuTazele(){
+  await cekSenetArsivGecerliBayragiGuncelle();
+  const report = state.report;
+  if(!report) return;
+  const tumMusteriler = (report.musteriler||[]).concat(report.bakiyesiz||[]);
+  tumMusteriler.forEach(m=>{
+    if(!m.cekSenetDetay || !m.cekSenetDetay.length) return;
+    let degisenVar = false;
+    let yeniCekSenetRisk = 0;
+    m.cekSenetDetay.forEach(c=>{
+      if(c.tahsilatTuru === 'Cek' || c.tahsilatTuru === 'Senet'){
+        const onaylandi = state.cekSenetTahsilOnaylari.has(c.senetAnahtari);
+        if(onaylandi !== c.tahsilEdildiMi) degisenVar = true;
+        c.tahsilEdildiMi = onaylandi;
+      }
+      if((c.tahsilatTuru === 'Cek' || c.tahsilatTuru === 'Senet') && !c.tahsilEdildiMi) yeniCekSenetRisk += (c.tutar||0);
+    });
+    if(!degisenVar && yeniCekSenetRisk === (m.cekSenet||0)) return;
+    m.cekSenet = yeniCekSenetRisk;
+    if(!m.__bakiyesiz){
+      m.toplamRisk = m.kalanBorc + m.cekSenet;
+    } else {
+      m.toplamRisk = m.cekSenet;
+    }
+  });
+  // ÖNEMLİ: computeSevkOzet/computeGenelKPI/computeNoktaYaslandirma/computeNakitAkisTahmini/
+  // computeSupheliAlacak gibi fonksiyonlar memoizePure ile önbelleklenir; önbellek anahtarı
+  // `report` nesnesinin REFERANSINA (kimliğine) göre üretilir, içeriğine göre değil (bkz.
+  // __dataVersion — WeakMap tabanlı). state.report'u YERİNDE (aynı referansla) değiştirirsek bu
+  // fonksiyonlar değişikliği fark etmez ve ESKİ (tahsil öncesi) sonucu döndürmeye devam eder — bu
+  // yüzden kart/Toplam Risk ekranda güncellenmiyordu, sadece yeni bir dosya yüklemesi (ki o da
+  // state.report'u TAMAMEN yeni bir nesneyle değiştiriyor) sorunu "çözüyormuş" gibi görünüyordu.
+  // Çözüm: mutasyondan sonra report'u sığ (shallow) kopyalayıp state.report'a YENİ bir referans
+  // olarak atıyoruz — böylece tüm memoize önbellekleri otomatik olarak geçersiz sayılır.
+  if(report){
+    state.report = Object.assign({}, report, {
+      musteriler: (report.musteriler||[]).slice(),
+      bakiyesiz: (report.bakiyesiz||[]).slice(),
+    });
+  }
+  if(typeof renderReport === 'function' && state.report) renderReport(state.report);
+  // Güncellenmiş raporu (yeni Toplam Risk/cekSenetDetay değerleriyle) cihaza VE (bulut açıksa)
+  // buluta kalıcı kaydet — aksi halde F5/sayfa yenilemede veya başka bir cihazda state.report,
+  // buildReport'un EN SON çalıştığı andaki (onay öncesi) hâliyle geri yüklenir ve "Tahsil Edildi"
+  // durumu sıfırlanmış gibi görünür. (Onay bilgisinin kendisi state.cekSenetTahsilOnaylari'nde
+  // zaten kalıcıdır, ama raporun KENDİSİ bu onayı yansıtacak şekilde yeniden kaydedilmezse
+  // ekranda eski hâli görünmeye devam eder — buildReport yeniden ÇALIŞTIRILMADIĞI sürece.)
+  if(state.report){
+    saveReportToStorage(state.report).catch(()=>{});
+    if(cloudEnabled()){
+      saveReportToCloud(state.report).catch(err=> console.error('UYARI: Çek/Senet onayı sonrası rapor buluta yazılamadı, sadece cihazda kaldı.', err));
+    }
+  }
+}
 
 async function tahsilatTahminiModalAc(musteriKod, musteriAdi){
   document.getElementById('tahsilatTahminiModalAvatar').textContent = avatarBaslangic(musteriAdi);
@@ -9532,6 +10082,11 @@ async function analizModalAc(musteriKod, musteriAdi){
       <span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--accent);margin-right:4px;"></span>Normal ${TL(normalPay)}</span>
       ${hakedisPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:#1D5FB8;margin-right:4px;"></span>Hakediş ${TL(hakedisPay)}</span>` : ''}
       ${krediPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--danger);margin-right:4px;"></span>İade/Depozito ${TL(krediPay)}</span>` : ''}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;">
+      ${ozet.aylikTuruNormal>0 ? `<span class="badge" style="background:var(--accent-soft,#eef2ff);color:var(--accent);">Normal tahsilat ${TL(ozet.aylikTuruNormal)}</span>` : ''}
+      ${ozet.aylikTuruCekSenet>0 ? `<span class="badge" style="background:#FFF3E0;color:#B8630A;">Çek senet ${TL(ozet.aylikTuruCekSenet)}</span>` : ''}
+      ${ozet.aylikTuruSanalPos>0 ? `<span class="badge" style="background:#EAE6FB;color:#5B3FBD;">Sanal Pos ${TL(ozet.aylikTuruSanalPos)}</span>` : ''}
     </div>` : ''}
 
     <div style="height:1px;background:var(--line-soft);margin:16px 0;"></div>
@@ -10081,15 +10636,16 @@ function getSevkFilteredSorted(report){
   const riskFilter = document.getElementById('sevkRiskFilter').value;
   const vadeMin = document.getElementById('sevkVadeMinInput').value;
   const vadeMax = document.getElementById('sevkVadeMaxInput').value;
+  // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — yalnızca çek/senet riski yazılır.
   const bakiyesizSatirlari = (report.bakiyesiz||[]).map(b=>({
     musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
     kalanBorc: 0, avgVadeGun: null, siparisTutari: b.siparisTutari||0, emanetSiparis: b.emanetSiparis||0,
-    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.siparisTutari||0)+(b.cekSenet||0),
+    cekSenet: b.cekSenet||0, alinanTahsilat: 0, toplamRisk: (b.cekSenet||0),
     invoices: [], cekSenetDetay: b.cekSenetDetay||[], __bakiyesiz: true,
   }));
   let rows = report.musteriler.filter(m=> m.siparisTutari>0 || m.emanetSiparis>0).concat(bakiyesizSatirlari);
   rows = rows.filter(m=>{
-    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over60' && !(m.avgVadeGun>60)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -10297,11 +10853,13 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
       };
     }
     if(temsilciFilter && m.temsilci !== temsilciFilter) return;
-    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri)) return;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan)) return;
     // Fatura Kontrol'de gösterilen tahsilat SEÇİLİ TARİHE özgüdür — bu yüzden döküm de (varsa
     // Genel Rapor'un "bugüne en yakın gün" bazlı dökümü değil) o güne özgü kaynak dağılımıyla
     // gösterilir (bkz. renderMusteriDetail'daki alinanTahsilatKaynak kullanımı).
-    const toplamRisk = m.__bakiyesiz ? v.seciliSiparis : m.toplamRisk;
+    // Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı isteği) — bakiyesiz (Kalemler'de kaydı
+    // olmayan) bir müşterinin burada çek/senedi de olamayacağından (yukarıda cekSenet:0 sabit) risk 0'dır.
+    const toplamRisk = m.__bakiyesiz ? (m.cekSenet||0) : m.toplamRisk;
     rows.push(Object.assign({}, m, {seciliSiparis: v.seciliSiparis, seciliTahsilat: v.seciliTahsilat, oncekiGunTahsilat: v.oncekiGunTahsilat||0, alinanTahsilat: v.seciliTahsilat, alinanTahsilatKaynak: v.seciliTahsilatKaynak || null, toplamRisk}));
   });
 
@@ -10494,10 +11052,14 @@ document.getElementById('faturaKontrolDahaFazlaBtn').addEventListener('click', (
 async function computeMusteriAylikOzet(musteri){
   const birlesik = await faturaKontrolArsivBirlestirCached(state.faturaArsivCache || {});
   const faturalar = birlesik.faturaArsiv.filter(r=>r.musteri===musteri && r.faturaTarihi);
-  const tahsilatlarArsiv = birlesik.tahsilatArsiv.filter(r=>r.musteri===musteri && r.belgeTarihi);
+  // "gecerli:false" olan kayıtlar (ör. henüz "Tahsil Edildi" onayı verilmemiş Alınan Çek/Senet)
+  // Trend Analizi/Aylık Ortalama tahsilat toplamlarına DAHİL EDİLMEZ — bunlar henüz fiilen
+  // tahsil edilmemiş, risk olarak bekleyen kayıtlardır (kullanıcı isteği: hem Çek hem Senet
+  // manuel "Tahsil Edildi" onayına kadar sayılmaz).
+  const tahsilatlarArsiv = birlesik.tahsilatArsiv.filter(r=>r.musteri===musteri && r.belgeTarihi && r.gecerli!==false);
   const hakedisTahsilatlari = (birlesik.bayiHakedisArsiv || [])
     .filter(r=>r.musteri===musteri && r.tahsilatTarihi)
-    .map(r=>({musteri:r.musteri, belgeTarihi:r.tahsilatTarihi, tutar:r.tutar}));
+    .map(r=>({musteri:r.musteri, belgeTarihi:r.tahsilatTarihi, tutar:r.tutar, __hakedis:true}));
   const toplamHakedisTahsilat = hakedisTahsilatlari.reduce((a,b)=>a+(b.tutar||0),0);
   const tahsilatlar = tahsilatlarArsiv.concat(hakedisTahsilatlari);
   if(!faturalar.length && !tahsilatlar.length) return null;
@@ -10520,15 +11082,25 @@ async function computeMusteriAylikOzet(musteri){
   const KREDI_ETIKETLERI = new Set(['FaturaIade', 'DepozitoTahsilat']);
   const toplamKrediTahsilat = tahsilatlar.reduce((a,b)=> a + (KREDI_ETIKETLERI.has(b.formatKaynagi) ? (b.tutar||0) : 0), 0);
   const toplamNormalTahsilat = toplamTahsilat - toplamKrediTahsilat - toplamHakedisTahsilat;
+  // Tahsilat türü dökümü (Nakit/Kredi Kartı → "Normal tahsilat", Çek/Senet → "Çek senet",
+  // Sanal Pos → "Sanal Pos") — sadece bu dökümde kullanılır, KPI toplamlarını etkilemez;
+  // "TAHSİLAT · AYLIK ORTALAMA" alanındaki chip etiketleri için kaynak ayrımı sağlar.
+  const toplamTuruNormal = tahsilatlar.reduce((a,b)=> a + (!b.__hakedis && !KREDI_ETIKETLERI.has(b.formatKaynagi) && (!b.tahsilatTuru || b.tahsilatTuru==='Normal') ? (b.tutar||0) : 0), 0);
+  const toplamTuruCekSenet = tahsilatlar.reduce((a,b)=> a + ((b.tahsilatTuru==='Cek' || b.tahsilatTuru==='Senet') ? (b.tutar||0) : 0), 0);
+  const toplamTuruSanalPos = tahsilatlar.reduce((a,b)=> a + (b.tahsilatTuru==='SanalPos' ? (b.tutar||0) : 0), 0);
   const aylikFatura = toplamFatura / aySayisi;
   const aylikLitre = toplamLitre / aySayisi;
   const aylikTahsilat = toplamTahsilat / aySayisi;
   const aylikNormalTahsilat = toplamNormalTahsilat / aySayisi;
   const aylikKrediTahsilat = toplamKrediTahsilat / aySayisi;
   const aylikHakedisTahsilat = toplamHakedisTahsilat / aySayisi;
+  const aylikTuruNormal = toplamTuruNormal / aySayisi;
+  const aylikTuruCekSenet = toplamTuruCekSenet / aySayisi;
+  const aylikTuruSanalPos = toplamTuruSanalPos / aySayisi;
   const geriDonusGun = aylikTahsilat > 0 ? (aylikFatura / aylikTahsilat) * 30 : null;
   return { gunSayisi, aySayisi, toplamFatura, toplamLitre, toplamTahsilat, toplamNormalTahsilat, toplamKrediTahsilat,
-    aylikFatura, aylikLitre, aylikTahsilat, aylikNormalTahsilat, aylikKrediTahsilat, aylikHakedisTahsilat, geriDonusGun, toplamHakedisTahsilat };
+    aylikFatura, aylikLitre, aylikTahsilat, aylikNormalTahsilat, aylikKrediTahsilat, aylikHakedisTahsilat, geriDonusGun, toplamHakedisTahsilat,
+    toplamTuruNormal, toplamTuruCekSenet, toplamTuruSanalPos, aylikTuruNormal, aylikTuruCekSenet, aylikTuruSanalPos };
 }
 
 // Not: fmtTrendDeger burada değil, dosyanın ilerisinde (yüzde birimini de destekleyen üst küme
@@ -12311,12 +12883,23 @@ async function ortalamaGecmisTahsilatOrani(report, ayAdedi){
   if(!gunler.length) return null;
   const aylar = Array.from(new Set(gunler.map(g=>g.slice(0,7)))).sort();
   const buAy = dateKeyLocal(new Date()).slice(0,7);
-  const tamamlanmisAylar = aylar.filter(a=>a<buAy).slice(-ayAdedi);
-  const hedefAylar = tamamlanmisAylar.length ? tamamlanmisAylar : aylar.slice(-1);
+  // ÖNEMLİ DÜZELTME: Arşivde bir ay anahtarının bulunması (ör. bir Fatura/Tahsilat satırının o aya
+  // sızmış "kabuk" bir kaydı olması), o ayda gerçekten Kalemler yüklenip musteriSnapshot alınmış
+  // olduğu anlamına gelmez — computeTahsilatVerimlilikAy böyle bir ayda {yok:true} veya
+  // tahsilatOrani:null döndürür. Eskiden "bu aydan önceki son N ay" körü körüne seçiliyordu; araya
+  // veri içermeyen boş bir ay (ör. Haziran) girdiğinde, aslında dolu olan Temmuz (bu ay, henüz
+  // "tamamlanmamış" sayıldığı için) hiç denenmeden oran null kalıyordu — halbuki Tahsilat
+  // Verimliliği sekmesi tam da bu ayı gösterip gerçek bir oran (%) hesaplayabiliyordu. Şimdi:
+  // önce geçmiş aylar (en yeniden eskiye) TEK TEK denenir, gerçekten veri döndüren (yok değil VE
+  // tahsilatOrani dolu) ay bulununca o kullanılır; hiçbiri veri vermezse mevcut ay (bu ay) da
+  // fallback olarak denenir — Tahsilat Verimliliği sekmesiyle aynı "en son dolu ay" mantığı.
+  const gecmisAylarYeniden = aylar.filter(a=>a<buAy).slice().reverse();
+  const denenecekAylar = gecmisAylarYeniden.concat(aylar.includes(buAy) ? [buAy] : []);
   let toplamOran=0, sayi=0;
-  for(const ay of hedefAylar){
+  for(const ay of denenecekAylar){
     const rep = await computeTahsilatVerimlilikAy(report, ay, false);
     if(rep && !rep.yok && rep.genel.tahsilatOrani!=null){ toplamOran += rep.genel.tahsilatOrani; sayi++; }
+    if(sayi >= ayAdedi) break; // yeterli sayıda GERÇEK veri içeren ay bulunduysa dur
   }
   return sayi ? (toplamOran/sayi/100) : null;
 }
@@ -12460,7 +13043,7 @@ function getHukukiFiltered(hukukiListesi){
   const vadeMax = document.getElementById('hukukiVadeMaxInput').value;
 
   return hukukiListesi.filter(m=>{
-    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
+    if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over180' && !(m.avgVadeGun>=180)) return false;
     if(riskFilter==='hasCek' && !(m.cekSenet>0)) return false;
@@ -13437,7 +14020,10 @@ async function sellOutHedefYenile(){
 async function sellOutHedefKaydet(obj){
   state.sellOutHedef = obj;
   await saveSellOutHedefToLocal(obj);
-  if(cloudEnabled()) await saveSellOutHedefToCloud(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveSellOutHedefToCloud(obj);
+    if(!sonuc.ok) throw new Error('Hedef buluta kaydedilemedi (cihaza da kaydedilmiyor): '+(sonuc.reason||'bilinmeyen hata'));
+  }
 }
 
 async function saveSellOutReportToCloud(rapor){
@@ -13490,7 +14076,16 @@ async function sellOutKaydet(rapor){
   state.sellOutReport = rapor;
   state.sellOutSonGuncelleme = zaman;
   await saveSellOutReportToLocal(rapor);
-  if(cloudEnabled()) await saveSellOutReportToCloud(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveSellOutReportToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Sell Out raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Sell Out raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
 }
 
 async function sellOutRaporuOlustur(){
@@ -13620,7 +14215,10 @@ async function modernKanalHedefYenile(){
 async function modernKanalHedefKaydet(deger){
   state.modernKanalHedef = Number(deger)||0;
   await saveModernKanalHedefToLocal(state.modernKanalHedef);
-  if(cloudEnabled()) await saveModernKanalHedefToCloud(state.modernKanalHedef);
+  if(cloudEnabled()){
+    const sonuc = await saveModernKanalHedefToCloud(state.modernKanalHedef);
+    if(!sonuc.ok) throw new Error('Hedef buluta kaydedilemedi (cihaza da kaydedilmiyor): '+(sonuc.reason||'bilinmeyen hata'));
+  }
 }
 
 async function saveModernKanalReportToCloud(rapor){
@@ -13673,7 +14271,16 @@ async function modernKanalKaydet(rapor){
   state.modernKanalReport = rapor;
   state.modernKanalSonGuncelleme = zaman;
   await saveModernKanalReportToLocal(rapor);
-  if(cloudEnabled()) await saveModernKanalReportToCloud(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveModernKanalReportToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Modern Kanal raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Modern Kanal raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
 }
 
 async function saveModernKanalArsivAyToCloud(ayKey, rapor){
@@ -13837,8 +14444,10 @@ async function sellOutArsivleButonu(){
     state.sellOutArsivCache = Object.assign({}, state.sellOutArsivCache, {[ayKey]: raporSnapshot});
     await saveSellOutArsivToLocal(state.sellOutArsivCache);
     const sonuc = await saveSellOutArsivAyToCloud(ayKey, raporSnapshot);
-    if(cloudEnabled() && !sonuc.ok){
-      alert('Arsiv cihaza kaydedildi ama buluta yazilamadi: ' + (sonuc.reason||'bilinmeyen hata'));
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı (kullanıcı isteği) — bulut yazması başarısız olursa bu arşiv kaydı
+      // HİÇBİR YERDE kalıcı DEĞİLDİR, sayfa yenilenirse kaybolur.
+      alert('UYARI: Arşiv buluta yazılamadı (' + (sonuc.reason||'bilinmeyen hata') + '). Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfa yenilenirse bu arşiv kaydı kaybolur.');
     }
     populateSellOutAySelect();
     document.getElementById('sellOutAySelect').value = ayKey;
@@ -15260,8 +15869,10 @@ document.getElementById('modernKanalArsivleBtn')?.addEventListener('click', asyn
     state.modernKanalArsivCache = Object.assign({}, state.modernKanalArsivCache, {[ayKey]: raporSnapshot});
     await saveModernKanalArsivToLocal(state.modernKanalArsivCache);
     const sonuc = await saveModernKanalArsivAyToCloud(ayKey, raporSnapshot);
-    if(cloudEnabled() && !sonuc.ok){
-      alert('Arşiv cihaza kaydedildi ama buluta yazılamadı: ' + (sonuc.reason||'bilinmeyen hata'));
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı (kullanıcı isteği) — bulut yazması başarısız olursa bu arşiv kaydı
+      // HİÇBİR YERDE kalıcı DEĞİLDİR, sayfa yenilenirse kaybolur.
+      alert('UYARI: Arşiv buluta yazılamadı (' + (sonuc.reason||'bilinmeyen hata') + '). Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfa yenilenirse bu arşiv kaydı kaybolur.');
     }
     populateModernKanalAySelect();
     document.getElementById('modernKanalAySelect').value = ayKey;
