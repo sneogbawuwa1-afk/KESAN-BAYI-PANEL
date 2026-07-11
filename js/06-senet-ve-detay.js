@@ -1018,26 +1018,40 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
     throw new Error('Tahsilat Dökümü veya Yükleme Raporu\'ndan en az birinde satır bulunamadı.');
   }
 
+  // TAHSİLAT FORMAT ALGILAMA (buildReport'takiyle BİREBİR aynı kural): İki farklı tahsilat dosyası
+  // düzeni var:
+  //   • Format A (geçici / "Ön Kayıt" dökümü): tarih "Tarih", müşteri kodu "Müşteri" kolonunda.
+  //   • Format B (kalıcı / nihai rapor):        tarih "Belge Tarihi", müşteri kodu "Müşt. Kodu" kolonunda.
+  // ÖNCEDEN buildYuklemeRaporu koşulsuz olarak "Belge Tarihi"/"Müşt. Kodu" okuyordu — bu yüzden Format
+  // A (geçici) dosyası yüklendiğinde tarih kolonu bulunamıyor, TÜM satırlar tarihsiz kalıp filtreleniyor
+  // ve "Tahsilat Dökümü'nde geçerli bir Belge Tarihi bulunamadı" hatası fırlatılıyordu. Artık dosya
+  // başlıklarından format otomatik algılanıp doğru kolonlar okunuyor (bkz. buildReport formatA).
+  const tahsilatHeaderSet = new Set((tahsilatRows && tahsilatRows.length) ? Object.keys(tahsilatRows[0]) : []);
+  const tahsilatFormatA = tahsilatHeaderSet.has('Tutar') && tahsilatHeaderSet.has('Tahsilat Alan');
+  const tahsilatTarihKolonu = tahsilatFormatA ? 'Tarih' : 'Belge Tarihi';
+  const tahsilatKodKolonu   = tahsilatFormatA ? 'Müşteri' : 'Müşt. Kodu';
+  const tahsilatTutarKolonu = tahsilatFormatA ? 'Tutar' : 'Belge Tutarı';
+
   const tahsilatParsed = (tahsilatRows||[]).map(r=>({
     sst: (r['SST']||'Tanımsız').toString().trim() || 'Tanımsız',
-    musteriKodu: yuklemeKod(r['Müşt. Kodu']),
+    musteriKodu: yuklemeKod(r[tahsilatKodKolonu]),
     // Not: excelDateToJSArti1Gun kullanılır (excelDateToJS DEĞİL). Tarayıcı Türkiye (+3) saat
     // diliminde çalışırken, saf/naif Excel tarihleri (saat bileşeni olmayan) JS'e aktarılırken 1 gün
     // geriye kayabiliyor; bu +1 düzeltmesi o kaymayı telafi eder. (Daha önce bunu gereksiz sanıp
     // kaldırmıştım ama UTC ortamda test ettiğim için bu kaymayı görememiştim — gerçek arşiv verisiyle
     // doğrulandı.) Aşağıdaki gün eşleştirme mantığı (tahsilat günü + 1 = sevkiyat günü) bu düzeltilmiş
     // tarih üzerinden çalışır.
-    belgeTarihi: excelDateToJSArti1Gun(r['Belge Tarihi']),
+    belgeTarihi: excelDateToJSArti1Gun(r[tahsilatTarihKolonu]),
     belgeNo: yuklemeKod(r['Belge No']),
     odemeTipi: r['Ödeme Tipi'],
     banka: r['Banka'],
-    tutar: Math.abs(yuklemeNumber(r['Belge Tutarı'])),
+    tutar: Math.abs(yuklemeNumber(r[tahsilatTutarKolonu])),
   })).filter(r=> r.belgeTarihi);
   // Not: Tahsilat dosyası bu yüklemede hiç YOKSA (tahsilatRows null/boş) burada hata verilmez —
   // tahsilatParsed zaten boş kalır ve aşağıdaki hesaplama sadece Yükleme Raporu tarafını işler.
   // Tahsilat dosyası VARDI ama içinde geçerli bir Belge Tarihi bulunamadıysa (gerçek bir veri
   // sorunu) hata vermeye devam eder.
-  if(tahsilatRows && tahsilatRows.length && !tahsilatParsed.length) throw new Error('Tahsilat Dökümü\'nde geçerli bir Belge Tarihi bulunamadı.');
+  if(tahsilatRows && tahsilatRows.length && !tahsilatParsed.length) throw new Error('Tahsilat Dökümü\'nde geçerli bir tarih bulunamadı (aranan kolon: "'+tahsilatTarihKolonu+'", format: '+(tahsilatFormatA?'A/geçici':'B/kalıcı')+').');
 
   // Tahsilat satırlarını takvim gününe göre grupla — dosyadaki HER gün ayrı işlenecek.
   const tahsilatGunHaritasi = new Map(); // gunKey -> {tarih, satirlar[]}
