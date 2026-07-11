@@ -13,6 +13,7 @@
     dikkatModalOverlay:            typeof closeDikkatModal==='function'            ? closeDikkatModal            : null,
     faturaModalOverlay:           typeof faturaModalKapat==='function'            ? faturaModalKapat            : null,
     cekSenetModalOverlay:         typeof cekSenetModalKapat==='function'          ? cekSenetModalKapat          : null,
+    cekSenetEksikModalOverlay:    typeof cekSenetEksikModalKapat==='function'     ? cekSenetEksikModalKapat     : null,
     tahsilatTahminiModalOverlay:  typeof tahsilatTahminiModalKapat==='function'   ? tahsilatTahminiModalKapat   : null,
     analizModalOverlay:           typeof analizModalKapat==='function'            ? analizModalKapat            : null,
     stokModalOverlay:             typeof stokModalKapat==='function'              ? stokModalKapat              : null,

@@ -793,6 +793,7 @@ async function uygulamayiBaslat(){
     modernKanalArsivYenile(),
     malzemelerStokYenile(),
     loadSenetTahsilOnaylariFromLocal(),
+    (async()=>{ state.cekSenetArsivi = await cekSenetArsiviniOku(); })(),
   ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';
@@ -1095,46 +1096,29 @@ function buildReport(files, musteriMasterMap){
       const musteriArsiv = String((formatA ? r['Müşteri'] : r['Müşt. Kodu'])||'').trim();
       const tutarArsiv = Math.abs(Number(formatA ? r['Tutar'] : r['Belge Tutarı'])||0);
       if(musteriArsiv && musteriGecerliMi(musteriArsiv)){
-        // TAHSİLAT TÜRÜ SINIFLANDIRMASI (kullanıcı isteği): "Ödeme Tipi" kolonuna göre dört kategori:
-        //   Normal -> Nakit / Kredi Kartı / Banka havalesi (ve tanımadığımız diğer tipler, güvenli varsayılan)
-        //   Cek    -> Alınan Çek   (OTOMATİK SAYILMAZ — kullanıcı manuel "Tahsil Edildi" onayı
-        //   Senet  -> Alınan Senet  vermeden risk olarak kalır; bkz. state.cekSenetTahsilOnaylari / satır altı not)
-        //   SanalPos -> Sanal Pos
         const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
         const odemeTipi = odemeTipiHam.toLocaleLowerCase('tr-TR');
         const cekMi = odemeTipi.includes('çek');
         const senetMi = odemeTipi.includes('senet');
+        // ÇEK/SENET ARTIK TAHSİLAT DÖKÜMÜ'NDEN İŞLENMİYOR (kullanıcı isteği — bu mantık tamamen
+        // iptal edildi). Çek/Senet Riski artık ayrı, kendi Grup B alanından yüklenen kalıcı bir
+        // arşivden besleniyor (bkz. 01-cekirdek-ve-arsiv.js: cekSenetArsiviniBirlestir ve
+        // buildReport'un altındaki "ÇEK/SENET — KALICI ARŞİVDEN" bloğu). Tahsilat Dökümü'ndeki
+        // "Alınan Çek"/"Alınan Senet" satırları burada TAMAMEN GÖZ ARDI EDİLİR — ne tahsilatArsiv'e
+        // yazılır ne de herhangi bir hesaplamaya girer.
+        if(cekMi || senetMi) return;
         const sanalPosMu = odemeTipi.includes('sanal');
-        const tahsilatTuru = cekMi ? 'Cek' : (senetMi ? 'Senet' : (sanalPosMu ? 'SanalPos' : 'Normal'));
-        // ÇEK/SENET İÇİN TARİH: kullanıcı isteği üzerine, çek/senet kayıtlarının TÜM hesaplamalarında
-        // (tahsilat arşivi günlere dağıtma, Genel Rapor/Sevk KPI'ları, Trend Analizi/Aylık Ortalama)
-        // belge/alınan tarihi değil, "Vade Tarihi" kolonu baz alınır — bu tarih, çekin/senedin fiilen
-        // paraya döneceği (vadesinin geldiği) günü yansıttığından tahsilat gerçekleşme zamanlaması
-        // olarak daha doğrudur. Normal/Sanal Pos kayıtlar eskisi gibi belge tarihini kullanmaya devam eder.
-        const vadeTarihiHam = r['Vade Tarihi'];
-        const vadeTarihi = vadeTarihiHam!=null ? excelDateToJSArti1Gun(vadeTarihiHam) : null;
-        const belgeTarihiHam = excelDateToJSArti1Gun(r[tarihKolonu]);
-        const belgeTarihi = ((cekMi||senetMi) && vadeTarihi) ? vadeTarihi : belgeTarihiHam;
-        // Çek/Senet için benzersiz anahtar: manuel "Tahsil Edildi" onayının hangi çek/senede ait
-        // olduğunu (state.cekSenetTahsilOnaylari Set'inde) eşleştirmek için kullanılır. Çek/Senet No
-        // varsa o baz alınır (en güvenilir); yoksa müşteri+tutar+vade kombinasyonuna düşülür.
-        const cekSenetNo = r['Çek/Senet No']||null;
-        const cekSenetAnahtari = (cekMi||senetMi) ? ('musteri:'+musteriArsiv+'|no:'+(cekSenetNo||'')+'|tutar:'+tutarArsiv+'|vade:'+(vadeTarihi?dateKeyLocal(vadeTarihi):'')) : null;
-        // "gecerli": bu satırın Genel Rapor/Sevk Raporu KPI'sında sayılıp sayılmayacağını önceden
-        // hesaplayıp satıra etiketler. ÖNEMLİ (kullanıcı isteği): hem Çek hem Senet OTOMATİK SAYILMAZ
-        // — kullanıcı bu çek/senedi state.cekSenetTahsilOnaylari setinde MANUEL olarak
-        // "Tahsil Edildi" işaretlemediği sürece gecerli=false kalır (yani risk olarak görünmeye
-        // devam eder, tahsilat toplamına girmez). Normal/Sanal Pos kayıtlar etkilenmez.
+        const tahsilatTuru = sanalPosMu ? 'SanalPos' : 'Normal';
+        const belgeTarihi = excelDateToJSArti1Gun(r[tarihKolonu]);
+        // "gecerli": bu satırın Genel Rapor/Sevk Raporu KPI'sında sayılıp sayılmayacağı.
         let gecerli = true;
         if(r['Belge Türü'] && r['Belge Türü'] !== 'Müşteri Tahsilat' && r['Belge Türü'] !== 'Müşteri Çek Tahsilat') gecerli = false;
         if(formatA && String(r['Belge Tipi']||'').trim() !== 'Ön Kayıt') gecerli = false;
-        if((cekMi||senetMi) && !(state.cekSenetTahsilOnaylari && state.cekSenetTahsilOnaylari.has(cekSenetAnahtari))) gecerli = false;
         // formatKaynagi: bu kayıt Format A (geçici Ön Kayıt) mı yoksa Format B (nihai) mı ile mi
         // arşivlendi — Format B yüklendiğinde, kendi Belge Tarihi günlerine denk gelen Format A
         // kayıtlarının silinebilmesi için gerekli (bkz. tahsilatEfektifGunMapHesapla).
         tahsilatArsiv.push({musteri: musteriArsiv, belgeTarihi, tutar: tutarArsiv, formatKaynagi: formatA ? 'A' : 'B', gecerli,
-          tahsilatTuru, cekSenetNo, cekSenetDurumu: r['Çek/Senet Durumu']||null, senetAnahtari: cekSenetAnahtari,
-          vadeTarihi, belgeTarihiHam, odemeTipiHam});
+          tahsilatTuru, odemeTipiHam});
       }
     });
   }
@@ -1253,30 +1237,28 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
-  // ÇEK/SENET BİLGİSİ ARTIK AYRI "Çek/Senet Riski" DOSYASINDAN DEĞİL (kullanıcı isteği), doğrudan
-  // Tahsilat Dökümü'ndeki "Alınan Çek"/"Alınan Senet" satırlarından besleniyor — ayrı bir Grup B
-  // dosyası yüklemeye gerek kalmaz, müşteri kartlarındaki Çek/Senet bilgisi Tahsilat Dökümü ile
-  // otomatik güncel kalır. cekSenetDetayMap TÜM çek+senet satırlarını (tahsil edilmiş/edilmemiş
-  // fark etmeksizin) listeler — kart üzerindeki detay tablosunda hepsi görünür, "Durum" kolonuyla
-  // ayırt edilir. cekSenetMap (Toplam Risk'e eklenen tutar) ise SADECE HENÜZ TAHSİL EDİLMEMİŞ
-  // ÇEK/SENETLERİ toplar (kullanıcı isteği — GÜNCELLEME: Çek de Senet gibi artık OTOMATİK
-  // tahsilat sayılmaz; ikisi de risk olarak kalır ve kullanıcı ilgili çek/senet için "Tahsil
-  // Edildi" onayı verince (gecerli=true) risk olmaktan çıkar). Onaylanmamış çek/senetler
-  // (gecerli=false) hâlâ riskli/portföydeki alacak olarak kalır.
+  // ÇEK/SENET — KALICI ARŞİVDEN (kullanıcı isteği): Artık Tahsilat Dökümü'nden değil, kendi Grup B
+  // alanından yüklenen ve state.cekSenetArsivi'nde (bkz. 01-cekirdek-ve-arsiv.js) kalıcı olarak
+  // saklanan Çek/Senet Riski dosyasından besleniyor. Arşivdeki HER kayıt (durum='risk' veya
+  // 'tahsilEdildi' fark etmeksizin) cekSenetDetayMap'e (detay tablosu için) girer; yalnızca
+  // durum='risk' olanlar cekSenetMap'e (Toplam Risk'e eklenen tutar) girer — 'tahsilEdildi' olanlar
+  // artık risk değil, alinanTahsilat'a eklenir (bkz. hemen altındaki tahsilEdilenCekSenetMap).
   const cekSenetMap = new Map();
   const cekSenetDetayMap = new Map();
-  tahsilatArsiv.forEach(r=>{
-    if(r.tahsilatTuru !== 'Cek' && r.tahsilatTuru !== 'Senet') return;
-    const musteri = r.musteri;
+  const tahsilEdilenCekSenetMap = new Map(); // tahsilEdildi olan çek/senetlerin tutarı — alinanTahsilat'a eklenir
+  Object.entries(state.cekSenetArsivi||{}).forEach(([anahtar, r])=>{
+    const musteri = r.musteriKod;
     if(!musteri) return;
-    if(!r.gecerli){
+    if(r.durum === 'tahsilEdildi'){
+      tahsilEdilenCekSenetMap.set(musteri, (tahsilEdilenCekSenetMap.get(musteri)||0) + r.tutar);
+    }else{
       cekSenetMap.set(musteri, (cekSenetMap.get(musteri)||0) + r.tutar);
     }
     if(!cekSenetDetayMap.has(musteri)) cekSenetDetayMap.set(musteri, []);
     cekSenetDetayMap.get(musteri).push({
-      no: r.cekSenetNo, tip: r.odemeTipiHam, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru,
-      tahsilEdildiMi: !!r.gecerli, senetAnahtari: r.senetAnahtari,
-      vade: r.vadeTarihi || r.belgeTarihi, belgeTarihi: r.belgeTarihiHam || r.belgeTarihi,
+      no: r.no, tip: r.odemeTipiHam, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru,
+      tahsilEdildiMi: r.durum === 'tahsilEdildi', senetAnahtari: anahtar,
+      vade: r.vadeTarihi ? new Date(r.vadeTarihi) : null, belgeTarihi: r.belgeTarihi ? new Date(r.belgeTarihi) : null,
     });
   });
 
@@ -1321,7 +1303,18 @@ function buildReport(files, musteriMasterMap){
     m.siparisTutari = siparisNormalMap.get(musteri)||0;
     m.emanetSiparis = emanetSiparisMap.get(musteri)||0;
     m.cekSenet = cekSenetMap.get(musteri)||0;
-    m.alinanTahsilat = tahsilatMap.get(musteri)||0;
+    // TAHSİL EDİLDİ ÇEK/SENET — İKİLİ DAVRANIŞ (kullanıcı kuralı, netleştirilmiş hali):
+    //   • m.alinanTahsilat: Genel KPI toplamı, Temsilci Karnesi, Tahsilat Verimliliği, Trend/
+    //     Finansal Analiz gibi TÜM genel/toplam hesaplarda kullanılan asıl alandır — Tahsil Edildi
+    //     çek/senet burada normal bir tahsilat gibi SAYILIR (kullanıcı: "finansal raporlara tahsilat
+    //     olarak yansısın").
+    //   • m.alinanTahsilatKartGosterge: SADECE müşteri kartının üzerindeki küçük "Tahsilat"
+    //     göstergesinde kullanılır (bkz. renderMusteriTable) — çek/senet buraya DAHİL EDİLMEZ
+    //     (kullanıcı: "kartta görünmesine gerek yok"). Bu, aynı müşterinin aynı anda hem "tahsilat
+    //     yapılmış" (genel toplamlarda) hem "kartta tahsilat yok" (görsel gösterge) görünmesini
+    //     sağlayan BİLİNÇLİ bir ayrımdır — iki farklı ekranın iki farklı amacı olduğu için.
+    m.alinanTahsilat = (tahsilatMap.get(musteri)||0) + (tahsilEdilenCekSenetMap.get(musteri)||0);
+    m.alinanTahsilatKartGosterge = tahsilatMap.get(musteri)||0;
     m.alinanTahsilatKaynak = tahsilatKaynakMap.get(musteri)||null;
     m.cekSenetDetay = cekSenetDetayMap.get(musteri)||[];
 

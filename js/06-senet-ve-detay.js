@@ -424,7 +424,7 @@ function renderSevkMusteriTable(report, resetSayfa=true){
       <div class="htk-inline-stats">
         <div class="htk-stat-item"><span class="l">Sipariş</span><span class="v${m.siparisTutari>0?' c-siparis':' zero'}">${m.siparisTutari>0?TL(m.siparisTutari):'—'}</span></div>
         <div class="htk-stat-item"><span class="l">Sevk Ert.</span><span class="v${m.emanetSiparis>0?' c-sevk':' zero'}">${m.emanetSiparis>0?TL(m.emanetSiparis):'—'}</span></div>
-        <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.alinanTahsilat>0?' c-tahsilat':' zero'}">${m.alinanTahsilat>0?TL(m.alinanTahsilat):'—'}</span></div>
+        <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.alinanTahsilatKartGosterge>0?' c-tahsilat':' zero'}">${m.alinanTahsilatKartGosterge>0?TL(m.alinanTahsilatKartGosterge):'—'}</span></div>
       </div>
       <div class="htk-alt">
         <span class="htk-ceksenet">Çek/Senet: ${TL(m.cekSenet||0)}</span>
@@ -747,7 +747,19 @@ async function computeMusteriAylikOzet(musteri){
     .filter(r=>r.musteri===musteri && r.tahsilatTarihi)
     .map(r=>({musteri:r.musteri, belgeTarihi:r.tahsilatTarihi, tutar:r.tutar, __hakedis:true}));
   const toplamHakedisTahsilat = hakedisTahsilatlari.reduce((a,b)=>a+(b.tutar||0),0);
-  const tahsilatlar = tahsilatlarArsiv.concat(hakedisTahsilatlari);
+  // TAHSİL EDİLDİ ÇEK/SENET (kullanıcı kuralı): Bu kayıtlar artık Tahsilat Dökümü'nden değil, ayrı
+  // "Çek/Senet Riski" dosyasından (state.cekSenetArsivi) geliyor — bu yüzden yukarıdaki
+  // birlesik.tahsilatArsiv (Tahsilat Dökümü arşivi) bunları hiç içermez. Kullanıcı kuralı net:
+  // "müşteri kartındaki Alınan Tahsilat'a eklenmesin AMA Finansal Analiz/Trend raporlarına
+  // tahsilat olarak yansısın" — bu modal (Aylık Trend Analizi) o ikinci kategoriye girer, bu
+  // yüzden durum='tahsilEdildi' olan çek/senetler burada tahsilat toplamına DAHİL EDİLİR. Tarih
+  // olarak Belge Tarihi kullanılır (Vade Tarihi genelde gelecektedir, aylık ortalama/tarih
+  // aralığı hesabını bozar).
+  const tahsilEdilenCekSenetler = Object.values(state.cekSenetArsivi||{})
+    .filter(r=> r.musteriKod===musteri && r.durum==='tahsilEdildi' && r.belgeTarihi)
+    .map(r=>({musteri: r.musteriKod, belgeTarihi: r.belgeTarihi, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru, __cekSenet: true}));
+  const toplamCekSenetTahsilat = tahsilEdilenCekSenetler.reduce((a,b)=>a+(b.tutar||0),0);
+  const tahsilatlar = tahsilatlarArsiv.concat(hakedisTahsilatlari).concat(tahsilEdilenCekSenetler);
   if(!faturalar.length && !tahsilatlar.length) return null;
 
   const tumZamanlar = [

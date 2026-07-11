@@ -208,7 +208,14 @@ function girisEkraniGizle(){
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   document.getElementById('authLogoutBtn').style.display = 'inline-block';
-  uygulamayiBaslat();
+  // ERTELEME DÜZELTMESİ: uygulamayiBaslat, 03-veri-yukleme-ve-senkron.js'de tanımlıdır — bu dosya
+  // (02) henüz o script yüklenmeden ÖNCE (defer sırasına göre) top-level'da çalışabilir/çağrılabilir.
+  // Doğrudan çağrı "uygulamayiBaslat is not defined" ile patlıyordu (BULUTSUZ_TEST kapalıyken bile,
+  // kullanıcı fiilen giriş yaptığında). window.addEventListener('load') tüm script'ler ve DOM
+  // tamamen hazır olduktan sonra çalışır — bu, tarayıcı sekmesi tamamen yüklendiğinde (image/css
+  // dahil her şey biter) tetiklenen en son olay olduğundan güvenli bir erteleme noktasıdır.
+  if(document.readyState === 'complete') uygulamayiBaslat();
+  else window.addEventListener('load', ()=> uygulamayiBaslat(), {once:true});
 }
 
 if(authAktif){
@@ -222,7 +229,9 @@ if(authAktif){
   document.getElementById('authGate').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   // Auth atlandığında uygulamayı doğrudan başlat (girisEkraniGizle normalde bunu yapardı).
-  uygulamayiBaslat();
+  // Aynı erteleme düzeltmesi burada da gereklidir — bkz. girisEkraniGizle'deki not.
+  if(document.readyState === 'complete') uygulamayiBaslat();
+  else window.addEventListener('load', ()=> uygulamayiBaslat(), {once:true});
 }
 
 const KULLANICI_KODU_UZANTISI = '@kullanici.noktacari';
@@ -1155,7 +1164,7 @@ const VADE_ESIGI_GUN = 23;
 // ("Günlük Veri Yükle" — bkz. #gvyPanel) yükleniyor. Aynı state.files yapısı ve aynı
 // handleFiles/detectType mekanizması kullanılır — sadece dosya SEÇİMİNİN yapıldığı arayüz
 // ayrı bir yere taşınmıştır; buildReport ve arşivleme mantığına dokunulmamıştır.
-const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme','cariEkstre'];
+const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme','cariEkstre','cekSenet'];
 // Grup C ("Günlük Veri Yükle"): gün içinde sürekli güncellenebilen, son yüklenen hali kalıcı
 // tek-slot arşivde saklanan dosyalar. Bunlar GRUP_A_TEKIL_DOSYA_TANIMLARI'nda zaten kayıtlı
 // (aynı kalıcı mekanizmayı kullanır) ve GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR üyesidir — yani
@@ -1496,6 +1505,17 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     if(!state.files.kalemler || !state.files.kalemler.data || !state.files.kalemler.data.length){
       throw new Error('Bugün için Kalemler dosyası henüz yüklenmedi. Diğer dosyalar (Sipariş/Tahsilat/Fatura vb.) işlenmeden önce bugün en az bir kez Kalemler dosyasını yüklemeniz gerekir.');
     }
+    // ÇEK/SENET RİSKİ — ARŞİV BİRLEŞTİRME (kullanıcı isteği): buildReport'tan ÖNCE, bu oturumda
+    // yeni bir Çek/Senet Riski dosyası seçildiyse (state.files.cekSenet doluysa) kalıcı arşivle
+    // birleştirilir — yeni/güncellenen kayıtlar arşive işlenir, eski arşivde olup bu dosyada
+    // OLMAYAN kayıtlar SİLİNMEZ, cekSenetEksikKalanlar listesine düşer (aşağıda rapor
+    // oluşturulduktan sonra kullanıcıya "Tahsil Edildi mi, İptal mi?" olarak sorulur).
+    if(state.files.cekSenet && state.files.cekSenet.data && state.files.cekSenet.data.length){
+      const {arsiv, eksikKalanlar} = cekSenetArsiviniBirlestir(state.cekSenetArsivi, state.files.cekSenet.data);
+      state.cekSenetArsivi = arsiv;
+      state.cekSenetEksikKalanlar = eksikKalanlar;
+      await cekSenetArsiviniKaydet(arsiv);
+    }
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
     // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle
     // tek-slot arşivine kaydedildi — Grup B/C panellerinin "Kalemler yok" sanmaması için bayrağı set et.
@@ -1507,6 +1527,12 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     document.getElementById('reportSection').style.display='block';
     document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
+    // ÇEK/SENET EKSİK KALAN UYARISI: rapor başarıyla oluşturulup ekrana yansıdıktan SONRA tetiklenir
+    // (kullanıcı isteği: "dosya yüklenip rapor tekrar oluştuktan sonra tetiklenecek"). Modal, arşivde
+    // kalan ama son yüklenen Çek/Senet Riski dosyasında olmayan kayıtları listeler.
+    if(state.cekSenetEksikKalanlar && state.cekSenetEksikKalanlar.length){
+      cekSenetEksikOnayModalAc(state.cekSenetEksikKalanlar);
+    }
     // ÖNEMLİ: Cihaz depolama (IndexedDB) tamamen devre dışı (kullanıcı isteği) — saveReportToStorage
     // artık gerçekte HİÇBİR YERE yazmayan bir no-op'tur, her zaman true döner. Bu yüzden onun
     // sonucuna güvenip "kaydedildi" demek YANLIŞ OLURDU; gerçek kalıcılık YALNIZCA bulut yazması

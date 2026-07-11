@@ -1177,6 +1177,19 @@
      Mevcut .empty-state (düz metin) korunur; bu bileşen veri-bağımlı ekranlarda (ör. Stok Gün)
      eksik olan adımı ve nereden tamamlanacağını söylemek için kullanılır. ===== */
   .bos-durum{text-align:center;padding:34px 20px;}
+  /* ===== ÇEK/SENET DETAY + EKSİK-ONAY MODALLERİ: kompakt Durum/Karar kolonu =====
+     Önceki halde "Çek Tahsil Edildi mi?" gibi uzun buton metni 3 satıra bölünüp İptal butonunu
+     alta itiyor, yatay taşma/kaydırma çıkarıyordu. Artık iki buton (kısaltılmış metinlerle) yan
+     yana tek satırda sığıyor, kolon genişliği butonlara göre daralıyor, satır dolgusu sıkılaştı. */
+  #cekSenetModalTable, #cekSenetEksikModalTable{table-layout:auto;}
+  #cekSenetModalTable td, #cekSenetModalTable th,
+  #cekSenetEksikModalTable td, #cekSenetEksikModalTable th{padding:8px 10px;white-space:nowrap;}
+  #cekSenetModalTable th:last-child, #cekSenetEksikModalTable th:last-child{min-width:150px;}
+  .senet-durum-btn-grup{display:flex;gap:6px;align-items:center;flex-wrap:nowrap;}
+  .senet-durum-btn-grup .btn.small{padding:5px 9px;font-size:11.5px;white-space:nowrap;}
+  @media(max-width:480px){
+    .senet-durum-btn-grup{flex-wrap:wrap;}
+  }
   .bos-durum .bd-ikon{width:52px;height:52px;margin:0 auto 12px;border:1.5px solid var(--accent);border-radius:13px;display:flex;align-items:center;justify-content:center;color:var(--accent-deep);font-size:20px;background:var(--accent-soft);}
   .bos-durum h3{font-family:'Space Grotesk',sans-serif;font-size:14.5px;color:var(--ink);margin:0;}
   .bos-durum p{font-size:12.5px;color:var(--ink-soft);margin:6px auto 0;max-width:400px;line-height:1.6;}

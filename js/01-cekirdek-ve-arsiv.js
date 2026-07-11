@@ -1,3 +1,4 @@
+
 // Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
 // konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
 // bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
@@ -25,6 +26,15 @@ const state = {
   // çek hem senet için kullanılır) bu Set'e eklenir ve buildReport bir sonraki çalışmasında o
   // kaydı tahsilat sayar. idb ile cihaza kalıcı kaydedilir.
   cekSenetTahsilOnaylari: new Set(),
+  // ÇEK/SENET RİSKİ — KALICI ARŞİV (kullanıcı isteği): {[anahtar]: {no, musteriKod, musteriAdi,
+  // tahsilatTuru, tutar, vadeTarihi, belgeTarihi, durum:'risk'|'tahsilEdildi'}}. Tahsilat
+  // Dökümü'nden bağımsız, ayrı bir Grup B alanından yüklenir; buildReport bunu HİÇ SİLMEDEN okur
+  // (bkz. cekSenetArsiviniBirlestir). Uygulama açılışında buluttan/cihazdan geri yüklenir.
+  cekSenetArsivi: {},
+  // Son "Veri Güncelle" / "Raporu Oluştur" sonrasında tespit edilen, arşivde olup yeni yüklenen
+  // Çek/Senet Riski dosyasında YER ALMAYAN kayıtlar — kullanıcıya "Tahsil Edildi mi, İptal mi?"
+  // sorulacak liste (bkz. cekSenetEksikOnayModalAc). Her rapor oluşturmada yeniden hesaplanır.
+  cekSenetEksikKalanlar: [],
   faturaArsivCache: {},
   yuklemeReport: null,
   yuklemeSort: { key:'temsilci', dir:1 },
@@ -1020,3 +1030,107 @@ function wireSearchClear(inputId, btnId, renderFn){
     input.focus();
   });
 }
+
+/* =====================================================================
+   ÇEK / SENET RİSKİ — KALICI ARŞİV (kullanıcı isteği)
+   Bu dosya artık Tahsilat Dökümü'nden BAĞIMSIZ, kendi Grup B alanından yüklenir ve KALICI olarak
+   arşivlenir. Kural (aynen kullanıcının tarif ettiği gibi):
+     • Yeni yüklemede AYNI Çek/Senet Numarası varsa → o kayıt GÜNCELLENİR (güncel hali kazanır).
+     • Yeni yüklemede OLMAYAN bir numara (eski arşivde varken) → SİLİNMEZ, "eksik" olarak işaretlenir
+       ve kullanıcıya sorulur (bkz. cekSenetArsivEksikleriBul / rapor oluşturma akışındaki tetikleyici).
+     • Kullanıcı bir eksik kayıt için "Tahsil Edildi" derse → durum='tahsilEdildi' olur, finansal/trend
+       hesaplarında TAHSİLAT olarak sayılır, risk olmaktan çıkar, kalıcı arşivde SİLİNMEDEN durur.
+     • Kullanıcı "İptal" derse → kayıt arşivden KALICI OLARAK SİLİNİR. İptal her zaman (tahsil
+       edilmemiş HERHANGİ bir kayıt için) uygulanabilir; yalnızca zaten "tahsilEdildi" olan bir kayıt
+       İptal edilemez (kullanıcı kuralı — tahsil edilmiş kayıt üzerinde geri dönüş yok).
+   Arşiv, {[cekSenetNo]: kayit} şeklinde bir obje (Map değil — JSON/Firebase uyumlu düz obje) olarak
+   saklanır; cekSenetNo tanımlı olmayan (boş) satırlar için sırayla üretilen "no-satırIndex" anahtarı
+   kullanılır (yine de benzersiz olması ve kaybolmaması için).
+   ===================================================================== */
+const CEK_SENET_ARSIV_CLOUD_PATH = CLOUD.path + '_cekSenetArsivi';
+const CEK_SENET_ARSIV_LOCAL_KEY = 'noktaCariTakip_cekSenetArsivi_v1';
+
+function cekSenetKayitAnahtari(no, satirIndex){
+  const n = String(no==null?'':no).trim();
+  return n ? ('no:'+n) : ('satir:'+satirIndex);
+}
+
+// Yeni yüklenen ham satırları {anahtar: kayit} haline getirir (henüz mevcut arşivle birleştirmez).
+function cekSenetSatirlariniNormalizeEt(rows){
+  const sonuc = {};
+  (rows||[]).forEach((r,i)=>{
+    const musteriKod = String(r['Müşteri Kodu']||'').trim();
+    if(!musteriKod) return;
+    const no = r['Çek/Senet Numarası'];
+    const anahtar = cekSenetKayitAnahtari(no, i);
+    const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
+    const odemeTipi = odemeTipiHam.toLocaleLowerCase('tr-TR');
+    const tahsilatTuru = odemeTipi.includes('çek') ? 'Cek' : (odemeTipi.includes('senet') ? 'Senet' : 'Diger');
+    const vadeTarihi = excelDateToJSArti1Gun(r['Net Vade Tarihi']);
+    const belgeTarihi = excelDateToJSArti1Gun(r['Belge Tarihi']);
+    sonuc[anahtar] = {
+      no: no!=null ? String(no).trim() : '',
+      musteriKod, musteriAdi: String(r['Müşteri Adı']||'').trim(),
+      tahsilatTuru, odemeTipiHam,
+      tutar: Math.abs(Number(r['Tutar'])||0),
+      vadeTarihi: vadeTarihi ? vadeTarihi.toISOString() : null,
+      belgeTarihi: belgeTarihi ? belgeTarihi.toISOString() : null,
+      durum: 'risk', // 'risk' | 'tahsilEdildi'
+      sonGorulduguYukleme: dateKeyLocal(turkiyeBugun()),
+    };
+  });
+  return sonuc;
+}
+
+// Mevcut kalıcı arşiv ile yeni yüklemeyi birleştirir. DÖNÜŞ: {arsiv, eksikKalanlar}
+//   arsiv: güncellenmiş {anahtar: kayit} objesi (henüz kaydedilmedi — çağıran taraf kaydeder)
+//   eksikKalanlar: eski arşivde olup yeni yüklemede YER ALMAYAN, henüz 'tahsilEdildi' olmayan kayıtlar
+function cekSenetArsiviniBirlestir(mevcutArsiv, yeniRows){
+  const yeni = cekSenetSatirlariniNormalizeEt(yeniRows);
+  const arsiv = Object.assign({}, mevcutArsiv||{});
+  const eksikKalanlar = [];
+  // 1) Yeni gelenler: ekle veya güncelle (durum 'tahsilEdildi' ise bile, aynı no tekrar geldiğinde
+  //    ham veriler güncellenir ama durum korunur — kullanıcı onayını kaybetmeyelim).
+  Object.keys(yeni).forEach(anahtar=>{
+    const eski = arsiv[anahtar];
+    const yeniKayit = yeni[anahtar];
+    if(eski) yeniKayit.durum = eski.durum; // önceki karar (risk/tahsilEdildi) korunur
+    arsiv[anahtar] = yeniKayit;
+  });
+  // 2) Eski arşivde olup bu yüklemede gelmeyenler: silinmez, 'eksik' listesine düşer (zaten
+  //    tahsilEdildi olanlar tekrar sorulmasın — onlar için karar zaten verilmiş).
+  Object.keys(arsiv).forEach(anahtar=>{
+    if(yeni[anahtar]) return; // bu yüklemede geldi, eksik değil
+    const kayit = arsiv[anahtar];
+    if(kayit.durum === 'tahsilEdildi') return; // karar verilmiş, tekrar sorma
+    eksikKalanlar.push(Object.assign({anahtar}, kayit));
+  });
+  return {arsiv, eksikKalanlar};
+}
+
+async function cekSenetArsiviniKaydet(arsiv){
+  const ok = await idbSet(CEK_SENET_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Çek/Senet arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(CEK_SENET_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(CEK_SENET_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Çek/Senet arşivi buluta kaydedilemedi:', err); }
+}
+
+async function cekSenetArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Çek/Senet arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(CEK_SENET_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
+

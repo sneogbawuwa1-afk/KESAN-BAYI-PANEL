@@ -230,10 +230,19 @@ function cekSenetModalSatirDurumHtml(c){
   // tahsilat sayılmaz) — kullanıcı isteği: "çekte de riskten sayılsın, en mantıklı çözüm buydu".
   if(c.tahsilatTuru === 'Cek' || c.tahsilatTuru === 'Senet'){
     if(c.tahsilEdildiMi){
-      return `<span class="badge" style="background:var(--good-soft,#e6f6ec);color:var(--good,#1a8a4c);">Tahsil Edildi</span>`;
+      // KURAL (kullanıcı isteği): "Tahsil edildi kaydı olan İptal edilemez." — İptal butonu
+      // burada bilerek YOK, yalnızca durum rozeti gösterilir.
+      return `<span class="badge" style="background:var(--good-soft,#e6f6ec);color:var(--good,#1a8a4c);white-space:nowrap;">Tahsil Edildi</span>`;
     }
-    const etiket = c.tahsilatTuru === 'Cek' ? 'Çek Tahsil Edildi mi?' : 'Senet Tahsil Edildi mi?';
-    return `<button type="button" class="btn small senet-tahsil-btn" data-senet-anahtari="${escapeHtml(c.senetAnahtari||'')}">${etiket}</button>`;
+    // Kısa buton metni ("Tahsil Et") kullanılır — satır türü (Çek/Senet) zaten aynı satırda ayrı
+    // bir kolonda görünüyor, butonda tekrarlamaya gerek yok; bu, iki butonun tek satırda yan yana
+    // sığmasını sağlar (önceki "Çek Tahsil Edildi mi?" metni 3 satıra bölünüp İptal'i alta itiyordu).
+    // İPTAL BUTONU HER ZAMAN UYGULANABİLİR (kullanıcı kuralı) — tahsil edilmemiş her çek/senet
+    // için, yeni dosyada eksik olsun ya da olmasın, doğrudan kart üzerinden de iptal edilebilir.
+    return `<div class="senet-durum-btn-grup">
+      <button type="button" class="btn small senet-tahsil-btn" data-senet-anahtari="${escapeHtml(c.senetAnahtari||'')}" title="Tahsil edildi olarak işaretle">Tahsil Et</button>
+      <button type="button" class="btn small senet-iptal-btn" data-senet-anahtari="${escapeHtml(c.senetAnahtari||'')}" title="Bu kaydı kalıcı olarak sil">İptal</button>
+    </div>`;
   }
   return '—';
 }
@@ -263,23 +272,38 @@ document.getElementById('cekSenetModalOverlay').addEventListener('click', (e)=>{
 });
 // "Çek/Senet Tahsil Edildi mi?" butonu — tıklanınca ilgili kaydın anahtarı kalıcı onay listesine
 // eklenir, rapor bu müşteri için yeniden hesaplanır (tam yeniden yükleme YAPILMADAN — yalnızca
-// tahsilatArsiv içindeki gecerli bayrağı ve türetilmiş alanlar güncellenir) ve hem popup hem de
-// arkadaki tüm ekranlar (Toplam Risk, Alınan Tahsilat, KPI'lar vb.) tazelenir.
+// state.cekSenetArsivi'deki ilgili kaydın durumu güncellenir) ve hem popup hem de arkadaki tüm
+// ekranlar (Toplam Risk, Alınan Tahsilat, KPI'lar vb.) tazelenir.
 document.getElementById('cekSenetModalTbody').addEventListener('click', async (e)=>{
-  const btn = e.target.closest('.senet-tahsil-btn');
+  const tahsilBtn = e.target.closest('.senet-tahsil-btn');
+  const iptalBtn = e.target.closest('.senet-iptal-btn');
+  const btn = tahsilBtn || iptalBtn;
   if(!btn) return;
   const anahtar = btn.getAttribute('data-senet-anahtari');
-  if(!anahtar) return;
-  const onayli = confirm('Bu çek/senedin tahsil edildiğini onaylıyor musunuz? Onaylarsanız bu kayıt artık risk olarak değil, tahsilat olarak sayılacaktır.');
-  if(!onayli) return;
-  state.cekSenetTahsilOnaylari.add(anahtar);
-  const onayBuluttaKaydedildi = await saveSenetTahsilOnaylariToLocal();
-  if(cloudEnabled() && !onayBuluttaKaydedildi){
-    // Cihaz depolama kapalı — onay buluta yazılamazsa hiçbir yerde kalıcı değildir, sayfa
-    // yenilenirse "Tahsil Edildi" durumu sıfırlanmış gibi görünür. Kullanıcıyı açıkça uyarıyoruz.
-    alert('UYARI: Bu onay buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse "Tahsil Edildi" durumu kaybolabilir. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+  if(!anahtar || !state.cekSenetArsivi[anahtar]) return;
+  if(tahsilBtn){
+    const onayli = confirm('Bu çek/senedin tahsil edildiğini onaylıyor musunuz? Onaylarsanız bu kayıt artık risk olarak değil, tahsilat olarak sayılacaktır.');
+    if(!onayli) return;
+    state.cekSenetArsivi[anahtar].durum = 'tahsilEdildi';
+  }else{
+    // İPTAL HER ZAMAN UYGULANABİLİR (kullanıcı kuralı) — bu buton yalnızca henüz tahsil edilmemiş
+    // kayıtlarda göründüğü için (bkz. cekSenetModalSatirDurumHtml), burada ek bir durum kontrolüne
+    // gerek yoktur; "Tahsil Edildi" olanlarda bu buton zaten hiç render edilmez.
+    const onayli = confirm('Bu çek/senet kaydı KALICI OLARAK SİLİNECEK. Onaylıyor musunuz?');
+    if(!onayli) return;
+    delete state.cekSenetArsivi[anahtar];
   }
-  await cekSenetOnayiUyguladiktanSonraRaporuTazele();
+  await cekSenetArsiviniKaydet(state.cekSenetArsivi);
+  state.cekSenetEksikKalanlar = (state.cekSenetEksikKalanlar||[]).filter(k=>k.anahtar!==anahtar);
+  if(state.report){
+    // DÜZELTME: state.report yeniden kuruluyordu ama renderReport() ÇAĞRILMIYORDU — bu yüzden
+    // Tahsil Edildi/İptal kararı, açık olan bu popup'ta görünse de Nokta Detay kartları, Genel
+    // Bakış KPI'ları ve Trend Analizi gibi diğer TÜM ekranlar eski (karar öncesi) veriyle
+    // kalmaya devam ediyordu. renderReport, uygulamadaki her görünümü bu güncel rapora göre
+    // yeniden çizer — eksik-onay modalindeki eşdeğer handler'la artık tutarlı.
+    state.report = buildReport(state.files, state.musteriMasterMap);
+    renderReport(state.report);
+  }
   const mevcut = state.cekSenetModalMevcut;
   if(mevcut) cekSenetModalAc(mevcut.kod, mevcut.adi);
   // Arkada açık olan Fatura modalı (Toplam Kalan Borç / Risk başlığı) aynı müşteriye aitse onu da
@@ -290,7 +314,71 @@ document.getElementById('cekSenetModalTbody').addEventListener('click', async (e
     faturaModalAc(faturaMevcut.kod, faturaMevcut.adi);
   }
 });
+
+/* =====================================================================
+   ÇEK/SENET EKSİK KAYIT ONAY MODALI (kullanıcı isteği)
+   Yeni bir Çek/Senet Riski dosyası yüklenip rapor oluşturulduktan SONRA, arşivde olup yeni dosyada
+   YER ALMAYAN kayıtlar için kullanıcıya "Tahsil Edildi mi, İptal mi?" sorar. Kararlar
+   state.cekSenetArsivi'ne uygulanıp kalıcı olarak (bulut+cihaz) kaydedilir, rapor yeniden hesaplanır.
+   ===================================================================== */
+function cekSenetEksikSatirHtml(k){
+  const tipEtiket = k.tahsilatTuru === 'Cek' ? 'Çek' : (k.tahsilatTuru === 'Senet' ? 'Senet' : (k.tahsilatTuru||'—'));
+  return `<tr data-eksik-anahtar="${escapeHtml(k.anahtar)}">
+    <td>${escapeHtml(k.musteriAdi||k.musteriKod||'—')}</td>
+    <td>${escapeHtml(k.no||'—')}</td>
+    <td>${tipEtiket}</td>
+    <td>${fmtDate(k.vadeTarihi ? new Date(k.vadeTarihi) : null)}</td>
+    <td class="num">${TL(k.tutar)}</td>
+    <td>
+      <div class="senet-durum-btn-grup">
+        <button type="button" class="btn small eksik-tahsil-btn" data-eksik-anahtar="${escapeHtml(k.anahtar)}" style="color:var(--good,#1a8a4c);border-color:var(--good,#1a8a4c);" title="Tahsil edildi olarak işaretle">Tahsil Et</button>
+        <button type="button" class="btn small eksik-iptal-btn" data-eksik-anahtar="${escapeHtml(k.anahtar)}" style="color:var(--danger,#c0392b);border-color:var(--danger,#c0392b);" title="Bu kaydı kalıcı olarak sil">İptal</button>
+      </div>
+    </td>
+  </tr>`;
+}
+function cekSenetEksikOnayModalAc(eksikKalanlar){
+  document.getElementById('cekSenetEksikModalSub').textContent = eksikKalanlar.length + ' kayıt';
+  document.getElementById('cekSenetEksikModalTbody').innerHTML = eksikKalanlar.map(cekSenetEksikSatirHtml).join('');
+  document.getElementById('cekSenetEksikModalOverlay').classList.add('open');
+}
+function cekSenetEksikModalKapat(){
+  document.getElementById('cekSenetEksikModalOverlay').classList.remove('open');
+}
+document.getElementById('cekSenetEksikModalClose').addEventListener('click', cekSenetEksikModalKapat);
+document.getElementById('cekSenetEksikModalOverlay').addEventListener('click', (e)=>{
+  if(e.target.id==='cekSenetEksikModalOverlay') cekSenetEksikModalKapat();
+});
+document.getElementById('cekSenetEksikModalTbody').addEventListener('click', async (e)=>{
+  const tahsilBtn = e.target.closest('.eksik-tahsil-btn');
+  const iptalBtn = e.target.closest('.eksik-iptal-btn');
+  const btn = tahsilBtn || iptalBtn;
+  if(!btn) return;
+  const anahtar = btn.getAttribute('data-eksik-anahtar');
+  if(!anahtar || !state.cekSenetArsivi[anahtar]) return;
+  const satir = e.target.closest('tr');
+  if(tahsilBtn){
+    const onayli = confirm('Bu çek/senedin tahsil edildiğini onaylıyor musunuz? Onaylarsanız artık risk olarak değil, tahsilat olarak sayılacaktır.');
+    if(!onayli) return;
+    state.cekSenetArsivi[anahtar].durum = 'tahsilEdildi';
+  }else{
+    const onayli = confirm('Bu çek/senet kaydı KALICI OLARAK SİLİNECEK. Onaylıyor musunuz?');
+    if(!onayli) return;
+    delete state.cekSenetArsivi[anahtar];
+  }
+  await cekSenetArsiviniKaydet(state.cekSenetArsivi);
+  state.cekSenetEksikKalanlar = state.cekSenetEksikKalanlar.filter(k=>k.anahtar!==anahtar);
+  if(satir) satir.remove();
+  if(!state.cekSenetEksikKalanlar.length) cekSenetEksikModalKapat();
+  // Karar, müşteri kartındaki Toplam Risk/Alınan Tahsilat'ı etkilediği için raporu yeniden kur.
+  if(state.report){
+    state.report = buildReport(state.files, state.musteriMasterMap);
+    renderReport(state.report);
+  }
+});
+
 // Rapor zaten bellekteyken (state.report) yeni bir dosya yüklemesi olmadan çek/senet onayını
+
 // yansıtmak için: tahsilatArsiv'deki ilgili çek/senet satır(lar)ını "gecerli" yapar, cekSenetMap /
 // cekSenetDetay / m.cekSenet / m.toplamRisk / m.alinanTahsilat / m.kalanBorc değerlerini o
 // müşteri için yeniden türetir ve ekranı tazeler. buildReport'un ilgili bölümüyle aynı formülleri
@@ -502,12 +590,17 @@ async function analizModalAc(musteriKod, musteriAdi){
     return;
   }
   const toplamTahsilatPay = ozet.aylikTahsilat>0 ? ozet.aylikTahsilat : 1;
-  const normalPay = Math.max(0, ozet.aylikNormalTahsilat);
+  // normalPay artık aylikNormalTahsilat'tan DEĞİL, aylikTuruNormal'dan (Çek/Senet hariç normal
+  // tahsilat) hesaplanır — aksi halde Tahsil Edildi çek/senetler yanlışlıkla "normal" dilimine
+  // karışıp üst çubukta "%100 normal" gibi yanıltıcı görünürdü (bkz. cekSenetPay altta ayrı dilim).
+  const normalPay = Math.max(0, ozet.aylikTuruNormal);
   const hakedisPay = Math.max(0, ozet.aylikHakedisTahsilat);
   const krediPay = Math.max(0, ozet.aylikKrediTahsilat);
+  const cekSenetPay = Math.max(0, ozet.aylikTuruCekSenet);
   const normalYuzde = (normalPay/toplamTahsilatPay*100);
   const hakedisYuzde = (hakedisPay/toplamTahsilatPay*100);
   const krediYuzde = (krediPay/toplamTahsilatPay*100);
+  const cekSenetYuzde = (cekSenetPay/toplamTahsilatPay*100);
   const geriDonusRenk = ozet.geriDonusGun==null ? {renk:'var(--ink-faint)', soft:'var(--line-soft)'} : donusRenk(ozet.geriDonusGun);
   body.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;">
@@ -526,18 +619,20 @@ async function analizModalAc(musteriKod, musteriAdi){
     <div style="font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--ink-soft);margin-bottom:9px;">TAHSİLAT · AYLIK ORTALAMA</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;">
       <div style="font-family:var(--font-figures);font-size:22px;font-weight:700;color:var(--ink);">${TL(ozet.aylikTahsilat)}</div>
-      ${ozet.aylikTahsilat>0 ? `<div style="font-size:11px;color:var(--ink-soft);">%${normalYuzde.toFixed(1).replace('.',',')} normal</div>` : ''}
+      ${ozet.aylikTahsilat>0 ? `<div style="font-size:11px;color:var(--ink-soft);">%${normalYuzde.toFixed(1).replace('.',',')} normal${cekSenetPay>0?' · %'+cekSenetYuzde.toFixed(1).replace('.',',')+' çek/senet':''}</div>` : ''}
     </div>
     ${ozet.aylikTahsilat>0 ? `
     <div style="height:8px;border-radius:5px;background:var(--line-soft);margin-top:8px;overflow:hidden;display:flex;">
       <div style="width:${normalYuzde.toFixed(2)}%;background:var(--accent);"></div>
       <div style="width:${hakedisYuzde.toFixed(2)}%;background:#1D5FB8;"></div>
       <div style="width:${krediYuzde.toFixed(2)}%;background:var(--danger);"></div>
+      <div style="width:${cekSenetYuzde.toFixed(2)}%;background:#B8630A;"></div>
     </div>
     <div style="display:flex;gap:14px;margin-top:7px;font-size:10.5px;color:var(--ink-soft);flex-wrap:wrap;">
       <span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--accent);margin-right:4px;"></span>Normal ${TL(normalPay)}</span>
       ${hakedisPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:#1D5FB8;margin-right:4px;"></span>Hakediş ${TL(hakedisPay)}</span>` : ''}
       ${krediPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:var(--danger);margin-right:4px;"></span>İade/Depozito ${TL(krediPay)}</span>` : ''}
+      ${cekSenetPay>0 ? `<span><span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:#B8630A;margin-right:4px;"></span>Tahsil Edilen Çek/Senet ${TL(cekSenetPay)}</span>` : ''}
     </div>
     <div style="display:flex;gap:8px;margin-top:9px;flex-wrap:wrap;">
       ${ozet.aylikTuruNormal>0 ? `<span class="badge" style="background:var(--accent-soft,#eef2ff);color:var(--accent);">Normal tahsilat ${TL(ozet.aylikTuruNormal)}</span>` : ''}
@@ -712,7 +807,7 @@ function renderMusteriTable(report, resetSayfa=true){
       <div class="htk-inline-stats">
         <div class="htk-stat-item"><span class="l">Sipariş</span><span class="v${m.siparisTutari>0?' c-siparis':' zero'}">${m.siparisTutari>0?TL(m.siparisTutari):'—'}</span></div>
         <div class="htk-stat-item"><span class="l">Sevk Ert.</span><span class="v${m.emanetSiparis>0?' c-sevk':' zero'}">${m.emanetSiparis>0?TL(m.emanetSiparis):'—'}</span></div>
-        <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.alinanTahsilat>0?' c-tahsilat':' zero'}">${m.alinanTahsilat>0?TL(m.alinanTahsilat):'—'}</span></div>
+        <div class="htk-stat-item"><span class="l">Tahsilat</span><span class="v${m.alinanTahsilatKartGosterge>0?' c-tahsilat':' zero'}">${m.alinanTahsilatKartGosterge>0?TL(m.alinanTahsilatKartGosterge):'—'}</span></div>
       </div>
       <div class="htk-alt">
         <span class="htk-ceksenet">Çek/Senet: ${TL(m.cekSenet||0)}</span>

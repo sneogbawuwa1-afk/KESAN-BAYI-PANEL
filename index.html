@@ -325,6 +325,13 @@
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
               </div>
             </div>
+            <div class="gvy-row" data-gvy-type="cekSenet">
+              <div><div class="gvy-row-label">Çek / Senet Riski</div><div class="gvy-row-sub" data-gvy-sub></div><div class="gvy-row-arsivgun" data-gvy-arsivgun></div></div>
+              <div class="gvy-row-btns">
+                <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
+                <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+              </div>
+            </div>
 
             <div class="gvy-panel-title" style="margin-top:6px;">Kanal Raporları</div>
 
@@ -1805,8 +1812,37 @@
       </div>
     </div>
 
+    <div class="modal-overlay" id="cekSenetEksikModalOverlay">
+      <div class="modal" id="cekSenetEksikModal" role="dialog" aria-modal="true" aria-labelledby="cekSenetEksikModalTitle" style="max-width:720px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="cekSenetEksikModalTitle">Eksik Çek/Senet Kayıtları</div>
+              <div class="modal-head-navy-sub" id="cekSenetEksikModalSub"></div>
+            </div>
+          </div>
+          <button class="modal-close" id="cekSenetEksikModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:14px 20px 0;font-size:12.5px;color:var(--ink-soft);">
+            Bu kayıtlar arşivde duruyor ama en son yüklenen Çek/Senet Riski dosyasında yok. Her biri için
+            "Tahsil Edildi" veya "İptal" seçin — karar verilmeyenler arşivde risk olarak kalmaya devam eder.
+          </div>
+          <div class="table-scroll" style="padding:12px 20px 20px;">
+            <table id="cekSenetEksikModalTable">
+              <thead><tr>
+                <th>Müşteri</th><th>No</th><th>Tip</th><th>Vade</th><th class="num">Tutar</th><th>Karar</th>
+              </tr></thead>
+              <tbody id="cekSenetEksikModalTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="cekSenetModalOverlay">
-      <div class="modal" id="cekSenetModal" role="dialog" aria-modal="true" aria-labelledby="cekSenetModalTitle" style="max-width:520px;">
+      <div class="modal" id="cekSenetModal" role="dialog" aria-modal="true" aria-labelledby="cekSenetModalTitle" style="max-width:640px;">
         <div class="panel-head modal-head-navy">
           <div class="modal-head-navy-top">
             <div class="modal-head-navy-avatar" id="cekSenetModalAvatar"></div>
