@@ -1135,9 +1135,11 @@ function enYakinGunKey(gunListesi, hedefGunKey){
 const SIGNATURES = {
   kalemler: [['Kalan Borç','Faturadan Sonr.Gün','Borç/alacak']],
   siparis: [['Sipariş Toplam Tutar','Teslimat Durumu']],
+  // YENİ TAHSİLAT FORMATI (kullanıcı isteği — eski Format A/B ayrımı tamamen kaldırıldı, tek dosya
+  // tipine indirgendi): Belge Numarası + Ters Kayıt Belge Numarası kombinasyonu bu dosyaya özgüdür,
+  // başka hiçbir dosyada birlikte bulunmaz.
   tahsilat: [
-    ['Belge Tipi','Tahsilat Alan','Ödeme Tipi'],
-    ['Belge Tutarı','Çek/Senet Durumu','Müşt. Kodu'],
+    ['Belge Numarası','Ters Kayıt Belge Numarası','Tarih'],
   ],
   cekSenet: [['Esas Borçlu','Çek/Senet Numarası']],
   ticariStok: [['Depoda Kalan Mk.','Depoda Kalan Lt.','Malzeme Kodu']],
@@ -1515,6 +1517,16 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
       state.cekSenetArsivi = arsiv;
       state.cekSenetEksikKalanlar = eksikKalanlar;
       await cekSenetArsiviniKaydet(arsiv);
+    }
+    // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği): çek/senetle BİREBİR AYNI
+    // desen. buildReport'tan ÖNCE, bu oturumda yeni bir Tahsilat Dökümü dosyası seçildiyse kalıcı
+    // arşivle birleştirilir (belge no bazlı ekle/güncelle + Ters Kayıt ile sil + Ön Kayıt yaşam
+    // döngüsü temizliği — bkz. 01-cekirdek-ve-arsiv.js: tahsilatArsiviniBirlestir). Bu, YIL
+    // BOYUNCA tek seferde toplu yüklenen bir dosyanın her satırının kendi Tarih gününe doğru
+    // dağıtılabilmesini sağlar; sonraki kısmi (ör. son hafta) yüklemeler diğer günlere dokunmaz.
+    if(state.files.tahsilat && state.files.tahsilat.data && state.files.tahsilat.data.length){
+      state.tahsilatArsivi = tahsilatArsiviniBirlestir(state.tahsilatArsivi, state.files.tahsilat.data);
+      await tahsilatArsiviniKaydet(state.tahsilatArsivi);
     }
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
     // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle

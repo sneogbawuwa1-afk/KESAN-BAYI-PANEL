@@ -647,10 +647,12 @@ async function computeYonetimOzeti(report, zorla){
   const haftaOncesi = gunKeyEkle(bugunKey, -7);
 
   let haftalikTahsilat = 0;
-  (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
+  // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT (kullanıcı isteği): artık birlesikArsiv.tahsilatArsiv
+  // (Fatura Kontrol'ün eski, artık senkronize edilmeyen günlük snapshot arşivi) DEĞİL, kendi
+  // bağımsız kalıcı arşivi state.tahsilatArsivi (belge no bazlı) okunur.
+  tahsilatArsivindenAralikDiziyeCevir(state.tahsilatArsivi, gunKeyEkle(haftaOncesi,1), bugunKey).forEach(r=>{
     if(!r.belgeTarihi || !musteriTvIcinGecerliMi(r.musteri)) return;
-    const gk = dateKeyLocal(r.belgeTarihi);
-    if(gk && gk>haftaOncesi && gk<=bugunKey) haftalikTahsilat += r.tutar||0;
+    haftalikTahsilat += r.tutar||0;
   });
   let haftalikHakedis = 0;
   (birlesikArsiv.bayiHakedisArsiv||[]).forEach(r=>{
