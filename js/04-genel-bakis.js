@@ -71,9 +71,19 @@ function gbSparkline(seed, color){
 function renderGenelBakisView(report){
   const view = document.getElementById('genelBakisView');
   if(!view) return;
+  const bosPanel = document.getElementById('genelBakisBosPanel');
+  const icerik = document.getElementById('genelBakisIcerik');
   if(!report){
+    // DÜZELTME: Fatura Kontrol bugüne ait kayıtları bulut arşivinden bağımsız gösterebildiği
+    // için, kullanıcı "veri var ama Genel Bakış boş" diye bir tutarsızlıkla karşılaşıyordu.
+    // Genel Bakış (Sevk gibi) yalnızca state.report'a (işlenmiş Kalemler'e) dayanabilir —
+    // artık sessizce boş kalmak yerine sebebi ve tek adımlı çözümü söylüyor.
+    if(bosPanel) bosPanel.style.display = 'block';
+    if(icerik) icerik.style.display = 'none';
     return;
   }
+  if(bosPanel) bosPanel.style.display = 'none';
+  if(icerik) icerik.style.display = 'block';
 
   const musteriler = gbTumMusteriler(report);
   const kpi = report.kpi || computeGenelKPI(report, '');
@@ -622,7 +632,7 @@ function setActiveView(view){
   });
 
   if(view==='genelBakis') renderGenelBakisView(state.report);
-  if(view==='sevk' && state.report) renderSevkView(state.report);
+  if(view==='sevk') renderSevkView(state.report);
   if(view==='yukleme') renderYuklemeView();
   if(view==='yaslandirma' && state.report) renderYaslandirmaView(state.report);
   if(view==='ticariStok' && state.report) renderTicariStokView(state.report);
@@ -1562,6 +1572,19 @@ function refreshGenelKPIs(report){
 }
 
 function renderSevkView(report){
+  const bosPanel = document.getElementById('sevkBosPanel');
+  const icerik = document.getElementById('sevkIcerik');
+  // DÜZELTME: bkz. renderGenelBakisView'daki aynı not — bu fonksiyon eskiden çağrıldığında
+  // report zaten var olmak ZORUNDAYDI (setActiveView'da "&& state.report" şartı sayesinde),
+  // ama rapor yokken sekmeye tıklanınca kullanıcı hiçbir açıklama görmeden boş bir sayfayla
+  // karşılaşıyordu. Artık savunmacı: report yoksa boş durumu gösterip çıkar.
+  if(!report){
+    if(bosPanel) bosPanel.style.display = 'block';
+    if(icerik) icerik.style.display = 'none';
+    return;
+  }
+  if(bosPanel) bosPanel.style.display = 'none';
+  if(icerik) icerik.style.display = 'block';
   renderSevkMusteriTable(report);
   renderSevkOzet(report);
 }
