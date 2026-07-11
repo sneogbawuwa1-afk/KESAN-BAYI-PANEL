@@ -11,7 +11,7 @@
 // CACHE_NAME de APP_VERSION'dan türediği için otomatik olarak yeni bir cache alanı açılır
 // ve activate aşamasında eski sürümün cache'i silinir — statik dosyalarda manuel cache
 // temizliği gerekmez.
-const APP_VERSION = '2.2';
+const APP_VERSION = '2.3';
 const CACHE_NAME = 'kesan-bayi-takip-v' + APP_VERSION;
 
 // Uygulama kabuğu: ilk yüklemede önbelleğe alınır, çevrimdışı açılışı mümkün kılar.
