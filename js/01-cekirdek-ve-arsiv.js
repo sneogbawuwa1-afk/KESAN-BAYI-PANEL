@@ -1,4 +1,3 @@
-
 // Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
 // konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
 // bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
@@ -323,10 +322,17 @@ function tahsilatEfektifGunMapHesapla(mevcutArsivGunler, yeniTahsilatSatirlari, 
   });
 
   if(!tahsilatFormatB){
-    // Format A: eskiden olduğu gibi SADECE bugünün altına, bugünün ÖNCEKİ tahsilat içeriğinin
-    // tamamen yerine geçecek şekilde yazılır (bkz. faturaKontrolArsivineKaydetVeSenkronizeEt'teki
-    // bugununKaydiTaban mantığı — burada sadece gösterim hesaplaması için aynısı simüle edilir).
-    sonuc.set(bugunKey, (yeniTahsilatSatirlari||[]).slice());
+    // Format A (geçici / Ön Kayıt): SADECE bugünün altına yazılır. ÖNEMLİ DÜZELTME — eskiden bugünün
+    // TÜM tahsilat içeriği (Format B çek/senetler dahil) silinip yerine yalnızca yeni Format A satırları
+    // konuyordu; bu yüzden Format A yüklemesi, Format B (kalıcı nihai rapor) ile kaydedilmiş çek/senet
+    // kayıtlarını gösterim/trend hesabından siliyordu. Oysa gerçek kalıcı arşiv
+    // (faturaKontrolArsivineKaydetVeSenkronizeEt'teki bugununKaydiTaban) yalnızca eski 'A' etiketli
+    // kısmı değiştirip 'B'/'FaturaIade'/'DepozitoTahsilat' kayıtlarına DOKUNMUYOR. Bu hesaplama artık
+    // o gerçek arşiv davranışıyla BİREBİR aynı: bugünün eski Format B (ve kredi) kayıtları korunur,
+    // sadece eski Format A yeni Format A ile değiştirilir.
+    const bugunOncesi = (mevcutArsivGunler[bugunKey]||{}).tahsilatArsiv || [];
+    const bugunKorunan = bugunOncesi.filter(r=> r.formatKaynagi !== 'A');
+    sonuc.set(bugunKey, bugunKorunan.concat((yeniTahsilatSatirlari||[]).slice()));
     return sonuc;
   }
 
@@ -347,6 +353,31 @@ function tahsilatEfektifGunMapHesapla(mevcutArsivGunler, yeniTahsilatSatirlari, 
   // Adım 2: Format B satırları kendi Belge Tarihi günlerine dağıtılır; veri gelen günlerin Format B
   // kısmı TAMAMEN bu yüklemenin satırlarıyla değiştirilir (o günün Format A'sı varsa -yukarıdaki
   // koşullu temizlikten sağ çıkmışsa- korunur), veri gelmeyen günlere dokunulmaz.
+  //
+  // ÇEK/SENET KALICILIĞI (kullanıcı isteği): Çek ve Senet tipi tahsilatlar, üzerlerinde manuel
+  // "Tahsil Edildi" onayı/düzeltmesi yapılan, uzun vadeli takip gerektiren kritik kayıtlardır ve
+  // müşteri kartındaki "Çek/Senet Riski"nde SÜREKLİ görünmeleri gerekir. Bu yüzden yeni bir tahsilat
+  // dökümü yüklendiğinde, eski Format B çek/senet kayıtları KÖRÜ KÖRÜNE SİLİNMEZ — yalnızca yeni
+  // yüklemede AYNI belge numarasıyla (cekSenetNo) bir çek/senet geldiyse eskisi onunla değiştirilir
+  // (güncel hali kazanır); aksi halde eski çek/senet kaydı arşivde OLDUĞU GİBİ KORUNUR. Belge
+  // numarası olmayan çek/senetler de güvenli tarafta kalınarak korunur. (Normal/SanalPos tahsilatlar
+  // eskisi gibi tamamen değiştirilir — onlar günlük kesinleşen verilerdir.)
+  //
+  // Önce TÜM yeni yüklemede gelen çek/senet belge no'larını topla (koruma kararı bunlara bakar).
+  const yeniCekSenetNolar = new Set();
+  (yeniTahsilatSatirlari||[]).forEach(r=>{
+    if(r && (r.tahsilatTuru==='Cek' || r.tahsilatTuru==='Senet') && r.cekSenetNo){
+      yeniCekSenetNolar.add(String(r.cekSenetNo));
+    }
+  });
+  const cekSenetKorunacakMi = (r)=>{
+    if(!r || r.formatKaynagi!=='B') return false;
+    if(r.tahsilatTuru!=='Cek' && r.tahsilatTuru!=='Senet') return false;
+    // Belge no yoksa güvenli tarafta kal, koru. Belge no varsa: yeni yüklemede AYNI no gelmediyse koru.
+    if(!r.cekSenetNo) return true;
+    return !yeniCekSenetNolar.has(String(r.cekSenetNo));
+  };
+
   const gunBazliYeni = new Map();
   (yeniTahsilatSatirlari||[]).forEach(r=>{
     if(!r || !r.belgeTarihi) return;
@@ -358,8 +389,15 @@ function tahsilatEfektifGunMapHesapla(mevcutArsivGunler, yeniTahsilatSatirlari, 
   gunBazliYeni.forEach((satirlar, gunKey)=>{
     const mevcutGun = sonuc.get(gunKey) || [];
     const eskiFormatA = mevcutGun.filter(r=> r.formatKaynagi === 'A');
-    sonuc.set(gunKey, eskiFormatA.concat(satirlar));
+    // Bu güne ait, silinmeyip KORUNACAK eski Format B çek/senet kayıtları.
+    const korunanCekSenet = mevcutGun.filter(cekSenetKorunacakMi);
+    sonuc.set(gunKey, eskiFormatA.concat(korunanCekSenet).concat(satirlar));
   });
+
+  // ÖNEMLİ: Yukarıdaki döngü yalnızca "yeni veri gelen" günleri işler. Ama korunacak bir çek/senet,
+  // yeni yüklemede HİÇ satır gelmeyen bir güne (ör. gelecekteki vade günü) düşmüş olabilir — o günler
+  // gunBazliYeni'de olmadığından yukarıda hiç dokunulmaz ve zaten sonuc'ta olduğu gibi korunur.
+  // Dolayısıyla o günlerdeki çek/senetler otomatik olarak zaten güvendedir; ek işlem gerekmez.
 
   return sonuc;
 }
