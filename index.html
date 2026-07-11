@@ -392,6 +392,23 @@
 
     <div id="genelBakisView" role="tabpanel" aria-labelledby="sbbtn-genelBakis">
 
+      <!-- RAPOR-YOK BOŞ DURUMU: Genel Bakış, bugünün Fatura Kontrol arşivinden değil,
+           state.report'tan (yani "Raporu Oluştur" ile işlenen Kalemler dosyasından) beslenir.
+           Fatura Kontrol'de bugüne ait sipariş/tahsilat görünüyor olsa bile, bugünün Kalemler
+           dosyası henüz işlenmediyse bu ekran boş kalırdı — artık sebebi ve tek adımlı çözümü
+           söylüyor. -->
+      <div class="panel" id="genelBakisBosPanel" style="display:none;">
+        <div class="panel-body">
+          <div class="bos-durum">
+            <div class="bd-ikon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
+            <h3>Bugünün raporu henüz oluşturulmadı</h3>
+            <p>Genel Bakış, bugün için işlenmiş Kalemler verisine dayanır. Fatura Kontrol'de bugüne ait kayıtlar görünüyor olsa bile (bunlar bulut arşivinden gelir), bu ekranın dolması için bugünün Kalemler dosyasını yükleyip "Raporu Oluştur"a basmanız gerekir.</p>
+            <div class="bd-eylem"><button type="button" class="btn primary" onclick="document.getElementById('resetBtn')?.click();"><i class="fa-solid fa-upload" aria-hidden="true" style="margin-right:7px;"></i>Rapor Oluştur ekranına git</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="genelBakisIcerik">
       <div class="gb-kpi-grid" id="gbKpiGrid"></div>
 
       <div class="alert-banner" id="gbDikkatBanner" style="display:none;" role="button" tabindex="0" aria-haspopup="dialog">
@@ -568,6 +585,7 @@
           </div>
         </div>
       </div>
+      </div><!-- /#genelBakisIcerik -->
     </div>
 
     <div id="genelView" style="display:none;" role="tabpanel">
@@ -662,6 +680,20 @@
 
     <div id="sevkView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-sevk">
 
+      <!-- RAPOR-YOK BOŞ DURUMU: bkz. Genel Bakış'taki aynı açıklama — Sevk raporu da
+           state.report'a (bugünün işlenmiş Kalemler verisine) bağımlıdır. -->
+      <div class="panel" id="sevkBosPanel" style="display:none;">
+        <div class="panel-body">
+          <div class="bos-durum">
+            <div class="bd-ikon"><i class="fa-solid fa-truck" aria-hidden="true"></i></div>
+            <h3>Bugünün raporu henüz oluşturulmadı</h3>
+            <p>Sevk Özeti, bugün için işlenmiş Kalemler verisine dayanır. Fatura Kontrol'de bugüne ait kayıtlar görünüyor olsa bile (bunlar bulut arşivinden gelir), bu ekranın dolması için bugünün Kalemler dosyasını yükleyip "Raporu Oluştur"a basmanız gerekir.</p>
+            <div class="bd-eylem"><button type="button" class="btn primary" onclick="document.getElementById('resetBtn')?.click();"><i class="fa-solid fa-upload" aria-hidden="true" style="margin-right:7px;"></i>Rapor Oluştur ekranına git</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sevkIcerik">
       <div class="panel" id="sevkOzetiPanel">
         <div class="panel-head panel-head-navy-hero">
           <div class="yukleme-head-left">
@@ -721,6 +753,7 @@
         </div>
       </div>
 
+      </div><!-- /#sevkIcerik -->
     </div>
 
     <div id="yuklemeView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-yukleme">
