@@ -1005,6 +1005,14 @@ function buildReport(files, musteriMasterMap){
     // Raporu hiç yüklenmemişse, dosyadaki İstenilen Tsl. Trh. günleri arasından bugüne en yakın
     // olan seçilir. Hiçbir tarihli veri yoksa hiçbir sipariş KPI'sı gösterilmez.
     const bugunGunKey = dateKeyLocal(today);
+    // Sipariş dosyasının kendi teslim günleri — hem "yükleme yok" dalında kullanılır hem de
+    // aşağıdaki güvenlik ağında (yükleme günü siparişlerle çakışmıyorsa geri dönülecek küme).
+    const siparisGunleri = new Set();
+    siparisSatirlari.forEach(r=>{
+      const t = excelDateToJSArti1Gun(r['İstenilen Tsl. Trh.']);
+      const gk = t ? dateKeyLocal(t) : null;
+      if(gk) siparisGunleri.add(gk);
+    });
     let siparisGosterimGunKey = null;
     if(files.yukleme){
       const yuklemeGunleri = new Set();
@@ -1014,13 +1022,17 @@ function buildReport(files, musteriMasterMap){
         if(gk) yuklemeGunleri.add(gk);
       });
       siparisGosterimGunKey = enYakinGunKey(Array.from(yuklemeGunleri), bugunGunKey);
+      // GÜVENLİK AĞI (eski Yükleme Raporu düzeltmesi): Yükleme Raporu, Sipariş dökümünden DAHA ESKİ
+      // kalabiliyor (ör. bugünün siparişleri girildi ama Yükleme Raporu henüz dünkü halinde). Böyle
+      // bir durumda yükleme gününe göre seçilen gösterim günü, sipariş dosyasında HİÇ bulunmayan bir
+      // güne işaret ediyor ve TÜM siparişler "—" görünüyordu. Seçilen gün sipariş dosyasında yoksa,
+      // sipariş dosyasının KENDİ günlerinden bugüne en yakınına geri düşülür — böylece güncel
+      // siparişler, eski bir Yükleme Raporu yüzünden gizlenmez. (Yükleme günü siparişlerle
+      // çakışıyorsa davranış eskisiyle birebir aynı kalır.)
+      if(!siparisGosterimGunKey || !siparisGunleri.has(siparisGosterimGunKey)){
+        siparisGosterimGunKey = enYakinGunKey(Array.from(siparisGunleri), bugunGunKey);
+      }
     }else{
-      const siparisGunleri = new Set();
-      siparisSatirlari.forEach(r=>{
-        const t = excelDateToJSArti1Gun(r['İstenilen Tsl. Trh.']);
-        const gk = t ? dateKeyLocal(t) : null;
-        if(gk) siparisGunleri.add(gk);
-      });
       siparisGosterimGunKey = enYakinGunKey(Array.from(siparisGunleri), bugunGunKey);
     }
 
