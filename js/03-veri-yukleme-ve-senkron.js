@@ -766,6 +766,11 @@ async function uygulamayiBaslat(){
   if(uygulamaBaslatildiMi) return;
   uygulamaBaslatildiMi = true;
 
+  // BULUT YÜKLEME EKRANI: rapor gelene (ya da rapor yok kararı verilene) kadar #reportSection'ın
+  // çıplak/boş KPI iskeleti yerine tam ekran, tek bir yükleniyor göstergesi sunulur. Fonksiyon
+  // içindeki TÜM çıkış yollarında (rapor bulundu / bulunamadı / hata) en altta kapatılır.
+  const bulutYukleEkran = document.getElementById('bulutYuklemeEkrani');
+
   let report = null, source = null;
 
   // ÖNEMLİ PERFORMANS DÜZELTMESİ: Bu 9 veri türü (Müşteri Master, Bayi Hakediş, Sell Out
@@ -798,6 +803,8 @@ async function uygulamayiBaslat(){
   ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';
+    const bulutYukleMsg = document.getElementById('bulutYuklemeMesaj');
+    if(bulutYukleMsg) bulutYukleMsg.textContent = 'Bulut verisi kontrol ediliyor…';
     // Skeleton: bulut kontrolü sürerken kullanıcı boş bir kartla değil, gelecek içeriğin
     // silüetiyle karşılansın (bekleme algısını kısaltır, "dondu mu?" hissini önler).
     const acilisSk = document.getElementById('acilisSkeleton');
@@ -877,6 +884,10 @@ async function uygulamayiBaslat(){
     document.body.classList.add('has-sidebar');
     setActiveView('genelBakis');
   }
+  // BULUT YÜKLEME EKRANI KAPAT: rapor durumu (var/yok) artık kesinleşti, arkadaki
+  // reportSection de (doluysa/boşsa) doğru haliyle render edilmiş durumda — overlay'i
+  // kaldırıp kullanıcıya gerçek ekranı gösterebiliriz.
+  if(bulutYukleEkran) bulutYukleEkran.style.display = 'none';
   // OTOMATİK GÜNLÜK SNAPSHOT (kullanıcı kararı): Önceden musteriSnapshot SADECE kullanıcı "Raporu
   // Oluştur"/"Veri Güncelle" butonuna bastığında yazılıyordu — kullanıcı Kalemler'i bir kez
   // yükleyip günlerce hiç butona basmazsa (artık zorunlu olmadığı için sıkça olacak bir senaryu),

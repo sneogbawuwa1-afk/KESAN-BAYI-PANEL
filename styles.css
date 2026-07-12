@@ -85,7 +85,9 @@
      çok geniş (ultra-wide/5K) ekranlarda satırların okunamayacak kadar uzamasını önleyen bir
      üst sınırdır — 2560px'e kadar olan tüm yaygın çözünürlüklerde sayfa neredeyse tam genişlikte
      görünür, daha büyük ekranlarda ise ortalanıp kenarlarda nefes payı bırakır. */
-  #app{width:100%;max-width:var(--app-max);margin:0 auto;padding:0 var(--page-pad) 80px;}
+  /* DÜZELTME: alt padding 80px'ten 24px'e indirildi — eskiden sayfa kısa olduğunda
+     (az sayıda kart vb.) ekranın altında amaçsız büyük bir boşluk kalıyordu. */
+  #app{width:100%;max-width:var(--app-max);margin:0 auto;padding:0 var(--page-pad) 24px;}
 
   /* ===== Sol Navigasyon (Sidebar) ===== */
   /* 100dvh (dynamic viewport height), iOS Safari'de adres çubuğu gizlenip
@@ -123,7 +125,7 @@
   }
   .sb-link i.sb-ic{width:15px;text-align:center;font-size:13.5px;color:rgba(255,255,255,.55);flex-shrink:0;}
   .sb-link:hover{background:rgba(255,255,255,.08);color:#fff;}
-  .sb-link.active{background:rgba(255,255,255,.09);color:#fff;border-left-color:var(--accent);font-weight:700;}
+  .sb-link.active{background:rgba(255,255,255,.09);color:#fff;border-left-color:#D9B25C;font-weight:700;}
   .sb-link.active i.sb-ic{color:#D9B25C;}
   .sb-link .sb-arrow{margin-left:auto;font-size:10px;color:rgba(255,255,255,.4);transition:transform .15s ease;flex-shrink:0;}
   .sb-link.sb-parent.open .sb-arrow{transform:rotate(180deg);}
@@ -134,7 +136,7 @@
   .sb-submenu.open{display:flex;}
   .sb-submenu .sb-link{font-size:12.5px;font-weight:500;padding:8px 10px 8px 9px;}
   .sb-submenu .sb-link i.sb-ic{font-size:12px;}
-  .app-main{flex:1 1 auto;min-width:0;margin-left:var(--sidebar-w);padding:0 0 0 clamp(20px,1.8vw,32px);position:relative;}
+  .app-main{flex:1 1 auto;min-width:0;margin-left:var(--sidebar-w);padding:0 0 0 clamp(20px,1.8vw,32px);position:relative;transition:margin-left .16s ease;}
   @media(max-width:980px){
     .sidebar{
       transform:translateX(-100%);
@@ -1186,6 +1188,28 @@
      Mevcut .empty-state (düz metin) korunur; bu bileşen veri-bağımlı ekranlarda (ör. Stok Gün)
      eksik olan adımı ve nereden tamamlanacağını söylemek için kullanılır. ===== */
   .bos-durum{text-align:center;padding:34px 20px;}
+  /* ===== RAPOR GEÇİŞ YÜKLEME OVERLAY'İ: setActiveView() içindeki async render fonksiyonları
+     (buluttan veri çekebilen ağır raporlar — Sell Out, Stok Gün, DSO Trendi, Fatura Kontrol vb.)
+     tamamlanana kadar view'ın kendi kapsayıcısı üzerine biner. Sidebar/başlık/diğer sekmeler
+     tıklanabilir kalır, sadece geçilen rapor alanı hafifçe soluklaşıp üzerine markaya uygun
+     (lacivert zemin + altın çerçeve/metin) bir "Rapor yükleniyor" kartı gelir. ===== */
+  .view-yukleme-overlay{
+    position:absolute;inset:0;background:rgba(238,241,246,.72);
+    display:flex;align-items:center;justify-content:center;z-index:15;
+  }
+  .view-yukleme-karti{
+    display:flex;flex-direction:column;align-items:center;gap:12px;
+    background:var(--navy);border:1px solid #D9B25C;border-radius:12px;
+    padding:18px 26px;box-shadow:0 10px 26px -10px rgba(19,34,63,.4);
+  }
+  .view-yukleme-spin{
+    width:22px;height:22px;border-radius:50%;
+    border:3px solid rgba(217,178,92,.28);border-top-color:#D9B25C;
+    animation:vyoSpin .8s linear infinite;
+  }
+  .view-yukleme-metin{font-size:12.5px;font-weight:700;color:#D9B25C;letter-spacing:.02em;}
+  @keyframes vyoSpin{to{transform:rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){.view-yukleme-spin{animation:none;}}
   /* ===== ÇEK/SENET DETAY + EKSİK-ONAY MODALLERİ: kompakt Durum/Karar kolonu =====
      Önceki halde "Çek Tahsil Edildi mi?" gibi uzun buton metni 3 satıra bölünüp İptal butonunu
      alta itiyor, yatay taşma/kaydırma çıkarıyordu. Artık iki buton (kısaltılmış metinlerle) yan
@@ -1549,39 +1573,170 @@
     .stok-section-divider .toolbar > *{width:100%;}
   }
 
+  /* ===================== GİRİŞ EKRANI (authGate) — yeniden tasarım ===================== */
+  /* Eski tasarım: düz beyaz kutu + üstte tek taraflı ince altın çizgi (border-top), genel
+     lacivert/altın kimlikle bağlantısızdı. Yeni tasarım: üstte marka bandı (lacivert zemin +
+     tam genişlikte altın alt çizgi) + altta sade beyaz form alanı — header'daki .app-header-mark
+     ile aynı rozet dilini kullanır, ama daha sade/az dekoratiftir. */
+  .auth-gate-overlay{
+    position:fixed;inset:0;background:var(--bg);z-index:9999;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .auth-gate-card{
+    background:var(--surface);border-radius:16px;max-width:380px;width:100%;
+    border:1px solid var(--line);box-shadow:0 20px 45px -18px rgba(19,34,63,.18);
+    overflow:hidden;
+  }
+  .auth-gate-top{
+    background:var(--navy);border-bottom:3px solid #D9B25C;
+    padding:26px 30px 22px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  }
+  .auth-gate-mark{width:46px;height:46px;font-size:13px;margin-bottom:12px;}
+  .auth-gate-title{font-size:17px;white-space:normal;margin:0;}
+  .auth-gate-breadcrumb{margin-top:6px;justify-content:center;}
+  .auth-gate-body{padding:26px 28px 28px;display:flex;flex-direction:column;gap:11px;}
+  .auth-gate-field label{
+    display:block;font-size:11.5px;font-weight:700;color:var(--ink-soft);
+    margin-bottom:5px;letter-spacing:.01em;
+  }
+  .auth-gate-field input{
+    width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;
+    background:#fff;color:var(--ink);font-size:14.5px;font-family:inherit;
+    transition:border-color .15s ease;box-sizing:border-box;
+  }
+  .auth-gate-field input:focus{outline:none;border-color:var(--accent);}
+  /* "Giriş Yap" ve "Uygulamayı Yükle" — kullanıcı isteğiyle AYNI görünüme sahip tek buton stili. */
+  .auth-gate-submit{
+    width:100%;padding:12px;border:none;border-radius:9px;margin-top:6px;
+    background:var(--navy);color:#fff;font-weight:700;font-size:13.5px;font-family:inherit;
+    cursor:pointer;transition:background .15s ease;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .auth-gate-submit:hover{background:#0C1B33;}
+  .auth-gate-install{margin-top:2px;}
+  .auth-gate-error{
+    display:none;color:var(--danger);font-size:12px;text-align:center;margin-top:2px;
+  }
+  .auth-gate-status{
+    display:none;color:var(--ink-soft);font-size:12px;text-align:center;
+  }
+  .auth-gate-ios-hint{
+    display:none;background:var(--accent-soft);border:1px solid rgba(138,109,31,.3);
+    border-radius:9px;padding:10px 12px;font-size:12.5px;color:var(--ink-soft);
+    text-align:left;line-height:1.5;
+  }
+  .auth-gate-ios-hint b{color:var(--navy);}
+  .auth-gate-ios-hint i{color:var(--accent);}
+
+  /* ===================== BULUT YÜKLEME EKRANI (bulutYuklemeEkrani) ===================== */
+  /* Tasarım tamamen yenilendi: tam lacivert zemin (üst panelle aynı --navy), ortada altın
+     çerçeveli V3.4 rozeti, üst paneldeki "AKGÜN | MEŞRUBAT GIDA" başlığıyla BİREBİR aynı iki
+     renkli tipografi (beyaz kalın + soluk ayraç + altın), altında durum yazısı ve ince kayan
+     (indeterminate) altın renkli bir ilerleme çubuğu — klasik daire spinner yerine. */
+  .cloud-load-overlay{
+    position:fixed;inset:0;background:var(--navy);z-index:9998;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .cloud-load-wrap{display:flex;flex-direction:column;align-items:center;gap:22px;}
+  .cloud-load-mark{
+    width:58px;height:58px;font-size:16px;
+    background:linear-gradient(160deg, rgba(217,178,92,.14), rgba(217,178,92,.03));
+  }
+  .cloud-load-title{
+    margin:0;font-family:'Space Grotesk',sans-serif;font-size:20px;line-height:1.15;
+    white-space:nowrap;text-align:center;
+  }
+  .cloud-load-strong{font-weight:800;color:#fff;letter-spacing:-.01em;}
+  .cloud-load-sep{color:rgba(255,255,255,.28);font-weight:400;margin:0 10px;}
+  .cloud-load-light{font-weight:700;color:#F0DCA6;letter-spacing:.01em;}
+  .cloud-load-status{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;
+    color:rgba(255,255,255,.75);margin-top:-8px;
+  }
+  .cloud-load-msg{
+    font-size:11.5px;color:rgba(255,255,255,.45);margin-top:-14px;text-align:center;
+  }
+  .cloud-load-track{
+    width:160px;height:3px;border-radius:2px;background:rgba(255,255,255,.12);overflow:hidden;
+  }
+  .cloud-load-fill{
+    height:100%;width:40%;border-radius:2px;
+    background:linear-gradient(90deg,#D9B25C,#F0DCA6);
+    animation:cloudLoadMove 1.4s ease-in-out infinite;
+  }
+  @media(max-width:760px){
+    .cloud-load-title{font-size:17px;}
+    .cloud-load-wrap{gap:18px;}
+  }
+  @media(max-width:420px){
+    .cloud-load-title{font-size:15px;white-space:normal;padding:0 6px;}
+    .cloud-load-sep{margin:0 7px;}
+    .cloud-load-mark{width:50px;height:50px;font-size:14px;}
+    .cloud-load-track{width:130px;}
+  }
+
   /* ===================== GENEL BAKIŞ (DASHBOARD) ===================== */
+  /* DÜZELTME (sidebar + header birleşik görünüm): header artık dört kenarlı bir "kutu" değil,
+     sidebar'ın devamı gibi tam genişlikte bir bant. Sol/üst kenarlık ve o taraftaki köşe
+     yuvarlaması kaldırıldı (sidebar'ın kendi 2px'lik altın border-right'ı zaten o sınırı
+     çiziyor); yalnızca alt kenarlıkla ayrılıyor, sağ üst köşesi masaüstünde hafifçe yuvarlak
+     kalıyor. margin kaldırıldı — bir önceki kuraldaki negatif margin ile zaten sidebar'a
+     bitişik hale getiriliyor. */
+  /* DÜZELTME (kullanıcı isteği): header artık koyu lacivert değil, sayfanın kendi arka planıyla
+     (--bg) BİREBİR aynı renkte — çerçevesiz/gölgesiz, altındaki içerikle tek bir düz zemin gibi
+     görünüyor. Sidebar'la "birleşik" hale getirme denemesi (negatif margin, tam genişlik vb.)
+     tamamen geri alındı — header yine bağımsız, kendi köşeli/yuvarlak kutusunda duran orijinal
+     yapıya döndü; tek fark artık lacivert yerine bg rengi kullanması. Yazı renkleri de buna göre
+     koyu (var(--navy)/var(--ink)) tonlara çevrildi ki açık zeminde okunabilir kalsın. V3.4 rozeti
+     dikkat çeksin diye kendi küçük lacivert kutusunu korudu (bkz. .app-header-mark). */
   .app-header{
     display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
     position:sticky;top:0;z-index:35;background:var(--bg);
-    padding:16px 0 16px;margin-bottom:20px;border-bottom:1px solid var(--line-soft);
+    padding:16px 20px;margin:0 0 20px;border-radius:14px;border:none;box-shadow:none;
+    box-sizing:border-box;
   }
-  .app-header-brand{display:flex;align-items:center;gap:14px;min-width:0;}
+  /* Açık zeminde koyu noktalı doku — aynı motif, artık koyu lacivert yerine hafif lacivert tonda. */
+  .app-header::before{
+    content:'';position:absolute;top:0;left:0;width:120px;height:100%;pointer-events:none;
+    border-radius:14px 0 0 14px;overflow:hidden;
+    background-image:radial-gradient(rgba(19,35,63,.08) 1.4px, transparent 1.4px);
+    background-size:14px 14px;background-position:14px 10px;
+    -webkit-mask-image:linear-gradient(to right, #000 0%, transparent 85%);
+    mask-image:linear-gradient(to right, #000 0%, transparent 85%);
+  }
+  .app-header-brand{display:flex;align-items:center;gap:14px;min-width:0;position:relative;z-index:1;}
   .app-header-mark{
     width:52px;height:52px;border-radius:13px;flex-shrink:0;
-    background:var(--navy);border:1px solid var(--accent);
+    background:var(--navy);border:1.5px solid var(--accent);
     display:flex;align-items:center;justify-content:center;
     color:#D9B25C;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:800;font-size:15px;
   }
   .app-header-title-wrap{min-width:0;}
-  .app-header-title{margin:0;font-size:clamp(20px,2.2vw,28px);line-height:1.15;white-space:nowrap;}
+  .app-header-title{margin:0;font-size:clamp(18px,2vw,24px);line-height:1.15;white-space:nowrap;}
   .app-header-title-strong{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:800;color:var(--navy);letter-spacing:-.01em;}
   .app-header-title-sep{color:var(--line);font-weight:400;margin:0 10px;}
-  .app-header-title-light{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:var(--accent-deep);letter-spacing:.01em;}
-  .app-header-breadcrumb{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:12.5px;font-weight:700;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase;}
+  .app-header-title-light{font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;color:var(--accent);letter-spacing:.01em;}
+  .app-header-breadcrumb{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:12px;font-weight:700;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;}
+  .app-header-breadcrumb .gb-sep{color:var(--line);}
   .app-topbar-actions{
     display:flex;align-items:center;gap:8px;justify-content:flex-end;flex-wrap:wrap;
+    position:relative;z-index:1;
   }
-  .app-topbar-actions .pill{background:var(--navy-soft);color:var(--navy);}
+  /* DÜZELTME: header açık zemine (--bg) döndüğü için içindeki etiket/buton renkleri de
+     koyu zemine göre tasarlanmış yarı saydam beyazlardan, açık zemine uygun tonlara çevrildi. */
+  .app-topbar-actions .pill{background:var(--surface);color:var(--ink);border:1px solid var(--line);}
+  .app-topbar-actions .pill.ok{background:rgba(60,122,86,.10);color:#2F6446;border-color:rgba(60,122,86,.28);}
+  .app-topbar-actions .pill i{color:inherit;}
   .app-topbar-actions .icon-btn{
     width:38px;height:38px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
   }
-  .app-topbar-actions .icon-btn:hover{background:var(--bg);border-color:var(--accent);color:var(--accent-deep);}
+  .app-topbar-actions .icon-btn:hover{background:var(--bg);border-color:var(--accent);color:var(--accent);}
   .app-topbar-actions .icon-btn.danger{border-color:var(--line);background:var(--surface);color:var(--ink-soft);}
-  .app-topbar-actions .icon-btn.danger:hover{border-color:var(--danger);background:var(--danger-soft);color:var(--danger);filter:none;}
+  .app-topbar-actions .icon-btn.danger:hover{border-color:#E06A5A;background:rgba(224,106,90,.10);color:#B23A2C;filter:none;}
   .app-date-chip{
     display:flex;align-items:center;gap:8px;height:38px;padding:0 13px;
     border:1px solid var(--line);background:var(--surface);border-radius:9px;
-    font-size:12.5px;font-weight:600;color:var(--ink-soft);white-space:nowrap;
+    font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap;
   }
   .app-date-chip i{color:var(--accent);font-size:12px;}
 
@@ -1591,13 +1746,13 @@
      açılan bir dropdown (sidebar flyout'larla aynı görsel dil) — dışarı tıklanınca kapanır. */
   .gvy-wrap{position:relative;}
   .gvy-btn{
-    display:flex;align-items:center;gap:7px;height:38px;padding:0 14px;border-radius:9px;
-    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
-    font-size:12.5px;font-weight:700;white-space:nowrap;cursor:pointer;
+    display:flex;align-items:center;gap:7px;height:38px;padding:0 16px;border-radius:9px;
+    border:1px solid #D9B25C;background:#D9B25C;color:var(--navy);
+    font-size:12.5px;font-weight:800;white-space:nowrap;cursor:pointer;
   }
-  .gvy-btn:hover{background:var(--bg);border-color:var(--accent);color:var(--accent-deep);}
-  .gvy-btn.has-update{border-color:var(--accent);color:var(--accent-deep);background:var(--accent-soft);}
-  .gvy-btn i.fa-cloud-arrow-up{color:var(--accent);}
+  .gvy-btn:hover{background:#E6C273;border-color:#E6C273;color:var(--navy);}
+  .gvy-btn.has-update{border-color:#fff;background:#fff;color:var(--navy);}
+  .gvy-btn i.fa-cloud-arrow-up{color:var(--navy);}
   .gvy-panel{
     display:none;position:absolute;top:calc(100% + 8px);right:0;width:340px;z-index:60;
     background:var(--navy);border-radius:14px;box-shadow:0 18px 44px -14px rgba(12,27,51,.42);

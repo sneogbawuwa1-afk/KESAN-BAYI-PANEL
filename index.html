@@ -53,29 +53,57 @@
 
 </head>
 <body>
-<div id="authGate" style="position:fixed;inset:0;background:var(--bg,#EEF1F6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#fff;border-radius:14px;padding:36px 32px;max-width:380px;width:100%;border:1px solid var(--line,#DBE2EC);border-top:3px solid #8A6D1F;">
-    <div class="app-header-brand" style="justify-content:center;margin-bottom:26px;">
-      <div class="app-header-mark app-version-label" translate="no">V3.4</div>
-      <div class="app-header-title-wrap">
-        <h1 class="app-header-title" translate="no" style="font-size:19px;white-space:normal;"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
-        <div class="app-header-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
-      </div>
+<div id="authGate" class="auth-gate-overlay">
+  <div class="auth-gate-card">
+    <div class="auth-gate-top">
+      <div class="app-header-mark app-version-label auth-gate-mark" translate="no">V3.4</div>
+      <h1 class="app-header-title auth-gate-title" translate="no"><span class="app-header-title-strong">AKGÜN</span><span class="app-header-title-sep">|</span><span class="app-header-title-light">MEŞRUBAT GIDA</span></h1>
+      <div class="app-header-breadcrumb auth-gate-breadcrumb"><span>Keşan</span><span class="gb-sep">|</span><span>Efes Pilsen Bayi</span></div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <input type="text" id="authKullaniciKodu" placeholder="Kullanıcı Kodu" aria-label="Kullanıcı Kodu" autocomplete="username" inputmode="numeric" style="padding:11px 13px;border:1px solid var(--line,#DBE2EC);border-radius:9px;font-size:16px;font-family:inherit;" />
-      <input type="password" id="authPassword" placeholder="Şifre" aria-label="Şifre" autocomplete="current-password" style="padding:11px 13px;border:1px solid var(--line,#DBE2EC);border-radius:9px;font-size:16px;font-family:inherit;" />
-      <button type="button" id="authLoginBtn" class="btn primary" style="width:100%;justify-content:center;">Giriş Yap</button>
-      <div id="authError" style="display:none;color:var(--danger,#B23A2C);font-size:12.5px;text-align:center;"></div>
-      <div id="authStatus" style="display:none;color:var(--ink-soft,#54617A);font-size:12.5px;text-align:center;"></div>
-      <button type="button" id="pwaInstallBtnAuth" style="display:none;width:100%;justify-content:center;align-items:center;gap:8px;background:#0C1B33;color:#D9B25C;border:1px solid rgba(201,150,44,0.5);border-radius:9px;padding:11px 13px;font-weight:600;font-size:13.5px;cursor:pointer;"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>Uygulamayı Yükle</button>
-      <div id="iosInstallHint" style="display:none;background:#F5F1E6;border:1px solid rgba(201,150,44,0.4);border-radius:9px;padding:10px 12px;font-size:12.5px;color:#54617A;text-align:left;line-height:1.5;">
-        <b style="color:#0C1B33;">📲 iPhone/iPad'e kurmak için:</b><br>
-        Safari'de alttaki <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true" style="color:#8A6D1F;"></i> Paylaş simgesine dokunun, ardından <b>"Ana Ekrana Ekle"</b>yi seçin.
+    <div class="auth-gate-body">
+      <div class="auth-gate-field">
+        <label for="authKullaniciKodu">Kullanıcı Kodu</label>
+        <input type="text" id="authKullaniciKodu" placeholder="Kullanıcı kodunuzu girin" aria-label="Kullanıcı Kodu" autocomplete="username" inputmode="numeric" />
+      </div>
+      <div class="auth-gate-field">
+        <label for="authPassword">Şifre</label>
+        <input type="password" id="authPassword" placeholder="••••••••" aria-label="Şifre" autocomplete="current-password" />
+      </div>
+      <button type="button" id="authLoginBtn" class="auth-gate-submit">Giriş Yap</button>
+      <div id="authError" class="auth-gate-error"></div>
+      <div id="authStatus" class="auth-gate-status"></div>
+      <button type="button" id="pwaInstallBtnAuth" class="auth-gate-submit auth-gate-install" style="display:none;"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>Uygulamayı Yükle</button>
+      <div id="iosInstallHint" class="auth-gate-ios-hint" style="display:none;">
+        <b>📲 iPhone/iPad'e kurmak için:</b><br>
+        Safari'de alttaki <i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i> Paylaş simgesine dokunun, ardından <b>"Ana Ekrana Ekle"</b>yi seçin.
       </div>
     </div>
   </div>
 </div>
+<!-- BULUT YÜKLEME EKRANI: uygulama açılışında (auth'tan sonra) rapor verisi buluttan/cihazdan
+     gelene kadar gösterilir. #reportSection artık her zaman DOM'da render edildiğinden (boş
+     KPI kutuları dahil) bu overlay, o çıplak/boş iskeleti kullanıcıya göstermeden örter.
+     JS tarafında raporGeldi() (03-veri-yukleme-ve-senkron.js) çağrıldığında gizlenir. -->
+<div id="bulutYuklemeEkrani" class="cloud-load-overlay">
+  <div class="cloud-load-wrap">
+    <div class="app-header-mark app-version-label cloud-load-mark" translate="no">V3.4</div>
+    <h1 class="cloud-load-title" translate="no"><span class="cloud-load-strong">AKGÜN</span><span class="cloud-load-sep">|</span><span class="cloud-load-light">MEŞRUBAT GIDA</span></h1>
+    <div class="cloud-load-status">Rapor hazırlanıyor</div>
+    <div id="bulutYuklemeMesaj" class="cloud-load-msg">Bulut verisi kontrol ediliyor…</div>
+    <div class="cloud-load-track"><div class="cloud-load-fill"></div></div>
+  </div>
+</div>
+<style>@keyframes cloudLoadMove{0%{transform:translateX(-100%);}100%{transform:translateX(350%);}}</style>
+<script>
+  // GÜVENLİK AĞI: uygulamayiBaslat() içindeki en uzun bulut zaman aşımı 25 sn'dir; beklenmeyen
+  // bir hata (ör. yakalanmamış exception) overlay'i kapatan finally satırına hiç ulaşılmasını
+  // engellerse, kullanıcı sonsuza kadar "Rapor hazırlanıyor" ekranında kalmasın diye 30 sn sonra
+  // overlay otomatik olarak kaldırılır (arkadaki reportSection/uploadCard normal haliyle kalır).
+  setTimeout(function(){
+    var el = document.getElementById('bulutYuklemeEkrani');
+    if(el) el.style.display = 'none';
+  }, 30000);
+</script>
 <div id="app" style="display:none;">
 
   <div class="topbar">

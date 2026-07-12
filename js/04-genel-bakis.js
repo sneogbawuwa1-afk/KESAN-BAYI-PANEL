@@ -603,7 +603,38 @@ SB_SUBMENUS.forEach(s=>{
   });
 });
 
-function setActiveView(view){
+// ===== RAPOR GEÇİŞ YÜKLEME OVERLAY'İ =====
+// setActiveView() içinde bazı render fonksiyonları async'tir (bazıları buluttan veri çeker —
+// örn. sellOutYenile). Bu çağrılar await edilmeden önce kullanıcı geçtiği view'ı boş/eski
+// haliyle görüyordu, veri "aniden" beliriyordu. Aşağıdaki iki yardımcı, ilgili view'ın kendi
+// kapsayıcısı üzerine (yalnızca o alanı kaplayan, sidebar/başlığı etkilemeyen) markaya uygun
+// bir "Rapor yükleniyor" kartı bindirir/kaldırır.
+function viewYuklemeOverlayGoster(viewId){
+  const el = document.getElementById(viewId+'View');
+  if(!el) return;
+  if(getComputedStyle(el).position === 'static') el.style.position = 'relative';
+  let overlay = el.querySelector(':scope > .view-yukleme-overlay');
+  if(!overlay){
+    overlay = document.createElement('div');
+    overlay.className = 'view-yukleme-overlay';
+    overlay.innerHTML = '<div class="view-yukleme-karti"><div class="view-yukleme-spin"></div><span class="view-yukleme-metin">Rapor yükleniyor…</span></div>';
+    el.appendChild(overlay);
+  }
+  overlay.style.display = 'flex';
+}
+function viewYuklemeOverlayGizle(viewId){
+  const el = document.getElementById(viewId+'View');
+  const overlay = el && el.querySelector(':scope > .view-yukleme-overlay');
+  if(overlay) overlay.style.display = 'none';
+}
+// Hangi view'ların render fonksiyonu async'tir (buluttan veri çekebilir/ağır hesaplama
+// yapabilir) — sadece bunlar için geçiş overlay'i gösterilir; senkron olanlarda (genelBakis,
+// sevk, yaslandirma, ticariStok, bayiHakedis, supheliAlacak) zaten anlık render olduğundan
+// overlay'e gerek yoktur.
+const ASYNC_RENDER_VIEWLER = new Set(['yukleme','faturaKontrol','sellOut','modernKanal',
+  'stokGun','tahsilatVerimlilik','dsoTrend','nakitAkis','temsilciKarnesi','yonetimOzeti','cei']);
+
+async function setActiveView(view){
   // Üst sekme çubuğu (mobil/dar ekran) ve sidebar linklerini birlikte senkronize et.
   document.querySelectorAll('.tab-btn[data-view]').forEach(b=>{
     const match = b.getAttribute('data-view')===view;
@@ -631,23 +662,28 @@ function setActiveView(view){
     if(el) el.style.display = (id===view) ? 'block' : 'none';
   });
 
-  if(view==='genelBakis') renderGenelBakisView(state.report);
-  if(view==='sevk') renderSevkView(state.report);
-  if(view==='yukleme') renderYuklemeView();
-  if(view==='yaslandirma' && state.report) renderYaslandirmaView(state.report);
-  if(view==='ticariStok' && state.report) renderTicariStokView(state.report);
-  if(view==='faturaKontrol' && state.report) renderFaturaKontrolView(state.report);
-  if(view==='bayiHakedis') renderBayiHakedisView();
-  if(view==='sellOut') renderSellOutView();
-  if(view==='modernKanal') renderModernKanalView();
-  if(view==='stokGun') renderStokGunView();
-  if(view==='tahsilatVerimlilik' && state.report) renderTahsilatVerimlilikView(state.report);
-  if(view==='dsoTrend' && state.report) renderDsoTrendView(state.report);
-  if(view==='nakitAkis' && state.report) renderNakitAkisView(state.report);
-  if(view==='supheliAlacak' && state.report) renderSupheliAlacakView(state.report);
-  if(view==='temsilciKarnesi' && state.report) renderTemsilciKarnesiView(state.report);
-  if(view==='yonetimOzeti' && state.report) renderYonetimOzetiView(state.report);
-  if(view==='cei' && state.report) renderCeiView(state.report);
+  if(ASYNC_RENDER_VIEWLER.has(view)) viewYuklemeOverlayGoster(view);
+  try{
+    if(view==='genelBakis') renderGenelBakisView(state.report);
+    if(view==='sevk') renderSevkView(state.report);
+    if(view==='yukleme') await renderYuklemeView();
+    if(view==='yaslandirma' && state.report) renderYaslandirmaView(state.report);
+    if(view==='ticariStok' && state.report) renderTicariStokView(state.report);
+    if(view==='faturaKontrol' && state.report) await renderFaturaKontrolView(state.report);
+    if(view==='bayiHakedis') renderBayiHakedisView();
+    if(view==='sellOut') await renderSellOutView();
+    if(view==='modernKanal') await renderModernKanalView();
+    if(view==='stokGun') await renderStokGunView();
+    if(view==='tahsilatVerimlilik' && state.report) await renderTahsilatVerimlilikView(state.report);
+    if(view==='dsoTrend' && state.report) await renderDsoTrendView(state.report);
+    if(view==='nakitAkis' && state.report) await renderNakitAkisView(state.report);
+    if(view==='supheliAlacak' && state.report) renderSupheliAlacakView(state.report);
+    if(view==='temsilciKarnesi' && state.report) await renderTemsilciKarnesiView(state.report);
+    if(view==='yonetimOzeti' && state.report) await renderYonetimOzetiView(state.report);
+    if(view==='cei' && state.report) await renderCeiView(state.report);
+  }finally{
+    if(ASYNC_RENDER_VIEWLER.has(view)) viewYuklemeOverlayGizle(view);
+  }
   // AÇILIŞ EKRANI KALDIRILDI (kullanıcı kararı): report yokken YUKARIDAKİ "&& state.report" şartı
   // yüzünden bu render fonksiyonları hiç çağrılmıyor — ama view'ın kendi HTML kapsayıcısı zaten
   // ALL_VIEW_IDS döngüsünde display:block yapılmış oluyor. Düzeltme öncesi kullanıcı, rapor yokken
@@ -776,6 +812,13 @@ document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
       if(leftViewport || e.clientX > sbHoverCloseThresholdX()){
         sidebar.classList.remove('sb-hover-peek');
         sidebar.classList.add('collapsed');
+        // DÜZELTME (kullanıcı isteği): hover-peek eskiden sadece sidebar'ı görsel olarak
+        // genişletip .app-shell'e dokunmuyordu ("içerik yer değiştirmesin, sidebar üzerine
+        // yüzen bir panel gibi genişlesin" tasarımı) — bu da header'ın sidebar'ın ALTINDA/
+        // ARKASINDA kalmış gibi görünmesine (sidebar header'ın üstüne binmesine) yol açıyordu.
+        // Artık fare ayrılınca sidebar tekrar daraldığı gibi .app-shell de tekrar
+        // sb-collapsed'e dönüyor — yani header/içerik de sidebar'la birlikte genişleyip daralıyor.
+        shell.classList.add('sb-collapsed');
         closeAllFlyouts();
         sbStopHoverWatch();
       }
@@ -789,6 +832,10 @@ document.querySelectorAll('.sb-nav-link[data-view]').forEach(btn=>{
     sbStopHoverWatch();
     sidebar.classList.add('sb-hover-peek');
     sidebar.classList.remove('collapsed');
+    // DÜZELTME (kullanıcı isteği): header/içerik artık sidebar ile AYNI ANDA genişliyor —
+    // sidebar sadece görsel olarak büyüyüp header'ın üstüne binmiyor, header da gerçekten
+    // sağa kayıp yer açıyor (tıpkı kalıcı aç/kapa butonundaki davranış gibi).
+    shell.classList.remove('sb-collapsed');
   });
   sidebar.addEventListener('mouseleave', ()=>{
     if(!sidebar.classList.contains('sb-hover-peek')) return;
