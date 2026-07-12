@@ -593,6 +593,16 @@ function computeStokGunRaporu(){
     const toplamGerekliLitre = (!u.oluUrun && (sellOutHedefKendi>0 || modernKanalHedefKendi>0))
       ? (gerekliLitreSellOutToplam + gerekliLitreModernKanalToplam)
       : null;
+    // ÖNEMLİ DÜZELTME: Malzemeler dosyasındaki "Tahditsiz Kullanılabilir" değeri MİKTAR
+    // (koli/adet) cinsindendir, litre değil — bu yüzden doğrudan gunlukHiz'e (litre/gün)
+    // bölmek birim uyuşmazlığı yüzünden anlamsız bir sonuç veriyordu (ör. 1116 miktar / 268
+    // litre-gün). Anlık stok önce litreMiktarOrani ile litreye çevrilip (1116 × 12 = 13.392 L),
+    // ancak öyle günlük litre hızına bölünüyor. Bu blok, "Hedef Gereken Sipariş" hesabının
+    // (aşağıda) depo stoğunu düşebilmesi için ARTIK BURAYA (gerekliLitre'den ÖNCEYE) taşındı.
+    const litreMiktarOraniOnHesap = u.toplamMiktar6Ay>0 ? (u.toplamLitre6Ay/u.toplamMiktar6Ay) : null;
+    const anlikStokMiktar = malzemelerStokBirlesik.get(u.kod);
+    const anlikStokLitre = (anlikStokMiktar!=null && litreMiktarOraniOnHesap>0) ? (anlikStokMiktar*litreMiktarOraniOnHesap) : null;
+    const anlikStok = anlikStokMiktar;
     // Bu ürünün bu ay şimdiye kadar gerçekleşen satışı, HER KANALIN KENDİ kalan hedefinden
     // kendi kanalındaki satış düşülerek bulunur (negatife düşmez), sonra ikisi toplanır —
     // "kalan hedef" de artık kanal bazında ayrı hesaplanıp öyle birleştirilir.
@@ -600,11 +610,22 @@ function computeStokGunRaporu(){
     const buAySatilanModernKanal = buAySatilanModernKanalMap.get(u.kod) || 0;
     const kalanSellOut = Math.max(0, gerekliLitreSellOutToplam - buAySatilanSellOut);
     const kalanModernKanal = Math.max(0, gerekliLitreModernKanalToplam - buAySatilanModernKanal);
-    const gerekliLitre = toplamGerekliLitre!=null ? (kalanSellOut + kalanModernKanal) : null;
+    // KULLANICI KARARI: "Hedef Gereken Sipariş" artık mevcut Depo Stoğu (anlikStokLitre) DÜŞÜLEREK
+    // hesaplanır — zaten elde olan stok kadar daha az sipariş verilmesi gerektiği için. Depo
+    // stoğu, iki kanalın kalan hedefinden ORANLARINA göre (kalanSellOut/kalanModernKanal'ın
+    // toplam içindeki payı kadar) düşülür — böylece stok, hangi kanaldan daha çok satılıyorsa o
+    // kanalın kalan hedefinden daha fazla düşer (mantıksal olarak tutarlı bir dağıtım).
+    const kalanToplamStoksuz = kalanSellOut + kalanModernKanal;
+    const depoStokDususu = anlikStokLitre!=null ? Math.min(anlikStokLitre, kalanToplamStoksuz) : 0;
+    const depoStokDususSellOut = (depoStokDususu>0 && kalanToplamStoksuz>0) ? depoStokDususu * (kalanSellOut/kalanToplamStoksuz) : 0;
+    const depoStokDususModernKanal = depoStokDususu - depoStokDususSellOut;
+    const kalanSellOutStoksuz = Math.max(0, kalanSellOut - depoStokDususSellOut);
+    const kalanModernKanalStoksuz = Math.max(0, kalanModernKanal - depoStokDususModernKanal);
+    const gerekliLitre = toplamGerekliLitre!=null ? (kalanSellOutStoksuz + kalanModernKanalStoksuz) : null;
     // Litre/Miktar oranı (bir "miktar" biriminin kaç litreye denk geldiği) — Sell Out
     // verisindeki aynı satırlarda hem Litre hem Miktar birlikte geldiği için, 6 aylık
     // toplamlardan çıkarılan bu oran ürüne özgü sabit bir çevrim katsayısı olarak kullanılır.
-    const litreMiktarOrani = u.toplamMiktar6Ay>0 ? (u.toplamLitre6Ay/u.toplamMiktar6Ay) : null;
+    const litreMiktarOrani = litreMiktarOraniOnHesap;
     const gerekliMiktar = (gerekliLitre!=null && litreMiktarOrani>0) ? (gerekliLitre/litreMiktarOrani) : null;
 
     // Bu urunun 6 aylik toplaminin, 4 hafta dilimine gore yuzdesel dagilimi. Bugun hangi
@@ -643,14 +664,9 @@ function computeStokGunRaporu(){
     });
     const gunlukHiz = haftaGunlukHizlari[bugunHaftaIndex] || 0; // tabloda "bugünün hızı" olarak gösterilmeye devam eder
     const gunlukMiktar = litreMiktarOrani>0 ? (gunlukHiz/litreMiktarOrani) : null;
-    // ÖNEMLİ DÜZELTME: Malzemeler dosyasındaki "Tahditsiz Kullanılabilir" değeri MİKTAR
-    // (koli/adet) cinsindendir, litre değil — bu yüzden doğrudan gunlukHiz'e (litre/gün)
-    // bölmek birim uyuşmazlığı yüzünden anlamsız bir sonuç veriyordu (ör. 1116 miktar / 268
-    // litre-gün). Anlık stok önce litreMiktarOrani ile litreye çevrilip (1116 × 12 = 13.392 L),
-    // ancak öyle günlük litre hızına bölünüyor.
-    const anlikStokMiktar = malzemelerStokBirlesik.get(u.kod);
-    const anlikStokLitre = (anlikStokMiktar!=null && litreMiktarOrani>0) ? (anlikStokMiktar*litreMiktarOrani) : null;
-    const anlikStok = anlikStokMiktar;
+    // anlikStokMiktar/anlikStokLitre/anlikStok artık YUKARIDA (gerekliLitre hesabından önce)
+    // tanımlanıyor — bkz. o bloktaki not (kullanıcı kararı: Hedef Gereken Sipariş depo stoğunu
+    // düşsün diye taşındı). Burada tekrar tanımlanmıyor, aynı isimlerle yukarıdan kullanılıyor.
     // STOK GÜNÜ artık tek bir sabit hıza bölünmüyor — bugünden başlayarak GÜN GÜN
     // düşürülüyor, her gün kendi haftasının hızıyla tüketiliyor (bkz. stokGunSimulasyonuYap).
     // Böylece stok günü 7'yi aşıp başka bir haftaya taştığında, o sonraki haftanın

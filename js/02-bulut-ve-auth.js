@@ -709,10 +709,14 @@ async function grupATekilDosyaBuluttanOku(tip){
 
 // Ticari Stok/Çek-Senet/Ciro Primi/Dönemsel İskonto için: bugün yeniden seçilmemişse, ne kadar eski
 // olursa olsun en son bilinen hal sorgusuz kullanılır (bu dosyalar "her gün yüklenmesi gerekmez").
-// Kalemler için ise bu, KASITLI OLARAK farklıdır — bkz. KALEMLER_BUGUN_ZORUNLU aşağıda.
-const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','ciroPrimi','donemselIskonto',
+// KALEMLER ARTIK BU LİSTEYE DAHİL (kullanıcı kararı — büyük mimari değişiklik): "Kalemleri
+// yüklemediği hiçbir gün veri yüklemesi yapamamalı" kuralı KALDIRILDI. Artık kart oluşturma
+// Müşteri Master'a, bakiye Cari Ekstre'ye bağlı; Kalemler yalnızca (varsa) açık fatura detayı
+// ekler ve diğer Grup A/B dosyaları gibi en son yüklenen hali kalıcı kalıp güne bakılmaksızın
+// kullanılmaya devam eder (bkz. buildReport'taki yeni kart oluşturma mantığı).
+const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','ciroPrimi','donemselIskonto','kalemler',
   // Grup B de tarih kısıtlaması OLMADAN saklanır: en son yüklenen (çok-günlü/toplu dosyalar dahil)
-  // tarih fark etmeksizin geri yüklenir. Yalnızca Kalemler bugüne-özeldir.
+  // tarih fark etmeksizin geri yüklenir. Yalnızca Kalemler bugüne-özeldi (artık değil).
   'siparis','tahsilat','fatura','depozitoTahsilat','bayiHakedis','yukleme','cariEkstre']);
 
 // Bu dosyaların hepsini paralel olarak yükler; her biri için o gün ekranda yeni bir dosya SEÇİLMİŞSE
@@ -721,31 +725,26 @@ const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','ciroPrimi','d
 // beklediği {data, headers} şekliyle) yerleştirilir — böylece buildReport çağrısı her zaman aynı arayüzü
 // görür, dosyanın "bugün mü yüklendi yoksa önceki gün mü kaldı" farkını bilmesine gerek kalmaz.
 //
-// KALEMLER_BUGUN_ZORUNLU: Kalemler diğer 4 dosyadan farklı olarak HER GÜN en az bir kez yüklenmiş
-// olmalıdır (kullanıcı isteği: "Kalemleri yüklemediği hiçbir gün veri yüklemesi yapamamalı" — örn.
-// bugün Kalemler yüklendi, yarın unutulup sadece Sipariş yüklenirse bu ENGELLENMELİ). Bu yüzden
-// Kalemler için geri yüklenen tek-slot kaydının tarihi BUGÜNE ait değilse, state.files.kalemler
-// KASITLI OLARAK DOLDURULMAZ (null bırakılır) — ardından raporuOlusturVeyaGuncelleAkisiniCalistir
-// içindeki güvenlik kontrolü bunu yakalayıp net bir hata verir. Aynı GÜN içinde Kalemler bir kez
-// yüklendikten sonra ise (tek-slot kaydının tarihi bugüne aitse) o gün boyunca sınırsız sayıda Grup B
-// güncellemesi yapılabilir, Kalemler'in tekrar seçilmesine gerek kalmaz.
-// "Bugün Kalemler yüklendi mi?" durumunu güvenilir biçimde belirler ve state.bugunKalemlerHazir'a
-// yazar. İki kaynağa bakar: (1) bu oturumda bellekteki state.files.kalemler, (2) tek-slot Kalemler
-// arşivindeki kaydın TARİHİ bugüne aitse. Böylece kullanıcı Kalemler'i yükleyip rapor oluşturduktan
-// sonra (state.files bellekte boşalsa bile) Grup B/C panelleri "Kalemler yok" sanmaz.
+// KALEMLER_BUGUN_ZORUNLU KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Kalemler artık
+// diğer Grup A/B dosyaları gibi davranır — en son yüklenen hali, günü ne olursa olsun, yeni bir
+// dosya seçilene kadar kalıcı kullanılır. Kart oluşturma artık Müşteri Master'a, bakiye Cari
+// Ekstre'ye bağlı olduğundan Kalemler'in "her gün zorunlu" olması gerekmiyor — Kalemler yalnızca
+// (varsa) açık fatura detayı ekleyen opsiyonel bir kaynak. "Kalemler yüklendi mi?" durumunu
+// güvenilir biçimde belirler ve state.bugunKalemlerHazir'a yazar (isim tarihsel nedenlerle
+// korunmuştur, artık "bugüne özel" değil "herhangi bir zamanda yüklendi mi" anlamına gelir). İki
+// kaynağa bakar: (1) bu oturumda bellekteki state.files.kalemler, (2) tek-slot Kalemler arşivinde
+// (tarihi ne olursa olsun) bir kayıt var mı.
 async function bugunKalemlerDurumTazele(){
   // 1) Bellekte bu oturumda yüklü mü?
   if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length){
     state.bugunKalemlerHazir = true;
     return true;
   }
-  // 2) Tek-slot arşivinde BUGÜNE ait bir Kalemler kaydı var mı?
+  // 2) Tek-slot arşivinde bir Kalemler kaydı var mı (tarihi ne olursa olsun)?
   try{
-    const bugunKey = dateKeyLocal(new Date());
     let kayit = cloudEnabled() ? await grupATekilDosyaBuluttanOku('kalemler') : null;
     if(!kayit) kayit = await grupATekilDosyaYerelOku('kalemler');
-    const kayitGunKey = (kayit && kayit.tarih) ? dateKeyLocal(new Date(kayit.tarih)) : null;
-    const varMi = !!(kayit && kayit.data && kayit.data.length && kayitGunKey === bugunKey);
+    const varMi = !!(kayit && kayit.data && kayit.data.length);
     state.bugunKalemlerHazir = varMi;
     return varMi;
   }catch(_){
@@ -1248,6 +1247,10 @@ const dropzone = document.getElementById('dropzone');
 const fileInput = document.getElementById('fileInput');
 const uploadError = document.getElementById('uploadError');
 const buildBtn = document.getElementById('buildBtn');
+// Ana Veri sekmesindeki (Veri Yükle panelindeki) ikinci "Raporu Oluştur" butonu — dropzone'daki
+// buildBtn ile AYNI akışı tetikler, aynı disabled/textContent durumunu senkron gösterir (bkz.
+// updateUploadUI ve raporuOlusturVeyaGuncelleAkisiniCalistir).
+const gvyAnaBuildBtn = document.getElementById('gvyAnaBuildBtn');
 const statusPill = document.getElementById('statusPill');
 const statusPillMsg = document.getElementById('statusPillMsg');
 const resetBtn = document.getElementById('resetBtn');
@@ -1455,24 +1458,37 @@ function updateChecklist(){
       item.classList.remove('done');
     }
   });
-  // Ana ekran (Grup A) artık YALNIZCA Kalemler (zorunlu) + Müşteri Master (opsiyonel) gösterir.
-  // Sayaç bu iki dosyaya göre hesaplanır — Grup B (Sipariş/Tahsilat/… üst panel "Arşiv Verisi")
-  // ve Grup C (Çek/Senet/Stok/Ciro/İskonto üst panel "Günlük Veri") ile kanal dosyaları buraya
-  // dahil edilmez. Ana ekranda tek zorunlu dosya Kalemler'dir; Müşteri Master opsiyoneldir.
+  // Ana Veri sekmesindeki (Veri Yükle panelindeki) Kalemler/Müşteri Master özet metinlerini de
+  // aynı state.files verisiyle senkron tutar — dropzone'daki checklist ile AYNI bilgiyi gösterir.
+  const gvyAnaKalemlerSub = document.getElementById('gvyAnaKalemlerSub');
+  if(gvyAnaKalemlerSub){
+    const info = state.files.kalemler;
+    gvyAnaKalemlerSub.textContent = info ? (info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır') : 'Dosya seçilmedi';
+  }
+  const gvyAnaMasterSub = document.getElementById('gvyAnaMasterSub');
+  if(gvyAnaMasterSub){
+    const info = state.files.musteriMaster;
+    gvyAnaMasterSub.textContent = info ? (info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır') : 'Dosya seçilmedi';
+  }
+  // Ana ekran (Grup A): Kalemler + Müşteri Master gösterir. KALEMLER ARTIK ZORUNLU DEĞİL (kullanıcı
+  // kararı — büyük mimari değişiklik, bkz. GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR ve
+  // raporuOlusturVeyaGuncelleAkisiniCalistir'deki kaldırılan güvenlik kontrolü notu). Bu ekranın
+  // GÖRSEL yeniden düzenlemesi (yeni "Ana Veri" sekmesi: Kalemler + Müşteri Master + Cari Ekstre)
+  // ayrı bir adımda yapılacak — burada yalnızca FONKSİYONEL kısıt (buton kilidi) kaldırılıyor.
   const anaEkranTipleri = ['kalemler','musteriMaster'];
   const kalemlerLoaded = Boolean(state.files.kalemler);
   const total = anaEkranTipleri.length;
   const loadedCount = anaEkranTipleri.filter(t=> Boolean(state.files[t])).length;
   const allLoaded = loadedCount === total;
-  buildBtn.disabled = !kalemlerLoaded;
-  // Kalemler zorunlu, Müşteri Master opsiyonel: Kalemler yüklüyse rapor oluşturulabilir. Buton
-  // metni kullanıcıyı yanıltmasın — Müşteri Master eksikse "opsiyonel" olduğu için engel yok.
+  // KİLİT KALDIRILDI: Rapor artık Kalemler olmadan da (Müşteri Master + Cari Ekstre ile) oluşabilir.
+  buildBtn.disabled = false;
   buildBtn.textContent = 'Raporu Oluştur';
+  if(gvyAnaBuildBtn){ gvyAnaBuildBtn.disabled = false; gvyAnaBuildBtn.textContent = 'Raporu Oluştur'; }
   statusPillMsg.textContent = allLoaded
     ? (total+'/'+total+' dosya hazır')
     : (kalemlerLoaded
         ? (loadedCount+'/'+total+' dosya · Kalemler hazır (Müşteri Master opsiyonel)')
-        : ('Kalemler bekleniyor (zorunlu)'));
+        : (loadedCount+'/'+total+' dosya · Kalemler ve Müşteri Master opsiyonel'));
   if(kalemlerLoaded) statusPill.classList.add('ok');
 }
 
@@ -1499,14 +1515,12 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     // geçilip Kalemler o gün için hiç yüklenmediyse bilerek BOŞ bırakılır (bkz.
     // grupATekilDosyalariHazirla ve KALEMLER_BUGUN_ZORUNLU açıklaması).
     await grupATekilDosyalariHazirla();
-    // GÜVENLİK KONTROLÜ: Kalemler bugün için hiç yüklenmediyse (ne bu oturumda ne tek-slot kaydında)
-    // hiçbir dosya işlenmez — kullanıcı isteği: "Kalemleri yüklemediği hiçbir gün veri yüklemesi
-    // yapamamalı" (bugün Kalemler yüklenip yarın unutulup sadece Sipariş yüklenmesi senaryosunun
-    // önüne geçmek için). Eskiden bu durumda "Cannot read properties of null (reading 'data')" diye
-    // anlamsız bir hata fırlatılıyordu, artık net bir mesaj veriliyor.
-    if(!state.files.kalemler || !state.files.kalemler.data || !state.files.kalemler.data.length){
-      throw new Error('Bugün için Kalemler dosyası henüz yüklenmedi. Diğer dosyalar (Sipariş/Tahsilat/Fatura vb.) işlenmeden önce bugün en az bir kez Kalemler dosyasını yüklemeniz gerekir.');
-    }
+    // GÜVENLİK KONTROLÜ KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Önceden Kalemler
+    // hiç yüklenmemişse burada hata fırlatılıp TÜM işlem durduruluyordu. Artık kart oluşturma
+    // Müşteri Master'a, bakiye Cari Ekstre'ye bağlı olduğundan Kalemler'in varlığı ZORUNLU değil —
+    // Kalemler yalnızca (varsa) mevcut kartlara açık fatura detayı ekler. state.files.kalemler boş
+    // olsa bile buildReport artık normal şekilde çalışabilir (bkz. buildReport'un başındaki
+    // "files.kalemler || {data:[]}" güvenli varsayılanı).
     // ÇEK/SENET RİSKİ — ARŞİV BİRLEŞTİRME (kullanıcı isteği): buildReport'tan ÖNCE, bu oturumda
     // yeni bir Çek/Senet Riski dosyası seçildiyse (state.files.cekSenet doluysa) kalıcı arşivle
     // birleştirilir — yeni/güncellenen kayıtlar arşive işlenir, eski arşivde olup bu dosyada
@@ -1586,6 +1600,7 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
   }
 }
 buildBtn.addEventListener('click', raporuOlusturVeyaGuncelleAkisiniCalistir);
+if(gvyAnaBuildBtn) gvyAnaBuildBtn.addEventListener('click', raporuOlusturVeyaGuncelleAkisiniCalistir);
 
 syncBtn.addEventListener('click', async ()=>{
   if(!cloudEnabled()) return;

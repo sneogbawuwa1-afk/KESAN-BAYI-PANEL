@@ -789,7 +789,11 @@ async function computeCeiTrend(report, ayAdedi, zorla){
 
 async function populateCeiAySelect(){
   const gunler = Object.keys(state.faturaArsivCache||{}).sort();
-  const aylar = Array.from(new Set(gunler.map(g=>g.slice(0,7)))).sort();
+  // TEMMUZ 2026 ÖNCESİ AYLAR MANUEL OLARAK GİZLENİR (kullanıcı kararı) — bkz. tvMevcutAylar
+  // içindeki aynı notu (06-senet-ve-detay.js). Otomatik günlük snapshot mekanizması sadece
+  // bugünden itibaren çalıştığı için geçmiş aylarda hiçbir zaman "Kalan Borç" fotoğrafı olmayacak.
+  const CEI_MIN_AY_KEY = '2026-07';
+  const aylar = Array.from(new Set(gunler.map(g=>g.slice(0,7)))).filter(ay=> ay>=CEI_MIN_AY_KEY).sort();
   const sel = document.getElementById('ceiAySelect');
   const mevcutSecim = state.ceiAy;
   sel.innerHTML = aylar.map(a=>`<option value="${a}">${fmtDate(new Date(a+'-01'))}</option>`).join('');

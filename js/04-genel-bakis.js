@@ -648,6 +648,40 @@ function setActiveView(view){
   if(view==='temsilciKarnesi' && state.report) renderTemsilciKarnesiView(state.report);
   if(view==='yonetimOzeti' && state.report) renderYonetimOzetiView(state.report);
   if(view==='cei' && state.report) renderCeiView(state.report);
+  // AÇILIŞ EKRANI KALDIRILDI (kullanıcı kararı): report yokken YUKARIDAKİ "&& state.report" şartı
+  // yüzünden bu render fonksiyonları hiç çağrılmıyor — ama view'ın kendi HTML kapsayıcısı zaten
+  // ALL_VIEW_IDS döngüsünde display:block yapılmış oluyor. Düzeltme öncesi kullanıcı, rapor yokken
+  // bu sekmelere tıklarsa TAMAMEN BOŞ bir sayfa görüyordu (dsoTrend/cei hariç, onların zaten kendi
+  // bosPanel'i vardı). Şimdi, henüz kendi özel boş-durum paneli olmayan sekmeler için TEK NOKTADAN,
+  // güvenli/genel bir "Rapor henüz oluşturulmadı" mesajı gösterilir. ÖNEMLİ (veri güvenliği):
+  // view'ın innerHTML'i DEĞİŞTİRİLMEZ (bu, ileride rapor oluştuğunda render fonksiyonlarının
+  // aradığı elementleri kalıcı olarak silip onları sessizce bozabilirdi) — bunun yerine görünmez/
+  // absolute bir overlay div EKLENIR, orijinal içerik CSS ile (visibility) gizlenir ama DOM'da
+  // olduğu gibi kalır; rapor geldiğinde overlay kaldırılır ve içerik normal şekilde render edilir.
+  const KENDI_BOS_PANELI_OLMAYAN_VIEWLER = new Set(['yaslandirma','ticariStok','faturaKontrol',
+    'tahsilatVerimlilik','nakitAkis','supheliAlacak','temsilciKarnesi','yonetimOzeti']);
+  if(KENDI_BOS_PANELI_OLMAYAN_VIEWLER.has(view)){
+    const el = document.getElementById(view+'View');
+    if(el){
+      let overlay = el.querySelector(':scope > .gvy-genel-bos-durum');
+      if(!state.report){
+        if(!overlay){
+          overlay = document.createElement('div');
+          overlay.className = 'bos-durum gvy-genel-bos-durum';
+          overlay.style.cssText = 'padding:60px 20px;text-align:center;';
+          overlay.innerHTML = `<i class="fa-solid fa-file-circle-question" aria-hidden="true" style="font-size:28px;color:var(--ink-faint);"></i>
+            <div style="font-size:15px;font-weight:600;margin:12px 0 4px;">Bugünün raporu henüz oluşturulmadı</div>
+            <div style="font-size:12.5px;color:var(--ink-soft);">Bu ekran, işlenmiş rapor verisine dayanır. Üst köşedeki <b>Veri Yükle</b> panelinden Kalemler/Müşteri Master/Cari Ekstre yükleyip "Raporu Oluştur"a basın.</div>`;
+          el.insertBefore(overlay, el.firstChild);
+        }
+        Array.from(el.children).forEach(child=>{ if(child!==overlay) child.style.display='none'; });
+        overlay.style.display = 'block';
+      }else if(overlay){
+        overlay.style.display = 'none';
+        Array.from(el.children).forEach(child=>{ if(child!==overlay) child.style.removeProperty('display'); });
+      }
+    }
+  }
 
   try{ window.scrollTo({top:0, behavior:'instant'}); }catch(e){ window.scrollTo(0,0); }
 }

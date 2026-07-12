@@ -224,9 +224,10 @@
           </button>
           <div class="gvy-panel" id="gvyPanel" role="dialog" aria-label="Veri Yükle">
 
-            <!-- İki sekmeli panel: Günlük Veri (Grup C) + Arşiv Verisi (Grup B) -->
+            <!-- Üç sekmeli panel: Ana Veri (Kalemler+Master+Ekstre) + Günlük Veri (Grup C) + Arşiv Verisi (Grup B) -->
             <div class="gvy-tabs" role="tablist">
-              <button type="button" class="gvy-tab active" id="gvyTabGunluk" data-gvy-tab="gunluk" role="tab" aria-selected="true">Günlük Veri</button>
+              <button type="button" class="gvy-tab active" id="gvyTabAna" data-gvy-tab="ana" role="tab" aria-selected="true">Ana Veri</button>
+              <button type="button" class="gvy-tab" id="gvyTabGunluk" data-gvy-tab="gunluk" role="tab" aria-selected="false">Günlük Veri</button>
               <button type="button" class="gvy-tab" id="gvyTabArsiv" data-gvy-tab="arsiv" role="tab" aria-selected="false">Arşiv Verisi</button>
             </div>
 
@@ -234,7 +235,53 @@
             <div class="gvy-uyari" id="gvyKalemlerUyari"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Güne başlamak için önce ana ekrandan bugünün <b>Kalemler</b> dosyasını yükleyip "Raporu Oluştur"a basın. Kalemler yüklenmeden veri güncellemesi yapılamaz.</div>
 
             <!-- ===================== SEKME 1: GÜNLÜK VERİ (GRUP C) ===================== -->
-            <div class="gvy-tabpane active" id="gvyPaneGunluk" role="tabpanel" aria-labelledby="gvyTabGunluk">
+            <!-- ===================== SEKME 0: ANA VERİ (Kalemler + Müşteri Master + Cari Ekstre) ===================== -->
+            <div class="gvy-tabpane active" id="gvyPaneAna" role="tabpanel" aria-labelledby="gvyTabAna">
+              <div class="gvy-panel-title">Ana Veri Yükle</div>
+              <div class="gvy-uyari" style="display:block;background:transparent;border:none;padding:0 0 10px;color:rgba(255,255,255,.55);font-size:11px;">
+                Kalemler ve Müşteri Master de artık HER GÜN yüklenmesi zorunlu değildir — en son yüklenen dosya kalıcı kalır, yeni bir dosya seçilene kadar kullanılmaya devam eder.
+              </div>
+
+              <!-- TAŞINDI (kullanıcı kararı — panel yeniden yapılanması): Kalemler + Müşteri Master
+                   dosya seçme alanları önceden ana ekranın (dropzone) içindeydi; id'leri ve JS
+                   bağlantıları (fileInput, buildBtn, fileChecklist vb.) KORUNMUŞTUR, sadece bu
+                   panele taşındı. Dropzone'un kendisi (sürükle-bırak) ayrı bir adımda ele alınacak. -->
+              <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
+                  <div>
+                    <div class="gvy-row-label">Kalemler (Fatura / Bakiye)</div>
+                    <div class="gvy-row-sub" id="gvyAnaKalemlerSub">Dosya seçilmedi</div>
+                  </div>
+                  <label for="fileInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
+                </div>
+              </div>
+              <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
+                  <div>
+                    <div class="gvy-row-label">Müşteri Master</div>
+                    <div class="gvy-row-sub" id="gvyAnaMasterSub">Dosya seçilmedi</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="gvy-panel-title" style="margin-top:6px;">Cari Hesap Ekstre</div>
+              <!-- TAŞINDI (kullanıcı kararı): Cari Ekstre önceden "Arşiv Verisi" sekmesindeydi,
+                   kendi gvy-row/GVY_DOSYA_TIPLERI mekanizmasıyla (Dosya Seç butonu, gvyFileInput
+                   üzerinden) ÇALIŞMAYA DEVAM EDİYOR — yalnızca HTML'deki konumu değişti. -->
+              <div class="gvy-row" data-gvy-type="cariEkstre">
+                <div><div class="gvy-row-label">Cari Hesap Ekstre</div><div class="gvy-row-sub" data-gvy-sub></div><div class="gvy-row-arsivgun" data-gvy-arsivgun></div></div>
+                <div class="gvy-row-btns">
+                  <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
+                  <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                </div>
+              </div>
+
+              <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">
+                <button class="btn primary" id="gvyAnaBuildBtn" disabled>Raporu Oluştur</button>
+              </div>
+            </div>
+
+            <div class="gvy-tabpane" id="gvyPaneGunluk" role="tabpanel" aria-labelledby="gvyTabGunluk">
               <div class="gvy-panel-title">Günlük Veri Yükle</div>
 
               <div class="gvy-row" data-gvc-type="ticariStok">
@@ -259,6 +306,69 @@
                 </div>
               </div>
               <input type="file" id="gvcFileInput" accept=".xlsx,.xls" multiple style="display:none;" />
+
+              <div class="gvy-panel-title" style="margin-top:6px;">Kanal Raporları</div>
+
+              <!-- TAŞINDI (kullanıcı kararı — panel yeniden yapılanması): Bu iki alan önceden
+                   "Arşiv Verisi" sekmesindeydi, artık "Günlük Veri" sekmesinde — id'leri ve JS
+                   bağlantıları KORUNMUŞTUR, sadece HTML'deki fiziksel konumları değişti. "Bu Ayı
+                   Arşivle" / "Tüm Ayları Toplu Arşivle" butonları kasıtlı olarak kendi sekmelerinde
+                   (Geleneksel Kanal / Modern Kanal) bırakılmıştır. -->
+              <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
+                  <div>
+                    <div class="gvy-row-label">Geleneksel Kanal (Sell Out)</div>
+                    <div class="gvy-row-sub" id="sellOutKendiDosyaAdi">Dosya seçilmedi</div>
+                    <div class="gvy-row-arsivgun" id="sellOutKendiSonVeri"></div>
+                  </div>
+                  <label for="sellOutKendiDosyaInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
+                </div>
+                <input type="file" id="sellOutKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+                <div style="display:flex;align-items:center;gap:8px;width:100%;">
+                  <button type="button" class="btn small" id="sellOutKendiGuncelleBtn" disabled style="flex:1;">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+                  </button>
+                  <span id="sellOutKendiDurum" style="font-size:11.5px;color:rgba(255,255,255,.6);"></span>
+                </div>
+              </div>
+
+              <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
+                  <div>
+                    <div class="gvy-row-label">Modern Kanal (İrsaliye)</div>
+                    <div class="gvy-row-sub" id="modernKanalKendiDosyaAdi">Dosya seçilmedi</div>
+                    <div class="gvy-row-arsivgun" id="modernKanalKendiSonVeri"></div>
+                  </div>
+                  <label for="modernKanalKendiDosyaInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
+                </div>
+                <input type="file" id="modernKanalKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+                <div style="display:flex;align-items:center;gap:8px;width:100%;">
+                  <button type="button" class="btn small" id="modernKanalKendiGuncelleBtn" disabled style="flex:1;">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+                  </button>
+                  <span id="modernKanalKendiDurum" style="font-size:11.5px;color:rgba(255,255,255,.6);"></span>
+                </div>
+              </div>
+
+              <!-- TAŞINDI (kullanıcı kararı): Stok Gün'ün "Malzemeler" dosyası — id'leri ve JS
+                   bağlantıları KORUNMUŞTUR, sadece HTML'deki fiziksel konumu değişti. -->
+              <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
+                  <div>
+                    <div class="gvy-row-label">Malzemeler (Stok Gün — Anlık Depo Stoğu)</div>
+                    <div class="gvy-row-sub" id="stokGunKendiDosyaAdi">Dosya seçilmedi</div>
+                  </div>
+                  <label for="stokGunKendiDosyaInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
+                </div>
+                <input type="file" id="stokGunKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
+                <div style="display:flex;align-items:center;gap:8px;width:100%;">
+                  <button type="button" class="btn small" id="stokGunKendiGuncelleBtn" disabled style="flex:1;">
+                    <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
+                  </button>
+                  <span id="stokGunKendiDurum" style="font-size:11.5px;color:rgba(255,255,255,.6);"></span>
+                </div>
+              </div>
+
               <div class="gvy-actions">
                 <button type="button" class="gvy-update-btn" id="gvcUpdateBtn">Verileri Güncelle</button>
               </div>
@@ -330,49 +440,6 @@
               <div class="gvy-row-btns">
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-              </div>
-            </div>
-
-            <div class="gvy-panel-title" style="margin-top:6px;">Kanal Raporları</div>
-
-            <!-- Bu iki alan, Geleneksel Kanal ve Modern Kanal sekmelerindeki bağımsız dosya yükleme
-                 alanlarıyla AYNI elementlerdir (id'leri korunmuştur) — sadece HTML'deki fiziksel
-                 konumları buraya taşınmıştır, JS tarafında hiçbir değişiklik yapılmamıştır. "Bu Ayı
-                 Arşivle" / "Tüm Ayları Toplu Arşivle" butonları kasıtlı olarak kendi sekmelerinde
-                 (Geleneksel Kanal / Modern Kanal) bırakılmıştır. -->
-            <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
-                <div>
-                  <div class="gvy-row-label">Geleneksel Kanal (Sell Out)</div>
-                  <div class="gvy-row-sub" id="sellOutKendiDosyaAdi">Dosya seçilmedi</div>
-                  <div class="gvy-row-arsivgun" id="sellOutKendiSonVeri"></div>
-                </div>
-                <label for="sellOutKendiDosyaInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
-              </div>
-              <input type="file" id="sellOutKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
-              <div style="display:flex;align-items:center;gap:8px;width:100%;">
-                <button type="button" class="btn small" id="sellOutKendiGuncelleBtn" disabled style="flex:1;">
-                  <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
-                </button>
-                <span id="sellOutKendiDurum" style="font-size:11.5px;color:rgba(255,255,255,.6);"></span>
-              </div>
-            </div>
-
-            <div class="gvy-row" style="align-items:flex-start;flex-direction:column;gap:8px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px;">
-                <div>
-                  <div class="gvy-row-label">Modern Kanal (İrsaliye)</div>
-                  <div class="gvy-row-sub" id="modernKanalKendiDosyaAdi">Dosya seçilmedi</div>
-                  <div class="gvy-row-arsivgun" id="modernKanalKendiSonVeri"></div>
-                </div>
-                <label for="modernKanalKendiDosyaInput" class="gvy-file-btn" style="cursor:pointer;">Dosya Seç</label>
-              </div>
-              <input type="file" id="modernKanalKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
-              <div style="display:flex;align-items:center;gap:8px;width:100%;">
-                <button type="button" class="btn small" id="modernKanalKendiGuncelleBtn" disabled style="flex:1;">
-                  <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
-                </button>
-                <span id="modernKanalKendiDurum" style="font-size:11.5px;color:rgba(255,255,255,.6);"></span>
               </div>
             </div>
 
@@ -1152,19 +1219,8 @@
       </details>
 
       <div class="panel" id="stokGunKendiYuklemePanel">
-        <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
-          <label for="stokGunKendiDosyaInput" class="btn small" style="cursor:pointer;">
-            <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> Malzemeler Dosyası Seç
-          </label>
-          <input type="file" id="stokGunKendiDosyaInput" accept=".xlsx,.xls,.csv" style="display:none;">
-          <span id="stokGunKendiDosyaAdi" style="font-size:12.5px;color:var(--ink-soft);">Dosya seçilmedi</span>
-          <button type="button" class="btn small" id="stokGunKendiGuncelleBtn" disabled>
-            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Verileri Güncelle
-          </button>
-          <span id="stokGunKendiDurum" style="font-size:12px;color:var(--ink-faint);"></span>
-        </div>
-        <div class="panel-body" style="padding-top:0;font-size:11.5px;color:var(--ink-faint);">
-          Malzeme Numarası ve Tahditsiz Kullanılabilir stok kolonlarını içeren anlık depo stok dökümü yüklenir — bu alan da ana yükleme ekranından bağımsızdır.
+        <div class="panel-body" style="font-size:11.5px;color:var(--ink-faint);">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> Malzemeler dosya yükleme alanı artık üst menüdeki <b>"Veri Yükle → Günlük Veri"</b> sekmesinde. Aynı id'ler orada yaşıyor, JS hiç değişmedi.
         </div>
       </div>
 
@@ -1656,7 +1712,7 @@
     </div>
 
     <div class="modal-overlay" id="analizModalOverlay">
-      <div class="modal" id="analizModal" role="dialog" aria-modal="true" aria-labelledby="analizModalTitle" style="max-width:480px;">
+      <div class="modal" id="analizModal" role="dialog" aria-modal="true" aria-labelledby="analizModalTitle" style="max-width:560px;">
         <div class="panel-head modal-head-navy">
           <div class="modal-head-navy-top">
             <div class="modal-head-navy-avatar" id="analizModalAvatar"></div>

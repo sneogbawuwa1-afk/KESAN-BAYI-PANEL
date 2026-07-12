@@ -33,7 +33,7 @@
     toggleBtn.setAttribute('aria-expanded','false');
   }
 
-  // ---- Sekme geçişi (Günlük Veri / Arşiv Verisi) ----
+  // ---- Sekme geçişi (Ana Veri / Günlük Veri / Arşiv Verisi) ----
   const tabButtons = panel.querySelectorAll('.gvy-tab');
   const tabPanes = panel.querySelectorAll('.gvy-tabpane');
   tabButtons.forEach(tb=>{
@@ -41,32 +41,31 @@
       const hedef = tb.getAttribute('data-gvy-tab');
       tabButtons.forEach(b=>{ const aktif=b===tb; b.classList.toggle('active',aktif); b.setAttribute('aria-selected', aktif?'true':'false'); });
       tabPanes.forEach(p=>{
-        const aktif = (hedef==='gunluk' && p.id==='gvyPaneGunluk') || (hedef==='arsiv' && p.id==='gvyPaneArsiv');
+        const aktif = (hedef==='ana' && p.id==='gvyPaneAna') || (hedef==='gunluk' && p.id==='gvyPaneGunluk') || (hedef==='arsiv' && p.id==='gvyPaneArsiv');
         p.classList.toggle('active', aktif);
       });
     });
   });
 
-  // Bugün Kalemler yüklendi mi? (Grup C/B için ön koşul.) Ana ekrandaki state.files.kalemler O GÜN
-  // yüklenmiş bir dosya varsa doludur (grupATekilDosyalariHazirla yalnızca bugüne ait Kalemler'i geri
-  // yükler). Bu yüzden bugün Kalemler yoksa uyarı gösterilir ve güncelleme butonları kilitlenir.
-  // Senkron hızlı kontrol: bellekte VEYA (en son tazelemede belirlenen) bugüne ait tek-slot kaydı.
+  // Bugün Kalemler yüklendi mi? (Artık Grup B/C için ZORUNLU bir ön koşul DEĞİL — kullanıcı
+  // kararıyla kaldırıldı. Bu fonksiyon yalnızca bilgilendirme amaçlı "uyarı" göstergesi için
+  // korunmuştur, artık hiçbir butonu kilitlemez.)
   function bugunKalemlerVarMi(){
     if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length) return true;
     return !!state.bugunKalemlerHazir;
   }
-  // Asenkron: önce tek-slot arşivini tazeler (bugüne ait Kalemler var mı?), sonra UI'ı günceller.
-  // Böylece rapor oluşturulmuş ama state.files bellekte boş olsa bile doğru sonucu verir.
+  // Asenkron: önce tek-slot arşivini tazeler (Kalemler var mı?), sonra UI'ı günceller.
   async function gvyKalemlerUyariGuncelle(){
     try{ if(typeof bugunKalemlerDurumTazele === 'function') await bugunKalemlerDurumTazele(); }catch(_){}
     const uyari = document.getElementById('gvyKalemlerUyari');
     const kalemlerYok = !bugunKalemlerVarMi();
     if(uyari) uyari.classList.toggle('goster', kalemlerYok);
-    // Grup B ve Grup C güncelleme butonlarını da senkronla.
+    // KİLİT KALDIRILDI (kullanıcı kararı): Grup B/C güncelleme butonları artık Kalemler'in varlığına
+    // bağlı DEĞİL — yalnızca kendi grubunda seçili dosya olup olmamasına bakar.
     const gb = document.getElementById('gvyUpdateBtn');
     const gc = document.getElementById('gvcUpdateBtn');
-    if(gb) gb.disabled = kalemlerYok || (GVY_DOSYA_TIPLERI.filter(t=>state.files[t]).length===0);
-    if(gc) gc.disabled = kalemlerYok || GRUP_C_HAZIR_SAYISI()===0;
+    if(gb) gb.disabled = GVY_DOSYA_TIPLERI.filter(t=>state.files[t]).length===0;
+    if(gc) gc.disabled = GRUP_C_HAZIR_SAYISI()===0;
   }
   window.gvyKalemlerUyariGuncelle = gvyKalemlerUyariGuncelle;
   toggleBtn.addEventListener('click', async (e)=>{
@@ -477,6 +476,7 @@ async function resetAll(){
   });
   buildBtn.disabled = true;
   buildBtn.textContent = 'Raporu Oluştur';
+  if(typeof gvyAnaBuildBtn !== 'undefined' && gvyAnaBuildBtn){ gvyAnaBuildBtn.disabled = true; gvyAnaBuildBtn.textContent = 'Raporu Oluştur'; }
   statusPillMsg.textContent = 'Veri bekleniyor';
   statusPill.classList.remove('ok');
   document.getElementById('uploadCard').style.display='block';
@@ -867,9 +867,44 @@ async function uygulamayiBaslat(){
   }else if(cloudEnabled()){
     statusPillMsg.textContent = 'Veri bekleniyor';
   }
+  // AÇILIŞ EKRANI KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Rapor HİÇ yoksa bile
+  // (hem cihazda hem buluttan hiç veri gelmediyse) uygulama artık boş bir dropzone değil, doğrudan
+  // rapor arayüzünü (sidebar + Genel Bakış'ın "Bugünün raporu henüz oluşturulmadı" boş durumu)
+  // gösterir. Daha önce bu durumda hiçbir render tetiklenmiyordu (yalnızca "Veri bekleniyor" yazısı
+  // güncelleniyordu) — bu satırlar olmadan kullanıcı, dropzone kalktıktan sonra tamamen BOŞ bir
+  // sayfa (sidebar'sız, içeriksiz) görürdü.
+  if(!state.report){
+    document.body.classList.add('has-sidebar');
+    setActiveView('genelBakis');
+  }
+  // OTOMATİK GÜNLÜK SNAPSHOT (kullanıcı kararı): Önceden musteriSnapshot SADECE kullanıcı "Raporu
+  // Oluştur"/"Veri Güncelle" butonuna bastığında yazılıyordu — kullanıcı Kalemler'i bir kez
+  // yükleyip günlerce hiç butona basmazsa (artık zorunlu olmadığı için sıkça olacak bir senaryu),
+  // Trend Analizi/Tahsilat Verimliliği/Yönetim Özeti gibi raporlar o günleri "musteriSnapshot yok"
+  // sayıp boş/eksik gösteriyordu — halbuki fatura/tahsilat verisi zaten yüklenmiş olabiliyordu.
+  // Şimdi: rapor (Kalemler/Master/Ekstre'den en az biri) zaten varsa VE bugün için henüz hiç
+  // snapshot alınmadıysa, uygulama açılışta/sekmeye dönüşte SESSİZCE kendi kendine bir snapshot
+  // alır — kullanıcı hiçbir şey yapmasa bile. Bu, cari bakiye/borç durumunu DEĞİŞTİRMEZ (buildReport
+  // zaten aynı veriyle hesaplanmıştı), sadece o günün "fotoğrafını" arşive kalıcı olarak ekler.
+  if(state.report) await gunlukSnapshotGerekiyorsaAl();
   // Açılıştaki bilinen "son değişiklik zamanı" ile otomatik arka plan senkronizasyonuna başla —
   // bkz. otomatikBulutSenkronizasyonuBaslat() tanımı ve açıklaması.
   if(cloudEnabled()) otomatikBulutSenkronizasyonuBaslat();
+}
+
+// Bugün için musteriSnapshot arşivde yoksa (hiç "Raporu Oluştur"a basılmamışsa bile) sessizce
+// alır. state.faturaArsivCache zaten uygulamayiBaslat akışında önceden yüklenmiş olur (bkz.
+// faturaArsivBaslangicYukle) — burada sadece bugünün anahtarını kontrol ediyoruz, tüm arşivi
+// yeniden taramıyoruz (ucuz bir işlem).
+async function gunlukSnapshotGerekiyorsaAl(){
+  try{
+    const bugunKey = dateKeyLocal(turkiyeBugun());
+    const bugunKaydi = (state.faturaArsivCache||{})[bugunKey];
+    if(bugunKaydi && bugunKaydi.musteriSnapshot && bugunKaydi.musteriSnapshot.length) return; // zaten var, tekrar alma
+    await faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
+  }catch(err){
+    console.error('Otomatik günlük snapshot alınamadı:', err);
+  }
 }
 window.addEventListener('DOMContentLoaded', async ()=>{
   if(!authAktif) await uygulamayiBaslat();
@@ -940,7 +975,13 @@ function otomatikBulutSenkronizasyonuBaslat(){
   cloudMetaOkuUzaktan(CLOUD.path).then(meta=>{ if(meta) otomatikSenkronBilinenZaman = meta.updatedAt; });
   otomatikSenkronTimerId = setInterval(otomatikBulutSenkronizasyonuKontrolEt, OTOMATIK_SENKRON_POLL_ARALIK_MS);
   document.addEventListener('visibilitychange', ()=>{
-    if(document.visibilityState==='visible') otomatikBulutSenkronizasyonuKontrolEt();
+    if(document.visibilityState==='visible'){
+      otomatikBulutSenkronizasyonuKontrolEt();
+      // OTOMATİK GÜNLÜK SNAPSHOT: kullanıcı sekmeyi/uygulamayı GÜNLER SONRA tekrar açtığında
+      // (bulutta değişiklik olmasa bile, sadece takvim günü ilerlediği için) bugünün henüz hiç
+      // snapshot'ı yoksa sessizce alınır — bkz. gunlukSnapshotGerekiyorsaAl.
+      if(state.report) gunlukSnapshotGerekiyorsaAl();
+    }
   });
 }
 
@@ -951,7 +992,27 @@ function buildReport(files, musteriMasterMap){
   const invoices = [];
   const musteriMap = new Map();
 
-  files.kalemler.data.forEach(r=>{
+  // GÖRÜNÜRLÜK FİLTRESİ ÖN-HESAPLAMASI (kullanıcı kararı — büyük mimari değişiklik): Pasif/İptal
+  // müşterilerin "tüm-zamanların arşivinde tahsilat/fatura kaydı var mı" kontrolü için, HER
+  // müşteride ayrı ayrı tüm arşivi taramak yerine (O(müşteri × gün × satır), çok yavaş), arşiv BİR
+  // KEZ taranıp geçmişi olan müşteri kodlarının bir Set'i çıkarılır (O(gün × satır) + O(1) sorgu).
+  // İki kaynak taranır: (1) state.faturaArsivCache (her günün faturaArsiv/tahsilatArsiv dizileri —
+  // eski/mevcut fatura arşivleme mekanizması), (2) state.tahsilatArsivi (yeni tek-format kalıcı
+  // tahsilat arşivi, belge no bazlı). Bu Set yalnızca görünürlük kararı için kullanılır, hiçbir
+  // tutar/toplam hesabına karışmaz.
+  const gecmisiOlanMusteriler = new Set();
+  Object.values(state.faturaArsivCache || {}).forEach(gun=>{
+    (gun.faturaArsiv||[]).forEach(r=>{ if(r && r.musteri) gecmisiOlanMusteriler.add(String(r.musteri).trim()); });
+    (gun.tahsilatArsiv||[]).forEach(r=>{ if(r && r.musteri) gecmisiOlanMusteriler.add(String(r.musteri).trim()); });
+  });
+  Object.values(state.tahsilatArsivi || {}).forEach(r=>{ if(r && r.musteriKod) gecmisiOlanMusteriler.add(String(r.musteriKod).trim()); });
+
+  // KALEMLER ARTIK OPSİYONEL (kullanıcı kararı — büyük mimari değişiklik): Önceden bu dosya
+  // zorunluydu ve doğrudan files.kalemler.data.forEach ile başlanıyordu (dosya yoksa çökerdi).
+  // Artık kart iskeleti Müşteri Master'dan, bakiye Cari Ekstre'den geliyor — Kalemler yalnızca
+  // (varsa) mevcut kartlara açık fatura detayı/vade bilgisi ekler. Dosya yoksa bu blok sessizce
+  // atlanır, aşağıdaki Müşteri Master/Cari Ekstre blokları kartları zaten oluşturmuş olur.
+  (files.kalemler ? files.kalemler.data : []).forEach(r=>{
     const musteri = String(r['Müşteri']||'').trim();
     if(!musteri) return;
     const kalanBorc = Number(r['Kalan Borç'])||0;
@@ -1274,6 +1335,36 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
+  // MÜŞTERİ MASTER — KART OLUŞTURUCU (kullanıcı kararı — büyük mimari değişiklik): Artık kart
+  // iskeletini oluşturan ANA kaynak Müşteri Master'dır, Kalemler değil. Kural (kullanıcının tarif
+  // ettiği gibi):
+  //   • Müşteri Master'da "Aktif" olan HER müşteri için kart İSTİSNASIZ oluşturulur (Kalemler/Cari
+  //     Ekstre'de kaydı olsun olmasın). Böyle bir müşterinin ne bakiyesi ne geçmiş tahsilat/fatura
+  //     arşivi yoksa, kart yine de OLUŞUR ama görünürlük filtresinde (aşağıda, tüm musteriMap
+  //     doldurulduktan SONRA) gizlenir — bu yüzden burada m.__masterAktifMi=true olarak işaretlenir.
+  //   • Müşteri Master'da "Pasif" veya "İptal" olan müşteriler için kart SADECE bakiyesi (Cari
+  //     Ekstre'den) sıfır değilse VEYA tüm-zamanların arşivinde (state.faturaArsivCache) tahsilat/
+  //     fatura kaydı varsa oluşturulur — bu ikisi de yoksa kart HİÇ AÇILMAZ. Bu kontrol de
+  //     musteriMap tamamlandıktan SONRA (görünürlük filtresi aşamasında) yapılır; burada Pasif/
+  //     İptal müşteriler geçici olarak "aday" şeklinde eklenir, sonra elenir/kalır.
+  (state.musteriMasterDurum || new Map()).forEach((durumHam, kod)=>{
+    if(musteriMap.has(kod)) return; // Kalemler veya Cari Ekstre zaten kart açmış, tekrar oluşturma
+    const pasifVeyaIptal = noktaPasifVeyaIptalMi(durumHam);
+    // İSİM ÖNCELİĞİ (kullanıcı kararı): önce Cari Ekstre'deki Müşteri Ad/Ünvan, o yoksa Müşteri
+    // Master'daki musteriAdi (state.musteriMasterDetay), o da yoksa müşteri kodunun kendisi.
+    const cariAdayKayit = cariEkstreMap.get(kod);
+    const masterDetay = (state.musteriMasterDetay && state.musteriMasterDetay.get(kod)) || null;
+    const musteriAdi = (cariAdayKayit && cariAdayKayit.ad) || (masterDetay && masterDetay.musteriAdi) || kod;
+    const musteriUnvan = (cariAdayKayit && cariAdayKayit.unvan) || '';
+    musteriMap.set(kod, {
+      musteri: kod, musteriAdi, musteriUnvan, kalanBorc:0, faturaSayisi:0,
+      vadeAgirlikliToplam:0, agirlikBorc:0, avgVadeGun:0, invoices:[], temsilci:null,
+      cekSenet:0, cekSenetDetay:[], siparisTutari:0, emanetSiparis:0, alinanTahsilat:0,
+      // Görünürlük filtresi bu iki bayrağı kullanır (aşağıda, musteriMap tam dolduktan sonra):
+      __masterKaynakli: true, __masterAktifMi: !pasifVeyaIptal,
+    });
+  });
+
   musteriMap.forEach((m, musteri)=>{
     m.siparisTutari = siparisNormalMap.get(musteri)||0;
     m.emanetSiparis = emanetSiparisMap.get(musteri)||0;
@@ -1312,7 +1403,11 @@ function buildReport(files, musteriMasterMap){
       // faturadan başlayarak düş — böylece kalan açık faturalar toplamı cari bakiyeye eşitlenir.
       // Çek/senet mahsubu YAPILMAZ (cari bakiye zaten tahsilatları içerir; çift düşme önlenir).
       const acikFaturaToplam = sortedOldestFirst.reduce((s,inv)=> s + (inv.kalanBorc>0 ? inv.kalanBorc : 0), 0);
-      const hedefBakiye = cariKayit ? cariKayit.bakiye : acikFaturaToplam;
+      // Bu müşterinin Cari Ekstre'de HİÇ kaydı yoksa hedef 0'dır (kullanıcı kararı: Cari Ekstre'de
+      // yoksa bakiye 0 sayılır) — bu, üstte gösterilen m.kalanBorc=0 ile TUTARLI olsun diye
+      // buradaki açık fatura listesi de tamamen "kapatılmış" sayılır (aksi halde toplam 0 derken
+      // fatura listesi hâlâ açık görünüp çelişki yaratırdı).
+      const hedefBakiye = cariKayit ? cariKayit.bakiye : 0;
       // Düşülecek fark: açık fatura toplamı hedeften fazlaysa aradaki tutar (negatif olamaz).
       let dusulecek = Math.max(0, acikFaturaToplam - hedefBakiye);
       sortedOldestFirst.forEach(inv=>{
@@ -1381,11 +1476,12 @@ function buildReport(files, musteriMasterMap){
         vadesiGelmisBakiye += inv.kalanBorc;
       }
     });
-    // Kartta görünen BAKİYE: Cari Ekstre yüklüyse GERÇEK cari bakiye (kullanıcı isteği), yoksa
-    // açık faturaların (mahsup sonrası) toplamı. Açık faturaların düşürülmüş hali (kalanBorcToplam)
-    // vade/yaşlandırma hesabı için zaten kullanıldı; ama gösterilen bakiye cari ekstreye eşitlenir.
+    // Kartta görünen BAKİYE: Cari Ekstre yüklüyse GERÇEK cari bakiye (kullanıcı isteği) — bu
+    // müşterinin Cari Ekstre'de HİÇ kaydı yoksa bakiye 0 sayılır (Kalemler'deki açık fatura
+    // toplamına ARTIK DÜŞÜLMEZ — kullanıcı kararı: "Cari Ekstre'de yoksa bakiye 0 görünsün").
+    // Cari Ekstre HİÇ yüklenmemişse mevcut davranış (açık faturaların toplamı) DEĞİŞMEDEN kalır.
     m.kalanBorc = cariEkstreVar
-      ? (cariKayit ? cariKayit.bakiye : kalanBorcToplam)
+      ? (cariKayit ? cariKayit.bakiye : 0)
       : kalanBorcToplam;
     m.vadeAgirlikliToplam = vAgirlikliToplam;
     m.agirlikBorc = agirlikBorc;
@@ -1423,6 +1519,33 @@ function buildReport(files, musteriMasterMap){
   bakiyesiz.sort((a,b)=> (b.siparisTutari+b.emanetSiparis+b.cekSenet)-(a.siparisTutari+a.emanetSiparis+a.cekSenet));
 
   const musteriler = Array.from(musteriMap.values());
+
+  // GÖRÜNÜRLÜK FİLTRESİ (kullanıcı kararı — büyük mimari değişiklik, NETLEŞTİRİLMİŞ HALİ): Bu,
+  // kartı SİLMEZ (kpi toplamlarını etkilememesi ve ileride bir hata olursa "veri kayboldu" değil
+  // "görünmüyor" gibi daha az riskli bir durum yaratması için) — yalnızca m.__gizli bayrağını set
+  // eder. Render fonksiyonları (renderMusteriTable vb.) bu bayrağı görüp kartı listeden çıkarır.
+  // Kart, gizli olsa bile musteriMap'te durmaya devam eder — bu yüzden geçmiş
+  // ödeme/tahsilat/fatura verileri Trend Analizi/Temsilci Karnesi/Tahsilat Verimliliği gibi TÜM
+  // rapor hesaplamalarında kullanılmaya devam eder, yalnızca kart LİSTEDE görünmez. Kural:
+  //   • Müşteri Master kaynaklı DEĞİLSE (yani Kalemler/Cari Ekstre'den geldiyse — normal, eski
+  //     davranış): hiç filtrelenmez, her zaman görünür (bu ikisi zaten "veri var" demek).
+  //   • Müşteri Master'da "Aktif" (m.__masterAktifMi===true): kart HER ZAMAN oluşur ama bakiyesi
+  //     0 VE tüm-zamanların arşivinde (gecmisiOlanMusteriler) hiç kaydı yoksa GİZLENİR.
+  //   • Müşteri Master'da "Pasif/İptal" (m.__masterAktifMi===false): kart SADECE BAKİYESİ≠0 İSE
+  //     GÖRÜNÜR — geçmiş arşiv kaydı (gecmisiOlanMusteriler) burada görünürlüğe HİÇ ETKİ ETMEZ
+  //     (kullanıcı kararı: "bakiyesi 0 olan pasif/iptal müşteri geçmiş kaydı olsa da gözükmesin,
+  //     sadece rapor hesaplamalarında geçmiş verisi kullanılsın").
+  musteriler.forEach(m=>{
+    if(!m.__masterKaynakli){ m.__gizli = false; return; }
+    const bakiyeVar = Math.abs(m.kalanBorc||0) > 0;
+    if(m.__masterAktifMi){
+      const gecmisiVar = gecmisiOlanMusteriler.has(String(m.musteri).trim());
+      m.__gizli = !bakiyeVar && !gecmisiVar;
+    }else{
+      m.__gizli = !bakiyeVar;
+    }
+  });
+
   const tahsilatToplamHam = Array.from(tahsilatMap.values()).reduce((a,b)=>a+b,0);
   const tahsilatEslesenToplam = sum(musteriler,'alinanTahsilat');
   const kpi = {

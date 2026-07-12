@@ -355,6 +355,7 @@ function getSevkFilteredSorted(report){
   }));
   let rows = report.musteriler.filter(m=> m.siparisTutari>0 || m.emanetSiparis>0).concat(bakiyesizSatirlari);
   rows = rows.filter(m=>{
+    if(m.__gizli) return false;
     if(q && !musteriAramaEslesiyorMu(q, m.musteriAdi, m.musteri, m.musteriUnvan) && !String(m.temsilci).toLocaleLowerCase('tr-TR').includes(q)) return false;
     if(temsilci && m.temsilci !== temsilci) return false;
     if(riskFilter==='over60' && !(m.avgVadeGun>60)) return false;
@@ -495,29 +496,56 @@ async function computeFaturaKontrolRows(report, selectedDate, temsilciFilter, ar
     if(!e.musteriAdi && r.musteriAdi) e.musteriAdi = r.musteriAdi;
     if(!e.temsilci && r.temsilci) e.temsilci = r.temsilci;
   });
-  (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
-    if(!r.belgeTarihi) return;
-    const rGunKey = dateKeyLocal(r.belgeTarihi);
+  // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT (düzeltme): Artık birlesikArsiv.tahsilatArsiv (eski Format
+  // A/B döneminden kalma, faturaKontrolArsivineKaydetVeSenkronizeEt'in artık HİÇ yazmadığı bir
+  // kaynak) DEĞİL, kendi bağımsız kalıcı arşivi state.tahsilatArsivi (belge no bazlı) okunur —
+  // Trend Analizi/Tahsilat Verimliliği'nin kullandığı KAYNAKLA AYNI. Önceki halde bu ekran hep
+  // "TAHSİLAT: —" gösteriyordu çünkü baktığı kaynağa artık hiçbir şey yazılmıyordu.
+  Object.values(state.tahsilatArsivi||{}).forEach(r=>{
+    if(!r.tarih) return;
+    const rGunKey = dateKeyLocal(new Date(r.tarih));
     if(rGunKey === selectedDate){
       // YENİ KURAL: Fatura Kontrol'de kart, SADECE o gün siparişi olan müşteriler için gösterilir.
       // Bu yüzden tahsilat kaydı, o müşteri için "eslesen" map'inde YENİ bir satır AÇMAZ — sadece
       // sipariş bloğunda zaten eklenmiş olan müşterinin tahsilat bilgisini doldurur.
-      if(!eslesen.has(r.musteri)) return;
-      const e = eslesen.get(r.musteri);
-      if(!e.seciliTahsilatKaynak) e.seciliTahsilatKaynak = {normal:0, bozukIade:0, depozito:0};
+      if(!eslesen.has(r.musteriKod)) return;
+      const e = eslesen.get(r.musteriKod);
+      if(!e.seciliTahsilatKaynak) e.seciliTahsilatKaynak = {normal:0, bozukIade:0, depozito:0, hakedis:0};
       e.seciliTahsilat += (r.tutar||0);
-      if(r.formatKaynagi==='FaturaIade') e.seciliTahsilatKaynak.bozukIade += r.tutar||0;
-      else if(r.formatKaynagi==='DepozitoTahsilat') e.seciliTahsilatKaynak.depozito += r.tutar||0;
+      if(r.tahsilatKategori==='Hakedis') e.seciliTahsilatKaynak.hakedis += r.tutar||0;
       else e.seciliTahsilatKaynak.normal += r.tutar||0;
     } else if(rGunKey === oncekiGunKey){
       // Bir önceki güne ait tahsilat: yeni "Önceki Gün Tahsilatı" alanı için ayrıca toplanır.
       // YENİ KURAL: bu da yalnızca seçili günde zaten siparişi olup "eslesen" map'inde bulunan
       // müşteriler için doldurulur; tek başına yeni bir satır/kart açmaz.
+      if(!eslesen.has(r.musteriKod)) return;
+      const e = eslesen.get(r.musteriKod);
+      e.oncekiGunTahsilat += (r.tutar||0);
+      if(!e.musteriAdi && r.musteriAdi) e.musteriAdi = r.musteriAdi;
+    }
+  });
+  // BOZUK İADE FATURASI / DEPOZİTO TAHSİLATI KREDİLERİ — AYRI KAYNAK (kullanıcı isteği bu ayrımı
+  // hiç değiştirmedi): Bu iki kredi türü, Tahsilat Dökümü'nün tek-format değişikliğinden ETKİLENMEDİ
+  // — hâlâ faturaKontrolArsivineKaydetVeSenkronizeEt içinde, Fatura Dökümü/Depozito Tahsilat
+  // dosyalarından türeyip birlesikArsiv.tahsilatArsiv'e 'FaturaIade'/'DepozitoTahsilat' etiketiyle
+  // yazılıyor. Bu yüzden burada AYRICA (yukarıdaki yeni tahsilat bloğuna ek olarak) okunmaya devam
+  // eder — aksi halde bu iki kredi türü Fatura Kontrol'de hiç görünmezdi.
+  (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
+    if(!r.belgeTarihi) return;
+    if(r.formatKaynagi!=='FaturaIade' && r.formatKaynagi!=='DepozitoTahsilat') return;
+    const rGunKey = dateKeyLocal(r.belgeTarihi);
+    if(rGunKey === selectedDate){
+      if(!eslesen.has(r.musteri)) return;
+      const e = eslesen.get(r.musteri);
+      if(!e.seciliTahsilatKaynak) e.seciliTahsilatKaynak = {normal:0, bozukIade:0, depozito:0, hakedis:0};
+      e.seciliTahsilat += (r.tutar||0);
+      if(r.formatKaynagi==='FaturaIade') e.seciliTahsilatKaynak.bozukIade += r.tutar||0;
+      else e.seciliTahsilatKaynak.depozito += r.tutar||0;
+    } else if(rGunKey === oncekiGunKey){
       if(!eslesen.has(r.musteri)) return;
       const e = eslesen.get(r.musteri);
       e.oncekiGunTahsilat += (r.tutar||0);
       if(!e.musteriAdi && r.musteriAdi) e.musteriAdi = r.musteriAdi;
-      if(!e.temsilci && r.temsilci) e.temsilci = r.temsilci;
     }
   });
 
@@ -736,89 +764,131 @@ document.getElementById('faturaKontrolDahaFazlaBtn').addEventListener('click', (
   renderFaturaKontrolTable(state.report, false);
 });
 
-async function computeMusteriAylikOzet(musteri){
+// computeMusteriAylikOzetPeriyot(musteri, ayPenceresi)
+// ----------------------------------------------------------------------------
+// REVİZYON GEREKÇESİ (kullanıcı talebiyle): Eski computeMusteriAylikOzet iki ayrı mantık
+// hatası taşıyordu:
+//   1) SEZONSALLIK: Tüm arşiv (12+ ay) tek düz ortalamaya indirgeniyordu — sezonluk bir
+//      müşteride (örn. yılın 6 ayı düşük, 6 ayı yüksek hacim) bu, hem düşük hem yüksek
+//      sezonu birbirine karıştırıp yanıltıcı tek bir sayı üretiyordu. ÇÖZÜM: fonksiyon artık
+//      bir `ayPenceresi` parametresi alır (3/6/12) ve SADECE o pencereye düşen fatura/tahsilat
+//      kayıtlarını kullanır — üç pencere ayrı ayrı hesaplanıp yan yana karşılaştırılabilir.
+//   2) DÖNÜŞ SÜRESİ FORMÜLÜ: Eski `geriDonusGun = (aylikFatura/aylikTahsilat)*30` bir akış
+//      ORANIYDI, gerçek bir tahsilat vadesi (DSO) değildi. Eski bakiyenin o ay kapatılması
+//      tahsilatı yapay şişirip "hızlı dönüş" gibi gösterebiliyor, sezon başında fatura hızlı
+//      artıp tahsilat henüz yetişmediğinde de "yavaş dönüş" gibi gösterip yanıltabiliyordu.
+//      ÇÖZÜM: Artık şirket geneli DSO Trendi'nde kullanılan AYNI yöntemle — açık faturaların
+//      KALAN BORÇ ağırlıklı ortalama yaşı (bkz. js/03-veri-yukleme-ve-senkron.js m.avgVadeGun
+//      hesabı) — gerçek "şu an elde kaç günlük bekleyen bakiye var" sorusuna cevap verir.
+//      state.report.musteriler[].invoices üzerinden, o pencerede kesilmiş faturaların kalan
+//      borcu × fatura yaşı ağırlıklı ortalaması alınır.
+// ----------------------------------------------------------------------------
+async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
   const birlesik = await faturaKontrolArsivBirlestirCached(state.faturaArsivCache || {});
-  const faturalar = birlesik.faturaArsiv.filter(r=>r.musteri===musteri && r.faturaTarihi);
-  // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT (kullanıcı isteği, eski Format A/B ayrımı kaldırıldı): artık
-  // birlesik.tahsilatArsiv (Fatura Kontrol'ün günlük snapshot arşivi) DEĞİL, kendi bağımsız kalıcı
-  // arşivi state.tahsilatArsivi (belge no bazlı) okunur. "gecerli:false" kavramı yeni yapıda yok —
-  // Belge Türü sınıflandırması (Normal/Hakediş/Ödeme/Virman) ve ters kayıt/Ön Kayıt temizliği zaten
-  // arşiv birleştirme aşamasında (tahsilatArsiviniBirlestir) uygulanmış durumda; burada arşivde
-  // duran HER kayıt geçerli bir tahsilat sayılır.
-  const tumTahsilatKayitlari = Object.values(state.tahsilatArsivi||{}).filter(r=> r.musteriKod===musteri && r.tarih);
-  // Normal / Ödeme / Virman kategorileri KULLANICI KARARIYLA ayrı gösterilmez — üçü de "Normal
-  // Tahsilat" olarak tek kalemde toplanır (Ödeme/Virman'ın işaretli tutarı zaten arşivde doğru
-  // yönde saklandığından, buraya diğerleriyle aynı şekilde eklenmesi yeterlidir).
+  const simdi = Date.now();
+  const pencereBaslangic = ayPenceresi==null ? -Infinity : simdi - ayPenceresi*30*86400000;
+
+  const faturalar = birlesik.faturaArsiv.filter(r=>{
+    if(r.musteri!==musteri || !r.faturaTarihi) return false;
+    const t = new Date(r.faturaTarihi).getTime();
+    return t>=pencereBaslangic && t<=simdi;
+  });
+
+  // TAHSİLAT DÖKÜMÜ — kendi bağımsız kalıcı arşivi state.tahsilatArsivi (belge no bazlı) okunur.
+  const tumTahsilatKayitlari = Object.values(state.tahsilatArsivi||{}).filter(r=>{
+    if(r.musteriKod!==musteri || !r.tarih) return false;
+    const t = new Date(r.tarih).getTime();
+    return t>=pencereBaslangic && t<=simdi;
+  });
   const tahsilatlarArsiv = tumTahsilatKayitlari
     .filter(r=> r.tahsilatKategori==='Normal' || r.tahsilatKategori==='Odeme' || r.tahsilatKategori==='Virman')
     .map(r=>({musteri:r.musteriKod, belgeTarihi:r.tarih, tutar:r.tutar, tahsilatTuru:r.odemeEtiketi}));
-  // TAHSİLAT DÖKÜMÜ'NDEKİ HAKEDİŞ (Belge Türü='Hizmet Alış Fatura') — Bayi Hak Ediş dosyasından
-  // gelen hakedisTahsilatlari'nden AYRI bir kaynak; ikisi de "Hakediş" başlığı altında toplanır
-  // ama farklı dosyalardan geldiği için ayrı değişkenlerde tutulup sonda birleştirilir.
   const tahsilatDokumuHakedisleri = tumTahsilatKayitlari
     .filter(r=> r.tahsilatKategori==='Hakedis')
     .map(r=>({musteri:r.musteriKod, belgeTarihi:r.tarih, tutar:r.tutar, __hakedis:true}));
   const hakedisTahsilatlari = (birlesik.bayiHakedisArsiv || [])
-    .filter(r=>r.musteri===musteri && r.tahsilatTarihi)
+    .filter(r=>{
+      if(r.musteri!==musteri || !r.tahsilatTarihi) return false;
+      const t = new Date(r.tahsilatTarihi).getTime();
+      return t>=pencereBaslangic && t<=simdi;
+    })
     .map(r=>({musteri:r.musteri, belgeTarihi:r.tahsilatTarihi, tutar:r.tutar, __hakedis:true}))
     .concat(tahsilatDokumuHakedisleri);
   const toplamHakedisTahsilat = hakedisTahsilatlari.reduce((a,b)=>a+(b.tutar||0),0);
-  // TAHSİL EDİLDİ ÇEK/SENET (kullanıcı kuralı): Bu kayıtlar Tahsilat Dökümü'nden değil, ayrı
-  // "Çek/Senet Riski" dosyasından (state.cekSenetArsivi) geliyor. Kullanıcı kuralı net: "müşteri
-  // kartındaki Alınan Tahsilat'a eklenmesin AMA Finansal Analiz/Trend raporlarına tahsilat olarak
-  // yansısın" — bu modal (Aylık Trend Analizi) o ikinci kategoriye girer, bu yüzden
-  // durum='tahsilEdildi' olan çek/senetler burada tahsilat toplamına DAHİL EDİLİR.
+
   const tahsilEdilenCekSenetler = Object.values(state.cekSenetArsivi||{})
-    .filter(r=> r.musteriKod===musteri && r.durum==='tahsilEdildi' && r.belgeTarihi)
+    .filter(r=>{
+      if(r.musteriKod!==musteri || r.durum!=='tahsilEdildi' || !r.belgeTarihi) return false;
+      const t = new Date(r.belgeTarihi).getTime();
+      return t>=pencereBaslangic && t<=simdi;
+    })
     .map(r=>({musteri: r.musteriKod, belgeTarihi: r.belgeTarihi, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru, __cekSenet: true}));
   const toplamCekSenetTahsilat = tahsilEdilenCekSenetler.reduce((a,b)=>a+(b.tutar||0),0);
   const tahsilatlar = tahsilatlarArsiv.concat(hakedisTahsilatlari).concat(tahsilEdilenCekSenetler);
   if(!faturalar.length && !tahsilatlar.length) return null;
 
-  const tumZamanlar = [
-    ...faturalar.map(r=> new Date(r.faturaTarihi).getTime()),
-    ...tahsilatlar.map(r=> new Date(r.belgeTarihi).getTime()),
-  ];
-  const enEski = Math.min(...tumZamanlar);
-  const enYeni = Math.max(...tumZamanlar);
-  const gunSayisi = Math.max(1, Math.round((enYeni - enEski) / 86400000) + 1);
+  // Pencere gün sayısı: sabit ayPenceresi*30 kullanılır (değişken "en eski/en yeni kayıt
+  // aralığı" YERİNE) — böylece 3/6/12 ay pencereleri birbirleriyle DOĞRU kıyaslanabilir aynı
+  // paydaya (gerçek takvim günü) sahip olur; veri seyrekse pencere yapay küçülmez.
+  const gunSayisi = ayPenceresi==null
+    ? Math.max(1, Math.round((simdi - Math.min(...faturalar.map(r=>new Date(r.faturaTarihi).getTime()).concat(tahsilatlar.map(r=>new Date(r.belgeTarihi).getTime()))))/86400000)+1)
+    : ayPenceresi*30;
   const aySayisi = Math.max(1, gunSayisi/30);
 
   const toplamFatura = faturalar.reduce((a,b)=>a+(b.tutar||0),0);
   const toplamLitre = faturalar.reduce((a,b)=>a+(b.litre||0),0);
   const toplamTahsilat = tahsilatlar.reduce((a,b)=>a+(b.tutar||0),0);
-  // Tahsilat toplamının kaynak dökümü: normal (nakit/Ödeme/Virman hepsi tek kalemde) tahsilat mı,
-  // Bayi Hak Ediş mi, Bozuk İade Faturası / Depozito Tahsilatı mı — Aylık Ortalama Tahsilat
-  // KPI'sının altında renkli kutucuklarla (chip) şeffaf şekilde gösterilir. Ödeme/Virman
-  // KULLANICI KARARIYLA ayrı gösterilmez, "Normal" içinde erir (işaretli tutarları zaten arşivde
-  // doğru yönde saklandığı için toplama otomatik doğru katılır).
-  const KREDI_ETIKETLERI = new Set(['FaturaIade', 'DepozitoTahsilat']);
-  const toplamKrediTahsilat = tahsilatlar.reduce((a,b)=> a + (KREDI_ETIKETLERI.has(b.formatKaynagi) ? (b.tutar||0) : 0), 0);
-  const toplamNormalTahsilat = toplamTahsilat - toplamKrediTahsilat - toplamHakedisTahsilat;
-  // Tahsilat türü dökümü (Nakit/Kredi Kartı/Ödeme/Virman → "Normal tahsilat", Çek/Senet → "Çek
-  // senet", Sanal Pos → "Sanal Pos") — sadece bu dökümde kullanılır, KPI toplamlarını etkilemez;
-  // "TAHSİLAT · AYLIK ORTALAMA" alanındaki chip etiketleri için kaynak ayrımı sağlar.
-  // DÜZELTME: tahsilatTuru artık sabit 'Normal' değeri taşımıyor — gerçek ödeme tipi/banka etiketi
-  // taşıyor (ör. 'Nakit', 'Banka havalesi', 'Kredi Kartı (SÜPÜRME)', Virman/Ödeme için 'Diğer').
-  // Bu yüzden "normal" chip'i ARTIK "Çek/Senet ve Sanal Pos DIŞINDAKİ her şey" olarak tanımlanır —
-  // eski '===Normal' eşleşmesi hiçbir zaman tutmuyordu (bkz. görsel test: chip'te "Normal 0 ₺"
-  // görünüp toplamla tutarsız kalıyordu).
-  const toplamTuruNormal = tahsilatlar.reduce((a,b)=> a + (!b.__hakedis && !KREDI_ETIKETLERI.has(b.formatKaynagi) && b.tahsilatTuru!=='Cek' && b.tahsilatTuru!=='Senet' && b.tahsilatTuru!=='SanalPos' ? (b.tutar||0) : 0), 0);
-  const toplamTuruCekSenet = tahsilatlar.reduce((a,b)=> a + ((b.tahsilatTuru==='Cek' || b.tahsilatTuru==='Senet') ? (b.tutar||0) : 0), 0);
-  const toplamTuruSanalPos = tahsilatlar.reduce((a,b)=> a + (b.tahsilatTuru==='SanalPos' ? (b.tutar||0) : 0), 0);
+
+  // TAHSİLAT TÜRÜ DÖKÜMÜ — 5 KATEGORİ (kullanıcı talebi): Nakit/Havale, Kredi Kartı, Hakediş,
+  // Çek/Senet, İade/Depozito. odemeEtiketi gerçek ödeme tipini taşır (bkz.
+  // tahsilatBankaAltEtiketi): 'Nakit', 'Banka havalesi', 'Kredi Kartı(...)' vb.
+  const KREDI_ETIKETLERI = new Set(['FaturaIade', 'DepozitoTahsilat']); // İade/Depozito
+  const toplamIadeDepozito = tahsilatlar.reduce((a,b)=> a + (KREDI_ETIKETLERI.has(b.formatKaynagi) ? (b.tutar||0) : 0), 0);
+  const toplamCekSenet = tahsilatlar.reduce((a,b)=> a + ((b.tahsilatTuru==='Cek' || b.tahsilatTuru==='Senet' || b.__cekSenet) ? (b.tutar||0) : 0), 0);
+  const toplamKrediKarti = tahsilatlar.reduce((a,b)=> a + (!b.__hakedis && !KREDI_ETIKETLERI.has(b.formatKaynagi) && /kredi kart/i.test(String(b.tahsilatTuru||'')) ? (b.tutar||0) : 0), 0);
+  const toplamNakitHavale = tahsilatlar.reduce((a,b)=>{
+    if(b.__hakedis || KREDI_ETIKETLERI.has(b.formatKaynagi)) return a;
+    if(b.tahsilatTuru==='Cek' || b.tahsilatTuru==='Senet' || b.__cekSenet) return a;
+    if(/kredi kart/i.test(String(b.tahsilatTuru||''))) return a;
+    return a + (b.tutar||0);
+  }, 0);
+
   const aylikFatura = toplamFatura / aySayisi;
   const aylikLitre = toplamLitre / aySayisi;
   const aylikTahsilat = toplamTahsilat / aySayisi;
-  const aylikNormalTahsilat = toplamNormalTahsilat / aySayisi;
-  const aylikKrediTahsilat = toplamKrediTahsilat / aySayisi;
-  const aylikHakedisTahsilat = toplamHakedisTahsilat / aySayisi;
-  const aylikTuruNormal = toplamTuruNormal / aySayisi;
-  const aylikTuruCekSenet = toplamTuruCekSenet / aySayisi;
-  const aylikTuruSanalPos = toplamTuruSanalPos / aySayisi;
-  const geriDonusGun = aylikTahsilat > 0 ? (aylikFatura / aylikTahsilat) * 30 : null;
-  return { gunSayisi, aySayisi, toplamFatura, toplamLitre, toplamTahsilat, toplamNormalTahsilat, toplamKrediTahsilat,
-    aylikFatura, aylikLitre, aylikTahsilat, aylikNormalTahsilat, aylikKrediTahsilat, aylikHakedisTahsilat, geriDonusGun, toplamHakedisTahsilat,
-    toplamTuruNormal, toplamTuruCekSenet, toplamTuruSanalPos, aylikTuruNormal, aylikTuruCekSenet, aylikTuruSanalPos };
+  const aylikNakitHavale = toplamNakitHavale / aySayisi;
+  const aylikKrediKarti = toplamKrediKarti / aySayisi;
+  const aylikHakedis = toplamHakedisTahsilat / aySayisi;
+  const aylikCekSenet = toplamCekSenet / aySayisi;
+  const aylikIadeDepozito = toplamIadeDepozito / aySayisi;
+
+  // DÖNÜŞ SÜRESİ — FATURA/TAHSİLAT ORANI (kullanıcı kararı, geri alındı): Önceki revizyonda bu
+  // metrik "kalan borç ağırlıklı açık fatura yaşı" (DSO benzeri) olarak değiştirilmişti — ama bu,
+  // ekranda yan yana duran "Fatura/Ay" ve "Tahsilat/Ay" rakamlarıyla DOĞRUDAN İLİŞKİLİYMİŞ gibi
+  // görünüp kullanıcıyı yanıltıyordu (iki farklı soruya cevap veren iki ayrı metrik aynı anda
+  // gösteriliyordu: "ne kadar satıldı/tahsil edildi" vs "elde duran faturalar ne kadar eski").
+  // Kullanıcı isteğiyle DÖNÜŞ artık tekrar birincil olarak akış oranına dayanır — bu pencerede
+  // kesilen faturanın kaç günde bir tahsilata dönüştüğünü basitçe gösterir ve yukarıdaki iki
+  // rakamla TUTARLI/açıklanabilir bir ilişkisi vardır.
+  let geriDonusGun = null;
+  let geriDonusYaklasik = false;
+  if(aylikTahsilat>0){
+    geriDonusGun = (aylikFatura / aylikTahsilat) * 30;
+  }
+
+  return {
+    ayPenceresi, gunSayisi, aySayisi,
+    toplamFatura, toplamLitre, toplamTahsilat,
+    aylikFatura, aylikLitre, aylikTahsilat,
+    aylikNakitHavale, aylikKrediKarti, aylikHakedis, aylikCekSenet, aylikIadeDepozito,
+    toplamNakitHavale, toplamKrediKarti, toplamHakedisTahsilat, toplamCekSenet, toplamIadeDepozito,
+    geriDonusGun, geriDonusYaklasik,
+  };
+}
+
+// Geriye dönük uyumluluk: eski çağıranlar (varsa) hâlâ tüm-arşiv tek pencereli sonucu alır.
+async function computeMusteriAylikOzet(musteri){
+  return computeMusteriAylikOzetPeriyot(musteri, null);
 }
 
 // Not: fmtTrendDeger burada değil, dosyanın ilerisinde (yüzde birimini de destekleyen üst küme
@@ -2041,7 +2111,14 @@ async function tvMevcutAylar(zorla){
   const gunler = await tvGunAnahtarlariniGetir(zorla);
   const set = new Set();
   gunler.forEach(g=>{ if(g && g.length>=7) set.add(g.slice(0,7)); });
-  return Array.from(set).sort();
+  // TEMMUZ 2026 ÖNCESİ AYLAR MANUEL OLARAK GİZLENİR (kullanıcı kararı): Otomatik günlük snapshot
+  // mekanizması sadece BUGÜNDEN itibaren çalışıyor (bkz. gunlukSnapshotGerekiyorsaAl) — geçmişte
+  // (Temmuz 2026'dan önce) hiç "Raporu Oluştur"a basılmamış günler için asla snapshot alınamaz,
+  // bu yüzden o aylar seçilse bile "veri bulunamadı" ile sonuçlanırdı. Kullanıcı, otomatik tespit
+  // yerine (performans maliyeti + belirsizlik) sabit bir tarih sınırı tercih etti: dropdown'da
+  // 2026-07'den daha eski ay hiç görünmez.
+  const TV_MIN_AY_KEY = '2026-07';
+  return Array.from(set).filter(ay=> ay>=TV_MIN_AY_KEY).sort();
 }
 
 // Seçilen ayKey için gereken gün aralığını (ay içi + önceki bakiye karşılaştırması için bir miktar

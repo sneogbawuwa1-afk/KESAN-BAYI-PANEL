@@ -351,9 +351,12 @@
   .tab-btn.quick-access-btn:hover{border-color:var(--accent);color:var(--accent-deep);}
   .tab-btn.quick-access-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
 
+  /* AÇILIŞ EKRANI KALDIRILDI (kullanıcı kararı): upload-card (dropzone'un dış kapsayıcısı) artık
+     kalıcı olarak gizli — Kalemler/Müşteri Master/Cari Ekstre artık "Veri Yükle → Ana Veri"
+     sekmesinden yüklenir. JS'teki ilgili display='block'/'none' satırları hâlâ çalışabilir
+     (zararsız, no-op) ama bu kural onları her zaman ezer. */
   .upload-card{
-    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-    padding:32px;
+    display:none !important;
   }
   .dropzone{
     border:1.5px dashed #C9CFDB;border-radius:12px;
@@ -400,7 +403,13 @@
     color:var(--danger);font-size:12.5px;font-weight:500;display:none;
   }
 
-  #reportSection{display:none;}
+  /* AÇILIŞ EKRANI KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Önceden JS render
+     tamamlanana kadar "yarım rapor" görünmesin diye reportSection gizli başlıyordu, dropzone
+     (uploadCard) görünüyordu. Artık dropzone tamamen kaldırıldı — uygulama HER ZAMAN doğrudan
+     rapor arayüzünü gösterir (veri yoksa KPI'lar boş/sıfır görünür), "Veri Yükle" her zaman üst
+     köşede sabit bir buton olarak durur. #reportSection artık varsayılan olarak GÖRÜNÜR
+     (display kuralı kaldırıldı — normal blok akışına döner).
+  */
   .as-of{font-size:12px;color:var(--ink-soft);margin:2px 0 20px;}
 
   /* --- Hero + Row KPI system (Tasarım B): tüm rapor sekmeleri --- */
@@ -1798,3 +1807,91 @@
     .gb-donut-row{grid-template-columns:1fr;}
     .gb-section-head .btn.small{margin-left:0;}
   }
+
+/* ============================================================================
+   MÜŞTERİ ANALİZ MODALI — 3/6/12 AYLIK KARŞILAŞTIRMA KARTLARI (am-*)
+   Revizyon gerekçesi: eski tek-KPI kart, sezonluk dalgalanmayı ve eski bakiye
+   kapatmalarının tahsilat oranını çarpıtmasını gizliyordu. Bu blok, 3 farklı
+   zaman penceresini (güncelden genele: 3 Ay → 6 Ay → 12 Ay) yan yana/alt alta
+   karşılaştırır. Her pencere kendi renk şemasını taşır.
+   ============================================================================ */
+.am-basis{font-size:10.5px;color:var(--ink-faint);background:var(--line-soft);padding:8px 12px;border-radius:9px;font-weight:700;margin-bottom:14px;}
+
+.am-cols{display:flex; flex-direction:column; gap:12px;}
+.am-col{border-radius:13px; padding:16px 18px; position:relative; overflow:hidden;}
+
+.am-col-head{display:flex; align-items:center; justify-content:space-between;}
+.am-col-lbl{font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:.05em;}
+.am-live-pin{font-size:9px; font-weight:900; padding:2px 7px; border-radius:20px; letter-spacing:.03em; background:#FF6B5C; color:#fff;}
+
+.am-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:10px;}
+.am-row .am-l{font-size:11px;}
+.am-row .am-v{font-size:15px; font-weight:800; font-variant-numeric:tabular-nums; font-family:var(--font-figures);}
+
+.am-tur-bar{height:7px; border-radius:5px; margin-top:9px; overflow:hidden; display:flex;}
+.am-tur-seg{height:100%;}
+.am-tur-chips{display:flex; flex-wrap:wrap; gap:5px; margin-top:9px;}
+.am-chip{font-size:9.5px; font-weight:700; padding:3px 8px; border-radius:6px; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;}
+.am-dot{width:6px; height:6px; border-radius:2px; flex-shrink:0; background:currentColor;}
+
+.am-donus-block{margin-top:14px; padding-top:12px; display:flex; align-items:flex-end; justify-content:space-between; gap:10px;}
+.am-donus-num{font-size:26px; font-weight:900; line-height:1; font-variant-numeric:tabular-nums; font-family:var(--font-figures);}
+.am-donus-lbl{font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-top:4px;}
+.am-approx-note{font-size:9px; font-style:italic; margin-top:3px; opacity:.75;}
+.am-trend-chip{display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:800; padding:4px 10px; border-radius:20px; white-space:nowrap;}
+
+/* --- Tahsilat türü renk paleti (5 kategori) — aynı paletin 3 kartta da tutarlı kalması,
+   kullanıcının "yeşil=nakit" gibi öğrenilmiş renk eşlemesini korur. --- */
+.am-tc-nakit .am-dot{background:#3DB56E;} .am-tc-nakit{background:#E4F5EB; color:#1E6B42;} .am-tur-seg.am-tc-nakit{background:#3DB56E;}
+.am-tc-kk .am-dot{background:#7A5CD6;} .am-tc-kk{background:#EEE9FB; color:#5636AD;} .am-tur-seg.am-tc-kk{background:#7A5CD6;}
+.am-tc-hakedis .am-dot{background:#3E7BD8;} .am-tc-hakedis{background:#E7EFFB; color:#1D5FB8;} .am-tur-seg.am-tc-hakedis{background:#3E7BD8;}
+.am-tc-ceksenet .am-dot{background:#D98A2E;} .am-tc-ceksenet{background:#FFF3E0; color:#B8630A;} .am-tur-seg.am-tc-ceksenet{background:#D98A2E;}
+.am-tc-iade .am-dot{background:#D2483A;} .am-tc-iade{background:#FBEAE7; color:#B23A2C;} .am-tur-seg.am-tc-iade{background:#D2483A;}
+
+/* ===== RENK ŞEMASI 1 — SON 3 AY: koyu lacivert, en dikkat çekici (güncel dönem) ===== */
+.am-col.am-c3{background:var(--navy); color:#fff; border:1px solid var(--navy);}
+.am-col.am-c3 .am-col-lbl{color:#fff;}
+.am-col.am-c3 .am-row .am-l{color:#AEBBD6;}
+.am-col.am-c3 .am-row .am-v{color:#fff;}
+.am-col.am-c3 .am-tur-bar{background:rgba(255,255,255,.14);}
+.am-col.am-c3 .am-donus-block{border-top:1px dashed rgba(255,255,255,.16);}
+.am-col.am-c3 .am-donus-num{color:#fff;}
+.am-col.am-c3 .am-donus-lbl{color:#8393B2;}
+.am-col.am-c3 .am-trend-chip.up{background:rgba(255,107,92,.2); color:#FF9C8E;}
+.am-col.am-c3 .am-trend-chip.down{background:rgba(61,181,110,.22); color:#8FE3AE;}
+.am-col.am-c3 .am-trend-chip.base{background:rgba(255,255,255,.12); color:#D7DEEC;}
+.am-col.am-c3 .am-chip{background:rgba(255,255,255,.1); color:#fff;}
+.am-col.am-c3 .am-chip .am-dot{filter:brightness(1.3);}
+
+/* ===== RENK ŞEMASI 2 — SON 6 AY: kehribar/amber, geçiş dönemi hissi ===== */
+.am-col.am-c6{background:#FBF3E3; border:1px solid #EAD9B0;}
+.am-col.am-c6 .am-col-lbl{color:#7A5312;}
+.am-col.am-c6 .am-row .am-l{color:#8A6F47;}
+.am-col.am-c6 .am-row .am-v{color:#43350F;}
+.am-col.am-c6 .am-tur-bar{background:rgba(122,83,18,.14);}
+.am-col.am-c6 .am-donus-block{border-top:1px dashed rgba(122,83,18,.22);}
+.am-col.am-c6 .am-donus-num{color:#7A5312;}
+.am-col.am-c6 .am-donus-lbl{color:#A9895A;}
+.am-col.am-c6 .am-trend-chip.up{background:#F4DFC1; color:#8A5A0F;}
+.am-col.am-c6 .am-trend-chip.down{background:var(--success-soft); color:var(--success);}
+.am-col.am-c6 .am-trend-chip.base{background:#F0E2C4; color:#8A6F47;}
+
+/* ===== RENK ŞEMASI 3 — 12 AY GENEL: açık nötr, sakin referans ===== */
+.am-col.am-c12{background:var(--line-soft); border:1px solid var(--line);}
+.am-col.am-c12 .am-col-lbl{color:var(--ink-soft);}
+.am-col.am-c12 .am-row .am-l{color:var(--ink-soft);}
+.am-col.am-c12 .am-row .am-v{color:var(--ink);}
+.am-col.am-c12 .am-tur-bar{background:rgba(21,34,56,.08);}
+.am-col.am-c12 .am-donus-block{border-top:1px dashed rgba(21,34,56,.12);}
+.am-col.am-c12 .am-donus-num{color:var(--ink);}
+.am-col.am-c12 .am-donus-lbl{color:var(--ink-faint);}
+.am-col.am-c12 .am-trend-chip.base{background:#fff; color:var(--ink-soft); border:1px solid var(--line);}
+
+.am-insight{margin-top:16px; background:var(--warn-soft); border-radius:11px; padding:13px 16px; font-size:12.5px; color:#7A5312; line-height:1.55; display:flex; gap:10px;}
+.am-insight-good{background:var(--success-soft); color:#1E6B42;}
+
+@media(max-width:640px){
+  .am-col{padding:14px 16px;}
+  .am-donus-num{font-size:28px;}
+  .am-chip{font-size:9px; padding:3px 6px;}
+}
