@@ -1067,6 +1067,12 @@
   .ssm-fkns-ring-wrap{margin-left:auto;text-align:center;flex-shrink:0;}
   .ssm-fkns-ring{width:52px;height:52px;display:block;}
   .ssm-fkns-ring-label{font-size:9px;color:var(--ink-faint);font-weight:700;letter-spacing:.02em;margin-top:2px;}
+  /* Temsilci Karnesi kartındaki 3'lü FKNS halkası (Açık/Kapalı/Toplam) — tek halkanın yerini alır,
+     kart genişliğine göre otomatik sıraya dizilip gerekirse alta kayar (küçük ekranlarda). */
+  .ssm-fkns-ring-trio{display:flex;align-items:flex-start;justify-content:space-around;gap:6px;margin:2px 0 14px;padding:10px 4px;background:var(--bg);border-radius:10px;flex-wrap:wrap;}
+  .ssm-fkns-ring-item{text-align:center;flex:0 0 auto;}
+  .ssm-fkns-ring-item .ssm-fkns-ring{width:44px;height:44px;}
+  .ssm-fkns-ring-item .ssm-fkns-ring-label{margin-top:3px;}
   .ssm-kanal-row{margin-bottom:11px;}
   .ssm-kanal-row:last-of-type{margin-bottom:0;}
   .ssm-kanal-top{display:flex;justify-content:space-between;gap:8px;font-size:11.5px;margin-bottom:5px;}
