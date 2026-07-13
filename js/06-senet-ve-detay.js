@@ -1122,12 +1122,21 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
 
   // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT (kullanıcı isteği, eski Format A/B ayrımı tamamen
   // kaldırıldı): Artık tek bir dosya düzeni var — tarih "Tarih", müşteri kodu "Müşteri", tutar
-  // "Tutar", temsilci "Satış Temsilcisi" kolonunda. Çek/Senet satırları (Ödeme Tipi='Alınan Çek'/
-  // 'Alınan Senet') burada da es geçilir — o veri ayrı Çek/Senet Riski modülünden yönetiliyor.
+  // "Tutar", temsilci "Satış Temsilcisi" kolonunda.
+  // ÖDEME TİPİ BEYAZ LİSTESİ (kullanıcı kararı): ST Tahsilat/Litre ekranına SADECE şu 4 ödeme tipi
+  // dahil edilir — Nakit, Kredi Kartı (banka alt kırılımları dahil — bunlar "Banka" kolonundan
+  // türetilir ama ham "Ödeme Tipi" her zaman sadece "Kredi Kartı"dır), Banka havalesi, Sanal Pos.
+  // Bunların DIŞINDAKİ her şey (Alınan Çek/Alınan Senet — ayrı Çek/Senet Riski modülünden
+  // yönetiliyor —, boş/tanımsız Ödeme Tipi, "Diğer" gibi başka herhangi bir ham değer) bu ekrandan
+  // TAMAMEN ÇIKARILIR — ne genel toplama ne kolon listesine dahil edilir. Önceden yalnızca Alınan
+  // Çek/Alınan Senet hariç tutulup geri kalan HER ŞEY (Virman, Hizmet Alış Fatura/Hakediş dahil,
+  // varsa) toplamaya dahil ediliyordu; kullanıcı bunun yalnızca 4 sabit ödeme tipiyle sınırlı
+  // olmasını istedi.
+  const TAHSILAT_IZIN_VERILEN_ODEME_TIPLERI = new Set(['Nakit','Kredi Kartı','Banka havalesi','Sanal Pos']);
   const tahsilatParsed = (tahsilatRows||[])
     .filter(r=>{
       const ot = String(r['Ödeme Tipi']||'').trim();
-      return ot !== 'Alınan Çek' && ot !== 'Alınan Senet';
+      return TAHSILAT_IZIN_VERILEN_ODEME_TIPLERI.has(ot);
     })
     .map(r=>({
       sst: String(r['Satış Temsilcisi']||'Tanımsız').trim() || 'Tanımsız',
