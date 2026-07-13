@@ -1113,11 +1113,8 @@ async function renderSellOutView(){
           <div class="musteri-name">${escapeHtml(r.temsilci)} <span class="badge" style="background:${sellOutRenkSoft(r.fknsOrani)};color:${fknsRenk};">#${i+1}</span></div>
           <span class="temsilci-tag" style="margin-top:5px;display:inline-block;">${escapeHtml(r.ssm)}</span>
         </div>
-        <div class="ssm-fkns-ring-wrap">
-          ${fknsRingSvg(r.fknsOrani)}
-          <div class="ssm-fkns-ring-label">FKNS</div>
-        </div>
       </div>
+      ${fknsRingUcluSvg(r.fknsAcikOrani, r.fknsKapaliOrani, r.fknsOrani)}
       ${ssmKanalRowHtml('Açık Kanal', r.acikLitre, r.acikHedef, 'fa-lock-open')}
       ${ssmKanalRowHtml('Kapalı Kanal', r.kapaliLitre, r.kapaliHedef, 'fa-lock')}
       <div class="ssm-karne-foot">
