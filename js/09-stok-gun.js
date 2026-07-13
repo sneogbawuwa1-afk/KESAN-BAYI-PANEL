@@ -1128,15 +1128,19 @@ async function renderSellOutView(){
         <button type="button" class="hedef-kaydet-btn" data-temsilci-key="${escapeHtml(r.key)}" data-temsilci-ad="${escapeHtml(r.temsilci)}"><i class="fa-solid fa-lock" aria-hidden="true"></i> Kaydet</button>
       </div>`}
 
-      <div class="htk-alt htk-alt-fkns" style="margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);">
-        <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-file-circle-xmark" aria-hidden="true"></i></span>Fatura kesilmeyen: <b style="color:var(--ink);">${r.faturaKesilmeyenNokta} nokta</b></span>
-        <div class="htk-alt-actions">
-          <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}">Detay ↗</button>
+      <div class="fatura-kesilmeyen-kanal-satirlar" style="margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);">
+        <div class="htk-alt htk-alt-fkns">
+          <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-lock-open" aria-hidden="true"></i></span>Fatura kesilmeyen Açık Kanal nokta: <b style="color:var(--ink);">${r.faturaKesilmeyenNoktaAcik}</b></span>
+          <div class="htk-alt-actions">
+            <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="acik">Detay ↗</button>
+          </div>
         </div>
-      </div>
-      <div class="fatura-kesilmeyen-kanal-ozet">
-        <span class="fkns-kanal-ozet-item"><i class="fa-solid fa-lock-open" aria-hidden="true"></i>Açık Kanal: <b>${r.faturaKesilmeyenNoktaAcik}</b></span>
-        <span class="fkns-kanal-ozet-item"><i class="fa-solid fa-lock" aria-hidden="true"></i>Kapalı Kanal: <b>${r.faturaKesilmeyenNoktaKapali}</b></span>
+        <div class="htk-alt htk-alt-fkns" style="margin-top:9px;">
+          <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>Fatura kesilmeyen Kapalı Kanal nokta: <b style="color:var(--ink);">${r.faturaKesilmeyenNoktaKapali}</b></span>
+          <div class="htk-alt-actions">
+            <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="kapali">Detay ↗</button>
+          </div>
+        </div>
       </div>
     </div>`;
   }).join('') || '<div class="empty-state" style="grid-column:1/-1;">Kayıt yok</div>';
