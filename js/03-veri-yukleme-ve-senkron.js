@@ -1314,11 +1314,15 @@ function buildReport(files, musteriMasterMap){
   // alanından yüklenen ve state.cekSenetArsivi'nde (bkz. 01-cekirdek-ve-arsiv.js) kalıcı olarak
   // saklanan Çek/Senet Riski dosyasından besleniyor. Arşivdeki HER kayıt (durum='risk' veya
   // 'tahsilEdildi' fark etmeksizin) cekSenetDetayMap'e (detay tablosu için) girer; yalnızca
-  // durum='risk' olanlar cekSenetMap'e (Toplam Risk'e eklenen tutar) girer — 'tahsilEdildi' olanlar
-  // artık risk değil, alinanTahsilat'a eklenir (bkz. hemen altındaki tahsilEdilenCekSenetMap).
+  // durum='risk' olanlar cekSenetMap'e (Toplam Risk'e eklenen tutar) girer.
+  // tahsilEdilenCekSenetMap (tahsilEdildi olanların toplamı) HÂLÂ hesaplanır ama artık
+  // m.alinanTahsilat'a (Alınan Tahsilat KPI'sı) EKLENMEZ — kullanıcı kararı: "Tahsil Edildi"
+  // işaretlemesinin bir tarih damgası olmadığı için "bugünü asla baz alma" kuralına tabi
+  // tutulamıyor, bu yüzden KPI'dan tamamen çıkarıldı (bkz. aşağıdaki m.alinanTahsilat ataması).
+  // Harita yine de ileride (örn. bir tarih damgası eklenirse) tekrar kullanılabilsin diye korunuyor.
   const cekSenetMap = new Map();
   const cekSenetDetayMap = new Map();
-  const tahsilEdilenCekSenetMap = new Map(); // tahsilEdildi olan çek/senetlerin tutarı — alinanTahsilat'a eklenir
+  const tahsilEdilenCekSenetMap = new Map();
   Object.entries(state.cekSenetArsivi||{}).forEach(([anahtar, r])=>{
     const musteri = r.musteriKod;
     if(!musteri) return;
@@ -1406,17 +1410,20 @@ function buildReport(files, musteriMasterMap){
     m.siparisTutari = siparisNormalMap.get(musteri)||0;
     m.emanetSiparis = emanetSiparisMap.get(musteri)||0;
     m.cekSenet = cekSenetMap.get(musteri)||0;
-    // TAHSİL EDİLDİ ÇEK/SENET — İKİLİ DAVRANIŞ (kullanıcı kuralı, netleştirilmiş hali):
-    //   • m.alinanTahsilat: Genel KPI toplamı, Temsilci Karnesi, Tahsilat Verimliliği, Trend/
-    //     Finansal Analiz gibi TÜM genel/toplam hesaplarda kullanılan asıl alandır — Tahsil Edildi
-    //     çek/senet burada normal bir tahsilat gibi SAYILIR (kullanıcı: "finansal raporlara tahsilat
-    //     olarak yansısın").
-    //   • m.alinanTahsilatKartGosterge: SADECE müşteri kartının üzerindeki küçük "Tahsilat"
-    //     göstergesinde kullanılır (bkz. renderMusteriTable) — çek/senet buraya DAHİL EDİLMEZ
-    //     (kullanıcı: "kartta görünmesine gerek yok"). Bu, aynı müşterinin aynı anda hem "tahsilat
-    //     yapılmış" (genel toplamlarda) hem "kartta tahsilat yok" (görsel gösterge) görünmesini
-    //     sağlayan BİLİNÇLİ bir ayrımdır — iki farklı ekranın iki farklı amacı olduğu için.
-    m.alinanTahsilat = (tahsilatMap.get(musteri)||0) + (tahsilEdilenCekSenetMap.get(musteri)||0);
+    // TAHSİL EDİLDİ ÇEK/SENET — KULLANICI KARARIYLA GÜNCELLENDİ (önceki davranış: bu tutar
+    // m.alinanTahsilat'a — yani Genel Bakış/Sevk Raporu KPI toplamına — da dahil ediliyordu).
+    // Sorun: "Tahsil Edildi" işaretlemesinin bir TARİH damgası yok (sadece durum='tahsilEdildi'
+    // olarak state.cekSenetArsivi'nde tutuluyor), bu yüzden "Alınan Tahsilat" KPI'sının "bugünü asla
+    // baz alma, bugünden önceki en yakın veri gününü göster" kuralına (bkz. yukarıdaki
+    // hedefTahsilatGunKeyTumYil/TAHSILAT_GERIYE_ARAMA_GUN_LIMITI) hiç tabi tutulamıyordu — kullanıcı
+    // bugün bir çek/senedi tahsil edildi işaretlediğinde bu tutar hangi gün olursa olsun ANINDA
+    // KPI'ya giriyor, kuralı sessizce bypass ediyordu. Kullanıcı kararı: çek/senet tahsilatları
+    // Alınan Tahsilat KPI'sine (m.alinanTahsilat) ARTIK HİÇ DAHİL EDİLMEZ — yalnızca Tahsilat
+    // Dökümü + Bozuk İade Faturası + Depozito Tahsilatı kaynaklı tahsilatlar (tahsilatMap, hepsi
+    // aynı gün kuralına tabi) sayılır. tahsilEdilenCekSenetMap hâlâ hesaplanıyor ve cekSenetDetayMap
+    // üzerinden Nokta Detay popup'ındaki "Tahsil Edildi" rozetinde/listesinde gösterilmeye devam
+    // ediyor — sadece genel KPI toplamına eklenmiyor.
+    m.alinanTahsilat = tahsilatMap.get(musteri)||0;
     m.alinanTahsilatKartGosterge = tahsilatMap.get(musteri)||0;
     m.alinanTahsilatKaynak = tahsilatKaynakMap.get(musteri)||null;
     m.cekSenetDetay = cekSenetDetayMap.get(musteri)||[];
