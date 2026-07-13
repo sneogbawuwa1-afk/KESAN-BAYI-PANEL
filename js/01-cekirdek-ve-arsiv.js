@@ -1,4 +1,3 @@
-
 // Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
 // konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
 // bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
@@ -57,6 +56,7 @@ const state = {
   stokGunAcikRiskSatirlar: new Set(), // Ürün×temsilci risk detayı genişletilmiş satırların ürün kodları
   malzemelerStok: new Map(), // malzemeKodu -> anlık kullanılabilir stok miktarı (Malzemeler dosyasından)
   musteriMasterDurum: new Map(), // musteri kodu -> 'Aktif' | ham durum metni (Sell Out Raporu FKNS hesaplaması için)
+  musteriMasterKanal: new Map(), // musteri kodu -> 'Açık Kanal' | 'Kapalı Kanal' (Satış Kanalı Tanımı'ndan; Sell Out Raporu Açık/Kapalı Kanal FKNS ayrımı için — bkz. musteriMasterKanalSinifla)
   sellOutHedef: {}, // { [temsilciAdi]: {acik:Number, kapali:Number} } — buluta kayıtlı, şifreyle değiştirilebilir
   sellOutNoktaSort: new Map(), // temsilciKey -> {key:'adi'|'kod', dir:1|-1} — Fatura Kesilmeyen Aktif Noktalar listesi sıralaması
   karneRiskliSort: new Map(), // temsilciAdi -> {key:'adi'|'kod'|'ortVade', dir:1|-1} — Temsilci Karnesi kartındaki Riskli Müşteriler listesi sıralaması
@@ -1219,5 +1219,3 @@ function tahsilatArsivindenAralikDiziyeCevir(arsiv, ilkGunKey, sonGunKey){
       gecerli: true, tahsilatTuru: r.odemeEtiketi, satisTemsilcisi: r.satisTemsilcisi,
     }));
 }
-
-
