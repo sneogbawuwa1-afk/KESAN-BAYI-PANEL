@@ -1961,15 +1961,19 @@ document.addEventListener('click', (e)=>{
   hakedisModalAc(btn.getAttribute('data-kod'));
 });
 
-function faturaKesilmeyenModalRenderList(temsilciKey){
+// kanalFiltre: 'acik' | 'kapali' | null (null = tümü, eski/genel kullanım için geriye dönük uyumlu)
+function faturaKesilmeyenModalRenderList(temsilciKey, kanalFiltre){
   const r = state.sellOutTemsilciMap && state.sellOutTemsilciMap.get(temsilciKey);
   const list = document.getElementById('faturaKesilmeyenModalList');
-  if(!r || !r.faturaKesilmeyenListe.length){
-    list.innerHTML = `<div class="fkns-empty">Tüm aktif noktalara fatura kesilmiş <i class="fa-solid fa-champagne-glasses" aria-hidden="true"></i></div>`;
+  const kanalAdi = kanalFiltre==='acik' ? 'Açık Kanal' : (kanalFiltre==='kapali' ? 'Kapalı Kanal' : null);
+  const tamListe = (r ? r.faturaKesilmeyenListe : []) || [];
+  const filtreliListe = kanalAdi ? tamListe.filter(n=> n.kanal===kanalAdi) : tamListe;
+  if(!r || !filtreliListe.length){
+    list.innerHTML = `<div class="fkns-empty">${kanalAdi ? 'Bu kanalda tüm aktif noktalara fatura kesilmiş' : 'Tüm aktif noktalara fatura kesilmiş'} <i class="fa-solid fa-champagne-glasses" aria-hidden="true"></i></div>`;
     return;
   }
   const noktaSort = state.sellOutNoktaSort.get(temsilciKey) || {key:'adi', dir:1};
-  const siraliListe = r.faturaKesilmeyenListe.slice().sort((a,b)=>{
+  const siraliListe = filtreliListe.slice().sort((a,b)=>{
     const av = String(a[noktaSort.key]||''), bv = String(b[noktaSort.key]||'');
     return noktaSort.dir * av.localeCompare(bv, 'tr');
   });
@@ -1990,19 +1994,25 @@ function faturaKesilmeyenModalRenderList(temsilciKey){
     </div>`;
   }).join('');
 }
-function faturaKesilmeyenModalAc(temsilciKey){
+// kanalFiltre: 'acik' | 'kapali' | undefined (buton her zaman birini belirtir; undefined sadece
+// eski/harici çağrılar için geriye dönük uyumluluk amaçlı, tüm listeyi gösterir).
+function faturaKesilmeyenModalAc(temsilciKey, kanalFiltre){
   const r = state.sellOutTemsilciMap && state.sellOutTemsilciMap.get(temsilciKey);
+  state.faturaKesilmeyenModalKanalFiltre = kanalFiltre || null;
+  const kanalAdi = kanalFiltre==='acik' ? 'Açık Kanal' : (kanalFiltre==='kapali' ? 'Kapalı Kanal' : null);
   document.getElementById('faturaKesilmeyenModalAvatar').textContent = r ? avatarBaslangic(r.temsilci) : '';
   document.getElementById('faturaKesilmeyenModalTitle').textContent = r ? r.temsilci : 'Temsilci bulunamadı';
+  const modalSub = document.querySelector('#faturaKesilmeyenModal .modal-head-navy-sub');
+  if(modalSub) modalSub.textContent = kanalAdi ? `Fatura Kesilmeyen Aktif Noktalar — ${kanalAdi}` : 'Fatura Kesilmeyen Aktif Noktalar';
   document.getElementById('faturaKesilmeyenModalPill').textContent = r
-    ? `${r.faturaKesilmeyenNokta} nokta (Açık ${r.faturaKesilmeyenNoktaAcik} · Kapalı ${r.faturaKesilmeyenNoktaKapali})`
+    ? (kanalFiltre==='acik' ? r.faturaKesilmeyenNoktaAcik : (kanalFiltre==='kapali' ? r.faturaKesilmeyenNoktaKapali : r.faturaKesilmeyenNokta)) + ' nokta'
     : '';
   const noktaSort = state.sellOutNoktaSort.get(temsilciKey) || {key:'adi', dir:1};
   document.getElementById('faturaKesilmeyenModalSortSelect').value = noktaSort.key;
   document.getElementById('faturaKesilmeyenModalSortDirBtn').textContent = noktaSort.dir===1 ? '↓' : '↑';
   document.getElementById('faturaKesilmeyenModalSortSelect').dataset.temsilciKey = temsilciKey;
   document.getElementById('faturaKesilmeyenModalSortDirBtn').dataset.temsilciKey = temsilciKey;
-  faturaKesilmeyenModalRenderList(temsilciKey);
+  faturaKesilmeyenModalRenderList(temsilciKey, kanalFiltre || null);
   document.getElementById('faturaKesilmeyenModalOverlay').classList.add('open');
 }
 function faturaKesilmeyenModalKapat(){
@@ -2016,7 +2026,7 @@ document.getElementById('faturaKesilmeyenModalSortSelect').addEventListener('cha
   const key = e.target.dataset.temsilciKey;
   const mevcut = state.sellOutNoktaSort.get(key) || {key:'adi', dir:1};
   state.sellOutNoktaSort.set(key, {key: e.target.value, dir: mevcut.dir});
-  faturaKesilmeyenModalRenderList(key);
+  faturaKesilmeyenModalRenderList(key, state.faturaKesilmeyenModalKanalFiltre || null);
 });
 document.getElementById('faturaKesilmeyenModalSortDirBtn').addEventListener('click', (e)=>{
   const key = e.target.dataset.temsilciKey;
@@ -2024,13 +2034,13 @@ document.getElementById('faturaKesilmeyenModalSortDirBtn').addEventListener('cli
   const yeniDir = mevcut.dir*-1;
   state.sellOutNoktaSort.set(key, {key: mevcut.key, dir: yeniDir});
   e.target.textContent = yeniDir===1 ? '↓' : '↑';
-  faturaKesilmeyenModalRenderList(key);
+  faturaKesilmeyenModalRenderList(key, state.faturaKesilmeyenModalKanalFiltre || null);
 });
 document.addEventListener('click', (e)=>{
   const btn = e.target.closest('.fatura-kesilmeyen-detay-btn');
   if(!btn) return;
   e.stopPropagation();
-  faturaKesilmeyenModalAc(btn.getAttribute('data-temsilci-key'));
+  faturaKesilmeyenModalAc(btn.getAttribute('data-temsilci-key'), btn.getAttribute('data-kanal'));
 });
 
 function renderBayiHakedisView(){
