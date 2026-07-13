@@ -1455,7 +1455,7 @@ document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('cli
         }
       }
       ktlog('GELENEKSEL "Verileri Güncelle" → buildSellOutReport çağrılıyor. Kaynak: state.sellOutKendiDosya ('+(state.sellOutKendiDosya&&state.sellOutKendiDosya.ad)+', '+(state.sellOutKendiDosya&&state.sellOutKendiDosya.data?state.sellOutKendiDosya.data.length:0)+' satır)');
-      const baseRapor = buildSellOutReport(state.sellOutKendiDosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay);
+      const baseRapor = buildSellOutReport(state.sellOutKendiDosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay, state.musteriMasterKanal);
       await sellOutKaydet(baseRapor);
       await renderSellOutView();
       durumEl.textContent = '✓ Güncellendi — ' + fmtDate(new Date());
