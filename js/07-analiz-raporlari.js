@@ -691,7 +691,7 @@ function computeYonetimInsights(ozet, karne){
   if(ozet.dikkatSayisi>0) insights.push({icon:'fa-triangle-exclamation', cls:'danger', text:ozet.dikkatSayisi.toLocaleString('tr-TR')+' müşteri 90+ gün gecikmede'});
   insights.push({icon:'fa-coins', cls:'success', text:'Bu hafta '+TL(ozet.haftalikTahsilat)+' tahsilat yapıldı'});
   if(ozet.haftalikLitre>0) insights.push({icon:'fa-box', cls:'neutral', text:'Bu hafta '+Math.round(ozet.haftalikLitre).toLocaleString('tr-TR')+' Lt sevkiyat gerçekleşti'});
-  if(ozet.haftalikHakedis>0) insights.push({icon:'fa-award', cls:'accent', text:'Bu hafta '+TL(ozet.haftalikHakedis)+' bayi hakediş tahakkuk etti'});
+  if(ozet.haftalikHakedis>0) insights.push({icon:'fa-award', cls:'accent', text:'Bu hafta '+TLKurus(ozet.haftalikHakedis)+' bayi hakediş tahakkuk etti'});
   if(karne && karne.rows && karne.rows.length){
     const enIyi = karne.rows[0];
     if(enIyi && enIyi.gerceklesme!=null) insights.push({icon:'fa-trophy', cls:'accent', text:'En yüksek tahsilat gerçekleşmesi: '+enIyi.temsilci+' ('+fmtYuzde(enIyi.gerceklesme)+')'});
