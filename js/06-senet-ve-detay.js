@@ -274,7 +274,7 @@ function renderMusteriDetail(m, showSenetBtn){
       <b>Tahsilat Dökümü:</b> ${TL(m.alinanTahsilat)} toplam
       <div style="margin-top:4px;display:flex;flex-direction:column;gap:2px;">
         ${kay.normal>0 ? `<span>· Normal Tahsilat: ${TL(kay.normal)}</span>` : ''}
-        ${kay.hakedis>0 ? `<span>· Hakediş Tahsilatı: ${TL(kay.hakedis)}</span>` : ''}
+        ${kay.hakedis>0 ? `<span>· Hakediş Tahsilatı: ${TLKurus(kay.hakedis)}</span>` : ''}
         ${kay.bozukIade>0 ? `<span>· Bozuk İade Faturası: ${TL(kay.bozukIade)}</span>` : ''}
         ${kay.depozito>0 ? `<span>· Depozito Tahsilatı: ${TL(kay.depozito)}</span>` : ''}
       </div>
@@ -290,8 +290,8 @@ function renderMusteriDetail(m, showSenetBtn){
     html += hakedisKaydi.kayitlar.map(k=>`<tr>
       <td>${fmtDate(k.tarih)}</td>
       <td>${escapeHtml(k.kategori)}</td>
-      <td class="num">${TL(k.tutarHaric)}</td>
-      <td class="num">${TL(k.tutarKdvli)}</td>
+      <td class="num">${TLKurus(k.tutarHaric)}</td>
+      <td class="num">${TLKurus(k.tutarKdvli)}</td>
     </tr>`).join('');
     html += `</tbody></table></div>`;
   }
@@ -1891,7 +1891,7 @@ function renderBayiHakedisTable(resetSayfa=true){
   const list = document.getElementById('bayiHakedisTbody');
   const g = report.genelToplam;
   document.getElementById('bayiHakedisGenelToplam').innerHTML =
-    `Genel Toplam — Kayıt: <b>${g.kayitSayisi}</b> · İskonto: <b>${g.iskontoSayisi}</b> · İşletme Katkı Payı: <b>${g.katkiPayiSayisi}</b> · Toplam Hakediş (KDV Dahil): <b>${TL(g.toplamKdvli)}</b>`;
+    `Genel Toplam — Kayıt: <b>${g.kayitSayisi}</b> · İskonto: <b>${g.iskontoSayisi}</b> · İşletme Katkı Payı: <b>${g.katkiPayiSayisi}</b> · Toplam Hakediş (KDV Dahil): <b>${TLKurus(g.toplamKdvli)}</b>`;
   if(!rows.length){
     list.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">Aramanızla/filtrenizle eşleşen nokta bulunamadı.</div>`;
     renderBayiHakedisDahaFazlaBtn(0, 0);
@@ -1912,7 +1912,7 @@ function renderBayiHakedisTable(resetSayfa=true){
         </span>
       </div>
       <div class="htk-borc-satir">
-        <span class="htk-borc">${TL(r.toplamKdvli)}</span>
+        <span class="htk-borc">${TLKurus(r.toplamKdvli)}</span>
         <span class="htk-gecikme" style="color:var(--ink-faint);">toplam hakediş (KDV dahil)</span>
       </div>
       <div class="htk-inline-stats">
@@ -1952,7 +1952,7 @@ function hakedisModalAc(kod){
   document.getElementById('hakedisModalSub').textContent = r.kod + ' · ' + (r.kayitSayisi||0) + ' kayıt';
   document.getElementById('hakedisModalTbody').innerHTML = (r.kayitlar||[]).length ? r.kayitlar.map(k=>`<tr>
     <td>${fmtDate(k.tarih)}</td><td>${escapeHtml(k.kategori)}</td>
-    <td class="num">${TL(k.tutarHaric)}</td><td class="num">${TL(k.tutarKdvli)}</td>
+    <td class="num">${TLKurus(k.tutarHaric)}</td><td class="num">${TLKurus(k.tutarKdvli)}</td>
   </tr>`).join('') : `<tr><td colspan="4" class="empty-state">Hakediş kaydı bulunamadı</td></tr>`;
   document.getElementById('hakedisModalOverlay').classList.add('open');
 }
