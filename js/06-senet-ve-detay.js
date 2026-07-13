@@ -1973,20 +1973,30 @@ function faturaKesilmeyenModalRenderList(temsilciKey){
     const av = String(a[noktaSort.key]||''), bv = String(b[noktaSort.key]||'');
     return noktaSort.dir * av.localeCompare(bv, 'tr');
   });
-  list.innerHTML = siraliListe.map(n=>`
+  // n.kanal: 'Açık Kanal' | 'Kapalı Kanal' | null (Müşteri Master'da Satış Kanalı Tanımı bilinmeyen/
+  // "Key Account" gibi sınıflandırılamayan noktalar için null — bu noktalarda rozet gösterilmez).
+  list.innerHTML = siraliListe.map(n=>{
+    const kanalRozet = n.kanal
+      ? `<span class="popup-nokta-kanal-badge ${n.kanal==='Açık Kanal'?'acik':'kapali'}"><i class="fa-solid ${n.kanal==='Açık Kanal'?'fa-lock-open':'fa-lock'}" aria-hidden="true"></i>${n.kanal==='Açık Kanal'?'Açık':'Kapalı'}</span>`
+      : '';
+    return `
     <div class="popup-nokta-row">
       <div class="popup-nokta-avatar">${escapeHtml(avatarBaslangic(n.adi))}</div>
       <div class="popup-nokta-info">
         <div class="popup-nokta-adi" title="${escapeHtml(n.adi)}">${escapeHtml(n.adi)}</div>
         <div class="popup-nokta-kod">${escapeHtml(n.kod)}</div>
       </div>
-    </div>`).join('');
+      ${kanalRozet}
+    </div>`;
+  }).join('');
 }
 function faturaKesilmeyenModalAc(temsilciKey){
   const r = state.sellOutTemsilciMap && state.sellOutTemsilciMap.get(temsilciKey);
   document.getElementById('faturaKesilmeyenModalAvatar').textContent = r ? avatarBaslangic(r.temsilci) : '';
   document.getElementById('faturaKesilmeyenModalTitle').textContent = r ? r.temsilci : 'Temsilci bulunamadı';
-  document.getElementById('faturaKesilmeyenModalPill').textContent = r ? r.faturaKesilmeyenNokta + ' nokta' : '';
+  document.getElementById('faturaKesilmeyenModalPill').textContent = r
+    ? `${r.faturaKesilmeyenNokta} nokta (Açık ${r.faturaKesilmeyenNoktaAcik} · Kapalı ${r.faturaKesilmeyenNoktaKapali})`
+    : '';
   const noktaSort = state.sellOutNoktaSort.get(temsilciKey) || {key:'adi', dir:1};
   document.getElementById('faturaKesilmeyenModalSortSelect').value = noktaSort.key;
   document.getElementById('faturaKesilmeyenModalSortDirBtn').textContent = noktaSort.dir===1 ? '↓' : '↑';
