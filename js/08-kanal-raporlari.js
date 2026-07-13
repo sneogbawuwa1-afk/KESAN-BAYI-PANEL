@@ -186,6 +186,13 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
   let blokajTutar=0, blokajAdet=0;
   const belgeSetGenel = new Set();
   const invoicedNoktaSetGenel = new Set();
+  // Müşteri No -> {acik, kapali} — bu döneme ait satış satırlarında o müşterinin kaç satırda Açık,
+  // kaç satırda Kapalı Kanal olarak göründüğünün sayacı. Kanal, Müşteri Master'da değil, ham Sell
+  // Out satırlarında (Müşteri Kanalı Tnm.) yer aldığı ve bir müşteri teorik olarak dönem içinde
+  // birden fazla satırda görünüp (nadiren) farklı kanal etiketleriyle eşleşebildiği için, müşterinin
+  // NİHAİ kanalı bu sayaçtaki çoğunluğa (en çok görülen etiket) göre belirlenir — Açık/Kapalı Kanal
+  // FKNS oranlarının paydası (aktif nokta sayısı) bu eşlemeyle bölünür.
+  const musteriKanalOylari = new Map();
 
   (rows||[]).forEach(r=>{
     const musteri = String(r['Müşteri No']||'').trim();
@@ -212,6 +219,11 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     if(belgeNo!=null && belgeNo!=='') belgeSetGenel.add(String(belgeNo));
     if(musteri) invoicedNoktaSetGenel.add(musteri);
     if(muhasebeDurum === 'Faturalama Blokajlı'){ blokajTutar += net; blokajAdet += 1; }
+    if(musteri){
+      if(!musteriKanalOylari.has(musteri)) musteriKanalOylari.set(musteri, {acik:0, kapali:0});
+      const oy = musteriKanalOylari.get(musteri);
+      if(kanal==='Açık Kanal') oy.acik++; else oy.kapali++;
+    }
 
     markaAgg.set(marka, (markaAgg.get(marka)||0)+litre);
     hacimSegAgg.set(hacimSeg, (hacimSegAgg.get(hacimSeg)||0)+net);
@@ -257,6 +269,15 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     if(musteri) t.invoicedNoktaSet.add(musteri);
   });
 
+  // musteriKanalOylari sayaçlarından her müşterinin NİHAİ kanalını (çoğunluk oyu) belirleyip
+  // tek bir haritada topluyoruz. Bu dönemde hiç satış satırı olmayan (dolayısıyla oy da
+  // bulunmayan) müşteriler burada YER ALMAZ — aşağıda aktifNoktalar'a dağıtılırken kanalı
+  // bilinmiyor kabul edilip ne Açık ne Kapalı FKNS paydasına dahil edilir (bkz. not aşağıda).
+  const musteriKanalMap = new Map();
+  musteriKanalOylari.forEach((oy, musteriKod)=>{
+    musteriKanalMap.set(musteriKod, oy.acik >= oy.kapali ? 'Açık Kanal' : 'Kapalı Kanal');
+  });
+
   // Müşteri Master'daki noktaları temsilcilerine dağıt (bu dönem satışı olmasa da FKNS hesabına
   // dahil olmaları gerekir). Durum kolonu bulunamadıysa tüm noktalar aktif kabul edilir. Durum
   // kolonu varsa, yalnızca statüsü açıkça "Pasif" veya "İptal" olan noktalar hem bu listeden hem de
@@ -277,13 +298,25 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     const faturaKesilmeyenKodlar = t.aktifNoktalar.filter(k=>!t.invoicedNoktaSet.has(k));
     const faturaKesilen = toplamAktif - faturaKesilmeyenKodlar.length;
     const fknsOrani = toplamAktif>0 ? (faturaKesilen/toplamAktif*100) : null;
+    // Açık/Kapalı Kanal FKNS — aynı aktifNoktalar listesi, musteriKanalMap'e göre ikiye bölünüp
+    // her alt küme için ayrı ayrı (fatura kesilen / toplam aktif) oranı hesaplanır. Bu dönemde hiç
+    // satış satırı olmadığı için kanalı belirlenemeyen (musteriKanalMap'te bulunmayan) noktalar
+    // HİÇBİR kanal paydasına dahil edilmez — yanlışlıkla Açık ya da Kapalı Kanal'a sayılıp o
+    // oranları gereksiz yere düşürmesinler diye; Toplam FKNS (fknsOrani) bu noktaları zaten içerir.
+    const acikAktifNoktalar = t.aktifNoktalar.filter(k=> musteriKanalMap.get(k)==='Açık Kanal');
+    const kapaliAktifNoktalar = t.aktifNoktalar.filter(k=> musteriKanalMap.get(k)==='Kapalı Kanal');
+    const acikFaturaKesilen = acikAktifNoktalar.filter(k=> t.invoicedNoktaSet.has(k)).length;
+    const kapaliFaturaKesilen = kapaliAktifNoktalar.filter(k=> t.invoicedNoktaSet.has(k)).length;
+    const fknsAcikOrani = acikAktifNoktalar.length>0 ? (acikFaturaKesilen/acikAktifNoktalar.length*100) : null;
+    const fknsKapaliOrani = kapaliAktifNoktalar.length>0 ? (kapaliFaturaKesilen/kapaliAktifNoktalar.length*100) : null;
     const ssm = t.ssm || getSahaMuduru(t.ad) || 'Tanımsız';
     return {
       key:t.key, temsilci:t.ad, ssm, netCiro:t.netCiro,
       acikLitre:t.acikLitre, kapaliLitre:t.kapaliLitre, toplamLitre:t.acikLitre+t.kapaliLitre,
       belgeSayisi:t.belgeSet.size,
       toplamAktifNokta:toplamAktif, faturaKesilenNokta:faturaKesilen, faturaKesilmeyenNokta:faturaKesilmeyenKodlar.length,
-      fknsOrani,
+      fknsOrani, fknsAcikOrani, fknsKapaliOrani,
+      toplamAktifNoktaAcik:acikAktifNoktalar.length, toplamAktifNoktaKapali:kapaliAktifNoktalar.length,
       faturaKesilmeyenListe: faturaKesilmeyenKodlar.map(kod=>({kod, adi:(musteriMasterDetayMap.get(kod)||{}).musteriAdi || kod})),
     };
   }).sort((a,b)=> b.toplamLitre - a.toplamLitre);
@@ -967,6 +1000,22 @@ function fknsRingSvg(oran){
     <path d="M18 2a16 16 0 0 1 0 32 16 16 0 0 1 0-32" fill="none" style="stroke:${renk}" stroke-width="4" stroke-dasharray="${deger} 100" stroke-linecap="round"/>
     <text x="18" y="21" font-size="9" font-weight="700" fill="#152238" text-anchor="middle" font-family="Space Grotesk">${escapeHtml(metin)}</text>
   </svg>`;
+}
+
+// Temsilci Karnesi kartlarında tek FKNS halkası yerine Açık Kanal / Kapalı Kanal / Toplam olmak
+// üzere yan yana 3 küçük halka gösterir. Aynı fknsRingSvg() motoru kullanılır (yeniden çizim
+// yerine sadece boyutu küçültülür), her halkanın altına kısa etiketi yazılır.
+function fknsRingUcluSvg(acikOran, kapaliOran, toplamOran){
+  const halka = (oran, etiket)=> `
+    <div class="ssm-fkns-ring-item">
+      ${fknsRingSvg(oran)}
+      <div class="ssm-fkns-ring-label">${escapeHtml(etiket)}</div>
+    </div>`;
+  return `<div class="ssm-fkns-ring-trio">
+    ${halka(acikOran, 'Açık FKNS')}
+    ${halka(kapaliOran, 'Kapalı FKNS')}
+    ${halka(toplamOran, 'Toplam FKNS')}
+  </div>`;
 }
 
 // Açık/Kapalı Kanal ilerleme satırı — hedef girilmemişse (0) sadece satış litresi gösterilir.
