@@ -1166,7 +1166,31 @@ function buildReport(files, musteriMasterMap){
   const tahsilatMap = new Map();
   const bugunGunKeyTahsilatTumYil = dateKeyLocal(today);
   const dunTarihiTumYil = new Date(bugunGunKeyTahsilatTumYil+'T00:00:00'); dunTarihiTumYil.setDate(dunTarihiTumYil.getDate()-1);
-  const hedefTahsilatGunKeyTumYil = dateKeyLocal(dunTarihiTumYil);
+  const dunGunKeyTahsilatTumYil = dateKeyLocal(dunTarihiTumYil);
+  // KULLANICI İSTEĞİ (bugüne en yakın dolu güne kayan tahsilat KPI'sı): eskiden HER ZAMAN sabit
+  // olarak dünün gününe bakılırdı, o gün boşsa KPI 0/boş kalırdı. Artık dünden geriye doğru en
+  // fazla 30 gün taranır ve ARŞİVDE (bozukIadeTahsilat/depozitoTahsilat henüz efektifGunMap'e
+  // eklenmeden ÖNCEKİ ham Tahsilat Dökümü verisine göre) veri bulunan İLK (bugüne en yakın) gün
+  // hedef alınır. Bugünün kendisi bu aramaya DAHİL DEĞİLDİR (kullanıcı isteği: "bugün ve sonrası
+  // için geçerli değil") — arama en erken dünden başlar, en geç 30 gün öncesine kadar gider.
+  const TAHSILAT_GERIYE_ARAMA_GUN_LIMITI = 30;
+  const aramaBaslangicTarihi = new Date(dunGunKeyTahsilatTumYil+'T00:00:00');
+  aramaBaslangicTarihi.setDate(aramaBaslangicTarihi.getDate() - (TAHSILAT_GERIYE_ARAMA_GUN_LIMITI - 1));
+  const aramaBaslangicGunKey = dateKeyLocal(aramaBaslangicTarihi);
+  const tahsilatAralikHavuzu = tahsilatArsivindenAralikDiziyeCevir(state.tahsilatArsivi || {}, aramaBaslangicGunKey, dunGunKeyTahsilatTumYil);
+  const tahsilatDoluGunler = new Set(tahsilatAralikHavuzu.map(r=> dateKeyLocal(new Date(r.belgeTarihi))));
+  let hedefTahsilatGunKeyTumYil = null;
+  {
+    const aday = new Date(dunGunKeyTahsilatTumYil+'T00:00:00');
+    for(let i=0;i<TAHSILAT_GERIYE_ARAMA_GUN_LIMITI;i++){
+      const adayGunKey = dateKeyLocal(aday);
+      if(tahsilatDoluGunler.has(adayGunKey)){ hedefTahsilatGunKeyTumYil = adayGunKey; break; }
+      aday.setDate(aday.getDate()-1);
+    }
+    // Arşivde 30 gün içinde hiç veri yoksa eski davranışla tutarlı kalınır: hedef "dün" olarak
+    // sabitlenir (KPI o zaman 0/boş görünür) — sessizce çok eski bir tarihe kayıp yanıltmaz.
+    if(!hedefTahsilatGunKeyTumYil) hedefTahsilatGunKeyTumYil = dunGunKeyTahsilatTumYil;
+  }
   const tahsilatArsiv = hedefTahsilatGunKeyTumYil
     ? tahsilatArsivindenGunlukDiziyeCevir(state.tahsilatArsivi || {}, hedefTahsilatGunKeyTumYil)
     : [];
@@ -1246,13 +1270,15 @@ function buildReport(files, musteriMasterMap){
     });
   }
 
-  // Genel Rapor/Sevk Raporu'ndaki tahsilat KPI'sı: ARTIK "bugüne en yakın dolu gün" değil, HER ZAMAN
-  // SABİT olarak bugünden bir gün önceki takvim gününe göre gösterilir — o günde arşivde/bu
-  // Genel Rapor/Sevk Raporu'ndaki tahsilat KPI'sı: SABİT olarak bugünden bir gün önceki takvim
-  // gününe göre gösterilir — o günde arşivde hiç veri yoksa KPI 0/boş görünür (başka bir güne
-  // kaymaz). Fatura Dökümü'ndeki "Bozuk İade Faturası" ve Depozito Tahsilatı'ndaki (Fatura Belge
+  // Genel Rapor/Sevk Raporu'ndaki tahsilat KPI'sı (KULLANICI İSTEĞİYLE GÜNCELLENDİ): artık sabit
+  // "dün" gününe değil, dünden geriye doğru en fazla 30 gün içinde veri bulunan İLK (bugüne en
+  // yakın) güne göre gösterilir — bkz. yukarıdaki hedefTahsilatGunKeyTumYil hesaplaması. Bugünün
+  // kendisi bu aramaya dahil değildir (kural yalnızca bugünden ÖNCEKİ günler için geçerli); 30 gün
+  // içinde hiç veri bulunamazsa eski davranışla tutarlı olarak "dün" hedef alınır ve KPI 0/boş
+  // görünür. Fatura Dökümü'ndeki "Bozuk İade Faturası" ve Depozito Tahsilatı'ndaki (Fatura Belge
   // No'lu) satırlardan türeyen tahsilat kredileri de (bkz. bozukIadeTahsilat, depozitoTahsilat) bu
-  // hesaba dahildir — bunlar Tahsilat Dökümü'nden gelmese bile aynı KPI'ya katkı sağlar.
+  // hesaba dahildir — bunlar Tahsilat Dökümü'nden gelmese bile, hedef günle eşleştiklerinde aynı
+  // KPI'ya katkı sağlar.
   const bugunGunKeyTahsilat = bugunGunKeyTahsilatTumYil;
   const hedefTahsilatGunKey = hedefTahsilatGunKeyTumYil;
   const efektifGunMap = new Map();
