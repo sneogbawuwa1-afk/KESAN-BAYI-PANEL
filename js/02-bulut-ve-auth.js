@@ -1168,6 +1168,12 @@ function getSahaMuduru(temsilci){
 }
 
 const TL = n => (Math.round(n||0)).toLocaleString('tr-TR') + ' ₺';
+// Kuruşu kuruşuna (2 ondalık basamaklı) TL biçimlendirme — SADECE Bayi Hakediş ekranında
+// kullanılır (kullanıcı kararı: hakediş tutarları TL()'nin yaptığı gibi tam sayıya
+// yuvarlanmasın, kuruş hassasiyeti korunsun). Uygulamanın geri kalanındaki tüm diğer
+// tutarlar (KPI'lar, müşteri kartları, diğer tablolar) TL() ile tam sayıya yuvarlanmaya
+// devam eder — bu bilinçli bir istisna, genel bir değişiklik değil.
+const TLKurus = n => (Number(n)||0).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
 const NUM = n => (Math.round(n||0)).toLocaleString('tr-TR');
 const MK = n => NUM(n) + ' Mk.';
 const LT = n => NUM(n) + ' Lt.';
