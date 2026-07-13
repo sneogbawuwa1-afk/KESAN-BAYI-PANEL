@@ -331,6 +331,10 @@ const MUSTERI_MASTER_DETAY_LOCAL_KEY = 'noktaCariTakip_musteriMasterDetay_v1';
 // dosyasındaki nokta durumu (Aktif/Pasif) — temsilci haritasıyla birlikte ama AYRI kaydedilir.
 const MUSTERI_MASTER_DURUM_CLOUD_PATH = CLOUD.path + '_musteriMasterDurum';
 const MUSTERI_MASTER_DURUM_LOCAL_KEY = 'noktaCariTakip_musteriMasterDurum_v1';
+// Açık Kanal / Kapalı Kanal FKNS ayrımı için, Müşteri Master dosyasındaki "Satış Kanalı Tanımı"
+// kolonu — temsilci/durum haritalarıyla birlikte ama AYRI kaydedilir (aynı desen).
+const MUSTERI_MASTER_KANAL_CLOUD_PATH = CLOUD.path + '_musteriMasterKanal';
+const MUSTERI_MASTER_KANAL_LOCAL_KEY = 'noktaCariTakip_musteriMasterKanal_v1';
 
 function buildMusteriMasterMap(rows){
   const map = new Map();
@@ -398,6 +402,33 @@ function buildMusteriMasterDurumMap(rows, headers){
     const ham = String(r[kolon]||'').trim();
     const normalize = ham.toLocaleUpperCase('tr-TR');
     map.set(musteri, normalize === 'AKTİF' || normalize === 'AKTIF' ? 'Aktif' : (ham || 'Pasif'));
+  });
+  return map;
+}
+// Açık Kanal / Kapalı Kanal FKNS ayrımı için Müşteri Master'daki "Satış Kanalı Tanımı" kolonu —
+// aynı ham değer kümesi Sell Out dosyasındaki "Müşteri Kanalı Tnm." ile birebir örtüşüyor (Standart
+// Açık/Standart Kapalı/Otel/Horeca/Ekomini), bu yüzden aynı eşleme (sellOutKanalSinifla'nın temel
+// KAPALI_KANAL_DEGERLERI/ACIK_KANAL_DEGERLERI kümeleri, bkz. 08-kanal-raporlari.js) burada da
+// kullanılır. "Key Account" gibi bu kümelerin dışında kalan değerler kasıtlı olarak null döner —
+// bu müşteriler ne Açık ne Kapalı Kanal FKNS paydasına dahil edilmez, sadece Toplam FKNS'ye girer
+// (kullanıcı kararı).
+function musteriMasterKanalSinifla(satisKanaliTanimiRaw){
+  const v = String(satisKanaliTanimiRaw||'').trim();
+  // KAPALI_KANAL_DEGERLERI / ACIK_KANAL_DEGERLERI, js/08-kanal-raporlari.js içinde tanımlıdır
+  // (Sell Out dosyasındaki aynı isimli sınıflandırma için); bu fonksiyon sadece kullanıcı bir
+  // yükleme/rapor işlemi tetiklediğinde (tüm script dosyaları çoktan yüklenmiş haldeyken) çağrıldığı
+  // için script sırası burada sorun yaratmaz.
+  if(KAPALI_KANAL_DEGERLERI.has(v)) return 'Kapalı Kanal';
+  if(ACIK_KANAL_DEGERLERI.has(v)) return 'Açık Kanal';
+  return null;
+}
+function buildMusteriMasterKanalMap(rows){
+  const map = new Map();
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri']||'').trim();
+    if(!musteri) return;
+    const kanal = musteriMasterKanalSinifla(r['Satış Kanalı Tanımı']);
+    if(kanal) map.set(musteri, kanal);
   });
   return map;
 }
@@ -810,13 +841,48 @@ async function loadMusteriMasterDurumFromLocal(){
   }catch(err){ console.error(err); return null; }
 }
 
+async function saveMusteriMasterKanalToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_KANAL_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MUSTERI_MASTER_KANAL_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MUSTERI_MASTER_KANAL_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Müşteri Master Kanal buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMusteriMasterKanalFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_KANAL_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Müşteri Master Kanal buluttan okunamadı:', err); return null; }
+}
+async function saveMusteriMasterKanalToLocal(obj){
+  const ok = await idbSet(MUSTERI_MASTER_KANAL_LOCAL_KEY, obj);
+  if(!ok) console.error('Müşteri Master Kanal cihaza kaydedilemedi.');
+}
+async function loadMusteriMasterKanalFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_KANAL_LOCAL_KEY);
+    return await idbGet(MUSTERI_MASTER_KANAL_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+
 async function musteriMasterYenile(){
-  // Aşağıdaki üç veri (Master/Detay/Durum) birbirinden bağımsız — üçü de aynı anda kontrol
+  // Aşağıdaki dört veri (Master/Detay/Durum/Kanal) birbirinden bağımsız — hepsi aynı anda kontrol
   // edilip indirilir (bkz. uygulamayiBaslat'taki Promise.all açıklaması, aynı mantık).
-  const [masterSonuc, detaySonuc, durumSonuc] = await Promise.all([
+  const [masterSonuc, detaySonuc, durumSonuc, kanalSonuc] = await Promise.all([
     cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_CLOUD_PATH, loadMusteriMasterFromCloud, loadMusteriMasterFromLocal) : Promise.resolve(null),
     cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_DETAY_CLOUD_PATH, loadMusteriMasterDetayFromCloud, loadMusteriMasterDetayFromLocal) : Promise.resolve(null),
     cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_DURUM_CLOUD_PATH, loadMusteriMasterDurumFromCloud, loadMusteriMasterDurumFromLocal) : Promise.resolve(null),
+    cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_KANAL_CLOUD_PATH, loadMusteriMasterKanalFromCloud, loadMusteriMasterKanalFromLocal) : Promise.resolve(null),
   ]);
 
   let obj = masterSonuc ? masterSonuc.data : null;
@@ -830,6 +896,10 @@ async function musteriMasterYenile(){
   let durumObj = durumSonuc ? durumSonuc.data : null;
   if(!durumObj) durumObj = await loadMusteriMasterDurumFromLocal();
   state.musteriMasterDurum = musteriMasterObjToMap(durumObj);
+
+  let kanalObj = kanalSonuc ? kanalSonuc.data : null;
+  if(!kanalObj) kanalObj = await loadMusteriMasterKanalFromLocal();
+  state.musteriMasterKanal = musteriMasterObjToMap(kanalObj);
 
   return state.musteriMasterMap;
 }
@@ -865,6 +935,15 @@ async function musteriMasterKaydet(rows, headers){
   if(cloudEnabled()){
     const sonuc = await saveMusteriMasterDurumToCloud(durumObj);
     if(!sonuc.ok) hatalar.push('Müşteri Master Durum buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
+
+  const kanalMap = buildMusteriMasterKanalMap(rows);
+  state.musteriMasterKanal = kanalMap;
+  const kanalObj = musteriMasterMapToObj(kanalMap);
+  await saveMusteriMasterKanalToLocal(kanalObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterKanalToCloud(kanalObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Kanal buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
   }
 
   if(hatalar.length) console.error('musteriMasterKaydet: bazı veriler buluta yazılamadı:', hatalar);
