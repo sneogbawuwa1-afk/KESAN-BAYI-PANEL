@@ -160,10 +160,11 @@ function sellOutMarkaGrubu(markaHam){
 // hesaplar. Açık/Kapalı Kanal LİTRE HEDEFLERİ elle girildiği ve her an değişebildiği için burada
 // HESAPLANMAZ — bunlar render anında applySellOutHedef() ile ayrıca uygulanır; böylece bir hedef
 // kaydedildiğinde ham Sell Out dosyasını yeniden yüklemeye gerek kalmaz.
-function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, musteriMasterDetayMap){
+function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, musteriMasterDetayMap, musteriMasterKanalMap){
   musteriMasterMap = musteriMasterMap || new Map();
   musteriMasterDurumMap = musteriMasterDurumMap || new Map();
   musteriMasterDetayMap = musteriMasterDetayMap || new Map();
+  musteriMasterKanalMap = musteriMasterKanalMap || new Map();
 
   const temsilciAgg = new Map();
   const temsilciToSSM = new Map();
@@ -186,13 +187,6 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
   let blokajTutar=0, blokajAdet=0;
   const belgeSetGenel = new Set();
   const invoicedNoktaSetGenel = new Set();
-  // Müşteri No -> {acik, kapali} — bu döneme ait satış satırlarında o müşterinin kaç satırda Açık,
-  // kaç satırda Kapalı Kanal olarak göründüğünün sayacı. Kanal, Müşteri Master'da değil, ham Sell
-  // Out satırlarında (Müşteri Kanalı Tnm.) yer aldığı ve bir müşteri teorik olarak dönem içinde
-  // birden fazla satırda görünüp (nadiren) farklı kanal etiketleriyle eşleşebildiği için, müşterinin
-  // NİHAİ kanalı bu sayaçtaki çoğunluğa (en çok görülen etiket) göre belirlenir — Açık/Kapalı Kanal
-  // FKNS oranlarının paydası (aktif nokta sayısı) bu eşlemeyle bölünür.
-  const musteriKanalOylari = new Map();
 
   (rows||[]).forEach(r=>{
     const musteri = String(r['Müşteri No']||'').trim();
@@ -219,11 +213,6 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     if(belgeNo!=null && belgeNo!=='') belgeSetGenel.add(String(belgeNo));
     if(musteri) invoicedNoktaSetGenel.add(musteri);
     if(muhasebeDurum === 'Faturalama Blokajlı'){ blokajTutar += net; blokajAdet += 1; }
-    if(musteri){
-      if(!musteriKanalOylari.has(musteri)) musteriKanalOylari.set(musteri, {acik:0, kapali:0});
-      const oy = musteriKanalOylari.get(musteri);
-      if(kanal==='Açık Kanal') oy.acik++; else oy.kapali++;
-    }
 
     markaAgg.set(marka, (markaAgg.get(marka)||0)+litre);
     hacimSegAgg.set(hacimSeg, (hacimSegAgg.get(hacimSeg)||0)+net);
@@ -269,14 +258,15 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     if(musteri) t.invoicedNoktaSet.add(musteri);
   });
 
-  // musteriKanalOylari sayaçlarından her müşterinin NİHAİ kanalını (çoğunluk oyu) belirleyip
-  // tek bir haritada topluyoruz. Bu dönemde hiç satış satırı olmayan (dolayısıyla oy da
-  // bulunmayan) müşteriler burada YER ALMAZ — aşağıda aktifNoktalar'a dağıtılırken kanalı
-  // bilinmiyor kabul edilip ne Açık ne Kapalı FKNS paydasına dahil edilir (bkz. not aşağıda).
-  const musteriKanalMap = new Map();
-  musteriKanalOylari.forEach((oy, musteriKod)=>{
-    musteriKanalMap.set(musteriKod, oy.acik >= oy.kapali ? 'Açık Kanal' : 'Kapalı Kanal');
-  });
+  // Açık/Kapalı Kanal FKNS ayrımı için müşteri kanalı — Müşteri Master dosyasındaki "Satış Kanalı
+  // Tanımı" kolonundan (musteriMasterKanalMap, bkz. buildMusteriMasterKanalMap/02-bulut-ve-auth.js)
+  // doğrudan okunur. Bu, bu dönem hiç satışı olmayan noktalar için de kanalın bilinmesini sağlar
+  // (eski yaklaşım sadece Sell Out satırlarından türetiyordu, satışı olmayan noktaların kanalı hiç
+  // bilinemiyordu). "Key Account" gibi Açık/Kapalı Kanal kümelerinin dışında kalan ya da Müşteri
+  // Master'da hiç bulunmayan noktalar musteriMasterKanalMap'te YER ALMAZ — aşağıda aktifNoktalar'a
+  // dağıtılırken kanalı bilinmiyor kabul edilip ne Açık ne Kapalı FKNS paydasına dahil edilir,
+  // sadece Toplam FKNS'ye girerler (kullanıcı kararı).
+  const musteriKanalMap = musteriMasterKanalMap;
 
   // Müşteri Master'daki noktaları temsilcilerine dağıt (bu dönem satışı olmasa da FKNS hesabına
   // dahil olmaları gerekir). Durum kolonu bulunamadıysa tüm noktalar aktif kabul edilir. Durum
@@ -521,7 +511,7 @@ async function sellOutRaporuOlustur(){
   const dosya = state.files.sellOut;
   if(!dosya) return; // yeni dosya yüklenmediyse önceden kaydedilmiş rapor korunur
   try{
-    const baseRapor = buildSellOutReport(dosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay);
+    const baseRapor = buildSellOutReport(dosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay, state.musteriMasterKanal);
     await sellOutKaydet(baseRapor);
   }catch(err){
     console.error('Sell Out raporu oluşturulamadı:', err);
