@@ -299,15 +299,22 @@ function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, muste
     const kapaliFaturaKesilen = kapaliAktifNoktalar.filter(k=> t.invoicedNoktaSet.has(k)).length;
     const fknsAcikOrani = acikAktifNoktalar.length>0 ? (acikFaturaKesilen/acikAktifNoktalar.length*100) : null;
     const fknsKapaliOrani = kapaliAktifNoktalar.length>0 ? (kapaliFaturaKesilen/kapaliAktifNoktalar.length*100) : null;
+    // Fatura kesilmeyen noktalar da aynı kanal haritasına göre Açık/Kapalı/(kanalı bilinmeyen)
+    // olarak üçe ayrılır — kart üzerindeki "Fatura kesilmeyen" sayacı ve Detay modalı bu ayrımı
+    // gösterir. faturaKesilmeyenListe (kanal etiketli, tam liste) modaldaki filtre/sekme için
+    // kullanılır; faturaKesilmeyenAcik/Kapali sayıları ise kart üzerindeki kısa özet içindir.
+    const faturaKesilmeyenAcikKodlar = faturaKesilmeyenKodlar.filter(k=> musteriKanalMap.get(k)==='Açık Kanal');
+    const faturaKesilmeyenKapaliKodlar = faturaKesilmeyenKodlar.filter(k=> musteriKanalMap.get(k)==='Kapalı Kanal');
     const ssm = t.ssm || getSahaMuduru(t.ad) || 'Tanımsız';
     return {
       key:t.key, temsilci:t.ad, ssm, netCiro:t.netCiro,
       acikLitre:t.acikLitre, kapaliLitre:t.kapaliLitre, toplamLitre:t.acikLitre+t.kapaliLitre,
       belgeSayisi:t.belgeSet.size,
       toplamAktifNokta:toplamAktif, faturaKesilenNokta:faturaKesilen, faturaKesilmeyenNokta:faturaKesilmeyenKodlar.length,
+      faturaKesilmeyenNoktaAcik:faturaKesilmeyenAcikKodlar.length, faturaKesilmeyenNoktaKapali:faturaKesilmeyenKapaliKodlar.length,
       fknsOrani, fknsAcikOrani, fknsKapaliOrani,
       toplamAktifNoktaAcik:acikAktifNoktalar.length, toplamAktifNoktaKapali:kapaliAktifNoktalar.length,
-      faturaKesilmeyenListe: faturaKesilmeyenKodlar.map(kod=>({kod, adi:(musteriMasterDetayMap.get(kod)||{}).musteriAdi || kod})),
+      faturaKesilmeyenListe: faturaKesilmeyenKodlar.map(kod=>({kod, adi:(musteriMasterDetayMap.get(kod)||{}).musteriAdi || kod, kanal: musteriKanalMap.get(kod) || null})),
     };
   }).sort((a,b)=> b.toplamLitre - a.toplamLitre);
 
