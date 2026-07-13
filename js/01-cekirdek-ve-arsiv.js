@@ -1,3 +1,4 @@
+
 // Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
 // konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
 // bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
@@ -1220,3 +1221,5 @@ function tahsilatArsivindenAralikDiziyeCevir(arsiv, ilkGunKey, sonGunKey){
       gecerli: true, tahsilatTuru: r.odemeEtiketi, satisTemsilcisi: r.satisTemsilcisi,
     }));
 }
+
+
