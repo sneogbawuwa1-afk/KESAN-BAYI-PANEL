@@ -59,6 +59,7 @@ const state = {
   musteriMasterKanal: new Map(), // musteri kodu -> 'Açık Kanal' | 'Kapalı Kanal' (Satış Kanalı Tanımı'ndan; Sell Out Raporu Açık/Kapalı Kanal FKNS ayrımı için — bkz. musteriMasterKanalSinifla)
   sellOutHedef: {}, // { [temsilciAdi]: {acik:Number, kapali:Number} } — buluta kayıtlı, şifreyle değiştirilebilir
   sellOutNoktaSort: new Map(), // temsilciKey -> {key:'adi'|'kod', dir:1|-1} — Fatura Kesilmeyen Aktif Noktalar listesi sıralaması
+  faturaKesilmeyenModalKanalFiltre: null, // 'acik'|'kapali'|null — Fatura Kesilmeyen modalı şu an hangi kanala filtrelenmiş açıldı (modal açıkken sort/yön değişikliklerinde filtreyi korumak için)
   karneRiskliSort: new Map(), // temsilciAdi -> {key:'adi'|'kod'|'ortVade', dir:1|-1} — Temsilci Karnesi kartındaki Riskli Müşteriler listesi sıralaması
   sellOutReport: null,
   sellOutSonGuncelleme: null, // Güncel Sell Out verisinin en son ne zaman hesaplandığının ISO zaman damgası (GVY panelinde "Son veri" için)
