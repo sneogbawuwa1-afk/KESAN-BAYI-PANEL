@@ -1133,10 +1133,27 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
   // varsa) toplamaya dahil ediliyordu; kullanıcı bunun yalnızca 4 sabit ödeme tipiyle sınırlı
   // olmasını istedi.
   const TAHSILAT_IZIN_VERILEN_ODEME_TIPLERI = new Set(['Nakit','Kredi Kartı','Banka havalesi','Sanal Pos']);
+  // BELGE TÜRÜ İŞARET KURALI (Genel Bakış/buildReport'taki tahsilatSatirlariniNormalizeEt ile
+  // BİREBİR AYNI mantık — kullanıcı düzeltmesi): Önceden bu ekran Ödeme Tipi'ne bakılmaksızın HER
+  // satırın mutlak değerini alıp topluyordu. Bu, "Ödeme" (ve "Virman") türündeki satırların aslında
+  // İKİ YÖNLÜ olduğunu (SAP'ta pozitif tutar bir geri ödeme/mahsup olup o günün tahsilatından
+  // DÜŞÜLMESİ gerektiğini) göz ardı ediyordu — sonuç olarak Genel Bakış'ta tahsilattan düşülen bir
+  // "Ödeme" kaydı burada tam tersine EKLENİYOR ve iki ekran arasında (aynı günün aynı verisiyle)
+  // tutarsızlık oluşuyordu. Artık işaret, Belge Türü'ne göre Genel Bakış'la aynı kuralla belirlenir:
+  //   Müşteri Tahsilat / Hizmet Alış Fatura → SAP'ta negatif gelir, tahsilat artışı olsun diye işaret
+  //     çevrilir: isaretliTutar = -hamTutar (net etki: pozitif tahsilat).
+  //   Ödeme / Virman → ham işaret AYNEN korunur (yine isaretliTutar = -hamTutar formülüyle: pozitif
+  //     ham tutar → negatif katkı/azalma, negatif ham tutar → pozitif katkı/artış).
+  // Yani DÖRT kategori için de aynı tek formül geçerli: isaretliTutar = -hamTutar. Tanımadığımız bir
+  // Belge Türü gelirse (whitelist'teki 4 ödeme tipinden biri olsa bile) güvenli tarafta kalınıp satır
+  // atlanır — Genel Bakış'taki "tanımadığımız Belge Türü'nü yok say" kuralıyla tutarlı.
+  const TAHSILAT_BILINEN_BELGE_TURLERI = new Set(['Müşteri Tahsilat','Hizmet Alış Fatura','Ödeme','Virman']);
   const tahsilatParsed = (tahsilatRows||[])
     .filter(r=>{
       const ot = String(r['Ödeme Tipi']||'').trim();
-      return TAHSILAT_IZIN_VERILEN_ODEME_TIPLERI.has(ot);
+      if(!TAHSILAT_IZIN_VERILEN_ODEME_TIPLERI.has(ot)) return false;
+      const bt = String(r['Belge Türü']||'').trim();
+      return TAHSILAT_BILINEN_BELGE_TURLERI.has(bt);
     })
     .map(r=>({
       sst: String(r['Satış Temsilcisi']||'Tanımsız').trim() || 'Tanımsız',
@@ -1151,7 +1168,8 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
       belgeNo: yuklemeKod(r['Belge Numarası']),
       odemeTipi: r['Ödeme Tipi'],
       banka: r['Banka'],
-      tutar: Math.abs(yuklemeNumber(r['Tutar'])),
+      // Genel Bakış'la BİREBİR AYNI işaret formülü (bkz. yukarıdaki not): -hamTutar.
+      tutar: -(yuklemeNumber(r['Tutar'])||0),
     })).filter(r=> r.belgeTarihi);
   // Not: Tahsilat dosyası bu yüklemede hiç YOKSA (tahsilatRows null/boş) burada hata verilmez —
   // tahsilatParsed zaten boş kalır ve aşağıdaki hesaplama sadece Yükleme Raporu tarafını işler.
