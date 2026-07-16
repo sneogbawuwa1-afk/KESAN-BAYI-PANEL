@@ -1,1 +1,1784 @@
-const _0x54915f=_0x65c7;(function(_0x5be12f,_0x5ad6eb){const _0x1cd47e=_0x65c7,_0x258a28=_0x5be12f();while(!![]){try{const _0x204c3c=parseInt(_0x1cd47e(0x24a))/0x1+-parseInt(_0x1cd47e(0x2f8))/0x2+parseInt(_0x1cd47e(0x294))/0x3*(parseInt(_0x1cd47e(0x181))/0x4)+-parseInt(_0x1cd47e(0x1b5))/0x5+-parseInt(_0x1cd47e(0x32f))/0x6+parseInt(_0x1cd47e(0x228))/0x7+-parseInt(_0x1cd47e(0x271))/0x8;if(_0x204c3c===_0x5ad6eb)break;else _0x258a28['push'](_0x258a28['shift']());}catch(_0x60c16e){_0x258a28['push'](_0x258a28['shift']());}}}(_0x95a9,0xca784));const STOK_GUN_AY_SAYISI=0x6,STOK_GUN_SERVIS_SEVIYESI_Z=1.65,STOK_GUN_VARSAYILAN_LEAD_TIME_GUN=0x3,STOK_GUN_TAKVIM_ETKISI_2026={'2026-01-01':0.4,'2025-12-30':1.3,'2025-12-31':1.5,'2026-03-18':1.3,'2026-03-19':0.5,'2026-03-20':0.2,'2026-03-21':0.2,'2026-03-22':0.2,'2026-04-23':0.4,'2026-05-01':0.4,'2026-05-19':0.4,'2026-05-25':1.4,'2026-05-26':0.5,'2026-05-27':0.15,'2026-05-28':0.15,'2026-05-29':0.15,'2026-05-30':0.15,'2026-07-15':0.4,'2026-08-30':0.4,'2026-10-28':0.6,'2026-10-29':0.4};function stokGunTakvimEtkisi(_0x217bb0){const _0x1c03f8=dateKeyLocal(_0x217bb0);return STOK_GUN_TAKVIM_ETKISI_2026[_0x1c03f8]!=null?STOK_GUN_TAKVIM_ETKISI_2026[_0x1c03f8]:0x1;}function stokGunHaftaDilimleri(_0x5d4953){const _0x36b653=_0x65c7,[_0x5ada05,_0x4c1de8]=_0x5d4953[_0x36b653(0x2c1)]('-')[_0x36b653(0x1dd)](Number),_0x11165c=new Date(_0x5ada05,_0x4c1de8,0x0)[_0x36b653(0x225)]();return[{'baslangic':0x1,'bitis':0x7,'gunSayisi':0x7},{'baslangic':0x8,'bitis':0xe,'gunSayisi':0x7},{'baslangic':0xf,'bitis':0x15,'gunSayisi':0x7},{'baslangic':0x16,'bitis':_0x11165c,'gunSayisi':_0x11165c-0x16+0x1}];}function stokGunUrunVerileriniTopla(){const _0x28466e=_0x65c7,_0x347786=state[_0x28466e(0x27d)]||{},_0x3c53cf=state[_0x28466e(0x187)]||{},_0x2cb277=dateKeyLocal(turkiyeBugun())[_0x28466e(0x1bc)](0x0,0x7),_0x5b42a2=Object['keys'](_0x347786)[_0x28466e(0x2dd)](_0xc3a10d=>_0xc3a10d!==_0x2cb277)['sort']()[_0x28466e(0x1bc)](-STOK_GUN_AY_SAYISI),_0x215a9a=Object[_0x28466e(0x33b)](_0x3c53cf)[_0x28466e(0x2dd)](_0x527da7=>_0x527da7!==_0x2cb277)[_0x28466e(0x18a)]()['slice'](-STOK_GUN_AY_SAYISI),_0x5ca8f1=Array[_0x28466e(0x1d9)](new Set([..._0x5b42a2,..._0x215a9a]))['sort'](),_0x4dd10f=new Map();function _0x22e854(_0x1f8b61,_0x4e55a2,_0x14e3f6){const _0x58bf21=_0x28466e;_0x14e3f6[_0x58bf21(0x208)](_0x444c5e=>{const _0x59aa7f=_0x58bf21,_0xaa255=_0x4e55a2[_0x444c5e];if(!_0xaa255||!Array[_0x59aa7f(0x1a8)](_0xaa255[_0x59aa7f(0x2a6)]))return;_0xaa255[_0x59aa7f(0x2a6)][_0x59aa7f(0x208)](_0x4488a0=>{const _0x3a8f62=_0x59aa7f,_0x818aa7=sellOutMarkaGrubu(_0x4488a0[_0x3a8f62(0x20c)]||_0x4488a0[_0x3a8f62(0x252)]||_0x4488a0['kod']),_0x51bfe2=stokGunHedefKodBul(_0x4488a0[_0x3a8f62(0x2ee)],_0x818aa7);if(!_0x4dd10f['has'](_0x51bfe2))_0x4dd10f[_0x3a8f62(0x269)](_0x51bfe2,{'kod':_0x51bfe2,'urunAdi':_0x51bfe2===_0x4488a0[_0x3a8f62(0x2ee)]?_0x4488a0['urunAdi']:null,'marka':_0x818aa7,'toplamLitre6Ay':0x0,'toplamMiktar6Ay':0x0,'gunler':[],'aktifAylar':new Set(),'kapsananAylar':new Set(),'kanal':{'sellOut':{'toplamLitre6Ay':0x0,'gunler':[]},'modernKanal':{'toplamLitre6Ay':0x0,'gunler':[]}}});const _0x160c51=_0x4dd10f[_0x3a8f62(0x255)](_0x51bfe2);if(_0x51bfe2===_0x4488a0[_0x3a8f62(0x2ee)]){if(_0x4488a0['urunAdi'])_0x160c51[_0x3a8f62(0x252)]=_0x4488a0['urunAdi'];}else!_0x160c51['urunAdi']&&(_0x160c51['urunAdi']=_0x4488a0['urunAdi']);_0x160c51[_0x3a8f62(0x20c)]=_0x818aa7,_0x160c51['kapsananAylar'][_0x3a8f62(0x206)](_0x444c5e);const _0x8bf3aa=_0x160c51[_0x3a8f62(0x357)][_0x1f8b61];let _0x227cf8=0x0;(_0x4488a0['gunler']||[])[_0x3a8f62(0x208)](_0x5636a1=>{const _0x5299be=_0x3a8f62;_0x160c51[_0x5299be(0x1f2)]+=_0x5636a1[_0x5299be(0x1ff)];const _0x3facbc=stokGunMiktarBirimCevir(_0x5636a1[_0x5299be(0x323)]||0x0,_0x4488a0[_0x5299be(0x2ee)],_0x51bfe2);_0x160c51['toplamMiktar6Ay']+=_0x3facbc,_0x160c51[_0x5299be(0x202)][_0x5299be(0x231)](_0x5636a1[_0x5299be(0x323)]===_0x3facbc?_0x5636a1:Object[_0x5299be(0x2bc)]({},_0x5636a1,{'miktar':_0x3facbc})),_0x8bf3aa[_0x5299be(0x1f2)]+=_0x5636a1['litre'],_0x8bf3aa[_0x5299be(0x202)]['push'](_0x5636a1[_0x5299be(0x323)]===_0x3facbc?_0x5636a1:Object[_0x5299be(0x2bc)]({},_0x5636a1,{'miktar':_0x3facbc})),_0x227cf8+=_0x5636a1[_0x5299be(0x1ff)];});if(_0x227cf8>0x0)_0x160c51[_0x3a8f62(0x34c)][_0x3a8f62(0x206)](_0x444c5e);});});}_0x22e854('sellOut',_0x347786,_0x5b42a2),_0x22e854(_0x28466e(0x2d6),_0x3c53cf,_0x215a9a);const _0x512e36=Array[_0x28466e(0x1d9)](_0x4dd10f['values']())[_0x28466e(0x1dd)](_0x3f0653=>{const _0x22a12b=_0x28466e,_0x597c7e=Array[_0x22a12b(0x1d9)](_0x3f0653[_0x22a12b(0x34c)])[_0x22a12b(0x18a)](),_0x3db2fb=Array[_0x22a12b(0x1d9)](_0x3f0653[_0x22a12b(0x320)])[_0x22a12b(0x18a)](),_0x7bec49=_0x597c7e[0x0]||null,_0x242e49=_0x597c7e[_0x22a12b(0x2e3)],_0x239909=!!(_0x7bec49&&_0x3db2fb['length']&&_0x7bec49!==_0x3db2fb[0x0]);let _0x356a25=_0x22a12b(0x2c8);if(_0x242e49<=0x1)_0x356a25=_0x22a12b(0x21c);else{if(_0x242e49<=0x3)_0x356a25=_0x22a12b(0x326);}return Object[_0x22a12b(0x2bc)]({},_0x3f0653,{'aktifAylar':_0x597c7e,'kapsananAylar':_0x3db2fb,'ilkSatisAy':_0x7bec49,'aktifAySayisi':_0x242e49,'yeniUrun':_0x239909,'veriGuveni':_0x356a25});});return{'sonAylar':_0x5ca8f1,'urunler':_0x512e36};}function stokGunMarkaHaftaSekilleri(_0x4b8e65){const _0x4a1857=_0x65c7,_0x3905fd=new Map();_0x4b8e65['forEach'](_0x5ca3d2=>{const _0x4b3023=_0x65c7,_0x242b8b=stokGunHaftaDagilimi(_0x5ca3d2[_0x4b3023(0x202)]);if(!_0x3905fd[_0x4b3023(0x189)](_0x5ca3d2[_0x4b3023(0x20c)]))_0x3905fd[_0x4b3023(0x269)](_0x5ca3d2['marka'],[0x0,0x0,0x0,0x0]);const _0x380f42=_0x3905fd[_0x4b3023(0x255)](_0x5ca3d2['marka']);for(let _0x17423a=0x0;_0x17423a<0x4;_0x17423a++)_0x380f42[_0x17423a]+=_0x242b8b['litre'][_0x17423a];});const _0x2207b8=new Map();return _0x3905fd[_0x4a1857(0x208)]((_0x2483be,_0x1f4c7b)=>{const _0x29e005=_0x4a1857,_0x13dd7c=_0x2483be['reduce']((_0x598829,_0x481257)=>_0x598829+_0x481257,0x0);_0x2207b8[_0x29e005(0x269)](_0x1f4c7b,_0x13dd7c>0x0?_0x2483be['map'](_0x168f25=>_0x168f25/_0x13dd7c):[0.25,0.25,0.25,0.25]);}),_0x2207b8;}function stokGunOwnVeMarkaShapeKarisimi(_0x4ad3e9,_0x50ee35){const _0x460fa0=_0x65c7,_0x33e448=stokGunHaftaDagilimi(_0x4ad3e9[_0x460fa0(0x202)]),_0xef7070=_0x4ad3e9['toplamLitre6Ay']||_0x33e448[_0x460fa0(0x1ff)][_0x460fa0(0x28b)]((_0x12bd71,_0x386e78)=>_0x12bd71+_0x386e78,0x0);if(_0xef7070<=0x0)return _0x33e448;const _0x2fe131=_0x33e448['litre'][_0x460fa0(0x1dd)](_0x909ac0=>_0x909ac0/_0xef7070),_0x33f9f0=_0x50ee35[_0x460fa0(0x255)](_0x4ad3e9[_0x460fa0(0x20c)])||[0.25,0.25,0.25,0.25],_0x4decbb=Math[_0x460fa0(0x213)](0x1,(_0x4ad3e9[_0x460fa0(0x2b9)]||0x0)/0x3),_0x5aa692=_0x2fe131[_0x460fa0(0x1dd)]((_0x18057d,_0x167fb0)=>_0x4decbb*_0x18057d+(0x1-_0x4decbb)*_0x33f9f0[_0x167fb0]),_0x1df982=_0x33e448[_0x460fa0(0x1ff)][_0x460fa0(0x1dd)]((_0x4c8a93,_0x15be3b)=>{const _0xa8d29a=_0x460fa0,_0x31d3af=_0x5aa692[_0x15be3b]*_0xef7070,_0x4d12d3=_0x4c8a93>0x0?_0x31d3af/_0x4c8a93:0x1;return(_0x33e448[_0xa8d29a(0x323)][_0x15be3b]||0x0)*_0x4d12d3;});return{'litre':_0x5aa692[_0x460fa0(0x1dd)](_0xd11fe3=>_0xd11fe3*_0xef7070),'miktar':_0x1df982};}function stokGunAylikOzet(_0x306d73){const _0x50c81f=_0x65c7,_0xa3a3a0=new Map();return(_0x306d73[_0x50c81f(0x202)]||[])[_0x50c81f(0x208)](_0x9bdf6b=>{const _0x4b9da3=_0x50c81f,_0x5bfc7a=_0x9bdf6b[_0x4b9da3(0x2e5)][_0x4b9da3(0x1bc)](0x0,0x7);_0xa3a3a0[_0x4b9da3(0x269)](_0x5bfc7a,(_0xa3a3a0[_0x4b9da3(0x255)](_0x5bfc7a)||0x0)+_0x9bdf6b[_0x4b9da3(0x1ff)]);}),_0xa3a3a0;}function stokGunAyAgirlikHaritasi(_0x5064a1){const _0x45962c=_0x65c7,_0x435dca=new Map();return _0x5064a1[_0x45962c(0x208)]((_0x3c877f,_0x561f13)=>_0x435dca[_0x45962c(0x269)](_0x3c877f,_0x561f13+0x1)),_0x435dca;}function stokGunAgirlikliAylikOrtalama(_0x451c11,_0x284b29){const _0x499a97=_0x65c7;let _0x54bcce=0x0,_0x286b35=0x0;return _0x451c11[_0x499a97(0x208)]((_0x37b540,_0x2e4750)=>{const _0x138696=_0x499a97,_0x2f664b=_0x284b29[_0x138696(0x255)](_0x2e4750)||0x1;_0x54bcce+=_0x37b540*_0x2f664b,_0x286b35+=_0x2f664b;}),_0x286b35>0x0?_0x54bcce/_0x286b35:0x0;}function stokGunGercekGunlukIstatistik(_0x2b82e7,_0x2fe6bd){const _0x361165=_0x65c7;if(!_0x2b82e7||!_0x2b82e7[_0x361165(0x2e3)]||!_0x2fe6bd||!_0x2fe6bd[_0x361165(0x2e3)])return{'ortalama':0x0,'sigma':0x0,'gunSayisi':0x0,'cv':null};const _0x3a05b3=new Map();_0x2b82e7[_0x361165(0x208)](_0xf0da1b=>_0x3a05b3['set'](_0xf0da1b['gunKey'],(_0x3a05b3[_0x361165(0x255)](_0xf0da1b[_0x361165(0x2e5)])||0x0)+(_0xf0da1b[_0x361165(0x1ff)]||0x0)));const _0x18e9e6=[];_0x2fe6bd[_0x361165(0x208)](_0x584361=>{const _0x31bcde=_0x361165,[_0x5ebe36,_0x1348b]=_0x584361['split']('-')[_0x31bcde(0x1dd)](Number),_0xf58952=new Date(_0x5ebe36,_0x1348b,0x0)[_0x31bcde(0x225)]();for(let _0x154497=0x1;_0x154497<=_0xf58952;_0x154497++){const _0x57c2a4=_0x584361+'-'+String(_0x154497)['padStart'](0x2,'0');_0x18e9e6[_0x31bcde(0x231)](_0x3a05b3[_0x31bcde(0x255)](_0x57c2a4)||0x0);}});const _0x4ce5f0=_0x18e9e6['length'];if(_0x4ce5f0<0x2)return{'ortalama':0x0,'sigma':0x0,'gunSayisi':_0x4ce5f0,'cv':null};const _0x2e0771=_0x18e9e6[_0x361165(0x28b)]((_0x4dc1c9,_0x3ceeb9)=>_0x4dc1c9+_0x3ceeb9,0x0)/_0x4ce5f0;if(_0x2e0771<=0x0)return{'ortalama':0x0,'sigma':0x0,'gunSayisi':_0x4ce5f0,'cv':null};const _0x383e1e=_0x18e9e6[_0x361165(0x28b)]((_0x348103,_0x5eba1f)=>_0x348103+Math[_0x361165(0x2e6)](_0x5eba1f-_0x2e0771,0x2),0x0)/_0x4ce5f0,_0x3c38e3=Math['sqrt'](_0x383e1e);return{'ortalama':_0x2e0771,'sigma':_0x3c38e3,'gunSayisi':_0x4ce5f0,'cv':_0x3c38e3/_0x2e0771};}function stokGunDegiskenlikKatsayisi(_0x54c671){const _0x207e42=_0x65c7,_0x27deea=Array[_0x207e42(0x1d9)](_0x54c671[_0x207e42(0x324)]());if(_0x27deea[_0x207e42(0x2e3)]<0x2)return 0.35;const _0x5cdf72=_0x27deea[_0x207e42(0x28b)]((_0x3a5a97,_0x5619a9)=>_0x3a5a97+_0x5619a9,0x0)/_0x27deea[_0x207e42(0x2e3)];if(_0x5cdf72<=0x0)return 0.35;const _0x1d02bf=_0x27deea['reduce']((_0x55417c,_0xd817d7)=>_0x55417c+Math[_0x207e42(0x2e6)](_0xd817d7-_0x5cdf72,0x2),0x0)/_0x27deea[_0x207e42(0x2e3)];return Math[_0x207e42(0x213)](1.5,Math[_0x207e42(0x197)](_0x1d02bf)/_0x5cdf72);}function stokGunOluUrunMu(_0x583a39,_0x1db15e){const _0x5080c6=_0x65c7;if(!_0x583a39[_0x5080c6(0x260)]||!_0x1db15e['length'])return![];const _0xba4bf6=_0x1db15e['slice'](-Math[_0x5080c6(0x213)](0x2,_0x1db15e[_0x5080c6(0x2e3)]));return _0xba4bf6[_0x5080c6(0x2af)](_0x3780d7=>!(_0x583a39['get'](_0x3780d7)>0x0));}function stokGunBugununDilimIndex(){const _0x3482ba=_0x65c7,_0x17d8ab=turkiyeBugun(),_0x5cbb12=_0x17d8ab[_0x3482ba(0x225)](),_0x4eba2e=dateKeyLocal(_0x17d8ab)[_0x3482ba(0x1bc)](0x0,0x7),_0x37d361=stokGunHaftaDilimleri(_0x4eba2e),_0x553386=_0x37d361['findIndex'](_0x8be579=>_0x5cbb12>=_0x8be579[_0x3482ba(0x1eb)]&&_0x5cbb12<=_0x8be579[_0x3482ba(0x288)]);return _0x553386>=0x0?_0x553386:0x0;}function stokGunHaftaDagilimi(_0x4b5971){const _0x9bb5fd=_0x65c7,_0x10fbd1=[0x0,0x0,0x0,0x0],_0x5e3d16=[0x0,0x0,0x0,0x0];return _0x4b5971[_0x9bb5fd(0x208)](_0x3d0c19=>{const _0x316662=_0x9bb5fd,_0x29fcef=_0x3d0c19[_0x316662(0x2e5)][_0x316662(0x1bc)](0x0,0x7),_0x245016=Number(_0x3d0c19[_0x316662(0x2e5)]['slice'](0x8,0xa)),_0x3c90b6=stokGunHaftaDilimleri(_0x29fcef),_0x21c0e1=_0x3c90b6[_0x316662(0x35a)](_0x1bb622=>_0x245016>=_0x1bb622[_0x316662(0x1eb)]&&_0x245016<=_0x1bb622['bitis']);_0x21c0e1>=0x0&&(_0x10fbd1[_0x21c0e1]+=_0x3d0c19['litre'],_0x5e3d16[_0x21c0e1]+=_0x3d0c19[_0x316662(0x323)]||0x0);}),{'litre':_0x10fbd1,'miktar':_0x5e3d16};}function _0x95a9(){const _0x5c9e19=['B25LCNjVCG','C2vRBwu','AhvRDwTPvMfKzu1HEeLUChv0','C3rVA0D1BKjVC1bHBMvS','XlbYC2fSAxLLigrVC3LHC8sXig9RDw5HBwfKXle6','oYiGDgL0Bgu9iG','ywXS','pgrPDIbJBgfZCZ0Izw1WDhKTC3rHDguIihn0EwXLpsjNCMLKlwnVBhvTBJOXlY0XoYi+s2f5Xlf0ihLVAZWVzgL2pG','zMTUC0THCgfSAu9Yyw5P','pc9KAxy+cIaGicaGicaGica','vvLbuKK6iefYXz9PDIbIDwX1DgeGEwf6XlfSyw1HzmsXicG','idXZCgfUignSyxnZpsjIywrNzsbZC20TAgL5zxjHCNnPlwjHzgDLiJ48AsbJBgfZCZ0IzMeTC29SAwqGzMeTDxnLCI10AwuIigfYAweTAgLKzgvUpsj0CNvLiJ48l2K+ifntttWVC3bHBJ48l2rPDJ4kicaGicaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs1ZDwiIpG','u3rVAYbhW7XUigHLC2fIXleSigfYXz9PDMXLBM1PXz8GyxLSXlfRihnHDmsXXz8GAmsXESsXBMeGzgf5yw7eSxiUieDLBgvUzwTZzwWGs2fUywWGC2vRBwvZAw5KzsaIqNuGqxNeSsbbCSwFAxzSzsiGAwXLigjHXz9SyxNeSw4G4OcuigfYXz9PDMXLBMvUigHLCIbHEsbIDxjHzgeGnIbHEweGA2fKyxiGyMLYAwTPCI4','vmo8BCo8','pc9IpIa8C3bHBIbJBgfZCZ0ICgf5iJ4L','z3vUBhvRq1zlyxLUywDP','C3vWAgvSAuH1A3vRAurHAgfgyxPSyuj0BG','oYi+cIaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs10B3aIpGOGicaGicaGidXKAxyGy2XHC3m9iMn1C3qTyxzHDgfYiJ4','phnWyw4Gy2XHC3m9iNn0B2TNDw4TCMLZAY1JAgLWiJ48yJ4','zNjVBq','yMXVA2fQqwrLDa','C3r5Bgu','igf5ysbHExleSCwFDmsXCSsXBmsXCcbirvbtXlaGvevlifrfsYbHCSwFAxzSzw5Ly2vRoIa','BwfW','zgLZywjSzwq','C3rVA0D1BNu','pgKGy2XHC3m9iMzHlxnVBgLKigzHlwj1BgXZzxLLiIbHCMLHlwHPzgrLBJ0IDhj1zsi+pc9PpG','z2vUzwXgA25Z','BwvZC2fNzq','pgj1DhrVBIb0ExbLpsjIDxr0B24IignSyxnZpsjZDg9Rz3vUlxjPC2STDg9Nz2XLiIbKyxrHlxjPC2STA29Kpsi','ieW8l3nWyw4+pc9ZCgfUpG','cIaGicaGicaGica8zgL2ignSyxnZpsjZC20TzMTUCY1YAw5NlwXHyMvSiJ5gs05tpc9KAxy+cIaGicaGicaGpc9KAxy+cIaGicaGidWVzgL2pGOGicaGica','l2FdVg4','AxjZywXPEwvnAt0','kgnHBMZeSsK','rg9ZEweGB2T1BMfTywteSsdIGjqGBmo8DgzLBIbKB3n5yxNeSsb5zw5PzgvUihnLW6DPBI4','iIbHCMLHlwHPzgrLBJ0IDhj1zsi+pc9PpIblAw0GC2f0Xlf5B3i/pc9IDxr0B24+','yMfZBgfUz2LJ','Ew9NDw5iywz0yuv0AwTLDa','vg9WBgfTiehdP8sXAYblyw5HBcbmva','igFdVg5SW7XRig9YDgfSyw1HihrLzgfYAwSGC8o8CMvZAw5LigFdTNjLlcbKzCsFACwFA2vUBgLRia','DgvTC2LSy2LSzxi','C3nTu2f5AxnP','DMfYkc0TAw5RlwzHAw50kq','Dg9WBgfTtgL0CMu2qxK','phnWyw4GC3r5Bgu9iMrPC3bSyxK6zMXLEdTMBgv4lwrPCMvJDgLVBJPJB2X1Bw47ywXPz24TAxrLBxm6zMXLEc1LBMq7z2fWoJfWEdSIpJXZCgfUihn0EwXLpsjMB250lxnPEMu6os41ChG7zM9UDc13zwLNAhq6nZaWo2XLDhrLCI1ZCgfJAw5NoI4WngvTo29WywnPDhK6lJG7iJ5uB3bSyw0GtgL0CMu8l3nWyw4+phnWyw4GC3r5Bgu9iMzVBNqTzMfTAwX5oNzHCIGTlwzVBNqTzMLNDxjLCYK7zM9UDc1ZAxPLoJe5ChG7zM9UDc13zwLNAhq6odaWo2XPBMuTAgvPz2H0oJeUmtu7iJ4','Bw9KzxjUs2fUywXlzw5KAurVC3LHqwrP','EwvUAvvYDw4','ihrLBxnPBgnPpc9KAxy+cIaGicaGicaGpc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0IC3nTlwzRBNmTCMLUzY13CMfWiJ4kicaGicaGicaGia','DgfOC2LSyxqGDMvYAxnPihLVAW','rg9ZEweGB2T1BMfTywteStOG','C3rVA0D1BLnLyxjJAeLUChv0','igf5XlfUXlfUicG','iokaLcdIMQdVUi8GqNuGyxKGACoNAw4GAgvUW7X6igHPW6DIAxiGDgvTC2LSy2L5zsbbW6FeSwSVs2fWywZeSsblyw5HBcbOzwrLzMKGz2LYAwXTzw1PXz87icjhzxjLA2XPieXPDhjLiIbOzxnHCgXHBMfTXlf5B3iSigFdVg5SW7XRigJeSxOGz2xdP21PXz8Gz2vYW6DLAYbZyxteSCwFysbNW7zYzsaOAgvKzwzZAxOPigFdTNn0zxjPBgL5B3iU','twfSEMvTzwXLCIb2zxjPC2KGACwFBgvUzw1LzgK6','yNv0Dg9U','pgrPDIbJBgfZCZ0Izw1WDhKTC3rHDguIihn0EwXLpsjNCMLKlwnVBhvTBJOXlY0XoYi+','BgL0CMu','B2X1','C2jIDg4TC3rVA0D1BG','z3vUBgvY','CM91BMq','y2vPqxK','zMf0DxjHs2vZAwXTzxLLBK5VA3rHs2fWywXP','ywrK','A3jPDgLR','zM9YrwfJAa','Dg9ju09tDhjPBMC','tw9KzxjUieTHBMfSihjHCg9YDsbOzxnHCgXHBMfTywteStO','DMfYkc0TC3vJy2vZCYK','BwfYA2e','yxjPys1ZB3j0','Bw9KzxjUs2fUywXlzw5KAurVC3LH','Bw9KzxjUs2fUywXbEvnLBgvJDa','iIbZyxteSxi9','cIaGicaGidWVzgL2pG','ChjVDg90ExbL','BwLU','AhvRDwTPvgvTC2LSy2LgAwX0zxi','C3rVA2D1BI13yxjU','qxlfN2L2igTHEwteSsbZAwXPBMrP','otKR','tw9KzxjUieTHBMfSihrVCgX1igfYXz9PDMXLBwuGAgf0yxpeStO','CMvWBgfJzq','igFdVg4P','C3rVA0D1BKTHCNrmAxn0zq','rmo8Xz/dVgS','r0vmru5fs1nftcbKB8sFCNvSyw1HoIbZzwXSt3v0txu9','zMf0DxjHs2vZAwXTzxLLBK5VA3rHqwnPAW','pc9KAxy+cIaGicaGicaGica8zgL2ignSyxnZpsj1CNvUlwfKiIb0AxrSzt0I','yxjYyxK','yMXVy2S','Dg9mB2nHBgvmB3DLCKnHC2u','idXZCgfUignSyxnZpsjZzwTTzs1JB3vUDci+','Dg9WBgfTtwLRDgfYnKf5','z2v0rgf0zq','C3rVA0D1BLnVCNq','C3nT','nZaWmtm1muXxD2jNtq','iJ48zgL2ignSyxnZpsjSiJ5bs1teSeyGqvK8l2rPDJ48zgL2ignSyxnZpsj2iIbZDhLSzt0Iy29SB3i6','cIaGicaGicaGpc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0IC3rVA2D1BI1IywrNzsiGC3r5Bgu9iMnVBg9YoG','DMfYkc0TD2fYBI1ZB2z0kq','ltaX','z3vUBhvRq1y','zNvUy3rPB24','yMLSAw5TzxLLBIbOyxrH','Bw9KzxjUs2fUywXtzwnPBgLbEq','ChvZAa','DMfYkc0TzgfUz2vYlxnVzNqP','W5zUy2uGyMLYigrVC3LHihnLW6DPBI4','C2vSBe91Dej1qxLbCNnPDLrLBwL6BgvcDg4','pg9WDgLVBIb2ywX1zt0IiJ5uW7XTig1HBcbNCNvWBgfYXle8l29WDgLVBJ4','8j+uHcbzzw5PBgvUAxLVCUkaPG','C2vSBe91DeTLBMrPrg9ZEwfbzgK','CMvTB3zLqxr0CMLIDxrL','iJ4kicaGicaGicaGidXKAxyGy2XHC3m9iMWIpLnbveNfNIbqqvLjpc9KAxy+cIaGicaGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTy2HPCc1ZCgXPDc1YB3CIpGOGicaGicaGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTy2HPCc1ZCgXPDc1PDgvTigDLBci+phnWyw4Gy2XHC3m9iMSIpKDLBc48l3nWyw4+phnWyw4Gy2XHC3m9iNyIpIu','pc9ZCgfUpGOGicaGicaGicaGphnWyw4Gy2XHC3m9iMWIpKFdNe48l3nWyw4+cIaGicaGicaGpc9KAxy+cIaGicaGidWVzgL2pGOGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTz3jPzci+cIaGicaGicaGpgrPDIbJBgfZCZ0IDxj1BI1ZDgf0lwnOAxaIpJXKAxyGy2XHC3m9iMWIpKrfue8Gu1rpsZWVzgL2pJXKAxyGy2XHC3m9iNyIpG','C29UqxLSyxi','cIaGica8zgL2ignSyxnZpsjJDxn0lwnHCMqGC2vSBg91Dc1JyxjKiIbKyxrHlxrLBxnPBgnPlwTLEt0I','AmoIBmoIigjVXz8','s2fWywZeSsblyw5HBa','C3rVA0D1BKTLBMrPrg9ZEwfbzgK','igf5igfYXz9PDMXLBMrP','pc9ZCgfUpJWVzgL2pGOGicaGicaGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTy2HPCc1ZCgXPDc1KAxzPzgvYiJ48l2rPDJ4kicaGicaGicaGicaGpgrPDIbJBgfZCZ0IDxj1BI1ZDgf0lwnOAxaTC3bSAxqTAxrLBsbTB2qIpJXZCgfUignSyxnZpsjRiJ5nB2qUpc9ZCgfUpJXZCgfUignSyxnZpsj2iJ4L','ms03','yNvSDw5KDsWGDg9WBgfTtgL0CMu9','pc9KAxy+','Bg9JywXLq29TCgfYzq','C2vSBe91DfnLy2LSAuf5','CgfYy2fSAq','B25JBgLJAW','C3rVA0D1BLnLA21LvhvTDq','mtqYote3me9oBvreDa','ywnPA0XPDhjL','zgf0yq','oYi+iW','zgf0ys10zw1ZAwXJAs1RzxK','qCoNXlfRieTHBMfS','C2vSBe91DeTHCM5Lr3jPza','BMv1DhjHBa','Dxj1BKfKAq','tw9KzxjUieTHBMfS','idXZCgfUihrPDgXLpsjcDsddVhldVg4GC29UidyGyxLSXlfRihbLBMnLCMvKzsbZB25YywrHBIbZyxteSCwFysbIyCwFBgfKXleGkgLSAYbZyxteSCwFoIa','z2v0','DMfYkc0TD2fYBIK','CMvHzefZqxjYyxLcDwzMzxi','zhvYDw1wyxjnAq','pc9KAxy+cIaGicaGicaGpgrPDJ4kicaGicaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs1Uyw1LiJ4','Ew9zzw5PBgvcDg4','C3rVA0D1BNu6mq','u2vSBcbpDxqGzg9ZEwfZXleGB2T1BMfTywteStO','4PYtieFdVg5JzwXSzw5KAsdIGjqG','rw50zxi','W5XYW7XUigj1BhvUyw1HzmsXlG','C2L6zq','z2v0vgLTzq','pc9ZCgfUpGOGicaGicaGidWVzgL2pGOGicaGica8l2rPDJ4kicaGicaG','lNnLBgXVDxqTAgvKzwyTAw5WDxrBzgf0ys1Ryw5HBd0IywnPAYjD','ihr1DgfYXlfUzgeGBxvOyxnLyMvSzCwFBwv5AsbIzwTSAxLVCIWGDg9WBgfTignPCM9UDw4Gjq','Aw5JBhvKzxm','z3vUBhvRsgL6','C2vSBe91DefSzxj0qMfUBMvY','ic0GC8sXCMfSyq','C2v0','r0vmru5fs1nftcbPBNb1DcdIHPiGC3rHDguUC2vSBe91DeTLBMrPrg9ZEweUigrVC3LHpsi','iIbKyxrHlwTHBMfSpsjRyxbHBgKIpKrLDgf5iokgLZWVyNv0Dg9UpGOGicaGicaGicaGpc9KAxy+cIaGicaGicaGpc9KAxy+cIaGicaGidWVzgL2pGOGicaGpc9KAxy+','cGPmW7X0zMvUihrLA3jHCIbKzw5LEwLUlG','CxvLCNLtzwXLy3rVCKfSBa','BxvZDgvYAu1HC3rLCK1HCa','u2vSBcbpDxqGyxlfN2L2AsbOyxReSxiGka','iIbKyxrHlwTHBMfSpsjHy2LRiIb2ywX1zt0I','nJuZoti4oenZs0XKvW','imk3ie1VzgvYBIblyw5HBcbWyxNeSsaL','yw5H','BwfSEMvTzwXLCLn0B2S','z2vYzwTSAu1PA3rHCG','ywDPCMXPA2XPt3j0ywXHBwftzwXSt3v0','u3rVAYbhW7XUoIb0zw1ZAwXJAsbRyxjUzxnPigjHXj/eSw1ZXlf6igHLC2fWBgfUXlfYA2vUigHHDge6','CM93CW','u2vSBcbpDxqGCMfWB3j1igHLC2fWBgfUyw1HzmsXoG','C3vJy2vZCW','yMXVA2fQvhv0yxi','Cgf5','C2vSBe91DefYC2L2q2fJAgu','AhvRDwTPr29ZDgvYAwXLBG','4PYtieFdVg5JzwXSzw5KAsb2zsbIDwX1DgeGA2f5zgvKAwXKAsdIGjqG','Bw9KzxjUs2fUywXbCNnPDMXLqNrU','igf5XlfUysbHAxqPlIddNhPLCMLUzsb5yxReSwXZXlfUig3eSt8','Cgf5tw9KzxjUs2fUywW','Bw9KzxjUs2fUywXszxbVCNq','DgfOC2LSyxqTzhvZDwS','zgf0ys1TDxn0zxjPlwfKAq','C3rVA0D1BKfJAwTsAxnRu2f0AxjSyxi','C3rVA0D1BKTYAxrPA0jHBM5LCG','yML0Axm','pgKGy2XHC3m9iMzHlxnVBgLKigzHlxvZzxjZiIbHCMLHlwHPzgrLBJ0IDhj1zsi+pc9PpG','cIaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs1MB290iJ4kicaGicaGica8C3bHBIbJBgfZCZ0IzY1SyMWIpKHLzgvMieDLCSoNzwTSzCwFBwu8l3nWyw4+cIaGicaGicaGphnWyw4Gy2XHC3m9iMCTDMfSiIbZDhLSzt0Iy29SB3i6','CMvKDwnL','s2v5iefJy291BNqGsgvKzwzPBMKGzgxeN2NfN3rPCM1LAYbPW6DPBIdfN2LMCMv5AsbNAxjPBJO','vg9WBhuGyxlfN2L2BgvTzwSGACoNAw4GXz9PzNjLEwKGz2LYAw46','u2LSAw5PEw9Y4OcM','z3vUBhvRtwLRDgfY','r2vSzw5LA3nLBcblyw5HBcaOu2vSBcbpDxqP','oYi+','DgvTC2LSy2LsAxnRrgv0yxLP','cIaGicaGia','ndy1nZK4owXXy1ziDq','igf5oIa','pgKGy2XHC3m9iMzHlxnVBgLKigzHlwjVEciGyxjPys1OAwrKzw49iNrYDwuIpJWVAt4','idXZCgfUignSyxnZpsjIAxjPBsi+thqUpc9ZCgfUpJWVzgL2pJWVzgL2pGOGicaGicaGidWVzgL2pGOGicaGicaGidXKAxyGy2XHC3m9iNvYDw4TAgvKzwyTAgL6lw5VDhuIpJXPignSyxnZpsjMys1YzwD1BgfYigzHlwnHBgvUzgfYiIbHCMLHlwHPzgrLBJ0IDhj1zsi+pc9PpIbtDg9RigFdVg7dVcWGyxNeSw4Gpgi+','ChjLDMvUDerLzMf1Bhq','pc9ZCgfUpJWVC3bHBJ4','C2vSBe91DeTLBMrPrg9ZEwfjBNb1Da','Aw5Uzxjive1m','igf5XleGACoNAw4GEMf0zw4GyMLYigfYXz9PDIbRyxLKXleGyNvSDw5TDxLVCI4','C2vSBe91DeTLBMrPrhvYDw0','Bw9KzxjUs2fUywXizwrLzKLUChv0','y2vPqxLtzwXLy3q','C2vSBe91Da','Dg9gAxHLza','pgrPDIbJBgfZCZ0IywXLCNqTyMfUBMvYiJ4kicaGicaGpgrPDIbJBgfZCZ0IywXLCNqTyMfUBMvYlwLJB24IpJXPignSyxnZpsjMys1ZB2XPzcbMys10CMLHBMDSzs1LEgnSyw1HDgLVBIiGyxjPys1OAwrKzw49iNrYDwuIpJWVAt48l2rPDJ4kicaGicaGpgrPDIbJBgfZCZ0IywXLCNqTyMfUBMvYlxrLEhqIpJXZDhjVBMC+','tCo8Xz90zxjPieTHBMfSXleGvg5TlG','Bwf4','pgKGy2XHC3m9iMzHlxnVBgLKigzHlwzPBguTyxjYB3CTDxaIigfYAweTAgLKzgvUpsj0CNvLiIbZDhLSzt0IBwfYz2LUlxjPz2H0oJDWEdSIpJWVAt5nywX6zw1LBgvYigrVC3LHC8sXBSsXihnLW6C','BwfSEMvTzwXLCG','vMvYAsbRyxLUyCsFXle6ifnLBgWGt3v0igfYXz9PDMKGka','DMfYkc0TC3vJy2vZCY1ZB2z0kq','DgfOC2LSyxqGjq','BM9Uzq','icHIDwFdVg7dVg4GzgLSAw1Pkq','C2xdP2LSAuf5pq','pc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0Iy3vZDc1PBMzViJ4kicaGicaGicaGidXKAxyGy2XHC3m9iM11C3rLCMKTBMfTzsi+','ihnHDmsXCIK','zxzLCNK','CMvUzgvYu2vSBe91DfzPzxCGkeDftevoruTtruWGzwTYyw4PiokgKIbRyxLUywSGC3rHDguUC2vSBe91DfjLCg9YDc4GDg9WBgfTtgL0CMu9','XlbYC2fSAxLLifrHCMLOAq','C2vSBe91DeTLBMrPr3vUy2vSBgvcDg4','lIdeSgXRihnHDmsXCIbRB2XVBMXHCSsXoG','A29SB25Syxi9','qMLYigfKXlfTigTHBgteStOGtwfSEMvTzwXLCIbKB3n5yxpeSq','iIbKyxrHlxrLBxnPBgnPlwfKpsi','ihbHEtWVC3bHBJ4GWRCGphnWyw4Gy2XHC3m9iG','C2vSBe91Def5u2vSzwn0','ywT0AwzbEvnHEwLZAq','A2fYBMvzzw5PBgvcDg4','Dxn0ww9UzxrPBuHLzgvMAq','yxnZAwDU','igFdVg5Kzw4GyxOPiokaLca','C3rVA0D1BKfZt2y','sgfJAw0Gu2vNBwvUDgKGvg5TlG','W5zUy2uGzg9ZEweGz2vYzwTSAq','C3bSAxq','Aw5WDxq','igNdP2LUigHLzgvMigDPCMLSBwNfNYbHBMnHAYbZB24GnIbHEwrHigj1igTHBMfSkgXHCILKyw4GAgNdPYbZyxteSCwFihzLCMLZAsb5B2S7igj1igHLzgvMkgXLCIKGAgNdP2jPCIddVhldVg5LigrHXj/eSxteSwXHBwfKXleGDMuGiKDLCMvRBgKGtgL0CMuIigHLC2fIXlfUysb5yw5ZXlfTywteSs4','DgvTC2LSy2LtyxLPC2K','o2jHy2TNCM91BMq6','rg9ZEweGACoNzxjPXj9PBMuGz8o2CMuGyNuGDMvYAsa','W5XYW7XUieTVzhu','wCo8A3nLAW','igf5ksdINjmG4OcuihLHBg7eSxPJysbnywX6zw1LBgvYicHHBMZeSwSGzgvWBYbZDg/eN3uPigrVC3LHC8sXigvRC2LRlIbzW7XRBgv5Aw5JzsbYyxbVCIbVDg9TyxrPAYbOzxnHCgXHBSsXCI4','ks4Gq2LOyxPHigrHigTHEwrLzgLSBwL5B3iGkgj1imo2EMvSBgLRigTHCgfSXlePiokaLcbZyxLMysb5zw5PBgvUAxjZzsbIDsbHCSwFAxyGA2f5zmsXigTHEwjVBhvYlG','y29Uy2f0','DgfYz2v0','vg9WBgfTieTHCgfSXleGs2fUywWGtfq','AhvRDwTPu2vHCMnOq2XLyxjcDg4','Bw9KzxjUs2fUywXuB3bSDufYC2L2BgvcDg4','pgKGy2XHC3m9iMzHlxnVBgLKigzHlxn0B3jLiIbHCMLHlwHPzgrLBJ0IDhj1zsi+pc9PpG','A2v5','B25SB2fK','C2vSBe91De11pq','C2vSBe91DfjLCg9YDa','C2vSBe91DfnZBuDYAwq','Bw9KzxjUs2fUywW','W5zUy2uGXlbYC2fSAxLLigrVC3LHC8sXBSsXihNdVgTSzxLPCcaIvMvYAwXLCMKGr8o8BMnLBgXLiNLLigjHC8sXBI4','rg9ZEweGB2T1BNv5B3lIGky','C2vSBe91DefZt2y','ihrHCMLOAw5KzsbHCSwFAxzSzw5TACwFksb2zxjPC2KGz8o2C3rLCMLSAxLVCIdcTYa','lMn1C3qTy2fYza','kgjVXz8P','zMLSDgvY','C3rVA0D1BKLJzxjPAW','z2v0qxr0CMLIDxrL','Dg9Nz2XL','igf5XlfUysbHAxqGyxlfN2L2ihzLCMLZAsbIDwX1BMfTywteSs4','pgrPDIbJBgfZCZ0IC3rVA2D1BI1YAxnRlxrVz2DSzs1IB3nSDwSIpJWVzgL2pG','BgvUz3rO','AM9PBG','z3vUs2v5','Cg93','Ew9R','zMTUC0fJAwTpCMfUAq','D2fYBG','Bw9KzxjUs2fUywXlzw5KAur1CNvT','qMLYyq','C3nTBgvY','AgvKzwzhzxjJzwTSzxnTzq','A29K','C3rYAw5N','lNn0B2TNDw4TC2vRBwuTyNrU','ywn0AxzL','rxHJzwWGB2T1BweGyMLSzCwFzw5PicH4Bhn4ksb5W7XRBgvUzw1LzgKG4OcuihnHEwzHECsXihLLBMLSzxLPBI4','u2HLzxrZ','zxjYB3i','C3rVA2D1BI1VAW','yw5SAwTtDg9R','C3rVA0D1BLnVCNrtzwXLy3q','mZi0ndyZngXrtw1MDq','ywrKrxzLBNrmAxn0zw5LCG','mtuTmJe','igf5pc9KAxy+pc9KAxy+cIaGicaGidWVzgL2pGOGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTz3jPzcb1CNvUlxn0yxqTz3jPzc0YiJ4kicaGicaGica8zgL2ignSyxnZpsj1CNvUlxn0yxqTy2HPCci+pgrPDIbJBgfZCZ0IBci+r8oCtKZdNeSGtCsWs1rbuJWVzgL2pJXKAxyGy2XHC3m9iNyIpG','lNn0B2TNDw4TCMLZAY10B2DNBgu','qxlfN2L2BgvTzsbZXlfYyxpeSw5KysbIAxiGAgf0ysbVBhxfN3r1oIa','C2vSBe91DejVC1bHBMvS','A2fWywXPtgL0CMu','yMvSz2vtyxLPC2K','ywDPCMXPA2XPt3j0ywXHBwe','ksaRie1HBhPLBwvSzxiGkgfUBmsXAYbZDg9RksdIGjqGW5XZDcb5W7zUzxrPBsbOzwrLzMK6ia','rg9ZEwfKysbNzCoNzxjSAsbIAxiGXlbYC2fSAxLLifrHCMLOAsbRB2XVBNuVDMvYAxnPihLVAY4','ihzLia','Bw9KzxjUs2fUywXlzw5KAuD1BMnLBgXLqNrU','DhjPBq','C3rVA0D1BKTLBMrPrg9ZEwfjBNb1Da','pgKGy2XHC3m9iMzHlxnVBgLKigzHlwjVEciGyxjPys1OAwrKzw49iNrYDwuIpJWVAt4GqxlfN2L2oIa','jtK1ihnLCNzPCYbZzxzPEwvZAsbOzwrLzML5BguGz8o8DMvUBgLRihn0B8sFDtOG','sgf0ytOG','C3rVA0D1BLnLA21L','iIbKyxrHlwTHBMfSpsjRyxbHBgKIihzHBhvLpsi','C2vSBe91DfLLBMLSzsbOyxrHoG','DgfOC2LSyxrhzxjJzwTSzxnTzq','s3jPDgLRicG8','yxjZAxzAyw1HBMK','z2v0rwXLBwvUDej5swq','pc9ZCgfUpGOGicaGica8l2rPDJ4kicaGidWVzgL2pG','Bw9KzxjUs2fUywXizwrLzKrHz2L0AwXHBwfKAq','u2LSBwuGC8sXCMfZXlfUzgeGyMLYigHHDgeGB2X1Xz90DtOG','CxvLCNLtzwXLy3rVCG','CMvZDwX0','iJ48l2rPDJ4kicaGicaGica8zgL2ignSyxnZpsjOzwrLzI1MAwvSzci+pgXHyMvSpKTHCgfSXleGsgvKzwyGkeWPpc9SywjLBd48Aw5WDxqGDhLWzt0IBNvTyMvYiIbTAw49iJaIihn0zxa9iJeWmciGy2XHC3m9iNnLBgXVDxqTAgvKzwyTAw5WDxqIigrHDgeTDgvTC2LSy2KTA2v5psi','DgfIAw5KzxG','idXZCgfUignSyxnZpsjIywrNzsiGC3r5Bgu9iMjHy2TNCM91BMq6','4O+ZieTHEwrLzgLSAxLVCUkaPG','ihnHDmsXXz8GyMvSz2vZAq','iIbZDhLSzt0IyM9YzgvYlwXLzNq6nhb4ihnVBgLKia','DgHBzgf0ys1RzxLD','C2v0qxr0CMLIDxrL','igTHBgvTigzHDhvYywXHBweGyMXVA2fQBmsXpc9ZDhjVBMC+4Ocuia','A2fWC2fUyw5bEwXHCG','zgvZy2vUzgLUzW','zgf0ys1IywrNzq','BwLRDgfY','DMfSDwvZ','twfSEMvTzsbUDw1HCMfZXle','t3j0yq','Bw9KzxjUs2fUywXcDuf5qxjZAxzuzw1PEMXLqNrU','tw9KzxjUieTHBMfSigHLzgvMAsbRyxLKzwrPBgvTzwrPoG','tgL0CMuGAgvKzwzPBMKGzgxeN2NfN3rPCM1LAYbPW6DPBIdfN2LMCMv5AsbNAxjPBJO','lNnLBgXVDxqTAgvKzwyTAw5WDxqSic5OzwrLzI1RyxLKzxqTyNrU','Bw9KzxjUs2fUywXlzw5KAurVC3LHsw5WDxq','C2vSBe91DeHLzgvM','igf5XlfUysbHAxqGtw9KzxjUieTHBMfSigfYXz9PDIbRyxLKXleGC2LSAw5Ly2vRlIbhW7XUy2vSicHJyw5SXlePihzLCMLUAxOGrvrlXlbmru5nrvOSihLHBg7eSxPJysbIDsbHCSwFAxyGyw5SXlfRigFdTNldVg50W7XZW7WGA2fSzmsXCSsXBmsXCI4Grgv2yw0GzwrPBhnPBIbTAt8','j2KUpc9KAxy+cIaGica8l2rPDJ4','mtq1mtK3nKrSwMPuyG','DMfYkc0TBgLUzs1ZB2z0kq','C3rVA0D1BNvhDxzLBMXPA2XP','pgrPDIbJBgfZCZ0IAgvKzwyTzwrPDc1YB3CIpGOGicaGicaGidXKAxyGy2XHC3m9iMHLzgvMlwzPzwXKiJ48BgfIzwW+qCoNXlfRieHLzgvMicHmktWVBgfIzwW+pgLUChv0ihr5Cgu9iM51BwjLCIiGBwLUpsiWiIbZDgvWpsiXmdaIignSyxnZpsjZzwXSB3v0lwHLzgvMlwLUChv0iIbKyxrHlxrLBxnPBgnPlwTLEt0I','r2vYW6DLA2XLXz9TzsbpCMfUXle','ywnPA0HLzgvM','ywnJzw50','C3rVA0D1BKjVC0jHC2XPAW','DgfIyNrUlxn0B2ThDw4','igNdP2LUigfYXz9PDIb6yxrLBIb2yxiGkgrVC3LHigNdP2vYACsFAw5LigFdTNjLigj1ihzLCMKG','ihnHDmsXXz8GyMvSz2vZAsdcTYa','oc0Xna','A2v5CW','pc9KAxy+pc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0IDxj1BI1ZDgf0lwnOAxaGDxj1BI1ZDgf0lwnOAxaTC3bSAxqIihrPDgXLpsjhzwXLBMvRC2vSieTHBMfSihbHECsXicu','idXZCgfUihrPDgXLpsjtB24Gms0Yigf5zgeGC2f0XlhfN8sXihLVAYdIGjqGAgvKzwz0zw4GW6FeSwTHCSsXBgteSsWGu3rVAYbhW7XUigvZA2KGAmsXESsXEwXHihjLzMvYyw5ZigfTyCoNBmsXigFdTNn0zxjPBgL5B3iIihn0EwXLpsjKAxnWBgf5oMLUBgLUzs1IBg9JAZTWywrKAw5NoJfWEca3ChG7yM9YzgvYlxjHzgL1CZOXmdbWEdTMB250lxnPEMu6os41ChG7zM9UDc13zwLNAhq6nZaWo2nVBg9YoInMzMy7yMfJA2DYB3vUzdP2yxiOls1Kyw5NzxiPoYi+W5zmW5WGW5XsW5Xopc9ZCgfUpG','AgfZt3DUuhjVCgvYDhK','zw50CMLLCW','A2fWywXPsgvKzwy','Aw5SAw5LlwzSzxG','y2fSBa','Bw9KzxjUs2fUywXizwrLzKTHEwrLDej0BG','C3rVA0D1BKTLBMrPrg9ZEwe','C2vSBe91DefYC2L2BgvcDg4','XlbYC2fSAxLLifrHCMLOAsbIDwX1BMfTywteSq','pc9VChrPB24+','z2vYW6DLAYbNW7XUBmo8AYb2zxjPzgvUimo2BmoNW7XSzmo8','qNuGzg9ZEweGyMLYieDLBgvUzwTZzwWGs2fUywWGkfnLBgWGt3v0ksbKB3n5yxpeSsbNAwjPigFdTNldVg7dVhLVCIdIGjqGtw9KzxjUieTHBMfSicJeShjZywXPEwuPigfSyw7eSw5HihNdVgTSzw5KAs4Gtmo8DgzLBIdeShjZywXPEwuGzg9ZEwfZXlfUXleGyNuGywXHBMeSifnLBgWGt3v0igrVC3LHC8sXBSsXieDLBgvUzwTZzwWGs2fUywWGywXHBSsXBMeGECo8A2XLEwLUlG','zgvSzxrL','C3rVA0D1BLnLA21Ls3jPDgLR','ywT0AwzbEwXHCG','y3vYCMvUDfrHCMDLDa','pc9IpJWVC3bHBJ4kicaGicaGicaGidXKAxyGy2XHC3m9iMH0AY1HBhqTywn0Aw9UCYi+cIaGicaGicaGicaGidXIDxr0B24GDhLWzt0IyNv0Dg9UiIbJBgfZCZ0IBM9RDgeTzgv0yxKTyNrUihbYAw1HCNKGzMf0DxjHlwTLC2LSBwv5zw4Tzgv0yxKTyNrUiIbKyxrHlxrLBxnPBgnPlwTLEt0I','DMfSDwu','BMfTzq','ks4Gu3rVAYbIDsbZzxzPEwvUAw4GywX0XlfUysa','A2v5zg93BG','C3rVA0D1BKTLBMrPrhvYDw0','Dg9WBgfTtMv0','imo8CSo8BIK','pc9IpIbOXlf6Xlf5BgeGAgvZyxbSyw5KXle8l2rPDJ4kicaGicaGpc9KAxy+cIaGicaGia','A2fUywW','ieWGka','C2vSBe91DeTWAuDYAwq','zMLUzeLUzgv4','zMeTBg9JAW','DgvTC2LSy2K','yxjPys1SywjLBa','sgvKzwyGA2f5zgvKAwXPCMTLBIbIAxiGAgf0ysbVBhxfN3r1oIa','CM9Szq','iIb0AxrSzt0IqNuGW7XYW7XUW7WGzw4GW6DVAYbZyxrHBIb0zw1ZAwXJAwXLCIb2zsb0ywHZAwXHDcbWzxjMB3jTyw5ZBgfYXleIpJXPignSyxnZpsjMys1ZB2XPzcbMys1JAgv2CM9Ulq','neTyAMrSza','Dgv4DenVBNrLBNq','qxlfN2L2igTHEwteSsb5B2S','pc9ZCgfUpJWVzgL2pGOGicaGicaGicaGphnWyw4Gy2XHC3m9iNrLBxnPBgnPlxrHzYiGC3r5Bgu9iM1HCMDPBI10B3a6nxb4o2rPC3bSyxK6Aw5SAw5LlwjSB2nRoYi+','AgfZqxr0CMLIDxrL','qxlfN2L2Asb0zw1PEMXLBwvRigNdP2LUimwFAwzYzxLPigDPCMLUoG','Bw9KzxjUs2fUywXbCNnPDKnHy2HL','BxvZDgvYAu1HC3rLCKr1CNvT','AgfZ','C29YDa','igFdVg4GC29UCMeGAw5LCIdIGjqGEwvUAwrLBIbZAxbHCMNfNYbIDsb0yxjPAhrLBIddTM5Jzsb2zxjPBg1LBgKU','rg9ZEwfKywTPihzLCMLSzxiGXz91ia','Bw9KzxjUs2fUywXizwrLzG','imk3ie3dVmwFDgvYAsbnyxn0zxiNzgeGrhvYDw0GA29SB251igj1BhvUyw1HzmsXlcb0W7XTig5VA3rHBgfYigfRDgLMigTHyNvSigvKAwXKAq','vg9WBhuGyxlfN2L2BgvTzwSGACoNAw4GyMLYimsWCNnHBgL5zsbKB3n5yxpeSsb5W7XRBgv5AxaGiLzLCMLSzxjPieFdVg5JzwXSzsj5zsbIyxpeSw4U','pgrPDIbJBgfZCZ0IDxj1BI1JyxjKia','AhvRDwTPu2vHCMnOsw5WDxq','sgvKzwyGA2f5zgvKAwXLBwvKAtO','CMvWB3j0','z2vYzwTSAuXPDhjL','z3v2zw5SAwTtDg9NDuXPDhjL','pg9WDgLVBIb2ywX1zt0I','C3fYDa','A2fYBMvuzw1ZAwXJAu1HCa','CMvUAW','C2vSBe91DfnZBunVDw50','CMvUzgvYu2vSBe91DfzPzxC6igjLBgXLA3rLihnLBgXpDxrszxbVCNqGwu9liokgKIbKAxnRDgvUl2j1Bhv0DgfUihrHEMvSzw1LigrLBMvUAxLVCUkaPG','y2XVC2vZDa','vg9WBhuGyxlfN2L2BgvTzsbZXlfYyxpeSw5KysbIAxiGAgf0ysbVBhxfN3r1oIa','B2X1vxj1BG','8j+xHo+4JYbbCSwFAxzSzw5PEw9Y4OcM','pc9ZCgfUpGOGicaGica8l2rPDJ4kcIaGicaGia','C3rVA0D1BLnLyxjJAenSzwfYqNrU','DhiTvfi','C3rVA0D1BK1HCMTHrMLSDgvY','y2XPy2S','twfSEMvTzwXLCIbKB3n5yxpeSsbVA3vUyw1HzmsXoG','C3rVA0D1BLr1BvjVD3m','CMvHza','AxnbCNjHEq','AwXRu2f0AxnbEq','DMfYkc0TzgfUz2vYkq','DgvTC2LSy2LqyxK','qxlfN2L2BgvUBwNfNYbtzwXSie91Dcb2zxjPC2LUzguGW7XYW7XUigjHEMZeSsbSAxrYzsbIAwXNAxnPigj1BhvUyw1HzmsXiokaLcbHCSwFAxzSzw5LBIbHEwXHCSsXBIddVhldVg4Gzgv0yxNeSsbPW6DLCMrPXj9PBMrLBIbLBwLUig9SDw4U','igf5XlfUysbHAxqGyxlfN2L2igfUBmsXAYbNW7zYW7XUDmo8C8o8igTHBgteSxleSwXKXleU','zgf0yxnLDa','y2HHBMDL','pc9KAxy+pc9KAxy+cIaGicaGicaGpgrPDIbJBgfZCZ0IDxj1BI1ZDgf0lwnOAxaIpJXKAxyGy2XHC3m9iMWIpKFdNe5mW5XlieZeSfrsrtWVzgL2pJXKAxyGy2XHC3m9iNyIpG','C2vSBe91DfLLBMLSzuj0BG','o2nVBg9YoG','u2HLzxroyw1LCW','tw9KzxjUieTHBMfSigfYXz9PDMXLBwuGAgf0yxpeStO','mJm1ndKZmg92D2nYyG','zMTUC09Yyw5P','zMLSzxm','Ewv0zxjSAsbNW7XUBmo8AYb2zxjPihLVAYWGyxLSXlfRihLHA2XHXz/eSwSGzgxeN2vYigT1BgXHBSsXBgteSq','Dg9mB2nHBgvtDhjPBMC','wwvUAwXLBwuGC8sXCMfZXlfUzgeGyMLYigHHDgeGB2X1Xz90DtOG','igL0AwjHCSsXEwXH','C2XPy2u','C2vSBe91DeTLBMrPrg9ZEwe','qxlfN2L2BgvUzwnLAYbYyxbVCIb5B2S','qCoNXlfRl090zwWGvg5TlG','C3rVA0D1BKjVC01LC2fQ','zgLZCgXHEq','ywDPCMXPA2XPt3j0ywXHBwfnB2rLCM5lyw5HBa','mJiTyxKGC29UDq','pgrPDIbJBgfZCZ0IC3rVA2D1BI1YAxnRlwrLDgf5iJ4kicaGicaGica8zgL2ihn0EwXLpsjMB250lxnPEMu6mtbWEdTJB2XVCJP2yxiOls1PBMSTzMfPBNqPo2zVBNqTD2vPz2H0oJCWmdT0zxH0lxrYyw5ZzM9YBtP1ChbLCMnHC2u7Bgv0DgvYlxnWywnPBMC6lJaZzw07BwfYz2LUlwjVDhrVBtO2ChG7iJ5cDsbHEwTPihnHDmsXXz9HigFdTNjLigvUimoNB2SGC2f0yw4GDgvTC2LSy2LSzxi8l2rPDJ4kicaGicaGica','DMvYAuD1DMvUAq'];_0x95a9=function(){return _0x5c9e19;};return _0x95a9();}function stokGunSimulasyonuYap(_0x307198,_0x384389,_0x346414,_0x4c7237){const _0xe8710d=_0x65c7;_0x4c7237=_0x4c7237||0x0;if(_0x307198==null||_0x307198<=_0x4c7237)return 0x0;let _0x382980=_0x307198,_0x13ab4d=turkiyeBugun();const _0xc3b017=_0x346414||0x190;for(let _0x2fc7d0=0x0;_0x2fc7d0<_0xc3b017;_0x2fc7d0++){const _0x24da6b=dateKeyLocal(_0x13ab4d)[_0xe8710d(0x1bc)](0x0,0x7),_0x2e4fc5=_0x13ab4d[_0xe8710d(0x225)](),_0x1c833e=stokGunHaftaDilimleri(_0x24da6b),_0x5adea0=_0x1c833e[_0xe8710d(0x35a)](_0x147619=>_0x2e4fc5>=_0x147619[_0xe8710d(0x1eb)]&&_0x2e4fc5<=_0x147619[_0xe8710d(0x288)]),_0x200e55=(_0x384389[_0x5adea0>=0x0?_0x5adea0:0x0]||0x0)*stokGunTakvimEtkisi(_0x13ab4d);if(_0x200e55<=0x0){_0x13ab4d=new Date(_0x13ab4d[_0xe8710d(0x261)]()+0x5265c00);continue;}if(_0x382980-_0x200e55<=_0x4c7237)return _0x2fc7d0+(_0x382980-_0x4c7237)/_0x200e55;_0x382980-=_0x200e55,_0x13ab4d=new Date(_0x13ab4d[_0xe8710d(0x261)]()+0x5265c00);}return _0xc3b017;}function karneTemsilciGerceklesmeBul(_0x40933d){const _0x5b0a58=_0x65c7;if(!state[_0x5b0a58(0x198)]||!state[_0x5b0a58(0x198)][_0x5b0a58(0x260)]||!_0x40933d)return null;const _0x3420df=state[_0x5b0a58(0x198)][_0x5b0a58(0x255)](_0x40933d);if(_0x3420df)return _0x3420df['gerceklesme'];const _0x41ef00=normalizeAdSoyad(_0x40933d);for(const [_0x4f4539,_0x36dbf0]of state['karneTemsilciMap'][_0x5b0a58(0x33f)]()){if(normalizeAdSoyad(_0x4f4539)===_0x41ef00)return _0x36dbf0['gerceklesme'];}return null;}function computeStokGunRaporu(){const _0x4544e7=_0x65c7,{sonAylar:_0x48b5d8,urunler:_0x368585}=stokGunUrunVerileriniTopla();if(!_0x368585[_0x4544e7(0x2e3)]||!state[_0x4544e7(0x274)]||!state['malzemelerStok'][_0x4544e7(0x260)])return{'yok':!![],'sonAylar':_0x48b5d8};const _0xd6fbd3=new Map(_0x368585[_0x4544e7(0x1dd)](_0x4e1fff=>[_0x4e1fff[_0x4544e7(0x2ee)],_0x4e1fff[_0x4544e7(0x20c)]])),_0x2d7f39=new Map();state[_0x4544e7(0x274)][_0x4544e7(0x208)]((_0x26dec2,_0x7090d)=>{const _0xb9bb88=_0x4544e7,_0x5d009c=PARCALI_ANA_URUN_ESLEME[_0x7090d],_0x15f18b=ANA_PARCALI_URUN_ESLEME_TERS[_0x7090d];let _0x23eecf=_0x7090d;if(_0x5d009c){const _0x3c714c=_0xd6fbd3[_0xb9bb88(0x255)](_0x7090d)||_0xd6fbd3['get'](_0x5d009c[_0xb9bb88(0x273)]);_0x23eecf=stokGunHedefKodBul(_0x7090d,_0x3c714c||'Bira');}else{if(_0x15f18b){const _0xa06717=_0xd6fbd3[_0xb9bb88(0x255)](_0x7090d)||_0xd6fbd3[_0xb9bb88(0x255)](_0x15f18b[_0xb9bb88(0x247)]);_0x23eecf=stokGunHedefKodBul(_0x7090d,_0xa06717||_0xb9bb88(0x2eb));}}const _0x4d70f6=stokGunMiktarBirimCevir(_0x26dec2||0x0,_0x7090d,_0x23eecf);_0x2d7f39['set'](_0x23eecf,(_0x2d7f39[_0xb9bb88(0x255)](_0x23eecf)||0x0)+(_0x4d70f6||0x0));});const _0xd83d9=_0x368585[_0x4544e7(0x28b)]((_0x2ccec4,_0x3b7e62)=>_0x2ccec4+_0x3b7e62['toplamLitre6Ay'],0x0);if(_0xd83d9<=0x0)return{'yok':!![],'sonAylar':_0x48b5d8};const _0x4c1764=stokGunAyAgirlikHaritasi(_0x48b5d8),_0x47e85c=_0x368585[_0x4544e7(0x1dd)](_0x441b76=>{const _0x2c9088=_0x4544e7,_0x5bf51b=stokGunAylikOzet(_0x441b76),_0xbd6f79=stokGunAgirlikliAylikOrtalama(_0x5bf51b,_0x4c1764),_0x38ab40=stokGunDegiskenlikKatsayisi(_0x5bf51b),_0x53f260=stokGunGercekGunlukIstatistik(_0x441b76[_0x2c9088(0x202)],_0x441b76['kapsananAylar']),_0x25f480=stokGunOluUrunMu(_0x5bf51b,_0x441b76[_0x2c9088(0x320)]),_0x4b7acd=stokGunAylikOzet(_0x441b76[_0x2c9088(0x357)]['sellOut']),_0x2a58b4=stokGunAylikOzet(_0x441b76[_0x2c9088(0x357)][_0x2c9088(0x2d6)]),_0x133c2c=stokGunAgirlikliAylikOrtalama(_0x4b7acd,_0x4c1764),_0xd309c0=stokGunAgirlikliAylikOrtalama(_0x2a58b4,_0x4c1764);return Object[_0x2c9088(0x2bc)]({},_0x441b76,{'aylikLitre':_0x5bf51b,'agirlikliOrtalama':_0xbd6f79,'cv':_0x38ab40,'gunlukCV':_0x53f260['cv'],'oluUrun':_0x25f480,'agirlikliOrtalamaSellOut':_0x133c2c,'agirlikliOrtalamaModernKanal':_0xd309c0});}),_0x4e6912=_0x47e85c[_0x4544e7(0x28b)]((_0x4363cd,_0x11da55)=>_0x4363cd+(_0x11da55[_0x4544e7(0x19e)]?0x0:_0x11da55[_0x4544e7(0x301)]),0x0),_0x3bd04e=_0x47e85c[_0x4544e7(0x28b)]((_0x5d7d00,_0x3b2351)=>_0x5d7d00+(_0x3b2351['oluUrun']?0x0:_0x3b2351[_0x4544e7(0x276)]),0x0),_0x389fbf=_0x47e85c['reduce']((_0x29d9c8,_0x3bc976)=>_0x29d9c8+(_0x3bc976[_0x4544e7(0x19e)]?0x0:_0x3bc976[_0x4544e7(0x1c2)]),0x0),_0x2d6608=stokGunMarkaHaftaSekilleri(_0x368585),_0xaa634=state[_0x4544e7(0x2d4)]?applySellOutHedef(state['sellOutReport'],state[_0x4544e7(0x32c)]):null,_0x2e4821=_0xaa634&&Array[_0x4544e7(0x1a8)](_0xaa634[_0x4544e7(0x1ef)])?_0xaa634[_0x4544e7(0x1ef)]['reduce']((_0x14beab,_0x5a5de2)=>_0x14beab+(_0x5a5de2['acikHedef']||0x0)+(_0x5a5de2[_0x4544e7(0x340)]||0x0),0x0):0x0,_0x216953=state['modernKanalHedef']||0x0,_0x12b916=_0x2e4821+_0x216953,_0x2b2839=new Map();_0xaa634&&Array[_0x4544e7(0x1a8)](_0xaa634['malzemeler'])&&_0xaa634[_0x4544e7(0x2a6)][_0x4544e7(0x208)](_0x212be7=>{const _0x26e839=_0x4544e7,_0x20cf6a=_0xd6fbd3['get'](_0x212be7[_0x26e839(0x2ee)])||sellOutMarkaGrubu(_0x212be7[_0x26e839(0x20c)]||_0x212be7[_0x26e839(0x252)]||_0x212be7[_0x26e839(0x2ee)]),_0x2af5b8=stokGunHedefKodBul(_0x212be7[_0x26e839(0x2ee)],_0x20cf6a),_0x1cbbfb=(_0x212be7[_0x26e839(0x202)]||[])[_0x26e839(0x28b)]((_0xa8a977,_0x6b57f)=>_0xa8a977+(_0x6b57f[_0x26e839(0x1ff)]||0x0),0x0);_0x2b2839[_0x26e839(0x269)](_0x2af5b8,(_0x2b2839[_0x26e839(0x255)](_0x2af5b8)||0x0)+_0x1cbbfb);});const _0x4ea6ff=new Map();state[_0x4544e7(0x283)]&&Array[_0x4544e7(0x1a8)](state[_0x4544e7(0x283)][_0x4544e7(0x2a6)])&&state[_0x4544e7(0x283)][_0x4544e7(0x2a6)]['forEach'](_0x23c58d=>{const _0x116408=_0x4544e7,_0x99a014=_0xd6fbd3[_0x116408(0x255)](_0x23c58d[_0x116408(0x2ee)])||sellOutMarkaGrubu(_0x23c58d[_0x116408(0x20c)]||_0x23c58d['urunAdi']||_0x23c58d['kod']),_0x51de67=stokGunHedefKodBul(_0x23c58d[_0x116408(0x2ee)],_0x99a014),_0x56f4c3=(_0x23c58d['gunler']||[])['reduce']((_0x57dfaf,_0x25b0e8)=>_0x57dfaf+(_0x25b0e8[_0x116408(0x1ff)]||0x0),0x0);_0x4ea6ff[_0x116408(0x269)](_0x51de67,(_0x4ea6ff[_0x116408(0x255)](_0x51de67)||0x0)+_0x56f4c3);});const _0x54f6b0=new Map();_0xaa634&&Array['isArray'](_0xaa634[_0x4544e7(0x2a6)])&&_0xaa634[_0x4544e7(0x2a6)][_0x4544e7(0x208)](_0x36db15=>{const _0x5dc26d=_0x4544e7,_0x2250ad=_0xd6fbd3[_0x5dc26d(0x255)](_0x36db15[_0x5dc26d(0x2ee)])||sellOutMarkaGrubu(_0x36db15['marka']||_0x36db15[_0x5dc26d(0x252)]||_0x36db15[_0x5dc26d(0x2ee)]),_0x361e6c=stokGunHedefKodBul(_0x36db15[_0x5dc26d(0x2ee)],_0x2250ad),_0xa5d20a=_0x54f6b0['get'](_0x361e6c)||[];_0x54f6b0[_0x5dc26d(0x269)](_0x361e6c,_0xa5d20a[_0x5dc26d(0x2cb)](_0x36db15[_0x5dc26d(0x1ab)]||[]));});const _0x540ec8=stokGunBugununDilimIndex(),_0x1e85af=[_0x4544e7(0x242),_0x4544e7(0x33a),_0x4544e7(0x2fa),_0x4544e7(0x1c3)],_0x1ca748=_0x47e85c['map'](_0xbaa515=>{const _0x48cfd0=_0x4544e7,_0x582bc1=!_0xbaa515['oluUrun']&&_0x4e6912>0x0?_0xbaa515[_0x48cfd0(0x301)]/_0x4e6912:0x0,_0x43801f=!_0xbaa515[_0x48cfd0(0x19e)]&&_0x3bd04e>0x0?_0xbaa515[_0x48cfd0(0x276)]/_0x3bd04e:0x0,_0x444d8a=!_0xbaa515[_0x48cfd0(0x19e)]&&_0x389fbf>0x0?_0xbaa515[_0x48cfd0(0x1c2)]/_0x389fbf:0x0,_0x521cf3=!_0xbaa515['oluUrun']&&_0x2e4821>0x0?_0x2e4821*_0x43801f:0x0,_0x122466=!_0xbaa515[_0x48cfd0(0x19e)]&&_0x216953>0x0?_0x216953*_0x444d8a:0x0,_0x5146c6=!_0xbaa515[_0x48cfd0(0x19e)]&&(_0x2e4821>0x0||_0x216953>0x0)?_0x521cf3+_0x122466:null,_0x3e9461=_0xbaa515['toplamMiktar6Ay']>0x0?_0xbaa515[_0x48cfd0(0x1f2)]/_0xbaa515[_0x48cfd0(0x224)]:null,_0x4d496b=_0x2d7f39[_0x48cfd0(0x255)](_0xbaa515[_0x48cfd0(0x2ee)]),_0x2f1b81=_0x4d496b!=null&&_0x3e9461>0x0?_0x4d496b*_0x3e9461:null,_0x5a7236=_0x4d496b,_0x274603=_0x2b2839['get'](_0xbaa515[_0x48cfd0(0x2ee)])||0x0,_0x3c179a=_0x4ea6ff['get'](_0xbaa515[_0x48cfd0(0x2ee)])||0x0,_0xd4bed6=Math[_0x48cfd0(0x2a4)](0x0,_0x521cf3-_0x274603),_0x305d25=Math[_0x48cfd0(0x2a4)](0x0,_0x122466-_0x3c179a),_0xb040fc=_0xd4bed6+_0x305d25,_0x19c1d4=_0x2f1b81!=null?Math[_0x48cfd0(0x213)](_0x2f1b81,_0xb040fc):0x0,_0x39ea7f=_0x19c1d4>0x0&&_0xb040fc>0x0?_0x19c1d4*(_0xd4bed6/_0xb040fc):0x0,_0x2382d2=_0x19c1d4-_0x39ea7f,_0x36b2dd=Math[_0x48cfd0(0x2a4)](0x0,_0xd4bed6-_0x39ea7f),_0x331462=Math[_0x48cfd0(0x2a4)](0x0,_0x305d25-_0x2382d2),_0x2b10fa=_0x5146c6!=null?_0x36b2dd+_0x331462:null,_0x320485=_0x3e9461,_0x1c02b0=_0x2b10fa!=null&&_0x320485>0x0?_0x2b10fa/_0x320485:null,_0x136dd5=stokGunOwnVeMarkaShapeKarisimi(_0xbaa515,_0x2d6608),_0x41a7fa=_0xbaa515[_0x48cfd0(0x1f2)]>0x0?_0x136dd5[_0x48cfd0(0x1ff)][_0x48cfd0(0x1dd)](_0x277728=>_0x277728/_0xbaa515['toplamLitre6Ay']):[0.25,0.25,0.25,0.25],_0x1f55c0=_0x41a7fa[_0x48cfd0(0x1dd)]((_0x5a7b05,_0x35707c)=>{const _0x2af39f=_0x48cfd0;if(_0xbaa515[_0x2af39f(0x19e)])return _0x136dd5['litre'][_0x35707c]/0x7;const _0x18c2f7=_0x5a7b05*_0xd4bed6,_0x5443df=_0x5a7b05*_0x305d25;return(_0x18c2f7+_0x5443df)/0x7;}),_0x3dabcc=_0x1f55c0[_0x540ec8]||0x0,_0x3077e4=_0x320485>0x0?_0x3dabcc/_0x320485:null,_0xfcc1ab=_0x2f1b81!=null?stokGunSimulasyonuYap(_0x2f1b81,_0x1f55c0):null,_0x22ecf4=_0xbaa515['gunlukCV']!=null?_0xbaa515[_0x48cfd0(0x22d)]:_0xbaa515['cv'],_0x1999b5=_0xbaa515[_0x48cfd0(0x22d)]!=null?_0x48cfd0(0x348):_0x48cfd0(0x1b8),_0x280e02=_0x1f55c0[_0x48cfd0(0x28b)]((_0x11ebf8,_0x3e4bd5)=>_0x11ebf8+_0x3e4bd5,0x0)/0x4,_0x4dcc76=_0x280e02*_0x22ecf4,_0x410cf4=STOK_GUN_SERVIS_SEVIYESI_Z*_0x4dcc76*Math[_0x48cfd0(0x197)](STOK_GUN_VARSAYILAN_LEAD_TIME_GUN),_0x2c7470=_0x2f1b81!=null?stokGunSimulasyonuYap(_0x2f1b81,_0x1f55c0,null,_0x410cf4):null,_0x16bc2d=_0x54f6b0[_0x48cfd0(0x255)](_0xbaa515[_0x48cfd0(0x2ee)])||[],_0x2a9846=_0x16bc2d[_0x48cfd0(0x1bc)](0x0,0x3)[_0x48cfd0(0x1dd)](_0x4be394=>({'temsilci':_0x4be394['ad'],'pay':_0x4be394[_0x48cfd0(0x27c)],'tahsilatGerceklesme':karneTemsilciGerceklesmeBul(_0x4be394['ad'])}));return{'kod':_0xbaa515[_0x48cfd0(0x2ee)],'urunAdi':_0xbaa515['urunAdi'],'marka':_0xbaa515[_0x48cfd0(0x20c)],'pay':_0x582bc1*0x64,'gerekliLitre':_0x2b10fa,'gerekliMiktar':_0x1c02b0,'paySellOut':_0x43801f*0x64,'payModernKanal':_0x444d8a*0x64,'yogunHaftaEtiket':_0x1e85af[_0x540ec8]+_0x48cfd0(0x2ab),'gunlukHiz':_0x3dabcc,'gunlukMiktar':_0x3077e4,'anlikStok':_0x5a7236,'stokGunu':_0xfcc1ab,'stokGunuGuvenlikli':_0x2c7470,'guvenlikStoguLitre':_0x410cf4,'gunlukCVKaynagi':_0x1999b5,'cv':_0xbaa515['cv'],'aktifAySayisi':_0xbaa515[_0x48cfd0(0x2b9)],'ilkSatisAy':_0xbaa515[_0x48cfd0(0x1a9)],'yeniUrun':_0xbaa515['yeniUrun'],'veriGuveni':_0xbaa515[_0x48cfd0(0x1c5)],'oluUrun':_0xbaa515[_0x48cfd0(0x19e)],'temsilciRiskDetayi':_0x2a9846};})[_0x4544e7(0x18a)]((_0x7a181,_0x119ea1)=>{const _0x51b7e5=_0x4544e7;if(_0x7a181['stokGunu']==null&&_0x119ea1[_0x51b7e5(0x1df)]==null)return _0x119ea1[_0x51b7e5(0x27c)]-_0x7a181['pay'];if(_0x7a181['stokGunu']==null)return 0x1;if(_0x119ea1['stokGunu']==null)return-0x1;return _0x7a181['stokGunu']-_0x119ea1[_0x51b7e5(0x1df)];}),_0x4cae00=_0x2e4821>0x0&&_0x3bd04e<=0x0,_0x1d4368=_0x216953>0x0&&_0x389fbf<=0x0;return{'yok':![],'sonAylar':_0x48b5d8,'rows':_0x1ca748,'ustYonetimHedefi':_0x12b916,'toplamLitre6Ay':_0xd83d9,'sellOutHedefDagitilamadi':_0x4cae00,'modernKanalHedefDagitilamadi':_0x1d4368};}function stokGunRenkSeviyesi(_0x4f302f){const _0x518b62=_0x65c7;if(_0x4f302f==null)return{'renk':_0x518b62(0x1f1),'bg':_0x518b62(0x330)};if(_0x4f302f<0x7)return{'renk':_0x518b62(0x1aa),'bg':_0x518b62(0x232)};if(_0x4f302f<0xe)return{'renk':'var(--warn)','bg':_0x518b62(0x22b)};return{'renk':_0x518b62(0x20b),'bg':_0x518b62(0x2a8)};}async function renderStokGunView(){const _0x2ad943=_0x65c7,_0xb256af=document[_0x2ad943(0x311)](_0x2ad943(0x1c9)),_0x1ce793=document['getElementById'](_0x2ad943(0x1c0)),_0x2029a7=document[_0x2ad943(0x311)](_0x2ad943(0x2de));if((!state[_0x2ad943(0x198)]||!state[_0x2ad943(0x198)][_0x2ad943(0x260)])&&state['report'])try{const _0x5a8314=await computeTemsilciKarnesi(state[_0x2ad943(0x193)],![]);_0x5a8314&&!_0x5a8314[_0x2ad943(0x2e7)]&&_0x5a8314[_0x2ad943(0x278)]&&(state['karneTemsilciMap']=new Map(_0x5a8314[_0x2ad943(0x278)][_0x2ad943(0x1dd)](_0x3f26be=>[_0x3f26be[_0x2ad943(0x17c)],_0x3f26be])));}catch(_0x149e87){console[_0x2ad943(0x2f4)](_0x2ad943(0x277),_0x149e87);}const _0x1fd0b0=computeStokGunRaporu();if(_0x1fd0b0[_0x2ad943(0x2e7)]){_0x2029a7[_0x2ad943(0x1db)][_0x2ad943(0x1c1)]=_0x2ad943(0x2aa),_0xb256af[_0x2ad943(0x1db)][_0x2ad943(0x1c1)]=_0x2ad943(0x221);const _0x35a1ae=document[_0x2ad943(0x311)](_0x2ad943(0x336)),_0xcabb6d=document[_0x2ad943(0x311)]('stokGunBosEylemBtn');if(!_0x1fd0b0[_0x2ad943(0x23b)]||!_0x1fd0b0[_0x2ad943(0x23b)][_0x2ad943(0x2e3)])_0x35a1ae[_0x2ad943(0x182)]='Önce\x20en\x20az\x20bir\x20ay\x20arşivlenmeli',_0x1ce793[_0x2ad943(0x182)]=_0x2ad943(0x1d2),_0xcabb6d['style'][_0x2ad943(0x1c1)]=_0x2ad943(0x341),_0xcabb6d['innerHTML']='<i\x20class=\x22fa-solid\x20fa-box-archive\x22\x20aria-hidden=\x22true\x22\x20style=\x22margin-right:7px;\x22></i>Geleneksel\x20Kanal\x27a\x20git',_0xcabb6d[_0x2ad943(0x248)]=()=>setActiveView(_0x2ad943(0x2a0));else!state['malzemelerStok']||!state[_0x2ad943(0x274)][_0x2ad943(0x260)]?(_0x35a1ae[_0x2ad943(0x182)]=_0x2ad943(0x2b5),_0x1ce793['textContent']=_0x2ad943(0x26f)+_0x1fd0b0['sonAylar'][_0x2ad943(0x2e3)]+_0x2ad943(0x2c9),_0xcabb6d[_0x2ad943(0x1db)][_0x2ad943(0x1c1)]='inline-flex',_0xcabb6d[_0x2ad943(0x29b)]=_0x2ad943(0x2a5),_0xcabb6d[_0x2ad943(0x248)]=()=>{const _0x3a1c69=_0x2ad943,_0x17a09a=document['getElementById'](_0x3a1c69(0x307));if(_0x17a09a)_0x17a09a['click']();}):(_0x35a1ae[_0x2ad943(0x182)]='Litre\x20bilgisi\x20bulunamadı',_0x1ce793[_0x2ad943(0x182)]=_0x2ad943(0x1ac),_0xcabb6d[_0x2ad943(0x1db)]['display']=_0x2ad943(0x2aa),_0xcabb6d[_0x2ad943(0x248)]=null);return;}_0xb256af[_0x2ad943(0x1db)][_0x2ad943(0x1c1)]=_0x2ad943(0x2aa),_0x2029a7[_0x2ad943(0x1db)][_0x2ad943(0x1c1)]=_0x2ad943(0x221);const _0x5a4207=_0x1fd0b0['ustYonetimHedefi']>0x0?'':_0x2ad943(0x1fb),_0x3a6614=[];if(_0x1fd0b0['sellOutHedefDagitilamadi'])_0x3a6614[_0x2ad943(0x231)](_0x2ad943(0x290));if(_0x1fd0b0[_0x2ad943(0x313)])_0x3a6614[_0x2ad943(0x231)](_0x2ad943(0x253));const _0x14f345=_0x3a6614[_0x2ad943(0x2e3)]?'\x20—\x20⚠️\x20'+_0x3a6614['join'](_0x2ad943(0x304))+_0x2ad943(0x2c3):'';document[_0x2ad943(0x311)](_0x2ad943(0x2be))['textContent']=_0x2ad943(0x2a7)+_0x1fd0b0[_0x2ad943(0x23b)][_0x2ad943(0x2e3)]+_0x2ad943(0x295)+_0x1fd0b0[_0x2ad943(0x23b)]['map'](ayEtiketi)[_0x2ad943(0x2e4)](',\x20')+_0x2ad943(0x302)+Math['round'](_0x1fd0b0[_0x2ad943(0x2bb)])['toLocaleString'](_0x2ad943(0x1a2))+'\x20L'+_0x5a4207+_0x14f345,state[_0x2ad943(0x1a6)]=_0x1fd0b0[_0x2ad943(0x278)];const _0x5cbb98=document[_0x2ad943(0x311)](_0x2ad943(0x1a3));if(_0x5cbb98){const _0x4331eb=_0x5cbb98[_0x2ad943(0x34f)],_0x2edeaa=Array[_0x2ad943(0x1d9)](new Set(_0x1fd0b0[_0x2ad943(0x278)][_0x2ad943(0x1dd)](_0x57f177=>_0x57f177[_0x2ad943(0x20c)])[_0x2ad943(0x2dd)](Boolean)))['sort']((_0x5a7813,_0xee139)=>_0x5a7813[_0x2ad943(0x245)](_0xee139,'tr'));_0x5cbb98[_0x2ad943(0x29b)]=_0x2ad943(0x235)+_0x2edeaa[_0x2ad943(0x1dd)](_0x34057c=>_0x2ad943(0x196)+escapeHtml(_0x34057c)+'\x22>'+escapeHtml(_0x34057c)+_0x2ad943(0x347))[_0x2ad943(0x2e4)]('');if(_0x4331eb&&_0x2edeaa[_0x2ad943(0x265)](_0x4331eb))_0x5cbb98[_0x2ad943(0x34f)]=_0x4331eb;}stokGunKritikUyariGuncelle(_0x1fd0b0[_0x2ad943(0x278)]),stokGunSekmeSayilariniGuncelle(_0x1fd0b0[_0x2ad943(0x278)]),stokGunTabloyuFiltreleyipCiz();}const STOK_GUN_KRITIK_ESIK_GUN=0x7;function stokGunKritikUyariGuncelle(_0x42e074){const _0x19008c=_0x65c7,_0x573970=(_0x42e074||[])[_0x19008c(0x2dd)](_0x1d795c=>_0x1d795c[_0x19008c(0x1df)]!=null&&_0x1d795c[_0x19008c(0x1df)]<=STOK_GUN_KRITIK_ESIK_GUN&&!_0x1d795c[_0x19008c(0x19e)])[_0x19008c(0x18a)]((_0x2b9a52,_0x61e1fb)=>_0x2b9a52[_0x19008c(0x1df)]-_0x61e1fb['stokGunu']);[_0x19008c(0x201),_0x19008c(0x337)][_0x19008c(0x208)](_0x4b195c=>{const _0x3cd09b=_0x19008c,_0x46623a=document[_0x3cd09b(0x311)](_0x4b195c);if(!_0x46623a)return;if(_0x573970[_0x3cd09b(0x2e3)])_0x46623a['setAttribute']('data-badge',_0x573970[_0x3cd09b(0x2e3)]>0x63?_0x3cd09b(0x217):_0x573970[_0x3cd09b(0x2e3)]);else _0x46623a['removeAttribute'](_0x3cd09b(0x322));});const _0x2e19a6=document[_0x19008c(0x311)](_0x19008c(0x287));if(_0x2e19a6){if(!_0x573970[_0x19008c(0x2e3)])_0x2e19a6['innerHTML']='';else{const _0x137f43=_0x573970[_0x19008c(0x1bc)](0x0,0x3)[_0x19008c(0x1dd)](_0x23930f=>escapeHtml(_0x23930f[_0x19008c(0x252)])+'\x20('+Math['round'](_0x23930f[_0x19008c(0x1df)])+_0x19008c(0x21a))[_0x19008c(0x2e4)](',\x20'),_0x44d434=_0x573970[_0x19008c(0x2e3)]>0x3?_0x19008c(0x304)+(_0x573970['length']-0x3)+'\x20ürün\x20daha':'';_0x2e19a6[_0x19008c(0x29b)]='<div\x20class=\x22alert-banner\x22\x20id=\x22stokGunKritikBannerIc\x22\x20style=\x22margin-bottom:16px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22alert-banner-icon\x22><i\x20class=\x22fa-solid\x20fa-triangle-exclamation\x22\x20aria-hidden=\x22true\x22></i></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22alert-banner-text\x22><strong>'+_0x573970[_0x19008c(0x2e3)]+'\x20ürün\x20kritik\x20stok\x20seviyesinde</strong>\x20('+STOK_GUN_KRITIK_ESIK_GUN+_0x19008c(0x2bd)+_0x137f43+_0x44d434+'.</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22alert-banner-cta\x22\x20id=\x22stokGunKritikGorBtn\x22>Kritik\x20Sekmesini\x20Aç</div>\x0a\x20\x20\x20\x20\x20\x20</div>',document[_0x19008c(0x311)]('stokGunKritikGorBtn')?.[_0x19008c(0x2f9)]('click',()=>stokGunSekmeDegistir(_0x19008c(0x207)));}}}function stokGunSekmeSayilariniGuncelle(_0x258818){const _0x26317f=_0x65c7,_0x26b323=(_0x258818||[])['filter'](_0x38e421=>_0x38e421[_0x26317f(0x1df)]!=null&&_0x38e421[_0x26317f(0x1df)]<=STOK_GUN_KRITIK_ESIK_GUN&&!_0x38e421[_0x26317f(0x19e)])[_0x26317f(0x2e3)],_0xfd8c03=(_0x258818||[])[_0x26317f(0x2dd)](_0x67ea77=>_0x67ea77['yeniUrun'])[_0x26317f(0x2e3)],_0x354c5b=(_0x258818||[])[_0x26317f(0x2dd)](_0x5c1d0f=>_0x5c1d0f[_0x26317f(0x19e)])['length'],_0x3ae066=(_0x5548be,_0x12ac14,_0x167093)=>{const _0x56cbd7=_0x26317f,_0x167147=document['getElementById'](_0x5548be);if(_0x167147)_0x167147[_0x56cbd7(0x29b)]=_0x12ac14+_0x56cbd7(0x223)+_0x167093+'</span>';};_0x3ae066(_0x26317f(0x249),_0x26317f(0x1d3),(_0x258818||[])[_0x26317f(0x2e3)]),_0x3ae066(_0x26317f(0x34b),_0x26317f(0x30f)+STOK_GUN_KRITIK_ESIK_GUN+_0x26317f(0x21a),_0x26b323),_0x3ae066('stokGunSekmeYeni','Yeni\x20Ürünler',_0xfd8c03),_0x3ae066('stokGunSekmeOlu','Ölü\x20Ürünler',_0x354c5b);}function stokGunSekmeDegistir(_0x9c353a){const _0x488908=_0x65c7;state['stokGunSekme']=_0x9c353a,document[_0x488908(0x26d)](_0x488908(0x2f0))['forEach'](_0x41f5fc=>{const _0x2390ee=_0x488908;_0x41f5fc['classList'][_0x2390ee(0x2e0)](_0x2390ee(0x2f1),_0x41f5fc[_0x2390ee(0x1ae)][_0x2390ee(0x1c7)]===_0x9c353a);}),stokGunTabloyuFiltreleyipCiz();}function stokGunTabloyuFiltreleyipCiz(){const _0x221a07=_0x65c7,_0xe09de6=state[_0x221a07(0x1a6)]||[],_0x1e5c93=(document[_0x221a07(0x311)](_0x221a07(0x1f9))?.[_0x221a07(0x34f)]||'')[_0x221a07(0x306)]()['toLocaleLowerCase'](_0x221a07(0x1a2)),_0x3302c1=document[_0x221a07(0x311)]('stokGunMarkaFilter')?.[_0x221a07(0x34f)]||'',_0x255990=state[_0x221a07(0x30b)]||'tumu';let _0x3a0408=_0xe09de6[_0x221a07(0x2dd)](_0x1d98ad=>{const _0x3fb8f3=_0x221a07;if(_0x1e5c93&&!(String(_0x1d98ad[_0x3fb8f3(0x252)])[_0x3fb8f3(0x222)]('tr-TR')['includes'](_0x1e5c93)||String(_0x1d98ad[_0x3fb8f3(0x2ee)])['toLocaleLowerCase']('tr-TR')[_0x3fb8f3(0x265)](_0x1e5c93)))return![];if(_0x3302c1&&_0x1d98ad['marka']!==_0x3302c1)return![];if(_0x255990==='kritik'&&!(_0x1d98ad[_0x3fb8f3(0x1df)]!=null&&_0x1d98ad['stokGunu']<=STOK_GUN_KRITIK_ESIK_GUN&&!_0x1d98ad[_0x3fb8f3(0x19e)]))return![];if(_0x255990==='yeni'&&!_0x1d98ad[_0x3fb8f3(0x1f5)])return![];if(_0x255990===_0x3fb8f3(0x200)&&!_0x1d98ad['oluUrun'])return![];return!![];});const {key:_0x5d44bf,dir:_0x4fe1e3}=state[_0x221a07(0x226)];_0x3a0408=_0x3a0408[_0x221a07(0x1bc)]()[_0x221a07(0x18a)]((_0x14382a,_0x5cfef2)=>{const _0x23dd46=_0x221a07,_0x14bfb8=_0x14382a[_0x5d44bf],_0x461fc8=_0x5cfef2[_0x5d44bf];if(_0x14bfb8==null&&_0x461fc8==null)return 0x0;if(_0x14bfb8==null)return 0x1;if(_0x461fc8==null)return-0x1;if(typeof _0x14bfb8===_0x23dd46(0x2ef))return _0x4fe1e3*String(_0x14bfb8)['localeCompare'](String(_0x461fc8),'tr');return _0x4fe1e3*(_0x14bfb8-_0x461fc8);});function _0x27f0fb(_0x37c0b2){const _0x2680bc=_0x221a07;if(_0x37c0b2==null)return'';if(_0x37c0b2<0x7)return'stokgun-crit';if(_0x37c0b2<0xe)return _0x2680bc(0x215);return _0x2680bc(0x2f5);}function _0x385005(_0x4e38ea){const _0x4e3fd7=_0x221a07,_0x4116ae=String(_0x4e38ea||'')[_0x4e3fd7(0x219)](_0x4e3fd7(0x2ab),'')['trim']();return/^\d+-\d+$/['test'](_0x4116ae)?_0x4116ae+'.\x20günü':_0x4116ae;}document[_0x221a07(0x311)](_0x221a07(0x21b))['innerHTML']=_0x3a0408[_0x221a07(0x1dd)](_0x36a1a5=>{const _0x19e5a1=_0x221a07,_0xa9330c=stokGunRenkSeviyesi(_0x36a1a5[_0x19e5a1(0x1df)]),_0x2ad188=_0x27f0fb(_0x36a1a5[_0x19e5a1(0x1df)]),_0x5a16f8=_0x36a1a5[_0x19e5a1(0x1f5)]?_0x19e5a1(0x254)+escapeHtml(ayEtiketi(_0x36a1a5[_0x19e5a1(0x1a9)])||'')+')\x22\x20style=\x22display:inline-block;padding:1px\x207px;border-radius:100px;font-size:9.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);\x22>YENİ</span>':'',_0x4c304b=_0x36a1a5['oluUrun']?_0x19e5a1(0x33d):'',_0x5c1ccd=_0x36a1a5[_0x19e5a1(0x1c5)]===_0x19e5a1(0x21c)?_0x19e5a1(0x1aa):_0x36a1a5[_0x19e5a1(0x1c5)]===_0x19e5a1(0x326)?_0x19e5a1(0x256):'var(--ink-faint)',_0x3906f7=_0x36a1a5[_0x19e5a1(0x195)]!=null&&_0x36a1a5[_0x19e5a1(0x331)]!=null?_0x19e5a1(0x309)+Math[_0x19e5a1(0x203)](_0x36a1a5['guvenlikStoguLitre'])['toLocaleString'](_0x19e5a1(0x1a2))+_0x19e5a1(0x358)+STOK_GUN_VARSAYILAN_LEAD_TIME_GUN+_0x19e5a1(0x1ee)+_0x36a1a5[_0x19e5a1(0x1d5)]+_0x19e5a1(0x351)+Math[_0x19e5a1(0x203)](_0x36a1a5[_0x19e5a1(0x331)])+_0x19e5a1(0x18b):'Güvenlik\x20stoğu\x20hesaplanamadı',_0x4bff7d=_0x36a1a5['temsilciRiskDetayi']&&_0x36a1a5['temsilciRiskDetayi']['length']>0x0,_0x5832e8=state['stokGunAcikRiskSatirlar'][_0x19e5a1(0x189)](_0x36a1a5['kod']),_0x2e8dcd=_0x4bff7d?_0x19e5a1(0x1e3)+escapeHtml(_0x36a1a5['kod'])+_0x19e5a1(0x180)+(_0x5832e8?'up':'down')+_0x19e5a1(0x1ea):_0x19e5a1(0x2e2),_0x58878c=_0x4bff7d&&_0x5832e8?(function(){const _0x1c9914=_0x19e5a1,_0x4da102=_0x36a1a5[_0x1c9914(0x292)][_0x1c9914(0x1dd)](_0x16ca04=>{const _0x15da8c=_0x1c9914,_0x444a23=_0x16ca04[_0x15da8c(0x30e)]==null?'tahsilat-yok':_0x16ca04[_0x15da8c(0x30e)]<0x46?_0x15da8c(0x284):'tahsilat-iyi',_0x206fc4=_0x16ca04[_0x15da8c(0x30e)]==null?_0x15da8c(0x1f7):_0x15da8c(0x2a9)+Math[_0x15da8c(0x203)](_0x16ca04[_0x15da8c(0x30e)]);return _0x15da8c(0x1d8)+escapeHtml(_0x16ca04['temsilci'])+_0x15da8c(0x1d4)+_0x16ca04[_0x15da8c(0x27c)][_0x15da8c(0x2a1)](0x0)+_0x15da8c(0x2b7)+_0x444a23+'\x22>'+_0x206fc4+_0x15da8c(0x299);})[_0x1c9914(0x2e4)]('');return _0x1c9914(0x1c4)+_0x4da102+_0x1c9914(0x211);}()):'';return _0x19e5a1(0x190)+_0x2ad188+'\x22>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-card-top\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-id\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-kod\x22>'+escapeHtml(_0x36a1a5[_0x19e5a1(0x2ee)])+_0x19e5a1(0x21f)+escapeHtml(_0x36a1a5[_0x19e5a1(0x252)])+'\x22>'+escapeHtml(_0x36a1a5['urunAdi'])+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-rozet-satir\x22>'+_0x5a16f8+_0x4c304b+_0x19e5a1(0x1cf)+_0x2e8dcd+_0x19e5a1(0x22a)+_0xa9330c[_0x19e5a1(0x199)]+_0x19e5a1(0x2c5)+_0xa9330c['bg']+_0x19e5a1(0x1cb)+escapeHtml(_0x3906f7)+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22n\x22>'+(_0x36a1a5['stokGunu']!=null?Math['round'](_0x36a1a5[_0x19e5a1(0x1df)]):'—')+_0x19e5a1(0x23a)+(_0x36a1a5['anlikStok']!=null?_0x36a1a5[_0x19e5a1(0x2f6)]['toLocaleString'](_0x19e5a1(0x1a2)):'—')+_0x19e5a1(0x33c)+_0x36a1a5['paySellOut'][_0x19e5a1(0x2a1)](0x1)['replace']('.',',')+_0x19e5a1(0x272)+_0x36a1a5[_0x19e5a1(0x282)][_0x19e5a1(0x2a1)](0x1)[_0x19e5a1(0x219)]('.',',')+_0x19e5a1(0x239)+_0x36a1a5['paySellOut'][_0x19e5a1(0x2a1)](0x1)[_0x19e5a1(0x219)]('.',',')+_0x19e5a1(0x241)+_0x36a1a5['payModernKanal'][_0x19e5a1(0x2a1)](0x1)[_0x19e5a1(0x219)]('.',',')+'</span></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-stat-chip\x22\x20title=\x22Veri\x20güveni:\x20'+escapeHtml(_0x36a1a5[_0x19e5a1(0x1c5)])+_0x19e5a1(0x229)+_0x5c1ccd+_0x19e5a1(0x291)+_0x36a1a5[_0x19e5a1(0x2b9)]+_0x19e5a1(0x2fb)+(_0x36a1a5['gunlukMiktar']!=null?_0x36a1a5[_0x19e5a1(0x28f)][_0x19e5a1(0x1b9)]('tr-TR',{'maximumFractionDigits':0x1})+_0x19e5a1(0x1e6):'—')+_0x19e5a1(0x1b0)+LT(_0x36a1a5[_0x19e5a1(0x266)])+'/gün</div></div>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-hedef-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-hedef-baslik\x22><i\x20class=\x22fa-solid\x20fa-bullseye\x22\x20aria-hidden=\x22true\x22></i>\x20Hedef\x20gereken\x20sipariş</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-hedef-degerler\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-hedef-item\x22><div\x20class=\x22l\x22>MİKTAR</div><div\x20class=\x22v\x22>'+(_0x36a1a5[_0x19e5a1(0x275)]!=null?_0x36a1a5[_0x19e5a1(0x275)]['toLocaleString'](_0x19e5a1(0x1a2),{'maximumFractionDigits':0x0}):'—')+'</div></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22urun-hedef-item\x22><div\x20class=\x22l\x22>LİTRE</div><div\x20class=\x22v\x22>'+(_0x36a1a5[_0x19e5a1(0x194)]!=null?LT(_0x36a1a5['gerekliLitre'])[_0x19e5a1(0x219)](/\s*Lt\.?$/,''):'—')+_0x19e5a1(0x297)+escapeHtml(_0x385005(_0x36a1a5[_0x19e5a1(0x1ec)]))+_0x19e5a1(0x356)+_0x58878c+'\x0a\x20\x20\x20\x20</div>';})['join']('')||_0x221a07(0x1fe)+(_0x1e5c93?'Aramanızla\x20eşleşen\x20ürün\x20bulunamadı.':_0x221a07(0x25f))+_0x221a07(0x244);}async function renderSellOutView(){const _0x3fb577=_0x65c7,_0x256f8a=document[_0x3fb577(0x311)](_0x3fb577(0x2fe)),_0x32bf29=document[_0x3fb577(0x311)]('sellOutIcerik');populateSellOutAySelect();const _0x3bbdf2=state[_0x3fb577(0x246)],_0x1995e0=state[_0x3fb577(0x2d4)];ktlog(_0x3fb577(0x2b0),_0x1995e0&&_0x1995e0['toplamLitre'],'belgeSayisi=',_0x1995e0&&_0x1995e0[_0x3fb577(0x300)],_0x3fb577(0x2ac),_0x3bbdf2||_0x3fb577(0x1e8));let _0x28a45b,_0x399a18;if(_0x3bbdf2){_0x28a45b=state[_0x3fb577(0x27d)][_0x3bbdf2]||null,_0x399a18=!![];if(!_0x28a45b){_0x256f8a['style'][_0x3fb577(0x1c1)]=_0x3fb577(0x221),_0x32bf29[_0x3fb577(0x1db)][_0x3fb577(0x1c1)]=_0x3fb577(0x2aa),document[_0x3fb577(0x311)](_0x3fb577(0x2d9))['textContent']=fmtDate(new Date(_0x3bbdf2+_0x3fb577(0x22c)))+_0x3fb577(0x2e1);return;}}else{_0x399a18=![];let _0x123308=_0x1995e0;if(!_0x123308){ktlog(_0x3fb577(0x19b));try{typeof sellOutYenile===_0x3fb577(0x22e)&&(await sellOutYenile(),_0x123308=state[_0x3fb577(0x2d4)]);}catch(_0xf278cb){ktlog(_0x3fb577(0x30d),_0xf278cb&&_0xf278cb[_0x3fb577(0x1e2)]);}ktlog('renderSellOutView\x20tazeleme\x20sonrası:',_0x123308?_0x3fb577(0x243)+_0x123308['toplamLitre']:_0x3fb577(0x23d));}if(!_0x123308){_0x256f8a['style'][_0x3fb577(0x1c1)]=_0x3fb577(0x221),_0x32bf29[_0x3fb577(0x1db)]['display']=_0x3fb577(0x2aa),document[_0x3fb577(0x311)](_0x3fb577(0x2d9))[_0x3fb577(0x182)]='Veri\x20kaynağı:\x20Geleneksel\x20Kanal\x20(SAPUI5\x20dışa\x20aktarımı)\x20—\x20henüz\x20yüklenmedi';return;}_0x28a45b=applySellOutHedef(_0x123308,state[_0x3fb577(0x32c)]);}_0x256f8a[_0x3fb577(0x1db)][_0x3fb577(0x1c1)]=_0x3fb577(0x2aa),_0x32bf29[_0x3fb577(0x1db)][_0x3fb577(0x1c1)]=_0x3fb577(0x221);const _0x276776=_0x28a45b[_0x3fb577(0x258)]?'':_0x3fb577(0x18e);_0x399a18?document[_0x3fb577(0x311)](_0x3fb577(0x2d9))[_0x3fb577(0x182)]=_0x3fb577(0x308)+fmtDate(new Date(_0x3bbdf2+'-01'))+_0x3fb577(0x1fa)+fmtDate(new Date(_0x28a45b[_0x3fb577(0x310)]))+_0x3fb577(0x2da)+_0x28a45b[_0x3fb577(0x300)][_0x3fb577(0x1b9)](_0x3fb577(0x1a2))+_0x3fb577(0x31b)+_0x276776:document[_0x3fb577(0x311)]('sellOutAsOf')[_0x3fb577(0x182)]='Veri\x20kaynağı:\x20SAPUI5\x20dışa\x20aktarımı\x20·\x20'+_0x28a45b[_0x3fb577(0x300)][_0x3fb577(0x1b9)]('tr-TR')+_0x3fb577(0x339)+fmtDate(new Date())+_0x3fb577(0x1bb)+_0x276776;const _0x50ef11=document[_0x3fb577(0x311)](_0x3fb577(0x267));if(_0x28a45b[_0x3fb577(0x1da)]>0x0){const _0xc59c1b=_0x28a45b[_0x3fb577(0x354)]>0x0?_0x28a45b[_0x3fb577(0x27b)]/_0x28a45b[_0x3fb577(0x354)]*0x64:0x0;_0x50ef11[_0x3fb577(0x29b)]=_0x3fb577(0x2a2)+_0x28a45b['blokajAdet'][_0x3fb577(0x1b9)](_0x3fb577(0x1a2))+_0x3fb577(0x31f)+TL(_0x28a45b['blokajTutar'])+_0x3fb577(0x264)+_0xc59c1b['toFixed'](0x1)[_0x3fb577(0x219)]('.',',')+_0x3fb577(0x32e);}else _0x50ef11[_0x3fb577(0x29b)]='';const _0x30cb6b=sellOutKanalOzeti(_0x28a45b),{toplamAcikLitre:_0x5e4a34,toplamKapaliLitre:_0x4ff50c,acikKalan:_0x47948d,kapaliKalan:_0x355cfc,gerceklesmeOrani:_0x1f71e9}=_0x30cb6b,_0x26355c=[{'label':_0x3fb577(0x333),'icon':_0x3fb577(0x1e0),'value':null,'display':_0x1f71e9!=null?fmtYuzde(_0x1f71e9):'—','sub':_0x3fb577(0x1f3)+Math[_0x3fb577(0x203)](_0x28a45b['toplamLitre'])[_0x3fb577(0x1b9)](_0x3fb577(0x1a2))+_0x3fb577(0x1e4)},{'label':_0x3fb577(0x1ed),'icon':_0x3fb577(0x296),'cls':_0x3fb577(0x251),'value':null,'display':LT(_0x5e4a34)},{'label':_0x3fb577(0x2cd),'icon':_0x3fb577(0x296),'cls':_0x3fb577(0x335),'value':null,'display':LT(_0x4ff50c)},{'label':'Açık\x20Kanal\x20Kalan\x20Litre','icon':_0x3fb577(0x2d0),'cls':_0x3fb577(0x2e9),'value':null,'display':LT(_0x47948d)},{'label':'Kapalı\x20Kanal\x20Kalan\x20Litre','icon':_0x3fb577(0x289),'cls':_0x3fb577(0x2e9),'value':null,'display':LT(_0x355cfc)}];renderKpiHeroRow(_0x26355c,_0x3fb577(0x359)),document[_0x3fb577(0x311)](_0x3fb577(0x19a))[_0x3fb577(0x182)]=_0x28a45b[_0x3fb577(0x1f0)]+'\x20Saha\x20Satış\x20Müdürü';const _0x106b32=_0x28a45b[_0x3fb577(0x2ec)][_0x3fb577(0x1dd)](_0x2f7660=>'\x0a\x20\x20\x20\x20<div\x20class=\x22ssm-karne-card\x22\x20style=\x22border-left:4px\x20solid\x20'+sellOutRenk(_0x2f7660[_0x3fb577(0x1e1)])+_0x3fb577(0x1d7)+escapeHtml(avatarBaslangic(_0x2f7660[_0x3fb577(0x227)]))+_0x3fb577(0x259)+escapeHtml(_0x2f7660['ssm'])+_0x3fb577(0x1d1)+_0x2f7660[_0x3fb577(0x2c4)][_0x3fb577(0x1b9)](_0x3fb577(0x1a2))+_0x3fb577(0x1f6)+fknsRingSvg(_0x2f7660[_0x3fb577(0x1e1)])+_0x3fb577(0x1e5)+ssmKanalRowHtml(_0x3fb577(0x24f),_0x2f7660['acikLitre'],_0x2f7660[_0x3fb577(0x334)],'fa-lock-open')+_0x3fb577(0x293)+ssmKanalRowHtml(_0x3fb577(0x23e),_0x2f7660[_0x3fb577(0x2ff)],_0x2f7660[_0x3fb577(0x340)],_0x3fb577(0x35b))+_0x3fb577(0x28a)+sellOutRenk(_0x2f7660[_0x3fb577(0x2ed)])+_0x3fb577(0x291)+(_0x2f7660[_0x3fb577(0x2ed)]!=null?fmtYuzde(_0x2f7660[_0x3fb577(0x2ed)]):'—')+_0x3fb577(0x312))['join']('');document['getElementById'](_0x3fb577(0x2d5))[_0x3fb577(0x29b)]=_0x28a45b['ssmler'][_0x3fb577(0x2e3)]?_0x106b32:_0x3fb577(0x1cd),state['sellOutTemsilciMap']=new Map(_0x28a45b['temsilciler']['map'](_0x2d758b=>[_0x2d758b[_0x3fb577(0x2d1)],_0x2d758b])),document[_0x3fb577(0x311)](_0x3fb577(0x250))[_0x3fb577(0x29b)]=_0x28a45b[_0x3fb577(0x1ef)][_0x3fb577(0x1dd)]((_0x2b6788,_0x469f0a)=>{const _0x1715f8=_0x3fb577,_0x5ee80d=sellOutRenk(_0x2b6788[_0x1715f8(0x2ed)]),_0x5f2015=sellOutRenk(_0x2b6788['fknsOrani']);return _0x1715f8(0x23c)+escapeHtml(_0x2b6788[_0x1715f8(0x2d1)])+_0x1715f8(0x31c)+_0x5f2015+_0x1715f8(0x1d7)+escapeHtml(avatarBaslangic(_0x2b6788['temsilci']))+_0x1715f8(0x2ad)+escapeHtml(_0x2b6788[_0x1715f8(0x17c)])+_0x1715f8(0x319)+sellOutRenkSoft(_0x2b6788[_0x1715f8(0x1b6)])+_0x1715f8(0x1b2)+_0x5f2015+_0x1715f8(0x24d)+(_0x469f0a+0x1)+_0x1715f8(0x184)+escapeHtml(_0x2b6788[_0x1715f8(0x227)])+_0x1715f8(0x262)+fknsRingUcluSvg(_0x2b6788[_0x1715f8(0x2e8)],_0x2b6788[_0x1715f8(0x1ce)],_0x2b6788[_0x1715f8(0x1b6)])+_0x1715f8(0x293)+ssmKanalRowHtml('Açık\x20Kanal',_0x2b6788[_0x1715f8(0x24b)],_0x2b6788[_0x1715f8(0x334)],'fa-lock-open')+_0x1715f8(0x293)+ssmKanalRowHtml('Kapalı\x20Kanal',_0x2b6788[_0x1715f8(0x2ff)],_0x2b6788['kapaliHedef'],_0x1715f8(0x35b))+_0x1715f8(0x28a)+_0x5ee80d+_0x1715f8(0x291)+(_0x2b6788['hedefGerceklesme']!=null?fmtYuzde(_0x2b6788['hedefGerceklesme']):'—')+_0x1715f8(0x1a0)+(_0x399a18?'':_0x1715f8(0x332)+escapeHtml(_0x2b6788['key'])+_0x1715f8(0x270)+(_0x2b6788['acikHedef']||0x0)+_0x1715f8(0x317)+escapeHtml(_0x2b6788[_0x1715f8(0x2d1)])+_0x1715f8(0x30c)+(_0x2b6788[_0x1715f8(0x340)]||0x0)+'\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20type=\x22button\x22\x20class=\x22hedef-kaydet-btn\x22\x20data-temsilci-key=\x22'+escapeHtml(_0x2b6788[_0x1715f8(0x2d1)])+_0x1715f8(0x2b6)+escapeHtml(_0x2b6788[_0x1715f8(0x17c)])+'\x22><i\x20class=\x22fa-solid\x20fa-lock\x22\x20aria-hidden=\x22true\x22></i>\x20Kaydet</button>\x0a\x20\x20\x20\x20\x20\x20</div>')+'\x0a\x0a\x20\x20\x20\x20\x20\x20<div\x20class=\x22fatura-kesilmeyen-kanal-satirlar\x22\x20style=\x22margin-top:11px;padding-top:11px;border-top:1px\x20dashed\x20var(--line);\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22htk-alt\x20htk-alt-fkns\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22htk-ceksenet\x20fatura-kesilmeyen-lbl\x22><span\x20class=\x22ssm-kanal-icon\x22\x20style=\x22background:var(--line-soft);color:var(--danger);\x22><i\x20class=\x22fa-solid\x20fa-lock-open\x22\x20aria-hidden=\x22true\x22></i></span>Fatura\x20kesilmeyen\x20Açık\x20Kanal\x20nokta:\x20<b\x20style=\x22color:var(--ink);\x22>'+_0x2b6788[_0x1715f8(0x21e)]+_0x1715f8(0x34e)+escapeHtml(_0x2b6788[_0x1715f8(0x2d1)])+'\x22\x20data-kanal=\x22acik\x22>Detay\x20↗</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22htk-alt\x20htk-alt-fkns\x22\x20style=\x22margin-top:9px;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22htk-ceksenet\x20fatura-kesilmeyen-lbl\x22><span\x20class=\x22ssm-kanal-icon\x22\x20style=\x22background:var(--line-soft);color:var(--danger);\x22><i\x20class=\x22fa-solid\x20fa-lock\x22\x20aria-hidden=\x22true\x22></i></span>Fatura\x20kesilmeyen\x20Kapalı\x20Kanal\x20nokta:\x20<b\x20style=\x22color:var(--ink);\x22>'+_0x2b6788[_0x1715f8(0x205)]+_0x1715f8(0x34e)+escapeHtml(_0x2b6788['key'])+_0x1715f8(0x26b);})['join']('')||'<div\x20class=\x22empty-state\x22\x20style=\x22grid-column:1/-1;\x22>Kayıt\x20yok</div>',document['querySelectorAll'](_0x3fb577(0x32a))[_0x3fb577(0x208)](_0x3b190a=>{const _0x4af07a=_0x3fb577;_0x3b190a[_0x4af07a(0x2f9)](_0x4af07a(0x1a4),_0xf1b541=>_0xf1b541['stopPropagation']());}),document[_0x3fb577(0x26d)]('.hedef-kaydet-btn')[_0x3fb577(0x208)](_0xbc8e57=>{const _0x53fbc9=_0x3fb577;_0xbc8e57[_0x53fbc9(0x2f9)](_0x53fbc9(0x1a4),sellOutHedefKaydetHandler);});}async function sellOutHedefKaydetHandler(_0x58f69c){const _0x1ea1a4=_0x65c7,_0xa163a0=_0x58f69c[_0x1ea1a4(0x34d)],_0xde869f=_0xa163a0[_0x1ea1a4(0x2df)](_0x1ea1a4(0x24e)),_0x125b6f=_0xa163a0[_0x1ea1a4(0x2df)]('data-temsilci-ad'),_0x1ed50f=_0xa163a0[_0x1ea1a4(0x19c)](_0x1ea1a4(0x2db)),_0x33d18c=_0x1ed50f['querySelector'](_0x1ea1a4(0x263)),_0x3e60d7=_0x1ed50f['querySelector']('.sellout-hedef-input[data-kanal=\x22kapali\x22]'),_0x32e86d=Number(_0x33d18c[_0x1ea1a4(0x34f)])||0x0,_0x1ec1ea=Number(_0x3e60d7[_0x1ea1a4(0x34f)])||0x0;if(!await ortakSifreDogrula(_0x1ea1a4(0x329)))return;_0xa163a0['disabled']=!![];const _0x247185=_0xa163a0[_0x1ea1a4(0x182)];_0xa163a0[_0x1ea1a4(0x182)]=_0x1ea1a4(0x31a);try{const _0x2fbda8=Object['assign']({},state[_0x1ea1a4(0x32c)]);_0x2fbda8[_0xde869f]={'ad':_0x125b6f,'acik':_0x32e86d,'kapali':_0x1ec1ea},await sellOutHedefKaydet(_0x2fbda8),await renderSellOutView();}catch(_0x2e2187){console['error'](_0x1ea1a4(0x192),_0x2e2187),alert(_0x1ea1a4(0x17e)+_0x2e2187['message']),_0xa163a0[_0x1ea1a4(0x182)]=_0x247185,_0xa163a0[_0x1ea1a4(0x1de)]=![];}}document[_0x54915f(0x311)](_0x54915f(0x345))[_0x54915f(0x2f9)](_0x54915f(0x1a4),sellOutArsivleButonu),document[_0x54915f(0x311)](_0x54915f(0x2b8))[_0x54915f(0x2f9)](_0x54915f(0x1af),_0x23719a=>{const _0x58ff17=_0x54915f;state[_0x58ff17(0x246)]=_0x23719a[_0x58ff17(0x2cc)]['value']||null,renderSellOutView();}),document[_0x54915f(0x311)](_0x54915f(0x234))?.[_0x54915f(0x2f9)](_0x54915f(0x1a4),async()=>{const _0x327347=_0x54915f,_0x4f4153=document[_0x327347(0x311)](_0x327347(0x234)),_0x1dde2d=dateKeyLocal(turkiyeBugun())[_0x327347(0x1bc)](0x0,0x7),_0x2bc797=fmtDate(new Date(_0x1dde2d+_0x327347(0x22c)));if(!Object['prototype'][_0x327347(0x33e)][_0x327347(0x342)](state['sellOutArsivCache']||{},_0x1dde2d)){toastGoster('warn','Arşiv\x20kaydı\x20yok',_0x2bc797+_0x327347(0x29c));return;}if(!confirm(_0x2bc797+'\x20ayına\x20ait\x20Sell\x20Out\x20arşiv\x20kaydı\x20silinecek.\x20Güncel\x20(canlı)\x20veriniz\x20ETKİLENMEZ,\x20yalnızca\x20bu\x20arşiv\x20anlık\x20görüntüsü\x20kaldırılır.\x20Devam\x20edilsin\x20mi?'))return;if(!await ortakSifreDogrula(_0x327347(0x186)))return;_0x4f4153[_0x327347(0x1de)]=!![];const _0x2b168f=_0x4f4153['innerHTML'];_0x4f4153[_0x327347(0x29b)]=_0x327347(0x28e);try{await sellOutArsivAyiSil(_0x1dde2d);if(state[_0x327347(0x246)]===_0x1dde2d)state[_0x327347(0x246)]=null;await renderSellOutView(),toastGoster(_0x327347(0x27a),'Arşiv\x20kaydı\x20silindi',_0x2bc797+_0x327347(0x1ad));}catch(_0x5381a3){alert(_0x327347(0x314)+_0x5381a3[_0x327347(0x1e2)]);}finally{_0x4f4153[_0x327347(0x1de)]=![],_0x4f4153[_0x327347(0x29b)]=_0x2b168f;}}),document['getElementById']('modernKanalHedefKaydetBtn')?.[_0x54915f(0x2f9)](_0x54915f(0x1a4),async()=>{const _0x112fbe=_0x54915f,_0x1bba94=document[_0x112fbe(0x311)](_0x112fbe(0x343)),_0x29d39d=document[_0x112fbe(0x311)](_0x112fbe(0x29e)),_0x59ca38=Number(_0x29d39d['value'])||0x0;if(!await ortakSifreDogrula(_0x112fbe(0x28c)))return;_0x1bba94['disabled']=!![];const _0xcab22b=_0x1bba94['textContent'];_0x1bba94[_0x112fbe(0x182)]=_0x112fbe(0x31a);try{await modernKanalHedefKaydet(_0x59ca38),await renderModernKanalView();}catch(_0x5e2a85){console[_0x112fbe(0x2f4)](_0x112fbe(0x328),_0x5e2a85),alert('Hedef\x20kaydedilirken\x20bir\x20hata\x20oluştu:\x20'+_0x5e2a85[_0x112fbe(0x1e2)]);}finally{_0x1bba94[_0x112fbe(0x1de)]=![],_0x1bba94[_0x112fbe(0x182)]=_0xcab22b;}}),document['getElementById'](_0x54915f(0x20f))?.[_0x54915f(0x2f9)](_0x54915f(0x1af),_0x406146=>{const _0x1e5a25=_0x54915f;state[_0x1e5a25(0x230)]=_0x406146['target'][_0x1e5a25(0x34f)]||null,renderModernKanalView();});function irsaliyeBaskinAy(_0x622910){const _0x1f3035=_0x54915f,_0xea25d6=new Map();(_0x622910||[])['forEach'](_0x4cd23c=>{const _0x403eea=_0x65c7,_0x1b1f64=excelDateToJSArti1Gun(_0x4cd23c[_0x403eea(0x2b1)]);if(!_0x1b1f64)return;const _0xa13560=dateKeyLocal(_0x1b1f64)['slice'](0x0,0x7);_0xea25d6[_0x403eea(0x269)](_0xa13560,(_0xea25d6[_0x403eea(0x255)](_0xa13560)||0x0)+0x1);});let _0x3a7026=null,_0x58b4e9=0x0;return _0xea25d6[_0x1f3035(0x208)]((_0x5e7cee,_0x4f379e)=>{_0x5e7cee>_0x58b4e9&&(_0x58b4e9=_0x5e7cee,_0x3a7026=_0x4f379e);}),_0x3a7026;}document[_0x54915f(0x311)](_0x54915f(0x280))?.[_0x54915f(0x2f9)]('click',async()=>{const _0x14f121=_0x54915f,_0x35e122=document['getElementById']('modernKanalArsivleBtn'),_0x97e896=state['modernKanalReport'];if(!_0x97e896){toastGoster('warn',_0x14f121(0x1be),_0x14f121(0x2d7));return;}const _0x5032fb=state[_0x14f121(0x20e)]&&state[_0x14f121(0x20e)][_0x14f121(0x24c)],_0x557fee=_0x5032fb&&irsaliyeBaskinAy(_0x5032fb)||dateKeyLocal(turkiyeBugun())['slice'](0x0,0x7),_0x9dc261=fmtDate(new Date(_0x557fee+_0x14f121(0x22c))),_0x292c0c=Object[_0x14f121(0x212)]['hasOwnProperty'][_0x14f121(0x342)](state[_0x14f121(0x187)]||{},_0x557fee),_0x2be4e8=_0x292c0c?_0x9dc261+_0x14f121(0x338)+_0x9dc261+_0x14f121(0x281):_0x14f121(0x2c6)+_0x9dc261+'\x20ayına\x20ait\x20görünüyor.\x20GÜNCEL\x20Modern\x20Kanal\x20verisi\x20bu\x20ayın\x20altına\x20kalıcı\x20olarak\x20arşivlensin\x20mi?';if(!confirm(_0x2be4e8))return;if(!await ortakSifreDogrula('Bu\x20ayı\x20arşivlemek\x20için\x20şifreyi\x20girin:'))return;_0x35e122[_0x14f121(0x1de)]=!![];const _0x2bac06=_0x35e122[_0x14f121(0x182)];_0x35e122[_0x14f121(0x182)]=_0x14f121(0x19f);try{const _0x196f1d=Object['assign']({},_0x97e896,{'hedefAnlikGoruntu':state[_0x14f121(0x18d)]||0x0,'arsivAyKey':_0x557fee,'arsivZamani':new Date()[_0x14f121(0x209)]()});state['modernKanalArsivCache']=Object[_0x14f121(0x2bc)]({},state[_0x14f121(0x187)],{[_0x557fee]:_0x196f1d}),await saveModernKanalArsivToLocal(state['modernKanalArsivCache']);const _0x5d7add=await saveModernKanalArsivAyToCloud(_0x557fee,_0x196f1d);!_0x5d7add['ok']&&alert(_0x14f121(0x1d0)+(_0x5d7add['reason']||_0x14f121(0x22f))+_0x14f121(0x2ca)),populateModernKanalAySelect(),document['getElementById'](_0x14f121(0x20f))[_0x14f121(0x34f)]=_0x557fee,state[_0x14f121(0x230)]=_0x557fee,await renderModernKanalView();}catch(_0x5ed087){console[_0x14f121(0x2f4)](_0x14f121(0x1b4),_0x5ed087),alert(_0x14f121(0x2fd)+_0x5ed087[_0x14f121(0x1e2)]);}finally{_0x35e122[_0x14f121(0x1de)]=![],_0x35e122[_0x14f121(0x182)]=_0x2bac06;}}),document[_0x54915f(0x311)](_0x54915f(0x2cf))?.['addEventListener'](_0x54915f(0x1a4),async()=>{const _0x1b38dc=_0x54915f,_0x73bcea=document['getElementById']('modernKanalTopluArsivleBtn'),_0x22c168=state[_0x1b38dc(0x20e)]&&state['modernKanalKendiDosya']['data'];if(!_0x22c168||!_0x22c168[_0x1b38dc(0x2e3)]){toastGoster(_0x1b38dc(0x2e9),_0x1b38dc(0x2c0),_0x1b38dc(0x18f));return;}const _0x122a8e=irsaliyeAylaraGoreGrupla(_0x22c168),_0x464e3c=Array[_0x1b38dc(0x1d9)](_0x122a8e['keys']())[_0x1b38dc(0x18a)]();if(!_0x464e3c[_0x1b38dc(0x2e3)]){toastGoster('warn',_0x1b38dc(0x346),_0x1b38dc(0x303));return;}const _0x1e9117=_0x464e3c[_0x1b38dc(0x1dd)](_0xa29b=>fmtDate(new Date(_0xa29b+_0x1b38dc(0x22c))))['join'](',\x20');if(!confirm(_0x1b38dc(0x18c)+_0x464e3c['length']+_0x1b38dc(0x1dc)+_0x1e9117+'.\x20Devam\x20edilsin\x20mi?'))return;if(!await ortakSifreDogrula(_0x1b38dc(0x28d)))return;_0x73bcea[_0x1b38dc(0x1de)]=!![];const _0xe53d94=_0x73bcea[_0x1b38dc(0x182)];_0x73bcea[_0x1b38dc(0x182)]='🗄️\x20Toplu\x20arşivleniyor…';try{const _0x31af96=Object['assign']({},state[_0x1b38dc(0x187)]);for(const _0x4ff01a of _0x464e3c){const _0x4d0f79=_0x122a8e['get'](_0x4ff01a),_0x531885=buildIrsaliyeReport(_0x4d0f79),_0x52e1ff=Object[_0x1b38dc(0x2bc)]({},_0x531885,{'hedefAnlikGoruntu':state['modernKanalHedef']||0x0,'arsivAyKey':_0x4ff01a,'arsivZamani':new Date()[_0x1b38dc(0x209)]()});_0x31af96[_0x4ff01a]=_0x52e1ff,await saveModernKanalArsivAyToCloud(_0x4ff01a,_0x52e1ff);}state[_0x1b38dc(0x187)]=_0x31af96,await saveModernKanalArsivToLocal(state[_0x1b38dc(0x187)]),populateModernKanalAySelect(),await renderModernKanalView(),toastGoster(_0x1b38dc(0x27a),_0x464e3c[_0x1b38dc(0x2e3)]+_0x1b38dc(0x240),_0x1e9117);}catch(_0x3cb425){console['error'](_0x1b38dc(0x218),_0x3cb425),alert(_0x1b38dc(0x19d)+_0x3cb425[_0x1b38dc(0x1e2)]);}finally{_0x73bcea[_0x1b38dc(0x1de)]=![],_0x73bcea['textContent']=_0xe53d94;}}),document['getElementById']('modernKanalBuAyArsivTemizleBtn')?.[_0x54915f(0x2f9)](_0x54915f(0x1a4),async()=>{const _0x463f08=_0x54915f,_0x4d9735=document['getElementById'](_0x463f08(0x327)),_0x32fd23=dateKeyLocal(turkiyeBugun())[_0x463f08(0x1bc)](0x0,0x7),_0x13ca2c=fmtDate(new Date(_0x32fd23+_0x463f08(0x22c)));if(!Object[_0x463f08(0x212)][_0x463f08(0x33e)][_0x463f08(0x342)](state['modernKanalArsivCache']||{},_0x32fd23)){toastGoster(_0x463f08(0x2e9),_0x463f08(0x183),_0x13ca2c+_0x463f08(0x29c));return;}if(!confirm(_0x13ca2c+_0x463f08(0x32d)))return;if(!await ortakSifreDogrula(_0x463f08(0x186)))return;_0x4d9735[_0x463f08(0x1de)]=!![];const _0x11bd94=_0x4d9735[_0x463f08(0x29b)];_0x4d9735[_0x463f08(0x29b)]=_0x463f08(0x28e);try{await modernKanalArsivAyiSil(_0x32fd23);if(state[_0x463f08(0x230)]===_0x32fd23)state['modernKanalSeciliAy']=null;await renderModernKanalView(),toastGoster('success',_0x463f08(0x216),_0x13ca2c+_0x463f08(0x1ad));}catch(_0x14d7e9){alert('Silme\x20sırasında\x20bir\x20hata\x20oluştu:\x20'+_0x14d7e9[_0x463f08(0x1e2)]);}finally{_0x4d9735[_0x463f08(0x1de)]=![],_0x4d9735[_0x463f08(0x29b)]=_0x11bd94;}}),(function(){const _0xe6f83c=_0x54915f,_0x4d1228=document[_0xe6f83c(0x311)](_0xe6f83c(0x29a)),_0x171f87=document[_0xe6f83c(0x311)](_0xe6f83c(0x237)),_0x5deb11=document[_0xe6f83c(0x311)](_0xe6f83c(0x2b2)),_0x3ba1c8=document[_0xe6f83c(0x311)](_0xe6f83c(0x29d));if(!_0x4d1228)return;_0x4d1228['addEventListener']('change',_0x4a8933=>{const _0x5851c8=_0xe6f83c,_0x3a09b4=_0x4a8933[_0x5851c8(0x2cc)][_0x5851c8(0x1b7)][0x0];if(!_0x3a09b4)return;_0x171f87[_0x5851c8(0x182)]=_0x3a09b4['name'],_0x5deb11[_0x5851c8(0x1de)]=!![],state[_0x5851c8(0x1bd)]=null,_0x3ba1c8[_0x5851c8(0x182)]=_0x5851c8(0x2d8);const _0x412e65=new FileReader();_0x412e65['onload']=_0x4c314e=>{const _0x11c966=_0x5851c8;try{if(!xlsxHazirMi())throw new Error(_0x11c966(0x2f2));const _0x4367f8=XLSX[_0x11c966(0x1a7)](_0x4c314e[_0x11c966(0x2cc)][_0x11c966(0x316)],{'type':'array','cellDates':!![]}),_0x335e58=_0x4367f8[_0x11c966(0x2f3)][_0x4367f8[_0x11c966(0x1b3)][0x0]],{data:_0x45e029}=sheetToObjects(_0x335e58);ktlog(_0x11c966(0x26a)+_0x3a09b4['name']+_0x11c966(0x210)+(_0x45e029?_0x45e029[_0x11c966(0x2e3)]:0x0)+'.\x20İlk\x20satır\x20kolonları:',_0x45e029&&_0x45e029[0x0]?Object[_0x11c966(0x33b)](_0x45e029[0x0])[_0x11c966(0x1bc)](0x0,0x6):_0x11c966(0x2dc)),state[_0x11c966(0x1bd)]={'data':_0x45e029,'ad':_0x3a09b4[_0x11c966(0x350)]},_0x5deb11[_0x11c966(0x1de)]=![],_0x3ba1c8[_0x11c966(0x182)]='';}catch(_0x580e97){console[_0x11c966(0x2f4)](_0x11c966(0x25c),_0x580e97),_0x3ba1c8[_0x11c966(0x182)]=_0x11c966(0x1f8)+_0x580e97[_0x11c966(0x1e2)],_0x5deb11[_0x11c966(0x1de)]=!![];}},_0x412e65[_0x5851c8(0x1c6)]=()=>{const _0x40603b=_0x5851c8;_0x3ba1c8['textContent']=_0x40603b(0x1e9),_0x5deb11[_0x40603b(0x1de)]=!![];},_0x412e65[_0x5851c8(0x257)](_0x3a09b4);}),_0x5deb11[_0xe6f83c(0x2f9)]('click',async()=>{const _0x170ae2=_0xe6f83c;if(!state[_0x170ae2(0x1bd)]){_0x3ba1c8[_0x170ae2(0x182)]=_0x170ae2(0x233);return;}_0x5deb11[_0x170ae2(0x1de)]=!![];const _0x222bb8=_0x5deb11[_0x170ae2(0x29b)];_0x5deb11[_0x170ae2(0x29b)]='<i\x20class=\x22fa-solid\x20fa-spinner\x20fa-spin\x22\x20aria-hidden=\x22true\x22></i>\x20Hesaplanıyor…',_0x3ba1c8[_0x170ae2(0x182)]='';try{await musteriMasterYenile();{const _0x267b46=state[_0x170ae2(0x1bd)]['data']&&state[_0x170ae2(0x1bd)][_0x170ae2(0x24c)][0x0],_0x44caef=_0x267b46?Object['keys'](_0x267b46):[],_0x45a8ec=_0x44caef[_0x170ae2(0x265)]('Müşteri\x20Kanalı\x20Tnm.')||_0x44caef[_0x170ae2(0x265)](_0x170ae2(0x1bf))||_0x44caef['includes'](_0x170ae2(0x2bf)),_0x30626b=_0x44caef['includes'](_0x170ae2(0x2b1))&&_0x44caef[_0x170ae2(0x265)](_0x170ae2(0x2c7));ktlog(_0x170ae2(0x21d),_0x45a8ec,_0x170ae2(0x1e7),_0x30626b,_0x170ae2(0x2b4),_0x44caef[_0x170ae2(0x1bc)](0x0,0x8));if(_0x30626b&&!_0x45a8ec)throw new Error('Bu\x20dosya\x20bir\x20Modern\x20Kanal\x20(İrsaliye)\x20dosyası\x20gibi\x20görünüyor\x20—\x20Geleneksel\x20Kanal\x20(Sell\x20Out)\x20alanına\x20yüklendi.\x20Lütfen\x20Sell\x20Out\x20dosyasını\x20bu\x20alana,\x20İrsaliye\x20dosyasını\x20Modern\x20Kanal\x20alanına\x20yükleyin.');}ktlog('GELENEKSEL\x20\x22Verileri\x20Güncelle\x22\x20→\x20buildSellOutReport\x20çağrılıyor.\x20Kaynak:\x20state.sellOutKendiDosya\x20('+(state[_0x170ae2(0x1bd)]&&state['sellOutKendiDosya']['ad'])+',\x20'+(state[_0x170ae2(0x1bd)]&&state[_0x170ae2(0x1bd)][_0x170ae2(0x24c)]?state[_0x170ae2(0x1bd)][_0x170ae2(0x24c)][_0x170ae2(0x2e3)]:0x0)+_0x170ae2(0x2ae));const _0xf5486e=buildSellOutReport(state[_0x170ae2(0x1bd)]['data'],state[_0x170ae2(0x26e)],state[_0x170ae2(0x188)],state['musteriMasterDetay'],state['musteriMasterKanal']);await sellOutKaydet(_0xf5486e),await renderSellOutView(),_0x3ba1c8[_0x170ae2(0x182)]=_0x170ae2(0x25d)+fmtDate(new Date());}catch(_0x5d1537){console[_0x170ae2(0x2f4)](_0x170ae2(0x279),_0x5d1537),_0x3ba1c8['textContent']=_0x170ae2(0x30a)+_0x5d1537[_0x170ae2(0x1e2)];}finally{_0x5deb11[_0x170ae2(0x1de)]=![],_0x5deb11[_0x170ae2(0x29b)]=_0x222bb8;}});}()),(function(){const _0x529504=_0x54915f,_0x2c0a44=document[_0x529504(0x311)](_0x529504(0x32b)),_0x5f5660=document[_0x529504(0x311)](_0x529504(0x1f4)),_0x166fc1=document[_0x529504(0x311)](_0x529504(0x305)),_0xe847b=document[_0x529504(0x311)](_0x529504(0x2ea));if(!_0x2c0a44)return;_0x2c0a44[_0x529504(0x2f9)](_0x529504(0x1af),_0x2a26ef=>{const _0x207afe=_0x529504,_0x2616b2=_0x2a26ef[_0x207afe(0x2cc)][_0x207afe(0x1b7)][0x0];if(!_0x2616b2)return;_0x5f5660[_0x207afe(0x182)]=_0x2616b2['name'],_0x166fc1[_0x207afe(0x1de)]=!![],state[_0x207afe(0x20e)]=null,_0xe847b['textContent']=_0x207afe(0x2d8);const _0x2f9ac5=new FileReader();_0x2f9ac5[_0x207afe(0x2d2)]=_0x1e98b6=>{const _0xf34eb6=_0x207afe;try{if(!xlsxHazirMi())throw new Error(_0xf34eb6(0x2f2));const _0x1e7ade=XLSX[_0xf34eb6(0x1a7)](_0x1e98b6[_0xf34eb6(0x2cc)][_0xf34eb6(0x316)],{'type':'array','cellDates':!![]}),_0x44cfed=_0x1e7ade['Sheets'][_0x1e7ade[_0xf34eb6(0x1b3)][0x0]],{data:_0x38ed0c}=sheetToObjects(_0x44cfed);ktlog('MODERN\x20input\x20→\x20state.modernKanalKendiDosya.\x20dosya=\x22'+_0x2616b2[_0xf34eb6(0x350)]+_0xf34eb6(0x210)+(_0x38ed0c?_0x38ed0c[_0xf34eb6(0x2e3)]:0x0)+_0xf34eb6(0x2b3),_0x38ed0c&&_0x38ed0c[0x0]?Object[_0xf34eb6(0x33b)](_0x38ed0c[0x0])[_0xf34eb6(0x1bc)](0x0,0x6):_0xf34eb6(0x2dc)),state[_0xf34eb6(0x20e)]={'data':_0x38ed0c,'ad':_0x2616b2[_0xf34eb6(0x350)]},_0x166fc1[_0xf34eb6(0x1de)]=![],_0xe847b['textContent']='';}catch(_0x53af7a){console[_0xf34eb6(0x2f4)](_0xf34eb6(0x1ca),_0x53af7a),_0xe847b[_0xf34eb6(0x182)]='Dosya\x20okunamadı:\x20'+_0x53af7a[_0xf34eb6(0x1e2)],_0x166fc1['disabled']=!![];}},_0x2f9ac5[_0x207afe(0x1c6)]=()=>{const _0x4eed7a=_0x207afe;_0xe847b[_0x4eed7a(0x182)]=_0x4eed7a(0x1e9),_0x166fc1[_0x4eed7a(0x1de)]=!![];},_0x2f9ac5['readAsArrayBuffer'](_0x2616b2);}),_0x166fc1[_0x529504(0x2f9)](_0x529504(0x1a4),async()=>{const _0x51cca8=_0x529504;if(!state[_0x51cca8(0x20e)]){_0xe847b[_0x51cca8(0x182)]=_0x51cca8(0x233);return;}_0x166fc1['disabled']=!![];const _0x547dfc=_0x166fc1[_0x51cca8(0x29b)];_0x166fc1[_0x51cca8(0x29b)]='<i\x20class=\x22fa-solid\x20fa-spinner\x20fa-spin\x22\x20aria-hidden=\x22true\x22></i>\x20Hesaplanıyor…',_0xe847b[_0x51cca8(0x182)]='';try{{const _0x215961=state['modernKanalKendiDosya']['data']&&state[_0x51cca8(0x20e)][_0x51cca8(0x24c)][0x0],_0x237c3e=_0x215961?Object[_0x51cca8(0x33b)](_0x215961):[],_0x11843f=_0x237c3e[_0x51cca8(0x265)]('İrsaliye\x20Tarihi')&&_0x237c3e[_0x51cca8(0x265)](_0x51cca8(0x2c7)),_0x1765de=_0x237c3e[_0x51cca8(0x265)](_0x51cca8(0x2a3))||_0x237c3e[_0x51cca8(0x265)](_0x51cca8(0x1bf))||_0x237c3e[_0x51cca8(0x265)](_0x51cca8(0x2bf));ktlog('MODERN\x20doğrulama:\x20irsaliyeMi=',_0x11843f,_0x51cca8(0x2d3),_0x1765de,_0x51cca8(0x2b4),_0x237c3e[_0x51cca8(0x1bc)](0x0,0x8));if(_0x1765de&&!_0x11843f)throw new Error(_0x51cca8(0x349));}ktlog('MODERN\x20\x22Verileri\x20Güncelle\x22\x20→\x20buildIrsaliyeReport\x20çağrılıyor.\x20Kaynak:\x20state.modernKanalKendiDosya\x20('+(state[_0x51cca8(0x20e)]&&state['modernKanalKendiDosya']['ad'])+',\x20'+(state['modernKanalKendiDosya']&&state[_0x51cca8(0x20e)][_0x51cca8(0x24c)]?state[_0x51cca8(0x20e)][_0x51cca8(0x24c)][_0x51cca8(0x2e3)]:0x0)+_0x51cca8(0x2ae));const _0x31fcb8=buildIrsaliyeReport(state['modernKanalKendiDosya'][_0x51cca8(0x24c)]);await modernKanalKaydet(_0x31fcb8),await renderModernKanalView(),_0xe847b[_0x51cca8(0x182)]=_0x51cca8(0x25d)+fmtDate(new Date());}catch(_0x45475e){console[_0x51cca8(0x2f4)](_0x51cca8(0x20a),_0x45475e),_0xe847b[_0x51cca8(0x182)]=_0x51cca8(0x30a)+_0x45475e[_0x51cca8(0x1e2)];}finally{_0x166fc1[_0x51cca8(0x1de)]=![],_0x166fc1['innerHTML']=_0x547dfc;}});}()),(function(){const _0x2d83fe=_0x54915f,_0x2d8b4b=document[_0x2d83fe(0x311)](_0x2d83fe(0x307)),_0x46adaa=document[_0x2d83fe(0x311)](_0x2d83fe(0x23f)),_0x20d25d=document[_0x2d83fe(0x311)]('stokGunKendiGuncelleBtn'),_0x4106b2=document[_0x2d83fe(0x311)](_0x2d83fe(0x353));if(!_0x2d8b4b)return;_0x2d8b4b['addEventListener'](_0x2d83fe(0x1af),_0x7a12ce=>{const _0x4cc98d=_0x2d83fe,_0x428f94=_0x7a12ce[_0x4cc98d(0x2cc)][_0x4cc98d(0x1b7)][0x0];if(!_0x428f94)return;_0x46adaa[_0x4cc98d(0x182)]=_0x428f94['name'],_0x20d25d[_0x4cc98d(0x1de)]=!![],state[_0x4cc98d(0x344)]=null,_0x4106b2['textContent']='Dosya\x20okunuyor…';const _0x122728=new FileReader();_0x122728[_0x4cc98d(0x2d2)]=_0x84bd4e=>{const _0x917e30=_0x4cc98d;try{if(!xlsxHazirMi())throw new Error(_0x917e30(0x2f2));const _0x186a6d=XLSX['read'](_0x84bd4e['target'][_0x917e30(0x316)],{'type':_0x917e30(0x220),'cellDates':!![]}),_0x59425d=_0x186a6d[_0x917e30(0x2f3)][_0x186a6d[_0x917e30(0x1b3)][0x0]],{data:_0x4680fc}=sheetToObjects(_0x59425d);state[_0x917e30(0x344)]={'data':_0x4680fc,'ad':_0x428f94['name']},_0x20d25d[_0x917e30(0x1de)]=![],_0x4106b2['textContent']='';}catch(_0x974e2){console['error'](_0x917e30(0x1a5),_0x974e2),_0x4106b2[_0x917e30(0x182)]=_0x917e30(0x1f8)+_0x974e2[_0x917e30(0x1e2)],_0x20d25d[_0x917e30(0x1de)]=!![];}},_0x122728[_0x4cc98d(0x1c6)]=()=>{const _0x167b52=_0x4cc98d;_0x4106b2[_0x167b52(0x182)]=_0x167b52(0x1e9),_0x20d25d[_0x167b52(0x1de)]=!![];},_0x122728['readAsArrayBuffer'](_0x428f94);}),_0x20d25d[_0x2d83fe(0x2f9)](_0x2d83fe(0x1a4),async()=>{const _0xdd8a60=_0x2d83fe;if(!state[_0xdd8a60(0x344)]){_0x4106b2['textContent']=_0xdd8a60(0x233);return;}_0x20d25d[_0xdd8a60(0x1de)]=!![];const _0x49e378=_0x20d25d[_0xdd8a60(0x29b)];_0x20d25d[_0xdd8a60(0x29b)]='<i\x20class=\x22fa-solid\x20fa-spinner\x20fa-spin\x22\x20aria-hidden=\x22true\x22></i>\x20Hesaplanıyor…',_0x4106b2[_0xdd8a60(0x182)]='';try{const _0x23a083=new Map();(state[_0xdd8a60(0x344)][_0xdd8a60(0x24c)]||[])[_0xdd8a60(0x208)](_0x2e295c=>{const _0x451a17=_0xdd8a60,_0x584466=String(_0x2e295c[_0x451a17(0x325)]||'')[_0x451a17(0x306)]();if(!_0x584466)return;_0x23a083['set'](_0x584466,Number(_0x2e295c['Tahditsiz\x20kullanılabilir'])||0x0);}),await malzemelerStokKaydet(_0x23a083),renderStokGunView(),_0x4106b2[_0xdd8a60(0x182)]=_0xdd8a60(0x27f)+fmtDate(new Date())+'\x20('+_0x23a083[_0xdd8a60(0x260)]['toLocaleString']('tr-TR')+_0xdd8a60(0x355);}catch(_0x3bb0f9){console[_0xdd8a60(0x2f4)](_0xdd8a60(0x1fc),_0x3bb0f9),_0x4106b2[_0xdd8a60(0x182)]=_0xdd8a60(0x30a)+_0x3bb0f9['message'];}finally{_0x20d25d[_0xdd8a60(0x1de)]=![],_0x20d25d[_0xdd8a60(0x29b)]=_0x49e378;}});}());if(document[_0x54915f(0x311)]('stokGunSearchInput')){const debouncedStokGunFiltre=debounce(stokGunTabloyuFiltreleyipCiz);wireSearchInput(_0x54915f(0x1f9),_0x54915f(0x1a1),debouncedStokGunFiltre),wireSearchClear(_0x54915f(0x1f9),_0x54915f(0x1a1),stokGunTabloyuFiltreleyipCiz);}const stokGunSortSelectEl=document[_0x54915f(0x311)](_0x54915f(0x2f7));function _0x65c7(_0x2ac721,_0x551713){_0x2ac721=_0x2ac721-0x17c;const _0x95a972=_0x95a9();let _0x65c74b=_0x95a972[_0x2ac721];if(_0x65c7['sPsRea']===undefined){var _0x1d8765=function(_0x92323a){const _0x16e130='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x217bb0='',_0x1c03f8='';for(let _0x5d4953=0x0,_0x5ada05,_0x4c1de8,_0x11165c=0x0;_0x4c1de8=_0x92323a['charAt'](_0x11165c++);~_0x4c1de8&&(_0x5ada05=_0x5d4953%0x4?_0x5ada05*0x40+_0x4c1de8:_0x4c1de8,_0x5d4953++%0x4)?_0x217bb0+=String['fromCharCode'](0xff&_0x5ada05>>(-0x2*_0x5d4953&0x6)):0x0){_0x4c1de8=_0x16e130['indexOf'](_0x4c1de8);}for(let _0x347786=0x0,_0x3c53cf=_0x217bb0['length'];_0x347786<_0x3c53cf;_0x347786++){_0x1c03f8+='%'+('00'+_0x217bb0['charCodeAt'](_0x347786)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1c03f8);};_0x65c7['zrvERm']=_0x1d8765,_0x65c7['dvpHzD']={},_0x65c7['sPsRea']=!![];}const _0x1bba44=_0x95a972[0x0],_0x2f1fac=_0x2ac721+_0x1bba44,_0x5d0e08=_0x65c7['dvpHzD'][_0x2f1fac];return!_0x5d0e08?(_0x65c74b=_0x65c7['zrvERm'](_0x65c74b),_0x65c7['dvpHzD'][_0x2f1fac]=_0x65c74b):_0x65c74b=_0x5d0e08,_0x65c74b;}if(stokGunSortSelectEl){const [ilkKey,ilkDir]=(stokGunSortSelectEl[_0x54915f(0x34f)]||_0x54915f(0x25b))[_0x54915f(0x2c1)](':');state[_0x54915f(0x226)]={'key':ilkKey,'dir':Number(ilkDir)},stokGunSortSelectEl[_0x54915f(0x2f9)](_0x54915f(0x1af),()=>{const _0x13ade3=_0x54915f,[_0xef9bed,_0x4480fb]=stokGunSortSelectEl[_0x13ade3(0x34f)]['split'](':');state[_0x13ade3(0x226)]={'key':_0xef9bed,'dir':Number(_0x4480fb)},stokGunTabloyuFiltreleyipCiz();});}document[_0x54915f(0x311)]('stokGunMarkaFilter')?.[_0x54915f(0x2f9)](_0x54915f(0x1af),stokGunTabloyuFiltreleyipCiz),document[_0x54915f(0x26d)]('.stokgun-sekme-btn')[_0x54915f(0x208)](_0x519c4a=>{const _0x137566=_0x54915f;_0x519c4a[_0x137566(0x2f9)]('click',()=>stokGunSekmeDegistir(_0x519c4a[_0x137566(0x1ae)][_0x137566(0x1c7)]));}),document[_0x54915f(0x311)]('stokGunKartListe')?.[_0x54915f(0x2f9)]('click',_0x285ac8=>{const _0xdabd71=_0x54915f,_0x41a6ab=_0x285ac8[_0xdabd71(0x2cc)][_0xdabd71(0x19c)](_0xdabd71(0x2fc));if(!_0x41a6ab)return;const _0x37e5d1=_0x41a6ab[_0xdabd71(0x1ae)]['riskKod'];if(state[_0xdabd71(0x286)][_0xdabd71(0x189)](_0x37e5d1))state['stokGunAcikRiskSatirlar'][_0xdabd71(0x34a)](_0x37e5d1);else state['stokGunAcikRiskSatirlar'][_0xdabd71(0x206)](_0x37e5d1);stokGunTabloyuFiltreleyipCiz();}),document[_0x54915f(0x311)](_0x54915f(0x1b1))[_0x54915f(0x2f9)](_0x54915f(0x1a4),async()=>{const _0x498049=_0x54915f,_0x85fe61=document[_0x498049(0x311)](_0x498049(0x1b1));_0x85fe61[_0x498049(0x1de)]=!![];const _0x1487a1=_0x85fe61['textContent'];_0x85fe61[_0x498049(0x182)]=_0x498049(0x236);try{await Promise[_0x498049(0x1cc)]([sellOutHedefYenile(),musteriMasterYenile(),sellOutYenile(),sellOutArsivYenile(!![])]),await renderSellOutView();}catch(_0x1e8b3b){console[_0x498049(0x2f4)]('Sell\x20Out\x20verisi\x20yenilenemedi:',_0x1e8b3b),alert(_0x498049(0x1ba)+_0x1e8b3b['message']+_0x498049(0x26c));}finally{_0x85fe61[_0x498049(0x1de)]=![],_0x85fe61[_0x498049(0x182)]=_0x1487a1;}}),document['getElementById']('dsoTrendYenileBtn')['addEventListener'](_0x54915f(0x1a4),()=>renderDsoTrendView(state[_0x54915f(0x193)]||{'musteriler':[]},!![])),document['getElementById'](_0x54915f(0x2ba))[_0x54915f(0x2f9)](_0x54915f(0x1a4),()=>renderTemsilciKarnesiView(state[_0x54915f(0x193)]||{'musteriler':[]},!![])),document[_0x54915f(0x2f9)](_0x54915f(0x1a4),_0x3fb0d5=>{const _0x318a9c=_0x54915f,_0x12ee3a=_0x3fb0d5[_0x318a9c(0x2cc)][_0x318a9c(0x19c)]('#karneGrid\x20.fatura-detay-btn,\x20#supheliHukukiKartGrid\x20.fatura-detay-btn,\x20#musteriTbody\x20.fatura-detay-btn,\x20#sevkMusteriTbody\x20.fatura-detay-btn,\x20#faturaKontrolTbody\x20.fatura-detay-btn,\x20#karneRiskliModalList\x20.fatura-detay-btn');if(!_0x12ee3a)return;_0x3fb0d5['stopPropagation'](),faturaModalAc(_0x12ee3a[_0x318a9c(0x2df)]('data-musteri-kod'),_0x12ee3a[_0x318a9c(0x2df)](_0x318a9c(0x285)));}),document[_0x54915f(0x311)](_0x54915f(0x1d6))[_0x54915f(0x2f9)]('click',()=>{state['hukukiGosterilen']+=HUKUKI_SAYFA_BOYUTU,renderSupheliAlacakView(state['report']);});const debouncedRenderSupheliHukuki=debounce(()=>{const _0x4d8a24=_0x54915f;state[_0x4d8a24(0x27e)]=HUKUKI_SAYFA_BOYUTU,renderSupheliAlacakView(state['report']);});wireSearchInput(_0x54915f(0x191),'hukukiSearchClearBtn',debouncedRenderSupheliHukuki),wireSearchClear('hukukiSearchInput',_0x54915f(0x2ce),()=>{const _0x5569ba=_0x54915f;state[_0x5569ba(0x27e)]=HUKUKI_SAYFA_BOYUTU,renderSupheliAlacakView(state[_0x5569ba(0x193)]);}),document[_0x54915f(0x311)](_0x54915f(0x214))[_0x54915f(0x2f9)](_0x54915f(0x1af),()=>{const _0x24d556=_0x54915f;state[_0x24d556(0x27e)]=HUKUKI_SAYFA_BOYUTU,renderSupheliAlacakView(state[_0x24d556(0x193)]);}),document['getElementById']('hukukiRiskFilter')['addEventListener'](_0x54915f(0x1af),()=>{const _0x49dc99=_0x54915f;state[_0x49dc99(0x27e)]=HUKUKI_SAYFA_BOYUTU,renderSupheliAlacakView(state['report']);}),document[_0x54915f(0x311)]('hukukiVadeMinInput')[_0x54915f(0x2f9)](_0x54915f(0x2c2),debouncedRenderSupheliHukuki),document['getElementById'](_0x54915f(0x1c8))[_0x54915f(0x2f9)](_0x54915f(0x2c2),debouncedRenderSupheliHukuki),document[_0x54915f(0x311)](_0x54915f(0x25a))[_0x54915f(0x2f9)](_0x54915f(0x1a4),()=>renderYonetimOzetiView(state[_0x54915f(0x193)]||{'musteriler':[]},!![])),document[_0x54915f(0x311)]('ceiYenileBtn')['addEventListener'](_0x54915f(0x1a4),()=>renderCeiView(state[_0x54915f(0x193)]||{'musteriler':[]},!![])),document[_0x54915f(0x311)](_0x54915f(0x29f))[_0x54915f(0x2f9)](_0x54915f(0x1af),_0x72aa6d=>{const _0x115039=_0x54915f;state[_0x115039(0x204)]=_0x72aa6d[_0x115039(0x2cc)][_0x115039(0x34f)]||null,recomputeAndRenderCei(state['report']||{'musteriler':[]},![]);}),document[_0x54915f(0x26d)]('th[data-key]')[_0x54915f(0x208)](_0x49912b=>{const _0x4fc995=_0x54915f;_0x49912b['setAttribute'](_0x4fc995(0x318),'0'),_0x49912b[_0x4fc995(0x31e)](_0x4fc995(0x17f),_0x4fc995(0x1fd)),!_0x49912b[_0x4fc995(0x185)](_0x4fc995(0x17d))&&_0x49912b['setAttribute'](_0x4fc995(0x17d),_0x49912b['textContent'][_0x4fc995(0x306)]()[_0x4fc995(0x219)](/[▲▼]/g,'')[_0x4fc995(0x306)]()+_0x4fc995(0x268)),_0x49912b[_0x4fc995(0x2f9)](_0x4fc995(0x352),_0x3545e9=>{const _0x25ba3e=_0x4fc995;(_0x3545e9[_0x25ba3e(0x2d1)]===_0x25ba3e(0x25e)||_0x3545e9[_0x25ba3e(0x2d1)]==='\x20'||_0x3545e9[_0x25ba3e(0x2d1)]==='Spacebar')&&(_0x3545e9[_0x25ba3e(0x298)](),_0x49912b[_0x25ba3e(0x1a4)]());}),_0x49912b[_0x4fc995(0x2f9)](_0x4fc995(0x1a4),()=>{const _0x413eca=_0x4fc995,_0x236e34=_0x49912b[_0x413eca(0x19c)]('table');if(!_0x236e34)return;_0x236e34[_0x413eca(0x26d)](_0x413eca(0x31d))['forEach'](_0x441069=>_0x441069[_0x413eca(0x238)](_0x413eca(0x20d)));const _0x39e6f3=_0x49912b[_0x413eca(0x315)]('.arrow'),_0x40503f=_0x39e6f3?_0x39e6f3[_0x413eca(0x182)]:'';if(_0x40503f==='▲')_0x49912b[_0x413eca(0x31e)](_0x413eca(0x20d),'ascending');else{if(_0x40503f==='▼')_0x49912b[_0x413eca(0x31e)](_0x413eca(0x20d),_0x413eca(0x321));}});});
+// ============================================================================
+// STOK GÜN — Hedefli ve Dinamik Stok Yönetimi Metodolojisi
+// ============================================================================
+// 1. Aşama: son 6 ayın arşivlenmiş Sell Out verisinden (sellOutArsivCache), her ürünün
+// (Malzeme Kodu) toplam litre payı çıkarılır; üst yönetim hedefi (temsilci Açık+Kapalı Kanal
+// hedeflerinin toplamı) bu paylara göre ürünlere dağıtılır ("Gerekli Litre").
+// 2. Aşama: her ürünün 6 aylık günlük satış verisi, o ayın 4 sabit haftalık dilimine
+// (1-7 / 8-14 / 15-21 / 22-ay sonu) ayrılır; en yüksek toplam satışı olan dilim "yoğun hafta"
+// seçilir, o dilimin GÜNLÜK ORTALAMASI ("Yoğun Dönem Günlük Hız") hesaplanır. Anlık depo stoğu
+// (Malzemeler dosyası) bu hıza bölünerek "Dinamik Stok Günü" elde edilir.
+
+const STOK_GUN_AY_SAYISI = 6; // "son 6 ay" — arşivden geriye doğru kaç ay taranacağı
+
+// İSTATİSTİKSEL GÜVENLİK STOĞU sabitleri: SS = Z × σ_D × √LT
+//  Z: hedeflenen servis seviyesi çarpanı (%95 bulunurluk ≈ 1.65). Ürün sınıfına göre
+//     farklılaştırmak isterseniz (A/B/C sınıfı) bu sabiti ürün bazlı bir haritaya çevirebilirsiniz.
+//  σ_D: günlük talebin standart sapması — artık MÜMKÜN OLDUĞUNDA gerçek gün-gün satış
+//     verisinden ölçülüyor (bkz. stokGunGercekGunlukIstatistik). Yeterli günlük veri yoksa
+//     (yeni/az geçmişli ürün) aylık değişkenlik katsayısına (cv) geri düşer.
+//  LT: ortalama tedarik süresi (gün) — 3 gün olarak girildi (gerçek ortalama teslimat süreniz).
+//     Tedarikçiye göre farklılık varsa (ör. bazı ürünler 3, bazıları 10 gün) bunu ürün/tedarikçi
+//     bazlı bir haritaya çevirip haftaGunlukHizlari hesaplandığı yerde kullanabiliriz.
+const STOK_GUN_SERVIS_SEVIYESI_Z = 1.65; // ~%95 hedef bulunurluk oranı
+const STOK_GUN_VARSAYILAN_LEAD_TIME_GUN = 3; // Gerçek ortalama tedarik süresi
+
+// Bir ayKey (YYYY-MM) için, o ayın 4 sabit haftalık dilimini (başlangıç/bitiş gün numarası ve
+// dilimdeki gün sayısı) döndürür. Son dilim ayın gerçek gün sayısına göre 8-10 gün olabilir.
+// TAKVİM ETKİSİ İNDEKSİ (E_t): resmi/dini tatil ve arife günlerinde B2B dağıtım hacmi normal
+// güne göre nasıl değişiyor. Bunlar SATIŞ YASAĞI değil — Türkiye'de bayram günlerinde alkol
+// satışını tamamen durduran bir yasal düzenleme yok (sadece 22:00-06:00 arası günlük satış
+// saati kısıtı her gün geçerli). Buradaki düşük katsayılar, bayram günlerinde işyerlerinin/
+// noktaların kapalı olması nedeniyle FATURALAMA/DAĞITIM hacminin fiilen durmasını yansıtır;
+// yüksek katsayılar ise arife öncesi stoklama talebini yansıtır. DEĞERLER VARSAYIMDIR — ideal
+// olan, geçen yılın aynı tarihlerindeki gerçek düşüş/artışın arşiv verisinden ölçülmesidir;
+// yeterli geçmiş veri birikince stokGunGecmisTenOlcumluEt() ile güncellenebilir.
+const STOK_GUN_TAKVIM_ETKISI_2026 = {
+  '2026-01-01': 0.4,  // Yılbaşı
+  '2025-12-30': 1.3, '2025-12-31': 1.5, // Yılbaşı öncesi stoklama
+  '2026-03-18': 1.3, // Ramazan Bayramı öncesi stoklama
+  '2026-03-19': 0.5, // Arife (yarım gün)
+  '2026-03-20': 0.2, '2026-03-21': 0.2, '2026-03-22': 0.2, // Ramazan Bayramı
+  '2026-04-23': 0.4, // Ulusal Egemenlik ve Çocuk Bayramı
+  '2026-05-01': 0.4, // Emek ve Dayanışma Günü
+  '2026-05-19': 0.4, // Atatürk'ü Anma, Gençlik ve Spor Bayramı
+  '2026-05-25': 1.4, // Kurban Bayramı öncesi stoklama
+  '2026-05-26': 0.5, // Arife (yarım gün)
+  '2026-05-27': 0.15, '2026-05-28': 0.15, '2026-05-29': 0.15, '2026-05-30': 0.15, // Kurban Bayramı
+  '2026-07-15': 0.4, // Demokrasi ve Millî Birlik Günü
+  '2026-08-30': 0.4, // Zafer Bayramı
+  '2026-10-28': 0.6, // Cumhuriyet Bayramı arifesi (öğleden sonra yarım gün)
+  '2026-10-29': 0.4, // Cumhuriyet Bayramı
+};
+
+// Verilen bir Date için takvim etkisi katsayısını döndürür; tanımlı değilse 1.0 (etkisiz).
+function stokGunTakvimEtkisi(tarih){
+  const gk = dateKeyLocal(tarih);
+  return STOK_GUN_TAKVIM_ETKISI_2026[gk] != null ? STOK_GUN_TAKVIM_ETKISI_2026[gk] : 1.0;
+}
+
+function stokGunHaftaDilimleri(ayKey){
+  const [yil, ay] = ayKey.split('-').map(Number);
+  const ayinGunSayisi = new Date(yil, ay, 0).getDate();
+  return [
+    {baslangic:1, bitis:7, gunSayisi:7},
+    {baslangic:8, bitis:14, gunSayisi:7},
+    {baslangic:15, bitis:21, gunSayisi:7},
+    {baslangic:22, bitis:ayinGunSayisi, gunSayisi: ayinGunSayisi-22+1},
+  ];
+}
+
+// Son STOK_GUN_AY_SAYISI ay için arşivlenmiş Sell Out raporlarını (sellOutArsivCache) toplar,
+// yoksa boş döner. Her ürün için: {kod, urunAdi, toplamLitre6Ay, toplamMiktar6Ay, gunler:[{gunKey,litre,miktar}]}.
+function stokGunUrunVerileriniTopla(){
+  const sellOutArsiv = state.sellOutArsivCache || {};
+  const modernKanalArsiv = state.modernKanalArsivCache || {};
+  const buAyKey = dateKeyLocal(turkiyeBugun()).slice(0,7);
+  // İçinde bulunduğumuz ay yanlışlıkla (henüz tamamlanmadan) arşivlenmiş olsa bile burada
+  // her zaman hariç tutulur — "geçmiş 6 ay" mantığı yalnızca TAMAMLANMIŞ aylarla anlamlı;
+  // yarım kalmış bir ayın haftalık dağılımı gerçek deseni yanıltır. Geleneksel Kanal ve
+  // Modern Kanal'ın arşivlenmiş ayları AYRI tutulur (ikisi farklı ritimde arşivlenebilir),
+  // ama her ikisi de aynı "son 6 tamamlanmış ay" penceresine (kendi ay listesine göre) tabidir.
+  const sellOutAylar = Object.keys(sellOutArsiv).filter(ay=> ay !== buAyKey).sort().slice(-STOK_GUN_AY_SAYISI);
+  const modernKanalAylar = Object.keys(modernKanalArsiv).filter(ay=> ay !== buAyKey).sort().slice(-STOK_GUN_AY_SAYISI);
+  // "sonAylar" (raporun üst bilgisinde gösterilen "6 ay: ...") iki kaynağın aylarının
+  // BİRLEŞİMİDİR — kullanıcı hangi ayların hesaba katıldığını görebilsin diye.
+  const sonAylar = Array.from(new Set([...sellOutAylar, ...modernKanalAylar])).sort();
+  const urunMap = new Map(); // kod -> {urunAdi, marka, toplamLitre6Ay, toplamMiktar6Ay, gunler:[], aktifAylar:Set, kapsananAylar:Set, kanal:{sellOut:{...}, modernKanal:{...}}}
+
+  // Her iki kaynaktan (Geleneksel Kanal + Modern Kanal) gelen ürün listelerini AYNI urunMap'e
+  // TOPLAYARAK birleştirir — bir ürün her iki kanaldan da satılıyorsa (aynı Malzeme/Ürün Kodu),
+  // BİRLEŞİK litre/miktar/gün verileri toplanır (aktifAylar/veriGuveni/istatistik hesapları için).
+  // AYRICA, "kanal" alanı altında SELL OUT ve MODERN KANAL'ın kendi ayrı toplamLitre6Ay ve
+  // gunler dizileri de AYRI AYRI tutulur — çünkü "pay" artık HER KANALIN KENDİ İÇİNDE ayrı
+  // hesaplanıp kendi hedefine uygulanacak (bkz. computeStokGunRaporu): sadece Modern Kanal'dan
+  // satılan bir ürünün payı, Modern Kanal'ın toplamı içindeki payı olmalı ve SADECE Modern
+  // Kanal'ın (girilen) hedefine uygulanmalı — Sell Out'un (varsa) çok daha büyük hedefine göre
+  // hesaplanıp yapay derecede büyük bir "Gerekli Litre" üretmemeli.
+  function isle(kanalAdi, arsiv, aylar){
+    aylar.forEach(ayKey=>{
+      const rapor = arsiv[ayKey];
+      if(!rapor || !Array.isArray(rapor.malzemeler)) return;
+      rapor.malzemeler.forEach(u=>{
+        // Marka, arşivde saklanan (o ay hesaplandığı andaki) değer yerine HER ZAMAN GÜNCEL
+        // sellOutMarkaGrubu() mantığıyla yeniden hesaplanır. Böylece marka sınıflandırma kuralı
+        // (ör. Distile/Bira anahtar kelime listesi) değiştiğinde, geçmişte arşivlenmiş aylar
+        // yeniden arşivlenmeden/hiçbir dosya tekrar yüklenmeden, ekrandaki Stok Gün filtresi
+        // her zaman en güncel kurala göre görünür.
+        const guncelMarka = sellOutMarkaGrubu(u.marka || u.urunAdi || u.kod);
+        // Ana Ürün / Parçalı Ürün birleştirme kuralı (bkz. PARCALI_ANA_URUN_ESLEME): Bira
+        // grubunda parçalı kodun verisi ana koda toplanır (parçalı kod raporda görünmez);
+        // Distile grubunda ise tam tersi, ana kodun verisi parçalı koda toplanır (ana kod
+        // raporda görünmez). Gruplama anahtarı olarak u.kod yerine bu "hedef kod" kullanılır.
+        const hedefKod = stokGunHedefKodBul(u.kod, guncelMarka);
+        if(!urunMap.has(hedefKod)) urunMap.set(hedefKod, {
+          kod:hedefKod, urunAdi: (hedefKod===u.kod ? u.urunAdi : null), marka:guncelMarka,
+          toplamLitre6Ay:0, toplamMiktar6Ay:0, gunler:[], aktifAylar:new Set(), kapsananAylar:new Set(),
+          kanal:{ sellOut:{toplamLitre6Ay:0, gunler:[]}, modernKanal:{toplamLitre6Ay:0, gunler:[]} },
+        });
+        const hedef = urunMap.get(hedefKod);
+        // Ürün adı tercihen HEDEF KODUN kendi satırından gelsin (ör. Distile'de parçalı kodun
+        // "70CL" gibi kendi adı, ana kodun "12X70CL" adından daha doğru temsil eder); o satır
+        // henüz işlenmediyse geçici olarak eldeki isim kullanılır, hedef koda ait veri
+        // geldiğinde üzerine yazılır.
+        if(hedefKod===u.kod){
+          if(u.urunAdi) hedef.urunAdi = u.urunAdi;
+        } else if(!hedef.urunAdi){
+          hedef.urunAdi = u.urunAdi; // hedef kendi satırı gelene kadar geçici isim
+        }
+        hedef.marka = guncelMarka;
+        hedef.kapsananAylar.add(ayKey);
+        const kanalHedef = hedef.kanal[kanalAdi];
+        let buAyToplamLitre = 0;
+        (u.gunler||[]).forEach(g=>{
+          // LİTRE zaten gerçek fiziksel birimdir (bir adet parçalı ürünün de, bir adet ana
+          // ürünün de kendi gerçek litre karşılığı önceden hesaplanmıştır) — bu yüzden doğrudan
+          // toplanabilir, birim çevirme gerektirmez.
+          hedef.toplamLitre6Ay += g.litre;
+          // MİKTAR (adet) ise "1 adet ana" ile "1 adet parçalı" farklı fiziksel büyüklükte
+          // olduğundan (ör. 1 koli = 12 şişe), hedef kodun kendi birimine ÇEVRİLEREK toplanır —
+          // aksi halde litreMiktarOrani (Stok Gün'ün anlık stoğu litreye çevirmede kullandığı
+          // oran) karışık birimden yanlış hesaplanır (bkz. stokGunMiktarBirimCevir).
+          const donusmusMiktar = stokGunMiktarBirimCevir(g.miktar||0, u.kod, hedefKod);
+          hedef.toplamMiktar6Ay += donusmusMiktar;
+          hedef.gunler.push(g.miktar===donusmusMiktar ? g : Object.assign({}, g, {miktar:donusmusMiktar}));
+          kanalHedef.toplamLitre6Ay += g.litre;
+          kanalHedef.gunler.push(g.miktar===donusmusMiktar ? g : Object.assign({}, g, {miktar:donusmusMiktar}));
+          buAyToplamLitre += g.litre;
+        });
+        if(buAyToplamLitre>0) hedef.aktifAylar.add(ayKey);
+      });
+    });
+  }
+  isle('sellOut', sellOutArsiv, sellOutAylar);
+  isle('modernKanal', modernKanalArsiv, modernKanalAylar);
+
+  const urunler = Array.from(urunMap.values()).map(u=>{
+    const aktifAylarSirali = Array.from(u.aktifAylar).sort();
+    const kapsananAylarSirali = Array.from(u.kapsananAylar).sort();
+    const ilkSatisAy = aktifAylarSirali[0] || null;
+    const aktifAySayisi = aktifAylarSirali.length;
+    // "Yeni ürün": incelenen pencerenin (sonAylar) İLK ayında satışı yokken, sonraki bir ayda
+    // satışa başlamış ürün — yani portföye pencere içinde sonradan girmiş demektir. Pencerenin
+    // ilk ayından beri satılan ama arada satışsız ayı olan (mevsimsel/düzensiz) ürünler bu
+    // etiketi almaz, ama onlar için de aktifAySayisi zaten doğru şekilde düşük çıkar.
+    // "Yeni ürün" tespiti de ürünün KENDİ kapsananAylar penceresinin ilk ayına göre yapılır —
+    // birleşik sonAylar[0]'a göre değil. Aksi halde sadece Modern Kanal'dan (daha kısa/farklı
+    // takvimde arşivlenen) satılan aktif bir ürün, Sell Out'un daha eski bir ayı yüzünden
+    // haksız yere "yeni ürün" damgalanabilirdi.
+    const yeniUrun = !!(ilkSatisAy && kapsananAylarSirali.length && ilkSatisAy !== kapsananAylarSirali[0]);
+    let veriGuveni = 'Yüksek';
+    if(aktifAySayisi<=1) veriGuveni='Düşük';
+    else if(aktifAySayisi<=3) veriGuveni='Orta';
+    return Object.assign({}, u, {aktifAylar:aktifAylarSirali, kapsananAylar:kapsananAylarSirali, ilkSatisAy, aktifAySayisi, yeniUrun, veriGuveni});
+  });
+  return {sonAylar, urunler};
+}
+
+// Bir marka (mal grubu) için, o markadaki TÜM ürünlerin gün dizilerini birleştirip tek bir
+// "marka geneli haftalık dağılım şekli" (4 dilimin toplam litre içindeki oranı) çıkarır.
+// Yeni/az geçmişli ürünlerde kendi haftalık deseni (tek bir ayın gürültüsünden ibaret
+// olabilir) yerine, aynı markadaki daha köklü ürünlerin ORTAK deseni referans alınarak daha
+// istikrarlı bir tahmin elde edilir (bkz. stokGunOwnVeMarkaShapeKarisimi).
+function stokGunMarkaHaftaSekilleri(urunler){
+  const markaDilim = new Map(); // marka -> [4 dilim toplam litre]
+  urunler.forEach(u=>{
+    const d = stokGunHaftaDagilimi(u.gunler);
+    if(!markaDilim.has(u.marka)) markaDilim.set(u.marka, [0,0,0,0]);
+    const acc = markaDilim.get(u.marka);
+    for(let i=0;i<4;i++) acc[i]+=d.litre[i];
+  });
+  const markaSekil = new Map(); // marka -> [4 dilim ORAN (toplam=1)]
+  markaDilim.forEach((dilim, marka)=>{
+    const toplam = dilim.reduce((a,b)=>a+b,0);
+    markaSekil.set(marka, toplam>0 ? dilim.map(v=>v/toplam) : [0.25,0.25,0.25,0.25]);
+  });
+  return markaSekil;
+}
+
+// Bir ürünün KENDİ haftalık dağılım şeklini, veri güvenine göre markasının genel şekliyle
+// harmanlar. aktifAySayisi arttıkça kendi verisine olan güven artar (3 aya ulaşınca %100 kendi
+// verisi kullanılır); az geçmişli/yeni ürünlerde marka deseni ağırlık kazanarak tahmini
+// gürültüden (tek bir ayın rastgele dalgalanmasından) korur. Dönüş: bu ürünün toplamLitre6Ay'ı
+// üzerinden ölçeklenmiş, harmanlanmış 4 dilimlik litre dizisi (stokGunHaftaDagilimi ile aynı
+// formatta) — böylece geri kalan hesap akışı değişmeden kullanılabilir.
+function stokGunOwnVeMarkaShapeKarisimi(u, markaSekilleri){
+  const ownDilim = stokGunHaftaDagilimi(u.gunler);
+  const toplam = u.toplamLitre6Ay || ownDilim.litre.reduce((a,b)=>a+b,0);
+  if(toplam<=0) return ownDilim;
+  const ownSekil = ownDilim.litre.map(v=>v/toplam);
+  const markaSekil = markaSekilleri.get(u.marka) || [0.25,0.25,0.25,0.25];
+  const kendiAgirlik = Math.min(1, (u.aktifAySayisi||0)/3);
+  const harmanSekil = ownSekil.map((v,i)=> kendiAgirlik*v + (1-kendiAgirlik)*markaSekil[i]);
+  // ÖNEMLİ DÜZELTME: miktar dizisi önceden harmanlanmadan (ham ownDilim.miktar) dönüyordu —
+  // litre dizisi marka şekliyle harmanlanmışken miktar harmanlanmamış kalması, ikisinin
+  // birbirine göre tutarsız (farklı oranlarda ölçeklenmiş) olmasına yol açıyordu. Artık miktar
+  // da AYNI dilim bazında, litredeki değişim oranıyla ölçekleniyor — böylece iki dizi arasındaki
+  // litre/miktar oranı her dilimde tutarlı kalır.
+  const harmanMiktar = ownDilim.litre.map((ownLitreDeger, i)=>{
+    const yeniLitre = harmanSekil[i]*toplam;
+    const oran = ownLitreDeger>0 ? (yeniLitre/ownLitreDeger) : 1;
+    return (ownDilim.miktar[i]||0) * oran;
+  });
+  return {litre: harmanSekil.map(v=>v*toplam), miktar: harmanMiktar};
+}
+
+// Bir ürünün gün dizisini AY bazında toplayıp {ayKey -> litre} haritasına çevirir. Aşağıdaki
+// üç fonksiyonun (ağırlıklı ortalama, değişkenlik katsayısı, ölü ürün tespiti) ortak girdisi.
+function stokGunAylikOzet(u){
+  const aylikLitre = new Map();
+  (u.gunler||[]).forEach(g=>{
+    const ayKey = g.gunKey.slice(0,7);
+    aylikLitre.set(ayKey, (aylikLitre.get(ayKey)||0)+g.litre);
+  });
+  return aylikLitre;
+}
+
+// sonAylar dizisindeki her aya, sıradaki konumuna göre artan bir ağırlık atar (en eski ay=1,
+// en güncel ay=sonAylar.length). ÖNEMLİ: Bu uygulamanın gerçek verisinde 6 ayda toplam satış
+// hacmi ~4 katına çıkmış (Ocak 144binL → Haziran 600binL) — düz ortalama bu güncel ivmeyi
+// maskeliyordu. Doğrusal artan ağırlık, güncel aylara daha fazla pay vererek hem "pay" hem
+// "haftalık hız" hesabını şu anki satış temposuna daha yakın tutar.
+function stokGunAyAgirlikHaritasi(sonAylar){
+  const harita = new Map();
+  sonAylar.forEach((ay,idx)=> harita.set(ay, idx+1));
+  return harita;
+}
+
+// Bir ürünün aylık litrelerinin AĞIRLIKLI ortalamasını döndürür (düz ortalama yerine) — yalnızca
+// ürünün gerçekten aktif olduğu aylar (aylikLitre içindeki) ve o ayların ağırlıkları kullanılır;
+// böylece hem "yeni ürün" (az ay) hem "trend" (güncel aya yakınlık) etkisi birlikte hesaba katılır.
+function stokGunAgirlikliAylikOrtalama(aylikLitre, ayAgirlik){
+  let toplamAgirlikliLitre=0, toplamAgirlik=0;
+  aylikLitre.forEach((litre, ayKey)=>{
+    const w = ayAgirlik.get(ayKey) || 1;
+    toplamAgirlikliLitre += litre*w;
+    toplamAgirlik += w;
+  });
+  return toplamAgirlik>0 ? toplamAgirlikliLitre/toplamAgirlik : 0;
+}
+
+// Ürünün ay-ay satış hacmindeki OYNAKLIĞI (değişkenlik katsayısı = std sapma / ortalama)
+// ölçer — güvenlik stoğu payının temeli. Tek aylık geçmişte gerçek varyans hesaplanamayacağı
+// için, yeni/az geçmişli ürünlerde temkinli bir varsayılan (0.35) kullanılır. Üst sınır 1.5
+// ile sınırlanır ki aşırı uç bir ay (ör. tek seferlik dev sipariş) hesabı komple bozmasın.
+// GERÇEK GÜNLÜK DEĞİŞKENLİK: u.gunler'daki her kayıt bir SATIŞ OLAN gün — satış olmayan
+// günler dizide hiç yer almıyor (o gün için satır üretilmediği için). Bu yüzden doğrudan
+// gunler.map(g=>g.litre) üzerinden std sapma almak YANLIŞ olur: satışsız günleri (=0 litre)
+// yok sayıp ortalamayı olduğundan yüksek, değişkenliği olduğundan düşük gösterir. Doğrusu,
+// pencere içindeki (sonAylar) HER takvim gününü (satışlı/satışsız fark etmeksizin) sayıp
+// eksik günleri 0 kabul ederek gerçek bir günlük seri oluşturmak. Dönüş: {ortalama, sigma,
+// gunSayisi, cv} — cv, mevcut (aylık-türetilmiş) yaklaşık değerin yerine geçecek gerçek değer.
+function stokGunGercekGunlukIstatistik(gunler, sonAylar){
+  if(!gunler || !gunler.length || !sonAylar || !sonAylar.length) return {ortalama:0, sigma:0, gunSayisi:0, cv:null};
+  // ÖNEMLİ: Ana Ürün/Parçalı Ürün birleştirmesi sonrası AYNI güne (gunKey) ait BİRDEN FAZLA
+  // satır olabilir (ör. hem ana hem parçalı kodun o gün satışı varsa, ikisi de aynı hedef
+  // kodun gunler dizisine ayrı satırlar olarak eklenir). new Map(gunler.map(...)) burada YANLIŞ
+  // olurdu çünkü aynı anahtar (gunKey) tekrar geldiğinde ÖNCEKİ değeri SESSİZCE EZER, toplamaz
+  // — bu da o günün litresini olduğundan düşük gösterirdi. Doğrusu, aynı gunKey'e sahip
+  // satırların litrelerini TOPLAYARAK tek bir haritaya indirgemek.
+  const litreMap = new Map();
+  gunler.forEach(g=> litreMap.set(g.gunKey, (litreMap.get(g.gunKey)||0) + (g.litre||0)));
+  const seri = [];
+  sonAylar.forEach(ayKey=>{
+    const [yil, ay] = ayKey.split('-').map(Number);
+    const ayinGunSayisi = new Date(yil, ay, 0).getDate();
+    for(let gun=1; gun<=ayinGunSayisi; gun++){
+      const gk = ayKey + '-' + String(gun).padStart(2,'0');
+      seri.push(litreMap.get(gk) || 0);
+    }
+  });
+  const n = seri.length;
+  if(n<2) return {ortalama:0, sigma:0, gunSayisi:n, cv:null};
+  const ortalama = seri.reduce((a,b)=>a+b,0)/n;
+  if(ortalama<=0) return {ortalama:0, sigma:0, gunSayisi:n, cv:null};
+  const varyans = seri.reduce((a,v)=>a+Math.pow(v-ortalama,2),0)/n;
+  const sigma = Math.sqrt(varyans);
+  return {ortalama, sigma, gunSayisi:n, cv: sigma/ortalama};
+}
+
+function stokGunDegiskenlikKatsayisi(aylikLitre){
+  const degerler = Array.from(aylikLitre.values());
+  if(degerler.length<2) return 0.35;
+  const ort = degerler.reduce((a,b)=>a+b,0)/degerler.length;
+  if(ort<=0) return 0.35;
+  const varyans = degerler.reduce((a,v)=>a+Math.pow(v-ort,2),0)/degerler.length;
+  return Math.min(1.5, Math.sqrt(varyans)/ort);
+}
+
+// "Ölü ürün": geçmişte satışı olduğu halde, incelenen pencerenin SON 1-2 ayında hiç satışı
+// olmayan ürün — "yeni ürün"ün tam tersi bir durum. Bu ürünler artık hedef dağıtımından
+// (pay) çıkarılır — geçmiş hacimleri güncel talebi temsil etmediği için onlara sipariş hedefi
+// üretmek yanlış olur; yine de tablo'da eski (organik) hızlarıyla referans amaçlı gösterilir.
+function stokGunOluUrunMu(aylikLitre, sonAylar){
+  if(!aylikLitre.size || !sonAylar.length) return false;
+  const sonN = sonAylar.slice(-Math.min(2, sonAylar.length));
+  return sonN.every(ay => !(aylikLitre.get(ay) > 0));
+}
+
+// Bir ürünün gün dizisinden (birden fazla ayı kapsayabilir), en yoğun haftalık dilimi ve o
+// dilimin günlük ortalama hızını bulur. Her gün kendi ayının dilim sınırlarına göre
+// gruplanır (ör. Mayıs'ın 3. haftası ile Haziran'ın 3. haftası ayrı dilimlerdir).
+function stokGunBugununDilimIndex(){
+  const bugun = turkiyeBugun();
+  const gunNo = bugun.getDate();
+  const ayKey = dateKeyLocal(bugun).slice(0,7);
+  const dilimler = stokGunHaftaDilimleri(ayKey);
+  const idx = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+  return idx>=0 ? idx : 0;
+}
+
+// Bir urunun 6 aylik gun dizisini, AY BAGIMSIZ 4 hafta dilimine (0:1-7, 1:8-14, 2:15-21,
+// 3:22-ay sonu) gore toplar - her ay kendi gun sayisina gore 4. dilime katkida bulunur ama
+// hepsi tek bir "hafta 0/1/2/3" toplaminda birlesir. Boylece "6 ayin toplaminin yuzde kaci
+// hangi haftaya ait" sorusu ay ay degil, TUM 6 ay uzerinden tek bir dagilim olarak cikar.
+function stokGunHaftaDagilimi(gunler){
+  const litreDilim = [0,0,0,0];
+  const miktarDilim = [0,0,0,0];
+  gunler.forEach(g=>{
+    const ayKey = g.gunKey.slice(0,7);
+    const gunNo = Number(g.gunKey.slice(8,10));
+    const dilimler = stokGunHaftaDilimleri(ayKey);
+    const idx = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+    if(idx>=0){
+      litreDilim[idx] += g.litre;
+      miktarDilim[idx] += (g.miktar||0);
+    }
+  });
+  return {litre:litreDilim, miktar:miktarDilim};
+}
+
+// Bugünden başlayarak, anlık stoğu GÜN GÜN düşüren simülasyon: her gün, o günün ait olduğu
+// hafta diliminin (1-7/8-14/15-21/22-ay sonu) KENDİ günlük hızıyla tüketilir — haftalar
+// arası geçişte hız değişir (ör. bugün 3. haftanın son 2 günündeyse önce 3. haftanın hızıyla,
+// sonra 4. haftaya geçince 4. haftanın hızıyla devam eder). Stok sıfıra düştüğü gün sayısı
+// (kesirli kısım dahil) döndürülür. haftaGunlukHizlari: [hafta0Hız, hafta1Hız, hafta2Hız, hafta3Hız]
+// (litre/gün, her biri kendi haftasının kalan-hedefe göre ölçeklenmiş hızı).
+// esikLitre (varsayılan 0): simülasyonun "bittiği" kabul edilen stok seviyesi. 0 ile
+// çağrıldığında davranış eskisiyle birebir aynıdır (stok tamamen tükenene kadar sayar).
+// Pozitif bir değer verilirse (örn. güvenlik stoğu litresi), stok o eşiğin ALTINA düştüğü
+// gün sayısını döndürür — yani "kaç gün sonra yeniden sipariş noktasına düşer" sorusuna
+// cevap verir (bkz. computeStokGunRaporu'daki stokGunuGuvenlikli hesabı).
+function stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari, maksGunSiniri, esikLitre){
+  esikLitre = esikLitre || 0;
+  if(anlikStokLitre==null || anlikStokLitre<=esikLitre) return 0;
+  let kalanStok = anlikStokLitre;
+  let gun = turkiyeBugun();
+  const siniir = maksGunSiniri || 400; // sonsuz döngüye karşı güvenlik (stok hiç bitmiyorsa)
+  for(let i=0; i<siniir; i++){
+    const ayKey = dateKeyLocal(gun).slice(0,7);
+    const gunNo = gun.getDate();
+    const dilimler = stokGunHaftaDilimleri(ayKey);
+    const dilimIndex = dilimler.findIndex(d=> gunNo>=d.baslangic && gunNo<=d.bitis);
+    // Haftalık dilim hızı, o GÜNE ÖZEL takvim etkisiyle (tatil/arife/kampanya) ölçeklenir —
+    // bkz. STOK_GUN_TAKVIM_ETKISI_2026. Böylece örn. bir bayram haftasının ortasındaki gün,
+    // haftanın geri kalanından farklı (çok daha düşük) bir hızla tüketilir.
+    const gunlukHiz = (haftaGunlukHizlari[dilimIndex>=0?dilimIndex:0] || 0) * stokGunTakvimEtkisi(gun);
+    if(gunlukHiz<=0){
+      // Bu haftanın hızı sıfırsa (o dilimde hiç geçmiş satış yoksa), o günü es geçip bir
+      // sonraki güne devam edilir — sıfıra bölme veya sonsuz döngü oluşmaz.
+      gun = new Date(gun.getTime()+86400000);
+      continue;
+    }
+    if(kalanStok - gunlukHiz <= esikLitre){
+      // Stok bu günün ortasında eşiğe (varsayılan: sıfır) iniyor — kesirli gün olarak ekle.
+      return i + ((kalanStok-esikLitre)/gunlukHiz);
+    }
+    kalanStok -= gunlukHiz;
+    gun = new Date(gun.getTime()+86400000);
+  }
+  return siniir; // 400 günden fazla yetiyorsa (pratik olarak "tükenmiyor" demek), tavan değer.
+}
+
+// Ürün×temsilci risk detayındaki temsilci adını (Sell Out kaynaklı, "Satış Temsilcisi Adı")
+// Tahsilat Karnesi'ndeki temsilci adıyla (Cari/Aging kaynaklı, m.temsilci) eşleştirir. İki
+// kaynak farklı dosyalardan geldiği için birebir aynı yazılmayabilir (büyük/küçük harf, fazla
+// boşluk vb.) — bu yüzden önce tam eşleşme, olmazsa uygulamanın zaten kullandığı
+// normalizeAdSoyad standardıyla (bkz. getSahaMuduru) karşılaştırma yapılır.
+function karneTemsilciGerceklesmeBul(temsilciAdi){
+  if(!state.karneTemsilciMap || !state.karneTemsilciMap.size || !temsilciAdi) return null;
+  const direkt = state.karneTemsilciMap.get(temsilciAdi);
+  if(direkt) return direkt.gerceklesme;
+  const hedefKey = normalizeAdSoyad(temsilciAdi);
+  for(const [k,v] of state.karneTemsilciMap.entries()){
+    if(normalizeAdSoyad(k)===hedefKey) return v.gerceklesme;
+  }
+  return null;
+}
+
+function computeStokGunRaporu(){
+  const {sonAylar, urunler} = stokGunUrunVerileriniTopla();
+  if(!urunler.length || !state.malzemelerStok || !state.malzemelerStok.size){
+    return {yok:true, sonAylar};
+  }
+  // Anlık stok (Malzemeler dosyasından, ham/bölünmemiş kodlarla gelir) da AYNI Ana Ürün/Parçalı
+  // Ürün birleştirme kuralına göre toplanır: her ham kodun ait olduğu hedef kod, o ürünün
+  // (urunler listesindeki) marka sınıflandırmasına göre stokGunHedefKodBul ile bulunur ve
+  // miktarlar o hedef kodun altında TOPLANIR. Böylece "parçalı stok, Bira'da ana koda; ana
+  // stok, Distile'de parçalı koda" kuralı anlık stok tarafında da geçerli olur.
+  const kodMarkaHaritasi = new Map(urunler.map(u=>[u.kod, u.marka]));
+  const malzemelerStokBirlesik = new Map();
+  state.malzemelerStok.forEach((miktar, hamKod)=>{
+    // Bu ham kodun kendi markasını bilmiyoruz (Malzemeler dosyasında marka yok) — ama eşleme
+    // tablosundaki karşılığının (ana/parçalı) markasını urunler listesinden buluyoruz; bulunamazsa
+    // (ör. henüz Stok Gün'de hiç satılmamış bir kod) ham kod olduğu gibi kullanılır.
+    const bilgi = PARCALI_ANA_URUN_ESLEME[hamKod]; // hamKod parçalıysa
+    const tersBilgi = ANA_PARCALI_URUN_ESLEME_TERS[hamKod]; // hamKod anaysa
+    let hedefKod = hamKod;
+    if(bilgi){
+      const marka = kodMarkaHaritasi.get(hamKod) || kodMarkaHaritasi.get(bilgi.ana);
+      hedefKod = stokGunHedefKodBul(hamKod, marka || 'Bira');
+    } else if(tersBilgi){
+      const marka = kodMarkaHaritasi.get(hamKod) || kodMarkaHaritasi.get(tersBilgi.parcali);
+      hedefKod = stokGunHedefKodBul(hamKod, marka || 'Bira');
+    }
+    // Miktar, hamKod'un kendi biriminden hedefKod'un birimine ÇEVRİLEREK toplanır — aksi halde
+    // ör. 15 adet parçalı miktar, 812 adet ana miktara doğrudan (birim uyuşmazlığıyla) eklenip
+    // yanlış bir toplam (827) üretirdi; doğrusu 812 + (15/2) = 819,5 gibi birim-dönüştürülmüş
+    // bir toplamdır (bkz. stokGunMiktarBirimCevir).
+    const donusmusMiktar = stokGunMiktarBirimCevir(miktar||0, hamKod, hedefKod);
+    malzemelerStokBirlesik.set(hedefKod, (malzemelerStokBirlesik.get(hedefKod)||0) + (donusmusMiktar||0));
+  });
+  const toplamLitre6Ay = urunler.reduce((a,u)=>a+u.toplamLitre6Ay, 0);
+  if(toplamLitre6Ay<=0) return {yok:true, sonAylar};
+
+  // ÖNEMLİ DÜZELTME 1 (yeni ürün / kısmi geçmiş): "pay" eskiden doğrudan 6 aylık TOPLAM litre
+  // üzerinden hesaplanıyordu — ama 6 ayın tamamında satan köklü bir ürün ile, pencereye
+  // sonradan girip sadece 1 ayda satan yeni bir ürün aynı havuzda karşılaştırıldığında, yeni
+  // ürünün toplamı sırf daha az aya yayıldığı için küçük çıkıyor ve payı olduğundan düşük
+  // hesaplanıyordu.
+  // ÖNEMLİ DÜZELTME 2 (trend/ivme): Ayrıca düz ortalama, aylar arası büyük hacim değişimini
+  // (bu veri setinde 6 ayda toplam satış ~4 katına çıkmış) maskeliyordu — eski/yeni ay farkı
+  // gözetmeden eşit ağırlıklandırıyordu. Artık her ürünün aktif olduğu ayların litresi,
+  // GÜNCELE YAKINLIĞA göre ağırlıklandırılmış ortalamayla birleştiriliyor (bkz.
+  // stokGunAyAgirlikHaritasi/stokGunAgirlikliAylikOrtalama) — hem "az ay" hem "eski ay"
+  // etkisi aynı anda düzeltilmiş oluyor.
+  const ayAgirlik = stokGunAyAgirlikHaritasi(sonAylar);
+  const urunEk = urunler.map(u=>{
+    const aylikLitre = stokGunAylikOzet(u);
+    const agirlikliOrtalama = stokGunAgirlikliAylikOrtalama(aylikLitre, ayAgirlik);
+    const cv = stokGunDegiskenlikKatsayisi(aylikLitre);
+    // Gerçek günlük satış verisinden (aylık ortalamadan türetilmiş yaklaşık cv YERİNE) doğrudan
+    // ölçülmüş değişkenlik katsayısı — bkz. stokGunGercekGunlukIstatistik. Yeterli veri yoksa
+    // (gercekGunlukCV.cv==null) aşağıda güvenlik stoğu hesabı aylık cv'ye geri düşer.
+    // ÖNEMLİ DÜZELTME (farklı arşivleme takvimi): "sonAylar" iki kanalın (Sell Out + Modern
+    // Kanal) arşivlenen aylarının BİRLEŞİMİdir — ama bir ürün sadece TEK bir kanaldan
+    // satılıyorsa ve o kanal diğerinden daha az ay arşivlemişse, birleşik pencereyi kullanmak
+    // veri toplanmamış ayları yanlışlıkla "0 satış günü" sayardı (gerçek hızı olduğundan çok
+    // düşük gösterirdi). Bunun yerine, bu ürün için GERÇEKTEN veri toplanan aylar (u.kapsananAylar)
+    // kullanılır.
+    const gercekGunlukIstatistik = stokGunGercekGunlukIstatistik(u.gunler, u.kapsananAylar);
+    // ÖNEMLİ DÜZELTME 3 (ölü ürün): "yeni ürün"ün tam tersi — son 1-2 ayda hiç satmayan ama
+    // geçmişte satmış ürünler artık hedef dağıtımından (pay) TAMAMEN çıkarılır; eski
+    // hacimleriyle sipariş hedefi üretmek yanlış olur. Yine de tabloda eski (organik)
+    // hızlarıyla referans amaçlı gösterilmeye devam ederler (bkz. aşağıdaki olcekOrani dalı).
+    // Aynı düzeltme burada da geçerli: "son 2 ay" birleşik sonAylar üzerinden değil, bu
+    // ürünün GERÇEKTEN veri toplanan aylarının (kapsananAylar) son 2'si üzerinden bakılmalı —
+    // aksi halde farklı arşivleme takvimine sahip bir kanaldan gelen aktif bir ürün, diğer
+    // kanalın arşivlediği ama bu ürünün hiç var olmadığı sonraki aylar yüzünden yanlışlıkla
+    // "ölü ürün" damgalanıp hedef dağıtımından haksız yere çıkarılabilirdi.
+    const oluUrun = stokGunOluUrunMu(aylikLitre, u.kapsananAylar);
+    // ============================================================================
+    // KANAL BAZLI PAY DÜZELTMESİ (kritik): Bir ürünün "payı" artık BİRLEŞİK toplam üzerinden
+    // değil, HER KANALIN KENDİ HAVUZU İÇİNDE ayrı ayrı hesaplanır. Örnek: bir ürün SADECE
+    // Modern Kanal'dan satılıyorsa, payı SADECE Modern Kanal'ın toplam ağırlıklı ortalaması
+    // içindeki payı olmalı ve SADECE Modern Kanal'ın (kullanıcının girdiği) hedefine
+    // uygulanmalı — Sell Out'un (varsa çok daha büyük) hedefine göre hesaplanıp yapay
+    // derecede büyük bir "Gerekli Litre" üretmemeli. Bu yüzden her kanal için ayrı
+    // agirlikliOrtalama hesaplanır; toplamAgirlikliOrtalama da AŞAĞIDA her kanal için AYRI
+    // toplanır (bkz. toplamAgirlikliOrtalamaSellOut / toplamAgirlikliOrtalamaModernKanal).
+    const aylikLitreSellOut = stokGunAylikOzet(u.kanal.sellOut);
+    const aylikLitreModernKanal = stokGunAylikOzet(u.kanal.modernKanal);
+    const agirlikliOrtalamaSellOut = stokGunAgirlikliAylikOrtalama(aylikLitreSellOut, ayAgirlik);
+    const agirlikliOrtalamaModernKanal = stokGunAgirlikliAylikOrtalama(aylikLitreModernKanal, ayAgirlik);
+    return Object.assign({}, u, {aylikLitre, agirlikliOrtalama, cv, gunlukCV: gercekGunlukIstatistik.cv, oluUrun, agirlikliOrtalamaSellOut, agirlikliOrtalamaModernKanal});
+  });
+  // Ürünün BİRLEŞİK (iki kanal toplamı) ağırlıklı ortalaması ve bunun toplamı — sadece
+  // tabloda gösterilen "Satış Payı" bilgilendirme kolonu için kullanılır; "Gerekli Litre"
+  // hesabı bunu KULLANMAZ, o kanal bazlı ayrı toplamları (aşağıdaki SellOut/ModernKanal
+  // olanları) kullanır.
+  const toplamAgirlikliOrtalama = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalama), 0);
+  // Her kanalın kendi toplam ağırlıklı ortalaması — pay hesabının paydası, KANAL BAZINDA ayrı.
+  const toplamAgirlikliOrtalamaSellOut = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalamaSellOut), 0);
+  const toplamAgirlikliOrtalamaModernKanal = urunEk.reduce((a,u)=> a + (u.oluUrun ? 0 : u.agirlikliOrtalamaModernKanal), 0);
+  const markaSekilleri = stokGunMarkaHaftaSekilleri(urunler);
+
+  const guncelRapor = state.sellOutReport ? applySellOutHedef(state.sellOutReport, state.sellOutHedef) : null;
+  // ÖNEMLİ DÜZELTME: Önceden sellOutKanalOzeti'nin acikKalan/kapaliKalan alanları üzerinden
+  // (toplamLitre + kalan) formülüyle hedefi türetiyorduk — ama hedef hiç girilmemişse
+  // (acikHedef=kapaliHedef=0), Math.max(0, 0-satış) sıfıra düştüğü için formül "hedef =
+  // mevcut satış" gibi yanlış bir sonuç veriyordu. Artık hedef doğrudan temsilcilerin
+  // acikHedef/kapaliHedef alanlarının toplamından okunuyor — hedef gerçekten girilmemişse
+  // 0 kalır ve rapor "hedef girilmemiş" boş durumunu gösterir, mevcut satışı hedef sanmaz.
+  // NOT: sellOutHedefKendi ve modernKanalHedefKendi AYRI AYRI tutulur — "Gerekli Litre" artık
+  // her kanalın kendi payı × kendi hedefi olarak hesaplanır (bkz. rows bloğu); ustYonetimHedefi
+  // (ikisinin toplamı) yalnızca genel bilgi amaçlı (raporun üst şeridinde) kullanılır.
+  const sellOutHedefKendi = guncelRapor && Array.isArray(guncelRapor.temsilciler)
+    ? guncelRapor.temsilciler.reduce((a,t)=> a + (t.acikHedef||0) + (t.kapaliHedef||0), 0)
+    : 0;
+  const modernKanalHedefKendi = state.modernKanalHedef||0;
+  const ustYonetimHedefi = sellOutHedefKendi + modernKanalHedefKendi;
+
+  // Bu ayın GÜNCEL/CANLI Sell Out (+ Modern Kanal) verisinden, ürün (Malzeme/Ürün Kodu)
+  // bazlı bu ay şimdiye kadar satılan litre çıkarılır — "Gerekli Litre" artık hedefin TAMAMI
+  // Bu ayın GÜNCEL/CANLI verisinden, ürün (Malzeme/Ürün Kodu) bazlı bu ay şimdiye kadar
+  // satılan litre KANAL BAZINDA AYRI çıkarılır — "Gerekli Litre" artık her kanalın kendi
+  // hedefinin TAMAMI değil, o kanaldaki bu ana kadar satılan kısım düşüldükten sonra KALAN
+  // hedef üzerinden hesaplanır (ör. Modern Kanal hedefinin %70'i zaten satıldıysa, kalan
+  // %30'a göre günlük hız/stok günü belirlenir). Aynı ürün her iki kanaldan da satılıyorsa,
+  // her kanalın kendi "bu ay satılan"ı kendi kalan hedefinden düşülür, sonra ikisi toplanır.
+  // ÖNEMLİ: guncelRapor/state.modernKanalReport buradaki "malzemeler" HAM (bölünmemiş) ürün
+  // koduyla gelir (stokGunUrunVerileriniTopla'nın arşiv okurken yaptığı Ana Ürün/Parçalı Ürün
+  // birleştirmesi burada henüz uygulanmamıştır). Aşağıda bu haritalar da AYNI kurala göre HEDEF
+  // KODA yönlendirilerek toplanır — aksi halde, ör. Bira grubunda bu ay parçalı koddan satış
+  // olduğunda, kalan hedef hesaplaması (u.kod artık ana kod olduğu için) bu satışı hiç
+  // bulamaz ve "bu ay satılan" olduğundan düşük çıkardı (kalan hedef/gerekli litre de buna
+  // bağlı olarak yanlış hesaplanırdı). Litre birim çevirme GEREKMEZ (litre zaten fiziksel
+  // birim), sadece hangi kod altında toplandığı değişir.
+  const buAySatilanSellOutMap = new Map();
+  if(guncelRapor && Array.isArray(guncelRapor.malzemeler)){
+    guncelRapor.malzemeler.forEach(u=>{
+      const marka = kodMarkaHaritasi.get(u.kod) || sellOutMarkaGrubu(u.marka || u.urunAdi || u.kod);
+      const hedefKod = stokGunHedefKodBul(u.kod, marka);
+      const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
+      buAySatilanSellOutMap.set(hedefKod, (buAySatilanSellOutMap.get(hedefKod)||0) + toplam);
+    });
+  }
+  const buAySatilanModernKanalMap = new Map();
+  if(state.modernKanalReport && Array.isArray(state.modernKanalReport.malzemeler)){
+    state.modernKanalReport.malzemeler.forEach(u=>{
+      const marka = kodMarkaHaritasi.get(u.kod) || sellOutMarkaGrubu(u.marka || u.urunAdi || u.kod);
+      const hedefKod = stokGunHedefKodBul(u.kod, marka);
+      const toplam = (u.gunler||[]).reduce((a,g)=>a+(g.litre||0), 0);
+      buAySatilanModernKanalMap.set(hedefKod, (buAySatilanModernKanalMap.get(hedefKod)||0) + toplam);
+    });
+  }
+  // KRİTİK DÜZELTME (kalan hedefin YANLIŞ hesaplanması — kullanıcı tarafından tespit edildi):
+  // Önceden "kalan hedef" ÜRÜN BAZINDA şöyle hesaplanıyordu:
+  //   kalanModernKanal = max(0, ÜRÜNÜN_TAHMİNİ_PAYI - ÜRÜNÜN_BU_AY_SATIŞI)
+  // Bu YANLIŞ: "tahmini pay" (ör. 100.000 L hedefin %0,7'si = 700 L), ayın SONUNA kadar
+  // beklenen bir TAHMİN'dir, ürünün "hakkı" veya "kotası" değildir. Bir ürün bu tahminin
+  // ÜZERİNDE satarsa (ör. ilk 10 günde 700 değil 1.000 L satmışsa), bu "hedefini doldurdu,
+  // artık satmayacak" anlamına GELMEZ — tam tersine güçlü talebi gösterir. Eski formülle
+  // kalanModernKanal = max(0, 700-1.000) = 0 çıkıyordu — yani hızlı satan ürünün kalan ay
+  // için beklenen satışı (ve dolayısıyla Hedef Gereken Sipariş'i) YANLIŞLIKLA sıfıra
+  // düşürülüyordu, halbuki payı hâlâ %0,7 ise kalan hedefin %0,7'si kadar satmaya devam
+  // etmesi beklenir.
+  //
+  // DOĞRU YÖNTEM: Önce KANAL TOPLAMINDA (tüm ürünler birlikte) kalan hedef bir kez bulunur:
+  //   kalanKanalHedefiToplam = max(0, KANAL_HEDEFİ - KANALIN_TÜM_ÜRÜNLERİNİN_BU_AY_TOPLAM_SATIŞI)
+  // Sonra bu kalan, HER ÜRÜNE KENDİ PAYINA GÖRE yeniden dağıtılır:
+  //   kalanModernKanal (ürün) = kalanKanalHedefiToplam × ürününPayı
+  // Böylece kullanıcının verdiği örnekteki gibi (100.000 L hedef, 40.000 L kalan, %0,7 pay
+  // → kalan pay 280 L) doğru sonuç üretilir; hızlı satan ürünler cezalandırılmaz, yavaş
+  // satan ürünler de yapay olarak şişirilmez — pay her zaman KALAN toplam hedefe uygulanır.
+  const buAySatilanSellOutToplam = Array.from(buAySatilanSellOutMap.values()).reduce((a,b)=>a+b, 0);
+  const buAySatilanModernKanalToplam = Array.from(buAySatilanModernKanalMap.values()).reduce((a,b)=>a+b, 0);
+  const kalanSellOutKanalToplam = Math.max(0, sellOutHedefKendi - buAySatilanSellOutToplam);
+  const kalanModernKanalKanalToplam = Math.max(0, modernKanalHedefKendi - buAySatilanModernKanalToplam);
+
+  // Ürün kodu -> bu ayı en çok satan temsilciler (litre payına göre) — ürün×temsilci risk
+  // detayının ham girdisi, sadece BU AYIN canlı Sell Out verisinden (guncelRapor) gelir.
+  // Burada da AYNI Ana Ürün/Parçalı Ürün birleştirme kuralı uygulanır — aksi halde parçalı/ana
+  // kod farkı yüzünden bu ürünün temsilci-payı listesi, birleştirilmiş satırla (u.kod artık
+  // hedef kod) hiç eşleşmez ve ürün×temsilci risk detayı o ürün için boş görünürdü.
+  const malzemeTemsilciPayMap = new Map();
+  if(guncelRapor && Array.isArray(guncelRapor.malzemeler)){
+    guncelRapor.malzemeler.forEach(u=>{
+      const marka = kodMarkaHaritasi.get(u.kod) || sellOutMarkaGrubu(u.marka || u.urunAdi || u.kod);
+      const hedefKod = stokGunHedefKodBul(u.kod, marka);
+      const mevcut = malzemeTemsilciPayMap.get(hedefKod) || [];
+      malzemeTemsilciPayMap.set(hedefKod, mevcut.concat(u.temsilciPay||[]));
+    });
+  }
+
+  const bugunHaftaIndex = stokGunBugununDilimIndex();
+  const haftaEtiketleri = ['1-7','8-14','15-21','22-ay sonu'];
+
+  const rows = urunEk.map(u=>{
+    // "Satış Payı" (tabloda gösterilen, bilgilendirme amaçlı) — ürünün BİRLEŞİK (iki kanal
+    // toplamı) ağırlıklı ortalamasının, BİRLEŞİK toplam içindeki payı. Bu değer sadece
+    // görüntüleme amaçlıdır; "Gerekli Litre" hesabı bunu KULLANMAZ (aşağıya bakınız).
+    const pay = (!u.oluUrun && toplamAgirlikliOrtalama>0) ? (u.agirlikliOrtalama / toplamAgirlikliOrtalama) : 0;
+
+    // ============================================================================
+    // KANAL BAZLI GEREKLİ LİTRE (kritik düzeltme): Her kanalın kendi payı SADECE o kanalın
+    // kendi hedefine uygulanır, sonra ikisi TOPLANIR. Böylece sadece Modern Kanal'dan satılan
+    // bir ürünün Gerekli Litre'si, girilen Modern Kanal hedefini ASLA aşamaz (matematiksel
+    // garanti: Σ tüm ürünlerin Modern Kanal payı = 1, dolayısıyla Σ Modern Kanal Gerekli
+    // Litre'leri = Modern Kanal hedefi). Aynı şekilde sadece Sell Out'tan satılan bir ürün de
+    // sadece Sell Out'un hedefine göre pay alır. Ortak (her iki kanaldan da satılan) ürünlerde
+    // iki katkı toplanır.
+    const paySellOut = (!u.oluUrun && toplamAgirlikliOrtalamaSellOut>0) ? (u.agirlikliOrtalamaSellOut / toplamAgirlikliOrtalamaSellOut) : 0;
+    const payModernKanal = (!u.oluUrun && toplamAgirlikliOrtalamaModernKanal>0) ? (u.agirlikliOrtalamaModernKanal / toplamAgirlikliOrtalamaModernKanal) : 0;
+    const gerekliLitreSellOutToplam = (!u.oluUrun && sellOutHedefKendi>0) ? sellOutHedefKendi * paySellOut : 0;
+    const gerekliLitreModernKanalToplam = (!u.oluUrun && modernKanalHedefKendi>0) ? modernKanalHedefKendi * payModernKanal : 0;
+    const toplamGerekliLitre = (!u.oluUrun && (sellOutHedefKendi>0 || modernKanalHedefKendi>0))
+      ? (gerekliLitreSellOutToplam + gerekliLitreModernKanalToplam)
+      : null;
+    // ÖNEMLİ DÜZELTME: Malzemeler dosyasındaki "Tahditsiz Kullanılabilir" değeri MİKTAR
+    // (koli/adet) cinsindendir, litre değil — bu yüzden doğrudan gunlukHiz'e (litre/gün)
+    // bölmek birim uyuşmazlığı yüzünden anlamsız bir sonuç veriyordu (ör. 1116 miktar / 268
+    // litre-gün). Anlık stok önce litreMiktarOrani ile litreye çevrilip (1116 × 12 = 13.392 L),
+    // ancak öyle günlük litre hızına bölünüyor. Bu blok, "Hedef Gereken Sipariş" hesabının
+    // (aşağıda) depo stoğunu düşebilmesi için ARTIK BURAYA (gerekliLitre'den ÖNCEYE) taşındı.
+    const litreMiktarOraniOnHesap = u.toplamMiktar6Ay>0 ? (u.toplamLitre6Ay/u.toplamMiktar6Ay) : null;
+    const anlikStokMiktar = malzemelerStokBirlesik.get(u.kod);
+    const anlikStokLitre = (anlikStokMiktar!=null && litreMiktarOraniOnHesap>0) ? (anlikStokMiktar*litreMiktarOraniOnHesap) : null;
+    const anlikStok = anlikStokMiktar;
+    // KRİTİK DÜZELTME (kullanıcı tarafından tespit edilen mantık hatası): "Kalan hedef" artık
+    // ürünün KENDİ tahmini payından KENDİ satışının çıkarılmasıyla DEĞİL — önce KANAL
+    // TOPLAMINDA bir kez hesaplanan kalan hedefin (kalanSellOutKanalToplam/kalanModernKanalKanalToplam,
+    // yukarıda tanımlı), ürünün payına göre YENİDEN DAĞITILMASIYLA bulunur. Eskiden bir ürün
+    // kendi tahmini payından (ör. 700 L) daha FAZLA satarsa (ör. 1.000 L), "kalan hedefi" max(0,
+    // 700-1.000)=0 çıkıyordu — güçlü satan bir ürünün sipariş ihtiyacı YANLIŞLIKLA sıfırlanıyordu.
+    // Artık kalan hedef, payın KALAN toplam hedefe uygulanmasıyla bulunuyor — ürün beklenenden
+    // hızlı satsa bile payı %0,7 ise kalan ayın kalan hedefinin %0,7'si kadar satmaya devam
+    // etmesi beklenir (bkz. kullanıcının 100.000L→40.000L kalan, %0,7 pay → 280L örneği).
+    const buAySatilanSellOut = buAySatilanSellOutMap.get(u.kod) || 0;
+    const buAySatilanModernKanal = buAySatilanModernKanalMap.get(u.kod) || 0;
+    const kalanSellOut = kalanSellOutKanalToplam * paySellOut;
+    const kalanModernKanal = kalanModernKanalKanalToplam * payModernKanal;
+    // KULLANICI KARARI: "Hedef Gereken Sipariş" artık mevcut Depo Stoğu (anlikStokLitre) DÜŞÜLEREK
+    // hesaplanır — zaten elde olan stok kadar daha az sipariş verilmesi gerektiği için. Depo
+    // stoğu, iki kanalın kalan hedefinden ORANLARINA göre (kalanSellOut/kalanModernKanal'ın
+    // toplam içindeki payı kadar) düşülür — böylece stok, hangi kanaldan daha çok satılıyorsa o
+    // kanalın kalan hedefinden daha fazla düşer (mantıksal olarak tutarlı bir dağıtım).
+    const kalanToplamStoksuz = kalanSellOut + kalanModernKanal;
+    const depoStokDususu = anlikStokLitre!=null ? Math.min(anlikStokLitre, kalanToplamStoksuz) : 0;
+    const depoStokDususSellOut = (depoStokDususu>0 && kalanToplamStoksuz>0) ? depoStokDususu * (kalanSellOut/kalanToplamStoksuz) : 0;
+    const depoStokDususModernKanal = depoStokDususu - depoStokDususSellOut;
+    const kalanSellOutStoksuz = Math.max(0, kalanSellOut - depoStokDususSellOut);
+    const kalanModernKanalStoksuz = Math.max(0, kalanModernKanal - depoStokDususModernKanal);
+    const gerekliLitre = toplamGerekliLitre!=null ? (kalanSellOutStoksuz + kalanModernKanalStoksuz) : null;
+    // Litre/Miktar oranı (bir "miktar" biriminin kaç litreye denk geldiği) — Sell Out
+    // verisindeki aynı satırlarda hem Litre hem Miktar birlikte geldiği için, 6 aylık
+    // toplamlardan çıkarılan bu oran ürüne özgü sabit bir çevrim katsayısı olarak kullanılır.
+    const litreMiktarOrani = litreMiktarOraniOnHesap;
+    const gerekliMiktar = (gerekliLitre!=null && litreMiktarOrani>0) ? (gerekliLitre/litreMiktarOrani) : null;
+
+    // Bu urunun 6 aylik toplaminin, 4 hafta dilimine gore yuzdesel dagilimi. Bugun hangi
+    // dilimdeysek onu ayri gostermek yerine, ARTIK T\u00dcM 4 haftanin kendi gunluk hizi
+    // ayri ayri hesaplaniyor - cunku stok tukenene kadar gecen sure genelde birden fazla
+    // haftaya yayiliyor (or. bugun 3. haftanin son 2 gunundeyse, stok o 2 gunden sonra
+    // 4. haftaya gecip FARKLI bir hizla tukenmeye devam ediyor).
+    // Az geçmişli/yeni ürünlerde (aktifAySayisi<3) kendi haftalık deseni tek başına
+    // gürültülü olabileceğinden, markanın genel deseniyle harmanlanmış hali kullanılır
+    // (bkz. stokGunOwnVeMarkaShapeKarisimi) — 3+ aylık geçmişi olan ürünlerde bu, kendi
+    // gerçek deseniyle pratikte aynı sonucu verir (kendiAgirlik=1).
+    const haftaDagilimi = stokGunOwnVeMarkaShapeKarisimi(u, markaSekilleri);
+    // ============================================================================
+    // KANAL BAZLI HAFTALIK ÖLÇEKLEME (kritik düzeltme): haftaDagilimi.litre, ürünün BİRLEŞİK
+    // (iki kanal karışık) geçmiş deseninin ŞEKLİNİ (hangi hafta ne kadar yoğun) veriyor — bu
+    // şekli birleşik olarak kullanmak makul (iki kanalın mevsimsel deseni genelde benzerdir).
+    // AMA önceden bu şekle TEK bir "olcekOrani" (kalan hedef toplamı / geçmiş toplam) uygulanıyordu
+    // — bu, ortak ürünlerde (hem Sell Out hem Modern Kanal'dan satılan) YANLIŞ sonuç verirdi:
+    // örneğin Modern Kanal hedefi geçmişin 4 katına çıkarken Sell Out hedefi geçmişin sadece
+    // %40'ına düşmüşse, "birleşik ortalama" oran (ör. 0.73) HİÇBİR kanalın gerçek değişimini
+    // yansıtmaz. Artık haftalık şekil (oran olarak) her kanalın KENDİ kalan hedefine ayrı ayrı
+    // uygulanıyor, sonra iki kanalın o haftaki litresi TOPLANIYOR — böylece her kanal kendi
+    // gerçek büyüme/küçülme oranıyla ölçeklenmiş oluyor.
+    const haftaSekilOrani = u.toplamLitre6Ay>0 ? haftaDagilimi.litre.map(v=>v/u.toplamLitre6Ay) : [0.25,0.25,0.25,0.25];
+    const haftaGunlukHizlari = haftaSekilOrani.map((oran, i)=>{
+      if(u.oluUrun){
+        // ÖLÜ ÜRÜN istisnası: hedefe dahil olmadığı için (gerekliLitre=null) kanal bazlı kalan
+        // hedeflerden pay almaz — bunun yerine ürünün KENDİ eski (organik, birleşik) haftalık
+        // hızı gösterilir. Böylece stok günü "artık pratikte tükenmiyor" gibi yapay bir değer
+        // değil, "eski hızıyla devam etseydi kaç günde biterdi" gibi anlamlı bir referans olur.
+        return haftaDagilimi.litre[i]/7;
+      }
+      const haftaLitreSellOut = oran*kalanSellOut;
+      const haftaLitreModernKanal = oran*kalanModernKanal;
+      return (haftaLitreSellOut + haftaLitreModernKanal)/7;
+    });
+    const gunlukHiz = haftaGunlukHizlari[bugunHaftaIndex] || 0; // tabloda "bugünün hızı" olarak gösterilmeye devam eder
+    const gunlukMiktar = litreMiktarOrani>0 ? (gunlukHiz/litreMiktarOrani) : null;
+    // anlikStokMiktar/anlikStokLitre/anlikStok artık YUKARIDA (gerekliLitre hesabından önce)
+    // tanımlanıyor — bkz. o bloktaki not (kullanıcı kararı: Hedef Gereken Sipariş depo stoğunu
+    // düşsün diye taşındı). Burada tekrar tanımlanmıyor, aynı isimlerle yukarıdan kullanılıyor.
+    // STOK GÜNÜ artık tek bir sabit hıza bölünmüyor — bugünden başlayarak GÜN GÜN
+    // düşürülüyor, her gün kendi haftasının hızıyla tüketiliyor (bkz. stokGunSimulasyonuYap).
+    // Böylece stok günü 7'yi aşıp başka bir haftaya taştığında, o sonraki haftanın
+    // (muhtemelen farklı) hızına doğru şekilde geçiş yapılmış olur.
+    const stokGunu = anlikStokLitre!=null ? stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari) : null;
+    // İSTATİSTİKSEL GÜVENLİK STOĞU: SS = Z × σ_D × √LT (bkz. dosya başındaki sabit tanımları).
+    // σ_D artık MÜMKÜN OLDUĞUNDA gerçek gün-gün satış verisinden ölçülüyor (u.gunlukCV, bkz.
+    // stokGunGercekGunlukIstatistik) — aylık toplamlardan türetilen yaklaşık cv SADECE yeterli
+    // günlük veri yoksa (yeni ürün, kısa geçmiş) yedek olarak kullanılır. Ölçülen CV, güncel
+    // (bugünkü) günlük hıza uygulanarak bugünün ölçeğinde bir σ_D elde edilir — böylece hem
+    // "gerçek oynaklık" hem "güncel satış temposu" birlikte yansıtılmış olur.
+    const kullanilanCV = u.gunlukCV!=null ? u.gunlukCV : u.cv;
+    const gunlukCVKaynagi = u.gunlukCV!=null ? 'gerçek günlük veriden ölçüldü' : 'yeterli günlük veri yok, aylık yaklaşık değer kullanıldı';
+    const gunlukHizOrtalamasi = haftaGunlukHizlari.reduce((a,b)=>a+b,0)/4;
+    const sigmaD = gunlukHizOrtalamasi * kullanilanCV;
+    const guvenlikStoguLitre = STOK_GUN_SERVIS_SEVIYESI_Z * sigmaD * Math.sqrt(STOK_GUN_VARSAYILAN_LEAD_TIME_GUN);
+    const stokGunuGuvenlikli = anlikStokLitre!=null
+      ? stokGunSimulasyonuYap(anlikStokLitre, haftaGunlukHizlari, null, guvenlikStoguLitre)
+      : null;
+
+    // ÜRÜN×TEMSİLCİ RİSK DETAYI: bu ürünü bu ay en çok satan temsilciler + (varsa) tahsilat
+    // karnesi gerçekleşme yüzdeleri. state.karneTemsilciMap artık "Temsilci Karnesi" sekmesi
+    // ziyaret edilmeden de doludur — renderStokGunView, computeStokGunRaporu'yu çağırmadan
+    // ÖNCE bu haritayı bağımsız olarak (Sell Out raporu üzerinden) doldurur (bkz.
+    // renderStokGunView). Sell Out raporu hiç yoksa (henüz veri yüklenmemişse) harita boş
+    // kalır ve tahsilatGerceklesme null döner, arayüzde "tahsilat verisi yok" gösterilir.
+    // NOT: t.pay burada YENİDEN hesaplanmıyor — buildSellOutRaporu'da top-5'e kesilmeden ÖNCE,
+    // ürünün TÜM temsilcileri üzerinden hesaplanmış gerçek pay kullanılıyor (bkz. temsilciPay
+    // tanımı). Sadece burada top-5'ten en çok satan ilk 3'ü gösteriyoruz.
+    const temsilciPay = malzemeTemsilciPayMap.get(u.kod) || [];
+    const temsilciRiskDetayi = temsilciPay.slice(0,3).map(t=>({
+      temsilci: t.ad,
+      pay: t.pay,
+      tahsilatGerceklesme: karneTemsilciGerceklesmeBul(t.ad),
+    }));
+
+    return {
+      kod: u.kod, urunAdi: u.urunAdi, marka: u.marka, pay: pay*100, gerekliLitre, gerekliMiktar,
+      paySellOut: paySellOut*100, payModernKanal: payModernKanal*100,
+      yogunHaftaEtiket: haftaEtiketleri[bugunHaftaIndex] + ' (bugünün dilimi)',
+      gunlukHiz, gunlukMiktar, anlikStok, stokGunu, stokGunuGuvenlikli, guvenlikStoguLitre, gunlukCVKaynagi, cv: u.cv,
+      aktifAySayisi: u.aktifAySayisi, ilkSatisAy: u.ilkSatisAy, yeniUrun: u.yeniUrun, veriGuveni: u.veriGuveni,
+      oluUrun: u.oluUrun, temsilciRiskDetayi,
+    };
+  }).sort((a,b)=>{
+    if(a.stokGunu==null && b.stokGunu==null) return b.pay-a.pay;
+    if(a.stokGunu==null) return 1;
+    if(b.stokGunu==null) return -1;
+    return a.stokGunu-b.stokGunu;
+  });
+
+  // KANAL BAZLI DAĞITILAMAYAN HEDEF UYARISI: Bir kanal için hedef girilmiş (>0) olsa bile, o
+  // kanaldan son 6 ayda HİÇ satış verisi yoksa (toplamAgirlikliOrtalama...=0), pay hesabı her
+  // üründe 0 döner ve hedef hiçbir ürüne dağıtılamaz — kullanıcı hedefi girer ama "Gerekli
+  // Litre" hiç değişmez, nedeni belirsiz kalır. Bu durumu burada tespit edip UI'da açıkça
+  // uyarı olarak göstermek için işaretliyoruz.
+  const sellOutHedefDagitilamadi = sellOutHedefKendi>0 && toplamAgirlikliOrtalamaSellOut<=0;
+  const modernKanalHedefDagitilamadi = modernKanalHedefKendi>0 && toplamAgirlikliOrtalamaModernKanal<=0;
+
+  return {yok:false, sonAylar, rows, ustYonetimHedefi, toplamLitre6Ay, sellOutHedefDagitilamadi, modernKanalHedefDagitilamadi};
+}
+
+function stokGunRenkSeviyesi(stokGunu){
+  if(stokGunu==null) return {renk:'var(--ink-faint)', bg:'var(--line-soft)'};
+  if(stokGunu < 7) return {renk:'var(--danger)', bg:'var(--danger-soft)'};
+  if(stokGunu < 14) return {renk:'var(--warn)', bg:'var(--warn-soft)'};
+  return {renk:'var(--success)', bg:'var(--success-soft)'};
+}
+
+async function renderStokGunView(){
+  const bosPanel = document.getElementById('stokGunBosPanel');
+  const bosMesaj = document.getElementById('stokGunBosMesaj');
+  const icerik = document.getElementById('stokGunIcerik');
+
+  // "Kim satıyor?" detayındaki tahsilat gerçekleşme yüzdesi (state.karneTemsilciMap) eskiden
+  // SADECE kullanıcı "Temsilci Karnesi" sekmesini en az bir kez ziyaret ettiğinde doluyordu —
+  // aksi halde kartlarda hep "tahsilat verisi yok" görünüyordu. Artık Stok Gün paneli bu veriye
+  // BAĞIMSIZ olarak kendi ihtiyacı için ulaşır: harita boşsa ve hesaplamak için gereken ana rapor
+  // (state.report — Fatura/Kalemler/Tahsilat verisi, computeTemsilciKarnesi'nin gerçekte
+  // beklediği kaynak; Sell Out raporu DEĞİL) mevcutsa, kart listesi çizilmeden önce burada bir
+  // kere hesaplanıp doldurulur.
+  if((!state.karneTemsilciMap || !state.karneTemsilciMap.size) && state.report){
+    try{
+      const karne = await computeTemsilciKarnesi(state.report, false);
+      if(karne && !karne.yok && karne.rows){
+        state.karneTemsilciMap = new Map(karne.rows.map(r=>[r.temsilci, r]));
+      }
+    }catch(err){
+      console.error('Stok Gün: temsilci karnesi bağımsız hesaplanırken hata:', err);
+    }
+  }
+
+  const veri = computeStokGunRaporu();
+
+  if(veri.yok){
+    icerik.style.display = 'none';
+    bosPanel.style.display = 'block';
+    const bosBaslik = document.getElementById('stokGunBosBaslik');
+    const eylemBtn = document.getElementById('stokGunBosEylemBtn');
+    // Yol gösteren boş durum: eksik olan ADIM'a göre başlık/mesaj/eylem değişir.
+    if(!veri.sonAylar || !veri.sonAylar.length){
+      bosBaslik.textContent = 'Önce en az bir ay arşivlenmeli';
+      bosMesaj.textContent = 'Stok Gün hesabı, arşivlenmiş aylık satış hızına dayanır. Geleneksel Kanal sekmesinde "Bu Ayı Arşivle" ile başlayın — arşivlenen her ay burada 6 aya kadar birikir.';
+      eylemBtn.style.display = 'inline-flex';
+      eylemBtn.innerHTML = '<i class="fa-solid fa-box-archive" aria-hidden="true" style="margin-right:7px;"></i>Geleneksel Kanal\'a git';
+      eylemBtn.onclick = ()=> setActiveView('sellOut');
+    } else if(!state.malzemelerStok || !state.malzemelerStok.size){
+      bosBaslik.textContent = 'Bir adım kaldı: Malzemeler dosyası';
+      bosMesaj.textContent = 'Sell Out arşivi hazır (' + veri.sonAylar.length + ' ay) ✓ — yalnızca Malzemeler (anlık depo stoğu) dosyası eksik. Yükleyince rapor otomatik hesaplanır.';
+      eylemBtn.style.display = 'inline-flex';
+      eylemBtn.innerHTML = '<i class="fa-solid fa-file-arrow-up" aria-hidden="true" style="margin-right:7px;"></i>Malzemeler dosyasını seç';
+      eylemBtn.onclick = ()=>{ const inp = document.getElementById('stokGunKendiDosyaInput'); if(inp) inp.click(); };
+    } else {
+      bosBaslik.textContent = 'Litre bilgisi bulunamadı';
+      bosMesaj.textContent = 'Arşivlenmiş Sell Out verisinde ürün bazlı litre bilgisi bulunamadı — arşivlenen ayların ürün detayı içerdiğinden emin olun.';
+      eylemBtn.style.display = 'none';
+      eylemBtn.onclick = null;
+    }
+    return;
+  }
+
+  bosPanel.style.display = 'none';
+  icerik.style.display = 'block';
+  const hedefUyarisi = veri.ustYonetimHedefi>0
+    ? ''
+    : ' — ⚠️ Bu ay için henüz hiçbir temsilciye Açık/Kapalı Kanal hedefi girilmemiş; "Gerekli Litre" hesaplanamıyor, günlük hız geçmiş gerçek satışa göre (hedefsiz) gösteriliyor.';
+  // Hedef girilmiş ama o kanaldan hiç geçmiş satış verisi yoksa, pay hesaplanamadığı için hedef
+  // hiçbir ürüne dağıtılamıyor — kullanıcı bunu fark edemeyebileceğinden ayrıca uyarıyoruz.
+  const kanalDagitimUyarilari = [];
+  if(veri.sellOutHedefDagitilamadi) kanalDagitimUyarilari.push('Geleneksel Kanal (Sell Out)');
+  if(veri.modernKanalHedefDagitilamadi) kanalDagitimUyarilari.push('Modern Kanal');
+  const kanalUyarisi = kanalDagitimUyarilari.length
+    ? ' — ⚠️ ' + kanalDagitimUyarilari.join(' ve ') + ' için hedef girilmiş ancak son 6 ayda bu kanal(lar)dan hiç satış verisi yok; bu hedef(ler) hiçbir ürüne dağıtılamadı ve "Gerekli Litre" hesabına yansımadı.'
+    : '';
+  document.getElementById('stokGunAsOf').textContent = 'Veri kaynağı: Sell Out arşivi (' + veri.sonAylar.length + ' ay: ' + veri.sonAylar.map(ayEtiketi).join(', ') + ') + Malzemeler (anlık stok) — Üst yönetim hedefi: ' + Math.round(veri.ustYonetimHedefi).toLocaleString('tr-TR') + ' L' + hedefUyarisi + kanalUyarisi;
+
+  // Arama kutusu (ürün adı veya kodu, büyük/küçük harf duyarsız — Türkçe İ/ı ayrımı için
+  // toLocaleLowerCase('tr-TR') kullanılıyor, sistemin geri kalanındaki arama kutularıyla tutarlı).
+  state.stokGunTumRows = veri.rows;
+
+  // Mal Grubu (marka) filtre dropdown'ını mevcut ürün listesindeki benzersiz markalarla
+  // doldur — seçili değeri (varsa) korur, listeyi tekrar oluşturunca sıfırlamaz.
+  const markaSel = document.getElementById('stokGunMarkaFilter');
+  if(markaSel){
+    const oncekiSecim = markaSel.value;
+    const markalar = Array.from(new Set(veri.rows.map(r=>r.marka).filter(Boolean))).sort((a,b)=>a.localeCompare(b,'tr'));
+    markaSel.innerHTML = '<option value="">Tüm mal grupları</option>' + markalar.map(m=>`<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join('');
+    if(oncekiSecim && markalar.includes(oncekiSecim)) markaSel.value = oncekiSecim;
+  }
+
+  stokGunKritikUyariGuncelle(veri.rows);
+  stokGunSekmeSayilariniGuncelle(veri.rows);
+  stokGunTabloyuFiltreleyipCiz();
+}
+
+// KRİTİK EŞİK BİLDİRİMİ: stok günü eşiğin altına düşen (ve hedefe dahil, yani ölü olmayan)
+// ürünleri sidebar/tab menüsündeki rozetlerde ve panel üstündeki banner'da gösterir. Gerçek
+// push bildirimi (sekme kapalıyken de ulaşan) sunucu taraflı altyapı gerektirir; burada panel
+// açıkken görünen bir uyarı + tarayıcı izni varsa Notification API kullanılır.
+const STOK_GUN_KRITIK_ESIK_GUN = 7; // stokGunRenkSeviyesi'ndeki kırmızı (danger) eşiğiyle aynı
+// (Not: eskiden burada bildirim tekrarını önlemek için bir "son bildirim anahtarı" tutuluyordu;
+// Notification API kaldırıldığı için o değişkene artık gerek yok.)
+function stokGunKritikUyariGuncelle(rows){
+  const kritikler = (rows||[]).filter(r => r.stokGunu!=null && r.stokGunu <= STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun)
+    .sort((a,b)=>a.stokGunu-b.stokGunu);
+
+  ['sbbtn-stokGun','tabbtn-stokGun'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    if(kritikler.length) el.setAttribute('data-badge', kritikler.length>99?'99+':kritikler.length);
+    else el.removeAttribute('data-badge');
+  });
+
+  const banner = document.getElementById('stokGunKritikBanner');
+  if(banner){
+    if(!kritikler.length){
+      banner.innerHTML = '';
+    } else {
+      const ilkUc = kritikler.slice(0,3).map(r=>`${escapeHtml(r.urunAdi)} (${Math.round(r.stokGunu)} gün)`).join(', ');
+      const kalanMetin = kritikler.length>3 ? ` ve ${kritikler.length-3} ürün daha` : '';
+      banner.innerHTML = `<div class="alert-banner" id="stokGunKritikBannerIc" style="margin-bottom:16px;">
+        <div class="alert-banner-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+        <div class="alert-banner-text"><strong>${kritikler.length} ürün kritik stok seviyesinde</strong> (${STOK_GUN_KRITIK_ESIK_GUN} günden az) — ${ilkUc}${kalanMetin}.</div>
+        <div class="alert-banner-cta" id="stokGunKritikGorBtn">Kritik Sekmesini Aç</div>
+      </div>`;
+      document.getElementById('stokGunKritikGorBtn')?.addEventListener('click', ()=> stokGunSekmeDegistir('kritik'));
+    }
+  }
+
+  // Not: Kritik stok listesi değiştiğinde tarayıcı bildirimi (Notification API) gösterme
+  // özelliği kaldırıldı — panel üstündeki banner ve sekme rozetleri yeterli uyarıyı veriyor.
+}
+
+// Sekme başlıklarındaki sayıları (Tümü/Kritik/Yeni/Ölü) güncelle.
+function stokGunSekmeSayilariniGuncelle(rows){
+  const kritikSayi = (rows||[]).filter(r=>r.stokGunu!=null && r.stokGunu<=STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun).length;
+  const yeniSayi = (rows||[]).filter(r=>r.yeniUrun).length;
+  const oluSayi = (rows||[]).filter(r=>r.oluUrun).length;
+  const setTxt = (id, etiket, sayi)=>{ const el=document.getElementById(id); if(el) el.innerHTML = `${etiket} <span class="sekme-count">${sayi}</span>`; };
+  setTxt('stokGunSekmeTumu', 'Tümü', (rows||[]).length);
+  setTxt('stokGunSekmeKritik', `Kritik (<${STOK_GUN_KRITIK_ESIK_GUN} gün)`, kritikSayi);
+  setTxt('stokGunSekmeYeni', 'Yeni Ürünler', yeniSayi);
+  setTxt('stokGunSekmeOlu', 'Ölü Ürünler', oluSayi);
+}
+
+function stokGunSekmeDegistir(sekme){
+  state.stokGunSekme = sekme;
+  document.querySelectorAll('.stokgun-sekme-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.sekme===sekme);
+  });
+  stokGunTabloyuFiltreleyipCiz();
+}
+
+function stokGunTabloyuFiltreleyipCiz(){
+  const rows = state.stokGunTumRows || [];
+  const q = (document.getElementById('stokGunSearchInput')?.value || '').trim().toLocaleLowerCase('tr-TR');
+  const markaFiltre = document.getElementById('stokGunMarkaFilter')?.value || '';
+  const sekme = state.stokGunSekme || 'tumu';
+  let filtreli = rows.filter(r=>{
+    if(q && !(String(r.urunAdi).toLocaleLowerCase('tr-TR').includes(q) || String(r.kod).toLocaleLowerCase('tr-TR').includes(q))) return false;
+    if(markaFiltre && r.marka !== markaFiltre) return false;
+    if(sekme==='kritik' && !(r.stokGunu!=null && r.stokGunu<=STOK_GUN_KRITIK_ESIK_GUN && !r.oluUrun)) return false;
+    if(sekme==='yeni' && !r.yeniUrun) return false;
+    if(sekme==='olu' && !r.oluUrun) return false;
+    return true;
+  });
+
+  const {key, dir} = state.stokGunSort;
+  filtreli = filtreli.slice().sort((a,b)=>{
+    const av = a[key], bv = b[key];
+    // null/undefined değerler (hesaplanamayan satırlar) sıralama yönünden bağımsız
+    // olarak HER ZAMAN en sonda kalır — aksi halde "büyükten küçüğe" sıralamada
+    // en üste çıkıp anlamsız görünürlerdi.
+    if(av==null && bv==null) return 0;
+    if(av==null) return 1;
+    if(bv==null) return -1;
+    if(typeof av==='string') return dir * String(av).localeCompare(String(bv), 'tr');
+    return dir * (av - bv);
+  });
+
+  // Kart rengi (kırmızı/sarı/yeşil kenarlık ve stok-gün rozeti) stokGunRenkSeviyesi'nden gelen
+  // aynı eşiklere göre belirlenir — sadece tablo hücresi yerine artık kartın kendisine uygulanır.
+  function stokGunSeviyeSinifi(stokGunu){
+    if(stokGunu==null) return '';
+    if(stokGunu < 7) return 'stokgun-crit';
+    if(stokGunu < 14) return 'stokgun-warn';
+    return 'stokgun-ok';
+  }
+
+  // Hedef kutusundaki "ayın X. günü hızıyla hesaplandı" notu için yogunHaftaEtiket'i
+  // ("1-7 (bugünün dilimi)" gibi) okunabilir kısa metne çevirir. Sayısal aralıklarda
+  // ("1-7", "8-14"...) sonuna "günü" eklenir; "22-ay sonu" gibi sayısal olmayan son
+  // dilimde "günü" eklenmez, çünkü "22-ay sonu. günü" anlamsız olurdu.
+  function stokGunHizDilimMetni(yogunHaftaEtiket){
+    const temiz = String(yogunHaftaEtiket||'').replace(' (bugünün dilimi)','').trim();
+    return /^\d+-\d+$/.test(temiz) ? (temiz + '. günü') : temiz;
+  }
+
+  document.getElementById('stokGunKartListe').innerHTML = filtreli.map(r=>{
+    const renk = stokGunRenkSeviyesi(r.stokGunu);
+    const seviyeSinifi = stokGunSeviyeSinifi(r.stokGunu);
+    // Yeni ürün rozeti + veri güveni ipucu: pencere içinde sonradan satışa başlayan ürünler
+    // "Yeni" etiketiyle, az geçmişli (Düşük/Orta güven) ürünler ise gri bir güven notuyla
+    // işaretlenir — kullanıcı bu kartlardaki rakamların daha az veriye dayandığını görür.
+    const yeniRozet = r.yeniUrun ? ' <span title="Bu ürün son 6 aylık pencerede sonradan satışa başladı (ilk satış: '+escapeHtml(ayEtiketi(r.ilkSatisAy)||'')+')" style="display:inline-block;padding:1px 7px;border-radius:100px;font-size:9.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-soft);">YENİ</span>' : '';
+    // Ölü ürün rozeti: son 1-2 ayda hiç satışı olmayan ama geçmişte satmış ürünler — bu
+    // kartlarda "Gerekli Litre" bilinçli olarak boş (—) kalır, çünkü artık hedefe dahil
+    // edilmiyor; Stok Gün ise eski (organik) hızıyla referans amaçlı gösterilmeye devam eder.
+    const oluRozet = r.oluUrun ? ' <span title="Son 1-2 ayda satışı yok — hedeften çıkarıldı, Stok Gün eski hızıyla referans amaçlı gösteriliyor" style="display:inline-block;padding:1px 7px;border-radius:100px;font-size:9.5px;font-weight:700;color:#fff;background:var(--danger);">ÖLÜ ÜRÜN</span>' : '';
+    const guvenRenk = r.veriGuveni==='Düşük' ? 'var(--danger)' : (r.veriGuveni==='Orta' ? 'var(--warn)' : 'var(--ink-faint)');
+    // Güvenlik stoğu ipucu: Z×σ×√LT formülüyle hesaplanan tampon (bkz. computeStokGunRaporu).
+    // stokGunuGuvenlikli artık "stok ne zaman biter" değil, "stok ne zaman güvenlik stoğu
+    // eşiğinin (guvenlikStoguLitre) altına iner" sorusuna cevap verir — yeniden sipariş noktası.
+    const guvenlikIpucu = (r.guvenlikStoguLitre!=null && r.stokGunuGuvenlikli!=null)
+      ? `%95 servis seviyesi hedefiyle güvenlik stoğu: ${Math.round(r.guvenlikStoguLitre).toLocaleString('tr-TR')} L (${STOK_GUN_VARSAYILAN_LEAD_TIME_GUN} günlük ortalama tedarik süresine göre, değişkenlik ${r.gunlukCVKaynagi}). Stok bu seviyenin altına ${Math.round(r.stokGunuGuvenlikli)} gün sonra iner — yeniden sipariş bu tarihten önce verilmeli.`
+      : 'Güvenlik stoğu hesaplanamadı';
+    // Ürün×temsilci risk detayı: bu ürünü en çok satan temsilciler + tahsilat gerçekleşmesi
+    // (bkz. computeStokGunRaporu / state.karneTemsilciMap). Kartta varsa küçük bir genişletme
+    // linki gösterilir; tıklanınca detay alanı açılır/kapanır (bkz. delegated click listener).
+    const riskVarMi = r.temsilciRiskDetayi && r.temsilciRiskDetayi.length>0;
+    const acikMi = state.stokGunAcikRiskSatirlar.has(r.kod);
+    const riskToggle = riskVarMi
+      ? `<button type="button" class="stokgun-risk-toggle" data-risk-kod="${escapeHtml(r.kod)}" title="Bu ürünü en çok satan temsilciler ve tahsilat performansları"><i class="fa-solid fa-chevron-${acikMi?'up':'down'}" aria-hidden="true"></i> Kim satıyor?</button>`
+      : `<div class="stokgun-risk-toggle-bosluk"></div>`;
+    const riskDetay = (riskVarMi && acikMi) ? (function(){
+      const chips = r.temsilciRiskDetayi.map(t=>{
+        const tahsilatSinifi = t.tahsilatGerceklesme==null ? 'tahsilat-yok' : (t.tahsilatGerceklesme<70 ? 'tahsilat-dusuk' : 'tahsilat-iyi');
+        const tahsilatMetin = t.tahsilatGerceklesme==null ? 'tahsilat verisi yok' : `tahsilat %${Math.round(t.tahsilatGerceklesme)}`;
+        return `<span class="stokgun-risk-chip"><b>${escapeHtml(t.temsilci)}</b> <span class="pay">%${t.pay.toFixed(0)} pay</span> · <span class="${tahsilatSinifi}">${tahsilatMetin}</span></span>`;
+      }).join('');
+      return `<div class="stokgun-risk-detay">
+        <div style="font-size:10px;color:var(--ink-faint);font-weight:700;text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;">Bu ayki satışa göre en çok satan temsilciler</div>
+        ${chips}
+      </div>`;
+    })() : '';
+
+    return `<div class="urun-card ${seviyeSinifi}">
+      <div class="urun-card-top">
+        <div class="urun-id">
+          <div class="urun-kod">${escapeHtml(r.kod)}</div>
+          <div class="urun-ad" title="${escapeHtml(r.urunAdi)}">${escapeHtml(r.urunAdi)}</div>
+          <div class="urun-rozet-satir">${yeniRozet}${oluRozet}</div>
+          ${riskToggle}
+        </div>
+        <div class="stokgun-badge" style="color:${renk.renk};background:${renk.bg};" title="${escapeHtml(guvenlikIpucu)}">
+          <span class="n">${r.stokGunu!=null ? Math.round(r.stokGunu) : '—'}</span>
+          <span class="l">GÜN</span>
+        </div>
+      </div>
+      <div class="urun-stat-grid">
+        <div class="urun-stat-chip"><div class="l">DEPO STOK</div><div class="v">${r.anlikStok!=null ? r.anlikStok.toLocaleString('tr-TR') : '—'}</div></div>
+        <div class="urun-stat-chip urun-stat-chip-split" title="Geleneksel Kanal payı %${r.paySellOut.toFixed(1).replace('.',',')} · Modern Kanal payı %${r.payModernKanal.toFixed(1).replace('.',',')}">
+          <div class="l">SATIŞ PAYI</div>
+          <div class="urun-stat-chip-split-row">
+            <div class="urun-stat-chip-split-item gel"><span class="k">Gel.</span><span class="v">%${r.paySellOut.toFixed(1).replace('.',',')}</span></div>
+            <div class="urun-stat-chip-split-divider"></div>
+            <div class="urun-stat-chip-split-item mod"><span class="k">Mod.</span><span class="v">%${r.payModernKanal.toFixed(1).replace('.',',')}</span></div>
+          </div>
+        </div>
+        <div class="urun-stat-chip" title="Veri güveni: ${escapeHtml(r.veriGuveni)}"><div class="l">AKTİF AY</div><div class="v" style="color:${guvenRenk};">${r.aktifAySayisi} ay</div></div>
+      </div>
+      <div class="urun-stat-grid urun-stat-grid-2">
+        <div class="urun-stat-chip"><div class="l">GÜNLÜK MİKTAR</div><div class="v">${r.gunlukMiktar!=null ? r.gunlukMiktar.toLocaleString('tr-TR',{maximumFractionDigits:1}) + '/gün' : '—'}</div></div>
+        <div class="urun-stat-chip"><div class="l">GÜNLÜK LİTRE</div><div class="v">${LT(r.gunlukHiz)}/gün</div></div>
+      </div>
+      <div class="urun-hedef-row">
+        <div class="urun-hedef-baslik"><i class="fa-solid fa-bullseye" aria-hidden="true"></i> Hedef gereken sipariş</div>
+        <div class="urun-hedef-degerler">
+          <div class="urun-hedef-item"><div class="l">MİKTAR</div><div class="v">${r.gerekliMiktar!=null ? r.gerekliMiktar.toLocaleString('tr-TR',{maximumFractionDigits:0}) : '—'}</div></div>
+          <div class="urun-hedef-item"><div class="l">LİTRE</div><div class="v">${r.gerekliLitre!=null ? LT(r.gerekliLitre).replace(/\s*Lt\.?$/,'') : '—'} <span class="birim">Lt.</span></div></div>
+        </div>
+        <div class="urun-hedef-hiz-notu"><i class="fa-regular fa-calendar" aria-hidden="true"></i> Stok günü, ayın <b>${escapeHtml(stokGunHizDilimMetni(r.yogunHaftaEtiket))}</b> hızıyla hesaplandı</div>
+      </div>
+      ${riskDetay}
+    </div>`;
+  }).join('') || `<div class="empty-state" style="grid-column:1/-1;">${q ? 'Aramanızla eşleşen ürün bulunamadı.' : 'Ürün bulunamadı.'}</div>`;
+}
+
+async function renderSellOutView(){
+  const bosPanel = document.getElementById('sellOutBosPanel');
+  const icerik = document.getElementById('sellOutIcerik');
+  populateSellOutAySelect();
+  const seciliAy = state.sellOutSeciliAy;
+  const baseRapor = state.sellOutReport;
+  ktlog('renderSellOutView (GELENEKSEL ekran) → kaynak state.sellOutReport. toplamLitre=', baseRapor&&baseRapor.toplamLitre, 'belgeSayisi=', baseRapor&&baseRapor.belgeSayisi, 'seçiliAy=', seciliAy||'(canlı)');
+
+  let report, isArsivGoruntuleme;
+  if(seciliAy){
+    report = state.sellOutArsivCache[seciliAy] || null;
+    isArsivGoruntuleme = true;
+    if(!report){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('sellOutAsOf').textContent = fmtDate(new Date(seciliAy+'-01'))+' ayına ait arşiv verisi bulunamadı.';
+      return;
+    }
+  }else{
+    isArsivGoruntuleme = false;
+    let canliRapor = baseRapor;
+    // HATA 1 KORUMASI: Canlı görünümde bellekteki rapor boşsa (ör. başka bir işlem sonrası ya da
+    // sayfa yenilenmesinin ardından belleğe henüz yüklenmemişse), boş panel göstermeden ÖNCE
+    // diskten/buluttan bir kez tazelemeyi dene — böylece daha önce yüklenmiş güncel Sell Out
+    // verisi "kayboldu" gibi görünüp litre 0'a düşmez.
+    if(!canliRapor){
+      ktlog('renderSellOutView: bellekte sellOutReport YOK → diskten/buluttan tazeleme deneniyor…');
+      try{ if(typeof sellOutYenile==='function'){ await sellOutYenile(); canliRapor = state.sellOutReport; } }catch(e){ ktlog('sellOutYenile hata:', e && e.message); }
+      ktlog('renderSellOutView tazeleme sonrası:', canliRapor ? ('bulundu, toplamLitre='+canliRapor.toplamLitre) : 'hâlâ boş');
+    }
+    if(!canliRapor){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('sellOutAsOf').textContent = 'Veri kaynağı: Geleneksel Kanal (SAPUI5 dışa aktarımı) — henüz yüklenmedi';
+      return;
+    }
+    report = applySellOutHedef(canliRapor, state.sellOutHedef);
+  }
+  bosPanel.style.display='none';
+  icerik.style.display='block';
+
+  const durumNotu = report.durumVarMi ? '' : " · Müşteri Master'da Durum kolonu bulunamadı, tüm noktalar aktif kabul edildi";
+  if(isArsivGoruntuleme){
+    document.getElementById('sellOutAsOf').textContent = '<i class="fa-solid fa-box" aria-hidden="true"></i> Arşiv: '+fmtDate(new Date(seciliAy+'-01'))+' ayının ('+fmtDate(new Date(report.arsivZamani))+' tarihinde arşivlenmiş) verisi gösteriliyor · '+report.belgeSayisi.toLocaleString('tr-TR')+' satış belgesi'+durumNotu;
+  }else{
+    document.getElementById('sellOutAsOf').textContent = 'Veri kaynağı: SAPUI5 dışa aktarımı · '+report.belgeSayisi.toLocaleString('tr-TR')+' satış belgesi · '+fmtDate(new Date())+' itibarıyla'+durumNotu;
+  }
+
+  const alertEl = document.getElementById('sellOutAlertBanner');
+  if(report.blokajAdet>0){
+    const oran = report.toplamNet>0 ? (report.blokajTutar/report.toplamNet*100) : 0;
+    alertEl.innerHTML = `<div class="alert-banner">
+      <div class="alert-banner-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+      <div class="alert-banner-text"><strong>${report.blokajAdet.toLocaleString('tr-TR')} kalem faturalama blokajlı</strong>— ${TL(report.blokajTutar)} tutarında muhasebeleşmeyi bekliyor, toplam cironun %${oran.toFixed(1).replace('.',',')}'i.</div>
+    </div>`;
+  }else{
+    alertEl.innerHTML = '';
+  }
+
+  const kanalOzeti = sellOutKanalOzeti(report);
+  const {toplamAcikLitre: toplamAcikLitreGenel, toplamKapaliLitre: toplamKapaliLitreGenel, acikKalan: acikKalanGenel, kapaliKalan: kapaliKalanGenel, gerceklesmeOrani: genelGerceklesmeOraniHero} = kanalOzeti;
+
+  const items = [
+    {label:'Gerçekleşme Oranı', icon:'<i class="fa-solid fa-bullseye" aria-hidden="true"></i>', value:null, display: genelGerceklesmeOraniHero!=null?fmtYuzde(genelGerceklesmeOraniHero):'—', sub: `<span style="display:flex;flex-direction:column;align-items:flex-end;gap:1px;"><span style="font-size:9.5px;font-weight:700;letter-spacing:.04em;opacity:.8;">Toplam Litre</span><span style="font-family:var(--font-figures);font-size:19px;font-weight:800;line-height:1.15;">${Math.round(report.toplamLitre).toLocaleString('tr-TR')} L</span></span>`},
+    {label:'Toplam Açık Kanal LT', icon:'<i class="fa-solid fa-box" aria-hidden="true"></i>', cls:'neutral', value:null, display: LT(toplamAcikLitreGenel)},
+    {label:'Toplam Kapalı Kanal LT', icon:'<i class="fa-solid fa-box" aria-hidden="true"></i>', cls:'accent', value:null, display: LT(toplamKapaliLitreGenel)},
+    {label:'Açık Kanal Kalan Litre', icon:'<i class="fa-solid fa-store" aria-hidden="true"></i>', cls:'warn', value:null, display: LT(acikKalanGenel)},
+    {label:'Kapalı Kanal Kalan Litre', icon:'<i class="fa-solid fa-users" aria-hidden="true"></i>', cls:'warn', value:null, display: LT(kapaliKalanGenel)},
+  ];
+  renderKpiHeroRow(items, 'sellOutKpiGrid');
+
+
+  document.getElementById('sellOutSsmCount').textContent = report.ssmSayisi+' Saha Satış Müdürü';
+  const ssmCardsHtml = report.ssmler.map(s=>`
+    <div class="ssm-karne-card" style="border-left:4px solid ${sellOutRenk(s.genelFkns)};">
+      <div class="ssm-karne-top">
+        <div class="cust-avatar">${escapeHtml(avatarBaslangic(s.ssm))}</div>
+        <div>
+          <div class="ssm-karne-name">${escapeHtml(s.ssm)} <span class="badge ssm-hiyerarsi-badge"><i class="fa-solid fa-user-tie" aria-hidden="true"></i> SSM</span></div>
+          <div class="ssm-karne-sub">${s.temsilciSayisi.toLocaleString('tr-TR')} temsilci</div>
+        </div>
+        <div class="ssm-fkns-ring-wrap">
+          ${fknsRingSvg(s.genelFkns)}
+          <div class="ssm-fkns-ring-label">FKNS</div>
+        </div>
+      </div>
+      ${ssmKanalRowHtml('Açık Kanal', s.acikLitre, s.acikHedef, 'fa-lock-open')}
+      ${ssmKanalRowHtml('Kapalı Kanal', s.kapaliLitre, s.kapaliHedef, 'fa-lock')}
+      <div class="ssm-karne-foot">
+        <span class="g-lbl">Hedef Gerçekleşme</span>
+        <span class="g-val" style="color:${sellOutRenk(s.hedefGerceklesme)};">${s.hedefGerceklesme!=null?fmtYuzde(s.hedefGerceklesme):'—'}</span>
+      </div>
+    </div>`).join('');
+
+  document.getElementById('sellOutSsmGrid').innerHTML = report.ssmler.length ? ssmCardsHtml : '<div class="empty-state" style="grid-column:1/-1;">Kayıt yok</div>';
+
+  state.sellOutTemsilciMap = new Map(report.temsilciler.map(x=>[x.key, x]));
+  document.getElementById('sellOutKarneGrid').innerHTML = report.temsilciler.map((r,i)=>{
+    const gercRenk = sellOutRenk(r.hedefGerceklesme);
+    const fknsRenk = sellOutRenk(r.fknsOrani);
+    return `
+    <div class="cust-card sellout-card" data-temsilci-key="${escapeHtml(r.key)}" style="border-left:4px solid ${fknsRenk};">
+      <div class="ssm-karne-top">
+        <div class="cust-avatar">${escapeHtml(avatarBaslangic(r.temsilci))}</div>
+        <div class="cust-info">
+          <div class="musteri-name">${escapeHtml(r.temsilci)} <span class="badge" style="background:${sellOutRenkSoft(r.fknsOrani)};color:${fknsRenk};">#${i+1}</span></div>
+          <span class="temsilci-tag" style="margin-top:5px;display:inline-block;">${escapeHtml(r.ssm)}</span>
+        </div>
+      </div>
+      ${fknsRingUcluSvg(r.fknsAcikOrani, r.fknsKapaliOrani, r.fknsOrani)}
+      ${ssmKanalRowHtml('Açık Kanal', r.acikLitre, r.acikHedef, 'fa-lock-open')}
+      ${ssmKanalRowHtml('Kapalı Kanal', r.kapaliLitre, r.kapaliHedef, 'fa-lock')}
+      <div class="ssm-karne-foot">
+        <span class="g-lbl">Hedef Gerçekleşme</span>
+        <span class="g-val" style="color:${gercRenk};">${r.hedefGerceklesme!=null?fmtYuzde(r.hedefGerceklesme):'—'}</span>
+      </div>
+
+      ${isArsivGoruntuleme ? '' : `<div class="hedef-edit-row">
+        <div class="hedef-field"><label>Açık Hedef (L)</label><input type="number" min="0" step="100" class="sellout-hedef-input" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="acik" value="${r.acikHedef||0}"></div>
+        <div class="hedef-field"><label>Kapalı Hedef (L)</label><input type="number" min="0" step="100" class="sellout-hedef-input" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="kapali" value="${r.kapaliHedef||0}"></div>
+        <button type="button" class="hedef-kaydet-btn" data-temsilci-key="${escapeHtml(r.key)}" data-temsilci-ad="${escapeHtml(r.temsilci)}"><i class="fa-solid fa-lock" aria-hidden="true"></i> Kaydet</button>
+      </div>`}
+
+      <div class="fatura-kesilmeyen-kanal-satirlar" style="margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);">
+        <div class="htk-alt htk-alt-fkns">
+          <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-lock-open" aria-hidden="true"></i></span>Fatura kesilmeyen Açık Kanal nokta: <b style="color:var(--ink);">${r.faturaKesilmeyenNoktaAcik}</b></span>
+          <div class="htk-alt-actions">
+            <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="acik">Detay ↗</button>
+          </div>
+        </div>
+        <div class="htk-alt htk-alt-fkns" style="margin-top:9px;">
+          <span class="htk-ceksenet fatura-kesilmeyen-lbl"><span class="ssm-kanal-icon" style="background:var(--line-soft);color:var(--danger);"><i class="fa-solid fa-lock" aria-hidden="true"></i></span>Fatura kesilmeyen Kapalı Kanal nokta: <b style="color:var(--ink);">${r.faturaKesilmeyenNoktaKapali}</b></span>
+          <div class="htk-alt-actions">
+            <button type="button" class="nokta-detay-btn primary fatura-kesilmeyen-detay-btn" data-temsilci-key="${escapeHtml(r.key)}" data-kanal="kapali">Detay ↗</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('') || '<div class="empty-state" style="grid-column:1/-1;">Kayıt yok</div>';
+
+  document.querySelectorAll('.sellout-hedef-input, .hedef-kaydet-btn').forEach(el=>{
+    el.addEventListener('click', e=>e.stopPropagation());
+  });
+
+  document.querySelectorAll('.hedef-kaydet-btn').forEach(btn=>{
+    btn.addEventListener('click', sellOutHedefKaydetHandler);
+  });
+}
+
+async function sellOutHedefKaydetHandler(e){
+  const btn = e.currentTarget;
+  const key = btn.getAttribute('data-temsilci-key');
+  const ad = btn.getAttribute('data-temsilci-ad');
+  const card = btn.closest('.cust-card');
+  const acikInput = card.querySelector('.sellout-hedef-input[data-kanal="acik"]');
+  const kapaliInput = card.querySelector('.sellout-hedef-input[data-kanal="kapali"]');
+  const acik = Number(acikInput.value)||0;
+  const kapali = Number(kapaliInput.value)||0;
+
+  if(!(await ortakSifreDogrula('Litre hedefini değiştirmek için şifreyi girin:'))) return;
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '⏳ Kaydediliyor…';
+  try{
+    const yeni = Object.assign({}, state.sellOutHedef);
+    yeni[key] = {ad, acik, kapali};
+    await sellOutHedefKaydet(yeni);
+    await renderSellOutView();
+  }catch(err){
+    console.error('Hedef kaydedilemedi:', err);
+    alert('Hedef kaydedilirken bir hata oluştu: '+err.message);
+    btn.textContent = eskiText;
+    btn.disabled = false;
+  }
+}
+
+document.getElementById('sellOutArsivleBtn').addEventListener('click', sellOutArsivleButonu);
+document.getElementById('sellOutAySelect').addEventListener('change', (e)=>{
+  state.sellOutSeciliAy = e.target.value || null;
+  renderSellOutView();
+});
+
+// "Bu Ayın Arşivini Temizle": cari ay (bugünün ayı) için — bilerek "Bu Ayı Arşivle"ye hiç
+// basılmamış olsa bile — bir arşiv kaydı varsa (örn. başka bir cihazdan/oturumdan bulut
+// üzerinden gelmiş olabilir) bu kaydı siler. Güncel (canlı) Sell Out verisi ETKİLENMEZ; yalnızca
+// cari ayın arşiv anlık görüntüsü kaldırılır. Geçmiş ayların (bilerek arşivlenmiş) kayıtlarına
+// kasıtlı olarak dokunulmaz — bu yüzden ay her zaman "bugün"e göre hesaplanır, dropdown'daki
+// seçime göre DEĞİL (kullanıcı yanlışlıkla geçmiş bir ayı silmesin diye).
+document.getElementById('sellOutBuAyArsivTemizleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('sellOutBuAyArsivTemizleBtn');
+  const ayKey = dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const ayEtiket = fmtDate(new Date(ayKey+'-01'));
+  if(!Object.prototype.hasOwnProperty.call(state.sellOutArsivCache||{}, ayKey)){
+    toastGoster('warn', 'Arşiv kaydı yok', ayEtiket + ' ayı için zaten bir arşiv kaydı bulunmuyor.');
+    return;
+  }
+  if(!confirm(ayEtiket + ' ayına ait Sell Out arşiv kaydı silinecek. Güncel (canlı) veriniz ETKİLENMEZ, yalnızca bu arşiv anlık görüntüsü kaldırılır. Devam edilsin mi?')) return;
+  if(!(await ortakSifreDogrula('Arşivi temizlemek için şifreyi girin:'))) return;
+  btn.disabled = true;
+  const oncekiHtml = btn.innerHTML;
+  btn.innerHTML = 'Siliniyor…';
+  try{
+    await sellOutArsivAyiSil(ayKey);
+    if(state.sellOutSeciliAy === ayKey) state.sellOutSeciliAy = null;
+    await renderSellOutView();
+    toastGoster('success', 'Arşiv kaydı silindi', ayEtiket + ' ayına ait arşiv anlık görüntüsü kaldırıldı.');
+  }catch(err){
+    alert('Silme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = oncekiHtml;
+  }
+});
+
+// Modern Kanal — Key Account Hedef kaydetme (şifre korumalı, Geleneksel Kanal ile aynı şifre).
+document.getElementById('modernKanalHedefKaydetBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalHedefKaydetBtn');
+  const input = document.getElementById('modernKanalHedefInput');
+  const deger = Number(input.value)||0;
+  if(!(await ortakSifreDogrula('Key Account Hedefini değiştirmek için şifreyi girin:'))) return;
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '⏳ Kaydediliyor…';
+  try{
+    await modernKanalHedefKaydet(deger);
+    await renderModernKanalView();
+  }catch(err){
+    console.error('Modern Kanal hedefi kaydedilemedi:', err);
+    alert('Hedef kaydedilirken bir hata oluştu: '+err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+document.getElementById('modernKanalAySelect')?.addEventListener('change', (e)=>{
+  state.modernKanalSeciliAy = e.target.value || null;
+  renderModernKanalView();
+});
+
+// Modern Kanal — "Bu Ayı Arşivle": İrsaliye dosyasındaki satırların çoğunluğu hangi aya
+// aitse (İrsaliye Tarihi baz alınarak) arşiv o ayın altına yazılır — Geleneksel Kanal'daki
+// sellOutBaskinAy ile aynı mantık, ama tarih kolonu farklı olduğu için ayrı bir tespit
+// fonksiyonu (irsaliyeBaskinAy) kullanılır.
+function irsaliyeBaskinAy(rows){
+  const ayCounts = new Map();
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    ayCounts.set(ayKey, (ayCounts.get(ayKey)||0) + 1);
+  });
+  let baskinAy = null, maksSayi = 0;
+  ayCounts.forEach((sayi, ay)=>{ if(sayi > maksSayi){ maksSayi = sayi; baskinAy = ay; } });
+  return baskinAy;
+}
+
+document.getElementById('modernKanalArsivleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalArsivleBtn');
+  const baseRapor = state.modernKanalReport;
+  if(!baseRapor){
+    toastGoster('warn', 'Arşivlenecek rapor yok', 'Önce İrsaliye dosyasını yükleyip "Verileri Güncelle"ye basın.');
+    return;
+  }
+  const hamVeri = state.modernKanalKendiDosya && state.modernKanalKendiDosya.data;
+  const ayKey = (hamVeri && irsaliyeBaskinAy(hamVeri)) || dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const ayEtiket = fmtDate(new Date(ayKey+'-01'));
+  const zatenVar = Object.prototype.hasOwnProperty.call(state.modernKanalArsivCache||{}, ayKey);
+  const soru = zatenVar
+    ? (ayEtiket+' için arşiv zaten var (dosya içeriğine göre bu veri '+ayEtiket+' ayına ait). Üzerine yazılsın mı?')
+    : ('Dosya içeriğine göre bu veri '+ayEtiket+' ayına ait görünüyor. GÜNCEL Modern Kanal verisi bu ayın altına kalıcı olarak arşivlensin mi?');
+  if(!confirm(soru)) return;
+  if(!(await ortakSifreDogrula('Bu ayı arşivlemek için şifreyi girin:'))) return;
+
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '🗄️ Arşivleniyor…';
+  try{
+    const raporSnapshot = Object.assign({}, baseRapor, {
+      hedefAnlikGoruntu: state.modernKanalHedef||0,
+      arsivAyKey: ayKey,
+      arsivZamani: new Date().toISOString(),
+    });
+    state.modernKanalArsivCache = Object.assign({}, state.modernKanalArsivCache, {[ayKey]: raporSnapshot});
+    await saveModernKanalArsivToLocal(state.modernKanalArsivCache);
+    const sonuc = await saveModernKanalArsivAyToCloud(ayKey, raporSnapshot);
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı (kullanıcı isteği) — bulut yazması başarısız olursa bu arşiv kaydı
+      // HİÇBİR YERDE kalıcı DEĞİLDİR, sayfa yenilenirse kaybolur.
+      alert('UYARI: Arşiv buluta yazılamadı (' + (sonuc.reason||'bilinmeyen hata') + '). Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfa yenilenirse bu arşiv kaydı kaybolur.');
+    }
+    populateModernKanalAySelect();
+    document.getElementById('modernKanalAySelect').value = ayKey;
+    state.modernKanalSeciliAy = ayKey;
+    await renderModernKanalView();
+  }catch(err){
+    console.error('Modern Kanal arşivleme hatası:', err);
+    alert('Arşivleme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+// Modern Kanal — "Tüm Ayları Toplu Arşivle": yüklenen İrsaliye dosyasındaki TÜM satırları
+// İrsaliye Tarihi'ne göre kaç farklı aya ayrışıyorsa, hepsini TEK TEK kendi ayına arşivler —
+// kullanıcı 6 ayı tek tek yükleyip arşivlemek zorunda kalmadan, 6 aylık tek bir dosyayı bir
+// kerede tüm aylarına dağıtabilir.
+document.getElementById('modernKanalTopluArsivleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalTopluArsivleBtn');
+  const hamVeri = state.modernKanalKendiDosya && state.modernKanalKendiDosya.data;
+  if(!hamVeri || !hamVeri.length){
+    toastGoster('warn', 'Önce dosya gerekli', 'Toplu arşivlemek için bir İrsaliye dosyası yükleyip "Verileri Güncelle"ye basın.');
+    return;
+  }
+  const gruplar = irsaliyeAylaraGoreGrupla(hamVeri);
+  const aylar = Array.from(gruplar.keys()).sort();
+  if(!aylar.length){
+    toastGoster('warn', 'İrsaliye Tarihi bulunamadı', 'Dosyada geçerli bir İrsaliye Tarihi kolonu/verisi yok.');
+    return;
+  }
+  const ayEtiketleri = aylar.map(a=>fmtDate(new Date(a+'-01'))).join(', ');
+  if(!confirm('Dosyadaki veriler şu '+aylar.length+' aya ayrıştırılıp HEPSİ TEK TEK arşivlenecek: '+ayEtiketleri+'. Devam edilsin mi?')) return;
+  if(!(await ortakSifreDogrula('Toplu arşivlemek için şifreyi girin:'))) return;
+
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = '🗄️ Toplu arşivleniyor…';
+  try{
+    const yeniCache = Object.assign({}, state.modernKanalArsivCache);
+    for(const ayKey of aylar){
+      const ayRows = gruplar.get(ayKey);
+      const ayRapor = buildIrsaliyeReport(ayRows);
+      const raporSnapshot = Object.assign({}, ayRapor, {
+        hedefAnlikGoruntu: state.modernKanalHedef||0,
+        arsivAyKey: ayKey,
+        arsivZamani: new Date().toISOString(),
+      });
+      yeniCache[ayKey] = raporSnapshot;
+      await saveModernKanalArsivAyToCloud(ayKey, raporSnapshot);
+    }
+    state.modernKanalArsivCache = yeniCache;
+    await saveModernKanalArsivToLocal(state.modernKanalArsivCache);
+    populateModernKanalAySelect();
+    await renderModernKanalView();
+    toastGoster('success', aylar.length + ' ay arşivlendi', ayEtiketleri);
+  }catch(err){
+    console.error('Modern Kanal toplu arşivleme hatası:', err);
+    alert('Toplu arşivleme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+});
+
+// "Bu Ayın Arşivini Temizle": cari ay (bugünün ayı) için — bilerek "Bu Ayı Arşivle"ye hiç
+// basılmamış olsa bile — bir arşiv kaydı varsa (örn. başka bir cihazdan/oturumdan bulut
+// üzerinden gelmiş olabilir) bu kaydı siler. Güncel (canlı) Modern Kanal verisi ETKİLENMEZ;
+// yalnızca cari ayın arşiv anlık görüntüsü kaldırılır. Geçmiş ayların (bilerek arşivlenmiş)
+// kayıtlarına kasıtlı olarak dokunulmaz — ay her zaman "bugün"e göre hesaplanır, dropdown'daki
+// seçime göre DEĞİL (kullanıcı yanlışlıkla geçmiş bir ayı silmesin diye).
+document.getElementById('modernKanalBuAyArsivTemizleBtn')?.addEventListener('click', async ()=>{
+  const btn = document.getElementById('modernKanalBuAyArsivTemizleBtn');
+  const ayKey = dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const ayEtiket = fmtDate(new Date(ayKey+'-01'));
+  if(!Object.prototype.hasOwnProperty.call(state.modernKanalArsivCache||{}, ayKey)){
+    toastGoster('warn', 'Arşiv kaydı yok', ayEtiket + ' ayı için zaten bir arşiv kaydı bulunmuyor.');
+    return;
+  }
+  if(!confirm(ayEtiket + ' ayına ait Modern Kanal arşiv kaydı silinecek. Güncel (canlı) veriniz ETKİLENMEZ, yalnızca bu arşiv anlık görüntüsü kaldırılır. Devam edilsin mi?')) return;
+  if(!(await ortakSifreDogrula('Arşivi temizlemek için şifreyi girin:'))) return;
+  btn.disabled = true;
+  const oncekiHtml = btn.innerHTML;
+  btn.innerHTML = 'Siliniyor…';
+  try{
+    await modernKanalArsivAyiSil(ayKey);
+    if(state.modernKanalSeciliAy === ayKey) state.modernKanalSeciliAy = null;
+    await renderModernKanalView();
+    toastGoster('success', 'Arşiv kaydı silindi', ayEtiket + ' ayına ait arşiv anlık görüntüsü kaldırıldı.');
+  }catch(err){
+    alert('Silme sırasında bir hata oluştu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = oncekiHtml;
+  }
+});
+
+// Sell Out Raporu'nun ana "Raporu Oluştur" akışından TAMAMEN bağımsız kendi yükleme alanı —
+// kullanıcı diğer raporlar (Kalemler, Sipariş vb.) için dosya yüklemeden, yalnızca Sell Out
+// verisini burada seçip "Verileri Güncelle"ye basarak hesaplatabilir. state.files.sellOut'a hiç
+// dokunmaz; doğrudan kendi state.sellOutKendiDosya değişkenini kullanır.
+(function(){
+  const dosyaInput = document.getElementById('sellOutKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('sellOutKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('sellOutKendiGuncelleBtn');
+  const durumEl = document.getElementById('sellOutKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    // YARIŞ DÜZELTMESİ: buton, dosya BAŞARIYLA OKUNDUKTAN sonra (reader.onload içinde) aktifleşir.
+    // Önceden seçim anında aktifleşiyordu — yavaş/başarısız okumada kullanıcı, ekranda yeni dosya
+    // adı yazarken bir ÖNCEKİ dosyanın verisiyle hesaplama başlatabiliyordu. Eski veri de temizlenir.
+    guncelleBtn.disabled = true;
+    state.sellOutKendiDosya = null;
+    durumEl.textContent = 'Dosya okunuyor…';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        ktlog('GELENEKSEL input → state.sellOutKendiDosya. dosya="'+file.name+'" satır='+(data?data.length:0)+'. İlk satır kolonları:', data&&data[0]?Object.keys(data[0]).slice(0,6):'(boş)');
+        state.sellOutKendiDosya = {data, ad:file.name};
+        guncelleBtn.disabled = false;
+        durumEl.textContent = '';
+      }catch(err){
+        console.error('Sell Out dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.onerror = ()=>{
+      // FileReader başarısız olabilir (ör. iOS'ta dosya sağlayıcının erişimi geri çekmesi) —
+      // sessiz kalmak yerine kullanıcıya net durum bildirilir.
+      durumEl.textContent = 'Dosya okunamadı — lütfen dosyayı yeniden seçin.';
+      guncelleBtn.disabled = true;
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.sellOutKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      // Müşteri Master, temsilci/SSM eşlemesi için burada da (ana akıştan bağımsız olarak) tazelenir —
+      // kullanıcı ana ekrana hiç gitmese bile FKNS ve temsilci isimleri doğru gelsin diye.
+      await musteriMasterYenile();
+      // SAVUNMACI KONTROL: Yanlışlıkla Modern Kanal (İrsaliye) dosyası bu alana seçildiyse, Sell Out
+      // olarak işlenmesi anlamsız/karışık sonuç verir. Dosyanın gerçekten Sell Out olduğunu ayırt
+      // edici kolonlarla doğrula; değilse net hata ver ve işlemeyi durdur (hata 2'nin önlenmesi).
+      {
+        const ilk = state.sellOutKendiDosya.data && state.sellOutKendiDosya.data[0];
+        const kolonlar = ilk ? Object.keys(ilk) : [];
+        const sellOutMu = kolonlar.includes('Müşteri Kanalı Tnm.') || kolonlar.includes('Açık/Otel Tnm.') || kolonlar.includes('Hacim Segmenti Tnm.');
+        const irsaliyeMi = kolonlar.includes('İrsaliye Tarihi') && kolonlar.includes('Ürün Kodu');
+        ktlog('GELENEKSEL doğrulama: sellOutMu=', sellOutMu, 'irsaliyeMi=', irsaliyeMi, 'kolonlar=', kolonlar.slice(0,8));
+        if(irsaliyeMi && !sellOutMu){
+          throw new Error('Bu dosya bir Modern Kanal (İrsaliye) dosyası gibi görünüyor — Geleneksel Kanal (Sell Out) alanına yüklendi. Lütfen Sell Out dosyasını bu alana, İrsaliye dosyasını Modern Kanal alanına yükleyin.');
+        }
+      }
+      ktlog('GELENEKSEL "Verileri Güncelle" → buildSellOutReport çağrılıyor. Kaynak: state.sellOutKendiDosya ('+(state.sellOutKendiDosya&&state.sellOutKendiDosya.ad)+', '+(state.sellOutKendiDosya&&state.sellOutKendiDosya.data?state.sellOutKendiDosya.data.length:0)+' satır)');
+      const baseRapor = buildSellOutReport(state.sellOutKendiDosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay, state.musteriMasterKanal);
+      await sellOutKaydet(baseRapor);
+      await renderSellOutView();
+      durumEl.textContent = '✓ Güncellendi — ' + fmtDate(new Date());
+    }catch(err){
+      console.error('Sell Out raporu hesaplanamadı:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Modern Kanal (İrsaliye Listesi) sekmesindeki bağımsız dosya yükleme alanı — Geleneksel
+// Kanal ile aynı desende, ana yükleme akışından tamamen ayrı çalışır.
+(function(){
+  const dosyaInput = document.getElementById('modernKanalKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('modernKanalKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('modernKanalKendiGuncelleBtn');
+  const durumEl = document.getElementById('modernKanalKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    // YARIŞ DÜZELTMESİ: buton, dosya BAŞARIYLA OKUNDUKTAN sonra (reader.onload içinde) aktifleşir.
+    // Önceden seçim anında aktifleşiyordu — yavaş/başarısız okumada kullanıcı, ekranda yeni dosya
+    // adı yazarken bir ÖNCEKİ dosyanın verisiyle hesaplama başlatabiliyordu. Eski veri de temizlenir.
+    guncelleBtn.disabled = true;
+    state.modernKanalKendiDosya = null;
+    durumEl.textContent = 'Dosya okunuyor…';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        ktlog('MODERN input → state.modernKanalKendiDosya. dosya="'+file.name+'" satır='+(data?data.length:0)+'. İlk satır kolonları:', data&&data[0]?Object.keys(data[0]).slice(0,6):'(boş)');
+        state.modernKanalKendiDosya = {data, ad:file.name};
+        guncelleBtn.disabled = false;
+        durumEl.textContent = '';
+      }catch(err){
+        console.error('İrsaliye dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.onerror = ()=>{
+      // FileReader başarısız olabilir (ör. iOS'ta dosya sağlayıcının erişimi geri çekmesi) —
+      // sessiz kalmak yerine kullanıcıya net durum bildirilir.
+      durumEl.textContent = 'Dosya okunamadı — lütfen dosyayı yeniden seçin.';
+      guncelleBtn.disabled = true;
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.modernKanalKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      // SAVUNMACI KONTROL (simetrik): Yanlışlıkla Sell Out dosyası bu Modern Kanal alanına
+      // seçildiyse durdur — İrsaliye olarak işlenirse 'İrsaliye Tarihi' bulunamaz ve litre 0 çıkar.
+      {
+        const ilk = state.modernKanalKendiDosya.data && state.modernKanalKendiDosya.data[0];
+        const kolonlar = ilk ? Object.keys(ilk) : [];
+        const irsaliyeMi = kolonlar.includes('İrsaliye Tarihi') && kolonlar.includes('Ürün Kodu');
+        const sellOutMu = kolonlar.includes('Müşteri Kanalı Tnm.') || kolonlar.includes('Açık/Otel Tnm.') || kolonlar.includes('Hacim Segmenti Tnm.');
+        ktlog('MODERN doğrulama: irsaliyeMi=', irsaliyeMi, 'sellOutMu=', sellOutMu, 'kolonlar=', kolonlar.slice(0,8));
+        if(sellOutMu && !irsaliyeMi){
+          throw new Error('Bu dosya bir Geleneksel Kanal (Sell Out) dosyası gibi görünüyor — Modern Kanal (İrsaliye) alanına yüklendi. Lütfen İrsaliye dosyasını bu alana, Sell Out dosyasını Geleneksel Kanal alanına yükleyin.');
+        }
+      }
+      ktlog('MODERN "Verileri Güncelle" → buildIrsaliyeReport çağrılıyor. Kaynak: state.modernKanalKendiDosya ('+(state.modernKanalKendiDosya&&state.modernKanalKendiDosya.ad)+', '+(state.modernKanalKendiDosya&&state.modernKanalKendiDosya.data?state.modernKanalKendiDosya.data.length:0)+' satır)');
+      const rapor = buildIrsaliyeReport(state.modernKanalKendiDosya.data);
+      await modernKanalKaydet(rapor);
+      await renderModernKanalView();
+      durumEl.textContent = '✓ Güncellendi — ' + fmtDate(new Date());
+    }catch(err){
+      console.error('Modern Kanal raporu hesaplanamadı:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Stok Gün sekmesindeki bağımsız Malzemeler (anlık depo stoğu) yükleme alanı — aynı desende,
+// ana akıştan tamamen ayrı. Malzeme numarası -> Tahditsiz kullanılabilir stok eşlemesini
+// state.malzemelerStok Map'ine yazar (kalıcı saklanmaz, her oturumda/sekmede yeniden yüklenir —
+// zaten anlık bir stok görüntüsü olduğu için kalıcılığın pratik faydası yok).
+(function(){
+  const dosyaInput = document.getElementById('stokGunKendiDosyaInput');
+  const dosyaAdiEl = document.getElementById('stokGunKendiDosyaAdi');
+  const guncelleBtn = document.getElementById('stokGunKendiGuncelleBtn');
+  const durumEl = document.getElementById('stokGunKendiDurum');
+  if(!dosyaInput) return;
+
+  dosyaInput.addEventListener('change', (e)=>{
+    const file = e.target.files[0];
+    if(!file) return;
+    dosyaAdiEl.textContent = file.name;
+    // YARIŞ DÜZELTMESİ: buton, dosya BAŞARIYLA OKUNDUKTAN sonra (reader.onload içinde) aktifleşir.
+    // Önceden seçim anında aktifleşiyordu — yavaş/başarısız okumada kullanıcı, ekranda yeni dosya
+    // adı yazarken bir ÖNCEKİ dosyanın verisiyle hesaplama başlatabiliyordu. Eski veri de temizlenir.
+    guncelleBtn.disabled = true;
+    state.stokGunKendiDosya = null;
+    durumEl.textContent = 'Dosya okunuyor…';
+    const reader = new FileReader();
+    reader.onload = (ev)=>{
+      try{
+        if(!xlsxHazirMi()) throw new Error('Excel okuma bileşeni (xlsx) yüklenemedi — sayfayı yenileyin.');
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const {data} = sheetToObjects(ws);
+        state.stokGunKendiDosya = {data, ad:file.name};
+        guncelleBtn.disabled = false;
+        durumEl.textContent = '';
+      }catch(err){
+        console.error('Malzemeler dosyası okunamadı:', err);
+        durumEl.textContent = 'Dosya okunamadı: ' + err.message;
+        guncelleBtn.disabled = true;
+      }
+    };
+    reader.onerror = ()=>{
+      // FileReader başarısız olabilir (ör. iOS'ta dosya sağlayıcının erişimi geri çekmesi) —
+      // sessiz kalmak yerine kullanıcıya net durum bildirilir.
+      durumEl.textContent = 'Dosya okunamadı — lütfen dosyayı yeniden seçin.';
+      guncelleBtn.disabled = true;
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  guncelleBtn.addEventListener('click', async ()=>{
+    if(!state.stokGunKendiDosya){ durumEl.textContent = 'Önce bir dosya seçin.'; return; }
+    guncelleBtn.disabled = true;
+    const oncekiText = guncelleBtn.innerHTML;
+    guncelleBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Hesaplanıyor…';
+    durumEl.textContent = '';
+    try{
+      const stokMap = new Map();
+      (state.stokGunKendiDosya.data||[]).forEach(r=>{
+        const kod = String(r['Malzeme numarası']||'').trim();
+        if(!kod) return;
+        stokMap.set(kod, Number(r['Tahditsiz kullanılabilir'])||0);
+      });
+      // Son yüklenen Malzemeler dosyası buluta (ve cihaza) kaydedilir — Müşteri Master ile
+      // aynı desen: yeni bir dosya yüklenip güncellenene kadar bu kayıt kullanılmaya devam
+      // eder, sayfa yenilendiğinde/sekmeye tekrar girildiğinde otomatik geri yüklenir.
+      await malzemelerStokKaydet(stokMap);
+      renderStokGunView();
+      durumEl.textContent = '✓ Güncellendi ve buluta kaydedildi — ' + fmtDate(new Date()) + ' (' + stokMap.size.toLocaleString('tr-TR') + ' ürün)';
+    }catch(err){
+      console.error('Malzemeler verisi işlenemedi:', err);
+      durumEl.textContent = 'Hata: ' + err.message;
+    }finally{
+      guncelleBtn.disabled = false;
+      guncelleBtn.innerHTML = oncekiText;
+    }
+  });
+})();
+
+// Stok Gün tablosu arama kutusu — büyük/küçük harf duyarsız (Türkçe İ/ı için tr-TR locale),
+// ürün adı veya kodu üzerinden filtreler. Sistemin diğer sekmelerindeki arama kutularıyla
+// aynı wireSearchInput/wireSearchClear yardımcı fonksiyonlarını kullanır.
+if(document.getElementById('stokGunSearchInput')){
+  const debouncedStokGunFiltre = debounce(stokGunTabloyuFiltreleyipCiz);
+  wireSearchInput('stokGunSearchInput', 'stokGunSearchClearBtn', debouncedStokGunFiltre);
+  wireSearchClear('stokGunSearchInput', 'stokGunSearchClearBtn', stokGunTabloyuFiltreleyipCiz);
+}
+// Stok Gün artık tablo değil kart-grid olduğu için sıralama, tıklanabilir kolon başlığı
+// yerine bir <select> ile yapılır (bkz. #stokGunSortSelect, kart panelinin üstünde). Seçilen
+// değer "anahtar:yön" formatındadır (ör. "stokGunu:1" = Stok Gün'e göre artan/azdan-çoğa).
+const stokGunSortSelectEl = document.getElementById('stokGunSortSelect');
+if(stokGunSortSelectEl){
+  const [ilkKey, ilkDir] = (stokGunSortSelectEl.value||'stokGunu:1').split(':');
+  state.stokGunSort = { key: ilkKey, dir: Number(ilkDir) };
+  stokGunSortSelectEl.addEventListener('change', ()=>{
+    const [key, dir] = stokGunSortSelectEl.value.split(':');
+    state.stokGunSort = { key, dir: Number(dir) };
+    stokGunTabloyuFiltreleyipCiz();
+  });
+}
+document.getElementById('stokGunMarkaFilter')?.addEventListener('change', stokGunTabloyuFiltreleyipCiz);
+
+// Tümü/Kritik/Yeni/Ölü sekme butonları
+document.querySelectorAll('.stokgun-sekme-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=> stokGunSekmeDegistir(btn.dataset.sekme));
+});
+
+// Ürün×temsilci risk detayı "Kim satıyor?" toggle — kart listesi her render'da yeniden
+// oluştuğu için delegated (üst kart-liste konteyneri üzerinden) bir click listener kullanılıyor.
+document.getElementById('stokGunKartListe')?.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.stokgun-risk-toggle');
+  if(!btn) return;
+  const kod = btn.dataset.riskKod;
+  if(state.stokGunAcikRiskSatirlar.has(kod)) state.stokGunAcikRiskSatirlar.delete(kod);
+  else state.stokGunAcikRiskSatirlar.add(kod);
+  stokGunTabloyuFiltreleyipCiz();
+});
+
+// Not: Kritik stok uyarıları için tarayıcı bildirimi (Notification API) özelliği
+// kaldırıldı — panel içi banner ve rozet uyarıları yeterli görüldü, ayrıca izin
+// istemi kullanıcı deneyimini bozuyordu.
+
+document.getElementById('sellOutYenileBtn').addEventListener('click', async ()=>{
+  const btn = document.getElementById('sellOutYenileBtn');
+  btn.disabled = true;
+  const prevText = btn.textContent;
+  btn.textContent = '🔄 Yenileniyor…';
+  try{
+    // Bu 4 çağrı birbirinden bağımsız — hepsi paralel çalıştırılıp sonra render edilir.
+    await Promise.all([
+      sellOutHedefYenile(),
+      musteriMasterYenile(),
+      sellOutYenile(),
+      sellOutArsivYenile(true),
+    ]);
+    await renderSellOutView();
+  }catch(err){
+    console.error('Sell Out verisi yenilenemedi:', err);
+    alert('Yenileme sırasında bir hata oluştu: ' + err.message + '\n\nLütfen tekrar deneyin.');
+  }finally{
+    btn.disabled = false;
+    btn.textContent = prevText;
+  }
+});
+
+// --- Olay bağlamaları ---
+document.getElementById('dsoTrendYenileBtn').addEventListener('click', ()=> renderDsoTrendView(state.report || {musteriler:[]}, true));
+document.getElementById('karneYenileBtn').addEventListener('click', ()=> renderTemsilciKarnesiView(state.report || {musteriler:[]}, true));
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('#karneGrid .fatura-detay-btn, #supheliHukukiKartGrid .fatura-detay-btn, #musteriTbody .fatura-detay-btn, #sevkMusteriTbody .fatura-detay-btn, #faturaKontrolTbody .fatura-detay-btn, #karneRiskliModalList .fatura-detay-btn');
+  if(!btn) return;
+  e.stopPropagation();
+  faturaModalAc(btn.getAttribute('data-musteri-kod'), btn.getAttribute('data-musteri-adi'));
+});
+document.getElementById('supheliHukukiDahaFazlaBtn').addEventListener('click', ()=>{
+  state.hukukiGosterilen += HUKUKI_SAYFA_BOYUTU;
+  renderSupheliAlacakView(state.report);
+});
+const debouncedRenderSupheliHukuki = debounce(()=>{ state.hukukiGosterilen = HUKUKI_SAYFA_BOYUTU; renderSupheliAlacakView(state.report); });
+wireSearchInput('hukukiSearchInput', 'hukukiSearchClearBtn', debouncedRenderSupheliHukuki);
+wireSearchClear('hukukiSearchInput', 'hukukiSearchClearBtn', ()=>{ state.hukukiGosterilen = HUKUKI_SAYFA_BOYUTU; renderSupheliAlacakView(state.report); });
+document.getElementById('hukukiTemsilciFilter').addEventListener('change', ()=>{
+  state.hukukiGosterilen = HUKUKI_SAYFA_BOYUTU;
+  renderSupheliAlacakView(state.report);
+});
+document.getElementById('hukukiRiskFilter').addEventListener('change', ()=>{
+  state.hukukiGosterilen = HUKUKI_SAYFA_BOYUTU;
+  renderSupheliAlacakView(state.report);
+});
+document.getElementById('hukukiVadeMinInput').addEventListener('input', debouncedRenderSupheliHukuki);
+document.getElementById('hukukiVadeMaxInput').addEventListener('input', debouncedRenderSupheliHukuki);
+document.getElementById('yoYenileBtn').addEventListener('click', ()=> renderYonetimOzetiView(state.report || {musteriler:[]}, true));
+document.getElementById('ceiYenileBtn').addEventListener('click', ()=> renderCeiView(state.report || {musteriler:[]}, true));
+document.getElementById('ceiAySelect').addEventListener('change', (e)=>{
+  state.ceiAy = e.target.value || null;
+  recomputeAndRenderCei(state.report || {musteriler:[]}, false);
+});
+
+
+document.querySelectorAll('th[data-key]').forEach(th=>{
+  th.setAttribute('tabindex','0');
+  th.setAttribute('role','button');
+  if(!th.hasAttribute('aria-label')){
+    th.setAttribute('aria-label', th.textContent.trim().replace(/[▲▼]/g,'').trim() + ' - sırala');
+  }
+  th.addEventListener('keydown', e=>{
+    if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
+      e.preventDefault();
+      th.click();
+    }
+  });
+  th.addEventListener('click', ()=>{
+    const table = th.closest('table');
+    if(!table) return;
+    table.querySelectorAll('th[data-key]').forEach(h=>h.removeAttribute('aria-sort'));
+    const arrow = th.querySelector('.arrow');
+    const dirText = arrow ? arrow.textContent : '';
+    if(dirText==='▲') th.setAttribute('aria-sort','ascending');
+    else if(dirText==='▼') th.setAttribute('aria-sort','descending');
+  });
+});
