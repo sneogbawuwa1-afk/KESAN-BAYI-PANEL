@@ -130,7 +130,7 @@
     <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Excel dosyalarını sürükleyip bırakın veya seçmek için Enter'a basın">
       <i class="fa-solid fa-cloud-arrow-up" style="font-size:32px;color:#8A6D1F;" aria-hidden="true"></i>
       <div class="dz-title">Excel dosyalarını buraya sürükleyin ya da tıklayıp seçin</div>
-      <div class="dz-sub">Bu ekrandan <b>Kalemler</b> (zorunlu) ve <b>Müşteri Master</b> (opsiyonel) yüklenir. Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto artık üst menüdeki <b>"Veri Yükle → Günlük Veri"</b> sekmesinden; Sipariş/Tahsilat/Fatura/Depozito/Bayi Hak Ediş/Yükleme ve Kanal Raporları ise <b>"Veri Yükle → Arşiv Verisi"</b> sekmesinden yüklenir.</div>
+      <div class="dz-sub">Bu ekrandan <b>Kalemler</b> (zorunlu) ve <b>Müşteri Master</b> (opsiyonel) yüklenir. Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto artık üst menüdeki <b>"Veri Yükle → Günlük Veri"</b> sekmesinden; Sipariş/Tahsilat/Fatura/Bayi Hak Ediş/Yükleme ve Kanal Raporları ise <b>"Veri Yükle → Arşiv Verisi"</b> sekmesinden yüklenir.</div>
     </div>
     <input type="file" id="fileInput" accept=".xlsx,.xls" multiple />
 
@@ -247,7 +247,7 @@
         <span class="pill" id="statusPillMain" role="status" aria-live="polite"><i class="fa-solid fa-cloud" aria-hidden="true"></i><span id="statusPillMainMsg">Veri bekleniyor</span></span>
 
         <div class="gvy-wrap" id="gvyWrap">
-          <button type="button" class="gvy-btn" id="gvyToggleBtn" aria-haspopup="true" aria-expanded="false" aria-controls="gvyPanel" title="Günlük güncelleme (Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto) ve arşiv verisi (Sipariş, Tahsilat, Fatura, Depozito, Bayi Hak Ediş, Yükleme + Kanal Raporları) dosyalarını buradan yükleyin">
+          <button type="button" class="gvy-btn" id="gvyToggleBtn" aria-haspopup="true" aria-expanded="false" aria-controls="gvyPanel" title="Günlük güncelleme (Çek/Senet, Ticari Stok, Ciro Primi, Dönemsel İskonto) ve arşiv verisi (Sipariş, Tahsilat, Fatura, Bayi Hak Ediş, Yükleme + Kanal Raporları) dosyalarını buradan yükleyin">
             <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Veri Yükle
           </button>
           <div class="gvy-panel" id="gvyPanel" role="dialog" aria-label="Veri Yükle">
@@ -430,14 +430,6 @@
                 <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
                 <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                 <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="fatura" title="Fatura Dökümü arşiv kayıtlarını tarihe göre sil" aria-label="Fatura Dökümü arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
-              </div>
-            </div>
-            <div class="gvy-row" data-gvy-type="depozitoTahsilat">
-              <div><div class="gvy-row-label">Depozito Tahsilat</div><div class="gvy-row-sub" data-gvy-sub></div><div class="gvy-row-arsivgun" data-gvy-arsivgun></div></div>
-              <div class="gvy-row-btns">
-                <button type="button" class="gvy-file-btn" data-gvy-filebtn>Dosya Seç</button>
-                <button type="button" class="gvy-remove-btn" data-gvy-removebtn title="Seçili dosyayı kaldır" style="display:none;"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                <button type="button" class="gvy-remove-btn" data-gvy-arsivsilbtn="depozitoTahsilat" title="Depozito Tahsilat arşiv kayıtlarını tarihe göre sil" aria-label="Depozito Tahsilat arşiv kayıtlarını tarihe göre sil"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
               </div>
             </div>
             <div class="gvy-row" data-gvy-type="bayiHakedis">
@@ -1789,7 +1781,7 @@
 
     <!-- Kalemler kilit modalı kaldırıldı (özellik iptal edilmişti; JS zinciriyle birlikte temizlendi) -->
 
-    <!-- Arşiv verisi (Sipariş/Tahsilat/Fatura/Depozito/Bayi Hak Ediş/Yükleme Raporu) için tarih
+    <!-- Arşiv verisi (Sipariş/Tahsilat/Fatura/Bayi Hak Ediş/Yükleme Raporu) için tarih
          aralığı seçmeli silme modalı. Tek/aynı ay/aralık/tüm günler seçimini destekler. -->
     <div class="modal-overlay" id="arsivSilModalOverlay" style="z-index:1040;">
       <div class="modal" id="arsivSilModal" role="dialog" aria-modal="true" aria-labelledby="arsivSilModalTitle" style="max-width:420px;">

@@ -1,1 +1,1228 @@
-const _0x16ae49=_0x5dbf;(function(_0x1285b1,_0x1e641d){const _0x4f2040=_0x5dbf,_0xa2131a=_0x1285b1();while(!![]){try{const _0x260d6a=-parseInt(_0x4f2040(0x23f))/(0x72f+0xc1f+-0x9*0x225)*(parseInt(_0x4f2040(0x20c))/(-0x4*-0x2c9+0x1e9c+-0x29be))+parseInt(_0x4f2040(0x47c))/(0x95*-0x36+-0x1*-0x1c09+0x1*0x368)*(parseInt(_0x4f2040(0x401))/(-0xd7e+0x2*0x25f+0x8c4*0x1))+parseInt(_0x4f2040(0x38b))/(-0x1aca+0x1*0x1f82+0x1*-0x4b3)*(-parseInt(_0x4f2040(0x322))/(-0x167b+-0x1*0x1af+0x1830))+-parseInt(_0x4f2040(0x18c))/(0x10db*-0x2+-0x928*-0x4+-0x1*0x2e3)*(parseInt(_0x4f2040(0x233))/(0x2464+-0x599+-0x1ec3))+parseInt(_0x4f2040(0x42f))/(-0x1*0x6d3+0x20ce+-0x29*0xa2)*(-parseInt(_0x4f2040(0x2ba))/(0x1caf+-0x18a*0x11+-0x27b))+parseInt(_0x4f2040(0x35b))/(0x1f*-0xd3+0x2267+-0x8cf*0x1)+parseInt(_0x4f2040(0x2f9))/(0x1b46+-0xc79+-0xec1)*(parseInt(_0x4f2040(0x1a8))/(0x3*-0x518+0x17cc+0x877*-0x1));if(_0x260d6a===_0x1e641d)break;else _0xa2131a['push'](_0xa2131a['shift']());}catch(_0x99fa33){_0xa2131a['push'](_0xa2131a['shift']());}}}(_0x2899,-0x20457+0xb5183+-0x1*0x39a54));const _0x28ab0f=(function(){const _0x571a8a={'ivmFv':function(_0x148763,_0x4a08e4){return _0x148763!==_0x4a08e4;},'hkCRX':'LBHpq'};let _0x188e63=!![];return function(_0x41098f,_0xca56a6){const _0x7fe08c=_0x5dbf,_0x534504={'SJcpY':function(_0xd0aea4,_0x1beff4){return _0xd0aea4(_0x1beff4);}};if(_0x571a8a[_0x7fe08c(0x3ee)](_0x7fe08c(0x179),_0x571a8a[_0x7fe08c(0x2b7)])){const _0x3d52b2=_0x188e63?function(){const _0x1c0a34=_0x7fe08c;if(_0xca56a6){const _0x5a4404=_0xca56a6[_0x1c0a34(0x37f)](_0x41098f,arguments);return _0xca56a6=null,_0x5a4404;}}:function(){};return _0x188e63=![],_0x3d52b2;}else{if(!_0x1f3d83||!_0x2511f8['belgeTar'+_0x7fe08c(0x3ad)])return;const _0x1525f6=_0x534504[_0x7fe08c(0x1d1)](dateKeyLocal,new _0x5cedc6(_0xaafbd8[_0x7fe08c(0x40d)+_0x7fe08c(0x3ad)]));if(!_0x1525f6)return;if(!_0x3dc2c5[_0x7fe08c(0x486)](_0x1525f6))_0x1c273f[_0x7fe08c(0x477)](_0x1525f6,[]);_0x2563eb[_0x7fe08c(0x43f)](_0x1525f6)[_0x7fe08c(0x42e)](_0x159cb9);}};}()),_0x3f1fec=_0x28ab0f(this,function(){const _0x2f2fb2=_0x5dbf,_0x2abbdf={'eETxi':function(_0x28e498,_0x1f3781){return _0x28e498!==_0x1f3781;},'DlZcx':_0x2f2fb2(0x287)+_0x2f2fb2(0x1b8)};if(_0x2abbdf[_0x2f2fb2(0x1ec)](_0x3f1fec[_0x2f2fb2(0x288)]()[_0x2f2fb2(0x349)]()[_0x2f2fb2(0x3c9)]('\x0a'),-(-0x576+0x296+0x2e1)))return;return _0x3f1fec[_0x2f2fb2(0x349)]()[_0x2f2fb2(0x204)](_0x2abbdf[_0x2f2fb2(0x2b1)])[_0x2f2fb2(0x349)]()[_0x2f2fb2(0x45d)+_0x2f2fb2(0x448)](_0x3f1fec)[_0x2f2fb2(0x204)]('(((.+)+)'+_0x2f2fb2(0x1b8));});_0x3f1fec();const DEBUG=![];function dwarn(..._0x29b384){const _0x2eb7cf=_0x5dbf;if(DEBUG)console[_0x2eb7cf(0x3b5)](..._0x29b384);}const KANAL_TESHIS=![];function ktlog(..._0x4f882d){const _0x442010=_0x5dbf,_0x4f5dae={'vFqBQ':_0x442010(0x3b3)+_0x442010(0x437)+_0x442010(0x30a)+':#F3C969'+_0x442010(0x1ba)+_0x442010(0x329)+_0x442010(0x16e)+_0x442010(0x3b7)+_0x442010(0x227)};if(KANAL_TESHIS)console['log']('%c[KANAL'+']',_0x4f5dae['vFqBQ'],..._0x4f882d);}const state={'files':{'kalemler':null,'siparis':null,'tahsilat':null,'cekSenet':null,'ticariStok':null,'fatura':null,'bayiHakedis':null,'yukleme':null,'musteriMaster':null,'ciroPrimi':null,'donemselIskonto':null,'sellOut':null,'depozitoTahsilat':null,'cariEkstre':null},'report':null,'sort':{'key':_0x16ae49(0x31f)+'c','dir':-(0x11b*0x17+0x14f7+-0x2e63)},'sevkSort':{'key':_0x16ae49(0x270)+'sk','dir':-(-0x14f3+0x1*0x1c86+0x22*-0x39)},'fkSort':{'key':_0x16ae49(0x31f)+'c','dir':-(-0x263f+-0x211*0x9+0x38d9)},'ySort':{'key':_0x16ae49(0x320),'dir':-(0x18*0xda+-0x31f+-0x8a8*0x2)},'tSort':{'key':_0x16ae49(0x43c)+_0x16ae49(0x3eb),'dir':-(-0x5*-0x43b+0x13*-0xab+0x1*-0x875)},'expanded':new Set(),'cekSenetTahsilOnaylari':new Set(),'cekSenetArsivi':{},'tahsilatArsivi':{},'cekSenetEksikKalanlar':[],'faturaArsivCache':{},'yuklemeReport':null,'yuklemeSort':{'key':_0x16ae49(0x472),'dir':0x1},'yuklemeGosterilenRapor':null,'yuklemeArsivCache':{},'yuklemeSeciliGun':null,'faturaModalYedekMap':new Map(),'musteriMasterMap':new Map(),'musteriMasterDetay':new Map(),'filesC':{},'bugunKalemlerHazir':![],'sellOutKendiDosya':null,'stokGunKendiDosya':null,'stokGunTumRows':[],'stokGunSort':{'key':_0x16ae49(0x364),'dir':0x1},'stokGunSekme':_0x16ae49(0x482),'stokGunAcikRiskSatirlar':new Set(),'malzemelerStok':new Map(),'musteriMasterDurum':new Map(),'musteriMasterKanal':new Map(),'sellOutHedef':{},'sellOutNoktaSort':new Map(),'faturaKesilmeyenModalKanalFiltre':null,'karneRiskliSort':new Map(),'sellOutReport':null,'sellOutSonGuncelleme':null,'sellOutArsivCache':{},'sellOutSeciliAy':null,'modernKanalKendiDosya':null,'modernKanalReport':null,'modernKanalSonGuncelleme':null,'modernKanalArsivCache':{},'modernKanalSeciliAy':null,'modernKanalHedef':0x0,'bayiHakedisReport':null,'bayiHakedisHata':null,'bhSort':{'key':_0x16ae49(0x1c3)+_0x16ae49(0x184),'dir':-(-0x149e+-0x82d+0x1ccc)},'tvReport':null,'tvAy':null,'tvSort':{'key':_0x16ae49(0x2a5)+_0x16ae49(0x43a),'dir':-(0x583*-0x2+-0x22b5+0xb6f*0x4)},'musteriGosterilen':0x1e,'sevkGosterilen':0x1e,'bhGosterilen':0x1e,'fkGosterilen':0x1e,'yaslandirmaGosterilen':0x1e,'hukukiGosterilen':0x19,'ticariStokGosterilen':0x14,'gbGosterilen':0x10,'gbRiskFiltre':_0x16ae49(0x30b)},MUSTERI_SAYFA_BOYUTU=0x126a+0x2694+-0x38e0,HUKUKI_SAYFA_BOYUTU=0x240f+-0x128f*-0x1+-0x3685,TICARI_STOK_SAYFA_BOYUTU=0x6f1*-0x5+-0x16f3+0x1cde*0x2,STORAGE_KEY=_0x16ae49(0x1bd)+_0x16ae49(0x2b8)+_0x16ae49(0x433),DATE_KEYS=new Set([_0x16ae49(0x455)+_0x16ae49(0x41f),_0x16ae49(0x316),_0x16ae49(0x1dc),_0x16ae49(0x40d)+_0x16ae49(0x3ad),_0x16ae49(0x337),_0x16ae49(0x46d)+_0x16ae49(0x194)+_0x16ae49(0x189),_0x16ae49(0x2a5)+_0x16ae49(0x38d)]),IDB_DB_NAME=_0x16ae49(0x1bd)+_0x16ae49(0x324),IDB_STORE='kv';let idbOpenPromise=null;function idbOpen(){const _0x5787c3=_0x16ae49,_0x4cdcbc={'HdHfs':_0x5787c3(0x1fd)+_0x5787c3(0x3f3)+_0x5787c3(0x28c)+_0x5787c3(0x3f0)+_0x5787c3(0x334)+_0x5787c3(0x3c3)+_0x5787c3(0x1ee)+')\x20kullan'+_0x5787c3(0x34c)};return Promise[_0x5787c3(0x3f4)](new Error(_0x4cdcbc[_0x5787c3(0x369)]));}async function idbSet(_0x3e31fb,_0x3f9958){return!![];}async function idbGet(_0x5a67b4){return null;}async function idbDelete(_0x29ca64){return!![];}async function idbMigrateFromLocalStorageOnce(_0x1932fd,_0x5e0fc7){}function reportDateReviver(_0x1ab091,_0x303798){const _0x1ec296=_0x16ae49,_0x2085d6={'jfROQ':function(_0x30b3f9,_0x8a26c3){return _0x30b3f9===_0x8a26c3;},'adKpM':_0x1ec296(0x371),'bxEVl':function(_0x207ec8,_0x3d6afe){return _0x207ec8!==_0x3d6afe;},'mkvJS':_0x1ec296(0x202),'JXnBD':function(_0x57cb33,_0x2b3ad5){return _0x57cb33(_0x2b3ad5);}};if(DATE_KEYS['has'](_0x1ab091)&&_0x2085d6[_0x1ec296(0x466)](typeof _0x303798,_0x2085d6[_0x1ec296(0x47e)])){if(_0x2085d6[_0x1ec296(0x32d)](_0x2085d6[_0x1ec296(0x3b1)],_0x1ec296(0x380))){const _0x1bcb38=new Date(_0x303798);return _0x2085d6[_0x1ec296(0x265)](isNaN,_0x1bcb38['getTime']())?_0x303798:_0x1bcb38;}else return faturaArsivYuklendiMi=!![],state[_0x1ec296(0x394)+_0x1ec296(0x255)];}return _0x303798;}async function saveReportToStorage(_0x51ee59){const _0x2e5b2a=_0x16ae49,_0x47d33c={'SSDdM':_0x2e5b2a(0x3dd)+_0x2e5b2a(0x40c)+'dedileme'+_0x2e5b2a(0x3f1)},_0x3d600e=await idbSet(STORAGE_KEY,_0x51ee59);if(!_0x3d600e)console[_0x2e5b2a(0x29f)](_0x47d33c[_0x2e5b2a(0x42c)]);return _0x3d600e;}async function loadReportFromStorage(){const _0x52a72a=_0x16ae49,_0x18e487={'VZHtB':function(_0x35730b,_0x5a0287,_0xef173e){return _0x35730b(_0x5a0287,_0xef173e);},'SGbqR':function(_0x3f8633,_0x502fd0){return _0x3f8633(_0x502fd0);},'gEVew':_0x52a72a(0x38c),'ltzCj':'Kayıtlı\x20'+_0x52a72a(0x268)+_0x52a72a(0x44c)};try{return await _0x18e487[_0x52a72a(0x2ce)](idbMigrateFromLocalStorageOnce,STORAGE_KEY,reportDateReviver),await _0x18e487[_0x52a72a(0x2c2)](idbGet,STORAGE_KEY);}catch(_0x411089){if(_0x18e487[_0x52a72a(0x205)]==='XcfBB')return console['error'](_0x18e487[_0x52a72a(0x291)],_0x411089),null;else(_0x393b6d[_0x4d5315]&&_0x4a9312[_0x2a38bb][_0x52a72a(0x178)+_0x52a72a(0x27b)]||[])[_0x52a72a(0x357)](_0x17a826=>{const _0x333b09=_0x52a72a;if(_0x17a826[_0x333b09(0x26a)+'o'])_0xc6e5b2[_0x333b09(0x477)](_0x17a826[_0x333b09(0x26a)+'o'],_0x17a826);else{const _0x4d2e90=_0x17a826[_0x333b09(0x2a5)+_0x333b09(0x38d)]?new _0x4971ab(_0x17a826[_0x333b09(0x2a5)+_0x333b09(0x38d)])[_0x333b09(0x454)]():'',_0x168a6c=[_0x17a826[_0x333b09(0x1d6)],_0x4d2e90,_0x17a826[_0x333b09(0x32c)]][_0x333b09(0x453)]('|');_0x5298b5['set'](_0x168a6c,_0x17a826);}});}}async function clearStoredReport(){const _0x91f853={'PTHTG':function(_0x401d2f,_0x4af35e){return _0x401d2f(_0x4af35e);}};await _0x91f853['PTHTG'](idbDelete,STORAGE_KEY);}function buildMusteriSnapshot(_0x3dbaac){const _0x4fa2b2=_0x16ae49,_0x567c22=(_0x3dbaac[_0x4fa2b2(0x297)+'er']||[])[_0x4fa2b2(0x3f8)](_0x26ff0b=>({'musteri':_0x26ff0b[_0x4fa2b2(0x1d6)],'musteriAdi':_0x26ff0b[_0x4fa2b2(0x409)+'di'],'temsilci':_0x26ff0b[_0x4fa2b2(0x472)],'kalanBorc':_0x26ff0b[_0x4fa2b2(0x31f)+'c'],'avgVadeGun':_0x26ff0b[_0x4fa2b2(0x22e)+'un'],'cekSenet':_0x26ff0b[_0x4fa2b2(0x41d)],'toplamRisk':_0x26ff0b['toplamRi'+'sk'],'vadesizBakiye':_0x26ff0b[_0x4fa2b2(0x29c)+_0x4fa2b2(0x412)]})),_0x36f1e8=(_0x3dbaac[_0x4fa2b2(0x389)+'z']||[])[_0x4fa2b2(0x3f8)](_0x3fcef8=>({'musteri':_0x3fcef8[_0x4fa2b2(0x1d6)],'musteriAdi':_0x3fcef8[_0x4fa2b2(0x409)+'di'],'temsilci':_0x3fcef8[_0x4fa2b2(0x472)],'kalanBorc':0x0,'avgVadeGun':null,'cekSenet':_0x3fcef8[_0x4fa2b2(0x41d)]||-0x1baf+-0x1ce3+0xd*0x45a,'toplamRisk':_0x3fcef8[_0x4fa2b2(0x41d)]||-0x2*0x293+-0x1ad4+0x1ffa,'vadesizBakiye':0x0}));return _0x567c22[_0x4fa2b2(0x248)](_0x36f1e8);}function musteriSnapshotKisalt(_0xe8c7ed){const _0x4c0454=_0x16ae49;return(_0xe8c7ed||[])[_0x4c0454(0x3f8)](_0x3cb341=>({'k':_0x3cb341[_0x4c0454(0x1d6)],'n':_0x3cb341[_0x4c0454(0x409)+'di'],'t':_0x3cb341[_0x4c0454(0x472)],'b':_0x3cb341[_0x4c0454(0x31f)+'c'],'v':_0x3cb341[_0x4c0454(0x22e)+'un'],'c':_0x3cb341[_0x4c0454(0x41d)],'r':_0x3cb341[_0x4c0454(0x270)+'sk'],'z':_0x3cb341[_0x4c0454(0x29c)+_0x4c0454(0x412)]}));}function musteriSnapshotUzat(_0xc937b6){const _0x1ef02a=_0x16ae49;return(_0xc937b6||[])[_0x1ef02a(0x3f8)](_0x70687=>{const _0x21fde6=_0x1ef02a;if(!_0x70687)return _0x70687;if(_0x70687[_0x21fde6(0x1d6)]!==undefined)return _0x70687;return{'musteri':_0x70687['k'],'musteriAdi':_0x70687['n'],'temsilci':_0x70687['t'],'kalanBorc':_0x70687['b'],'avgVadeGun':_0x70687['v'],'cekSenet':_0x70687['c'],'toplamRisk':_0x70687['r'],'vadesizBakiye':_0x70687['z']};});}function faturaKontrolArsivSnapshotlariUzat(_0x7d46fe){const _0x3f3e71=_0x16ae49,_0x5625f6={'ASreD':function(_0x3573b5,_0x14bf60){return _0x3573b5(_0x14bf60);}};if(!_0x7d46fe)return _0x7d46fe;return Object[_0x3f3e71(0x395)](_0x7d46fe)[_0x3f3e71(0x357)](_0x24e9f3=>{const _0x5026a1=_0x3f3e71,_0x324c55=_0x7d46fe[_0x24e9f3];if(_0x324c55&&_0x324c55['musteriS'+_0x5026a1(0x3fe)])_0x324c55[_0x5026a1(0x33e)+_0x5026a1(0x3fe)]=_0x5625f6[_0x5026a1(0x21d)](musteriSnapshotUzat,_0x324c55[_0x5026a1(0x33e)+_0x5026a1(0x3fe)]);}),_0x7d46fe;}const FATURA_ARSIV_LOCAL_KEY=_0x16ae49(0x1bd)+_0x16ae49(0x20d)+_0x16ae49(0x294)+_0x16ae49(0x3bc)+_0x16ae49(0x299);async function loadFaturaKontrolArsivFromLocal(){const _0x1e3096=_0x16ae49,_0x1f44f8={'MmuAY':function(_0x5886e2,_0x58d001){return _0x5886e2(_0x58d001);},'rRVzh':_0x1e3096(0x3ba)+_0x1e3096(0x216)+_0x1e3096(0x440)+_0x1e3096(0x22b)+_0x1e3096(0x423)+':'};try{return await _0x1f44f8[_0x1e3096(0x20a)](idbGet,FATURA_ARSIV_LOCAL_KEY);}catch(_0x13d100){return console['error'](_0x1f44f8['rRVzh'],_0x13d100),null;}}async function saveFaturaKontrolArsivToLocal(_0x4a8054){const _0x5130c4=_0x16ae49,_0x183086={'cKaVw':function(_0x14049d,_0x1b673a,_0x5a9c29){return _0x14049d(_0x1b673a,_0x5a9c29);},'FStql':_0x5130c4(0x3ba)+_0x5130c4(0x216)+_0x5130c4(0x440)+_0x5130c4(0x40c)+_0x5130c4(0x3c7)+_0x5130c4(0x3f1)},_0x562a86=await _0x183086[_0x5130c4(0x1f1)](idbSet,FATURA_ARSIV_LOCAL_KEY,_0x4a8054);if(!_0x562a86)console[_0x5130c4(0x29f)](_0x183086['FStql']);}function faturaKontrolArsivEksikGunAraligi(_0x505875,_0x197d8f){const _0x38a7e6=_0x16ae49,_0x4d688f={'njJZG':function(_0xbfa106,_0x1d7451){return _0xbfa106-_0x1d7451;}},_0x45c6b8=new Set(_0x505875),_0x1dc12a=(_0x197d8f||[])[_0x38a7e6(0x254)](_0x37d7ad=>!_0x45c6b8[_0x38a7e6(0x486)](_0x37d7ad))['sort']();if(!_0x1dc12a[_0x38a7e6(0x3b0)])return null;return{'ilk':_0x1dc12a[0x77*0x22+-0xbd2+0x6*-0xaa],'son':_0x1dc12a[_0x4d688f[_0x38a7e6(0x3cd)](_0x1dc12a[_0x38a7e6(0x3b0)],-0x508+-0x21a6+0x26af)]};}async function faturaArsivBaslangicYukle(){const _0x137e6a=_0x16ae49,_0x1b4606={'XssaK':function(_0x49f4e5,_0xf374e8){return _0x49f4e5(_0xf374e8);},'HSAzU':function(_0xe5b101,_0x13d5eb){return _0xe5b101>_0x13d5eb;},'kUPye':function(_0x806200,_0x4fb482){return _0x806200===_0x4fb482;},'RQWHy':'odJPl','xmMhE':function(_0x2046bf,_0x4a2c56,_0x32f088){return _0x2046bf(_0x4a2c56,_0x32f088);},'KusFj':function(_0x4e6bfa){return _0x4e6bfa();},'qZaAD':_0x137e6a(0x3ba)+_0x137e6a(0x216)+_0x137e6a(0x1d4)+_0x137e6a(0x39a)+_0x137e6a(0x1e1)+_0x137e6a(0x2a0)+_0x137e6a(0x3be),'hnlil':function(_0x4a5d29){return _0x4a5d29();},'vdHqL':function(_0x41b445,_0x4a630b,_0xc03f48){return _0x41b445(_0x4a630b,_0xc03f48);},'aygbS':_0x137e6a(0x285),'jWjcM':_0x137e6a(0x278),'RONEg':'bVxoW'},_0x424ef7=await _0x1b4606[_0x137e6a(0x405)](loadFaturaKontrolArsivFromLocal);if(_0x424ef7)state[_0x137e6a(0x394)+_0x137e6a(0x255)]=_0x424ef7;if(!cloudEnabled())return faturaArsivYuklendiMi=!![],state['faturaAr'+_0x137e6a(0x255)];try{const _0x138db3=await _0x1b4606[_0x137e6a(0x456)](loadFaturaKontrolArsivGunAnahtarlariFromCloud);if(_0x138db3===null)return faturaArsivYuklendiMi=!![],state[_0x137e6a(0x394)+'sivCache'];const _0x3dde42=new Set(_0x138db3),_0x5ec6e8=Object[_0x137e6a(0x395)](state[_0x137e6a(0x394)+_0x137e6a(0x255)]||{});let _0x54c7b7=![];_0x5ec6e8[_0x137e6a(0x357)](_0x1b393b=>{const _0x1c26b=_0x137e6a;if(!_0x3dde42[_0x1c26b(0x486)](_0x1b393b)){if(_0x1b4606[_0x1c26b(0x3df)](_0x1b4606[_0x1c26b(0x284)],_0x1b4606[_0x1c26b(0x284)]))delete state[_0x1c26b(0x394)+_0x1c26b(0x255)][_0x1b393b],_0x54c7b7=!![];else{if(!_0x2377cd[_0x3e90e2])return;const _0x25e197=_0x1b4606[_0x1c26b(0x26d)](dateKeyLocal,new _0x3fbde2(_0x3b6389[_0x3c85bf]));if(!_0x25e197)return;(!_0x37d684[_0x1c26b(0x486)](_0x25e197)||_0x1b4606[_0x1c26b(0x355)](_0x3d53ee,_0x51370e['get'](_0x25e197)))&&_0x1afc70[_0x1c26b(0x477)](_0x25e197,_0x34f4ff);}}});const _0x60d0ba=_0x1b4606[_0x137e6a(0x3c6)](faturaKontrolArsivEksikGunAraligi,Object[_0x137e6a(0x395)](state[_0x137e6a(0x394)+_0x137e6a(0x255)]||{}),_0x138db3);if(_0x60d0ba){const _0x47bbf9=await _0x1b4606[_0x137e6a(0x2e8)](loadFaturaKontrolArsivAraligiFromCloud,_0x60d0ba[_0x137e6a(0x458)],_0x60d0ba[_0x137e6a(0x314)]);_0x47bbf9&&(_0x137e6a(0x285)===_0x1b4606[_0x137e6a(0x373)]?(state[_0x137e6a(0x394)+'sivCache']=Object[_0x137e6a(0x3f6)]({},state[_0x137e6a(0x394)+_0x137e6a(0x255)],_0x47bbf9),_0x54c7b7=!![]):(_0x1b4606[_0x137e6a(0x2e8)](searchClearBtnGuncelle,_0x5eeb2d,_0x2da502),_0x1b4606[_0x137e6a(0x456)](_0xb90e4e)));}if(_0x54c7b7)await saveFaturaKontrolArsivToLocal(state['faturaAr'+_0x137e6a(0x255)]);faturaArsivYuklendiMi=!![];}catch(_0x5d8f8d){_0x1b4606[_0x137e6a(0x2fa)]===_0x1b4606['RONEg']?_0x3158d0[_0x137e6a(0x29f)](_0x1b4606[_0x137e6a(0x2d4)],_0xf6d5a8):console[_0x137e6a(0x29f)](_0x1b4606[_0x137e6a(0x2d4)],_0x5d8f8d);}return state[_0x137e6a(0x394)+_0x137e6a(0x255)];}let faturaArsivYuklendiMi=![];async function faturaArsivYenile(_0x2073a4){const _0x4ee69b=_0x16ae49,_0x1fdb39={'MSVpJ':function(_0xa1ac9c,_0x27608f){return _0xa1ac9c(_0x27608f);},'NwQHH':function(_0x18b66a){return _0x18b66a();},'DrMiQ':_0x4ee69b(0x1dd),'jddRt':function(_0x20eb41,_0x4a2cd8){return _0x20eb41===_0x4a2cd8;},'Emndi':_0x4ee69b(0x341),'omOkN':function(_0x13fb8c){return _0x13fb8c();},'kPQZj':function(_0x4e774a,_0x4ef396){return _0x4e774a||_0x4ef396;}};if(!_0x1fdb39[_0x4ee69b(0x414)](cloudEnabled))return state[_0x4ee69b(0x394)+_0x4ee69b(0x255)];if(faturaArsivYuklendiMi&&!_0x2073a4){if(_0x1fdb39[_0x4ee69b(0x1ad)]!==_0x1fdb39[_0x4ee69b(0x1ad)]){const _0x92dd8=new _0x576959(_0x187890),_0x4f34c6=(_0x5a4de1||[])[_0x4ee69b(0x254)](_0xdc0abe=>!_0x92dd8[_0x4ee69b(0x486)](_0xdc0abe))[_0x4ee69b(0x308)]();if(!_0x4f34c6[_0x4ee69b(0x3b0)])return null;return{'ilk':_0x4f34c6[0xa52*-0x1+0x1269+-0x13*0x6d],'son':_0x4f34c6[_0x4f34c6['length']-(0x50*0x50+-0x1585+-0x37a)]};}else return state[_0x4ee69b(0x394)+_0x4ee69b(0x255)];}if(!_0x2073a4){if(_0x1fdb39[_0x4ee69b(0x2c1)](_0x1fdb39[_0x4ee69b(0x3a5)],_0x1fdb39[_0x4ee69b(0x3a5)]))return await _0x1fdb39[_0x4ee69b(0x414)](faturaArsivBaslangicYukle);else{const _0x56fd75=new _0x1e9d7a();(_0x161fdf||[])['forEach'](_0x4905db=>{const _0x5f1e83=_0x4ee69b;if(!_0x4905db||!_0x4905db[_0x5f1e83(0x40d)+_0x5f1e83(0x3ad)])return;const _0x1fc45d=_0x1fdb39[_0x5f1e83(0x31b)](dateKeyLocal,new _0x445503(_0x4905db[_0x5f1e83(0x40d)+_0x5f1e83(0x3ad)]));if(!_0x1fc45d)return;if(!_0x56fd75[_0x5f1e83(0x486)](_0x1fc45d))_0x56fd75[_0x5f1e83(0x477)](_0x1fc45d,[]);_0x56fd75[_0x5f1e83(0x43f)](_0x1fc45d)[_0x5f1e83(0x42e)](_0x4905db);});const _0x53be5f=_0x5ddfc0['assign']({},_0x5ba530);return _0x56fd75[_0x4ee69b(0x357)]((_0xa6cb85,_0x390ab3)=>{const _0x50c2c1=_0x4ee69b,_0x429bdf=_0x53be5f[_0x390ab3]||{},_0x11b637=_0x429bdf['tahsilat'+_0x50c2c1(0x231)]||[],_0x404516=_0x11b637[_0x50c2c1(0x254)](_0x45f999=>_0x45f999[_0x50c2c1(0x24a)+_0x50c2c1(0x30c)]!==_0x42e07e);_0x53be5f[_0x390ab3]=_0x381f9e[_0x50c2c1(0x3f6)]({},_0x429bdf,{'tahsilatArsiv':_0x404516['concat'](_0xa6cb85)});}),{'arsiv':_0x53be5f,'etkilenenGunSayisi':_0x56fd75[_0x4ee69b(0x45c)]};}}const _0x15bd8d=await _0x1fdb39[_0x4ee69b(0x391)](loadFaturaKontrolArsivFromCloud);return state[_0x4ee69b(0x394)+_0x4ee69b(0x255)]=_0x1fdb39[_0x4ee69b(0x352)](_0x15bd8d,{}),faturaArsivYuklendiMi=!![],await _0x1fdb39[_0x4ee69b(0x31b)](saveFaturaKontrolArsivToLocal,state[_0x4ee69b(0x394)+_0x4ee69b(0x255)]),state[_0x4ee69b(0x394)+_0x4ee69b(0x255)];}function arsivGunlereDagitVeDegistir(_0x467f4f,_0x2ba075,_0x3968b8,_0x4668ae){const _0x42a1a6=_0x16ae49,_0x4517b1={'QvkPH':function(_0x45a441,_0x41bfee){return _0x45a441(_0x41bfee);},'uBsxY':_0x42a1a6(0x30d)},_0x507cf2=new Map();(_0x2ba075||[])[_0x42a1a6(0x357)](_0x1988cf=>{const _0x30a931=_0x42a1a6;if(!_0x1988cf||!_0x1988cf[_0x3968b8])return;const _0x10d501=_0x4517b1[_0x30a931(0x343)](dateKeyLocal,new Date(_0x1988cf[_0x3968b8]));if(!_0x10d501)return;if(!_0x507cf2['has'](_0x10d501))_0x507cf2[_0x30a931(0x477)](_0x10d501,[]);_0x507cf2[_0x30a931(0x43f)](_0x10d501)[_0x30a931(0x42e)](_0x1988cf);});const _0x3db25c=Object[_0x42a1a6(0x3f6)]({},_0x467f4f);return _0x507cf2[_0x42a1a6(0x357)]((_0x5aad8a,_0x2beee8)=>{const _0x1e07ee=_0x42a1a6;if(_0x4517b1[_0x1e07ee(0x3d5)]!==_0x1e07ee(0x30d)){const _0x268d8e=_0x5bf0e7[_0x117e3d];if(!_0x268d8e)return;if(_0x268d8e['tersKayi'+_0x1e07ee(0x313)]){delete _0x467181[_0x45287d],delete _0x305037[_0x268d8e[_0x1e07ee(0x229)+_0x1e07ee(0x313)]];return;}}else{const _0x2a3315=_0x3db25c[_0x2beee8]||{};_0x3db25c[_0x2beee8]=Object[_0x1e07ee(0x3f6)]({},_0x2a3315,{[_0x4668ae]:_0x5aad8a});}}),{'arsiv':_0x3db25c,'etkilenenGunSayisi':_0x507cf2[_0x42a1a6(0x45c)]};}function tahsilatKredisiGunlereEkleVeDegistir(_0x24079d,_0x8703e5,_0x495d56){const _0x41e017=_0x16ae49,_0x4dab55={'YRVJB':function(_0x179380,_0x40ae7b){return _0x179380(_0x40ae7b);},'BxFdY':function(_0x26b960,_0x40f907){return _0x26b960!==_0x40f907;},'jSYyy':_0x41e017(0x2c0)},_0xd52f2f=new Map();(_0x8703e5||[])[_0x41e017(0x357)](_0x32b896=>{const _0x50d229=_0x41e017;if(!_0x32b896||!_0x32b896[_0x50d229(0x40d)+_0x50d229(0x3ad)])return;const _0x4396e5=_0x4dab55[_0x50d229(0x215)](dateKeyLocal,new Date(_0x32b896['belgeTar'+_0x50d229(0x3ad)]));if(!_0x4396e5)return;if(!_0xd52f2f[_0x50d229(0x486)](_0x4396e5))_0xd52f2f[_0x50d229(0x477)](_0x4396e5,[]);_0xd52f2f[_0x50d229(0x43f)](_0x4396e5)[_0x50d229(0x42e)](_0x32b896);});const _0x2e005a=Object[_0x41e017(0x3f6)]({},_0x24079d);return _0xd52f2f['forEach']((_0x4b1c3e,_0x4628b0)=>{const _0x1889b0=_0x41e017;if(_0x4dab55[_0x1889b0(0x2d0)](_0x4dab55[_0x1889b0(0x370)],_0x4dab55['jSYyy']))return(_0x307534||[])[_0x1889b0(0x3f8)](_0x25f9a4=>({'k':_0x25f9a4[_0x1889b0(0x1d6)],'n':_0x25f9a4[_0x1889b0(0x409)+'di'],'t':_0x25f9a4[_0x1889b0(0x472)],'b':_0x25f9a4['kalanBor'+'c'],'v':_0x25f9a4[_0x1889b0(0x22e)+'un'],'c':_0x25f9a4[_0x1889b0(0x41d)],'r':_0x25f9a4[_0x1889b0(0x270)+'sk'],'z':_0x25f9a4[_0x1889b0(0x29c)+_0x1889b0(0x412)]}));else{const _0x2b7980=_0x2e005a[_0x4628b0]||{},_0x55ac01=_0x2b7980[_0x1889b0(0x2a5)+_0x1889b0(0x231)]||[],_0x76af41=_0x55ac01[_0x1889b0(0x254)](_0x104dc1=>_0x104dc1['formatKa'+_0x1889b0(0x30c)]!==_0x495d56);_0x2e005a[_0x4628b0]=Object[_0x1889b0(0x3f6)]({},_0x2b7980,{'tahsilatArsiv':_0x76af41['concat'](_0x4b1c3e)});}}),{'arsiv':_0x2e005a,'etkilenenGunSayisi':_0xd52f2f[_0x41e017(0x45c)]};}async function faturaKontrolArsivineKaydetVeSenkronizeEt(_0x554a6f){const _0x20cd12=_0x16ae49,_0x35910f={'gySsY':function(_0x444db4,_0x33bcf4){return _0x444db4(_0x33bcf4);},'eaOcm':function(_0x1bc245,_0x51e32f){return _0x1bc245===_0x51e32f;},'rSILf':_0x20cd12(0x208),'XMiBz':function(_0x44c5f7,_0x19ceb7){return _0x44c5f7===_0x19ceb7;},'caveB':'tahsilEd'+_0x20cd12(0x2bc),'DwNVp':function(_0x229a08,_0x406313){return _0x229a08(_0x406313);},'WzDXQ':function(_0x3a976e,_0x4d8bad){return _0x3a976e(_0x4d8bad);},'kgRtW':function(_0x342992,_0x458411,_0x4ec671){return _0x342992(_0x458411,_0x4ec671);},'eKbDp':function(_0x570262,_0x3b0d7b,_0xc3b29e,_0x5ccc9d,_0x4eb4eb){return _0x570262(_0x3b0d7b,_0xc3b29e,_0x5ccc9d,_0x4eb4eb);},'AhwuJ':_0x20cd12(0x455)+_0x20cd12(0x41f),'AjFoN':function(_0x44e699,_0x3c0154,_0x1ab2b4,_0x2284f5,_0x5d025f){return _0x44e699(_0x3c0154,_0x1ab2b4,_0x2284f5,_0x5d025f);},'RkMcm':_0x20cd12(0x178)+_0x20cd12(0x27b),'fpyCk':function(_0x5846eb,_0x28e8a1,_0x444d48,_0x31fabb){return _0x5846eb(_0x28e8a1,_0x444d48,_0x31fabb);},'rdiRg':'FaturaIa'+'de','pJwhx':function(_0x39d813,_0x101a59,_0x1cb826,_0xf0a610){return _0x39d813(_0x101a59,_0x1cb826,_0xf0a610);},'EFbNP':_0x20cd12(0x45f)+_0x20cd12(0x181),'HvlTI':function(_0x255b0d,_0x6db2a3,_0x39e5c8){return _0x255b0d(_0x6db2a3,_0x39e5c8);},'GhyBa':function(_0x58145d){return _0x58145d();},'bdGku':_0x20cd12(0x2b2),'wfsBL':_0x20cd12(0x3bd),'ilNBH':_0x20cd12(0x461)+_0x20cd12(0x45a)+_0x20cd12(0x1ae),'moFnY':function(_0x3c5ed1,_0x188aaa,_0x55d2aa){return _0x3c5ed1(_0x188aaa,_0x55d2aa);},'yleyq':_0x20cd12(0x3ba)+_0x20cd12(0x216)+_0x20cd12(0x3ae)+_0x20cd12(0x2cc)+_0x20cd12(0x32e)+_0x20cd12(0x3be)},_0x295c46=_0x35910f[_0x20cd12(0x201)](dateKeyLocal,new Date()),_0x11aed6=_0x35910f[_0x20cd12(0x1fb)](buildMusteriSnapshot,_0x554a6f);await faturaArsivYenile();const _0x373533=state['faturaAr'+_0x20cd12(0x255)]||{};let _0x372dd4=_0x373533;const {arsiv:_0x13e440}=_0x35910f[_0x20cd12(0x36f)](siparisArsivGunlereDagitVeTemizle,_0x372dd4,_0x554a6f[_0x20cd12(0x318)+_0x20cd12(0x2a3)]||[]),{arsiv:_0x25d6f7}=_0x35910f[_0x20cd12(0x239)](arsivGunlereDagitVeDegistir,_0x13e440,_0x554a6f[_0x20cd12(0x394)+'siv']||[],_0x35910f['AhwuJ'],_0x20cd12(0x394)+_0x20cd12(0x34b)),{arsiv:_0x3d11f9}=_0x35910f[_0x20cd12(0x38e)](arsivGunlereDagitVeDegistir,_0x25d6f7,_0x554a6f[_0x20cd12(0x178)+'dis']||[],_0x20cd12(0x2a5)+_0x20cd12(0x38d),_0x35910f['RkMcm']),{arsiv:_0x2c17e1}=_0x35910f[_0x20cd12(0x3d4)](tahsilatKredisiGunlereEkleVeDegistir,_0x3d11f9,_0x554a6f[_0x20cd12(0x298)+'eTahsila'+'t']||[],_0x35910f[_0x20cd12(0x2d1)]),{arsiv:_0x539901}=_0x35910f[_0x20cd12(0x176)](tahsilatKredisiGunlereEkleVeDegistir,_0x2c17e1,_0x554a6f[_0x20cd12(0x35a)+_0x20cd12(0x181)]||[],_0x35910f[_0x20cd12(0x37b)]),_0x27774b=new Date()[_0x20cd12(0x40e)+_0x20cd12(0x2e2)](),_0x1ba64e=_0x35910f[_0x20cd12(0x39e)](faturaKontrolArsivGunFarkiniBul,_0x373533,_0x539901),_0x202107=Object[_0x20cd12(0x3f6)]({},_0x539901);Object[_0x20cd12(0x395)](_0x1ba64e)[_0x20cd12(0x357)](_0x4da789=>{const _0x4ef3ca=_0x20cd12;if(_0x35910f[_0x4ef3ca(0x467)](_0x35910f[_0x4ef3ca(0x1c9)],_0x35910f[_0x4ef3ca(0x1c9)])){if(_0x35910f[_0x4ef3ca(0x2c9)](_0x4da789,_0x295c46))return;if(!_0x202107[_0x4da789])return;_0x202107[_0x4da789]=Object[_0x4ef3ca(0x3f6)]({},_0x202107[_0x4da789],{'kayitZamani':_0x27774b});}else{const _0x2ca352=new _0x39dc4c(_0x3a65d4);return SQxQET[_0x4ef3ca(0x1fb)](_0x297866,_0x2ca352[_0x4ef3ca(0x454)]())?_0x9426de:_0x2ca352;}});const _0x302b59=_0x202107[_0x295c46]||{},_0x351a06=_0x302b59,_0x2ab0e6=Object[_0x20cd12(0x3f6)]({},_0x351a06,{'musteriSnapshot':_0x11aed6,'kayitZamani':_0x27774b}),_0x5916b1=Object[_0x20cd12(0x3f6)]({},_0x202107,{[_0x295c46]:_0x2ab0e6});state[_0x20cd12(0x394)+_0x20cd12(0x255)]=_0x5916b1,_0x35910f[_0x20cd12(0x201)](saveFaturaKontrolArsivToLocal,state[_0x20cd12(0x394)+_0x20cd12(0x255)])[_0x20cd12(0x1e5)](()=>{});if(!_0x35910f['GhyBa'](cloudEnabled)){if(_0x35910f[_0x20cd12(0x306)]===_0x35910f[_0x20cd12(0x47a)]){if(_0x29cdfb[_0x3ae388])return;const _0xb05673=_0x56b6bf[_0x5ecaee];if(_0xb05673[_0x20cd12(0x2a8)]===_0x35910f[_0x20cd12(0x281)])return;_0x1d3c12[_0x20cd12(0x42e)](_0x65dc04[_0x20cd12(0x3f6)]({'anahtar':_0x3a2c05},_0xb05673));}else{if(document['getEleme'+_0x20cd12(0x393)](_0x35910f[_0x20cd12(0x419)]))await _0x35910f['GhyBa'](renderFaturaKontrolArsivBilgi);return;}}try{const _0x4cc09a=_0x35910f[_0x20cd12(0x2a1)](faturaKontrolArsivGunFarkiniBul,_0x373533,_0x5916b1);Object[_0x20cd12(0x395)](_0x4cc09a)[_0x20cd12(0x357)](_0x13da99=>{const _0x36d629=_0x20cd12,_0xd89735=_0x4cc09a[_0x13da99];_0xd89735&&_0xd89735[_0x36d629(0x33e)+_0x36d629(0x3fe)]&&(_0x4cc09a[_0x13da99]=Object[_0x36d629(0x3f6)]({},_0xd89735,{'musteriSnapshot':_0x35910f['DwNVp'](musteriSnapshotKisalt,_0xd89735[_0x36d629(0x33e)+'napshot'])}));}),await _0x35910f[_0x20cd12(0x367)](saveFaturaKontrolArsivGunleriToCloud,_0x4cc09a);if(document[_0x20cd12(0x3c8)+_0x20cd12(0x393)](_0x35910f[_0x20cd12(0x419)]))await renderFaturaKontrolArsivBilgi();}catch(_0x1391e6){console[_0x20cd12(0x29f)](_0x35910f[_0x20cd12(0x187)],_0x1391e6),alert(_0x20cd12(0x2fc)+_0x20cd12(0x301)+_0x20cd12(0x46c)+_0x20cd12(0x2e6)+_0x20cd12(0x3ed)+_0x20cd12(0x283)+_0x20cd12(0x44d)+_0x20cd12(0x35e)+_0x20cd12(0x39b)+_0x20cd12(0x468)+_0x20cd12(0x21e)+_0x20cd12(0x1af)+_0x20cd12(0x2a9)+_0x20cd12(0x2f2)+_0x20cd12(0x267)+_0x20cd12(0x2e1)+_0x20cd12(0x1c7)+_0x20cd12(0x421)+_0x20cd12(0x311)+_0x20cd12(0x420)+_0x20cd12(0x1a4)+_0x20cd12(0x27f)+_0x20cd12(0x1f6)+_0x20cd12(0x321)+_0x20cd12(0x225)+_0x20cd12(0x436)+_0x20cd12(0x38f)+_0x20cd12(0x2f5));}}const SIPARIS_IPTAL_DURUMLARI=new Set(['Reddedil'+'di',_0x16ae49(0x3d1)+_0x16ae49(0x2bc),_0x16ae49(0x24e)+_0x16ae49(0x402)]);function siparisArsivGunlereDagitVeTemizle(_0x2a7116,_0x3c1601){const _0x1f3e37=_0x16ae49,_0x42e934={'YaISC':function(_0x4b8055,_0x491b09){return _0x4b8055!==_0x491b09;},'PTDUh':function(_0x2b395b,_0x5f04f6){return _0x2b395b(_0x5f04f6);},'TbXCr':function(_0x71460c,_0x5cf55a){return _0x71460c!==_0x5cf55a;},'SvVpt':function(_0x1db297,_0x4ea02c){return _0x1db297!==_0x4ea02c;},'wWubB':_0x1f3e37(0x356),'WuxWC':_0x1f3e37(0x2e7),'yXJiv':function(_0x34f490,_0x1754bf){return _0x34f490(_0x1754bf);},'uXBPt':_0x1f3e37(0x34d),'ldwhf':function(_0x3831e0,_0x893a1b){return _0x3831e0(_0x893a1b);},'GpFaS':function(_0x2f61d4,_0x411a2e){return _0x2f61d4===_0x411a2e;},'YkXqE':function(_0x5ae9cf,_0x17504e){return _0x5ae9cf===_0x17504e;},'gjXUH':_0x1f3e37(0x2fd),'erqEV':function(_0x3389c8,_0x266955){return _0x3389c8-_0x266955;},'VPTlJ':function(_0x1e077f,_0x428912){return _0x1e077f!==_0x428912;},'vjKSs':function(_0x3d81ba,_0x5a7690){return _0x3d81ba!==_0x5a7690;},'gMOBR':'EhKNH','nWBdx':_0x1f3e37(0x43b),'BNoOa':_0x1f3e37(0x274)},_0x3ca5d1=Object[_0x1f3e37(0x3f6)]({},_0x2a7116),_0x2b8341=new Set();(_0x3c1601||[])[_0x1f3e37(0x357)](_0x24d72d=>{const _0x22387a=_0x1f3e37;if(_0x42e934[_0x22387a(0x260)](_0x22387a(0x20f),_0x22387a(0x251))){if(_0x24d72d&&_0x24d72d[_0x22387a(0x171)+_0x22387a(0x37a)])_0x2b8341[_0x22387a(0x1cb)](_0x24d72d[_0x22387a(0x171)+_0x22387a(0x37a)]);}else(_0x35ba71[_0x17c00a]&&_0x4836d4[_0x3387e4][_0x22387a(0x318)+_0x22387a(0x2a3)]||[])[_0x22387a(0x357)](_0x12745b=>{const _0x103476=_0x22387a;if(_0x12745b[_0x103476(0x171)+_0x103476(0x37a)])_0x103da3['set'](_0x12745b[_0x103476(0x171)+_0x103476(0x37a)],_0x232557);});});if(_0x2b8341[_0x1f3e37(0x45c)]){if(_0x42e934[_0x1f3e37(0x388)](_0x42e934[_0x1f3e37(0x1f9)],_0x1f3e37(0x1c1))){if(!_0x55875b||!_0x3e846c[_0xe0570a])return;const _0x50379b=dateKeyLocal(new _0x56aad4(_0x51913b[_0x444bd4]));if(!_0x50379b)return;if(!_0xfc9aa9['has'](_0x50379b))_0x42c25e[_0x1f3e37(0x477)](_0x50379b,[]);_0x6ef1b[_0x1f3e37(0x43f)](_0x50379b)['push'](_0xa555c4);}else Object['keys'](_0x3ca5d1)[_0x1f3e37(0x357)](_0xe20a20=>{const _0x3a0d95=_0x1f3e37,_0x23efd9=_0x3ca5d1[_0xe20a20],_0x342084=_0x23efd9&&_0x23efd9['siparisA'+_0x3a0d95(0x2a3)]||[];if(!_0x342084[_0x3a0d95(0x3b0)])return;const _0x4c5d98=_0x342084['filter'](_0x5a7874=>!(_0x5a7874[_0x3a0d95(0x171)+_0x3a0d95(0x37a)]&&_0x2b8341[_0x3a0d95(0x486)](_0x5a7874[_0x3a0d95(0x171)+_0x3a0d95(0x37a)])));if(_0x42e934[_0x3a0d95(0x1e2)](_0x4c5d98['length'],_0x342084['length'])){if(_0x42e934[_0x3a0d95(0x240)](_0x42e934[_0x3a0d95(0x331)],_0x42e934[_0x3a0d95(0x3f2)]))_0x3ca5d1[_0xe20a20]=Object[_0x3a0d95(0x3f6)]({},_0x23efd9,{'siparisArsiv':_0x4c5d98});else return _0x42e934[_0x3a0d95(0x319)](faturaKontrolArsivBirlestir,_0x5723e8);}});}(_0x3c1601||[])[_0x1f3e37(0x357)](_0x169075=>{const _0x2a9b5b=_0x1f3e37;if(!_0x169075||!_0x169075[_0x2a9b5b(0x46d)+'nTeslimT'+_0x2a9b5b(0x189)]||!_0x169075[_0x2a9b5b(0x171)+_0x2a9b5b(0x37a)])return;const _0x1e26cd=_0x42e934['yXJiv'](dateKeyLocal,new Date(_0x169075[_0x2a9b5b(0x46d)+_0x2a9b5b(0x194)+_0x2a9b5b(0x189)]));if(!_0x1e26cd)return;const _0x2c5db7=_0x3ca5d1[_0x1e26cd]||{},_0x4d4692=_0x2c5db7[_0x2a9b5b(0x318)+'rsiv']||[];_0x3ca5d1[_0x1e26cd]=Object[_0x2a9b5b(0x3f6)]({},_0x2c5db7,{'siparisArsiv':_0x4d4692[_0x2a9b5b(0x248)]([_0x169075])});});const _0x5cc2dd=new Set();Object[_0x1f3e37(0x395)](_0x3ca5d1)[_0x1f3e37(0x357)](_0x20366f=>{const _0x4cf112=_0x1f3e37;(_0x3ca5d1[_0x20366f]&&_0x3ca5d1[_0x20366f][_0x4cf112(0x318)+_0x4cf112(0x2a3)]||[])[_0x4cf112(0x357)](_0x5cd17e=>{const _0x253505=_0x4cf112;if(_0x5cd17e[_0x253505(0x171)+_0x253505(0x37a)]&&SIPARIS_IPTAL_DURUMLARI[_0x253505(0x486)](_0x5cd17e[_0x253505(0x210)+_0x253505(0x1a0)]))_0x5cc2dd[_0x253505(0x1cb)](_0x5cd17e['satisBel'+_0x253505(0x37a)]);});});const _0x1f90d2=Object[_0x1f3e37(0x395)](_0x3ca5d1)[_0x1f3e37(0x308)](),_0x4a2ede=new Map();_0x1f90d2[_0x1f3e37(0x357)](_0x113f01=>{const _0x48704d=_0x1f3e37,_0x1ea9b2={'vmxAQ':function(_0x739d54,_0x54c85a){const _0x4177c6=_0x5dbf;return _0x42e934[_0x4177c6(0x2cb)](_0x739d54,_0x54c85a);},'JVsah':function(_0x5b613b,_0x5d8cec){return _0x5b613b<=_0x5d8cec;}};(_0x3ca5d1[_0x113f01]&&_0x3ca5d1[_0x113f01][_0x48704d(0x318)+_0x48704d(0x2a3)]||[])[_0x48704d(0x357)](_0x5a77d2=>{const _0x10181a=_0x48704d;if(_0x42e934[_0x10181a(0x240)](_0x42e934['uXBPt'],_0x10181a(0x34d))){if(!_0x1cff40||!_0x3398fd[_0x10181a(0x2ca)])return![];const _0x5b5623=_0x1ea9b2[_0x10181a(0x1c2)](dateKeyLocal,new _0x542866(_0xf8ec56[_0x10181a(0x2ca)]));return _0x5b5623&&(!_0x50fedf||_0x5b5623>=_0x8b5a90)&&(!_0x27a95f||_0x1ea9b2[_0x10181a(0x2b0)](_0x5b5623,_0x354298));}else{if(_0x5a77d2[_0x10181a(0x171)+_0x10181a(0x37a)])_0x4a2ede[_0x10181a(0x477)](_0x5a77d2[_0x10181a(0x171)+_0x10181a(0x37a)],_0x113f01);}});});let _0x3b94bb=-0x261d+-0xcaa+0x32c7;return _0x1f90d2[_0x1f3e37(0x357)](_0x2c93de=>{const _0x381063=_0x1f3e37,_0x55fb59=_0x3ca5d1[_0x2c93de],_0x4ce2d6=_0x55fb59[_0x381063(0x318)+_0x381063(0x2a3)]||[];let _0x25aff5=_0x4ce2d6[_0x381063(0x254)](_0x38cd72=>!(_0x38cd72[_0x381063(0x171)+_0x381063(0x37a)]&&_0x5cc2dd[_0x381063(0x486)](_0x38cd72[_0x381063(0x171)+_0x381063(0x37a)])));_0x25aff5=_0x25aff5[_0x381063(0x254)](_0x3d6270=>{const _0x12e9ad=_0x381063;if(!_0x3d6270[_0x12e9ad(0x171)+_0x12e9ad(0x37a)])return!![];return _0x42e934[_0x12e9ad(0x374)](_0x4a2ede[_0x12e9ad(0x43f)](_0x3d6270[_0x12e9ad(0x171)+_0x12e9ad(0x37a)]),_0x2c93de);});const _0x46ea00=new Set();_0x25aff5=_0x25aff5['filter'](_0x31084c=>{const _0x3ac4fe=_0x381063,_0x2cef8d={'rxRda':function(_0x1c3aaa){return _0x1c3aaa();}};if(_0x42e934[_0x3ac4fe(0x388)]('GZdVh',_0x42e934[_0x3ac4fe(0x16f)]))_0xc9ad0e[_0x3ac4fe(0x3c8)+_0x3ac4fe(0x393)](_0x1fb913)[_0x3ac4fe(0x442)+_0x3ac4fe(0x406)](_0x3ac4fe(0x199),()=>{const _0x408be0=_0x3ac4fe,_0x1fcd3d=_0x14406c[_0x408be0(0x3c8)+_0x408be0(0x393)](_0x354a7b);_0x1fcd3d[_0x408be0(0x1fe)]='',searchClearBtnGuncelle(_0x15ce0f,_0x4b5164),_0x2cef8d[_0x408be0(0x19b)](_0x10c1a6),_0x1fcd3d[_0x408be0(0x2cd)]();});else{if(!_0x31084c[_0x3ac4fe(0x171)+_0x3ac4fe(0x37a)])return!![];if(_0x46ea00[_0x3ac4fe(0x486)](_0x31084c[_0x3ac4fe(0x171)+'geNo']))return![];return _0x46ea00['add'](_0x31084c['satisBel'+_0x3ac4fe(0x37a)]),!![];}}),_0x3b94bb+=_0x42e934['erqEV'](_0x4ce2d6['length'],_0x25aff5[_0x381063(0x3b0)]),_0x42e934[_0x381063(0x2e3)](_0x25aff5[_0x381063(0x3b0)],_0x4ce2d6[_0x381063(0x3b0)])&&(_0x42e934[_0x381063(0x485)](_0x42e934[_0x381063(0x3d7)],_0x42e934[_0x381063(0x30f)])?_0x3ca5d1[_0x2c93de]=Object[_0x381063(0x3f6)]({},_0x55fb59,{'siparisArsiv':_0x25aff5}):_0x271502[_0x381063(0x477)](_0x24f5d0[_0x381063(0x26a)+'o'],_0x2d64d1));}),{'arsiv':_0x3ca5d1,'silinenSatir':_0x3b94bb,'iptalEdilenBelgeSayisi':_0x5cc2dd[_0x1f3e37(0x45c)]};}function arsivKazananUploadGunuHaritasi(_0x5bdc51,_0x349dc0,_0x55fe0a,_0x233a22){const _0x42cad5=_0x16ae49,_0x1ce537={'dGAJH':function(_0x249d97,_0x129795){return _0x249d97===_0x129795;},'ToyGR':_0x42cad5(0x293),'haUSX':_0x42cad5(0x41c),'DqTMA':function(_0xd5fa4e,_0x3bcb35){return _0xd5fa4e(_0x3bcb35);},'ZsGof':function(_0x4ed0e2,_0x15be06){return _0x4ed0e2>_0x15be06;},'eqSaM':function(_0x5d5b77){return _0x5d5b77();},'GgHxN':function(_0x3de69d,_0x12998b){return _0x3de69d(_0x12998b);},'aTzuo':_0x42cad5(0x45e)},_0x180fe9=new Map();return _0x349dc0['forEach'](_0x378aca=>{const _0x275ad8=_0x42cad5,_0x41a15b={'yrgXD':function(_0x4ba5d1){const _0x19707a=_0x5dbf;return _0x1ce537[_0x19707a(0x3ce)](_0x4ba5d1);},'rTUPe':function(_0xc3e0b9,_0x23988a){const _0x55187c=_0x5dbf;return _0x1ce537[_0x55187c(0x417)](_0xc3e0b9,_0x23988a);},'BWwHB':'worker-k'+_0x275ad8(0x36a)+_0x275ad8(0x464)};if(_0x1ce537[_0x275ad8(0x3d8)]('SdnRh',_0x1ce537[_0x275ad8(0x441)]))(_0x5bdc51[_0x378aca]&&_0x5bdc51[_0x378aca][_0x55fe0a]||[])[_0x275ad8(0x357)](_0x42bf67=>{const _0x5d959b=_0x275ad8;if(_0x1ce537[_0x5d959b(0x3d8)](_0x1ce537[_0x5d959b(0x3ab)],_0x1ce537[_0x5d959b(0x263)]))state[_0x5d959b(0x394)+_0x5d959b(0x255)]=_0x2cbfe6[_0x5d959b(0x3f6)]({},state['faturaAr'+_0x5d959b(0x255)],_0x5323d3),_0x28699a=!![];else{if(!_0x42bf67[_0x233a22])return;const _0x48af0f=_0x1ce537[_0x5d959b(0x317)](dateKeyLocal,new Date(_0x42bf67[_0x233a22]));if(!_0x48af0f)return;(!_0x180fe9[_0x5d959b(0x486)](_0x48af0f)||_0x1ce537[_0x5d959b(0x478)](_0x378aca,_0x180fe9['get'](_0x48af0f)))&&_0x180fe9[_0x5d959b(0x477)](_0x48af0f,_0x378aca);}});else return new _0x537d6d((_0x30d249,_0x1be33f)=>{const _0x8ffa7e=_0x275ad8,_0x454506=_0x41a15b[_0x8ffa7e(0x1df)](faturaWorkerOlustur);if(!_0x454506){_0x41a15b['rTUPe'](_0x1be33f,new _0x5821dd(_0x41a15b[_0x8ffa7e(0x252)]));return;}const _0x16958b=++faturaWorkerReqId;faturaWorkerPending[_0x8ffa7e(0x477)](_0x16958b,{'resolve':_0x30d249,'reject':_0x1be33f}),_0x454506[_0x8ffa7e(0x434)+_0x8ffa7e(0x28f)]({'id':_0x16958b,'arsiv':_0x3c7ac7});});}),_0x180fe9;}function faturaKontrolArsivBirlestir(_0x15e04a){const _0x54c7ff=_0x16ae49,_0x527a1a={'RCrdW':_0x54c7ff(0x3e4),'RFODl':_0x54c7ff(0x199),'sTkXi':function(_0x37d836,_0x1ed5ef){return _0x37d836(_0x1ed5ef);},'uzBVo':function(_0x5e939e,_0x5ea4ab){return _0x5e939e(_0x5ea4ab);},'oYZSe':function(_0x473f6f,_0x454001){return _0x473f6f+_0x454001;},'ICSzz':function(_0x5695db,_0x3ad248){return _0x5695db!==_0x3ad248;},'McvSu':_0x54c7ff(0x404),'ePfCB':function(_0x3483c5,_0x19e0ec,_0x4d4c8e,_0x578d38,_0x4b11e8){return _0x3483c5(_0x19e0ec,_0x4d4c8e,_0x578d38,_0x4b11e8);},'AFVBf':function(_0x8c14ee,_0x2bad15){return _0x8c14ee(_0x2bad15);},'apctD':_0x54c7ff(0x330)+_0x54c7ff(0x22d),'hEhco':_0x54c7ff(0x2ee)+_0x54c7ff(0x45b),'sRUxn':function(_0x15f25f,_0x28043c){return _0x15f25f(_0x28043c);},'CPUVL':_0x54c7ff(0x200),'UXuWn':function(_0x2217b3,_0x39d6fc){return _0x2217b3===_0x39d6fc;},'tytwW':'Müşteri\x20'+'Tahsilat','UZuxn':_0x54c7ff(0x1c0),'NNEML':function(_0x56e420,_0x395ecb){return _0x56e420===_0x395ecb;},'efvQk':_0x54c7ff(0x3b6)+_0x54c7ff(0x2bf)+'ra','wiUGu':function(_0x4b13f2,_0x5a0b46){return _0x4b13f2===_0x5a0b46;},'jqwUA':_0x54c7ff(0x39d),'oHHPx':_0x54c7ff(0x378)+'pi','VLZGA':function(_0x245824,_0x2aaed5){return _0x245824(_0x2aaed5);},'DpcxR':_0x54c7ff(0x385)+_0x54c7ff(0x1d0)+_0x54c7ff(0x1eb)+'ı','zbiVX':_0x54c7ff(0x20b),'nIMam':_0x54c7ff(0x1b3),'uhlNk':_0x54c7ff(0x32f),'inEYg':_0x54c7ff(0x3a0)+_0x54c7ff(0x3fb)+'sı','lQeEP':function(_0xe09450,_0x4c177b,_0x1bdaeb){return _0xe09450(_0x4c177b,_0x1bdaeb);},'zhnlH':_0x54c7ff(0x264),'kIicC':'Diger','hNnuq':_0x54c7ff(0x473)+_0x54c7ff(0x41f),'QgNox':function(_0x3b4fb5,_0xfc586e){return _0x3b4fb5!=_0xfc586e;},'YQlkt':function(_0x346379){return _0x346379();},'sYcjF':function(_0x36f5a8,_0x2d52f9,_0x79468c){return _0x36f5a8(_0x2d52f9,_0x79468c);},'jwBEB':_0x54c7ff(0x394)+_0x54c7ff(0x34b),'IuhwA':_0x54c7ff(0x455)+_0x54c7ff(0x41f),'rczbH':function(_0x474762){return _0x474762();}},_0x13ec55=Object[_0x54c7ff(0x395)](_0x15e04a||{})[_0x54c7ff(0x308)]();function _0x3c4e8a(_0x38b6aa,_0x5c4ce9){const _0x24c999=_0x54c7ff,_0x555ca2={'fIMKH':_0x527a1a['RCrdW'],'fNQNP':_0x527a1a[_0x24c999(0x42a)],'gmLtD':function(_0x273fd6,_0xd6edb4){return _0x527a1a['sTkXi'](_0x273fd6,_0xd6edb4);},'oKiki':function(_0x4c4028,_0x2e6654){const _0x1144d8=_0x24c999;return _0x527a1a[_0x1144d8(0x262)](_0x4c4028,_0x2e6654);},'EWfWv':function(_0x1594c6,_0x37d2a3){const _0x3fe79e=_0x24c999;return _0x527a1a[_0x3fe79e(0x3b9)](_0x1594c6,_0x37d2a3);},'dcruk':_0x24c999(0x38a),'pKCwx':function(_0x13f8ea,_0x41db8b){const _0x3d3e5e=_0x24c999;return _0x527a1a[_0x3d3e5e(0x3cb)](_0x13f8ea,_0x41db8b);},'IibGE':_0x527a1a[_0x24c999(0x383)]},_0x4c6488=_0x527a1a[_0x24c999(0x213)](arsivKazananUploadGunuHaritasi,_0x15e04a,_0x13ec55,_0x38b6aa,_0x5c4ce9),_0x5c746b=new Map();return _0x13ec55['forEach'](_0x255fcf=>{const _0x1905da=_0x24c999;_0x555ca2[_0x1905da(0x177)]('RNcFg',_0x555ca2['IibGE'])?(_0xab1ca1[_0x1905da(0x3db)+'t']['remove'](_0x1905da(0x2eb)),_0x1096a9['removeEv'+_0x1905da(0x36c)+_0x1905da(0x2b5)](_0x555ca2[_0x1905da(0x1be)],_0x3a88e5),_0x12c50f[_0x1905da(0x3a8)+_0x1905da(0x36c)+_0x1905da(0x2b5)](_0x555ca2[_0x1905da(0x3f9)],_0x1bd7e5),_0x1e51f5[_0x1905da(0x3a8)+_0x1905da(0x36c)+_0x1905da(0x2b5)](_0x1905da(0x199),_0x3a2cef),_0x555ca2[_0x1905da(0x415)](_0x3527fd,_0x5d5462)):(_0x15e04a[_0x255fcf]&&_0x15e04a[_0x255fcf][_0x38b6aa]||[])[_0x1905da(0x357)](_0x58366f=>{const _0x4b9910=_0x1905da,_0x47818a=_0x58366f[_0x5c4ce9]?_0x555ca2[_0x4b9910(0x2a4)](dateKeyLocal,new Date(_0x58366f[_0x5c4ce9])):null;if(_0x47818a&&_0x4c6488[_0x4b9910(0x43f)](_0x47818a)!==_0x255fcf)return;const _0x4bb335=_0x58366f[_0x5c4ce9]?new Date(_0x58366f[_0x5c4ce9])['getTime']():'',_0x38ec2e=_0x58366f[_0x4b9910(0x1ef)]?_0x555ca2['EWfWv'](_0x555ca2[_0x4b9910(0x1ac)],_0x58366f[_0x4b9910(0x1ef)]):[_0x58366f[_0x4b9910(0x1d6)],_0x4bb335,_0x58366f[_0x4b9910(0x32c)]][_0x4b9910(0x453)]('|');_0x5c746b[_0x4b9910(0x477)](_0x38ec2e,_0x58366f);});}),Array[_0x24c999(0x1f3)](_0x5c746b[_0x24c999(0x3ff)]());}function _0x1c6fcd(){const _0x315117=_0x54c7ff;if(_0x527a1a[_0x315117(0x3cb)](_0x527a1a['zbiVX'],_0x527a1a[_0x315117(0x340)])){const _0x3bc051=new Map(),_0x4f2799=new Map();return _0x13ec55[_0x315117(0x357)](_0x2486ef=>{const _0xaa9038=_0x315117;(_0x15e04a[_0x2486ef]&&_0x15e04a[_0x2486ef][_0xaa9038(0x178)+_0xaa9038(0x27b)]||[])['forEach'](_0x3c01c8=>{const _0x1102ff=_0xaa9038;if(_0x3c01c8[_0x1102ff(0x26a)+'o'])_0x3bc051[_0x1102ff(0x477)](_0x3c01c8[_0x1102ff(0x26a)+'o'],_0x3c01c8);else{const _0x3c7e30=_0x3c01c8[_0x1102ff(0x2a5)+_0x1102ff(0x38d)]?new Date(_0x3c01c8[_0x1102ff(0x2a5)+_0x1102ff(0x38d)])['getTime']():'',_0x376b54=[_0x3c01c8[_0x1102ff(0x1d6)],_0x3c7e30,_0x3c01c8[_0x1102ff(0x32c)]][_0x1102ff(0x453)]('|');_0x4f2799[_0x1102ff(0x477)](_0x376b54,_0x3c01c8);}});}),[..._0x3bc051[_0x315117(0x3ff)](),..._0x4f2799[_0x315117(0x3ff)]()];}else{const _0x448e6a={'NwOUw':function(_0x1d0e39,_0x4a6309){const _0x19087c=_0x315117;return _0x527a1a[_0x19087c(0x23c)](_0x1d0e39,_0x4a6309);},'rJDRP':function(_0x6537a9,_0x6cd86e){const _0x3cdcca=_0x315117;return _0x527a1a[_0x3cdcca(0x2f4)](_0x6537a9,_0x6cd86e);},'zdgsv':function(_0x1a3a2d,_0x3a1021){return _0x1a3a2d===_0x3a1021;},'EqpmE':_0x315117(0x286)+'ek','jApyG':_0x527a1a[_0x315117(0x411)],'lnCaX':function(_0x1c83b4,_0x309da1){return _0x527a1a['AFVBf'](_0x1c83b4,_0x309da1);},'rFnxT':_0x527a1a[_0x315117(0x2ab)],'LBNvy':function(_0x26685e,_0x13d8d5){const _0x134328=_0x315117;return _0x527a1a[_0x134328(0x271)](_0x26685e,_0x13d8d5);},'XzFoH':_0x527a1a[_0x315117(0x1b9)],'QZYWi':_0x315117(0x333),'gImMt':function(_0x4aef07,_0x612e8){const _0x1b6c2e=_0x315117;return _0x527a1a[_0x1b6c2e(0x258)](_0x4aef07,_0x612e8);},'SjAZi':_0x527a1a[_0x315117(0x31d)],'vDrGw':_0x527a1a[_0x315117(0x326)],'BKIzQ':function(_0x2d4246,_0x36c81b){const _0x10b646=_0x315117;return _0x527a1a[_0x10b646(0x2a7)](_0x2d4246,_0x36c81b);},'UhtXW':_0x527a1a[_0x315117(0x2b6)],'mYwXc':function(_0x224ee8,_0x3297b4){const _0x946817=_0x315117;return _0x527a1a[_0x946817(0x3b2)](_0x224ee8,_0x3297b4);},'zgWGd':_0x527a1a[_0x315117(0x307)],'xwYpm':_0x315117(0x345),'yJTjG':_0x527a1a[_0x315117(0x1e6)],'mJtLf':function(_0x2ea902,_0xff3ede){return _0x527a1a['VLZGA'](_0x2ea902,_0xff3ede);},'AFMoB':_0x315117(0x22a)+_0x315117(0x21b),'oWziU':_0x315117(0x32a)+'msilcisi','RgRov':_0x527a1a['DpcxR']},_0x36b171={};return(_0x14fc5f||[])[_0x315117(0x357)](_0x49cdc1=>{const _0x49dd53=_0x315117,_0x56ff92=_0x448e6a['NwOUw'](_0x705bc7,_0x49cdc1[_0x49dd53(0x46b)]||'')[_0x49dd53(0x430)]();if(!_0x56ff92||!_0x448e6a[_0x49dd53(0x471)](musteriGecerliMi,_0x56ff92))return;const _0x39dc3a=_0x448e6a[_0x49dd53(0x44b)](_0x37920c,_0x49cdc1[_0x49dd53(0x192)+'pi']||'')[_0x49dd53(0x430)]();if(_0x448e6a[_0x49dd53(0x230)](_0x39dc3a,_0x448e6a[_0x49dd53(0x2bd)])||_0x39dc3a===_0x448e6a[_0x49dd53(0x2c3)])return;const _0x45215e=_0x448e6a[_0x49dd53(0x3e6)](_0x2c8246,_0x49cdc1[_0x448e6a[_0x49dd53(0x3e9)]]||'')[_0x49dd53(0x430)]();if(!_0x45215e)return;const _0x27d160=_0x3e3d02(_0x49cdc1[_0x49dd53(0x428)+'rü']||'')[_0x49dd53(0x430)](),_0xc42217=_0x448e6a['LBNvy'](excelDateToJSArti1Gun,_0x49cdc1[_0x448e6a[_0x49dd53(0x3f7)]]);if(!_0xc42217)return;const _0xfe4c68=_0x448e6a[_0x49dd53(0x44b)](_0x45f879,_0x49cdc1[_0x448e6a[_0x49dd53(0x362)]])||-0x13f*-0xb+0x16b*0x6+-0x1*0x1637;let _0x5eee9b;if(_0x448e6a[_0x49dd53(0x360)](_0x27d160,_0x448e6a['SjAZi']))_0x5eee9b=_0x448e6a[_0x49dd53(0x2b4)];else{if(_0x448e6a[_0x49dd53(0x2a2)](_0x27d160,_0x448e6a[_0x49dd53(0x238)]))_0x5eee9b=_0x49dd53(0x2f1);else{if(_0x448e6a[_0x49dd53(0x230)](_0x27d160,_0x49dd53(0x29d)))_0x5eee9b=_0x49dd53(0x28e);else{if(_0x448e6a[_0x49dd53(0x29a)](_0x27d160,_0x448e6a[_0x49dd53(0x19e)]))_0x5eee9b=_0x448e6a[_0x49dd53(0x19e)];else return;}}}const _0x1fab6e=-_0xfe4c68,_0x33b9b7=tahsilatBankaAltEtiketi(_0x39dc3a,_0x49cdc1[_0x448e6a[_0x49dd53(0x449)]]),_0x216851=_0x2f0291(_0x49cdc1[_0x448e6a[_0x49dd53(0x1bc)]]||'')[_0x49dd53(0x430)]();_0x36b171[_0x45215e]={'belgeNo':_0x45215e,'musteriKod':_0x56ff92,'musteriAdi':_0x448e6a[_0x49dd53(0x3e3)](_0x61a24,_0x49cdc1[_0x448e6a['AFMoB']]||'')[_0x49dd53(0x430)](),'tarih':_0xc42217['toISOStr'+_0x49dd53(0x2e2)](),'tutar':_0x1fab6e,'tahsilatKategori':_0x5eee9b,'odemeEtiketi':_0x33b9b7,'belgeTipi':_0x216851,'satisTemsilcisi':_0x49cdc1[_0x448e6a[_0x49dd53(0x1ab)]]||null,'tersKayitNo':_0x2f95f0(_0x49cdc1[_0x448e6a[_0x49dd53(0x29b)]]||'')[_0x49dd53(0x430)]()||null};}),_0x36b171;}}function _0x5e2d04(){const _0x481192=_0x54c7ff,_0xb6db4d={'utNMy':function(_0x587feb,_0x3a0d7d){return _0x587feb(_0x3a0d7d);},'oVZwq':_0x527a1a[_0x481192(0x3ca)],'mnJNT':function(_0x34a084,_0x8446ec,_0x383877){return _0x527a1a['lQeEP'](_0x34a084,_0x8446ec,_0x383877);},'zkPtJ':_0x481192(0x2af),'jfnGf':_0x481192(0x1cc),'iJLOh':_0x527a1a[_0x481192(0x2ac)],'vSiwK':_0x481192(0x18f),'BqALz':_0x527a1a[_0x481192(0x3c1)],'yimQZ':_0x481192(0x33f)+_0x481192(0x1c8),'qBvHD':_0x527a1a[_0x481192(0x451)],'XVrLB':function(_0x42abf1,_0x4c7f91){const _0x1d2718=_0x481192;return _0x527a1a[_0x1d2718(0x41a)](_0x42abf1,_0x4c7f91);},'rllJm':_0x481192(0x22a)+_0x481192(0x21b),'uCShu':_0x481192(0x1d3),'bvRCv':function(_0x291514,_0x24378c){return _0x291514(_0x24378c);},'JQgwT':function(_0x13ae4c){const _0x115456=_0x481192;return _0x527a1a[_0x115456(0x280)](_0x13ae4c);}},_0x3a766a=[];return _0x13ec55[_0x481192(0x357)](_0x1126bc=>{const _0x52a4c7=_0x481192;if(_0x527a1a[_0x52a4c7(0x222)]===_0x52a4c7(0x32f))(_0x15e04a[_0x1126bc]&&_0x15e04a[_0x1126bc]['siparisA'+_0x52a4c7(0x2a3)]||[])[_0x52a4c7(0x357)](_0x312d3d=>_0x3a766a[_0x52a4c7(0x42e)](_0x312d3d));else{const _0x1fa0d0=_0xb6db4d[_0x52a4c7(0x3bf)](_0x2b9a12,_0x2bbf00[_0x52a4c7(0x22a)+_0x52a4c7(0x1b1)]||'')[_0x52a4c7(0x430)]();if(!_0x1fa0d0)return;const _0xf0960f=_0x180e97[_0xb6db4d[_0x52a4c7(0x2ad)]],_0x3a2678=_0xb6db4d[_0x52a4c7(0x44e)](cekSenetKayitAnahtari,_0xf0960f,_0x4a01f0),_0x56022b=_0xb6db4d[_0x52a4c7(0x3bf)](_0x26284d,_0x27b699[_0x52a4c7(0x192)+'pi']||'')[_0x52a4c7(0x430)](),_0x38bfe1=_0x56022b[_0x52a4c7(0x3cf)+_0x52a4c7(0x399)+'e'](_0xb6db4d[_0x52a4c7(0x3d6)]),_0x1a82a6=_0x38bfe1[_0x52a4c7(0x1d2)](_0xb6db4d['jfnGf'])?_0xb6db4d[_0x52a4c7(0x465)]:_0x38bfe1['includes'](_0x52a4c7(0x172))?_0xb6db4d[_0x52a4c7(0x384)]:_0xb6db4d[_0x52a4c7(0x296)],_0x49a07a=_0xb6db4d[_0x52a4c7(0x3bf)](excelDateToJSArti1Gun,_0x2c19f6[_0xb6db4d['yimQZ']]),_0xa862e3=excelDateToJSArti1Gun(_0x7fbe4[_0xb6db4d['qBvHD']]);_0xe35115[_0x3a2678]={'no':_0xb6db4d[_0x52a4c7(0x2da)](_0xf0960f,null)?_0xb6db4d[_0x52a4c7(0x3bf)](_0x18789a,_0xf0960f)[_0x52a4c7(0x430)]():'','musteriKod':_0x1fa0d0,'musteriAdi':_0xb6db4d[_0x52a4c7(0x3bf)](_0xa392f1,_0x2758ed[_0xb6db4d[_0x52a4c7(0x275)]]||'')[_0x52a4c7(0x430)](),'tahsilatTuru':_0x1a82a6,'odemeTipiHam':_0x56022b,'tutar':_0x4930a5[_0x52a4c7(0x2e4)](_0x3ed300(_0x50c3d1[_0x52a4c7(0x333)])||0x306+0x5f4+-0x47d*0x2),'vadeTarihi':_0x49a07a?_0x49a07a[_0x52a4c7(0x40e)+_0x52a4c7(0x2e2)]():null,'belgeTarihi':_0xa862e3?_0xa862e3[_0x52a4c7(0x40e)+_0x52a4c7(0x2e2)]():null,'durum':_0xb6db4d['uCShu'],'sonGorulduguYukleme':_0xb6db4d[_0x52a4c7(0x3fd)](dateKeyLocal,_0xb6db4d[_0x52a4c7(0x2d8)](turkiyeBugun))};}}),_0x3a766a;}return{'siparisArsiv':_0x5e2d04(),'tahsilatArsiv':_0x527a1a[_0x54c7ff(0x1de)](_0x3c4e8a,_0x54c7ff(0x2a5)+'Arsiv',_0x54c7ff(0x40d)+'ihi'),'faturaArsiv':_0x527a1a[_0x54c7ff(0x247)](_0x3c4e8a,_0x527a1a[_0x54c7ff(0x397)],_0x527a1a['IuhwA']),'bayiHakedisArsiv':_0x527a1a['rczbH'](_0x1c6fcd),'gunSayisi':_0x13ec55[_0x54c7ff(0x3b0)],'ilkGun':_0x13ec55[0x521*-0x7+0x77*0x52+-0x237]||null,'sonGun':_0x13ec55[_0x13ec55[_0x54c7ff(0x3b0)]-(0xfa2+0x255f+0x1a80*-0x2)]||null};}function faturaKontrolArsivSikistir(_0x47818c){const _0x10ce45=_0x16ae49,_0x214ca1={'VJZkJ':function(_0x3a7ea8,_0x554b30){return _0x3a7ea8===_0x554b30;},'JgoNm':function(_0x501054,_0x3591b4){return _0x501054-_0x3591b4;},'wcltg':function(_0x12ea03,_0x170aab,_0x58da1a,_0x25c41c){return _0x12ea03(_0x170aab,_0x58da1a,_0x25c41c);},'GTatG':_0x10ce45(0x2a5)+_0x10ce45(0x231),'XLOXk':_0x10ce45(0x394)+_0x10ce45(0x34b),'NUucT':_0x10ce45(0x455)+_0x10ce45(0x41f),'FToRw':function(_0x4107b2,_0x98474a){return _0x4107b2||_0x98474a;},'WMLQT':function(_0x4f958e,_0x15b874){return _0x4f958e+_0x15b874;}},_0x151cbc=Object[_0x10ce45(0x395)](_0x214ca1[_0x10ce45(0x368)](_0x47818c,{}))[_0x10ce45(0x308)](),_0x2892df=(_0x5028a4,_0x2289e1)=>arsivKazananUploadGunuHaritasi(_0x47818c,_0x151cbc,_0x5028a4,_0x2289e1),_0x4e8d05=_0x2892df(_0x214ca1[_0x10ce45(0x46e)],'belgeTar'+_0x10ce45(0x3ad)),_0x9372e1=_0x2892df(_0x214ca1[_0x10ce45(0x348)],_0x214ca1[_0x10ce45(0x425)]);let _0x4bbc1c=-0x8ed+-0xc4a+0x1537;const _0x3fdb64={};_0x151cbc['forEach'](_0x65d928=>{const _0x19374b=_0x10ce45,_0x31a683=_0x47818c[_0x65d928]||{};function _0x44fbb3(_0x4803e4,_0x4fa2d8,_0x3cc225){const _0x61d4d1=_0x5dbf,_0x2d1520={'VteXp':function(_0x2ab6c7,_0x53f91b){const _0x5edc28=_0x5dbf;return _0x214ca1[_0x5edc28(0x206)](_0x2ab6c7,_0x53f91b);}},_0x5dbab0=_0x31a683[_0x4803e4]||[],_0xe55f0d=_0x5dbab0[_0x61d4d1(0x254)](_0x3c4d81=>{const _0x4bce08=_0x61d4d1;if(!_0x3c4d81[_0x4fa2d8])return!![];const _0xf22e3c=dateKeyLocal(new Date(_0x3c4d81[_0x4fa2d8]));if(!_0xf22e3c)return!![];return _0x2d1520[_0x4bce08(0x475)](_0x3cc225[_0x4bce08(0x43f)](_0xf22e3c),_0x65d928);});return _0x4bbc1c+=_0x214ca1[_0x61d4d1(0x292)](_0x5dbab0[_0x61d4d1(0x3b0)],_0xe55f0d['length']),_0xe55f0d;}_0x3fdb64[_0x65d928]=Object[_0x19374b(0x3f6)]({},_0x31a683,{'tahsilatArsiv':_0x214ca1[_0x19374b(0x2db)](_0x44fbb3,_0x214ca1[_0x19374b(0x46e)],_0x19374b(0x40d)+_0x19374b(0x3ad),_0x4e8d05),'faturaArsiv':_0x44fbb3(_0x214ca1[_0x19374b(0x348)],_0x214ca1[_0x19374b(0x425)],_0x9372e1)});});const {arsiv:_0xd08230,silinenSatir:_0x3be259}=siparisArsivGunlereDagitVeTemizle(_0x47818c,[]),_0x482958={};return _0x151cbc[_0x10ce45(0x357)](_0x288da5=>{const _0x4dde0f=_0x10ce45;_0x482958[_0x288da5]=Object['assign']({},_0x3fdb64[_0x288da5],{'siparisArsiv':_0xd08230[_0x288da5]&&_0xd08230[_0x288da5][_0x4dde0f(0x318)+_0x4dde0f(0x2a3)]||[]});}),{'arsiv':_0x482958,'silinenSatir':_0x214ca1[_0x10ce45(0x2f3)](_0x4bbc1c,_0x3be259)};}let faturaWorker=null,faturaWorkerKurulumBasarisiz=![],faturaWorkerReqId=0x1*-0x164c+-0x2*0x1370+0x3d2c;const faturaWorkerPending=new Map();function _0x2899(){const _0xbe8ec9=['rMrkz2S','C2LSy2LZAq','CMvTB3zLrxy','ywXdBg9Zzq','lNbVC3rnzxm','vg95r1i','nhWWFdn8mxW','AwHP','CSwFAxzPihnL','Cwf0r2G','BgvUz3rO','BwT2sLm','D2Lvr3u','yMfJA2DYB3u','B2XMDvC','D2fYBG','sgL6Bwv0iee','CMfKAxvZoJm','ywVeSwXKXleG4Ocu','B1LAu2u','rMf0DxjHieS','AMzmyuu','DhjVBefYC2K','t0jWr1i','zgK6','DxrotxK','Chnquhi','A0LPy0m','DeDrEfC','igj1Bhv0icG','W5XstuuP','zxH0uee','DMriCuW','zgvKAwXLBwu','z2v0rwXLBwu','Aw5KzxHpzG','Aw5fwwC','suntENO','y2XLyxi','BMPkwKC','zxftyu0','Dg9mB2nHBgu','wgvUquS','XlbWDgfSievK','yxnJCMLWDa','t0DYz2m','zNb5q2S','DujZEfK','EMTqDeO','z01pqLi','zeDbsKG','icaGDhj5EWO','Dgv4DenVBNq','y2XHC3nmAxm','igfYXz9PDIbR','uMfWB3iGy2K','r2HbyKS','A1vqEwu','v2vMufy','BuXrEMy','DvvRwKq','BuP0tgy','C3vIBwL0','CNbtDwu','Bg5dyvG','CK5Oy20','z2TAzxO','CKzUEfq','uMvgBwq','BgfUthq','quLYC0C','DgeGC2vUA3i','AxzTrNy','wvv1CNe','EwD1BgfTysa','zgKU','v3v4v0m','qIbKzxzYzsa','CMvQzwn0','zwjHC2vKyxq','yxnZAwDU','whPgB0G','BwfW','zK5rtLa','v25lEg4','DcboDw1HCMe','DgnOkgvYCIK','yNzsq3y','BMfWC2HVDa','DMfSDwvZ','B2rLBwvfDgK','nfLVBxLoyG','zgLSzw1LzgK','Dgv4Dc9Qyxy','uK5JrMC','Ag5SAwW','tgLZDgvUzxi','ChjVBwLZzq','A3jHCIbKzw4','BxvZDgvYAue','ANvhrMu','zvrPuNO','Agf6ysbRyxK','yMvSz2vuyxi','Dg9ju09tDhi','yxjHAYbRB3i','Exr2EeO','yxbJDeq','ywTPEwu','igzHDhvYyuS','tNDrseG','z21mDeq','x3yX','r2DiEe4','zK9kBeG','AwXoqKG','uwDoB3G','A2v0Aq','y1HUEhK','y2vRu2vUzxq','C3jKvwi','CMLOAq','A3jVBML6zsa','ihzLEweGiSwE','ywjHC2uUyxa','A3vUyw1HzmsX','ig9RDw5HBwe','tLv1y1q','vvzTvhG','Bu9Vvee','qMvSz2uGvmo8','DgfOC2LSrwq','uKzprgW','Cu5VCxC','u1neze0','CxvJCuG','ChvZAa','mJi1C0LlAfD3','DhjPBq','yLvWqM4','C2L2qMLYBgu','zxbVCNrFDJe','Cg9ZDe1LC3m','s3rhAMC','igj1ihzLCMK','BMq6iZeZmJm','DgvZDa','y2LOyxPHigS','t3jHBMK','thHYyMq','zgvWB2rHs2e','B0Xirhq','ywXjChrHBei','z2v0','CSwFAxzPignP','yvr6Dw8','ywrKrxzLBNq','CMvZDwX0id0','txrev3K','Dg9yC0m','CNiGjIyGzxi','vhDvrhK','Dg9Y','EhDzCg0','zgjvCMW','CKPeuLa','Dw5HBwfKXle6','Xlbmru1frmsWia','Bw5ktLq','q01kDeW','vxL6t3G','Ae5UDxe','BxvZDgvYAuS','AM9PBG','z2v0vgLTzq','zMf0DxjHvge','s3vZrMO','C3fJCxG','AwXR','svbyBfi','BNrYB2XbCNm','BwfYyxpeSq','C2L6zq','y29UC3rYDwm','u2rUuMG','rgvWB3PPDg8','qKzJB1e','zMf0DxjHs28','x3rHAhnPBge','ufvu','BwL5B3i','AuPmt2G','AMzst1e','zwfpy20','yxPKysbNW7XU','CSwFAxyGD29Y','ChjLDMvUDeq','tCo8Xz90zxjP','CSwFAxyGDMvY','Axn0zw5PBgu','r1rHDeC','tMfprey','C3vWrfa','tNDpvxC','DgvTC2LSy2K','qMvSz2uGvge','wNryzeK','vNrLwha','CMvZB2X2zq','C2v0','wNnhB2y','t0Hdu0e','D2zZqKW','zfbQBgi','mtiWnJaYmu9wquf0Ea','BgvvC3m','ywrlCe0','EYbPzdOGAwq','B25LCNjVCG','igtdTM7dVgZdVhK','DhvTDq','zxn0ms5MAxi','CMLUoG','DMPlu3m','AgfZ','o2jVCMrLCI0','z2PyvuG','Cg1mr3C','C2f0AxnczwW','C2vUzxq','ExPUr3u','A2vYigHHDge','qNuGACwFBgvT','CeP3AhG','CeTdD3G','yMf5AuHHA2u','A2Tsz0i','cIaGicaGihm','BwfKXleSigfU','Aw9Ul2PZB24','EvHICMK','cIaGicaGia','wwPJEuW','B0PSC1e','vgfOC2LSyxq','uwzkDLa','CNteSsaOu8oCua','DMXP','icaGicaGFtS','ysb0AhjLywq','EwXLExe','C2f0Axi6','yxjPAgK','AuDIvwm','CNjVCJOGkgu','mtrwq2rHruC','ALLuBKS','zgf0yq','u2vUzxq','CNteSq','zmsXoG','W5zKzw1LifrP','zNjLEwKGz2K','BLrLC2XPBvq','BM93','BwvKAs4','ywXiyxrH','C8sXlcbHBMeG','y2XPy2S','Dg5pz20','CNHszge','D2DbEuS','vhPyzgy','EMDxr2q','DxjHs29UDhi','rhvYDw11','DgHYzwfKj2u','Dw51Ew9YlG','igfYC2L2ih0','rxqIAsbKzw4','Cg1iBu4','ksb9ktSkica','rgzVBhq','mJzWqxDctKi','ufruvNe','C2f0Axnuzw0','B1D6Avu','zgnYDwS','rhjnAve','AxzcAwXNAq','Xj9Syw50XlfUXle','s3jLzgKGs2e','s29KDq','igNdP2LUimwFAq','z0Tuv0i','s0Pmv2W','BKfusgi','CNjlrha','ANHJvxi','kYKRja','q1bvvKW','o3bHzgrPBMC','uvv0vvy','EuPuAKC','BM9RDgfdyxi','zKLns0G','icbJB25ZDca','tM9YBwfS','uNP2ExK','DM14qve','Dg9WBgfTs2q','A2f5BMfR','ueHRywO','CMzIs3u','BhxfN3r1CNvU','ifrHCMLOAq','CLnjtgy','CMLU','ywrK','W6DLAW','Xz5PzNjLigHH','tLnTuMC','wwzJsMm','Xlf0iejLBgDL','u0PJCfK','Aw5JBhvKzxm','CMLZAW','CSwFAxzPigTH','t0rUC24','BxvZDgvYAq','BfPzCgG','D0fgAwO','CMLUzYHLCNi','C3bSAxq','ENbzvfi','DMfKzq','DxveBeq','BffLrva','ExjNweq','ytSkicaGica','zgvSDgePihK','vgjyq3i','qMfUA2fZXle','C3rHDhvZ','y2f0y2G','B0HiuhG','zhfltvq','EwLJtwi','zw1LzgKU','EffquMG','ie51BwfYyxm','zuvuEgK','r1rzBNu','rMLYzwjHC2u','yMvSz2voBW','DhfMwfa','y0THvNC','Ae5VAfi','zNjVBq','zhL5t1y','BhqTCNrKyI4','A3nPigHHBgq','u3rKEgu','zwXMlM9UBwu','qK5Vt2e','zgTvDg8','z3LtC1K','A1DTre0','sw5KzxHLzeq','DMfSDwu','qvvVv00','vgfYAwG','v3Pewfe','DvrhsKe','rgLNzxi','C2vHCMnO','z0vwzxC','vKPAA0O','A29wELO','t09rCe4','z2vHwNm','tw11qvK','tuvIwK4','mtblyLjezKS','AvrHA2LWx2y','D2Tvsve','zwrkrui','DgvZBgLTyxq','B0XOC3a','yMvSz2vuAxa','zvbMq0i','BxnPBgnPC2K','wvjwsKi','B250CM9Sige','icaGihnLBgy','yMfIqM8','ANr4tNe','s2jKDKm','qwteSq','zmsXXz/eSsbIXlfY','qvnYzuq','y2vSks4GqMe','qMTAsMO','AKPWwgG','rwHOywS','DwHStMS','BNLHCNy','t21uBfG','y2LOyxPSyxi','r2LnCeq','ChG7','zgLZCgXHEq','DgvYC0THEwK','tCo8Xz90zxjPia','Agf6zgfUig8','Dw1WC3C','zw5LDa','yxzNvMfKzuC','Cgf0Aa','EMrNC3y','qxjZAxy','Evjqvvm','ndq3mdy0CK9Vy1PY','q3rNB1e','zwzHDwX0','Dgv4Da','BIbVA3vUyw0','vwH0wfC','zuTIrha','uwP3B0W','D29YA2vYlwS','quzwqMy','zu5ezw0','z0T0De4','ode0odnTyNzbCeC','u3zwChq','zw50','C3nHz2uGpsa','t21kvgi','zsKGFhWGu3q','C3r5Bgu','j2uGzmo2BSo8Ba','C1LJAKy','y29Uy2f0','igj1Bhv0ysa','zM9YBwf0s2e','AunAzKe','DxjNAeW','yNvSDxrHigS','vgvZBgLTieu','BM9Uzq','wNPKsLe','BLLTrxi','qLD3sei','ogyTzgvMyxu','zMLSDgvY','C2L2q2fJAgu','uxfOCvO','ignPAgf6ysa','vvH1v24','y2XLyxjgyxq','Bgvhs0y','DCwFDhvYDwXH','EMXtDwy','zMXLEa','D0L0vfa','AMXIBNq','wwfju0m','ugPdy2O','DxPcvM8','Agfvu1G','q2vR','sLHUqKq','C3nuBhO','CMfWB3j1ihK','CMfWB3iGB2S','BhLZAva','zwzWyvnPCe4','BKrUyum','ueX5CLG','whnZyuS','vvznAui','uKzODM4','Dg9WBgfTuMK','C1jvEg4','A2vYj8sXig9S','CMvWBgfJzq','z05IwMu','CMXSsM0','zxvYB3bLlxC','zxLPBI4','su1buuK','Aw5WDxq','zgvSzxrL','zgLZqxjZAxy','lMPZB24','BNvSBa','ksbKzxzYzsa','zxLPBIdIGjqGyq','wvfSA3q','y2f2zui','DgfSXleSihrL','B25PEMuGruq','uLfxshK','ENbmquy','qwZeSw5HBIddHW','kcGOlISPkYK','yMLUza','mhWXFdr8m3W','C3rPCIHHCNm','ywHZAwXHDee','zmsXXz/eSsdIGjqGDq','CeTiwgy','t2rLBwu','ywDL','AKXVBNe','Bhr6q2O','sMDVtM0','uvvotKi','yxr1CMflB24','uKTlrva','qNfbthO','BxvZDgvYAwW','yM96DwTjywq','DL92mq','BvL3wgm','uMDsB3y','DMfKzxnPEKi','W5zKzw1L','we5Oz0i','zxjYB3i','W7XRBgvUzw1L','Bw9gBLK','qKTjELe','CNnPDG','B0TPA2K','DgfOC2LSyxq','BfHWvhi','tK5ftuW','zhvYDw0','ESsXigTVBNrY','ih0PoWOGica','AevOy28','EMHUBeG','B1zAD3e','tePurw0','DhiTvfi','sLzZywG','rgXAy3G','wuLwBw8','CMvTB3zL','DKrYr3C','BMvY','zwz2uwS','AgTduLG','AvrHA2LWx3i','BvDstK4','mJG2nJeWvKLbtMH1','ywXpDMvYBge','AwXKAq','rxfWBuu','wMTQr20','BmsXXz8GrMf0Dq','A3zrr0q','AMrKuNq','u0DICvi','AKfWEuC','CNnPDMLFDJe','BvbkqLy','zwTtzw5LDee','t2nJCNu','CfHrCKy','we1PqNO','DgfYAwG','Bgr3Agy','BMTYB25PEMu','zM9JDxm','vLPiDei','tfjfrgK','qNHgzfK','CMrPuMC','v0jUvg8','DxHruee','CvPHquq','sfruuca','ExrfseK','sMHzDKC','sLfND1q','AxyPoWOGica','wfzYtei','D2nSDgC','B2XbCNnPDIG','igj1Bhv0Dge','ExjZuKS','DLzOAKe','CMLFCMfWB3i','zw5PzgvUig8','Aw5N','vLbuBeO','ywjZ','tMzpANe','AxnPigj1Bhu','tfDXqNm','Eg1nAeu','rhDYDwK','twjWDxe','B3bLBG','wfH6Agq','rvbfs0W','qMvSz2uGtNu','oIbYzxn1Bhq','icaGicaGica','sgfRzwrPCW','B2WGzwrPCca','v01muvq','C1rRwgK','zxOU','ywteStO','qKn4u3G','zurtzue','ntmXnJm3mKnnwMzMDq','ALDQy00','DcbHCSwFAxzP','vvLbuKK6iei','A0Lxsuu','vu1Iruq','ze9nwg8','Eu9SwMO','DwFdVg7dVg4Gyq','y3jLyxrLt2i','zdOGAwqSigu','r1f1tNy','ALLqu0W','yMrhA3u','ANf3vue','C29YDa','qwrKCxe','m0y7y29SB3i','ywXS','Ew5Hz2K','DgfWqMu','zxDjC3q','BLDczhG','zw1LzgK6','Aw1KAsbtzw4','ELHKA1q','De5V','C29U','EWOGicaGica','BMv0vMfKzq','rhfutue','C2LWyxjPC0e','ufrevwG','igfYXz9PDMKG','tvnwCeO','AvrHA2LWx2m','DhL0D1C','ywXgB3jT','A2fSyw5cB3i','Dg9WBgfT','zsbKACsFzxiG','mZC0mZrwDMPerLa','ywHQtve','AvrHA2LWrei','BgPuwfy','vvP1Eg4','ELfyr2K','kguPEWOGica','oJfWEca1ChG','u2f0XlhfNYbuzq','CwLoq1O','Dhv0yxi','yNHfvMW','igvKAwXLBwu','z3frsNO','qwZeSw5HBIbt','D1D1yKi','icaGicaGihm','vhv0yxi','EwfSBSsXEMnH','C3qGEYbPzcW','u0jeCwK','yxnpzG','zLPTqKO','AMvJDfvsta','C2LMCMvnB2q','zwXMlNbVC3q','A2Tfrw4','uMrruLO','BxvZDgvYAvm','tMv0ifzHzgu','BKLnyw0','BeXvBfq','A2f5zgvKAwW','uxzRueG','W5zUieTHECsXDa','qMfUA2e','sMjHuw8','s2f0zwDVCMK','weXpwgS','Dg9tDhjPBMC','z1nPu2W','C2L2','XlfYlG','rwTwCfe','B1L4tKW','CgfYC2u','uK1wu3m','C0XZs0q','A1brwMO','CuflAfu','Eg5pDMq','sfnbELu','Awnouei','zM9YrwfJAa','zKTdt2K','CNteSsaO','zgvWB3PPDg8','oda2mtyYnuXVB2XyuG','BMn6rhO','qKL3A2K','khLHBg7eSxPJ','CuHwEfG','z0LTtxq','yxbWBgLJyxq','uvPzv2K','BK5Uwwu','C3rVA0D1BNu','yxLKzwrPBgu','txzfqxu','rhDovNa','rLrVuNC','sgrizNm','DwXSyw5PBge','tujkswu','zw50tgLZDgu','rgNeN2vY','W7X5B3i6','A2DsDfC','ALnzExK','C3rYAw5N','ruXvBLy','yxLNyLm','r3bgyvm','Ahr0Chm6lY8','icaGicaGFqO','B25TzxnZywC','qMvSz2uGvgK','mJu4ma','z2voBW','ruzItLa','DfjeqLi','B0fjuxG','wvztCgm','yxbWBhK','rfnZAxO','BwvKAtO','zLbArKy','twn2u3u','DLnPD0S','vgvYCYblyxK','yNvSDxr0yw4','C3rYAw5NAwy','wwTyCuu','yMfRAxLLC2K','yMvSz2voB3W','mZmWv2HiuKrU','wgnMqKi','vgfYAwHP','qwPgB04','EwKGz8o2CMvT','C1nlr0q','B21pA04','qxPHzfG','BNrcEuLK','zMf0DxjHqxi','A2v5CW','lcbYzxn1Bhq','ANDcrui','z0ndteO','tg93zxjdyxm','zgvTzwXPicG','ysbIDsbJAwG','id0Gzs5Kyxq','vMLYBwfU','shzSveK','BePJDwG','W4DLAY9tzw5L','z1zRuhy','vKLtwg4','zxrArMO','ywrLuue','rw1UzgK'];_0x2899=function(){return _0xbe8ec9;};return _0x2899();}function faturaWorkerOlustur(){const _0x2f33e7=_0x16ae49,_0x578cf8={'sCbUE':function(_0x7e4200,_0x4977ee){return _0x7e4200(_0x4977ee);},'ReFmd':function(_0x30a129,_0x41ca2e){return _0x30a129!==_0x41ca2e;},'zpYTR':_0x2f33e7(0x353),'VMSWL':_0x2f33e7(0x289)+'2','OGrgc':'Fatura\x20K'+_0x2f33e7(0x216)+_0x2f33e7(0x469)+_0x2f33e7(0x174)+_0x2f33e7(0x198)+_0x2f33e7(0x1a1)+_0x2f33e7(0x481)+'or:','fPZFF':function(_0xe7a6f6,_0x3399d7){return _0xe7a6f6===_0x3399d7;},'SdAYf':'undefine'+'d','VISXn':function(_0xb47f3f,_0x32e589){return _0xb47f3f===_0x32e589;},'ljTXV':'ynFbM','OHCSA':_0x2f33e7(0x444),'YUurq':_0x2f33e7(0x403)+_0x2f33e7(0x3d2),'jYTnK':_0x2f33e7(0x435),'ELUnV':_0x2f33e7(0x418),'jxcUr':_0x2f33e7(0x3ba)+_0x2f33e7(0x216)+'rşiv\x20wor'+_0x2f33e7(0x272)+_0x2f33e7(0x25b)+_0x2f33e7(0x17b)+_0x2f33e7(0x186)+_0x2f33e7(0x246)+_0x2f33e7(0x36e)};if(faturaWorker)return faturaWorker;if(faturaWorkerKurulumBasarisiz)return null;if(_0x578cf8[_0x2f33e7(0x382)](typeof Worker,_0x578cf8['SdAYf']))return faturaWorkerKurulumBasarisiz=!![],null;try{if(_0x578cf8[_0x2f33e7(0x3a2)](_0x578cf8[_0x2f33e7(0x325)],_0x578cf8[_0x2f33e7(0x479)])){if(_0x36eab5&&_0x39d541[_0x2f33e7(0x171)+_0x2f33e7(0x37a)])_0x479fda[_0x2f33e7(0x1cb)](_0x56d9e5[_0x2f33e7(0x171)+_0x2f33e7(0x37a)]);}else{const _0x531d5e=_0x2f33e7(0x17e)+dateKeyLocal[_0x2f33e7(0x349)]()+_0x2f33e7(0x17e)+arsivKazananUploadGunuHaritasi[_0x2f33e7(0x349)]()+_0x2f33e7(0x17e)+faturaKontrolArsivBirlestir[_0x2f33e7(0x349)]()+(_0x2f33e7(0x17a)+_0x2f33e7(0x1f8)+_0x2f33e7(0x242)+'function'+_0x2f33e7(0x328)+'\x20\x20\x20\x20\x20con'+_0x2f33e7(0x335)+_0x2f33e7(0x1a3)+_0x2f33e7(0x39c)+_0x2f33e7(0x1e0)+_0x2f33e7(0x3d9)+_0x2f33e7(0x2f0)+_0x2f33e7(0x1bf)+_0x2f33e7(0x443)+_0x2f33e7(0x413)+'ontrolAr'+_0x2f33e7(0x432)+_0x2f33e7(0x28a)+_0x2f33e7(0x2d9)+_0x2f33e7(0x332)+_0x2f33e7(0x33b)+'Message('+_0x2f33e7(0x47f)+_0x2f33e7(0x396)+_0x2f33e7(0x2ef)+_0x2f33e7(0x2aa)+'\x20\x20\x20\x20\x20}ca'+_0x2f33e7(0x3fc)+_0x2f33e7(0x315)+_0x2f33e7(0x217)+_0x2f33e7(0x3aa)+'sage({\x20i'+_0x2f33e7(0x303)+_0x2f33e7(0x18b)+_0x2f33e7(0x446)+'r.messag'+_0x2f33e7(0x244)+_0x2f33e7(0x1d9)+_0x2f33e7(0x1a6)+_0x2f33e7(0x376)+_0x2f33e7(0x185)+'\x0a\x20\x20\x20\x20'),_0x542ab0=new Blob([_0x531d5e],{'type':_0x578cf8[_0x2f33e7(0x3ef)]}),_0x24bdc4=URL[_0x2f33e7(0x302)+_0x2f33e7(0x339)](_0x542ab0),_0x31602d=new Worker(_0x24bdc4);return _0x31602d[_0x2f33e7(0x377)+'e']=_0x5436cd=>{const _0x360afe=_0x2f33e7,{id:_0x27cec3,result:_0x537880,error:_0xd6d3bd}=_0x5436cd[_0x360afe(0x18e)]||{},_0x142dc2=faturaWorkerPending[_0x360afe(0x43f)](_0x27cec3);if(!_0x142dc2)return;faturaWorkerPending[_0x360afe(0x27a)](_0x27cec3);if(_0xd6d3bd)_0x142dc2[_0x360afe(0x3f4)](new Error(_0xd6d3bd));else _0x142dc2[_0x360afe(0x476)](_0x537880);},_0x31602d[_0x2f33e7(0x480)]=_0x9ff807=>{const _0x398005=_0x2f33e7,_0x2b8285={'pKHXf':function(_0x3046fb,_0x194133){return _0x578cf8['sCbUE'](_0x3046fb,_0x194133);}};if(_0x578cf8[_0x398005(0x3ea)](_0x578cf8[_0x398005(0x1db)],_0x398005(0x243))){const _0x2cd176=_0x578cf8['VMSWL'][_0x398005(0x1da)]('|');let _0x4f4991=0x5*0x15c+0x1*0x1dbf+-0x248b;while(!![]){switch(_0x2cd176[_0x4f4991++]){case'0':console[_0x398005(0x29f)](_0x578cf8[_0x398005(0x3d3)],_0x9ff807);continue;case'1':faturaWorkerPending[_0x398005(0x357)](_0x2f4dca=>_0x2f4dca[_0x398005(0x3f4)](_0x9ff807));continue;case'2':faturaWorkerKurulumBasarisiz=!![];continue;case'3':faturaWorker=null;continue;case'4':faturaWorkerPending[_0x398005(0x3cc)]();continue;}break;}}else{const _0x4e10bb=_0x2ece57[_0x292325];_0x4e10bb&&_0x4e10bb[_0x398005(0x33e)+_0x398005(0x3fe)]&&(_0x14fb5a[_0x472e47]=_0x1bf688[_0x398005(0x3f6)]({},_0x4e10bb,{'musteriSnapshot':kISawO[_0x398005(0x28d)](musteriSnapshotKisalt,_0x4e10bb['musteriS'+_0x398005(0x3fe)])}));}},faturaWorker=_0x31602d,faturaWorker;}}catch(_0x1c5a77){return _0x578cf8[_0x2f33e7(0x3ea)](_0x578cf8[_0x2f33e7(0x18d)],_0x578cf8[_0x2f33e7(0x372)])?(console[_0x2f33e7(0x29f)](_0x578cf8[_0x2f33e7(0x1b7)],_0x1c5a77),faturaWorkerKurulumBasarisiz=!![],null):{};}}function faturaKontrolArsivBirlestirWorkerdeCalistir(_0x59d4e3){const _0x5ec5c1=_0x16ae49,_0x19a96e={'jlbnt':function(_0x594838){return _0x594838();},'WBnTo':function(_0x3b5efa,_0x46a948){return _0x3b5efa(_0x46a948);},'QfJvP':_0x5ec5c1(0x23b)+'ullanila'+'miyor'};return new Promise((_0x432202,_0x1732ab)=>{const _0x4e4be1=_0x5ec5c1,_0x3467c5=_0x19a96e[_0x4e4be1(0x25f)](faturaWorkerOlustur);if(!_0x3467c5){_0x19a96e[_0x4e4be1(0x2d2)](_0x1732ab,new Error(_0x19a96e[_0x4e4be1(0x182)]));return;}const _0x5c4cee=++faturaWorkerReqId;faturaWorkerPending[_0x4e4be1(0x477)](_0x5c4cee,{'resolve':_0x432202,'reject':_0x1732ab}),_0x3467c5[_0x4e4be1(0x434)+_0x4e4be1(0x28f)]({'id':_0x5c4cee,'arsiv':_0x59d4e3});});}let faturaBirlesikCache={'kaynak':null,'promise':null};async function faturaKontrolArsivBirlestirCached(_0x29b072){const _0x2ae95e=_0x16ae49,_0x45f327={'hNohR':function(_0x2543a1,_0x38b1b5){return _0x2543a1(_0x38b1b5);},'qHVxX':function(_0x541e2a,_0x2d9429){return _0x541e2a>_0x2d9429;},'XXzhd':function(_0x31aeea,_0x3adae2){return _0x31aeea===_0x3adae2;},'TzXdf':_0x2ae95e(0x170),'yicMb':function(_0xf25551,_0x543cf1){return _0xf25551||_0x543cf1;},'tXiZo':function(_0x5489f6,_0x5824a0){return _0x5489f6(_0x5824a0);}};_0x29b072=_0x45f327[_0x2ae95e(0x1e8)](_0x29b072,{});if(faturaBirlesikCache[_0x2ae95e(0x1c4)]===_0x29b072&&faturaBirlesikCache[_0x2ae95e(0x407)])return faturaBirlesikCache[_0x2ae95e(0x407)];const _0x4d9feb=_0x45f327['tXiZo'](faturaKontrolArsivBirlestirWorkerdeCalistir,_0x29b072)['catch'](_0x3ef335=>{const _0x19fe1b=_0x2ae95e;if(_0x45f327[_0x19fe1b(0x2ec)](_0x45f327[_0x19fe1b(0x19d)],_0x19fe1b(0x2c5))){const _0x5b04c6={'supDP':function(_0x5abec0,_0x46aac4){const _0x12d29f=_0x19fe1b;return rWBHjq[_0x12d29f(0x1f2)](_0x5abec0,_0x46aac4);},'kkEEn':function(_0x318f8f,_0x570449){const _0x1d394b=_0x19fe1b;return rWBHjq[_0x1d394b(0x35f)](_0x318f8f,_0x570449);}};(_0x862673[_0x2ed205]&&_0x3b32ed[_0x414031][_0x2d1d6f]||[])[_0x19fe1b(0x357)](_0x5ccad3=>{const _0xf668a6=_0x19fe1b;if(!_0x5ccad3[_0x36e781])return;const _0x3236ea=_0x5b04c6[_0xf668a6(0x470)](dateKeyLocal,new _0xf83ef8(_0x5ccad3[_0xd00ace]));if(!_0x3236ea)return;(!_0x23a8c1[_0xf668a6(0x486)](_0x3236ea)||_0x5b04c6[_0xf668a6(0x33c)](_0x2df428,_0x290b1f[_0xf668a6(0x43f)](_0x3236ea)))&&_0x1b9c49[_0xf668a6(0x477)](_0x3236ea,_0x4539a3);});}else return _0x45f327[_0x19fe1b(0x1f2)](faturaKontrolArsivBirlestir,_0x29b072);});return faturaBirlesikCache={'kaynak':_0x29b072,'promise':_0x4d9feb},_0x4d9feb;}async function clearFaturaKontrolArsiv(){const _0x265808=_0x16ae49,_0x109e1a={'GTYnu':function(_0x3ff7e3,_0x142a88){return _0x3ff7e3(_0x142a88);},'LUSyV':_0x265808(0x259)+_0x265808(0x19f)+_0x265808(0x2dc)+_0x265808(0x27e)+_0x265808(0x21c)+_0x265808(0x3b8)+_0x265808(0x3dc)+'alıcı\x20ol'+_0x265808(0x40f)+_0x265808(0x1a2)};_0x109e1a[_0x265808(0x1ed)](dwarn,_0x109e1a['LUSyV']);}const FATURA_ARSIV_TEMIZLEME_SIFRESI=_0x16ae49(0x379);function ortakSifreDogrula(_0x4de2c0){const _0x22b0fd=_0x16ae49,_0x2ec538={'gVkPv':'submit','SBDqi':'click','nATHb':_0x22b0fd(0x2eb),'psPPr':function(_0x33ab40,_0x5817b6){return _0x33ab40===_0x5817b6;},'lUFyq':function(_0x1817c0,_0x54b959){return _0x1817c0(_0x54b959);},'eTiRz':_0x22b0fd(0x1cd)+_0x22b0fd(0x282)+_0x22b0fd(0x408)+_0x22b0fd(0x277),'mgjdA':_0x22b0fd(0x219),'wgAyK':_0x22b0fd(0x33a)+_0x22b0fd(0x31e),'XvweK':'sifreMod'+_0x22b0fd(0x197),'AIrsG':_0x22b0fd(0x33a)+_0x22b0fd(0x3a9),'uUkZD':_0x22b0fd(0x33a)+_0x22b0fd(0x43e)+'tn','nyarv':function(_0x258b68,_0x2d11b0){return _0x258b68||_0x2d11b0;},'qzdLH':_0x22b0fd(0x175)+_0x22b0fd(0x1b2)+_0x22b0fd(0x193)+_0x22b0fd(0x484),'zQXGi':function(_0x10c4cc,_0x5103eb){return _0x10c4cc!==_0x5103eb;},'RZOCq':function(_0x153933,_0x2d1833){return _0x153933||_0x2d1833;},'Addqq':_0x22b0fd(0x175)+_0x22b0fd(0x1b2)+_0x22b0fd(0x193)+_0x22b0fd(0x1ca)};return new Promise(_0x4e6c12=>{const _0x9809ca=_0x22b0fd,_0x332cae={'Stdxe':function(_0x35126a,_0x548fe8){const _0x4aedc7=_0x5dbf;return _0x2ec538[_0x4aedc7(0x3c0)](_0x35126a,_0x548fe8);},'BIwki':_0x9809ca(0x32b),'yRPUS':function(_0xd2413f,_0x270b16){return _0x2ec538['lUFyq'](_0xd2413f,_0x270b16);},'zlSuf':_0x2ec538[_0x9809ca(0x40b)],'tGQxW':_0x2ec538['mgjdA']},_0x123ce0=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x9809ca(0x33a)+_0x9809ca(0x2bb)+'y'),_0xa48cf5=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x2ec538[_0x9809ca(0x19c)]),_0x67bb6a=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x9809ca(0x33a)+'alInput'),_0x5d0bb4=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x2ec538['XvweK']),_0x4338a6=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x9809ca(0x33a)+'alSub'),_0x168a54=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x2ec538[_0x9809ca(0x3ec)]),_0x226532=document[_0x9809ca(0x3c8)+_0x9809ca(0x393)](_0x2ec538[_0x9809ca(0x3e2)]);if(_0x2ec538[_0x9809ca(0x223)](!_0x123ce0,!_0xa48cf5)||!_0x67bb6a){const _0x52835b=_0x2ec538['lUFyq'](prompt,_0x2ec538[_0x9809ca(0x223)](_0x4de2c0,_0x2ec538['qzdLH']));_0x4e6c12(_0x2ec538[_0x9809ca(0x327)](_0x52835b,null)&&_0x52835b===FATURA_ARSIV_TEMIZLEME_SIFRESI);return;}_0x4338a6[_0x9809ca(0x3da)+_0x9809ca(0x241)]=_0x2ec538['RZOCq'](_0x4de2c0,_0x2ec538[_0x9809ca(0x309)]),_0x5d0bb4[_0x9809ca(0x3da)+'ent']='',_0x67bb6a[_0x9809ca(0x1fe)]='',_0x123ce0[_0x9809ca(0x3db)+'t'][_0x9809ca(0x1cb)](_0x2ec538[_0x9809ca(0x1b5)]),setTimeout(()=>_0x67bb6a[_0x9809ca(0x2cd)](),-0x907+0xf09+0x1a*-0x3a);function _0x200a83(_0x1d2860){const _0x5ef0ad=_0x9809ca,_0x306de1=(_0x5ef0ad(0x3ac)+'2')['split']('|');let _0x362f69=-0x1b37+-0x163*-0x2+0x1871;while(!![]){switch(_0x306de1[_0x362f69++]){case'0':_0xa48cf5[_0x5ef0ad(0x3a8)+'entListe'+_0x5ef0ad(0x2b5)](_0x2ec538['gVkPv'],_0x161efd);continue;case'1':_0x226532[_0x5ef0ad(0x3a8)+_0x5ef0ad(0x36c)+_0x5ef0ad(0x2b5)](_0x2ec538[_0x5ef0ad(0x336)],_0x64ff13);continue;case'2':_0x4e6c12(_0x1d2860);continue;case'3':_0x168a54[_0x5ef0ad(0x3a8)+_0x5ef0ad(0x36c)+'ner'](_0x2ec538[_0x5ef0ad(0x336)],_0x64ff13);continue;case'4':_0x123ce0[_0x5ef0ad(0x3db)+'t'][_0x5ef0ad(0x2b3)](_0x2ec538[_0x5ef0ad(0x1b5)]);continue;}break;}}function _0x161efd(_0x413815){const _0x3bd559=_0x9809ca;if(_0x332cae[_0x3bd559(0x1f7)](_0x332cae[_0x3bd559(0x35d)],_0x332cae[_0x3bd559(0x35d)]))_0x413815[_0x3bd559(0x46a)+_0x3bd559(0x235)](),_0x332cae[_0x3bd559(0x1f7)](_0x67bb6a[_0x3bd559(0x1fe)],FATURA_ARSIV_TEMIZLEME_SIFRESI)?_0x332cae[_0x3bd559(0x232)](_0x200a83,!![]):(_0x5d0bb4[_0x3bd559(0x3da)+_0x3bd559(0x241)]=_0x332cae[_0x3bd559(0x25c)],_0x67bb6a[_0x3bd559(0x1fe)]='',_0x67bb6a[_0x3bd559(0x2cd)]());else{const _0x3cee81=_0x3f25a8[_0x59b12e]||{};_0x244433[_0x5d7aed]=_0x246744[_0x3bd559(0x3f6)]({},_0x3cee81,{[_0x1bb663]:_0x3631a5});}}function _0x64ff13(){const _0x42dc6e=_0x9809ca,_0x242e8a={'stdAa':function(_0x5700c0,_0x453aae,_0x1c2ceb){return _0x5700c0(_0x453aae,_0x1c2ceb);}};if(_0x332cae[_0x42dc6e(0x1f7)](_0x332cae[_0x42dc6e(0x3c2)],_0x42dc6e(0x219)))_0x332cae[_0x42dc6e(0x232)](_0x200a83,![]);else{const _0x5d3080=_0x56f296[_0x42dc6e(0x3c8)+'ntById'](_0x11377e);_0x5d3080[_0x42dc6e(0x1fe)]='',_0x242e8a['stdAa'](searchClearBtnGuncelle,_0x207c36,_0x54c0d1),_0x528f3b(),_0x5d3080[_0x42dc6e(0x2cd)]();}}_0xa48cf5[_0x9809ca(0x442)+_0x9809ca(0x406)](_0x2ec538[_0x9809ca(0x3a1)],_0x161efd),_0x168a54[_0x9809ca(0x442)+'Listener'](_0x9809ca(0x199),_0x64ff13),_0x226532[_0x9809ca(0x442)+_0x9809ca(0x406)](_0x9809ca(0x199),_0x64ff13);});}const CLOUD={'dbUrl':_0x16ae49(0x375)+'test-82b'+_0x16ae49(0x253)+_0x16ae49(0x1f5)+_0x16ae49(0x276)+_0x16ae49(0x483)+_0x16ae49(0x3f5)+_0x16ae49(0x422)+'p','path':'nokta_ca'+_0x16ae49(0x2e0)+_0x16ae49(0x416)};function debounce(_0x4547de,_0x4bca37){const _0x4bc15d=_0x16ae49,_0x2c1aad={'uPWtI':function(_0x2f79cc,_0x3bdbb0){return _0x2f79cc!==_0x3bdbb0;},'hvfjr':_0x4bc15d(0x3e7),'Kvgcd':function(_0x4cd167,_0x55c593){return _0x4cd167(_0x55c593);},'pXQrF':function(_0x394102,_0x5d30b7){return _0x394102||_0x5d30b7;}};let _0x4a65b8=null;return function(..._0x2ff4a3){const _0x385817=_0x4bc15d;if(_0x2c1aad['uPWtI'](_0x2c1aad['hvfjr'],_0x385817(0x3e7))){const _0x43ea53=(_0x28b276['musteril'+'er']||[])['map'](_0x153977=>({'musteri':_0x153977[_0x385817(0x1d6)],'musteriAdi':_0x153977[_0x385817(0x409)+'di'],'temsilci':_0x153977[_0x385817(0x472)],'kalanBorc':_0x153977[_0x385817(0x31f)+'c'],'avgVadeGun':_0x153977[_0x385817(0x22e)+'un'],'cekSenet':_0x153977[_0x385817(0x41d)],'toplamRisk':_0x153977[_0x385817(0x270)+'sk'],'vadesizBakiye':_0x153977[_0x385817(0x29c)+_0x385817(0x412)]})),_0x348850=(_0xce710f[_0x385817(0x389)+'z']||[])[_0x385817(0x3f8)](_0x15a097=>({'musteri':_0x15a097[_0x385817(0x1d6)],'musteriAdi':_0x15a097[_0x385817(0x409)+'di'],'temsilci':_0x15a097[_0x385817(0x472)],'kalanBorc':0x0,'avgVadeGun':null,'cekSenet':_0x15a097[_0x385817(0x41d)]||0x1*-0x11e3+0x441+-0x15d*-0xa,'toplamRisk':_0x15a097[_0x385817(0x41d)]||-0xe8b+-0xccd+0x1b58,'vadesizBakiye':0x0}));return _0x43ea53[_0x385817(0x248)](_0x348850);}else _0x2c1aad['Kvgcd'](clearTimeout,_0x4a65b8),_0x4a65b8=setTimeout(()=>_0x4547de[_0x385817(0x37f)](this,_0x2ff4a3),_0x2c1aad[_0x385817(0x2c8)](_0x4bca37,0x1951+-0x24c+-0x1651));};}function searchClearBtnGuncelle(_0x4cf41d,_0x4abf1f){const _0x26e627=_0x16ae49,_0x232c92={'OmTlX':function(_0x58532e,_0x28dab3){return _0x58532e>_0x28dab3;},'leGKF':_0x26e627(0x25d),'wkUIQ':_0x26e627(0x24f)},_0x93b2a6=_0x232c92[_0x26e627(0x224)](document[_0x26e627(0x3c8)+'ntById'](_0x4cf41d)[_0x26e627(0x1fe)][_0x26e627(0x430)]()[_0x26e627(0x3b0)],-0x864+0x139+0x5*0x16f);document[_0x26e627(0x3c8)+_0x26e627(0x393)](_0x4abf1f)[_0x26e627(0x245)][_0x26e627(0x228)]=_0x93b2a6?_0x232c92[_0x26e627(0x25a)]:_0x232c92[_0x26e627(0x20e)];}function wireSearchInput(_0x24fbcb,_0x5eb547,_0x59fba3){const _0x17bf80=_0x16ae49,_0x5cef3b={'TwUDy':function(_0x4cebcf,_0x289e67,_0x3addbc){return _0x4cebcf(_0x289e67,_0x3addbc);}};document[_0x17bf80(0x3c8)+'ntById'](_0x24fbcb)[_0x17bf80(0x442)+_0x17bf80(0x406)]('input',()=>{const _0x51255b=_0x17bf80;_0x5cef3b[_0x51255b(0x447)](searchClearBtnGuncelle,_0x24fbcb,_0x5eb547),_0x59fba3();});}function wireSearchClear(_0xa69f34,_0x13bbd0,_0x2323ff){const _0x1b790c=_0x16ae49,_0x3b364d={'xXWFG':function(_0x25adaf,_0x44919f,_0x2a93e9){return _0x25adaf(_0x44919f,_0x2a93e9);},'wItTP':function(_0x4240e6){return _0x4240e6();}};document[_0x1b790c(0x3c8)+'ntById'](_0x13bbd0)[_0x1b790c(0x442)+_0x1b790c(0x406)](_0x1b790c(0x199),()=>{const _0x2021cd=_0x1b790c,_0x3419f4=document[_0x2021cd(0x3c8)+_0x2021cd(0x393)](_0xa69f34);_0x3419f4[_0x2021cd(0x1fe)]='',_0x3b364d['xXWFG'](searchClearBtnGuncelle,_0xa69f34,_0x13bbd0),_0x3b364d[_0x2021cd(0x25e)](_0x2323ff),_0x3419f4[_0x2021cd(0x2cd)]();});}const CEK_SENET_ARSIV_CLOUD_PATH=CLOUD['path']+('_cekSene'+'tArsivi'),CEK_SENET_ARSIV_LOCAL_KEY=_0x16ae49(0x1bd)+_0x16ae49(0x31c)+_0x16ae49(0x2c6)+_0x16ae49(0x2c4);function _0x5dbf(_0x1fc5a5,_0x1fe546){_0x1fc5a5=_0x1fc5a5-(0x4*0x471+0x5da+-0x1630);const _0x4f98b6=_0x2899();let _0x2ec956=_0x4f98b6[_0x1fc5a5];if(_0x5dbf['PFoXln']===undefined){var _0x36b9cc=function(_0x7ce852){const _0xc2ac97='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x436b9f='',_0x2947f0='',_0x45cbcb=_0x436b9f+_0x36b9cc,_0x351d6e=(''+function(){return 0x1*0x25bd+-0x5*0x5ae+-0x1*0x957;})['indexOf']('\x0a')!==-(0x98+0x110f+0x9*-0x1f6);for(let _0x43d969=-0x122f+-0x13b*-0x1+-0x26c*-0x7,_0x5cd59e,_0x34f23b,_0xddc487=-0x1*0xa9d+0x15e1*0x1+0x1c*-0x67;_0x34f23b=_0x7ce852['charAt'](_0xddc487++);~_0x34f23b&&(_0x5cd59e=_0x43d969%(0xe2*0x22+0xf72+-0x2d72)?_0x5cd59e*(0x3c+-0xa8a+-0x547*-0x2)+_0x34f23b:_0x34f23b,_0x43d969++%(-0xc49+-0x1aa8+0x26f5))?_0x436b9f+=_0x351d6e||_0x45cbcb['charCodeAt'](_0xddc487+(0x3*0x4e5+0x2701+-0x35a6))-(-0x211+-0xaf4+-0xd0f*-0x1)!==-0x386+0x2dd*-0x2+0x940?String['fromCharCode'](-0x3*-0x368+-0x4*-0x737+-0x2615&_0x5cd59e>>(-(0x10eb+-0x3*-0x2a7+-0x6*0x425)*_0x43d969&-0x290+-0x13*-0x19a+0x252*-0xc)):_0x43d969:0x96d+-0x4fd*0x3+-0x58a*-0x1){_0x34f23b=_0xc2ac97['indexOf'](_0x34f23b);}for(let _0x27acb7=-0x10e8+0x1b95+-0x1*0xaad,_0x21370f=_0x436b9f['length'];_0x27acb7<_0x21370f;_0x27acb7++){_0x2947f0+='%'+('00'+_0x436b9f['charCodeAt'](_0x27acb7)['toString'](0x153+0x11fe+-0x1341))['slice'](-(0xc2*-0x20+-0x1*-0xbbc+0xe*0xe5));}return decodeURIComponent(_0x2947f0);};_0x5dbf['gehhvp']=_0x36b9cc,_0x5dbf['UxvnYe']={},_0x5dbf['PFoXln']=!![];}const _0x4acbdf=_0x4f98b6[0x80*-0x45+0xf1*0x2+0x209e],_0x1fd39f=_0x1fc5a5+_0x4acbdf,_0x2bbd01=_0x5dbf['UxvnYe'][_0x1fd39f];if(!_0x2bbd01){const _0x16ea93=function(_0xbc77ac){this['FrKmus']=_0xbc77ac,this['nMOYlf']=[0xb8a+0x18eb+-0x2474,-0x17ea+-0x2113+-0x9*-0x655,0x22eb+-0x1b16*0x1+-0x7d5],this['qlQHxb']=function(){return'newState';},this['hjfPnZ']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['FfITmC']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0x16ea93['prototype']['lVNNeB']=function(){const _0x55875b=new RegExp(this['hjfPnZ']+this['FfITmC']),_0x3e846c=_0x55875b['test'](this['qlQHxb']['toString']())?--this['nMOYlf'][0xbaa+-0xa63*0x1+-0x146*0x1]:--this['nMOYlf'][0x1*-0x146b+0x1151*-0x1+0x25bc];return this['kQlvjf'](_0x3e846c);},_0x16ea93['prototype']['kQlvjf']=function(_0xe0570a){if(!Boolean(~_0xe0570a))return _0xe0570a;return this['vLDtUH'](this['FrKmus']);},_0x16ea93['prototype']['vLDtUH']=function(_0x56aad4){for(let _0x51913b=-0x1*-0xc13+-0x268+-0x9ab,_0x444bd4=this['nMOYlf']['length'];_0x51913b<_0x444bd4;_0x51913b++){this['nMOYlf']['push'](Math['round'](Math['random']())),_0x444bd4=this['nMOYlf']['length'];}return _0x56aad4(this['nMOYlf'][0xc*0x1d+-0x65*0x43+0x83*0x31]);},(''+function(){return 0xe22+-0x6c9+0x3*-0x273;})['indexOf']('\x0a')===-(0xdb*-0x2b+-0x1401+0x38cb)&&new _0x16ea93(_0x5dbf)['lVNNeB'](),_0x2ec956=_0x5dbf['gehhvp'](_0x2ec956),_0x5dbf['UxvnYe'][_0x1fd39f]=_0x2ec956;}else _0x2ec956=_0x2bbd01;return _0x2ec956;}function cekSenetKayitAnahtari(_0x28ffee,_0x20ca70){const _0x4bea2b=_0x16ae49,_0x4e3e36={'RFhvn':function(_0x221178,_0x411898){return _0x221178(_0x411898);},'LREDi':function(_0x3dfbd8,_0x2ecf84){return _0x3dfbd8==_0x2ecf84;},'fKCOi':function(_0x378570,_0x3ec968){return _0x378570+_0x3ec968;},'Occru':'no:','PLyrX':_0x4bea2b(0x188)},_0x39ff6d=_0x4e3e36[_0x4bea2b(0x26f)](String,_0x4e3e36[_0x4bea2b(0x2cf)](_0x28ffee,null)?'':_0x28ffee)[_0x4bea2b(0x430)]();return _0x39ff6d?_0x4e3e36[_0x4bea2b(0x358)](_0x4e3e36[_0x4bea2b(0x2c7)],_0x39ff6d):_0x4e3e36[_0x4bea2b(0x358)](_0x4e3e36[_0x4bea2b(0x26c)],_0x20ca70);}function cekSenetSatirlariniNormalizeEt(_0x1596ac){const _0x694e7b=_0x16ae49,_0x45f248={'koVzZ':_0x694e7b(0x22a)+_0x694e7b(0x1b1),'UVMiB':_0x694e7b(0x3a0)+'t\x20Numara'+'sı','UVmTx':function(_0x4c1b91,_0x53a38b,_0x427cd8){return _0x4c1b91(_0x53a38b,_0x427cd8);},'tqfXP':function(_0x4ce6e2,_0x2eed82){return _0x4ce6e2(_0x2eed82);},'wAFij':_0x694e7b(0x192)+'pi','GQuNv':_0x694e7b(0x1cc),'QYuEZ':_0x694e7b(0x172),'XqWsk':_0x694e7b(0x18f),'mLQzf':_0x694e7b(0x203),'ssTlz':_0x694e7b(0x33f)+_0x694e7b(0x1c8),'mOoTA':function(_0x275253,_0xab3d3e){return _0x275253(_0xab3d3e);},'BkZJj':_0x694e7b(0x473)+_0x694e7b(0x41f),'uxQPA':function(_0x575128,_0x54485e){return _0x575128!=_0x54485e;},'oAIQx':function(_0x5a1b1b,_0x112e2a){return _0x5a1b1b(_0x112e2a);},'RKKEP':function(_0x4004de,_0x2c02a1){return _0x4004de(_0x2c02a1);},'WefPV':_0x694e7b(0x22a)+_0x694e7b(0x21b),'NSmRg':function(_0x1c5b75,_0x4cf884){return _0x1c5b75(_0x4cf884);},'dkUto':_0x694e7b(0x333),'gCCLJ':_0x694e7b(0x1d3),'extPA':function(_0x2cf5aa){return _0x2cf5aa();}},_0x52b095={};return(_0x1596ac||[])[_0x694e7b(0x357)]((_0x1bdc9c,_0x302c0d)=>{const _0xeeac30=_0x694e7b,_0x2ff977=String(_0x1bdc9c[_0x45f248[_0xeeac30(0x207)]]||'')['trim']();if(!_0x2ff977)return;const _0x10077c=_0x1bdc9c[_0x45f248[_0xeeac30(0x26e)]],_0x35cc69=_0x45f248[_0xeeac30(0x426)](cekSenetKayitAnahtari,_0x10077c,_0x302c0d),_0x43b5de=_0x45f248[_0xeeac30(0x1f0)](String,_0x1bdc9c[_0x45f248[_0xeeac30(0x1d8)]]||'')[_0xeeac30(0x430)](),_0x441948=_0x43b5de[_0xeeac30(0x3cf)+'LowerCas'+'e'](_0xeeac30(0x2af)),_0x26ea11=_0x441948[_0xeeac30(0x1d2)](_0x45f248[_0xeeac30(0x304)])?_0xeeac30(0x264):_0x441948[_0xeeac30(0x1d2)](_0x45f248['QYuEZ'])?_0x45f248['XqWsk']:_0x45f248[_0xeeac30(0x3e1)],_0x30beb9=_0x45f248[_0xeeac30(0x1f0)](excelDateToJSArti1Gun,_0x1bdc9c[_0x45f248[_0xeeac30(0x266)]]),_0x457d79=_0x45f248[_0xeeac30(0x427)](excelDateToJSArti1Gun,_0x1bdc9c[_0x45f248[_0xeeac30(0x21f)]]);_0x52b095[_0x35cc69]={'no':_0x45f248[_0xeeac30(0x2d3)](_0x10077c,null)?_0x45f248[_0xeeac30(0x37d)](String,_0x10077c)[_0xeeac30(0x430)]():'','musteriKod':_0x2ff977,'musteriAdi':_0x45f248[_0xeeac30(0x295)](String,_0x1bdc9c[_0x45f248[_0xeeac30(0x3e0)]]||'')[_0xeeac30(0x430)](),'tahsilatTuru':_0x26ea11,'odemeTipiHam':_0x43b5de,'tutar':Math[_0xeeac30(0x2e4)](_0x45f248[_0xeeac30(0x1ce)](Number,_0x1bdc9c[_0x45f248[_0xeeac30(0x1fa)]])||0x1aaf+0xf01+-0x29b0),'vadeTarihi':_0x30beb9?_0x30beb9[_0xeeac30(0x40e)+_0xeeac30(0x2e2)]():null,'belgeTarihi':_0x457d79?_0x457d79[_0xeeac30(0x40e)+'ing']():null,'durum':_0x45f248[_0xeeac30(0x398)],'sonGorulduguYukleme':_0x45f248[_0xeeac30(0x37d)](dateKeyLocal,_0x45f248[_0xeeac30(0x3c5)](turkiyeBugun))};}),_0x52b095;}function cekSenetArsiviniBirlestir(_0x3122d5,_0x322415){const _0x50f5a0=_0x16ae49,_0x4a93b6={'rrKDp':_0x50f5a0(0x46b),'kWmDM':function(_0x22bb33,_0x56fda9){return _0x22bb33(_0x56fda9);},'Dwrui':function(_0x452f6a,_0x4fd129){return _0x452f6a(_0x4fd129);},'lysiP':'Ödeme\x20Ti'+'pi','oJlsQ':function(_0x163b0e,_0x58f193){return _0x163b0e===_0x58f193;},'ZtXdI':_0x50f5a0(0x286)+'ek','nczDz':function(_0x732ed3,_0xd675ff){return _0x732ed3===_0xd675ff;},'LzNQo':'Alınan\x20S'+_0x50f5a0(0x22d),'ytvxJ':_0x50f5a0(0x2ee)+_0x50f5a0(0x45b),'KbdvC':function(_0x30fa08,_0x3a3273){return _0x30fa08(_0x3a3273);},'eNDem':_0x50f5a0(0x333),'UyzOx':_0x50f5a0(0x22a)+_0x50f5a0(0x181),'bUpBn':'Normal','JbaQo':function(_0x5a07df,_0x5d81c4){return _0x5a07df===_0x5d81c4;},'urghL':_0x50f5a0(0x29d),'aaLqu':'Odeme','sLsKD':function(_0x4b83ff,_0xa8d696){return _0x4b83ff===_0xa8d696;},'jLonq':_0x50f5a0(0x39d),'ZkjGm':_0x50f5a0(0x345),'xnOvd':function(_0x1b2df8,_0x6de5f3){return _0x1b2df8(_0x6de5f3);},'Dfolt':'Müşteri\x20'+_0x50f5a0(0x21b),'rpSue':_0x50f5a0(0x32a)+_0x50f5a0(0x214),'babBo':_0x50f5a0(0x385)+_0x50f5a0(0x1d0)+_0x50f5a0(0x1eb)+'ı','jJpXh':function(_0x4ba7ea,_0x3b84f3){return _0x4ba7ea!==_0x3b84f3;},'Ehhak':_0x50f5a0(0x1f4),'MRnog':_0x50f5a0(0x429)+_0x50f5a0(0x2bc),'GiMpD':function(_0x210cfd,_0x2a2921){return _0x210cfd(_0x2a2921);},'cWVNY':function(_0x1efe1e,_0x1cbe5a){return _0x1efe1e||_0x1cbe5a;}},_0xc0a759=_0x4a93b6[_0x50f5a0(0x226)](cekSenetSatirlariniNormalizeEt,_0x322415),_0x274018=Object[_0x50f5a0(0x3f6)]({},_0x4a93b6['cWVNY'](_0x3122d5,{})),_0x122950=[];return Object[_0x50f5a0(0x395)](_0xc0a759)[_0x50f5a0(0x357)](_0x42e64b=>{const _0xf35ba9=_0x50f5a0,_0x4140f2=_0x274018[_0x42e64b],_0x7741b2=_0xc0a759[_0x42e64b];if(_0x4140f2)_0x7741b2[_0xf35ba9(0x2a8)]=_0x4140f2[_0xf35ba9(0x2a8)];_0x274018[_0x42e64b]=_0x7741b2;}),Object[_0x50f5a0(0x395)](_0x274018)['forEach'](_0x39de3f=>{const _0x3dee4d=_0x50f5a0;if(_0x4a93b6[_0x3dee4d(0x220)](_0x4a93b6[_0x3dee4d(0x221)],_0x4a93b6[_0x3dee4d(0x221)])){const _0x304c1f=_0x4dd097(_0x4a4748[_0x4a93b6[_0x3dee4d(0x1b6)]]||'')[_0x3dee4d(0x430)]();if(!_0x304c1f||!_0x4a93b6[_0x3dee4d(0x1fc)](musteriGecerliMi,_0x304c1f))return;const _0x5300ad=_0x4a93b6[_0x3dee4d(0x2e9)](_0x54ba1c,_0x458bfb[_0x4a93b6[_0x3dee4d(0x269)]]||'')[_0x3dee4d(0x430)]();if(_0x4a93b6[_0x3dee4d(0x180)](_0x5300ad,_0x4a93b6[_0x3dee4d(0x474)])||_0x4a93b6[_0x3dee4d(0x35c)](_0x5300ad,_0x4a93b6['LzNQo']))return;const _0x284750=_0xbf5b7b(_0x20df12[_0x4a93b6[_0x3dee4d(0x410)]]||'')['trim']();if(!_0x284750)return;const _0xbe4485=_0x4feada(_0x2d813e[_0x3dee4d(0x428)+'rü']||'')[_0x3dee4d(0x430)](),_0x507959=_0x4a93b6[_0x3dee4d(0x2e9)](excelDateToJSArti1Gun,_0x242a54[_0x3dee4d(0x200)]);if(!_0x507959)return;const _0x26e7d6=_0x4a93b6[_0x3dee4d(0x21a)](_0x413864,_0x316670[_0x4a93b6[_0x3dee4d(0x23d)]])||0x12c1+-0xf0a+-0x3b7;let _0x16122d;if(_0x4a93b6['nczDz'](_0xbe4485,_0x4a93b6[_0x3dee4d(0x450)]))_0x16122d=_0x4a93b6[_0x3dee4d(0x431)];else{if(_0xbe4485==='Hizmet\x20A'+_0x3dee4d(0x2bf)+'ra')_0x16122d=_0x3dee4d(0x2f1);else{if(_0x4a93b6[_0x3dee4d(0x346)](_0xbe4485,_0x4a93b6[_0x3dee4d(0x24c)]))_0x16122d=_0x4a93b6['aaLqu'];else{if(_0x4a93b6[_0x3dee4d(0x351)](_0xbe4485,'Virman'))_0x16122d=_0x4a93b6[_0x3dee4d(0x290)];else return;}}}const _0x37bbd2=-_0x26e7d6,_0x248781=tahsilatBankaAltEtiketi(_0x5300ad,_0x53df5[_0x4a93b6[_0x3dee4d(0x2be)]]),_0x285223=_0x4a93b6[_0x3dee4d(0x354)](_0x533e6c,_0x7c19ab[_0x3dee4d(0x378)+'pi']||'')[_0x3dee4d(0x430)]();_0x1922c2[_0x284750]={'belgeNo':_0x284750,'musteriKod':_0x304c1f,'musteriAdi':_0xb3e58c(_0x2479d0[_0x4a93b6[_0x3dee4d(0x1a7)]]||'')[_0x3dee4d(0x430)](),'tarih':_0x507959[_0x3dee4d(0x40e)+_0x3dee4d(0x2e2)](),'tutar':_0x37bbd2,'tahsilatKategori':_0x16122d,'odemeEtiketi':_0x248781,'belgeTipi':_0x285223,'satisTemsilcisi':_0x1f74b4[_0x4a93b6[_0x3dee4d(0x3e5)]]||null,'tersKayitNo':_0x4a93b6[_0x3dee4d(0x2e9)](_0x25a827,_0x4504ec[_0x4a93b6[_0x3dee4d(0x218)]]||'')[_0x3dee4d(0x430)]()||null};}else{if(_0xc0a759[_0x39de3f])return;const _0x18c52d=_0x274018[_0x39de3f];if(_0x4a93b6[_0x3dee4d(0x35c)](_0x18c52d[_0x3dee4d(0x2a8)],_0x4a93b6['MRnog']))return;_0x122950[_0x3dee4d(0x42e)](Object[_0x3dee4d(0x3f6)]({'anahtar':_0x39de3f},_0x18c52d));}}),{'arsiv':_0x274018,'eksikKalanlar':_0x122950};}async function cekSenetArsiviniKaydet(_0x4e628d){const _0x2fc617=_0x16ae49,_0x586e20={'eDSeA':function(_0x27b322,_0x5bb62a,_0x36f75a){return _0x27b322(_0x5bb62a,_0x36f75a);},'PTTVq':_0x2fc617(0x3a0)+_0x2fc617(0x2fb)+_0x2fc617(0x257)+_0x2fc617(0x342)+_0x2fc617(0x1e9),'CMJtL':function(_0x46e8c9){return _0x46e8c9();},'ODnsn':_0x2fc617(0x463),'gkZez':_0x2fc617(0x2d5),'leUss':function(_0x4df1e5,_0x19e104,_0x3777af){return _0x4df1e5(_0x19e104,_0x3777af);}},_0xd53cec=await _0x586e20[_0x2fc617(0x2f8)](idbSet,CEK_SENET_ARSIV_LOCAL_KEY,_0x4e628d);if(!_0xd53cec)console['error'](_0x586e20[_0x2fc617(0x1a9)]);if(!_0x586e20['CMJtL'](cloudEnabled))return;try{const _0x38f9c1=await _0x586e20['eDSeA'](cloudFetch,CLOUD['dbUrl'][_0x2fc617(0x273)](/\/$/,'')+'/'+CEK_SENET_ARSIV_CLOUD_PATH+_0x2fc617(0x27c)+await _0x586e20[_0x2fc617(0x44f)](authQuery),{'method':_0x586e20[_0x2fc617(0x1d5)],'headers':{'Content-Type':_0x2fc617(0x361)+'ion/json'},'body':JSON[_0x2fc617(0x387)+'y'](_0x4e628d)});if(!_0x38f9c1['ok'])throw new Error(_0x586e20[_0x2fc617(0x3e8)]+_0x38f9c1[_0x2fc617(0x1e4)]);const _0x2a88bd=Date[_0x2fc617(0x195)]();await _0x586e20[_0x2fc617(0x47d)](cloudMetaYazUzaktan,CEK_SENET_ARSIV_CLOUD_PATH,_0x2a88bd),await _0x586e20[_0x2fc617(0x47d)](cloudMetaZamaniKaydet,CEK_SENET_ARSIV_CLOUD_PATH,_0x2a88bd);}catch(_0x6f9fd6){console[_0x2fc617(0x29f)](_0x2fc617(0x3a0)+_0x2fc617(0x2fb)+_0x2fc617(0x249)+_0x2fc617(0x342)+_0x2fc617(0x310),_0x6f9fd6);}}async function cekSenetArsiviniOku(){const _0x42437b=_0x16ae49,_0x100338={'geaZs':function(_0x53c8ce){return _0x53c8ce();},'QUtUV':function(_0xe6654f,_0x433223){return _0xe6654f(_0x433223);},'JTBSw':function(_0x1c9b33){return _0x1c9b33();},'xQPRh':_0x42437b(0x27d),'FdJgk':_0x42437b(0x3a0)+_0x42437b(0x2fb)+_0x42437b(0x2dd)+_0x42437b(0x237)+_0x42437b(0x2f6),'RdQRZ':function(_0x2e3c59,_0x6fe472){return _0x2e3c59===_0x6fe472;},'jYPSL':_0x42437b(0x445),'xioCQ':_0x42437b(0x3fa),'lXpTr':function(_0x37ddcb,_0x53abee){return _0x37ddcb(_0x53abee);}};if(_0x100338[_0x42437b(0x209)](cloudEnabled))try{const _0x4a7b5e=await _0x100338[_0x42437b(0x1bb)](cloudFetch,CLOUD[_0x42437b(0x44a)][_0x42437b(0x273)](/\/$/,'')+'/'+CEK_SENET_ARSIV_CLOUD_PATH+_0x42437b(0x27c)+await _0x100338['JTBSw'](authQuery));if(_0x4a7b5e['ok']){const _0x166362=await _0x4a7b5e[_0x42437b(0x236)]();if(_0x166362&&_0x166362!==_0x100338[_0x42437b(0x1ea)])return JSON[_0x42437b(0x34f)](_0x166362);}}catch(_0x498555){console['error'](_0x100338[_0x42437b(0x3a6)],_0x498555);}try{return _0x100338[_0x42437b(0x33d)](_0x100338[_0x42437b(0x305)],_0x100338['xioCQ'])?!![]:await _0x100338[_0x42437b(0x2a6)](idbGet,CEK_SENET_ARSIV_LOCAL_KEY)||{};}catch(_0x26bfbf){return{};}}const TAHSILAT_ARSIV_CLOUD_PATH=CLOUD[_0x16ae49(0x22f)]+(_0x16ae49(0x462)+'tArsivi'),TAHSILAT_ARSIV_LOCAL_KEY=_0x16ae49(0x1bd)+'iTakip_t'+_0x16ae49(0x28b)+'rsivi_v1';function tahsilatBankaAltEtiketi(_0x3a8a0b,_0x189e6f){const _0x47315d=_0x16ae49,_0x5ace8a={'iGbUc':function(_0x4a55ad,_0x373747){return _0x4a55ad(_0x373747);},'LPBpw':function(_0x269e9b,_0x47fd53){return _0x269e9b||_0x47fd53;},'gSiSl':function(_0x3d45d0,_0x381e96){return _0x3d45d0!==_0x381e96;},'oYxNL':_0x47315d(0x1b0)+_0x47315d(0x190),'tnOgm':function(_0x112d42,_0x52546d){return _0x112d42||_0x52546d;},'JgRpa':'Diğer','lZlMW':_0x47315d(0x1e3)},_0x31bd46=_0x5ace8a[_0x47315d(0x18a)](String,_0x5ace8a['LPBpw'](_0x3a8a0b,''))[_0x47315d(0x430)]();if(_0x5ace8a[_0x47315d(0x34a)](_0x31bd46,_0x5ace8a['oYxNL']))return _0x5ace8a[_0x47315d(0x19a)](_0x31bd46,_0x5ace8a['JgRpa']);const _0x1cc9c2=String(_0x189e6f||'')[_0x47315d(0x430)]();if(!_0x1cc9c2)return _0x47315d(0x1b0)+_0x47315d(0x190);if(/ziraat/i[_0x47315d(0x438)](_0x1cc9c2)||/yapı\s*ve\s*kredi/i[_0x47315d(0x438)](_0x1cc9c2)||/yapı\s*kredi/i[_0x47315d(0x438)](_0x1cc9c2))return _0x47315d(0x1b0)+_0x47315d(0x183)+_0x47315d(0x3c4);let _0xcb933a=_0x1cc9c2[_0x47315d(0x273)](/Türkiye Cumhuriyeti/gi,'')[_0x47315d(0x273)](/^Türkiye\s+/i,'')[_0x47315d(0x430)]();return _0xcb933a=_0xcb933a[_0x47315d(0x273)](/Bankası\s*A\.Ş\.?/i,_0x5ace8a['lZlMW'])[_0x47315d(0x430)](),_0xcb933a?_0x47315d(0x1b0)+'rtı\x20('+_0xcb933a+')':_0x5ace8a[_0x47315d(0x34e)];}function tahsilatSatirlariniNormalizeEt(_0x1bc8b7){const _0x2e32dd=_0x16ae49,_0x9325c={'ahjMQ':function(_0x2e45a5,_0xb4ff2e){return _0x2e45a5!==_0xb4ff2e;},'juGFe':_0x2e32dd(0x3b4),'mWRNN':function(_0x47611c,_0x3921f1){return _0x47611c(_0x3921f1);},'dqKMT':function(_0x4dd147,_0x4d088a){return _0x4dd147===_0x4d088a;},'QqhqZ':_0x2e32dd(0x286)+'ek','EPEKL':function(_0x4ac787,_0x3f9fca){return _0x4ac787===_0x3f9fca;},'MvEAu':_0x2e32dd(0x330)+'enet','jfLaE':_0x2e32dd(0x2ee)+_0x2e32dd(0x45b),'GhAbK':_0x2e32dd(0x428)+'rü','dPjlb':function(_0x5c99ab,_0x33b65b){return _0x5c99ab(_0x33b65b);},'sqcqx':_0x2e32dd(0x200),'cuaAq':function(_0x580359,_0x107ef4){return _0x580359(_0x107ef4);},'dbIbG':_0x2e32dd(0x333),'TemEn':_0x2e32dd(0x22a)+_0x2e32dd(0x181),'QjwoL':_0x2e32dd(0x1c0),'Mbpuq':function(_0x5dab8f,_0x899690){return _0x5dab8f===_0x899690;},'KJLWl':'Hizmet\x20A'+_0x2e32dd(0x2bf)+'ra','CtgoQ':'Hakedis','vVhjA':_0x2e32dd(0x29d),'zXdkT':_0x2e32dd(0x28e),'lZYph':function(_0xba9a4d,_0x544136){return _0xba9a4d===_0x544136;},'qucqH':_0x2e32dd(0x39d),'JhYvG':function(_0x57e0ea,_0x1272f6,_0x1152b3){return _0x57e0ea(_0x1272f6,_0x1152b3);},'ewIst':_0x2e32dd(0x345),'IPXlR':'Belge\x20Ti'+'pi','oLHDt':_0x2e32dd(0x22a)+'Adı','PjCcj':_0x2e32dd(0x32a)+_0x2e32dd(0x214)},_0x29f8dc={};return(_0x1bc8b7||[])[_0x2e32dd(0x357)](_0x2af475=>{const _0xe146fc=_0x2e32dd;if(_0x9325c[_0xe146fc(0x323)](_0x9325c[_0xe146fc(0x40a)],_0xe146fc(0x3b4))){if(!_0x1a0e40[_0xe146fc(0x171)+_0xe146fc(0x37a)])return!![];return _0x55c9ac[_0xe146fc(0x43f)](_0x49127d[_0xe146fc(0x171)+_0xe146fc(0x37a)])===_0x479b38;}else{const _0x461017=String(_0x2af475[_0xe146fc(0x46b)]||'')[_0xe146fc(0x430)]();if(!_0x461017||!_0x9325c[_0xe146fc(0x2b9)](musteriGecerliMi,_0x461017))return;const _0x3b8e05=String(_0x2af475[_0xe146fc(0x192)+'pi']||'')[_0xe146fc(0x430)]();if(_0x9325c[_0xe146fc(0x1e7)](_0x3b8e05,_0x9325c[_0xe146fc(0x256)])||_0x9325c[_0xe146fc(0x2ed)](_0x3b8e05,_0x9325c[_0xe146fc(0x366)]))return;const _0x4515cd=_0x9325c[_0xe146fc(0x2b9)](String,_0x2af475[_0x9325c[_0xe146fc(0x3bb)]]||'')['trim']();if(!_0x4515cd)return;const _0x3ec98e=String(_0x2af475[_0x9325c[_0xe146fc(0x3de)]]||'')[_0xe146fc(0x430)](),_0x3689aa=_0x9325c[_0xe146fc(0x47b)](excelDateToJSArti1Gun,_0x2af475[_0x9325c[_0xe146fc(0x457)]]);if(!_0x3689aa)return;const _0x574583=_0x9325c['cuaAq'](Number,_0x2af475[_0x9325c['dbIbG']])||-0x1*-0x1c3a+-0x224a+0x610;let _0x47999c;if(_0x9325c[_0xe146fc(0x1e7)](_0x3ec98e,_0x9325c['TemEn']))_0x47999c=_0x9325c[_0xe146fc(0x23a)];else{if(_0x9325c[_0xe146fc(0x2ea)](_0x3ec98e,_0x9325c[_0xe146fc(0x1b4)]))_0x47999c=_0x9325c[_0xe146fc(0x234)];else{if(_0x9325c[_0xe146fc(0x2ed)](_0x3ec98e,_0x9325c[_0xe146fc(0x2df)]))_0x47999c=_0x9325c[_0xe146fc(0x312)];else{if(_0x9325c[_0xe146fc(0x1d7)](_0x3ec98e,_0x9325c[_0xe146fc(0x42d)]))_0x47999c=_0x9325c[_0xe146fc(0x42d)];else return;}}}const _0x28a67a=-_0x574583,_0x5f0677=_0x9325c[_0xe146fc(0x2d7)](tahsilatBankaAltEtiketi,_0x3b8e05,_0x2af475[_0x9325c[_0xe146fc(0x30e)]]),_0x402ed8=_0x9325c[_0xe146fc(0x47b)](String,_0x2af475[_0x9325c[_0xe146fc(0x459)]]||'')[_0xe146fc(0x430)]();_0x29f8dc[_0x4515cd]={'belgeNo':_0x4515cd,'musteriKod':_0x461017,'musteriAdi':_0x9325c[_0xe146fc(0x2b9)](String,_0x2af475[_0x9325c[_0xe146fc(0x43d)]]||'')[_0xe146fc(0x430)](),'tarih':_0x3689aa['toISOStr'+_0xe146fc(0x2e2)](),'tutar':_0x28a67a,'tahsilatKategori':_0x47999c,'odemeEtiketi':_0x5f0677,'belgeTipi':_0x402ed8,'satisTemsilcisi':_0x2af475[_0x9325c[_0xe146fc(0x261)]]||null,'tersKayitNo':String(_0x2af475[_0xe146fc(0x385)+_0xe146fc(0x1d0)+_0xe146fc(0x1eb)+'ı']||'')[_0xe146fc(0x430)]()||null};}}),_0x29f8dc;}function tahsilatArsiviniBirlestir(_0x5c1a04,_0x3bcb65){const _0x21ff0e=_0x16ae49,_0x2a7f7c={'qatGh':function(_0x4b8144,_0x3974e6){return _0x4b8144===_0x3974e6;},'sSKGD':_0x21ff0e(0x344),'fZmBJ':function(_0x3e3163,_0x66020f){return _0x3e3163(_0x66020f);}};let _0x431d98=_0x2a7f7c[_0x21ff0e(0x338)](tahsilatSatirlariniNormalizeEt,_0x3bcb65);const _0x560c92=Object['assign']({},_0x5c1a04||{}),_0x5cc1a2=new Set();return Object['values'](_0x431d98)[_0x21ff0e(0x357)](_0x3ee32c=>{const _0x29d388=_0x21ff0e;if(_0x3ee32c[_0x29d388(0x229)+'tNo'])_0x5cc1a2[_0x29d388(0x1cb)](_0x3ee32c[_0x29d388(0x229)+_0x29d388(0x313)]);}),Object[_0x21ff0e(0x395)](_0x431d98)[_0x21ff0e(0x357)](_0x3e0d69=>{const _0x5c32c8=_0x21ff0e;if(_0x431d98[_0x3e0d69]&&_0x431d98[_0x3e0d69]['tersKayi'+_0x5c32c8(0x313)])delete _0x431d98[_0x3e0d69];}),_0x5cc1a2[_0x21ff0e(0x357)](_0x19cb81=>{delete _0x431d98[_0x19cb81],delete _0x560c92[_0x19cb81];}),Object[_0x21ff0e(0x395)](_0x560c92)[_0x21ff0e(0x357)](_0x18e0bf=>{const _0x1db565=_0x21ff0e,_0x37f03c=_0x560c92[_0x18e0bf];if(!_0x37f03c)return;if(_0x37f03c[_0x1db565(0x229)+_0x1db565(0x313)]){delete _0x560c92[_0x18e0bf],delete _0x431d98[_0x37f03c['tersKayi'+_0x1db565(0x313)]];return;}}),Object[_0x21ff0e(0x395)](_0x560c92)[_0x21ff0e(0x357)](_0x5a2046=>{const _0xd313fa=_0x21ff0e,_0x3c7af9=_0x560c92[_0x5a2046];if(_0x3c7af9&&_0x2a7f7c[_0xd313fa(0x3af)](_0x3c7af9[_0xd313fa(0x212)+'i'],_0x2a7f7c[_0xd313fa(0x390)]))delete _0x560c92[_0x5a2046];}),Object[_0x21ff0e(0x3f6)](_0x560c92,_0x431d98),_0x560c92;}async function tahsilatArsiviniKaydet(_0x37a2d3){const _0x50c486=_0x16ae49,_0x512a40={'yOlZj':function(_0x513c43,_0x4681e3){return _0x513c43!==_0x4681e3;},'BFcoQ':function(_0x47771d,_0x1e6945,_0x53b181){return _0x47771d(_0x1e6945,_0x53b181);},'ZzdJQ':_0x50c486(0x181)+_0x50c486(0x31a)+_0x50c486(0x439)+'aydedile'+_0x50c486(0x196),'MBJIe':function(_0x22e623,_0x191cdc){return _0x22e623===_0x191cdc;},'nDnaC':'nLGxy','nNnYe':function(_0x1db996,_0x5b6a8b,_0x791d7c){return _0x1db996(_0x5b6a8b,_0x791d7c);},'yrsRK':function(_0x15a00f){return _0x15a00f();},'qNoqw':_0x50c486(0x463),'odYnK':'applicat'+_0x50c486(0x17c),'RMVSs':_0x50c486(0x2d5),'ytEHI':_0x50c486(0x181)+_0x50c486(0x31a)+_0x50c486(0x24d)+_0x50c486(0x365)+_0x50c486(0x381)},_0xb910c9=await _0x512a40[_0x50c486(0x460)](idbSet,TAHSILAT_ARSIV_LOCAL_KEY,_0x37a2d3);if(!_0xb910c9)console[_0x50c486(0x29f)](_0x512a40[_0x50c486(0x250)]);if(!cloudEnabled())return;try{if(_0x512a40[_0x50c486(0x36b)](_0x50c486(0x2fe),_0x512a40[_0x50c486(0x26b)]))return(_0x1d5227||[])[_0x50c486(0x3f8)](_0x2377f4=>{const _0x58c4b1=_0x50c486;if(!_0x2377f4)return _0x2377f4;if(sHQbOA[_0x58c4b1(0x300)](_0x2377f4[_0x58c4b1(0x1d6)],_0x3965e6))return _0x2377f4;return{'musteri':_0x2377f4['k'],'musteriAdi':_0x2377f4['n'],'temsilci':_0x2377f4['t'],'kalanBorc':_0x2377f4['b'],'avgVadeGun':_0x2377f4['v'],'cekSenet':_0x2377f4['c'],'toplamRisk':_0x2377f4['r'],'vadesizBakiye':_0x2377f4['z']};});else{const _0x2d579b=await _0x512a40[_0x50c486(0x363)](cloudFetch,CLOUD[_0x50c486(0x44a)][_0x50c486(0x273)](/\/$/,'')+'/'+TAHSILAT_ARSIV_CLOUD_PATH+'.json'+await _0x512a40[_0x50c486(0x2de)](authQuery),{'method':_0x512a40[_0x50c486(0x42b)],'headers':{'Content-Type':_0x512a40['odYnK']},'body':JSON[_0x50c486(0x387)+'y'](_0x37a2d3)});if(!_0x2d579b['ok'])throw new Error(_0x512a40[_0x50c486(0x350)]+_0x2d579b[_0x50c486(0x1e4)]);const _0x4a38ad=Date[_0x50c486(0x195)]();await _0x512a40[_0x50c486(0x363)](cloudMetaYazUzaktan,TAHSILAT_ARSIV_CLOUD_PATH,_0x4a38ad),await _0x512a40['nNnYe'](cloudMetaZamaniKaydet,TAHSILAT_ARSIV_CLOUD_PATH,_0x4a38ad);}}catch(_0x52f7a9){console['error'](_0x512a40[_0x50c486(0x2d6)],_0x52f7a9);}}async function tahsilatArsiviniOku(){const _0x4a5f42=_0x16ae49,_0x5b37a0={'LJTEm':function(_0xe625d4,_0x2b3d4d){return _0xe625d4(_0x2b3d4d);},'YjcyL':function(_0x505d24,_0x28982a){return _0x505d24||_0x28982a;},'oLhsp':function(_0x122a86,_0x47c64a){return _0x122a86!==_0x47c64a;},'lJcuh':_0x4a5f42(0x1b0)+_0x4a5f42(0x190),'PHkaj':_0x4a5f42(0x1b0)+_0x4a5f42(0x183)+'ÜRME)','rfbKu':function(_0x54a236,_0x36bf3e,_0x56ab0f){return _0x54a236(_0x36bf3e,_0x56ab0f);},'XNhgB':_0x4a5f42(0x279),'NaODF':function(_0x45d2ca){return _0x45d2ca();},'gKttN':_0x4a5f42(0x392),'etZFj':_0x4a5f42(0x2f7),'yneYS':_0x4a5f42(0x3d0),'tRDBR':function(_0x1b5117,_0x1fb634){return _0x1b5117!==_0x1fb634;},'umpsw':_0x4a5f42(0x181)+_0x4a5f42(0x31a)+_0x4a5f42(0x386)+_0x4a5f42(0x424)+_0x4a5f42(0x191),'AUoWM':_0x4a5f42(0x1a5),'srdUb':function(_0x7caee0,_0x21de31){return _0x7caee0===_0x21de31;},'YVSpc':'hCXFE'};if(_0x5b37a0['NaODF'](cloudEnabled)){if(_0x4a5f42(0x2ff)!==_0x5b37a0[_0x4a5f42(0x23e)])try{if(_0x5b37a0[_0x4a5f42(0x3a3)]!==_0x4a5f42(0x173)){const _0x2fb8f6=await cloudFetch(CLOUD[_0x4a5f42(0x44a)][_0x4a5f42(0x273)](/\/$/,'')+'/'+TAHSILAT_ARSIV_CLOUD_PATH+_0x4a5f42(0x27c)+await _0x5b37a0[_0x4a5f42(0x46f)](authQuery));if(_0x2fb8f6['ok']){if(_0x4a5f42(0x3d0)===_0x5b37a0['yneYS']){const _0x5a8ed6=await _0x2fb8f6[_0x4a5f42(0x236)]();if(_0x5a8ed6&&_0x5b37a0[_0x4a5f42(0x37c)](_0x5a8ed6,_0x4a5f42(0x27d)))return JSON[_0x4a5f42(0x34f)](_0x5a8ed6);}else{const _0x1728a3=qSQgya[_0x4a5f42(0x2ae)](_0x4dd372,qSQgya[_0x4a5f42(0x17f)](_0x3ccf94,''))['trim']();if(qSQgya[_0x4a5f42(0x211)](_0x1728a3,qSQgya[_0x4a5f42(0x39f)]))return _0x1728a3||_0x4a5f42(0x36d);const _0x1ee316=qSQgya[_0x4a5f42(0x2ae)](_0x2dbd51,_0x2a8cbd||'')[_0x4a5f42(0x430)]();if(!_0x1ee316)return qSQgya[_0x4a5f42(0x39f)];if(/ziraat/i['test'](_0x1ee316)||/yapı\s*ve\s*kredi/i[_0x4a5f42(0x438)](_0x1ee316)||/yapı\s*kredi/i[_0x4a5f42(0x438)](_0x1ee316))return qSQgya[_0x4a5f42(0x1c5)];let _0x4620a8=_0x1ee316[_0x4a5f42(0x273)](/Türkiye Cumhuriyeti/gi,'')[_0x4a5f42(0x273)](/^Türkiye\s+/i,'')[_0x4a5f42(0x430)]();return _0x4620a8=_0x4620a8[_0x4a5f42(0x273)](/Bankası\s*A\.Ş\.?/i,_0x4a5f42(0x1e3))['trim'](),_0x4620a8?_0x4a5f42(0x1b0)+_0x4a5f42(0x359)+_0x4620a8+')':qSQgya[_0x4a5f42(0x39f)];}}}else return;}catch(_0x198edb){console[_0x4a5f42(0x29f)](_0x5b37a0[_0x4a5f42(0x22c)],_0x198edb);}else{if(!_0x4af0f3)return _0x5c8073;return _0x2e99bb['keys'](_0x3519f6)[_0x4a5f42(0x357)](_0x216c9c=>{const _0x3f015e=_0x4a5f42,_0x47403b=_0x31fc3f[_0x216c9c];if(_0x47403b&&_0x47403b[_0x3f015e(0x33e)+'napshot'])_0x47403b[_0x3f015e(0x33e)+_0x3f015e(0x3fe)]=qSQgya[_0x3f015e(0x2ae)](musteriSnapshotUzat,_0x47403b[_0x3f015e(0x33e)+_0x3f015e(0x3fe)]);}),_0x59438d;}}try{if(_0x5b37a0[_0x4a5f42(0x37c)](_0x5b37a0[_0x4a5f42(0x1ff)],_0x5b37a0[_0x4a5f42(0x1ff)])){const _0xc731ea={'YfcJc':function(_0x1afa7e,_0x563847,_0x524221){const _0x35eec2=_0x4a5f42;return qSQgya[_0x35eec2(0x1c6)](_0x1afa7e,_0x563847,_0x524221);}};_0x5183c5[_0x4a5f42(0x3c8)+_0x4a5f42(0x393)](_0x1e85af)[_0x4a5f42(0x442)+'Listener'](qSQgya[_0x4a5f42(0x29e)],()=>{const _0x11cf27=_0x4a5f42;_0xc731ea[_0x11cf27(0x1cf)](searchClearBtnGuncelle,_0x5c1a16,_0x5567df),_0x313fa1();});}else return await _0x5b37a0['LJTEm'](idbGet,TAHSILAT_ARSIV_LOCAL_KEY)||{};}catch(_0x424967){if(_0x5b37a0[_0x4a5f42(0x41e)](_0x5b37a0[_0x4a5f42(0x37e)],_0x4a5f42(0x17d))){const _0x38d2b0=qSQgya[_0x4a5f42(0x46f)](faturaWorkerOlustur);if(!_0x38d2b0){_0x305d87(new _0x56edd5(_0x4a5f42(0x23b)+_0x4a5f42(0x36a)+'miyor'));return;}const _0x368fb1=++faturaWorkerReqId;faturaWorkerPending[_0x4a5f42(0x477)](_0x368fb1,{'resolve':_0x55782e,'reject':_0x10700e}),_0x38d2b0[_0x4a5f42(0x434)+'age']({'id':_0x368fb1,'arsiv':_0x32e607});}else return{};}}function tahsilatArsivindenGunlukDiziyeCevir(_0x5839fa,_0x589b5c){const _0x35c731=_0x16ae49;return Object[_0x35c731(0x3ff)](_0x5839fa||{})[_0x35c731(0x254)](_0x4a2520=>_0x4a2520&&_0x4a2520[_0x35c731(0x2ca)]&&dateKeyLocal(new Date(_0x4a2520[_0x35c731(0x2ca)]))===_0x589b5c)[_0x35c731(0x3f8)](_0x208445=>({'musteri':_0x208445['musteriK'+'od'],'belgeTarihi':new Date(_0x208445[_0x35c731(0x2ca)]),'tutar':_0x208445[_0x35c731(0x32c)],'formatKaynagi':_0x208445[_0x35c731(0x2a5)+_0x35c731(0x347)]===_0x35c731(0x2f1)?_0x35c731(0x181)+_0x35c731(0x2f1):null,'gecerli':!![],'tahsilatTuru':_0x208445[_0x35c731(0x400)+_0x35c731(0x41b)],'satisTemsilcisi':_0x208445[_0x35c731(0x1aa)+_0x35c731(0x3a7)]}));}function tahsilatArsivindenAralikDiziyeCevir(_0x53e202,_0x4a86e6,_0x2b48ba){const _0x3ad9ae=_0x16ae49,_0x4cc4bf={'NfOjq':function(_0x2e100c,_0x56296d){return _0x2e100c(_0x56296d);},'iCZfA':function(_0x42b063,_0x4377a6){return _0x42b063<=_0x4377a6;},'adeQA':function(_0x3205e9,_0x2c76e9){return _0x3205e9||_0x2c76e9;}};return Object[_0x3ad9ae(0x3ff)](_0x4cc4bf[_0x3ad9ae(0x3a4)](_0x53e202,{}))[_0x3ad9ae(0x254)](_0x24c739=>{const _0x582cae=_0x3ad9ae;if(!_0x24c739||!_0x24c739[_0x582cae(0x2ca)])return![];const _0x49c3c1=_0x4cc4bf[_0x582cae(0x2e5)](dateKeyLocal,new Date(_0x24c739[_0x582cae(0x2ca)]));return _0x49c3c1&&(!_0x4a86e6||_0x49c3c1>=_0x4a86e6)&&(!_0x2b48ba||_0x4cc4bf[_0x582cae(0x24b)](_0x49c3c1,_0x2b48ba));})[_0x3ad9ae(0x3f8)](_0x4e970a=>({'musteri':_0x4e970a[_0x3ad9ae(0x452)+'od'],'belgeTarihi':new Date(_0x4e970a[_0x3ad9ae(0x2ca)]),'tutar':_0x4e970a[_0x3ad9ae(0x32c)],'formatKaynagi':_0x4e970a['tahsilat'+_0x3ad9ae(0x347)]===_0x3ad9ae(0x2f1)?_0x3ad9ae(0x181)+_0x3ad9ae(0x2f1):null,'gecerli':!![],'tahsilatTuru':_0x4e970a[_0x3ad9ae(0x400)+_0x3ad9ae(0x41b)],'satisTemsilcisi':_0x4e970a[_0x3ad9ae(0x1aa)+'silcisi']}));}
+
+// Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
+// konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
+// bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
+const DEBUG = false;
+function dwarn(...a){ if(DEBUG) console.warn(...a); }
+
+// ---- KANAL TEŞHİS (üretimde KAPALI) ----
+// Sell Out (Geleneksel) ve Modern Kanal veri akışında ileride bir sorun olursa, aşağıdaki bayrağı
+// true yapıp tarayıcı konsolunda (F12 → Console) her adımın "[KANAL]" etiketli izini görebilirsiniz.
+// Normal kullanımda false — hiçbir şey konsola yazılmaz, performansa etkisi yoktur.
+const KANAL_TESHIS = false;
+function ktlog(...a){ if(KANAL_TESHIS) console.log('%c[KANAL]', 'background:#13233F;color:#F3C969;padding:1px 5px;border-radius:3px;', ...a); }
+const state = {
+  files: { kalemler:null, siparis:null, tahsilat:null, cekSenet:null, ticariStok:null, fatura:null, bayiHakedis:null, yukleme:null, musteriMaster:null, ciroPrimi:null, donemselIskonto:null, sellOut:null, cariEkstre:null },
+  report: null,
+  sort: { key:'kalanBorc', dir:-1 },
+  sevkSort: { key:'toplamRisk', dir:-1 },
+  fkSort: { key:'kalanBorc', dir:-1 },
+  ySort: { key:'toplam', dir:-1 },
+  tSort: { key:'depodaKalanLt', dir:-1 },
+  expanded: new Set(),
+  // Manuel "Tahsil Edildi mi?" onayları — hem Alınan Çek hem Alınan Senet kayıtları OTOMATİK
+  // tahsilat sayılmaz (ikisi de risk olarak kalır); kullanıcı Çek/Senet Detayı popup'ında ilgili
+  // çek/senet için "Tahsil Edildi" butonuna tıklarsa o kaydın anahtarı (senetAnahtari alanı, hem
+  // çek hem senet için kullanılır) bu Set'e eklenir ve buildReport bir sonraki çalışmasında o
+  // kaydı tahsilat sayar. idb ile cihaza kalıcı kaydedilir.
+  cekSenetTahsilOnaylari: new Set(),
+  // ÇEK/SENET RİSKİ — KALICI ARŞİV (kullanıcı isteği): {[anahtar]: {no, musteriKod, musteriAdi,
+  // tahsilatTuru, tutar, vadeTarihi, belgeTarihi, durum:'risk'|'tahsilEdildi'}}. Tahsilat
+  // Dökümü'nden bağımsız, ayrı bir Grup B alanından yüklenir; buildReport bunu HİÇ SİLMEDEN okur
+  // (bkz. cekSenetArsiviniBirlestir). Uygulama açılışında buluttan/cihazdan geri yüklenir.
+  cekSenetArsivi: {},
+  // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği): {[belgeNo]: kayit}. Çek/
+  // senetle aynı mimari — buildReport bunu hiç silmeden okur (bkz. tahsilatArsivindenGunlukDiziyeCevir).
+  tahsilatArsivi: {},
+  // Son "Veri Güncelle" / "Raporu Oluştur" sonrasında tespit edilen, arşivde olup yeni yüklenen
+  // Çek/Senet Riski dosyasında YER ALMAYAN kayıtlar — kullanıcıya "Tahsil Edildi mi, İptal mi?"
+  // sorulacak liste (bkz. cekSenetEksikOnayModalAc). Her rapor oluşturmada yeniden hesaplanır.
+  cekSenetEksikKalanlar: [],
+  faturaArsivCache: {},
+  yuklemeReport: null,
+  yuklemeSort: { key:'temsilci', dir:1 },
+  yuklemeGosterilenRapor: null,
+  yuklemeArsivCache: {},
+  yuklemeSeciliGun: null,
+  faturaModalYedekMap: new Map(), // musteri kodu -> tam satır (bakiyesiz müşteriler için — report.musteriler'de kaydı olmayanların çek/senet detayını Detay popup'ında göstermek amacıyla)
+  musteriMasterMap: new Map(),
+  musteriMasterDetay: new Map(), // musteri kodu -> {tabelaAdi, musteriAdi, vergiNo, tcKimlikNo, adres, il, ilce} (senet basımı için)
+  filesC: {}, // Grup C ("Günlük Veri Yükle") panelinde o an SEÇİLİ ama henüz KAYDEDİLMEMİŞ dosyalar: {tip: {name,headers,data}}
+  bugunKalemlerHazir: false, // Bugün için Kalemler yüklendi mi? (bellekte VEYA bugüne ait tek-slot arşivinde) — Grup B/C kilidi bunu kullanır. bugunKalemlerDurumTazele() günceller.
+  sellOutKendiDosya: null, // Sell Out sekmesindeki bağımsız yükleme alanından seçilen dosyanın ham verisi ({data, ad})
+  stokGunKendiDosya: null, // Stok Gün sekmesindeki bağımsız yükleme alanından seçilen Malzemeler dosyasının ham verisi ({data, ad})
+  stokGunTumRows: [], // Stok Gün tablosunun filtrelenmemiş tam veri seti (arama kutusu bunun üzerinde filtreler)
+  stokGunSort: { key:'stokGunu', dir:1 }, // Stok Gün tablosu sıralama durumu (varsayılan: en kritik/düşük stok günü önce)
+  stokGunSekme: 'tumu', // Stok Gün tablosu üst sekmesi: 'tumu'|'kritik'|'yeni'|'olu'
+  stokGunAcikRiskSatirlar: new Set(), // Ürün×temsilci risk detayı genişletilmiş satırların ürün kodları
+  malzemelerStok: new Map(), // malzemeKodu -> anlık kullanılabilir stok miktarı (Malzemeler dosyasından)
+  musteriMasterDurum: new Map(), // musteri kodu -> 'Aktif' | ham durum metni (Sell Out Raporu FKNS hesaplaması için)
+  musteriMasterKanal: new Map(), // musteri kodu -> 'Açık Kanal' | 'Kapalı Kanal' (Satış Kanalı Tanımı'ndan; Sell Out Raporu Açık/Kapalı Kanal FKNS ayrımı için — bkz. musteriMasterKanalSinifla)
+  sellOutHedef: {}, // { [temsilciAdi]: {acik:Number, kapali:Number} } — buluta kayıtlı, şifreyle değiştirilebilir
+  sellOutNoktaSort: new Map(), // temsilciKey -> {key:'adi'|'kod', dir:1|-1} — Fatura Kesilmeyen Aktif Noktalar listesi sıralaması
+  faturaKesilmeyenModalKanalFiltre: null, // 'acik'|'kapali'|null — Fatura Kesilmeyen modalı şu an hangi kanala filtrelenmiş açıldı (modal açıkken sort/yön değişikliklerinde filtreyi korumak için)
+  karneRiskliSort: new Map(), // temsilciAdi -> {key:'adi'|'kod'|'ortVade', dir:1|-1} — Temsilci Karnesi kartındaki Riskli Müşteriler listesi sıralaması
+  sellOutReport: null,
+  sellOutSonGuncelleme: null, // Güncel Sell Out verisinin en son ne zaman hesaplandığının ISO zaman damgası (GVY panelinde "Son veri" için)
+  sellOutArsivCache: {}, // ayKey (YYYY-MM) -> o ayın "Arşivle" ile kaydedilmiş Sell Out rapor anlık görüntüsü
+  sellOutSeciliAy: null, // null = Güncel (canlı) veri; dolu ise seçili arşiv ayının verisi gösterilir
+  modernKanalKendiDosya: null, // Modern Kanal sekmesindeki bağımsız yükleme alanından seçilen İrsaliye dosyasının ham verisi ({data, ad})
+  modernKanalReport: null, // buildIrsaliyeReport çıktısı (güncel/canlı)
+  modernKanalSonGuncelleme: null, // Güncel Modern Kanal verisinin en son ne zaman hesaplandığının ISO zaman damgası (GVY panelinde "Son veri" için)
+  modernKanalArsivCache: {}, // ayKey (YYYY-MM) -> o ayın arşivlenmiş İrsaliye rapor anlık görüntüsü
+  modernKanalSeciliAy: null, // null = Güncel (canlı); dolu ise seçili arşiv ayı
+  modernKanalHedef: 0, // Key Account Hedef (Lt.) — tek toplam hedef, buluta kayıtlı
+  bayiHakedisReport: null,
+  bayiHakedisHata: null,
+  bhSort: { key:'toplamKdvli', dir:-1 },
+  tvReport: null,
+  tvAy: null,
+  tvSort: { key:'tahsilatOrani', dir:-1 },
+  musteriGosterilen: 30,
+  sevkGosterilen: 30,
+  bhGosterilen: 30,
+  fkGosterilen: 30,
+  yaslandirmaGosterilen: 30,
+  hukukiGosterilen: 25,
+  ticariStokGosterilen: 20,
+  gbGosterilen: 16,
+  gbRiskFiltre: 'all',
+};
+
+const MUSTERI_SAYFA_BOYUTU = 30;
+const HUKUKI_SAYFA_BOYUTU = 25;
+const TICARI_STOK_SAYFA_BOYUTU = 20;
+
+const STORAGE_KEY = 'noktaCariTakip_report_v1';
+const DATE_KEYS = new Set(['faturaTarihi','netVade','vade','belgeTarihi','asOf','istenilenTeslimTarihi','tahsilatTarihi']);
+
+// --- IndexedDB tabanlı yerel depolama ---
+// localStorage'ın (~5-10MB, senkron/arayüz kilitleyen) yerine geçer: çok daha yüksek kapasite,
+// tüm okuma/yazmalar asenkron olduğu için büyüyen arşivler arayüzü dondurmaz.
+const IDB_DB_NAME = 'noktaCariTakipDB';
+const IDB_STORE = 'kv';
+let idbOpenPromise = null;
+// ================= CİHAZ (IndexedDB) DEPOLAMA TAMAMEN DEVRE DIŞI (kullanıcı isteği) =================
+// "Uygulama hiçbir şekilde local kullanmasın, sadece cloud verilerini kullansın" — bu üç fonksiyon
+// (idbOpen/idbSet/idbGet/idbDelete) uygulamanın HER YERİNDE cihaz okuma/yazma için TEK giriş
+// noktasıdır (grep ile doğrulandı: tüm saveXToLocal/loadXFromLocal fonksiyonları sadece bunları
+// çağırır). Bu yüzden gerçek IndexedDB erişimini burada, MERKEZİ olarak kapatmak yeterlidir —
+// onlarca ayrı save/load fonksiyonunu tek tek değiştirmeye gerek kalmaz:
+//   - idbSet: hiçbir şey yazmaz, her zaman "başarılı" (true) döner (çağıran kodun akışını bozmasın
+//     diye) — ama veri gerçekte HİÇBİR YERE kaydedilmez.
+//   - idbGet: her zaman null döner — yani "cihazda kayıtlı veri yok" gibi davranır. Bu sayede
+//     mevcut "önce buluttan dene, o da yoksa cihazdakine düş" mantığı otomatik olarak sadece
+//     "buluttan dene, o da yoksa boş" hâline gelir; ayrı bir kod değişikliği gerekmez.
+//   - idbDelete/idbOpen: no-op / hiç açılmayan sahte bir promise.
+// Not: Bu, önceki "Çek/Senet Tahsil Edildi buluta yazmıyor" sorununu da kökten çözer — artık
+// cihaza yazma diye bir şey OLMADIĞI için o fonksiyonlardaki bulut yazma adımları hatasız çalışırsa
+// veri sadece (ve her zaman) buluttadır, cihazda "takılı kalmış" eski bir kopya asla olmaz.
+function idbOpen(){
+  return Promise.reject(new Error('IndexedDB devre dışı — uygulama yalnızca bulut (Firebase) kullanır.'));
+}
+async function idbSet(key, value){
+  return true;
+}
+async function idbGet(key){
+  return null;
+}
+async function idbDelete(key){
+  return true;
+}
+// Eskiden localStorage'a yazılmış veriyi bir kereliğine IndexedDB'ye taşır (geriye dönük uyumluluk).
+// CİHAZ DEPOLAMA TAMAMEN KAPALI (kullanıcı isteği: "hiçbir işlem cihaza yazılmasın") — bu fonksiyon
+// eskiden localStorage'daki (IndexedDB öncesi dönemden kalma) veriyi IndexedDB'ye taşıyıp
+// localStorage'daki kopyayı SİLİYORDU. idbSet artık gerçekte hiçbir şey yazmadığı için, bu taşıma
+// eskiden olduğu gibi çalıştırılırsa veri hiçbir yere gitmeden localStorage'dan silinir ve GERÇEK
+// VERİ KAYBINA yol açar. Bu yüzden fonksiyon artık KASITLI OLARAK no-op'tur: localStorage'daki
+// olası eski veriye DOKUNMAZ (ne okur ne siler) — en azından orada durur, kaybolmaz. Bu uygulamanın
+// güncel veri kaynağı zaten yalnızca buluttur (bkz. cloudVeriVerimliYukle); bu fonksiyon çağıran
+// loadXFromLocal fonksiyonları yalnızca bulut erişilemezse devreye giren YEDEK yoldu, artık o yedek
+// yol da anlamsız (idbGet zaten her zaman null döner) ama zararsız bırakılmıştır.
+async function idbMigrateFromLocalStorageOnce(key, reviver){
+  // Kasıtlı no-op.
+}
+function reportDateReviver(key, value){
+  if(DATE_KEYS.has(key) && typeof value === 'string'){
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? value : d;
+  }
+  return value;
+}
+
+async function saveReportToStorage(report){
+  const ok = await idbSet(STORAGE_KEY, report);
+  if(!ok) console.error('Rapor cihaza kaydedilemedi.');
+  return ok;
+}
+async function loadReportFromStorage(){
+  try{
+    await idbMigrateFromLocalStorageOnce(STORAGE_KEY, reportDateReviver);
+    return await idbGet(STORAGE_KEY);
+  }catch(err){
+    console.error('Kayıtlı rapor okunamadı:', err);
+    return null;
+  }
+}
+async function clearStoredReport(){
+  await idbDelete(STORAGE_KEY);
+}
+
+
+function buildMusteriSnapshot(report){
+  const normal = (report.musteriler||[]).map(m=>({
+    musteri: m.musteri, musteriAdi: m.musteriAdi, temsilci: m.temsilci,
+    kalanBorc: m.kalanBorc, avgVadeGun: m.avgVadeGun, cekSenet: m.cekSenet, toplamRisk: m.toplamRisk,
+    vadesizBakiye: m.vadesizBakiye,
+  }));
+  // Bakiyesiz müşteriler (Kalemler dosyasında kaydı yok ama Sipariş Raporu'nda açık siparişi/sevki
+  // ertelenen tutarı var) — bu liste Kalemler'e bağlı DEĞİL, doğrudan Sipariş Raporu'ndan
+  // hesaplanıyor (bkz. buildReport'taki "bakiyesiz" dizisi). Önceden bu müşteriler günlük arşive
+  // hiç yazılmıyordu; bu yüzden Trend Analizi'nde ne arama listesinde çıkıyorlardı ne de geçmiş
+  // günlerdeki sipariş/risk verileri grafiğe yansıyordu. Kalan Borç/Ort. Vade bu müşteriler için
+  // anlamsız olduğundan 0/null olarak yazılır. Toplam Risk'e sipariş tutarı DAHİL EDİLMEZ (kullanıcı
+  // isteği) — yalnızca çek/senet riski yazılır; sipariş tutarı ayrı alanda (Sevk/liste ekranlarında) görünür.
+  const bakiyesiz = (report.bakiyesiz||[]).map(b=>({
+    musteri: b.musteri, musteriAdi: b.musteriAdi, temsilci: b.temsilci,
+    kalanBorc: 0, avgVadeGun: null, cekSenet: b.cekSenet||0, toplamRisk: (b.cekSenet||0),
+    vadesizBakiye: 0,
+  }));
+  return normal.concat(bakiyesiz);
+}
+
+// musteriSnapshot her gün TÜM müşteriler için tekrarlanan tek arşiv verisidir (sıkıştırma bile bu
+// diziye dokunmaz); bu yüzden alan adlarının (musteri, musteriAdi, temsilci, ...) kendisi bile
+// yüzlerce müşteri × yıllarca gün için ciddi bir JSON hacmi oluşturur. Buluta yazarken alan adları
+// kısaltılır (k/n/t/b/v/c/r); okurken ise hem bu kısa format hem de eski arşivlerdeki uzun format
+// sorunsuzca kabul edilir, böylece geçmiş veriler yeniden yazılmaya gerek kalmadan okunabilir.
+function musteriSnapshotKisalt(uzunDizi){
+  return (uzunDizi||[]).map(m=>({
+    k: m.musteri, n: m.musteriAdi, t: m.temsilci,
+    b: m.kalanBorc, v: m.avgVadeGun, c: m.cekSenet, r: m.toplamRisk,
+    z: m.vadesizBakiye,
+  }));
+}
+function musteriSnapshotUzat(dizi){
+  return (dizi||[]).map(m=>{
+    if(!m) return m;
+    if(m.musteri !== undefined) return m; // zaten uzun (eski) format
+    return {
+      musteri: m.k, musteriAdi: m.n, temsilci: m.t,
+      kalanBorc: m.b, avgVadeGun: m.v, cekSenet: m.c, toplamRisk: m.r,
+      vadesizBakiye: m.z,
+    };
+  });
+}
+// Buluttan okunan bir arşiv nesnesindeki HER günün musteriSnapshot dizisini canonical (uzun) alan
+// adlarına çevirir; böylece bu normalleştirmeden sonra state.faturaArsivCache'i okuyan hiçbir kod
+// (Trend Analizi, Tahsilat Verimliliği, vb.) kısa/uzun format farkını hiç bilmek zorunda kalmaz.
+function faturaKontrolArsivSnapshotlariUzat(arsiv){
+  if(!arsiv) return arsiv;
+  Object.keys(arsiv).forEach(gun=>{
+    const g = arsiv[gun];
+    if(g && g.musteriSnapshot) g.musteriSnapshot = musteriSnapshotUzat(g.musteriSnapshot);
+  });
+  return arsiv;
+}
+
+// --- Fatura Kontrol arşivi: cihaz içi (IndexedDB) önbellek + kademeli (delta) senkronizasyon ---
+// Buraya kadarki optimizasyonlar bir OTURUM içindeki tekrar indirmeleri önlüyordu; bu katman aynı
+// kazancı sayfa YENİLENDİĞİNDE/yeniden açıldığında da sağlar: arşivin en son bilinen hali cihazda
+// (IndexedDB) saklanır, açılışta önce O kullanılır (ağ beklenmez), ardından buluttaki gün
+// anahtarları (shallow=true, hafif) ile karşılaştırılıp SADECE cihazda eksik olan gün(ler) —
+// genelde en son birkaç gün — bir aralık isteğiyle çekilir. Böylece yıllarca birikmiş bir arşiv,
+// bir kez tam indirildikten sonra, sonraki her açılışta pratikte yalnızca "aradaki farkı" indirir.
+const FATURA_ARSIV_LOCAL_KEY = 'noktaCariTakip_faturaKontrolArsiv_v1';
+async function loadFaturaKontrolArsivFromLocal(){
+  try{ return await idbGet(FATURA_ARSIV_LOCAL_KEY); }
+  catch(err){ console.error('Fatura Kontrol arşivi cihazdan okunamadı:', err); return null; }
+}
+async function saveFaturaKontrolArsivToLocal(arsiv){
+  const ok = await idbSet(FATURA_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Fatura Kontrol arşivi cihaza kaydedilemedi.');
+}
+
+// Yereldeki (cihazdaki) gün anahtarlarıyla buluttakileri karşılaştırır; buluttaki ama yerelde
+// olmayan günlerin en küçüğü ile en büyüğünü (tek bir aralık isteğiyle çekilebilmesi için) döndürür.
+function faturaKontrolArsivEksikGunAraligi(yerelGunler, uzakGunler){
+  const yerelSet = new Set(yerelGunler);
+  const eksikler = (uzakGunler||[]).filter(g=>!yerelSet.has(g)).sort();
+  if(!eksikler.length) return null;
+  return {ilk: eksikler[0], son: eksikler[eksikler.length-1]};
+}
+
+// Uygulama açılışında (veya faturaArsivYenile ilk kez çağrıldığında) kullanılır: önce cihazdaki son
+// bilinen arşivi anında devreye sokar, sonra buluttaki gün anahtarlarına bakıp SADECE eksik olan
+// aralığı indirir. Bulutta artık olmayan (örn. başka bir cihazdan "Arşivi Temizle" ile silinmiş)
+// günler yerelden de temizlenir. Herhangi bir adımda ağ hatası olursa elde ne varsa onunla devam
+// edilir — hiçbir zaman kullanıcıyı hatayla bekletmez.
+async function faturaArsivBaslangicYukle(){
+  const yerelArsiv = await loadFaturaKontrolArsivFromLocal();
+  if(yerelArsiv) state.faturaArsivCache = yerelArsiv;
+  if(!cloudEnabled()){ faturaArsivYuklendiMi = true; return state.faturaArsivCache; }
+  try{
+    const uzakGunler = await loadFaturaKontrolArsivGunAnahtarlariFromCloud();
+    if(uzakGunler === null){
+      // Anahtarlar okunamadı (ağ hatası): elimizdeki (cihazdaki) önbellekle devam edilir.
+      faturaArsivYuklendiMi = true;
+      return state.faturaArsivCache;
+    }
+    const uzakSet = new Set(uzakGunler);
+    const yerelGunler = Object.keys(state.faturaArsivCache||{});
+    let degisti = false;
+    // Bulutta artık olmayan günleri yerelden çıkar (örn. başka bir cihazdan tam arşiv silme).
+    yerelGunler.forEach(g=>{
+      if(!uzakSet.has(g)){ delete state.faturaArsivCache[g]; degisti = true; }
+    });
+    const eksik = faturaKontrolArsivEksikGunAraligi(Object.keys(state.faturaArsivCache||{}), uzakGunler);
+    if(eksik){
+      const aralik = await loadFaturaKontrolArsivAraligiFromCloud(eksik.ilk, eksik.son);
+      if(aralik){
+        state.faturaArsivCache = Object.assign({}, state.faturaArsivCache, aralik);
+        degisti = true;
+      }
+    }
+    if(degisti) await saveFaturaKontrolArsivToLocal(state.faturaArsivCache);
+    faturaArsivYuklendiMi = true;
+  }catch(err){
+    console.error('Fatura Kontrol arşivi kademeli (delta) yüklenemedi:', err);
+  }
+  return state.faturaArsivCache;
+}
+
+// Bir oturumda arşivin TAMAMI bir kez tam indirildiyse (uygulama açılışı, senkronize butonu ya da
+// bir sekmenin ilk kez açılışı), aynı oturumda başka bir sekmeye geçildiğinde artık aynı onlarca/
+// yüzlerce günlük veri tekrar tekrar indirilmez — state.faturaArsivCache zaten günceldir.
+// zorla=true verilirse (<i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i> Yenile butonları, Senkronize Et), önbellek yok sayılır ve buluttan
+// gerçekten tam bir tazeleme yapılır (başka bir cihazın eklediği güncel veriyi görmek için).
+let faturaArsivYuklendiMi = false;
+async function faturaArsivYenile(zorla){
+  if(!cloudEnabled()){ return state.faturaArsivCache; }
+  if(faturaArsivYuklendiMi && !zorla){ return state.faturaArsivCache; }
+  if(!zorla){
+    // İlk kez ihtiyaç duyulduğunda (normalde uygulama açılışında zaten yapılmış olur) TÜM arşivi
+    // değil, cihazdaki önbellek + buluttaki farkı (delta) çeken kademeli yüklemeyi kullan.
+    return await faturaArsivBaslangicYukle();
+  }
+  const bulut = await loadFaturaKontrolArsivFromCloud();
+  state.faturaArsivCache = bulut || {};
+  faturaArsivYuklendiMi = true;
+  await saveFaturaKontrolArsivToLocal(state.faturaArsivCache);
+  return state.faturaArsivCache;
+}
+
+// Tahsilat dosyası iki formatta gelebilir: Format A ("Ön Kayıt" — geçici/erken döküm) ve Format B
+// (nihai/kesin rapor). Format A zaten geçici bir veri olduğu için olduğu gibi arşivlenmeye devam
+// eder. Format B yüklendiğinde ARTIK TÜM Format A kayıtları koşulsuz silinmiyor — sadece bu Format B
+// yüklemesindeki satırların Belge Tarihi günlerine denk gelen günlerdeki Format A kayıtları silinir
+// (o günler için Format B artık nihai/geçerli veridir); Format B'de hiç verisi olmayan günlerdeki
+// Format A kayıtlarına dokunulmaz.
+//
+// Bu fonksiyon, bir yüklemenin (Format A veya Format B) arşive uygulanması SONUCUNDA tahsilat
+
+// Fatura Dökümü ve Bayi Hak Ediş İÇİN GENEL GÜN BAZLI DAĞITIM
+// ESKİ KURAL (artık geçerli değil): bu iki dosyanın TÜM satırları, kendi tarihleri ne olursa olsun,
+// sadece o günkü YÜKLEME/rapor gününün (bugunKey) altına yazılırdı. Bu yüzden: (a) rapor
+// oluşturulmayan bir gün için geçmiş fatura/hak ediş verisi arşivde HİÇ görünmezdi, (b) bu dosyalar
+// genelde TÜM dönemi (ör. tüm yılı) kapsadığından, aynı kayıtlar art arda yüklemelerde hep "bugün"e
+// yığılıp tekrarlanırdı.
+// YENİ KURAL: her satır KENDİ tarihine (Fatura Tarihi / Hak Ediş tahsilat tarihi — Türkiye +3 saat
+// dilimi düzeltmesiyle, bkz. excelDateToJSArti1Gun) göre ilgili arşiv gününe dağıtılır. Bir güne bu
+// yüklemede veri geldiyse, o günün İLGİLİ ALANI (faturaArsiv veya bayiHakedisArsiv) TAMAMEN bu
+// yüklemenin satırlarıyla değiştirilir — bu sayede "tüm yılı her gün yeniden yükleme" alışkanlığında
+// mükerrer birikme olmaz, o günün en güncel/nihai hali korunur. Bu yüklemede hiç verisi olmayan
+// günlere dokunulmaz (o günün önceki verisi aynen durur).
+function arsivGunlereDagitVeDegistir(mevcutArsivGunler, yeniSatirlar, tarihAlani, arsivAlanAdi){
+  const gunBazliYeni = new Map();
+  (yeniSatirlar||[]).forEach(r=>{
+    if(!r || !r[tarihAlani]) return;
+    const gunKey = dateKeyLocal(new Date(r[tarihAlani]));
+    if(!gunKey) return;
+    if(!gunBazliYeni.has(gunKey)) gunBazliYeni.set(gunKey, []);
+    gunBazliYeni.get(gunKey).push(r);
+  });
+  const yeniArsiv = Object.assign({}, mevcutArsivGunler);
+  gunBazliYeni.forEach((satirlar, gunKey)=>{
+    const mevcutGun = yeniArsiv[gunKey] || {};
+    yeniArsiv[gunKey] = Object.assign({}, mevcutGun, {[arsivAlanAdi]: satirlar});
+  });
+  return {arsiv: yeniArsiv, etkilenenGunSayisi: gunBazliYeni.size};
+}
+
+// Fatura Dökümü'ndeki İade Grubu'ndan (Bozuk İade Faturası / Sağlam İade Faturası / Depozito İade
+// Faturası — bkz. buildReport'taki bozukIadeTahsilat) türeyen tahsilat kredilerini kendi
+// tarihlerine göre ilgili arşiv gününün tahsilatArsiv'ine ekler. Tahsilat Format A/B
+// mekanizmasından TAMAMEN BAĞIMSIZDIR — sadece o günün ÖNCEDEN eklenmiş, AYNI etikete sahip
+// satırlarını bu yüklemenin güncel haliyle değiştirir (mükerrer birikmeyi önlemek için), diğer TÜM
+// tahsilat kayıtlarına (Format A/B veya farklı etiketli krediler) dokunmaz.
+function tahsilatKredisiGunlereEkleVeDegistir(mevcutArsivGunler, yeniSatirlar, etiket){
+  const gunBazliYeni = new Map();
+  (yeniSatirlar||[]).forEach(r=>{
+    if(!r || !r.belgeTarihi) return;
+    const gunKey = dateKeyLocal(new Date(r.belgeTarihi));
+    if(!gunKey) return;
+    if(!gunBazliYeni.has(gunKey)) gunBazliYeni.set(gunKey, []);
+    gunBazliYeni.get(gunKey).push(r);
+  });
+  const yeniArsiv = Object.assign({}, mevcutArsivGunler);
+  gunBazliYeni.forEach((satirlar, gunKey)=>{
+    const mevcutGun = yeniArsiv[gunKey] || {};
+    const eskiTahsilat = mevcutGun.tahsilatArsiv || [];
+    const digerTahsilatlar = eskiTahsilat.filter(r=> r.formatKaynagi !== etiket);
+    yeniArsiv[gunKey] = Object.assign({}, mevcutGun, {tahsilatArsiv: digerTahsilatlar.concat(satirlar)});
+  });
+  return {arsiv: yeniArsiv, etkilenenGunSayisi: gunBazliYeni.size};
+}
+
+async function faturaKontrolArsivineKaydetVeSenkronizeEt(report){
+  const bugunKey = dateKeyLocal(new Date());
+  const musteriSnapshotUzun = buildMusteriSnapshot(report); // hafızada her zaman canonical (uzun) alan adları kullanılır
+
+  // Sipariş: ARTIK yükleme gününün (bugunKey) altına yazılmıyor — her satır KENDİ teslim tarihine
+  // (İstenilen Tsl. Trh.) karşılık gelen arşiv gününe yazılır, sonra Satış Belge No bazlı global
+  // temizlik uygulanır (bkz. siparisArsivGunlereDagitVeTemizle). Bu işlemin doğru çalışabilmesi
+  // için mevcut yerel arşiv önbelleğini tazeliyoruz — tam garanti için (örn. başka bir cihazdan
+  // yapılmış değişiklikleri de yakalamak için) periyodik olarak "<i class="fa-solid fa-eraser" aria-hidden="true"></i> Gölge Kayıtları Temizle"
+  // butonuyla TAM bir arşiv taraması yapılması önerilir.
+  await faturaArsivYenile();
+  const eskiArsivTumu = state.faturaArsivCache || {}; // GERÇEK önceki durum — buluta PATCH farkı bunun üzerinden hesaplanır
+
+  // TAHSİLAT DÖKÜMÜ ARTIK BU FONKSİYONUN DIŞINDA YÖNETİLİYOR (kullanıcı isteği — eski Format A/B
+  // ayrımı tamamen kaldırıldı). Yeni tek-format tahsilat, kendi bağımsız kalıcı arşivinde
+  // (state.tahsilatArsivi, belge no bazlı) yaşıyor — bkz. tahsilatArsiviniBirlestir ve bunun
+  // raporuOlusturVeyaGuncelleAkisiniCalistir içinde buildReport'tan ÖNCE çağrılması (çek/senet
+  // arşiviyle birebir aynı desen). Bu fonksiyon (faturaKontrolArsivineKaydetVeSenkronizeEt) artık
+  // tahsilata hiç dokunmuyor — Fatura Kontrol'ün günlük musteriSnapshot arşivi ile tahsilatın
+  // kalıcı arşivi birbirinden TAMAMEN BAĞIMSIZ iki ayrı veri kaynağıdır.
+  let calismaArsivi = eskiArsivTumu;
+
+  const {arsiv: siparisIslenmisArsiv} = siparisArsivGunlereDagitVeTemizle(calismaArsivi, report.siparisArsiv || []);
+
+  // Fatura Dökümü ve Bayi Hak Ediş artık BUGÜNÜN altına değil, kendi tarihlerine (Fatura Tarihi /
+  // hak ediş tahsilat tarihi) göre ilgili arşiv gününe dağıtılır (bkz. arsivGunlereDagitVeDegistir).
+  // Bir güne bu yüklemede veri geldiyse o günün ilgili alanı TAMAMEN değiştirilir; veri gelmeyen
+  // günlere dokunulmaz. Bu, "tüm yılı her gün yeniden yükleme" alışkanlığında hem mükerrer birikimi
+  // önler hem de rapor oluşturmadığınız günlerin geçmiş verisinin arşivde kaybolmasını engeller.
+  const {arsiv: faturaIslenmisArsiv} = arsivGunlereDagitVeDegistir(siparisIslenmisArsiv, report.faturaArsiv || [], 'faturaTarihi', 'faturaArsiv');
+  const {arsiv: hakedisIslenmisArsiv} = arsivGunlereDagitVeDegistir(faturaIslenmisArsiv, report.bayiHakedis || [], 'tahsilatTarihi', 'bayiHakedisArsiv');
+
+  // Fatura Dökümü'ndeki İade grubundan (Bozuk İade Faturası / Sağlam İade Faturası / Depozito İade
+  // Faturası — bkz. buildReport'taki bozukIadeTahsilat) türeyen tahsilat kredileri, Tahsilat Format
+  // A/B mekanizmasından TAMAMEN BAĞIMSIZ olarak, kendi tarihlerine göre ilgili arşiv gününün
+  // tahsilatArsiv'ine eklenir/güncellenir — sadece o günün ÖNCEDEN eklenmiş AYNI etiketli satırları
+  // bu yüklemenin güncel haliyle değiştirilir, diğer tüm Format A/B tahsilat kayıtlarına dokunulmaz
+  // (bkz. tahsilatKredisiGunlereEkleVeDegistir).
+  // NOT: Depozito Tahsilat dosyası (ayrı bir dosya/kaynak) SİSTEMDEN TAMAMEN KALDIRILDI (kullanıcı
+  // kararı) — Depozito İade artık yalnızca Fatura Dökümü'ndeki "Depozito İade Faturası" türünden,
+  // yukarıdaki bozukIadeTahsilat listesi üzerinden geliyor. Bu yüzden ayrı bir
+  // 'DepozitoTahsilat' etiketli ikinci dağıtım adımına gerek kalmadı.
+  const {arsiv: bozukIadeIslenmisArsiv} = tahsilatKredisiGunlereEkleVeDegistir(hakedisIslenmisArsiv, report.bozukIadeTahsilat || [], 'FaturaIade');
+
+  // ÖNEMLİ: Sipariş/Fatura/Bayi Hak Ediş/İade Grubu verileri BUGÜNÜN altına değil, kendi tarihlerine
+  // göre FARKLI arşiv günlerine dağıtılabiliyor (yukarıdaki dağıtım adımları). "Arşiv Verisi"
+  // panelindeki "Son güncelleme" göstergesi bu tipler için doğru çalışabilsin diye, kayitZamani
+  // SADECE bugünün kaydına değil, bu yüklemede GERÇEKTEN İÇERİĞİ DEĞİŞEN tüm günlere yazılır —
+  // böylece bir dosya bugün yüklense bile içindeki satırlar geçmiş bir tarihe (örn. Fatura Tarihi 3
+  // gün önceyse) dağıtılmış olsa dahi, o günün kaydında da doğru "ne zaman yüklendi" bilgisi bulunur
+  // (bkz. gvyTipiIcinSonKayitZamani).
+  const simdiIso = new Date().toISOString();
+  const dagitimdaDegisenGunler = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, bozukIadeIslenmisArsiv);
+  const islenmisArsivZamanDamgali = Object.assign({}, bozukIadeIslenmisArsiv);
+  Object.keys(dagitimdaDegisenGunler).forEach(gunKey=>{
+    if(gunKey === bugunKey) return; // bugünün kaydına zaten aşağıda ayrıca yazılıyor
+    if(!islenmisArsivZamanDamgali[gunKey]) return; // silinmiş (null) günlere dokunma
+    islenmisArsivZamanDamgali[gunKey] = Object.assign({}, islenmisArsivZamanDamgali[gunKey], {kayitZamani: simdiIso});
+  });
+
+  // Müşteri Snapshot: bu SADECE bugünün altına yazılmaya devam eder — çünkü bu, Kalemler
+  // dosyasının o ANKİ (rapor oluşturma anındaki) donmuş bakiye özetidir; geçmiş bir tarihe
+  // dağıtılamaz (geçmişe dönük yeniden hesaplanamaz). Rapor oluşturmadığınız günler için bu alan
+  // hâlâ boş kalır — bu, arşivin doğası gereği kaçınılmazdır.
+  const bugunGunOncesi = islenmisArsivZamanDamgali[bugunKey] || {};
+  // bugununKaydiTaban artık tahsilatArsiv alanına HİÇ DOKUNMUYOR (kullanıcı isteği — Format A/B
+  // ayrımı kalktı, tahsilat bu fonksiyondan tamamen bağımsız kendi kalıcı arşivinde yönetiliyor).
+  // 'FaturaIade' etiketli krediler zaten yukarıdaki dağıtım adımıyla (tahsilatKredisiGunlereEkleVeDegistir)
+  // bu günün tahsilatArsiv'ine ayrıca eklenmiş olabilir — onlara da dokunulmaz, bugunGunOncesi
+  // olduğu gibi taban alınır.
+  const bugununKaydiTaban = bugunGunOncesi;
+  const bugununKaydi = Object.assign({}, bugununKaydiTaban, {
+    musteriSnapshot: musteriSnapshotUzun,
+    kayitZamani: simdiIso,
+  });
+  const yeniArsivTumu = Object.assign({}, islenmisArsivZamanDamgali, {[bugunKey]: bugununKaydi});
+
+  // Yerel önbellek her durumda güncellenir; Trend/Tahsilat Verimliliği gibi ekranlar bugünün
+  // verisini hemen görsün.
+  state.faturaArsivCache = yeniArsivTumu;
+  // Cihaz içi (IndexedDB) önbellek de güncellenir ki bir sonraki sayfa açılışında bugünün verisi
+  // için tekrar ağa gidilmesin.
+  saveFaturaKontrolArsivToLocal(state.faturaArsivCache).catch(()=>{});
+  if(!cloudEnabled()){
+    if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+    return;
+  }
+  try{
+    // Sipariş artık teslim tarihine göre BİRDEN FAZLA günü (bugünden farklı günler dahil)
+    // etkileyebildiği için (ve Satış Belge No temizliği bazı günleri tamamen boşaltabildiği için),
+    // artık sadece bugunKey PATCH edilmiyor — eski/yeni arşiv karşılaştırılıp GERÇEKTEN değişen
+    // TÜM günler (silinen günler `null` olarak) tek bir çoklu-konum PATCH isteğiyle buluta yazılır.
+    const fark = faturaKontrolArsivGunFarkiniBul(eskiArsivTumu, yeniArsivTumu);
+    // Buluta giden musteriSnapshot, 978 müşterinin HER GÜN tekrar eden alan adlarının (musteri,
+    // musteriAdi, temsilci, ...) JSON'da kapladığı yeri azaltmak için kısaltılmış alan adlarıyla
+    // gönderilir (k/n/t/b/v/c/r) — okurken hem eski (uzun) hem yeni (kısa) format kabul edilir.
+    Object.keys(fark).forEach(gun=>{
+      const deger = fark[gun];
+      if(deger && deger.musteriSnapshot){
+        fark[gun] = Object.assign({}, deger, {musteriSnapshot: musteriSnapshotKisalt(deger.musteriSnapshot)});
+      }
+    });
+    await saveFaturaKontrolArsivGunleriToCloud(fark);
+    if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+  }catch(err){
+    console.error('Fatura Kontrol arşivi senkronize edilemedi:', err);
+    // GÖRÜNÜRLÜK DÜZELTMESİ: bu hata önceden yalnızca konsola düşüyordu — cihazdaki önbellek
+    // güncellendiği için her şey normal GÖRÜNÜYOR ama diğer cihazlar bugünün arşiv verisini
+    // alamıyor ve bu cihaz buluttan tazelenirse bugünün verisi kaybolabiliyordu. Kullanıcı,
+    // Bayi Hakediş kaydındaki aynı kalıpla açıkça uyarılır.
+    alert('UYARI: Bugünün arşiv verisi buluta senkronize EDİLEMEDİ (yalnızca bu cihazda güncel). Bağlantınızı kontrol edip raporu yeniden oluşturun veya "Şimdi Senkronize Et"i deneyin — aksi halde diğer cihazlar bu veriyi göremez.');
+  }
+}
+
+// Bir Satış Belge No'ya ait KAYITLARDAN herhangi biri bu durumlardan birindeyse, o Satış Belge
+// No'ya ait arşivdeki TÜM kayıtlar (farklı teslim tarihlerinde "Teslim Edildi" görünenler dahil)
+// kalıcı olarak silinir — çünkü bu durum, önceki teslimatın geçersiz kaldığını/geri alındığını
+// gösterir (ör. önce "Teslim Edildi", sonra "Reddedildi" olmuş bir sipariş → ürün geri alınmıştır).
+const SIPARIS_IPTAL_DURUMLARI = new Set(['Reddedildi', 'İptal Edildi', 'Teslim Edilemedi']);
+
+/* ============================== SİPARİŞ ARŞİVİ: TESLİM TARİHİNE GÖRE DAĞITIM + SATIŞ BELGE NO
+   TEMİZLİĞİ ==============================
+   ESKİ KURAL (artık geçerli değil): sipariş satırları o günkü YÜKLEME gününün altına yazılır,
+   aynı takvim (teslim) gününe ait birden çok yükleme günü olduğunda yalnızca en son yükleyen
+   "kazanır" ve diğerleri arşivde gölge kayıt olarak kalırdı.
+
+   YENİ KURAL: her sipariş satırı, yüklendiği gün ne olursa olsun, KENDİ İstenilen Tsl. Trh.
+   (teslim tarihi) değerine karşılık gelen arşiv gününe yazılır. Yerleştirmeden SONRA şu sıra ile
+   temizlik uygulanır:
+     1) Satış Belge No bazlı GLOBAL tarama: bu numaraya ait (hangi teslim tarihinde/hangi arşiv
+        gününde olursa olsun) herhangi bir kayıtta Teslimat Durumu SIPARIS_IPTAL_DURUMLARI
+        içindeyse, bu Satış Belge No'ya ait TÜM kayıtlar arşivin tamamından silinir.
+     2) Kalan (temiz) kayıtlarda: aynı teslim tarihinde (aynı arşiv günü içinde) aynı Satış Belge
+        No birden fazla kez geçiyorsa yalnızca ilk görülen kayıt tutulur, sonrakiler silinir. Aynı
+        Satış Belge No farklı teslim tarihlerinde ise HER İKİSİ de bulutta saklanmaya devam eder.
+   Satış Belge No veya teslim tarihi olmayan satırlara bu fonksiyon dokunmaz (güvenli tarafta
+   bırakılır). Fonksiyon, yalnızca gerçekten değişen günlerin nesnesini yeni referansla döndürür;
+   değişmeyen günler eski referanslarıyla kalır (bu sayede faturaKontrolArsivGunFarkiniBul çağrısı
+   yalnızca gerçekten değişen günleri buluta PATCH eder). */
+function siparisArsivGunlereDagitVeTemizle(mevcutArsiv, yeniSiparisSatirlari){
+  const yeniArsiv = Object.assign({}, mevcutArsiv);
+
+  // 0) DÜZELTME: Bu yüklemede gelen satırların Satış Belge No'larını topla ve bu numaralara ait
+  // ESKİ kayıtları, hangi takvim gününde (hangi eski İstenilen Tsl. Trh. altında) duruyor olursa
+  // olsun TÜM arşivden sil. Bu, bir siparişin teslim tarihi bir yüklemeden ötekine kaydığında
+  // (örn. 03.07 -> 04.07) eski günün kaydının arşivde "gölge" olarak kalıp yeni günün kaydıyla
+  // birlikte İKİ KEZ sayılmasını (Fatura Kontrol'de mükerrer sipariş tutarı) önler.
+  const buYuklemedekiBelgeNolari = new Set();
+  (yeniSiparisSatirlari||[]).forEach(r=>{ if(r && r.satisBelgeNo) buYuklemedekiBelgeNolari.add(r.satisBelgeNo); });
+  if(buYuklemedekiBelgeNolari.size){
+    Object.keys(yeniArsiv).forEach(gunKey=>{
+      const gun = yeniArsiv[gunKey];
+      const eski = (gun && gun.siparisArsiv) || [];
+      if(!eski.length) return;
+      const temiz = eski.filter(r=> !(r.satisBelgeNo && buYuklemedekiBelgeNolari.has(r.satisBelgeNo)));
+      if(temiz.length !== eski.length){
+        yeniArsiv[gunKey] = Object.assign({}, gun, {siparisArsiv: temiz});
+      }
+    });
+  }
+
+  // 1) Yeni satırları kendi teslim tarihi gününe dağıt (o günün mevcut siparisArsiv'ine ekle).
+  (yeniSiparisSatirlari||[]).forEach(r=>{
+    if(!r || !r.istenilenTeslimTarihi || !r.satisBelgeNo) return;
+    const gunKey = dateKeyLocal(new Date(r.istenilenTeslimTarihi));
+    if(!gunKey) return;
+    const mevcutGun = yeniArsiv[gunKey] || {};
+    const mevcutSiparisArsiv = mevcutGun.siparisArsiv || [];
+    yeniArsiv[gunKey] = Object.assign({}, mevcutGun, {siparisArsiv: mevcutSiparisArsiv.concat([r])});
+  });
+
+  // 2) Satış Belge No bazlı GLOBAL tarama: iptal/red/teslim-edilemedi izine sahip tüm numaraları topla.
+  const iptalBelgeNolari = new Set();
+  Object.keys(yeniArsiv).forEach(gunKey=>{
+    ((yeniArsiv[gunKey] && yeniArsiv[gunKey].siparisArsiv) || []).forEach(r=>{
+      if(r.satisBelgeNo && SIPARIS_IPTAL_DURUMLARI.has(r.teslimatDurumu)) iptalBelgeNolari.add(r.satisBelgeNo);
+    });
+  });
+
+  // 3) DÜZELTME: Aynı Satış Belge No'nun mükerrer kayıtlarını artık GÜNE ÖZGÜ değil, TÜM ARŞİV
+  // ÜZERİNDE global olarak tekilleştiriyoruz. Böylece bu fonksiyon yeni satır eklemeden de
+  // (bkz. faturaKontrolArsivSikistir çağrısı) geçmişte bu bug nedeniyle birden fazla güne dağılmış
+  // kayıtları tarayıp temizleyebiliyor. Aynı belge no birden çok günde bulunuyorsa, takvim günü en
+  // büyük (en güncel/son) olan kayıt tutulur — bir siparişin en son bilinen teslim tarihi budur.
+  const gunlerSirali = Object.keys(yeniArsiv).sort();
+  const belgeNoKazananGun = new Map();
+  gunlerSirali.forEach(gunKey=>{
+    ((yeniArsiv[gunKey] && yeniArsiv[gunKey].siparisArsiv) || []).forEach(r=>{
+      if(r.satisBelgeNo) belgeNoKazananGun.set(r.satisBelgeNo, gunKey); // sıralı ilerlediğimiz için en son atama en son (en güncel) günü verir
+    });
+  });
+
+  let silinenSatir = 0;
+  gunlerSirali.forEach(gunKey=>{
+    const gun = yeniArsiv[gunKey];
+    const orijinal = gun.siparisArsiv || [];
+
+    // İptal belgesi olan tüm kayıtları çıkar.
+    let sonraki = orijinal.filter(r=> !(r.satisBelgeNo && iptalBelgeNolari.has(r.satisBelgeNo)));
+
+    // Belge no'su bu günden BAŞKA bir günde "kazanan" olarak işaretlenmiş kayıtları çıkar (global mükerrer temizliği).
+    sonraki = sonraki.filter(r=>{
+      if(!r.satisBelgeNo) return true; // belge no'suz satır dokunulmaz
+      return belgeNoKazananGun.get(r.satisBelgeNo) === gunKey;
+    });
+
+    // Aynı gün içinde (yukarıdaki adımdan sonra) hâlâ kalan aynı Satış Belge No mükerrerlerini
+    // (örn. bir günün kendi içinde iki kez yüklenmiş olması) de temizle.
+    const gorulenBelgeNo = new Set();
+    sonraki = sonraki.filter(r=>{
+      if(!r.satisBelgeNo) return true;
+      if(gorulenBelgeNo.has(r.satisBelgeNo)) return false;
+      gorulenBelgeNo.add(r.satisBelgeNo);
+      return true;
+    });
+
+    silinenSatir += (orijinal.length - sonraki.length);
+    if(sonraki.length !== orijinal.length){
+      yeniArsiv[gunKey] = Object.assign({}, gun, {siparisArsiv: sonraki});
+    }
+  });
+
+  return {arsiv: yeniArsiv, silinenSatir, iptalEdilenBelgeSayisi: iptalBelgeNolari.size};
+}
+
+/* DRY YARDIMCI: "Kazanan yükleme günü" haritası — bir takvim gününe ait satırlar arşivde birden
+   fazla yükleme gününde bulunabildiğinden, her takvim günü için EN SON yükleme gününü seçer.
+   Bu mantık daha önce faturaKontrolArsivBirlestir/tekillestir ve faturaKontrolArsivSikistir/
+   kazananHaritasi içinde birebir kopya olarak iki kez yazılmıştı; tek kaynağa indirildi. */
+function arsivKazananUploadGunuHaritasi(arsiv, gunler, alanAdi, tarihAlani){
+  const sonUploadGunu = new Map();
+  gunler.forEach(uploadGunu=>{
+    ((arsiv[uploadGunu] && arsiv[uploadGunu][alanAdi]) || []).forEach(r=>{
+      if(!r[tarihAlani]) return;
+      const takvimGunu = dateKeyLocal(new Date(r[tarihAlani]));
+      if(!takvimGunu) return;
+      if(!sonUploadGunu.has(takvimGunu) || uploadGunu > sonUploadGunu.get(takvimGunu)){
+        sonUploadGunu.set(takvimGunu, uploadGunu);
+      }
+    });
+  });
+  return sonUploadGunu;
+}
+
+function faturaKontrolArsivBirlestir(arsiv){
+  const gunler = Object.keys(arsiv||{}).sort();
+
+  function tekillestir(alanAdi, tarihAlani){
+    const sonUploadGunu = arsivKazananUploadGunuHaritasi(arsiv, gunler, alanAdi, tarihAlani);
+    const sonuc = new Map();
+    gunler.forEach(uploadGunu=>{
+      ((arsiv[uploadGunu] && arsiv[uploadGunu][alanAdi]) || []).forEach(r=>{
+        const takvimGunu = r[tarihAlani] ? dateKeyLocal(new Date(r[tarihAlani])) : null;
+        if(takvimGunu && sonUploadGunu.get(takvimGunu) !== uploadGunu) return;
+        // Gerçek belge numarası (örn. Fatura Numarası) varsa tekilleştirme ARTIK BUNA göre yapılır:
+        // aynı belge no'ya sahip kayıtlar, arşivde hangi güne/yüklemeye (kayıt tarihi kayması vb.
+        // nedenle) düşmüş olursa olsun TEK bir fatura sayılır. Bu, örn. faturaTarihi'nde yükleme
+        // günleri arasında oluşan 1 günlük kaymanın aynı faturayı iki farklı takvim gününde ayrı
+        // ayrı saydırmasını önler. belgeNo taşımayan (eski/geriye dönük) kayıtlarda önceki
+        // müşteri+tarih+tutar bazlı anahtara düşülür.
+        const tarihKey = r[tarihAlani] ? new Date(r[tarihAlani]).getTime() : '';
+        const key = r.belgeNo ? ('belgeNo|'+r.belgeNo) : [r.musteri, tarihKey, r.tutar].join('|');
+        sonuc.set(key, r);
+      });
+    });
+    return Array.from(sonuc.values());
+  }
+
+  function tekillestirBayiHakedis(){
+    const idBazli = new Map();
+    const icerikBazli = new Map();
+    gunler.forEach(uploadGunu=>{
+      ((arsiv[uploadGunu] && arsiv[uploadGunu].bayiHakedisArsiv) || []).forEach(r=>{
+        if(r.efpaSipNo){
+          idBazli.set(r.efpaSipNo, r);
+        }else{
+          const tarihKey = r.tahsilatTarihi ? new Date(r.tahsilatTarihi).getTime() : '';
+          const key = [r.musteri, tarihKey, r.tutar].join('|');
+          icerikBazli.set(key, r);
+        }
+      });
+    });
+    return [...idBazli.values(), ...icerikBazli.values()];
+  }
+
+  // Sipariş: ARTIK "kazanan yükleme günü" mantığına tabi DEĞİL. Her arşiv günü zaten kendi teslim
+  // tarihine ait, Satış Belge No temizliği yazma anında (siparisArsivGunlereDagitVeTemizle)
+  // uygulanmış hâlde tutuluyor — burada sadece tüm günlerin siparisArsiv'lerinin birleşimi alınır.
+  function siparisBirlesigi(){
+    const sonuc = [];
+    gunler.forEach(g=>{ ((arsiv[g] && arsiv[g].siparisArsiv) || []).forEach(r=> sonuc.push(r)); });
+    return sonuc;
+  }
+
+  return {
+    siparisArsiv: siparisBirlesigi(),
+    tahsilatArsiv: tekillestir('tahsilatArsiv', 'belgeTarihi'),
+    faturaArsiv: tekillestir('faturaArsiv', 'faturaTarihi'),
+    bayiHakedisArsiv: tekillestirBayiHakedis(),
+    gunSayisi: gunler.length,
+    ilkGun: gunler[0] || null,
+    sonGun: gunler[gunler.length-1] || null,
+  };
+}
+
+/* ============================== ARŞİV SIKIŞTIRMA (GÖLGE KAYIT TEMİZLEME) ==============================
+   faturaKontrolArsivBirlestir() bir takvim gününe ait veriyi birden fazla yükleme günü arşivde
+   tutuyor olsa bile RAPORLARDA yalnızca en son yüklemenin verisini gösterir — ama eski (artık
+   "kaybeden") satırlar buluttaki arşivde fiilen kayıtlı kalmaya devam eder ("gölge kayıt").
+   Bu fonksiyon, her takvim günü için en son yükleme dışındaki TÜM eski satırları (siparişArsiv/
+   tahsilatArsiv/faturaArsiv) kalıcı olarak arşivden çıkarır ve temizlenmiş arşivi döndürür.
+   KASITLI OLARAK DOKUNULMAYANLAR:
+   - musteriSnapshot: Trend Analizi'ndeki "gün gün bakiye" grafiği bu anlık görüntülere dayanır;
+     bir yükleme gününün işlem satırları başka bir günün yüklemesiyle güncellenmiş olsa bile, o günün
+     BAKİYE DURUMU tarihsel bir veridir ve silinmemelidir.
+   - bayiHakedisArsiv: tekillestirBayiHakedis() takvim günü değil kayıt kimliğine (efpaSipNo/içerik)
+     göre eşleştirir; bu farklı mantık burada ayrıca ele alınmaz.
+   Tarihsiz satırlar (tarih alanı boş/okunamayan) güvenli tarafta kalınarak SİLİNMEZ. */
+function faturaKontrolArsivSikistir(arsiv){
+  const gunler = Object.keys(arsiv||{}).sort();
+  // "Kazanan yükleme günü" mantığı artık paylaşımlı arsivKazananUploadGunuHaritasi()'nda (DRY).
+  const kazananHaritasi = (alanAdi, tarihAlani)=> arsivKazananUploadGunuHaritasi(arsiv, gunler, alanAdi, tarihAlani);
+  // NOT: Sipariş artık burada "kazanan yükleme günü" mantığıyla değil, Satış Belge No bazlı global
+  // temizlikle (siparisArsivGunlereDagitVeTemizle) ele alınıyor — bkz. aşağıdaki ayrı geçiş.
+  // Tahsilat/Fatura için eski "kazanan gün" (gölge kayıt) mantığı DEĞİŞMEDİ.
+  const kazananTahsilat = kazananHaritasi('tahsilatArsiv', 'belgeTarihi');
+  const kazananFatura = kazananHaritasi('faturaArsiv', 'faturaTarihi');
+
+  let silinenSatir = 0;
+  const yeniArsivTahsilatFatura = {};
+  gunler.forEach(uploadGunu=>{
+    const g = arsiv[uploadGunu] || {};
+    function filtrele(alanAdi, tarihAlani, kazananMap){
+      const orijinal = g[alanAdi] || [];
+      const yeni = orijinal.filter(r=>{
+        if(!r[tarihAlani]) return true; // tarihsiz satır: dokunulmaz
+        const takvimGunu = dateKeyLocal(new Date(r[tarihAlani]));
+        if(!takvimGunu) return true;
+        return kazananMap.get(takvimGunu) === uploadGunu;
+      });
+      silinenSatir += (orijinal.length - yeni.length);
+      return yeni;
+    }
+    yeniArsivTahsilatFatura[uploadGunu] = Object.assign({}, g, {
+      tahsilatArsiv: filtrele('tahsilatArsiv', 'belgeTarihi', kazananTahsilat),
+      faturaArsiv: filtrele('faturaArsiv', 'faturaTarihi', kazananFatura),
+    });
+  });
+
+  // Sipariş: Satış Belge No bazlı global temizlik + aynı-gün mükerrer temizliğini TÜM arşiv
+  // üzerinde (yeni satır eklemeden, yalnızca mevcut veriyi tarayarak) yeniden çalıştırır. Bu, bu
+  // kuraldan ÖNCE arşive girmiş eski/tutarsız sipariş kayıtlarını da geriye dönük temizler.
+  const {arsiv: siparisTemizlenmisArsiv, silinenSatir: siparisSilinen} = siparisArsivGunlereDagitVeTemizle(arsiv, []);
+
+  const yeniArsiv = {};
+  gunler.forEach(g=>{
+    yeniArsiv[g] = Object.assign({}, yeniArsivTahsilatFatura[g], {
+      siparisArsiv: (siparisTemizlenmisArsiv[g] && siparisTemizlenmisArsiv[g].siparisArsiv) || [],
+    });
+  });
+
+  return {arsiv: yeniArsiv, silinenSatir: silinenSatir + siparisSilinen};
+}
+
+// --- Web Worker: Fatura Kontrol arşiv birleştirme/tekilleştirme ---
+// Arşiv her geçen gün büyüdüğü için bu işlem CPU açısından pahalılaşır; ana thread'de (arayüzü
+// kilitleyerek) çalıştırmak yerine ayrı bir worker thread'inde çalıştırılır. Worker'ın kaynak kodu,
+// faturaKontrolArsivBirlestir ve dateKeyLocal fonksiyonlarının kendisinden (.toString()) üretilir;
+// böylece worker ile ana thread'deki hesaplama mantığı asla birbirinden sapmaz (tek kaynak).
+// Worker desteklenmiyorsa/oluşturulamazsa otomatik olarak ana thread'de senkron hesaplamaya döner.
+let faturaWorker = null;
+let faturaWorkerKurulumBasarisiz = false;
+let faturaWorkerReqId = 0;
+const faturaWorkerPending = new Map();
+
+function faturaWorkerOlustur(){
+  if(faturaWorker) return faturaWorker;
+  if(faturaWorkerKurulumBasarisiz) return null;
+  if(typeof Worker === 'undefined'){ faturaWorkerKurulumBasarisiz = true; return null; }
+  try{
+    const src = `
+      ${dateKeyLocal.toString()}
+      ${arsivKazananUploadGunuHaritasi.toString()}
+      ${faturaKontrolArsivBirlestir.toString()}
+      self.onmessage = function(e){
+        const { id, arsiv } = e.data;
+        try{
+          const result = faturaKontrolArsivBirlestir(arsiv);
+          self.postMessage({ id: id, result: result });
+        }catch(err){
+          self.postMessage({ id: id, error: (err && err.message) || String(err) });
+        }
+      };
+    `;
+    const blob = new Blob([src], {type:'text/javascript'});
+    const url = URL.createObjectURL(blob);
+    const worker = new Worker(url);
+    worker.onmessage = (e)=>{
+      const {id, result, error} = e.data || {};
+      const pending = faturaWorkerPending.get(id);
+      if(!pending) return;
+      faturaWorkerPending.delete(id);
+      if(error) pending.reject(new Error(error)); else pending.resolve(result);
+    };
+    worker.onerror = (err)=>{
+      console.error('Fatura Kontrol arşiv worker hatası, ana thread\'e dönülüyor:', err);
+      faturaWorkerPending.forEach(p=> p.reject(err));
+      faturaWorkerPending.clear();
+      faturaWorker = null;
+      faturaWorkerKurulumBasarisiz = true;
+    };
+    faturaWorker = worker;
+    return faturaWorker;
+  }catch(err){
+    console.error('Fatura Kontrol arşiv worker\'ı oluşturulamadı, ana thread\'e dönülüyor:', err);
+    faturaWorkerKurulumBasarisiz = true;
+    return null;
+  }
+}
+
+function faturaKontrolArsivBirlestirWorkerdeCalistir(arsiv){
+  return new Promise((resolve, reject)=>{
+    const worker = faturaWorkerOlustur();
+    if(!worker){ reject(new Error('worker-kullanilamiyor')); return; }
+    const id = ++faturaWorkerReqId;
+    faturaWorkerPending.set(id, {resolve, reject});
+    worker.postMessage({id, arsiv});
+  });
+}
+
+// Aynı arşiv referansı için tekrar tekrar hesaplama yapmamak üzere sonucu (promise olarak) önbelleğe
+// alır; state.faturaArsivCache yeni bir nesneyle değiştirilmediği sürece (yani arşiv gerçekten
+// değişmediği sürece) önbellekteki sonuç doğrudan döndürülür.
+let faturaBirlesikCache = { kaynak: null, promise: null };
+async function faturaKontrolArsivBirlestirCached(arsiv){
+  arsiv = arsiv || {};
+  if(faturaBirlesikCache.kaynak === arsiv && faturaBirlesikCache.promise){
+    return faturaBirlesikCache.promise;
+  }
+  const promise = faturaKontrolArsivBirlestirWorkerdeCalistir(arsiv)
+    .catch(err=>{
+      return faturaKontrolArsivBirlestir(arsiv); // worker yoksa/başarısızsa ana thread'de senkron üret
+    });
+  faturaBirlesikCache = { kaynak: arsiv, promise };
+  return promise;
+}
+
+// Tüm arşivi silen özellik kaldırıldı — musteriSnapshot (ve arşivin tamamı) hiçbir koşulda
+// silinmemeli. Bu fonksiyon artık kasıtlı olarak hiçbir şey yapmayan güvenli bir no-op'tur;
+// başka bir yerden çağrılırsa bile arşive dokunmaz.
+async function clearFaturaKontrolArsiv(){
+  dwarn('clearFaturaKontrolArsiv() devre dışı bırakıldı — arşiv kalıcı olarak korunuyor.');
+}
+
+// Uygulamadaki TÜM şifre korumalı işlemler (hedef litre düzenleme, arşivleme, arşiv temizleme vb.)
+// TEK bir ortak şifre kullanır: 2580.
+const FATURA_ARSIV_TEMIZLEME_SIFRESI = '2580';
+// Kullanıcıdan ortak şifreyi ister; doğruysa true, kullanıcı iptal ederse veya yanlış girerse
+// (uyarı gösterip) false döner. Tüm şifre korumalı butonlar bu tek yardımcıyı kullanır.
+// Uygulamanın kendi tasarımına uygun (navy/altın tema) şifre giriş modal'ını açar ve Promise
+// döndürür: şifre doğruysa true, kullanıcı İptal'e basarsa/modal'ı kapatırsa false. Native
+// prompt() KASITLI OLARAK kullanılmaz — tarayıcının varsayılan (özelleştirilemeyen) diyaloğu
+// yerine uygulamanın diğer modalleriyle (bkz. .modal / .modal-head-navy) aynı görünümü sağlar.
+function ortakSifreDogrula(mesaj){
+  return new Promise((resolve)=>{
+    const overlay = document.getElementById('sifreModalOverlay');
+    const form = document.getElementById('sifreModalForm');
+    const input = document.getElementById('sifreModalInput');
+    const hataEl = document.getElementById('sifreModalHata');
+    const subEl = document.getElementById('sifreModalSub');
+    const closeBtn = document.getElementById('sifreModalClose');
+    const iptalBtn = document.getElementById('sifreModalIptalBtn');
+    if(!overlay || !form || !input){
+      // Modal elementleri herhangi bir sebeple DOM'da yoksa (beklenmeyen durum), güvenli tarafta
+      // kalıp işlemi engellememek yerine eski native prompt()'a geri döner.
+      const girilen = prompt(mesaj || 'Bu işlem için şifreyi girin:');
+      resolve(girilen !== null && girilen === FATURA_ARSIV_TEMIZLEME_SIFRESI);
+      return;
+    }
+    subEl.textContent = mesaj || 'Bu işlem için şifreyi girin';
+    hataEl.textContent = '';
+    input.value = '';
+    overlay.classList.add('open');
+    setTimeout(()=> input.focus(), 30);
+
+    function kapat(sonuc){
+      overlay.classList.remove('open');
+      form.removeEventListener('submit', onSubmit);
+      closeBtn.removeEventListener('click', onIptal);
+      iptalBtn.removeEventListener('click', onIptal);
+      resolve(sonuc);
+    }
+    function onSubmit(e){
+      e.preventDefault();
+      if(input.value === FATURA_ARSIV_TEMIZLEME_SIFRESI){
+        kapat(true);
+      }else{
+        hataEl.textContent = 'Şifre hatalı, tekrar deneyin.';
+        input.value = '';
+        input.focus();
+      }
+    }
+    function onIptal(){ kapat(false); }
+    form.addEventListener('submit', onSubmit);
+    closeBtn.addEventListener('click', onIptal);
+    iptalBtn.addEventListener('click', onIptal);
+  });
+}
+
+const CLOUD = {
+  dbUrl: 'https://test-82b8f-default-rtdb.europe-west1.firebasedatabase.app',
+  path: 'nokta_cari_rapor_v1',
+};
+// Yükleme sırası: debounce, 04-genel-bakis.js top-level kodunda kullanıldığı için çekirdekte tanımlanır.
+function debounce(fn, delay){
+  let timer = null;
+  return function(...args){
+    clearTimeout(timer);
+    timer = setTimeout(()=> fn.apply(this, args), delay || 180);
+  };
+}
+
+// Yükleme sırası: arama kutusu kablolama yardımcıları, 04. parçanın top-level kodunda kullanılır.
+// Bir "arama kutusu + temizle butonu" ikilisinin görünürlüğünü güncelleyen ortak yardımcı. Aynı üç
+// satır (kutunun dolu olup olmadığına bakıp butonu göster/gizle) önceden 5 farklı sekmede ayrı ayrı
+// fonksiyon olarak tekrarlanıyordu; artık her biri bu tek yardımcıya delege ediyor.
+function searchClearBtnGuncelle(inputId, btnId){
+  const hasValue = document.getElementById(inputId).value.trim().length > 0;
+  document.getElementById(btnId).style.display = hasValue ? 'flex' : 'none';
+}
+
+// Arama kutusuna her yazıldığında "temizle" butonunu güncelleyip tabloyu (debounce ile) yeniden
+// çizen ortak yardımcı. Aynı üç satır önceden 5 farklı sekmede ayrı ayrı tekrarlanıyordu.
+function wireSearchInput(inputId, clearBtnId, debouncedRenderFn){
+  document.getElementById(inputId).addEventListener('input', ()=>{
+    searchClearBtnGuncelle(inputId, clearBtnId);
+    debouncedRenderFn();
+  });
+}
+
+// "Temizle" (X) butonuna tıklanınca arama kutusunu boşaltıp tabloyu yeniden çizen ortak yardımcı.
+// Aynı beş satır önceden 5 farklı sekmede ayrı ayrı tekrarlanıyordu.
+function wireSearchClear(inputId, btnId, renderFn){
+  document.getElementById(btnId).addEventListener('click', ()=>{
+    const input = document.getElementById(inputId);
+    input.value = '';
+    searchClearBtnGuncelle(inputId, btnId);
+    renderFn();
+    input.focus();
+  });
+}
+
+/* =====================================================================
+   ÇEK / SENET RİSKİ — KALICI ARŞİV (kullanıcı isteği)
+   Bu dosya artık Tahsilat Dökümü'nden BAĞIMSIZ, kendi Grup B alanından yüklenir ve KALICI olarak
+   arşivlenir. Kural (aynen kullanıcının tarif ettiği gibi):
+     • Yeni yüklemede AYNI Çek/Senet Numarası varsa → o kayıt GÜNCELLENİR (güncel hali kazanır).
+     • Yeni yüklemede OLMAYAN bir numara (eski arşivde varken) → SİLİNMEZ, "eksik" olarak işaretlenir
+       ve kullanıcıya sorulur (bkz. cekSenetArsivEksikleriBul / rapor oluşturma akışındaki tetikleyici).
+     • Kullanıcı bir eksik kayıt için "Tahsil Edildi" derse → durum='tahsilEdildi' olur, finansal/trend
+       hesaplarında TAHSİLAT olarak sayılır, risk olmaktan çıkar, kalıcı arşivde SİLİNMEDEN durur.
+     • Kullanıcı "İptal" derse → kayıt arşivden KALICI OLARAK SİLİNİR. İptal her zaman (tahsil
+       edilmemiş HERHANGİ bir kayıt için) uygulanabilir; yalnızca zaten "tahsilEdildi" olan bir kayıt
+       İptal edilemez (kullanıcı kuralı — tahsil edilmiş kayıt üzerinde geri dönüş yok).
+   Arşiv, {[cekSenetNo]: kayit} şeklinde bir obje (Map değil — JSON/Firebase uyumlu düz obje) olarak
+   saklanır; cekSenetNo tanımlı olmayan (boş) satırlar için sırayla üretilen "no-satırIndex" anahtarı
+   kullanılır (yine de benzersiz olması ve kaybolmaması için).
+   ===================================================================== */
+const CEK_SENET_ARSIV_CLOUD_PATH = CLOUD.path + '_cekSenetArsivi';
+const CEK_SENET_ARSIV_LOCAL_KEY = 'noktaCariTakip_cekSenetArsivi_v1';
+
+function cekSenetKayitAnahtari(no, satirIndex){
+  const n = String(no==null?'':no).trim();
+  return n ? ('no:'+n) : ('satir:'+satirIndex);
+}
+
+// Yeni yüklenen ham satırları {anahtar: kayit} haline getirir (henüz mevcut arşivle birleştirmez).
+function cekSenetSatirlariniNormalizeEt(rows){
+  const sonuc = {};
+  (rows||[]).forEach((r,i)=>{
+    const musteriKod = String(r['Müşteri Kodu']||'').trim();
+    if(!musteriKod) return;
+    const no = r['Çek/Senet Numarası'];
+    const anahtar = cekSenetKayitAnahtari(no, i);
+    const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
+    const odemeTipi = odemeTipiHam.toLocaleLowerCase('tr-TR');
+    const tahsilatTuru = odemeTipi.includes('çek') ? 'Cek' : (odemeTipi.includes('senet') ? 'Senet' : 'Diger');
+    const vadeTarihi = excelDateToJSArti1Gun(r['Net Vade Tarihi']);
+    const belgeTarihi = excelDateToJSArti1Gun(r['Belge Tarihi']);
+    sonuc[anahtar] = {
+      no: no!=null ? String(no).trim() : '',
+      musteriKod, musteriAdi: String(r['Müşteri Adı']||'').trim(),
+      tahsilatTuru, odemeTipiHam,
+      tutar: Math.abs(Number(r['Tutar'])||0),
+      vadeTarihi: vadeTarihi ? vadeTarihi.toISOString() : null,
+      belgeTarihi: belgeTarihi ? belgeTarihi.toISOString() : null,
+      durum: 'risk', // 'risk' | 'tahsilEdildi'
+      sonGorulduguYukleme: dateKeyLocal(turkiyeBugun()),
+    };
+  });
+  return sonuc;
+}
+
+// Mevcut kalıcı arşiv ile yeni yüklemeyi birleştirir. DÖNÜŞ: {arsiv, eksikKalanlar}
+//   arsiv: güncellenmiş {anahtar: kayit} objesi (henüz kaydedilmedi — çağıran taraf kaydeder)
+//   eksikKalanlar: eski arşivde olup yeni yüklemede YER ALMAYAN, henüz 'tahsilEdildi' olmayan kayıtlar
+function cekSenetArsiviniBirlestir(mevcutArsiv, yeniRows){
+  const yeni = cekSenetSatirlariniNormalizeEt(yeniRows);
+  const arsiv = Object.assign({}, mevcutArsiv||{});
+  const eksikKalanlar = [];
+  // 1) Yeni gelenler: ekle veya güncelle (durum 'tahsilEdildi' ise bile, aynı no tekrar geldiğinde
+  //    ham veriler güncellenir ama durum korunur — kullanıcı onayını kaybetmeyelim).
+  Object.keys(yeni).forEach(anahtar=>{
+    const eski = arsiv[anahtar];
+    const yeniKayit = yeni[anahtar];
+    if(eski) yeniKayit.durum = eski.durum; // önceki karar (risk/tahsilEdildi) korunur
+    arsiv[anahtar] = yeniKayit;
+  });
+  // 2) Eski arşivde olup bu yüklemede gelmeyenler: silinmez, 'eksik' listesine düşer (zaten
+  //    tahsilEdildi olanlar tekrar sorulmasın — onlar için karar zaten verilmiş).
+  Object.keys(arsiv).forEach(anahtar=>{
+    if(yeni[anahtar]) return; // bu yüklemede geldi, eksik değil
+    const kayit = arsiv[anahtar];
+    if(kayit.durum === 'tahsilEdildi') return; // karar verilmiş, tekrar sorma
+    eksikKalanlar.push(Object.assign({anahtar}, kayit));
+  });
+  return {arsiv, eksikKalanlar};
+}
+
+async function cekSenetArsiviniKaydet(arsiv){
+  const ok = await idbSet(CEK_SENET_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Çek/Senet arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(CEK_SENET_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(CEK_SENET_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Çek/Senet arşivi buluta kaydedilemedi:', err); }
+}
+
+async function cekSenetArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Çek/Senet arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(CEK_SENET_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
+/* =====================================================================
+   TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği)
+   Eski Format A (geçici/Ön Kayıt) + Format B (kalıcı/nihai) ayrımı TAMAMEN KALDIRILDI. Artık tek
+   bir dosya formatı var (kolonlar: Belge Numarası, Belge Türü, Belge Tipi, Müşteri, Tarih, Ödeme
+   Tipi, Tutar, Ters Kayıt Belge Numarası, Satış Temsilcisi, Banka). Kurallar:
+     • Belge Tipi (Ön Kayıt/Gerçek Kayıt) artık hiçbir ayrım yapmaz — hepsi tahsilat sayılır.
+     • Çek/Senet satırları (Ödeme Tipi='Alınan Çek'/'Alınan Senet') es geçilir — o veri artık ayrı
+       "Çek/Senet Riski" modülünden yönetiliyor.
+     • Belge Türü sınıflandırması: 'Müşteri Tahsilat' → normal tahsilat; 'Hizmet Alış Fatura' →
+       Hakediş tahsilatı; 'Ödeme' → müşteri faturası/tahsilatı (işaretine göre iki yönlü);
+       'Virman' → aynı Belge Numarası altında bir müşteride pozitif (o günün tahsilatından
+       DÜŞÜLÜR), diğerinde negatif (o günün tahsilatına EKLENİR).
+     • Ters Kayıt Belge Numarası dolu bir satır geldiğinde: satırın kendisi VE arşivde/dosya
+       içinde o numaraya sahip kayıt, ikisi de silinir/es geçilir (bir işlem + iptali = yok
+       sayılır). Bu kontrol HER yüklemede hem dosya içinde hem dosya-arşiv arasında tekrarlanır.
+     • Kayıtlar Belge Numarası bazlı KALICI arşivde saklanır — çek/senet arşiviyle birebir aynı
+       mimari: aynı belge no gelirse günceller, yeni no eklenir, ters kayıt eşleşirse ikisi de
+       silinir. Bu YIL BOYUNCA TEK SEFERDE toplu yüklenen bir dosyanın (binlerce satır, karışık
+       tarihli) her satırı kendi Tarih gününe doğru dağıtılabilsin, sonraki KISMİ (ör. son hafta)
+       yüklemeler diğer günlere/aylara DOKUNMASIN diye bilinçli olarak böyle tasarlandı.
+   Arşiv yapısı: {[belgeNo]: {belgeNo, musteriKod, musteriAdi, tarih(ISO), tutar, tahsilatKategori,
+   odemeEtiketi, satisTemsilcisi, tersKayitNo}} — düz obje (Map değil, JSON/Firebase uyumlu).
+   ===================================================================== */
+const TAHSILAT_ARSIV_CLOUD_PATH = CLOUD.path + '_tahsilatArsivi';
+const TAHSILAT_ARSIV_LOCAL_KEY = 'noktaCariTakip_tahsilatArsivi_v1';
+
+// Banka adından Kredi Kartı alt-etiketini üretir (SADECE Ödeme Tipi='Kredi Kartı' satırlarında
+// kullanılır) — buildYuklemeRaporu'ndaki yuklemeOdemeEtiketi ile BİREBİR AYNI kural (kullanıcı:
+// "sıfırlandırılma kodları var onları kopyalayabilirsin").
+function tahsilatBankaAltEtiketi(odemeTipi, banka){
+  const ot = String(odemeTipi||'').trim();
+  if(ot !== 'Kredi Kartı') return ot || 'Diğer';
+  const b = String(banka||'').trim();
+  if(!b) return 'Kredi Kartı';
+  if(/ziraat/i.test(b) || /yapı\s*ve\s*kredi/i.test(b) || /yapı\s*kredi/i.test(b)) return 'Kredi Kartı (SÜPÜRME)';
+  let kisa = b.replace(/Türkiye Cumhuriyeti/gi,'').replace(/^Türkiye\s+/i,'').trim();
+  kisa = kisa.replace(/Bankası\s*A\.Ş\.?/i,'Bankası').trim();
+  return kisa ? `Kredi Kartı (${kisa})` : 'Kredi Kartı';
+}
+
+// Ham Excel satırlarını {belgeNo: kayit} haline getirir. Çek/Senet satırları elenir. Her satıra
+// Belge Türü'ne göre tahsilatKategori ve işaretli tutar (isaretliTutar) atanır — Virman/Ödeme'nin
+// iki yönlü davranışı burada, KAYNAKTA çözülür ki sonraki toplama kodu tek tip işaretli tutarı
+// basitçe toplasın yeter.
+function tahsilatSatirlariniNormalizeEt(rows){
+  const sonuc = {};
+  (rows||[]).forEach(r=>{
+    const musteriKod = String(r['Müşteri']||'').trim();
+    if(!musteriKod || !musteriGecerliMi(musteriKod)) return;
+    const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
+    // ÇEK/SENET ES GEÇİLİR (kullanıcı kuralı) — bu veri artık ayrı Çek/Senet Riski modülünde.
+    if(odemeTipiHam === 'Alınan Çek' || odemeTipiHam === 'Alınan Senet') return;
+    const belgeNo = String(r['Belge Numarası']||'').trim();
+    if(!belgeNo) return; // belge no'suz satır güvenilir şekilde yönetilemez, atlanır
+    const belgeTuru = String(r['Belge Türü']||'').trim();
+    const tarih = excelDateToJSArti1Gun(r['Tarih']);
+    if(!tarih) return;
+    const hamTutar = Number(r['Tutar'])||0;
+    // TAHSİLAT KATEGORİSİ ve İŞARETLİ TUTAR (kullanıcı kuralları):
+    //   Müşteri Tahsilat → normal tahsilat; SAP'ta negatif gelir (borç azaltır) → tahsilat ARTIŞI
+    //     olarak saymak için işaret ÇEVRİLİR (-tutar → pozitif tahsilat).
+    //   Hizmet Alış Fatura → Hakediş tahsilatı; aynı işaret çevirme mantığı.
+    //   Ödeme / Virman → İKİ YÖNLÜ: dosyadaki ham işaret AYNEN korunur (pozitif → o günün
+    //     tahsilatından DÜŞÜLÜR, negatif → EKLENİR). Yani bu ikisinde işaret ÇEVRİLMEZ, tam
+    //     tersine ham SAP işareti zaten doğru yönü taşıdığı için olduğu gibi eksi işaretlenir:
+    //     isaretliTutar = -hamTutar (pozitif ham → negatif katkı = azalma; negatif ham → pozitif
+    //     katkı = artış) — bu, Müşteri Tahsilat'ın "negatifi pozitife çevir" kuralıyla AYNI
+    //     formüldür (isaretliTutar = -hamTutar), yani tek bir formül dört kategoriye de uyar.
+    let tahsilatKategori;
+    if(belgeTuru === 'Müşteri Tahsilat') tahsilatKategori = 'Normal';
+    else if(belgeTuru === 'Hizmet Alış Fatura') tahsilatKategori = 'Hakedis';
+    else if(belgeTuru === 'Ödeme') tahsilatKategori = 'Odeme';
+    else if(belgeTuru === 'Virman') tahsilatKategori = 'Virman';
+    else return; // tanımadığımız/beklenmeyen bir Belge Türü — güvenli tarafta kalıp atla
+    const isaretliTutar = -hamTutar;
+    const odemeEtiketi = tahsilatBankaAltEtiketi(odemeTipiHam, r['Banka']);
+    const belgeTipi = String(r['Belge Tipi']||'').trim();
+    sonuc[belgeNo] = {
+      belgeNo, musteriKod, musteriAdi: String(r['Müşteri Adı']||'').trim(),
+      tarih: tarih.toISOString(), tutar: isaretliTutar, tahsilatKategori, odemeEtiketi, belgeTipi,
+      satisTemsilcisi: r['Satış Temsilcisi'] || null,
+      tersKayitNo: String(r['Ters Kayıt Belge Numarası']||'').trim() || null,
+    };
+  });
+  return sonuc;
+}
+
+// Mevcut kalıcı arşivi yeni yüklemeyle birleştirir. TERS KAYIT KURALI (kullanıcı, netleştirilmiş
+// hali): Ters Kayıt Belge Numarası DOLU olan HER satır, hedefini (dosyada veya arşivde) bulsun ya
+// da bulmasın, KENDİSİ HİÇ ARŞİVE ALINMAZ (bu satır zaten bir iptal/ters işlem kaydı, tek başına
+// anlamlı bir tahsilat değildir). AYRICA, eğer işaret ettiği belge no dosyada veya ARŞİVDE
+// bulunuyorsa, o hedef kayıt da silinir (orijinal işlem + iptali = ikisi de yok sayılır). Bu
+// kontrol dosya-içi VE dosya-arşiv arası olmak üzere iki aşamada, HER yüklemede yeniden yapılır.
+function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
+  let yeni = tahsilatSatirlariniNormalizeEt(yeniRows);
+  const arsiv = Object.assign({}, mevcutArsiv||{});
+
+  // Bu yüklemedeki tüm ters-kayıt hedef no'larını topla (kaynak satırın kendisi ne olursa olsun).
+  const tersKayitHedefleri = new Set();
+  Object.values(yeni).forEach(r=>{ if(r.tersKayitNo) tersKayitHedefleri.add(r.tersKayitNo); });
+
+  // AŞAMA 1 — Ters kayıt İŞARETİ taşıyan HER satır bu yüklemeden düşer (hedefi bulunsun/bulunmasın).
+  Object.keys(yeni).forEach(no=>{ if(yeni[no] && yeni[no].tersKayitNo) delete yeni[no]; });
+
+  // AŞAMA 2 — Hedeflenen belge no'lar hem YENİ yüklemeden hem ARŞİVDEN silinir (dosya-içi VE
+  // dosya-arşiv arası eşleşme tek döngüde ele alınır).
+  tersKayitHedefleri.forEach(hedefNo=>{
+    delete yeni[hedefNo];
+    delete arsiv[hedefNo];
+  });
+
+  // AŞAMA 3 — Arşivde DAHA ÖNCEDEN duran bir ters-kayıt-hedefi ilişkisi de simetrik kontrol edilir:
+  // arşivdeki bir kaydın kendisi ters kayıt işaretliyse (normalde hiç arşive girmemeliydi ama
+  // geçmiş bir veri tutarsızlığına karşı güvenlik amaçlı) veya arşivdeki bir kaydın hedeflediği
+  // belge no bu yüklemede yeni gelmişse, ikisi de temizlenir.
+  Object.keys(arsiv).forEach(no=>{
+    const eskiKayit = arsiv[no];
+    if(!eskiKayit) return;
+    if(eskiKayit.tersKayitNo){ delete arsiv[no]; delete yeni[eskiKayit.tersKayitNo]; return; }
+  });
+
+  // AŞAMA 3.5 — ÖN KAYIT YAŞAM DÖNGÜSÜ (kullanıcı kuralı, istisnasız): "Ön Kayıt" statüsünde
+  // arşive giren bir belge, AYNI belge no ile "Gerçek Kayıt" gelirse doğal olarak üzerine yazılır
+  // (bkz. Aşama 4). Ama bu yükleme, arşivde duran bir Ön Kayıt'ı GÜNCELLEMİYORSA bile (yani o
+  // belge no bu dosyada hiç yoksa), arşivdeki o Ön Kayıt YİNE DE SİLİNİR — bir dosya yüklemesi
+  // "bir sonraki yükleme" sayılır ve Ön Kayıt'lar bir yüklemeden fazla hayatta kalamaz. Bu,
+  // kullanıcının bilerek kabul ettiği bir davranıştır (Gerçek Kayıt hiç gelmese bile veri o günün
+  // tahsilatından düşer) — Format A'nın eski "geçici" doğasının doğal sonucu.
+  Object.keys(arsiv).forEach(no=>{
+    const eskiKayit = arsiv[no];
+    if(eskiKayit && eskiKayit.belgeTipi === 'Ön Kayıt') delete arsiv[no];
+  });
+
+  // AŞAMA 4 — Sağ kalan yeni kayıtlar arşive eklenir/günceller (aynı belge no tekrar gelirse günceller).
+  Object.assign(arsiv, yeni);
+  return arsiv;
+}
+
+async function tahsilatArsiviniKaydet(arsiv){
+  const ok = await idbSet(TAHSILAT_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Tahsilat arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${TAHSILAT_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(TAHSILAT_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(TAHSILAT_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Tahsilat arşivi buluta kaydedilemedi:', err); }
+}
+
+async function tahsilatArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${TAHSILAT_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Tahsilat arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(TAHSILAT_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
+// Kalıcı tahsilat arşivinden, GÜNÜN gösterimi için gerekli türetilmiş yapıları üretir: müşteri
+// bazlı günlük tahsilat toplamı (bugunKey gününe ait) ve Genel Rapor/Sevk KPI'sının okuduğu
+// tahsilatArsiv dizisi formatı (buildReport'un geri kalanının beklediği {musteri,belgeTarihi,
+// tutar,formatKaynagi,gecerli,tahsilatTuru} şekli — geriye dönük uyumluluk için bu şekle çevrilir).
+function tahsilatArsivindenGunlukDiziyeCevir(arsiv, gunKey){
+  return Object.values(arsiv||{})
+    .filter(r=> r && r.tarih && dateKeyLocal(new Date(r.tarih))===gunKey)
+    .map(r=>({
+      musteri: r.musteriKod, belgeTarihi: new Date(r.tarih), tutar: r.tutar,
+      // formatKaynagi artık A/B değil — Hakediş ayrı işlenebilsin diye kategori adı taşınır
+      // (mevcut FaturaIade kredi etiketiyle ÇAKIŞMAZ, farklı isim).
+      formatKaynagi: r.tahsilatKategori==='Hakedis' ? 'TahsilatHakedis' : null,
+      gecerli: true, tahsilatTuru: r.odemeEtiketi, satisTemsilcisi: r.satisTemsilcisi,
+    }));
+}
+
+// Kalıcı tahsilat arşivinden, VERİLEN TARİH ARALIĞINA (dahil-dahil, YYYY-MM-DD gün anahtarları)
+// denk gelen TÜM kayıtları aynı dizi formatına çevirir. Yönetim Özeti (haftalık tahsilat) ve
+// Tahsilat Verimliliği (aylık tahsilat) gibi çok günlü toplamlar bunu kullanır — tek güne özel
+// tahsilatArsivindenGunlukDiziyeCevir'in aksine, burada tüm arşiv bir kerede taranır.
+function tahsilatArsivindenAralikDiziyeCevir(arsiv, ilkGunKey, sonGunKey){
+  return Object.values(arsiv||{})
+    .filter(r=>{
+      if(!r || !r.tarih) return false;
+      const gk = dateKeyLocal(new Date(r.tarih));
+      return gk && (!ilkGunKey || gk>=ilkGunKey) && (!sonGunKey || gk<=sonGunKey);
+    })
+    .map(r=>({
+      musteri: r.musteriKod, belgeTarihi: new Date(r.tarih), tutar: r.tutar,
+      formatKaynagi: r.tahsilatKategori==='Hakedis' ? 'TahsilatHakedis' : null,
+      gecerli: true, tahsilatTuru: r.odemeEtiketi, satisTemsilcisi: r.satisTemsilcisi,
+    }));
+}
+
+

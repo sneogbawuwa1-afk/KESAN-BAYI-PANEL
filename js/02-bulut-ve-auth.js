@@ -1,1 +1,1735 @@
-const _0x44532d=_0x3581;(function(_0x381b11,_0x139a23){const _0x1894a5=_0x3581,_0x1aa4bd=_0x381b11();while(!![]){try{const _0x4ba5e8=parseInt(_0x1894a5(0x41b))/(-0x1*0x2a7+0x2432+-0x3ba*0x9)+parseInt(_0x1894a5(0x5de))/(0x1*-0x1565+0x2f*0x1+-0x38*-0x61)+parseInt(_0x1894a5(0x65c))/(-0xde8+0xa63*-0x1+-0x16e*-0x11)+parseInt(_0x1894a5(0x452))/(0x20a1+-0x241e+-0x17*-0x27)+parseInt(_0x1894a5(0x1b4))/(-0xff4+0x6f*-0xb+-0x2d*-0x76)*(parseInt(_0x1894a5(0x666))/(-0x8bf*0x1+-0x202e+0x28f3))+-parseInt(_0x1894a5(0x1db))/(-0x23f2*-0x1+0xd0a*-0x1+-0x1*0x16e1)+-parseInt(_0x1894a5(0x3b0))/(-0xa77+0x17c7+0x8*-0x1a9);if(_0x4ba5e8===_0x139a23)break;else _0x1aa4bd['push'](_0x1aa4bd['shift']());}catch(_0x20f8cc){_0x1aa4bd['push'](_0x1aa4bd['shift']());}}}(_0x473b,-0x1*-0xcce9c+-0x24822+-0x346ce));const _0xc8ae39=(function(){let _0x4825d2=!![];return function(_0x3810c2,_0x470a70){const _0x52c770=_0x4825d2?function(){const _0x56156b=_0x3581;if(_0x470a70){const _0x4f203a=_0x470a70[_0x56156b(0x612)](_0x3810c2,arguments);return _0x470a70=null,_0x4f203a;}}:function(){};return _0x4825d2=![],_0x52c770;};}()),_0x1a0723=_0xc8ae39(this,function(){const _0x2b27b2=_0x3581,_0x54cafe={'SODfR':function(_0x5308f7,_0x8b95e3){return _0x5308f7+_0x8b95e3;},'msoam':_0x2b27b2(0x2f7)+_0x2b27b2(0x23c)+'sı\x20okuna'+_0x2b27b2(0x662),'bYdcF':function(_0x1caa5c,_0x685faf){return _0x1caa5c!==_0x685faf;},'Jqwfd':_0x2b27b2(0x6b2)+'+)+$'};if(_0x54cafe[_0x2b27b2(0x438)](_0x1a0723[_0x2b27b2(0x656)]()[_0x2b27b2(0x332)]()[_0x2b27b2(0x6b6)]('\x0a'),-(-0x2*-0x38c+-0x916*-0x4+-0x2b6f))){if(_0x54cafe[_0x2b27b2(0x438)](_0x2b27b2(0x460),_0x2b27b2(0x363)))return;else return _0x4cef1e[_0x2b27b2(0x640)](_0x54cafe[_0x2b27b2(0x265)](_0x54cafe[_0x2b27b2(0x629)],_0x70536c)+'):',_0x2ffc13),null;}return _0x1a0723['toString']()[_0x2b27b2(0x602)](_0x2b27b2(0x6b2)+_0x2b27b2(0x671))['toString']()[_0x2b27b2(0x233)+_0x2b27b2(0x4ef)](_0x1a0723)['search'](_0x54cafe[_0x2b27b2(0x787)]);});_0x1a0723();const BULUTSUZ_TEST=![];function cloudEnabled(){const _0x433573=_0x3581;if(BULUTSUZ_TEST)return![];return!!(CLOUD[_0x433573(0x38f)]&&CLOUD[_0x433573(0x38f)][_0x433573(0x785)]());}function zamanAsimliYaris(_0x327f51,_0x2838cd,_0x5acaef){const _0x59f826=_0x3581;return Promise[_0x59f826(0x366)]([Promise[_0x59f826(0x329)](_0x327f51)[_0x59f826(0x501)](()=>_0x5acaef),new Promise(_0x13e494=>setTimeout(()=>_0x13e494(_0x5acaef),_0x2838cd))]);}async function cloudFetch(_0x2d0d4e,_0x1e231a,_0x35e56c){const _0x5af4d7=_0x3581,_0x684aba={'vDZYJ':function(_0x11c4e3,_0x476928){return _0x11c4e3+_0x476928;},'hljNT':_0x5af4d7(0x75a),'xuBbZ':_0x5af4d7(0x3f6),'ZyLpB':_0x5af4d7(0x2fc),'nGOxe':function(_0x341dd3,_0x10b8b6){return _0x341dd3||_0x10b8b6;},'Bobkp':function(_0x5f232,_0x125324,_0x3895e0){return _0x5f232(_0x125324,_0x3895e0);},'CHjyJ':'no-store','yauvw':function(_0x4400f4,_0x587e0e,_0x3e39ed){return _0x4400f4(_0x587e0e,_0x3e39ed);},'XYkcO':function(_0x3e417c,_0xef202b){return _0x3e417c!==_0xef202b;},'rfRYa':'gWIDV','MKFco':function(_0x505532,_0x476121){return _0x505532===_0x476121;},'aKWCS':_0x5af4d7(0x66e),'pwZEq':function(_0x412804,_0x117a55){return _0x412804+_0x117a55;},'NrbFZ':function(_0x3d565f,_0x215751){return _0x3d565f/_0x215751;},'LkHFp':_0x5af4d7(0x565),'WrhEK':function(_0x5713cc,_0x185558){return _0x5713cc(_0x185558);}};_0x35e56c=_0x684aba[_0x5af4d7(0x4e4)](_0x35e56c,-0x1*0x3a4+0x4862+-0xa26*0x1);const _0x232145=new AbortController(),_0x2b6643=_0x684aba[_0x5af4d7(0x289)](setTimeout,()=>_0x232145[_0x5af4d7(0x3c3)](),_0x35e56c);try{const _0x400d8f=Object[_0x5af4d7(0x274)]({'cache':_0x684aba[_0x5af4d7(0x667)]},_0x1e231a||{},{'signal':_0x232145[_0x5af4d7(0x73e)]});return await _0x684aba['yauvw'](fetch,_0x2d0d4e,_0x400d8f);}catch(_0x1bf5a8){if(_0x684aba[_0x5af4d7(0x30c)](_0x684aba[_0x5af4d7(0x2be)],_0x5af4d7(0x260))){if(_0x1bf5a8&&_0x1bf5a8[_0x5af4d7(0x22e)]===_0x5af4d7(0x4ac)+'or'){if(_0x684aba[_0x5af4d7(0x320)](_0x5af4d7(0x66e),_0x684aba[_0x5af4d7(0x651)]))throw new Error(_0x684aba[_0x5af4d7(0x597)](_0x684aba[_0x5af4d7(0x52e)]('Bulut\x20is'+_0x5af4d7(0x5db)+_0x5af4d7(0x5e4)+_0x5af4d7(0x6ac)+_0x5af4d7(0x7a5),Math[_0x5af4d7(0x1e0)](_0x684aba[_0x5af4d7(0x779)](_0x35e56c,0x289+0x9*0x409+-0x22f2))),_0x684aba[_0x5af4d7(0x46d)]));else _0x4d3387[_0x5af4d7(0x640)](_0x10aea5);}throw _0x1bf5a8;}else{const _0x135430=state['files'][_0x5af4d7(0x57e)];_0x2e7b9f[_0x5af4d7(0x73f)+_0x5af4d7(0x5c0)]=_0x135430?_0x684aba[_0x5af4d7(0x597)](_0x684aba[_0x5af4d7(0x597)](_0x135430[_0x5af4d7(0x22e)],_0x684aba[_0x5af4d7(0x3ec)]),_0x135430[_0x5af4d7(0x6c1)][_0x5af4d7(0x49d)][_0x5af4d7(0x476)+'String'](_0x684aba[_0x5af4d7(0x1f0)]))+_0x684aba[_0x5af4d7(0x3b1)]:_0x5af4d7(0x2d0)+_0x5af4d7(0x232);}}finally{_0x684aba['WrhEK'](clearTimeout,_0x2b6643);}}const CLOUD_META_LOCAL_KEY=_0x44532d(0x1e1)+_0x44532d(0x43a)+_0x44532d(0x3f5)+_0x44532d(0x3d5)+_0x44532d(0x4ed);let cloudMetaZamanCache=null;async function cloudMetaZamanlariniYukle(){const _0x536aad=_0x44532d,_0x445a51={'Jvjsd':_0x536aad(0x748),'iiVje':_0x536aad(0x684)+_0x536aad(0x422)+_0x536aad(0x454),'zrXeX':function(_0x243d41,_0x46cadf){return _0x243d41===_0x46cadf;},'vBYXo':_0x536aad(0x620),'vnbgC':_0x536aad(0x33f),'FZfdK':function(_0x27d461,_0x5acbd2){return _0x27d461(_0x5acbd2);}};if(cloudMetaZamanCache)return cloudMetaZamanCache;try{if(_0x445a51[_0x536aad(0x4bd)](_0x445a51[_0x536aad(0x1d8)],_0x445a51[_0x536aad(0x5b7)])){const _0x20d0df={'smvTh':function(_0x555fb5,_0x53bd92){return _0x555fb5(_0x53bd92);},'mcIYJ':_0x445a51[_0x536aad(0x6c3)],'uTEPo':_0x445a51[_0x536aad(0x229)]},_0x3ffc5a=new _0xf7e949();return(_0x24b979||[])['forEach'](_0x146ce3=>{const _0x134fd1=_0x536aad,_0x369e64=_0x20d0df[_0x134fd1(0x4a2)](_0xdcb7a8,_0x146ce3[_0x20d0df[_0x134fd1(0x2ed)]]||'')[_0x134fd1(0x785)]();if(!_0x369e64)return;const _0x4c323f=_0x20d0df[_0x134fd1(0x4a2)](musteriMasterKanalSinifla,_0x146ce3[_0x20d0df[_0x134fd1(0x683)]]);if(_0x4c323f)_0x3ffc5a[_0x134fd1(0x463)](_0x369e64,_0x4c323f);}),_0x3ffc5a;}else cloudMetaZamanCache=await _0x445a51['FZfdK'](idbGet,CLOUD_META_LOCAL_KEY)||{};}catch(_0xddf18a){cloudMetaZamanCache={};}return cloudMetaZamanCache;}async function cloudMetaZamaniKaydet(_0x3d119f,_0x22dc62){const _0x1305f0=_0x44532d,_0x22dd31={'BMYeU':function(_0x2ef47c){return _0x2ef47c();},'qLXpR':function(_0x560871,_0x2d60d4,_0x386d41){return _0x560871(_0x2d60d4,_0x386d41);}},_0x38d7cc=await _0x22dd31[_0x1305f0(0x443)](cloudMetaZamanlariniYukle);_0x38d7cc[_0x3d119f]=_0x22dc62,cloudMetaZamanCache=_0x38d7cc,await _0x22dd31[_0x1305f0(0x350)](idbSet,CLOUD_META_LOCAL_KEY,_0x38d7cc)[_0x1305f0(0x501)](()=>{});}async function cloudMetaOkuUzaktan(_0xcdb2b6){const _0x583f9f=_0x44532d,_0x2343dd={'WJCsm':function(_0x49d48a){return _0x49d48a();},'Jvmfs':function(_0x16f688,_0x33e1cd){return _0x16f688+_0x33e1cd;},'FsGFl':_0x583f9f(0x559),'wMKCS':function(_0x11b718,_0x1ac355){return _0x11b718===_0x1ac355;},'vWxJz':function(_0x2eccb0,_0x47c526){return _0x2eccb0!==_0x47c526;},'GEhqh':_0x583f9f(0x43c),'rlsiq':function(_0x337162,_0x540ad5){return _0x337162+_0x540ad5;}};if(!_0x2343dd[_0x583f9f(0x5b4)](cloudEnabled))return null;try{const _0x4d8656=await cloudFetch(CLOUD[_0x583f9f(0x38f)]['replace'](/\/$/,'')+_0x583f9f(0x199)+_0xcdb2b6+_0x583f9f(0x4c4)+await _0x2343dd[_0x583f9f(0x5b4)](authQuery));if(!_0x4d8656['ok'])throw new Error(_0x2343dd[_0x583f9f(0x376)](_0x2343dd[_0x583f9f(0x588)],_0x4d8656[_0x583f9f(0x73a)]));const _0x126fae=await _0x4d8656[_0x583f9f(0x78e)]();if(!_0x126fae||_0x2343dd[_0x583f9f(0x153)](_0x126fae,_0x583f9f(0x6e4)))return null;return JSON[_0x583f9f(0x1ab)](_0x126fae);}catch(_0x250f1d){if(_0x2343dd[_0x583f9f(0x266)](_0x2343dd[_0x583f9f(0x316)],_0x2343dd[_0x583f9f(0x316)]))cloudMetaZamanCache={};else return console[_0x583f9f(0x640)](_0x2343dd[_0x583f9f(0x3ac)]('Meta\x20zam'+_0x583f9f(0x23c)+_0x583f9f(0x744)+'madı\x20('+_0xcdb2b6,'):'),_0x250f1d),null;}}async function cloudMetaYazUzaktan(_0x2fe3f4,_0x3da15d){const _0x4bb43a=_0x44532d,_0x1f6e75={'RMHpp':function(_0x24618f,_0xfdc0e9){return _0x24618f===_0xfdc0e9;},'nOrXq':function(_0x546717,_0x276252){return _0x546717+_0x276252;},'Xllkf':function(_0x24028b,_0x149788){return _0x24028b(_0x149788);},'zptRo':function(_0x3353c5,_0xd513ca){return _0x3353c5-_0xd513ca;},'NSDfQ':function(_0x4530f0,_0x1d02bb){return _0x4530f0(_0x1d02bb);},'cCNOc':function(_0x424782){return _0x424782();},'YmXRU':function(_0x1fdb82,_0x1a0872,_0x5e9d90){return _0x1fdb82(_0x1a0872,_0x5e9d90);},'MHThP':function(_0x30a29f){return _0x30a29f();},'uHUrY':_0x4bb43a(0x36a),'QHWnx':_0x4bb43a(0x1f9)+_0x4bb43a(0x2d2),'xwnKF':function(_0x1466a5,_0x4ac5a5){return _0x1466a5!==_0x4ac5a5;},'KiaXM':'EoYzN'};if(!_0x1f6e75[_0x4bb43a(0x4be)](cloudEnabled))return![];try{const _0x2ddc99=await _0x1f6e75[_0x4bb43a(0x1b6)](cloudFetch,CLOUD[_0x4bb43a(0x38f)][_0x4bb43a(0x1c6)](/\/$/,'')+_0x4bb43a(0x199)+_0x2fe3f4+_0x4bb43a(0x4c4)+await _0x1f6e75[_0x4bb43a(0x5e2)](authQuery),{'method':_0x1f6e75['uHUrY'],'headers':{'Content-Type':_0x1f6e75['QHWnx']},'body':JSON['stringif'+'y']({'updatedAt':_0x3da15d})});return!!(_0x2ddc99&&_0x2ddc99['ok']);}catch(_0x717c6e){if(_0x1f6e75[_0x4bb43a(0x44f)](_0x1f6e75[_0x4bb43a(0x3b2)],'CiAqC'))return console[_0x4bb43a(0x640)](_0x4bb43a(0x2f7)+_0x4bb43a(0x23c)+_0x4bb43a(0x774)+_0x4bb43a(0x6fa)+_0x2fe3f4+'):',_0x717c6e),![];else{const _0x3c86b6=_0x325d7c[_0x4bb43a(0x785)](),_0x4cc29e=new _0x5779aa(_0x3c86b6);if(!_0x7a2b52(_0x4cc29e[_0x4bb43a(0x264)]()))return _0x4cc29e;const _0x2714ac=_0x3c86b6[_0x4bb43a(0x162)](/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})$/);if(_0x2714ac){let [,_0xfd615d,_0xfbe34f,_0x142dd4]=_0x2714ac;if(_0x1f6e75[_0x4bb43a(0x601)](_0x142dd4[_0x4bb43a(0x49d)],-0x1dc5+0x1505*-0x1+0xcb3*0x4))_0x142dd4=_0x1f6e75[_0x4bb43a(0x4fc)]('20',_0x142dd4);const _0xcb73e=new _0x384d7d(_0x185677[_0x4bb43a(0x66c)](_0x1f6e75[_0x4bb43a(0x22d)](_0x216340,_0x142dd4),_0x1f6e75['zptRo'](_0x1f6e75[_0x4bb43a(0x22d)](_0x33ad63,_0xfbe34f),-0x13cb+0x233e+-0xf72),_0x1f6e75['Xllkf'](_0x44df8f,_0xfd615d)));if(!_0x1f6e75[_0x4bb43a(0x5c4)](_0xf203df,_0xcb73e[_0x4bb43a(0x264)]()))return _0xcb73e;}}}}async function cloudVeriVerimliYukle(_0x3628e1,_0x2bcec9,_0x219d02){const _0x131a6f=_0x44532d,_0x584bf5={'KeEBS':function(_0x41038e,_0x58d00e){return _0x41038e(_0x58d00e);},'LjGnb':function(_0x5c6882,_0x4936df){return _0x5c6882!=_0x4936df;},'gtQpR':function(_0x1a2d3d,_0x39ed7c){return _0x1a2d3d===_0x39ed7c;},'NZjCL':function(_0x2d6b91){return _0x2d6b91();},'mlqws':function(_0x1c925,_0x437136){return _0x1c925!==_0x437136;},'yJtxw':_0x131a6f(0x6b5),'nVwnn':function(_0x140908,_0x4256b4,_0x2adda3){return _0x140908(_0x4256b4,_0x2adda3);},'dDUlq':_0x131a6f(0x2bc)},_0x57cffc=await cloudMetaZamanlariniYukle(),_0x6b6e58=_0x57cffc[_0x3628e1],_0x17b685=await _0x584bf5[_0x131a6f(0x34e)](cloudMetaOkuUzaktan,_0x3628e1);if(_0x17b685&&_0x584bf5[_0x131a6f(0x2c5)](_0x6b6e58,null)&&_0x584bf5[_0x131a6f(0x326)](_0x17b685['updatedA'+'t'],_0x6b6e58)){const _0x1ecb5f=await _0x584bf5[_0x131a6f(0x61a)](_0x219d02);if(_0x1ecb5f)return{'data':_0x1ecb5f,'source':'local-up'+_0x131a6f(0x41d)};}const _0x582c4d=await _0x2bcec9();if(_0x582c4d)return _0x584bf5[_0x131a6f(0x31a)](_0x584bf5[_0x131a6f(0x411)],_0x584bf5[_0x131a6f(0x411)])?(state[_0x131a6f(0x2e8)+_0x131a6f(0x16d)+'ir']=!![],!![]):(await _0x584bf5[_0x131a6f(0x681)](cloudMetaZamaniKaydet,_0x3628e1,_0x17b685?_0x17b685[_0x131a6f(0x5a4)+'t']:Date[_0x131a6f(0x2bb)]()),{'data':_0x582c4d,'source':_0x131a6f(0x246)});return{'data':null,'source':_0x584bf5[_0x131a6f(0x7ae)]};}const FIREBASE_CONFIG={'apiKey':_0x44532d(0x6ef)+_0x44532d(0x61f)+_0x44532d(0x752)+_0x44532d(0x5a3)+'GGgQKQg','authDomain':_0x44532d(0x747)+'8f.fireb'+_0x44532d(0x623)+'om','databaseURL':CLOUD[_0x44532d(0x38f)],'projectId':_0x44532d(0x747)+'8f','storageBucket':_0x44532d(0x747)+_0x44532d(0x184)+_0x44532d(0x31c)+_0x44532d(0x566),'messagingSenderId':_0x44532d(0x430)+_0x44532d(0x510),'appId':_0x44532d(0x429)+_0x44532d(0x146)+_0x44532d(0x37e)+_0x44532d(0x3cd)+_0x44532d(0x4e9),'measurementId':_0x44532d(0x1ba)+'8R28'};let authAktif=![];if(!BULUTSUZ_TEST)try{if(FIREBASE_CONFIG[_0x44532d(0x63d)]&&FIREBASE_CONFIG[_0x44532d(0x63d)]!==_0x44532d(0x475)+_0x44532d(0x20b)+_0x44532d(0x57b)+_0x44532d(0x249)+'IN'&&window['firebase'+_0x44532d(0x6ff)]){const app=window[_0x44532d(0x78a)+_0x44532d(0x6ff)][_0x44532d(0x29f)+'zeApp'](FIREBASE_CONFIG);window[_0x44532d(0x78a)+_0x44532d(0x6ff)]['authInst'+_0x44532d(0x277)]=window[_0x44532d(0x78a)+_0x44532d(0x6ff)][_0x44532d(0x63e)](app),authAktif=!![];}}catch(_0x2e9bb9){console[_0x44532d(0x640)](_0x44532d(0x43e)+_0x44532d(0x4f6)+'ication\x20'+_0x44532d(0x516)+'amadı:',_0x2e9bb9);}const AUTH_TOKEN_TAZELIK_MS=0x126e*0x1+-0x2057+-0x1*-0x1d89;let authTokenOnbellek=null,authTokenBekleyenIstek=null;async function authQuery(){const _0x4f019d=_0x44532d,_0x461e99={'unqJH':_0x4f019d(0x4c2)+'ontrol\x20a'+_0x4f019d(0x1af)+_0x4f019d(0x51b)+_0x4f019d(0x563),'WcCAW':function(_0x42bbe9,_0x1de614){return _0x42bbe9+_0x1de614;},'ydPih':'?auth=','HHbNx':function(_0x2708d6,_0x4e370d){return _0x2708d6!==_0x4e370d;},'KKrvi':_0x4f019d(0x6af),'epWAt':function(_0x1486e7,_0x4bba62){return _0x1486e7===_0x4bba62;},'VznpT':_0x4f019d(0x529),'FQStY':_0x4f019d(0x396),'XpAXe':_0x4f019d(0x147),'RvkTo':function(_0x5a16ef,_0x55bab4){return _0x5a16ef<_0x55bab4;},'rlMfC':function(_0x481b9b,_0x23af8d){return _0x481b9b!==_0x23af8d;},'WeKng':_0x4f019d(0x34d),'IVFmM':function(_0xa326df,_0xec1739){return _0xa326df!==_0xec1739;},'ETAvb':_0x4f019d(0x607)};if(!authAktif)return'';try{if(_0x461e99[_0x4f019d(0x1d7)](_0x461e99[_0x4f019d(0x459)],_0x4f019d(0x147)))_0x217608[_0x9737e2]=_0x41f4b0?_0x418742[_0x58e235]:null;else{const _0x205e7c=window[_0x4f019d(0x78a)+'AuthAPI'][_0x4f019d(0x237)+_0x4f019d(0x277)][_0x4f019d(0x214)+_0x4f019d(0x3f1)];if(!_0x205e7c)return'';const _0x55f55e=Date[_0x4f019d(0x2bb)]();if(authTokenOnbellek&&_0x461e99[_0x4f019d(0x64d)](_0x55f55e-authTokenOnbellek[_0x4f019d(0x34c)+_0x4f019d(0x352)],AUTH_TOKEN_TAZELIK_MS))return _0x461e99['rlMfC'](_0x461e99[_0x4f019d(0x514)],_0x4f019d(0x34d))?(_0x643838[_0x4f019d(0x640)](_0x461e99[_0x4f019d(0x560)],_0x22ff1f),null):_0x461e99[_0x4f019d(0x676)](_0x461e99[_0x4f019d(0x63b)],authTokenOnbellek[_0x4f019d(0x428)]);if(!authTokenBekleyenIstek){const _0x33d67b=-0x17*-0x2f5+0x8b*-0x16+-0x5ab*0x3,_0x2d3e0d=_0x205e7c['getIdTok'+'en'](!![])[_0x4f019d(0x7af)](_0x30176a=>{const _0x5c0e49=_0x4f019d,_0x2d6fd1={'guMXo':function(_0x2eaa2a,_0x36d6b2){const _0x266962=_0x3581;return _0x461e99[_0x266962(0x676)](_0x2eaa2a,_0x36d6b2);},'FGLyH':_0x461e99[_0x5c0e49(0x63b)]};return _0x461e99[_0x5c0e49(0x1d7)](_0x461e99[_0x5c0e49(0x3bd)],_0x461e99[_0x5c0e49(0x3bd)])?rZQeNl[_0x5c0e49(0x5fb)](rZQeNl[_0x5c0e49(0x19f)],authTokenOnbellek[_0x5c0e49(0x428)]):(authTokenOnbellek={'token':_0x30176a,'alinanZaman':Date['now']()},_0x30176a);}),_0x216fe7=new Promise((_0x3081ec,_0x3bbac4)=>setTimeout(()=>_0x3bbac4(new Error(_0x4f019d(0x579)+_0x4f019d(0x7ab)+'ut')),_0x33d67b));authTokenBekleyenIstek=Promise[_0x4f019d(0x366)]([_0x2d3e0d,_0x216fe7])[_0x4f019d(0x339)](()=>{const _0x2bbc1d=_0x4f019d,_0x2f3dae={'bxwUk':function(_0x143846,_0x53f2ae){const _0x43f377=_0x3581;return _0x461e99[_0x43f377(0x3e4)](_0x143846,_0x53f2ae);}};if(_0x461e99[_0x2bbc1d(0x727)]!==_0x461e99[_0x2bbc1d(0x4a1)])authTokenBekleyenIstek=null;else{if(_0x4696c3)_0x42b1b2[_0x1f02e2]=_0x2f3dae[_0x2bbc1d(0x45b)](_0x477625[_0x35a5cf],_0x3cb2df)?null:_0xe68655[_0x50bddb];}});}const _0x2f974d=await authTokenBekleyenIstek;return _0x461e99['ydPih']+_0x2f974d;}}catch(_0x3e41f7){if(_0x461e99[_0x4f019d(0x46b)](_0x4f019d(0x699),_0x461e99[_0x4f019d(0x325)]))return'';else{const _0x186ce9=_0x3f7fbe[_0x4f019d(0x78a)+_0x4f019d(0x6ff)][_0x4f019d(0x29f)+_0x4f019d(0x431)](FIREBASE_CONFIG);_0x12f5b4[_0x4f019d(0x78a)+_0x4f019d(0x6ff)][_0x4f019d(0x237)+_0x4f019d(0x277)]=_0x3c565e['firebase'+_0x4f019d(0x6ff)][_0x4f019d(0x63e)](_0x186ce9),authAktif=!![];}}}function girisEkraniGoster(){const _0x44e7a5=_0x44532d,_0x2dbb96={'dopGe':_0x44e7a5(0x525),'yUvQg':'app','NXLXt':_0x44e7a5(0x1df)+_0x44e7a5(0x5f7),'HWSsc':_0x44e7a5(0x2bc)};document[_0x44e7a5(0x2ac)+_0x44e7a5(0x575)](_0x44e7a5(0x54f))['style'][_0x44e7a5(0x5b5)]=_0x2dbb96[_0x44e7a5(0x56f)],document[_0x44e7a5(0x2ac)+_0x44e7a5(0x575)](_0x2dbb96[_0x44e7a5(0x30b)])['style'][_0x44e7a5(0x5b5)]=_0x44e7a5(0x2bc),document[_0x44e7a5(0x2ac)+_0x44e7a5(0x575)](_0x2dbb96[_0x44e7a5(0x1cf)])[_0x44e7a5(0x718)][_0x44e7a5(0x5b5)]=_0x2dbb96[_0x44e7a5(0x4c1)];}function girisEkraniGizle(){const _0x1e271c=_0x44532d,_0x1a4c3c={'IomfT':_0x1e271c(0x6a8),'HdcUl':function(_0xdce3e7,_0x3742ec){return _0xdce3e7===_0x3742ec;},'QvlkP':'complete','mwTjs':function(_0x24c903){return _0x24c903();},'RRmeb':_0x1e271c(0x782)};document[_0x1e271c(0x2ac)+_0x1e271c(0x575)](_0x1e271c(0x54f))[_0x1e271c(0x718)][_0x1e271c(0x5b5)]=_0x1e271c(0x2bc),document['getEleme'+'ntById'](_0x1e271c(0x584))[_0x1e271c(0x718)][_0x1e271c(0x5b5)]=_0x1a4c3c[_0x1e271c(0x717)],document[_0x1e271c(0x2ac)+'ntById'](_0x1e271c(0x1df)+_0x1e271c(0x5f7))[_0x1e271c(0x718)][_0x1e271c(0x5b5)]=_0x1e271c(0x70f)+_0x1e271c(0x536);if(_0x1a4c3c['HdcUl'](document[_0x1e271c(0x76b)+'te'],_0x1a4c3c[_0x1e271c(0x76e)]))_0x1a4c3c['mwTjs'](uygulamayiBaslat);else window[_0x1e271c(0x14f)+_0x1e271c(0x27b)](_0x1a4c3c[_0x1e271c(0x4bc)],()=>uygulamayiBaslat(),{'once':!![]});}if(authAktif)window[_0x44532d(0x78a)+_0x44532d(0x6ff)][_0x44532d(0x23f)+_0x44532d(0x2f1)+'ed'](window[_0x44532d(0x78a)+_0x44532d(0x6ff)][_0x44532d(0x237)+'ance'],_0x2031ba=>{const _0x2bc894=_0x44532d,_0x31ec94={'pbtFa':function(_0x5d4428){return _0x5d4428();}};if(_0x2031ba)_0x31ec94[_0x2bc894(0x418)](girisEkraniGizle);else girisEkraniGoster();});else{dwarn(_0x44532d(0x43e)+_0x44532d(0x4f6)+_0x44532d(0x212)+_0x44532d(0x589)+_0x44532d(0x5a0)+'\x20veya\x20BU'+_0x44532d(0x44a)+_0x44532d(0x2ad)+_0x44532d(0x205)+_0x44532d(0x272)+_0x44532d(0x291)+_0x44532d(0x251)),document['getEleme'+_0x44532d(0x575)](_0x44532d(0x54f))[_0x44532d(0x718)][_0x44532d(0x5b5)]=_0x44532d(0x2bc),document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x584))[_0x44532d(0x718)][_0x44532d(0x5b5)]='block';if(document[_0x44532d(0x76b)+'te']==='complete')uygulamayiBaslat();else window[_0x44532d(0x14f)+'Listener'](_0x44532d(0x782),()=>uygulamayiBaslat(),{'once':!![]});}const KULLANICI_KODU_UZANTISI=_0x44532d(0x38c)+_0x44532d(0x491)+_0x44532d(0x50a);function kullaniciKoduEmaile(_0x245a19){const _0x7ddb16=_0x44532d,_0x3de6e0={'YGeGO':function(_0x2d894e,_0x43d23e){return _0x2d894e+_0x43d23e;},'NfEtE':function(_0x5d8cc5,_0x58d71b){return _0x5d8cc5||_0x58d71b;}};return _0x3de6e0[_0x7ddb16(0x1c4)](String(_0x3de6e0[_0x7ddb16(0x312)](_0x245a19,''))[_0x7ddb16(0x785)](),KULLANICI_KODU_UZANTISI);}document[_0x44532d(0x2ac)+'ntById'](_0x44532d(0x242)+_0x44532d(0x2e0))[_0x44532d(0x14f)+'Listener'](_0x44532d(0x69b),async()=>{const _0x388997=_0x44532d,_0x522d66={'IlgBE':_0x388997(0x483)+_0x388997(0x5d6)+'u','QLtJi':_0x388997(0x4a6)+'r','lTGzd':'authStat'+'us','vdkcj':_0x388997(0x2bc),'SzYDo':function(_0xac9ec4,_0x1e6e27){return _0xac9ec4||_0x1e6e27;},'VuzSH':_0x388997(0x795)+_0x388997(0x711)+_0x388997(0x3bc)+_0x388997(0x1f5),'phdcV':_0x388997(0x6a8),'mbPMz':function(_0x3ae45b,_0x46d164){return _0x3ae45b!==_0x46d164;},'VLyJy':_0x388997(0x35f),'cPyVh':function(_0x13d1aa,_0x3f43f3){return _0x13d1aa(_0x3f43f3);}},_0x34bac2=document[_0x388997(0x2ac)+_0x388997(0x575)](_0x522d66['IlgBE'])[_0x388997(0x26d)][_0x388997(0x785)](),_0x32b349=document[_0x388997(0x2ac)+_0x388997(0x575)]('authPass'+_0x388997(0x716))['value'],_0x5440dd=document[_0x388997(0x2ac)+'ntById'](_0x522d66[_0x388997(0x3de)]),_0x5b270e=document[_0x388997(0x2ac)+_0x388997(0x575)](_0x522d66[_0x388997(0x24f)]);_0x5440dd[_0x388997(0x718)][_0x388997(0x5b5)]=_0x522d66['vdkcj'];if(_0x522d66[_0x388997(0x446)](!_0x34bac2,!_0x32b349)){_0x5440dd[_0x388997(0x73f)+_0x388997(0x5c0)]=_0x522d66[_0x388997(0x311)],_0x5440dd[_0x388997(0x718)][_0x388997(0x5b5)]=_0x522d66[_0x388997(0x794)];return;}_0x5b270e[_0x388997(0x73f)+'ent']=_0x388997(0x173)+_0x388997(0x441),_0x5b270e['style'][_0x388997(0x5b5)]=_0x522d66[_0x388997(0x794)];try{if(_0x522d66[_0x388997(0x442)](_0x388997(0x35f),_0x522d66['VLyJy'])){const _0x16569b=turkiyeSimdi();return new _0x58f790(_0x28b796[_0x388997(0x66c)](_0x16569b[_0x388997(0x3f8)+_0x388997(0x573)](),_0x16569b[_0x388997(0x61e)+_0x388997(0x142)](),_0x16569b[_0x388997(0x60a)+'te']()));}else await window['firebase'+'AuthAPI'][_0x388997(0x4c5)+_0x388997(0x37d)+_0x388997(0x50d)+'rd'](window[_0x388997(0x78a)+'AuthAPI']['authInst'+_0x388997(0x277)],_0x522d66['cPyVh'](kullaniciKoduEmaile,_0x34bac2),_0x32b349),_0x5b270e[_0x388997(0x718)]['display']=_0x388997(0x2bc);}catch(_0xf9fc3c){_0x5b270e[_0x388997(0x718)][_0x388997(0x5b5)]=_0x388997(0x2bc),_0x5440dd[_0x388997(0x73f)+_0x388997(0x5c0)]='Giriş\x20ba'+'şarısız:'+_0x388997(0x31d)+_0x388997(0x439)+_0x388997(0x43f)+_0x388997(0x6e9)+'ı.',_0x5440dd[_0x388997(0x718)][_0x388997(0x5b5)]=_0x522d66[_0x388997(0x794)];}}),document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x5be)+_0x44532d(0x716))['addEvent'+_0x44532d(0x27b)](_0x44532d(0x595),_0x1ba900=>{const _0x2302ac=_0x44532d,_0x184c1c={'wbbBT':function(_0x4ec0e5,_0x4af93f){return _0x4ec0e5===_0x4af93f;},'MABPG':_0x2302ac(0x555),'rgyEh':_0x2302ac(0x242)+_0x2302ac(0x2e0)};if(_0x184c1c[_0x2302ac(0x171)](_0x1ba900[_0x2302ac(0x5c2)],_0x184c1c[_0x2302ac(0x6df)]))document[_0x2302ac(0x2ac)+_0x2302ac(0x575)](_0x184c1c[_0x2302ac(0x545)])[_0x2302ac(0x69b)]();}),document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x1df)+_0x44532d(0x5f7))[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x69b),()=>{const _0x4f42c0=_0x44532d;if(authAktif)window['firebase'+_0x4f42c0(0x6ff)]['signOut'](window[_0x4f42c0(0x78a)+_0x4f42c0(0x6ff)][_0x4f42c0(0x237)+_0x4f42c0(0x277)]);});async function saveReportToCloud(_0x2be5f7){const _0x5e17a5=_0x44532d,_0x40ab69={'mxBXg':function(_0x7e9e24){return _0x7e9e24();},'bbnbE':_0x5e17a5(0x36f)+_0x5e17a5(0x4cf),'epzgO':'PUT','vTHuU':_0x5e17a5(0x1f9)+'ion/json','NdZll':_0x5e17a5(0x559),'pywob':function(_0x197b3d,_0x1900e6,_0x3ae41a){return _0x197b3d(_0x1900e6,_0x3ae41a);},'ejIVI':function(_0x4b86b1,_0x11bdcd,_0xc28a23){return _0x4b86b1(_0x11bdcd,_0xc28a23);},'ntkqq':_0x5e17a5(0x42d)+'d'};if(!_0x40ab69['mxBXg'](cloudEnabled))return{'ok':![],'reason':_0x40ab69[_0x5e17a5(0x425)]};try{const _0xc19158=await cloudFetch(CLOUD[_0x5e17a5(0x38f)][_0x5e17a5(0x1c6)](/\/$/,'')+'/'+CLOUD[_0x5e17a5(0x2cc)]+'.json'+await _0x40ab69[_0x5e17a5(0x41f)](authQuery),{'method':_0x40ab69[_0x5e17a5(0x70b)],'headers':{'Content-Type':_0x40ab69[_0x5e17a5(0x5a8)]},'body':JSON['stringif'+'y'](_0x2be5f7)});if(!_0xc19158['ok'])throw new Error(_0x40ab69[_0x5e17a5(0x469)]+_0xc19158[_0x5e17a5(0x73a)]);const _0x35af2e=Date[_0x5e17a5(0x2bb)]();let _0x3d5033=await _0x40ab69[_0x5e17a5(0x427)](cloudMetaYazUzaktan,CLOUD['path'],_0x35af2e);if(!_0x3d5033)_0x3d5033=await cloudMetaYazUzaktan(CLOUD[_0x5e17a5(0x2cc)],_0x35af2e);await _0x40ab69[_0x5e17a5(0x590)](cloudMetaZamaniKaydet,CLOUD[_0x5e17a5(0x2cc)],_0x35af2e);if(typeof otomatikSenkronBilinenZaman!==_0x40ab69[_0x5e17a5(0x477)])otomatikSenkronBilinenZaman=_0x35af2e;return{'ok':!![]};}catch(_0x2243ef){return console[_0x5e17a5(0x640)](_0x5e17a5(0x750)+_0x5e17a5(0x5d0)+'dedileme'+_0x5e17a5(0x488),_0x2243ef),{'ok':![],'reason':_0x2243ef[_0x5e17a5(0x2ef)]};}}async function loadReportFromCloud(){const _0x3ff908=_0x44532d,_0x301610={'aMOHZ':function(_0x588c39,_0x13d787){return _0x588c39===_0x13d787;},'GAFdu':'string','PDrNO':function(_0x4a2939,_0x382c66){return _0x4a2939(_0x382c66);},'ieUFF':function(_0x600077){return _0x600077();},'wyHmR':function(_0x408e13){return _0x408e13();},'njFcu':function(_0x1a0e80,_0x648459){return _0x1a0e80+_0x648459;},'pKKWH':_0x3ff908(0x559),'JLsXC':function(_0x310e6c,_0x58ada6){return _0x310e6c===_0x58ada6;},'LSUtg':'null','WraaJ':'Bulut\x20ve'+_0x3ff908(0x17a)+'namadı:'};if(!_0x301610[_0x3ff908(0x67d)](cloudEnabled))return null;try{const _0x1d8850=await cloudFetch(CLOUD['dbUrl'][_0x3ff908(0x1c6)](/\/$/,'')+'/'+CLOUD['path']+_0x3ff908(0x4c4)+await _0x301610[_0x3ff908(0x5d9)](authQuery));if(!_0x1d8850['ok'])throw new Error(_0x301610[_0x3ff908(0x3f2)](_0x301610['pKKWH'],_0x1d8850[_0x3ff908(0x73a)]));const _0x46f3bb=await _0x1d8850[_0x3ff908(0x78e)]();if(!_0x46f3bb||_0x301610[_0x3ff908(0x30d)](_0x46f3bb,_0x301610[_0x3ff908(0x746)]))return null;return JSON['parse'](_0x46f3bb,(_0x2151b8,_0x4c6a9f)=>{const _0x2d481c=_0x3ff908;if(DATE_KEYS[_0x2d481c(0x3db)](_0x2151b8)&&_0x301610['aMOHZ'](typeof _0x4c6a9f,_0x301610[_0x2d481c(0x341)])){const _0x20056c=new Date(_0x4c6a9f);return _0x301610[_0x2d481c(0x4d1)](isNaN,_0x20056c[_0x2d481c(0x264)]())?_0x4c6a9f:_0x20056c;}return _0x4c6a9f;});}catch(_0x519c5d){return console['error'](_0x301610['WraaJ'],_0x519c5d),null;}}const MUSTERI_MASTER_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x43d)+'Master'),MUSTERI_MASTER_LOCAL_KEY=_0x44532d(0x1e1)+'iTakip_m'+_0x44532d(0x1fe)+_0x44532d(0x19a),MUSTERI_MASTER_DETAY_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x43d)+'MasterDe'+_0x44532d(0x4ec)),MUSTERI_MASTER_DETAY_LOCAL_KEY=_0x44532d(0x1e1)+'iTakip_m'+_0x44532d(0x1fe)+_0x44532d(0x6d4)+_0x44532d(0x196),MUSTERI_MASTER_DURUM_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+('_musteri'+'MasterDu'+'rum'),MUSTERI_MASTER_DURUM_LOCAL_KEY='noktaCar'+_0x44532d(0x5bd)+_0x44532d(0x1fe)+_0x44532d(0x286)+_0x44532d(0x413),MUSTERI_MASTER_KANAL_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+('_musteri'+_0x44532d(0x52f)+_0x44532d(0x360)),MUSTERI_MASTER_KANAL_LOCAL_KEY=_0x44532d(0x1e1)+_0x44532d(0x5bd)+_0x44532d(0x1fe)+_0x44532d(0x401)+_0x44532d(0x6c9);function buildMusteriMasterMap(_0x4ffef8){const _0x2a5210=_0x44532d,_0x5f0d97={'Cvdsa':function(_0x1fb482,_0x4b2ff6){return _0x1fb482(_0x4b2ff6);},'urJKb':_0x2a5210(0x3af)+_0x2a5210(0x327)+'\x20Adı','LYVlb':'Key\x20Acco'+_0x2a5210(0x2ee)},_0x380d8d=new Map();return(_0x4ffef8||[])[_0x2a5210(0x370)](_0x32cd59=>{const _0x5be1e9=_0x2a5210,_0x40a485=_0x5f0d97[_0x5be1e9(0x495)](String,_0x32cd59[_0x5be1e9(0x748)]||'')[_0x5be1e9(0x785)]();if(!_0x40a485)return;let _0x520b0c=_0x5f0d97[_0x5be1e9(0x495)](String,_0x32cd59[_0x5f0d97[_0x5be1e9(0x631)]]||'')[_0x5be1e9(0x785)]();if(!_0x520b0c)_0x520b0c=_0x5f0d97[_0x5be1e9(0x743)];_0x380d8d[_0x5be1e9(0x463)](_0x40a485,_0x520b0c);}),_0x380d8d;}function musteriAdiTekillestir(_0x2a389f){const _0x1d64c8=_0x44532d,_0x1989c0={'EHmbG':function(_0x1fc76b,_0x5baa9b){return _0x1fc76b(_0x5baa9b);},'tdvJU':function(_0x32636f,_0x5b4f2b){return _0x32636f<_0x5b4f2b;},'IFnAH':function(_0x67c104,_0x361494){return _0x67c104!==_0x361494;},'DNlLy':function(_0x169d30,_0x1f35d6){return _0x169d30%_0x1f35d6;},'bOBUi':function(_0x51c746,_0x55698d){return _0x51c746===_0x55698d;},'gPWLe':_0x1d64c8(0x3f6)},_0x568f92=_0x1989c0[_0x1d64c8(0x3b6)](String,_0x2a389f||'')[_0x1d64c8(0x785)]()[_0x1d64c8(0x1c6)](/\s+/g,'\x20');if(!_0x568f92)return _0x568f92;const _0x24cfe5=_0x568f92[_0x1d64c8(0x406)]('\x20');if(_0x1989c0[_0x1d64c8(0x772)](_0x24cfe5['length'],0x19c5*0x1+0x4b4+0xb*-0x2c5)||_0x1989c0[_0x1d64c8(0x5ed)](_0x1989c0[_0x1d64c8(0x75d)](_0x24cfe5['length'],0x115e+-0x51a*-0x7+0x2*-0x1a89),0x788+0x17e5+-0x1f6d))return _0x568f92;const _0x305a6d=_0x24cfe5[_0x1d64c8(0x49d)]/(-0x1*-0xe89+0x1ded*-0x1+0xf66),_0x4ad176=_0x24cfe5[_0x1d64c8(0x5a9)](0x7*0x42b+-0x721+-0x160c,_0x305a6d)[_0x1d64c8(0x698)]('\x20'),_0x15cfb7=_0x24cfe5[_0x1d64c8(0x5a9)](_0x305a6d)[_0x1d64c8(0x698)]('\x20');return _0x1989c0[_0x1d64c8(0x187)](_0x4ad176[_0x1d64c8(0x476)+_0x1d64c8(0x754)+'e'](_0x1989c0[_0x1d64c8(0x755)]),_0x15cfb7[_0x1d64c8(0x476)+'UpperCas'+'e'](_0x1989c0[_0x1d64c8(0x755)]))?_0x4ad176:_0x568f92;}function buildMusteriMasterDetay(_0x3a627d){const _0x1a6302=_0x44532d,_0x2df177={'NIWTD':_0x1a6302(0x748),'FwlIa':function(_0x7b3fa9,_0x3cdd5f){return _0x7b3fa9(_0x3cdd5f);},'bzVcO':_0x1a6302(0x2fb)+'dı','smFNq':function(_0x13a087,_0x458ccb){return _0x13a087(_0x458ccb);},'iPvdg':_0x1a6302(0x2a6)+_0x1a6302(0x490),'hhCQM':function(_0x28e097,_0x1786e6){return _0x28e097(_0x1786e6);},'VCTrS':_0x1a6302(0x252),'tsxxZ':function(_0x144c49,_0x2ddcc5){return _0x144c49(_0x2ddcc5);},'jbLzm':_0x1a6302(0x50c)},_0x2cb11d=new Map();return(_0x3a627d||[])[_0x1a6302(0x370)](_0x530f49=>{const _0x42b6b7=_0x1a6302,_0x5ce47d=String(_0x530f49[_0x2df177[_0x42b6b7(0x47f)]]||'')[_0x42b6b7(0x785)]();if(!_0x5ce47d)return;_0x2cb11d[_0x42b6b7(0x463)](_0x5ce47d,{'tabelaAdi':_0x2df177[_0x42b6b7(0x166)](String,_0x530f49[_0x2df177[_0x42b6b7(0x688)]]||'')[_0x42b6b7(0x785)](),'musteriAdi':_0x2df177[_0x42b6b7(0x3e2)](musteriAdiTekillestir,_0x530f49[_0x2df177[_0x42b6b7(0x665)]]),'vergiNo':_0x2df177[_0x42b6b7(0x204)](String,_0x530f49[_0x2df177[_0x42b6b7(0x60e)]]||'')[_0x42b6b7(0x785)](),'tcKimlikNo':String(_0x530f49[_0x42b6b7(0x48d)+_0x42b6b7(0x15d)]||'')[_0x42b6b7(0x785)](),'adres':_0x2df177[_0x42b6b7(0x3e2)](String,_0x530f49[_0x42b6b7(0x497)+_0x42b6b7(0x5e6)]||'')[_0x42b6b7(0x785)](),'il':_0x2df177[_0x42b6b7(0x5e0)](String,_0x530f49['İl']||'')[_0x42b6b7(0x785)](),'ilce':_0x2df177[_0x42b6b7(0x166)](String,_0x530f49[_0x2df177[_0x42b6b7(0x2ae)]]||'')[_0x42b6b7(0x785)]()});}),_0x2cb11d;}function musteriMasterMapToObj(_0x360f78){const _0x219264=_0x44532d,_0x5ed514={};return _0x360f78[_0x219264(0x370)]((_0x4b2ff7,_0x8b27fb)=>{_0x5ed514[_0x8b27fb]=_0x4b2ff7;}),_0x5ed514;}function musteriMasterObjToMap(_0x1130de){const _0x50f370=_0x44532d,_0x2a0b69={'eTzol':function(_0x37a232,_0x782164){return _0x37a232||_0x782164;}};return new Map(Object[_0x50f370(0x5cb)](_0x2a0b69[_0x50f370(0x46a)](_0x1130de,{})));}const DURUM_KOLON_ADAYLARI=[_0x44532d(0x241),'Statü',_0x44532d(0x2a6)+_0x44532d(0x45f),_0x44532d(0x2a6)+_0x44532d(0x2b5),_0x44532d(0x528)+_0x44532d(0x6e7),_0x44532d(0x5f5)+_0x44532d(0x6e7),_0x44532d(0x143)+_0x44532d(0x2f8),_0x44532d(0x48b),_0x44532d(0x7a2)+'um'];function musteriDurumKolonunuBul(_0x5c3ce0){const _0x52be9c=_0x44532d,_0xa353c5=new Set((_0x5c3ce0||[])[_0x52be9c(0x4ca)](_0x5ab279=>String(_0x5ab279||'')[_0x52be9c(0x785)]()));return DURUM_KOLON_ADAYLARI[_0x52be9c(0x3f4)](_0x5ac7f4=>_0xa353c5[_0x52be9c(0x3db)](_0x5ac7f4))||null;}function buildMusteriMasterDurumMap(_0x4f0f8e,_0x2d37e7){const _0x531730=_0x44532d,_0x5e04d0={'oYpsa':function(_0x50d67c,_0x4701c6){return _0x50d67c===_0x4701c6;},'CZLJU':_0x531730(0x555),'KKfmm':function(_0x4ccc49,_0x43c0c8){return _0x4ccc49===_0x43c0c8;},'FyWjS':_0x531730(0x20f),'JpeUI':_0x531730(0x201),'ZyvZP':_0x531730(0x72c),'gHvhF':function(_0x279776,_0x284ad5){return _0x279776(_0x284ad5);},'POSMG':_0x531730(0x3f6),'zsnCL':function(_0x117ea5,_0xd946b8){return _0x117ea5===_0xd946b8;},'fdpWR':_0x531730(0x549),'yOYJA':_0x531730(0x65e),'rHwBl':_0x531730(0x677),'fjavS':function(_0x1277dd,_0x2cf7f5){return _0x1277dd||_0x2cf7f5;},'FgpEl':_0x531730(0x378)},_0xaa038b=new Map(),_0x1dd420=_0x5e04d0[_0x531730(0x3ff)](musteriDurumKolonunuBul,_0x2d37e7||(_0x4f0f8e&&_0x4f0f8e[0x2*0xcd2+0x11ba*0x1+-0x1*0x2b5e]?Object['keys'](_0x4f0f8e[0x8*0x29c+-0x18db+0x3fb]):[]));if(!_0x1dd420)return _0xaa038b;return(_0x4f0f8e||[])[_0x531730(0x370)](_0x1bb87c=>{const _0x3c9150=_0x531730;if(_0x5e04d0[_0x3c9150(0x250)](_0x5e04d0[_0x3c9150(0x669)],_0x5e04d0[_0x3c9150(0x215)]))(_0x5e04d0[_0x3c9150(0x250)](_0x1a7eb2['key'],_0x5e04d0[_0x3c9150(0x462)])||_0x5e04d0[_0x3c9150(0x250)](_0x44258a[_0x3c9150(0x5c2)],'\x20')||_0x5e04d0[_0x3c9150(0x4a3)](_0x2f0e64[_0x3c9150(0x5c2)],_0x5e04d0[_0x3c9150(0x6a3)]))&&(_0xf7dec[_0x3c9150(0x7a4)+_0x3c9150(0x49b)](),fileInput[_0x3c9150(0x69b)]());else{const _0x137fe4=String(_0x1bb87c[_0x3c9150(0x748)]||'')[_0x3c9150(0x785)]();if(!_0x137fe4)return;const _0x4e3dbf=_0x5e04d0[_0x3c9150(0x3ff)](String,_0x1bb87c[_0x1dd420]||'')[_0x3c9150(0x785)](),_0x261ea7=_0x4e3dbf[_0x3c9150(0x476)+_0x3c9150(0x754)+'e'](_0x5e04d0[_0x3c9150(0x68e)]);_0xaa038b['set'](_0x137fe4,_0x5e04d0[_0x3c9150(0x4b6)](_0x261ea7,_0x5e04d0[_0x3c9150(0x456)])||_0x261ea7===_0x5e04d0[_0x3c9150(0x710)]?_0x5e04d0[_0x3c9150(0x2c0)]:_0x5e04d0[_0x3c9150(0x6ba)](_0x4e3dbf,_0x5e04d0[_0x3c9150(0x535)]));}}),_0xaa038b;}function musteriMasterKanalSinifla(_0x2a7600){const _0x53e535=_0x44532d,_0x19bffa={'lptpA':function(_0x15af98,_0x58b27f){return _0x15af98(_0x58b27f);},'TEnmp':function(_0xd5359c,_0x381c75){return _0xd5359c||_0x381c75;},'ALqwe':'Kapalı\x20K'+'anal','pxXdc':_0x53e535(0x4f2)+'al'},_0x24c569=_0x19bffa[_0x53e535(0x35a)](String,_0x19bffa[_0x53e535(0x556)](_0x2a7600,''))[_0x53e535(0x785)]();if(KAPALI_KANAL_DEGERLERI[_0x53e535(0x3db)](_0x24c569))return _0x19bffa[_0x53e535(0x65f)];if(ACIK_KANAL_DEGERLERI[_0x53e535(0x3db)](_0x24c569))return _0x19bffa[_0x53e535(0x178)];return null;}function buildMusteriMasterKanalMap(_0x169aae){const _0x43e586=_0x44532d,_0x2997c9={'FgagJ':_0x43e586(0x2a6)+'Master\x20D'+_0x43e586(0x49f)+_0x43e586(0x6c0)+_0x43e586(0x563),'nxbpb':function(_0x2144c2,_0xb21c30){return _0x2144c2===_0xb21c30;},'JhjGs':_0x43e586(0x20a),'pUDJv':function(_0x312f0f,_0x1a0355){return _0x312f0f(_0x1a0355);},'LCbsL':_0x43e586(0x748),'wdQFK':function(_0x163c55,_0x3d6f51){return _0x163c55(_0x3d6f51);},'fRkhp':_0x43e586(0x684)+_0x43e586(0x422)+_0x43e586(0x454)},_0x555ef0=new Map();return(_0x169aae||[])[_0x43e586(0x370)](_0x4d37f3=>{const _0x3cef18=_0x43e586,_0x4cebb4={'cYxxa':_0x2997c9[_0x3cef18(0x474)]};if(_0x2997c9['nxbpb'](_0x2997c9[_0x3cef18(0x416)],_0x3cef18(0x57f)))return _0x572157[_0x3cef18(0x640)](_0x4cebb4['cYxxa'],_0x887e5e),null;else{const _0x5bdc64=_0x2997c9[_0x3cef18(0x3d4)](String,_0x4d37f3[_0x2997c9[_0x3cef18(0x6e0)]]||'')[_0x3cef18(0x785)]();if(!_0x5bdc64)return;const _0x2453ed=_0x2997c9[_0x3cef18(0x49e)](musteriMasterKanalSinifla,_0x4d37f3[_0x2997c9[_0x3cef18(0x4ff)]]);if(_0x2453ed)_0x555ef0['set'](_0x5bdc64,_0x2453ed);}}),_0x555ef0;}function noktaPasifVeyaIptalMi(_0x5c8341){const _0x29747f=_0x44532d,_0x8319c4={'YzRWZ':function(_0x1fc07d,_0x50d8bc){return _0x1fc07d(_0x50d8bc);},'tihZX':'tr-TR','PRIuh':'PASİF','mYbXS':_0x29747f(0x71d),'dvKqv':'IPTAL'};if(!_0x5c8341)return![];const _0x5457df=_0x8319c4[_0x29747f(0x2c4)](String,_0x5c8341)[_0x29747f(0x785)]()[_0x29747f(0x476)+'UpperCas'+'e'](_0x8319c4[_0x29747f(0x2ab)]);if(!_0x5457df)return![];return _0x5457df[_0x29747f(0x758)](_0x8319c4[_0x29747f(0x2b1)])||_0x5457df[_0x29747f(0x758)](_0x8319c4[_0x29747f(0x192)])||_0x5457df[_0x29747f(0x758)](_0x29747f(0x2c7))||_0x5457df['includes'](_0x8319c4[_0x29747f(0x4f4)]);}async function saveMusteriMasterToCloud(_0x454baa){const _0x3fcd27=_0x44532d,_0x371b2c={'qDOYm':_0x3fcd27(0x74b),'uBRPd':function(_0x25a247){return _0x25a247();},'hqwmJ':_0x3fcd27(0x36f)+_0x3fcd27(0x4cf),'MrhyC':function(_0x24a641,_0x4a2cf7){return _0x24a641===_0x4a2cf7;},'jtyVr':_0x3fcd27(0x6c6),'pVggU':'PUT','zRqNW':_0x3fcd27(0x1f9)+'ion/json','nOtOK':_0x3fcd27(0x559),'PyCYq':function(_0x4bfef3,_0x15129e,_0x15dbd9){return _0x4bfef3(_0x15129e,_0x15dbd9);},'uUJAx':_0x3fcd27(0x2a6)+'Master\x20b'+_0x3fcd27(0x355)+_0x3fcd27(0x4d5)+_0x3fcd27(0x6cc)};if(!_0x371b2c[_0x3fcd27(0x663)](cloudEnabled))return{'ok':![],'reason':_0x371b2c['hqwmJ']};try{if(_0x371b2c[_0x3fcd27(0x68f)](_0x371b2c[_0x3fcd27(0x64e)],_0x371b2c[_0x3fcd27(0x64e)])){const _0x3fed96=await cloudFetch(CLOUD[_0x3fcd27(0x38f)][_0x3fcd27(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_CLOUD_PATH+'.json'+await _0x371b2c['uBRPd'](authQuery),{'method':_0x371b2c['pVggU'],'headers':{'Content-Type':_0x371b2c[_0x3fcd27(0x6a7)]},'body':JSON[_0x3fcd27(0x4db)+'y'](_0x454baa)});if(!_0x3fed96['ok'])throw new Error(_0x371b2c[_0x3fcd27(0x4ee)]+_0x3fed96[_0x3fcd27(0x73a)]);const _0x5c2e23=Date[_0x3fcd27(0x2bb)]();return await _0x371b2c['PyCYq'](cloudMetaYazUzaktan,MUSTERI_MASTER_CLOUD_PATH,_0x5c2e23),await cloudMetaZamaniKaydet(MUSTERI_MASTER_CLOUD_PATH,_0x5c2e23),{'ok':!![]};}else _0x44386f[_0x3fcd27(0x1ac)+'t'][_0x3fcd27(0x600)](_0x371b2c['qDOYm']);}catch(_0x440438){return console[_0x3fcd27(0x640)](_0x371b2c[_0x3fcd27(0x594)],_0x440438),{'ok':![],'reason':_0x440438['message']};}}async function loadMusteriMasterFromCloud(){const _0x26b7dc=_0x44532d,_0x4b2658={'rSWyh':_0x26b7dc(0x2bc),'qfKtL':_0x26b7dc(0x39d)+_0x26b7dc(0x38e)+_0x26b7dc(0x31d)+'cı\x20kodu\x20'+_0x26b7dc(0x43f)+_0x26b7dc(0x6e9)+'ı.','RBzkU':_0x26b7dc(0x6a8),'tXuYM':function(_0x2bd3f1){return _0x2bd3f1();},'DQQhc':function(_0x370be7,_0x14ce06){return _0x370be7(_0x14ce06);},'dSIFL':function(_0x2fcb94,_0x32c988){return _0x2fcb94+_0x32c988;},'tdyuL':_0x26b7dc(0x559),'hnxgk':_0x26b7dc(0x6e4),'TQhSK':function(_0x1b6531,_0x322aaa){return _0x1b6531===_0x322aaa;},'qLTUg':_0x26b7dc(0x6f4),'utHij':'Müşteri\x20'+_0x26b7dc(0x766)+_0x26b7dc(0x562)+_0x26b7dc(0x5ce)+'ı:'};if(!_0x4b2658['tXuYM'](cloudEnabled))return null;try{const _0x4bd462=await _0x4b2658['DQQhc'](cloudFetch,CLOUD[_0x26b7dc(0x38f)][_0x26b7dc(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_CLOUD_PATH+_0x26b7dc(0x4c4)+await _0x4b2658['tXuYM'](authQuery));if(!_0x4bd462['ok'])throw new Error(_0x4b2658['dSIFL'](_0x4b2658[_0x26b7dc(0x3a5)],_0x4bd462[_0x26b7dc(0x73a)]));const _0x4a5a2a=await _0x4bd462[_0x26b7dc(0x78e)]();if(!_0x4a5a2a||_0x4a5a2a===_0x4b2658[_0x26b7dc(0x4b0)])return null;return JSON[_0x26b7dc(0x1ab)](_0x4a5a2a);}catch(_0x1e81fd){if(_0x4b2658[_0x26b7dc(0x41a)](_0x4b2658[_0x26b7dc(0x2a2)],_0x26b7dc(0x6f4)))return console[_0x26b7dc(0x640)](_0x4b2658[_0x26b7dc(0x77e)],_0x1e81fd),null;else _0x34b18c[_0x26b7dc(0x718)]['display']=sPmpwK[_0x26b7dc(0x194)],_0x43cf30[_0x26b7dc(0x73f)+'ent']=sPmpwK[_0x26b7dc(0x58d)],_0x3b2578[_0x26b7dc(0x718)][_0x26b7dc(0x5b5)]=sPmpwK[_0x26b7dc(0x145)];}}async function saveMusteriMasterToLocal(_0x4df4b5){const _0x407cda=_0x44532d,_0x3b7306={'QKBFg':function(_0x250d84,_0x2a540f,_0x381fba){return _0x250d84(_0x2a540f,_0x381fba);},'XWqwu':_0x407cda(0x2a6)+_0x407cda(0x45a)+_0x407cda(0x69e)+_0x407cda(0x4d5)+_0x407cda(0x505)},_0x317602=await _0x3b7306['QKBFg'](idbSet,MUSTERI_MASTER_LOCAL_KEY,_0x4df4b5);if(!_0x317602)console[_0x407cda(0x640)](_0x3b7306[_0x407cda(0x155)]);}async function loadMusteriMasterFromLocal(){const _0x4cbc07=_0x44532d,_0x274690={'JHsgH':function(_0x860fa5,_0x1592fc){return _0x860fa5!==_0x1592fc;},'sKtbS':function(_0x55ab9e,_0x51e2f3){return _0x55ab9e(_0x51e2f3);},'cfYqD':function(_0x225e3b,_0x1b1ca5){return _0x225e3b!==_0x1b1ca5;},'XcMUG':_0x4cbc07(0x35c)};try{return await _0x274690[_0x4cbc07(0x165)](idbMigrateFromLocalStorageOnce,MUSTERI_MASTER_LOCAL_KEY),await idbGet(MUSTERI_MASTER_LOCAL_KEY);}catch(_0x1049ea){if(_0x274690[_0x4cbc07(0x2a7)](_0x274690[_0x4cbc07(0x6ec)],_0x274690[_0x4cbc07(0x6ec)]))try{if(FIREBASE_CONFIG[_0x4cbc07(0x63d)]&&UHpDcT[_0x4cbc07(0x7ad)](FIREBASE_CONFIG[_0x4cbc07(0x63d)],'BURAYA_F'+_0x4cbc07(0x20b)+'API_KEY_'+_0x4cbc07(0x249)+'IN')&&_0x1225d3[_0x4cbc07(0x78a)+_0x4cbc07(0x6ff)]){const _0x19a3b1=_0x19cb04['firebase'+_0x4cbc07(0x6ff)][_0x4cbc07(0x29f)+_0x4cbc07(0x431)](FIREBASE_CONFIG);_0x209634[_0x4cbc07(0x78a)+_0x4cbc07(0x6ff)][_0x4cbc07(0x237)+_0x4cbc07(0x277)]=_0x33809b[_0x4cbc07(0x78a)+_0x4cbc07(0x6ff)][_0x4cbc07(0x63e)](_0x19a3b1),authAktif=!![];}}catch(_0x4e894a){_0x52c896[_0x4cbc07(0x640)](_0x4cbc07(0x43e)+_0x4cbc07(0x4f6)+_0x4cbc07(0x212)+_0x4cbc07(0x516)+_0x4cbc07(0x50e),_0x4e894a);}else return console[_0x4cbc07(0x640)](_0x1049ea),null;}}async function saveMusteriMasterDetayToCloud(_0x350801){const _0x355192=_0x44532d,_0x416aa0={'sOUpE':_0x355192(0x19d),'EEQmu':function(_0x1d8d96,_0x3fff2f){return _0x1d8d96+_0x3fff2f;},'VQJSf':function(_0x22059a,_0x39ac82){return _0x22059a+_0x39ac82;},'ADvsj':_0x355192(0x3df)+_0x355192(0x66d)+_0x355192(0x149)+'l\x20(yalnı'+_0x355192(0x2dd),'qlQWE':_0x355192(0x3cb),'YUFDp':'\x20destekl'+_0x355192(0x2c9),'HkBwN':_0x355192(0x36f)+_0x355192(0x4cf),'wpOed':function(_0x249709,_0x2ab63b,_0x22dff5){return _0x249709(_0x2ab63b,_0x22dff5);},'oBcoE':_0x355192(0x36a),'WwGNn':_0x355192(0x1f9)+_0x355192(0x2d2),'SkjGw':function(_0x49792a,_0xbe6ae2){return _0x49792a+_0xbe6ae2;},'MfHBz':_0x355192(0x559),'kmvtq':function(_0x26d196,_0x573cbe){return _0x26d196===_0x573cbe;},'eTQmn':_0x355192(0x723),'swSJL':_0x355192(0x2a6)+_0x355192(0x603)+_0x355192(0x22c)+'uta\x20kayd'+'edilemed'+'i:'};if(!cloudEnabled())return{'ok':![],'reason':_0x416aa0[_0x355192(0x6c7)]};try{const _0x5d9ad7=await _0x416aa0[_0x355192(0x6f1)](cloudFetch,CLOUD[_0x355192(0x38f)][_0x355192(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_DETAY_CLOUD_PATH+_0x355192(0x4c4)+await authQuery(),{'method':_0x416aa0[_0x355192(0x22b)],'headers':{'Content-Type':_0x416aa0[_0x355192(0x440)]},'body':JSON[_0x355192(0x4db)+'y'](_0x350801)});if(!_0x5d9ad7['ok'])throw new Error(_0x416aa0[_0x355192(0x78d)](_0x416aa0['MfHBz'],_0x5d9ad7[_0x355192(0x73a)]));const _0x5a4332=Date[_0x355192(0x2bb)]();return await _0x416aa0[_0x355192(0x6f1)](cloudMetaYazUzaktan,MUSTERI_MASTER_DETAY_CLOUD_PATH,_0x5a4332),await cloudMetaZamaniKaydet(MUSTERI_MASTER_DETAY_CLOUD_PATH,_0x5a4332),{'ok':!![]};}catch(_0x3736f4){if(_0x416aa0['kmvtq'](_0x416aa0[_0x355192(0x78b)],_0x416aa0[_0x355192(0x78b)]))return console[_0x355192(0x640)](_0x416aa0[_0x355192(0x644)],_0x3736f4),{'ok':![],'reason':_0x3736f4[_0x355192(0x2ef)]};else{_0x19415d({'file':_0x1a6789,'durum':_0x416aa0['sOUpE'],'mesaj':_0x416aa0[_0x355192(0x694)](_0x416aa0[_0x355192(0x694)](_0x416aa0[_0x355192(0x330)]('\x22',_0xca2929),_0x416aa0[_0x355192(0x6eb)])+KABUL_EDILEN_UZANTILAR[_0x355192(0x698)](_0x416aa0['qlQWE']),_0x416aa0[_0x355192(0x24b)])});return;}}}async function loadMusteriMasterDetayFromCloud(){const _0xd15fad=_0x44532d,_0x2dc1ac={'Plgii':_0xd15fad(0x4c2)+_0xd15fad(0x47a)+_0xd15fad(0x33d)+'n\x20anahta'+_0xd15fad(0x3e7)+_0xd15fad(0x563),'PqjuT':function(_0x3eb173,_0x5598bb){return _0x3eb173===_0x5598bb;},'iJJSt':_0xd15fad(0x15c),'GuvwA':function(_0x29e5eb,_0x56c886){return _0x29e5eb(_0x56c886);},'GjRaR':function(_0x59b478){return _0x59b478();},'ALWpo':function(_0x16fc57,_0x3f9a60){return _0x16fc57+_0x3f9a60;},'pCBOf':_0xd15fad(0x559),'RXwEX':function(_0x1afe14,_0x108398){return _0x1afe14===_0x108398;},'HnONy':_0xd15fad(0x6e4),'xRyrk':_0xd15fad(0x2a6)+_0xd15fad(0x603)+'etay\x20bul'+_0xd15fad(0x6c0)+_0xd15fad(0x563)};if(!cloudEnabled())return null;try{if(_0x2dc1ac[_0xd15fad(0x769)](_0xd15fad(0x206),_0x2dc1ac[_0xd15fad(0x4b2)]))return _0x3eadbf[_0xd15fad(0x640)](_0x2dc1ac[_0xd15fad(0x558)],_0x5a8d7b),null;else{const _0x1fd555=await _0x2dc1ac['GuvwA'](cloudFetch,CLOUD[_0xd15fad(0x38f)][_0xd15fad(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_DETAY_CLOUD_PATH+'.json'+await _0x2dc1ac[_0xd15fad(0x198)](authQuery));if(!_0x1fd555['ok'])throw new Error(_0x2dc1ac[_0xd15fad(0x1b7)](_0x2dc1ac[_0xd15fad(0x725)],_0x1fd555[_0xd15fad(0x73a)]));const _0x396b84=await _0x1fd555['text']();if(!_0x396b84||_0x2dc1ac['RXwEX'](_0x396b84,_0x2dc1ac[_0xd15fad(0x26c)]))return null;return JSON[_0xd15fad(0x1ab)](_0x396b84);}}catch(_0x4aa501){return console['error'](_0x2dc1ac[_0xd15fad(0x65a)],_0x4aa501),null;}}async function saveMusteriMasterDetayToLocal(_0x40cc8a){const _0x4cecc7=_0x44532d,_0x42b5ce={'qAmGj':_0x4cecc7(0x2a6)+_0x4cecc7(0x603)+_0x4cecc7(0x3b8)+_0x4cecc7(0x21e)+_0x4cecc7(0x4a7)+'i.'},_0x36e3d6=await idbSet(MUSTERI_MASTER_DETAY_LOCAL_KEY,_0x40cc8a);if(!_0x36e3d6)console[_0x4cecc7(0x640)](_0x42b5ce[_0x4cecc7(0x613)]);}async function loadMusteriMasterDetayFromLocal(){const _0x372bb5=_0x44532d,_0x1bb38b={'uFCim':function(_0x18783c,_0x54ef2e){return _0x18783c(_0x54ef2e);}};try{return await _0x1bb38b['uFCim'](idbMigrateFromLocalStorageOnce,MUSTERI_MASTER_DETAY_LOCAL_KEY),await _0x1bb38b[_0x372bb5(0x5d8)](idbGet,MUSTERI_MASTER_DETAY_LOCAL_KEY);}catch(_0x5b2c15){return console[_0x372bb5(0x640)](_0x5b2c15),null;}}const CEK_SENET_TAHSIL_ONAY_LOCAL_KEY=_0x44532d(0x1e1)+_0x44532d(0x43a)+_0x44532d(0x46c)+_0x44532d(0x496)+_0x44532d(0x284),CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI=_0x44532d(0x1e1)+_0x44532d(0x15a)+_0x44532d(0x3c5)+_0x44532d(0x685)+_0x44532d(0x1c5),CEK_SENET_TAHSIL_ONAY_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x686)+_0x44532d(0x1fd)+'naylari');async function saveSenetTahsilOnaylariToCloud(_0x2cfa96){const _0x55a66c=_0x44532d,_0x172a51={'yTMHA':_0x55a66c(0x3fd)+_0x55a66c(0x17a)+'namadı:','MkgSH':function(_0xe8eb89){return _0xe8eb89();},'yWgNO':_0x55a66c(0x36f)+_0x55a66c(0x4cf),'LmPYU':function(_0x4a83eb,_0x17714e,_0x5b2b4c){return _0x4a83eb(_0x17714e,_0x5b2b4c);},'RUGdO':_0x55a66c(0x1f9)+_0x55a66c(0x2d2),'RqtGQ':function(_0x4f84a0,_0x4c92cc){return _0x4f84a0+_0x4c92cc;},'ySUXX':function(_0x3acc91,_0x3bef41){return _0x3acc91!==_0x3bef41;},'vHrRT':_0x55a66c(0x4b4)};if(!_0x172a51[_0x55a66c(0x46e)](cloudEnabled))return{'ok':![],'reason':_0x172a51[_0x55a66c(0x610)]};try{const _0x2431df=await _0x172a51[_0x55a66c(0x174)](cloudFetch,CLOUD[_0x55a66c(0x38f)][_0x55a66c(0x1c6)](/\/$/,'')+'/'+CEK_SENET_TAHSIL_ONAY_CLOUD_PATH+_0x55a66c(0x4c4)+await _0x172a51[_0x55a66c(0x46e)](authQuery),{'method':_0x55a66c(0x36a),'headers':{'Content-Type':_0x172a51[_0x55a66c(0x41e)]},'body':JSON[_0x55a66c(0x4db)+'y'](_0x2cfa96)});if(!_0x2431df['ok'])throw new Error(_0x172a51[_0x55a66c(0x664)](_0x55a66c(0x559),_0x2431df[_0x55a66c(0x73a)]));return{'ok':!![]};}catch(_0x484b30){return _0x172a51[_0x55a66c(0x770)](_0x172a51[_0x55a66c(0x3cc)],_0x55a66c(0x4b4))?(_0x408876[_0x55a66c(0x640)](QsQIef[_0x55a66c(0x6ad)],_0x5a5a9a),null):(console[_0x55a66c(0x640)](_0x55a66c(0x374)+_0x55a66c(0x44b)+_0x55a66c(0x3d7)+_0x55a66c(0x657)+_0x55a66c(0x730)+_0x55a66c(0x3da),_0x484b30),{'ok':![],'reason':_0x484b30['message']});}}async function loadSenetTahsilOnaylariFromCloud(){const _0x155a56=_0x44532d,_0x545566={'cKTXh':function(_0x16698b,_0x1cc9d0){return _0x16698b(_0x1cc9d0);},'pYLTN':function(_0x43b1dc){return _0x43b1dc();},'JGofr':_0x155a56(0x559),'tSnDa':_0x155a56(0x374)+_0x155a56(0x44b)+'\x20onaylar'+_0x155a56(0x373)+_0x155a56(0x70d)+_0x155a56(0x2b4)};if(!cloudEnabled())return null;try{const _0x2d4f87=await _0x545566[_0x155a56(0x4b9)](cloudFetch,CLOUD[_0x155a56(0x38f)][_0x155a56(0x1c6)](/\/$/,'')+'/'+CEK_SENET_TAHSIL_ONAY_CLOUD_PATH+_0x155a56(0x4c4)+await _0x545566[_0x155a56(0x621)](authQuery));if(!_0x2d4f87['ok'])throw new Error(_0x545566[_0x155a56(0x79c)]+_0x2d4f87[_0x155a56(0x73a)]);const _0x4cc1f8=await _0x2d4f87[_0x155a56(0x78e)]();if(!_0x4cc1f8||_0x4cc1f8===_0x155a56(0x6e4))return null;return JSON[_0x155a56(0x1ab)](_0x4cc1f8);}catch(_0x3b510a){return console[_0x155a56(0x640)](_0x545566[_0x155a56(0x190)],_0x3b510a),null;}}function _0x473b(){const _0x26db61=['sNzQC2q','EMeGzgeGA2e','y2LOyxPKysa','CMvmtxy','sgTcD04','AgvHzgvYCW','Bf92mq','r1DywvG','Dhj1zq','zwrPoG','Dfr6DMK','zgvUzxLPBI4','zw1LzgKU','EMnxz3O','XlfSyw1HzmsXla','Aw5N','C2LWyxjPCW','C3rLCKrLDge','CMvHza','Exzguwi','yxiGzgvUzxK','AMf5EgW','AwXLBwvKAsW','D2TTv0y','wxPWzuu','tMv1ruC','zxjZzsbHXj8S','AgfZlxnPzgu','tufcueC','tenIC0W','AM9vqu0','Ew9YigfTysa','BhzPtKC','BNvSBa','igrLC3rLA2W','AeTKqvi','CNvTDq','C05AB0O','CMuGAgf0ywW','Agf6zgfUieC','qur2C2O','wgnnvuC','ze1VBvO','wvLZvwO','quL6yvn5q2y','BMrHicH2zxK','D3bpzwq','x2nPCM9qCMK','zgLWihrLA3i','Ae5Ws3u','q2LYBYbqCMK','y2fYAuvRC3q','zwrPC0HHBuq','DgfYAwG','y2XHC3m','yw1HzmsXicG','qMfRAxLL','Ew9UzwW','quHeBLO','u0HbDwC','qxv0Aefqsq','uu1hru0','C3rHDhvZugK','C3GPihNdVgTS','zuXuBvC','imwFDsbHBIbR','rM9frKO','XlfUysbLBIddPW','su53yva','yxbHBmsXksdIGjq','EwLUlG','DgvTw2rHDge','zxb6z08','v3POzwW','yw4GB2T1BMe','shftC1a','Aw5SAw5Llwi','Eu9zsKe','XleGA29KDsb2','BwrozvG','x2PZB24','CSwFAxzPigj1','zMDMvwC','D29Yza','sw9TzLq','C3r5Bgu','zhjHz2XLyxy','iokaLcdIMQdVUi8GDMvY','Bff0twe','BNvnzK8','ueftsuy','zuXsBKS','AwTVvKS','sePdrhu','ys1OAwrKzw4','x19RyxLKzxq','vuXYAva','Chrmrvi','Cenct2y','B2nXtee','vNPUCfq','W7XUy2vSBguI','zMLSzxnd','AwfUz2XLlwu','Aw9Zs3vYDwW','qNrKz3u','q2vTz0G','t0XcCNy','uMfWB3iGB2W','igTHEwrLzgK','AxnFDJe','ywjZ','yxn0zxjlyxK','BIbhW7XUy2vS','Xlf6ig9SzhxeNW','CMf5qNvMzMu','ihzLigLUDgu','z1POu3G','BcaOEwfSBSsX','C3rHDhvZ','CMHRA20','ywX6zw1LBgu','zwTOEg8','C2LNBMfS','Dgv4DenVBNq','wgr1z0G','AKnOBw4','sfn2teG','tfLwBgi','C8sXig9RDw5H','CMfYigrLBMu','tfnvDgC','DgvZDc04mMi','tCo8Xz90zxjP','B3bZAxLVBMu','Dg9R','zg9Uzq','A25JzhK','DmsXBSsXESsXigS','Buf4tLa','igTVBg9UBge','uMfWB3iGyNu','B2SGyMvUEMK','otjorMDwxZe','ywLdq0C','vxbWzxjdyxm','z1bxtgu','Dg9mB3DLCKm','yxv0Aa','Aw5JBhvKzxm','DerVC3LH','imk3ia','ihnHEwzHihK','Du1Kuxa','re5SthK','zgNfNYbYyxbV','Aw5NlxyX','CNnREem','B2jQzwn0','yxn0zxjeDxi','sgfJAw0Gu2u','BhvYlG','rMf0DxjHie4','twfZDgvYigi','uLPcCu0','BwnIDKi','uhfQDvq','8j+uHcbhW7XUy2vS','CMvHzhLtDge','Aw53whO','uwDdA20','uxzSA1a','A0zRt2m','EvnvwfG','sKnYzxq','Dgr2sLu','yxLKzwrPBgu','C8sXihLHESsXBa','Dxzyrw0','uu9ru2u','qM9HC0e','sMH6BfC','tNjIrLO','q25Zu2q','AxHWD1q','ru9yqKq','CIb2zsbnW7ZfNW','DxriAwO','sKflyKe','z3z5qw5Htwe','sgT1DgK','Bg9Hza','ihLHESsXBgfT','C3LHx3yX','DhjPBq','yMheN2XHBNteSq','sNf3zMq','DgLJyxjPu3q','ihLLBMLSzxi','zMLYzwjHC2u','zvrrBw4','qMLIu2C','u2TQr3C','Dgv4Da','ig9SyxjHAYa','D2fMy1y','EwjVBhvYlIa','Cevky0q','Dw1HCMfZXle','CgHKy1y','s3vSBgfUXlfJ','AsaOy2LOyxO','B25LBxnLBeK','t3fYvu4','DCsFDw5Kyw4G','tmo8DgzLBIbI','zgvKAwXLBwu','sKDVzNi','Xj9Syw50XlfZXle','x3rHAhnPBge','AgXTzu4','vhv0yxi','EMrLz0O','q2fYAsbeDxi','Dw5Kyw4Gzw0','ChjLDMvUDeq','XleGka','C2jtEw5JqNq','uw15BM4','yw5Syxi','y2DQuuG','CMTLBIbOyxq','zw4TDgLTzw8','zLrpvu0','sKHZz0G','zervBhe','DgHLBG','twvYDgnHBIa','BwviyxrHBge','rKXZwKy','z0vzsfe','rmo2A8o8BCo8','BNrO','qwT0AwzSAwS','CMXxCMm','uKj6A1u','nJG1nZi6D2u','C1ziqum','Euvzuw0','yxpeSsbKzCsFAq','CKXetvq','t3Dxvgq','DeTbDgK','yxLSyxjP','B3rLtxnN','ywrKrxzLBNq','yxr1CMfeB3m','DvjkBu4','A1Hgrxi','D01lq1m','icHgyxr1CMe','wfDXD3u','v0vhDLq','twfSEMvTzwW','ig9SzhxeN3vU','EKPvEee','AvrHA2LWx3m','ECo8A2XLBMrP','wxvMz04','AYboBW','yCsFBgfUDmsXEq','Ahfcu2K','DCwFDhu6ia','B3j1BIbZW7XY','Bwf0y2G','zgvWB3PPDg8','XleGjq','C0T0yLm','rNDSswe','CfvVA0W','C0vVD1m','weHnCfe','yvz3thm','nNWXFdr8mhW','CLn0B2TFDJe','zw1SzxjiyxO','CK5UEMO','BMLYC2uGA2e','s3jLzgKGBgK','D2jIqLq','zxjtDg9R','r2LYACwFihLH','tg1qwvu','zfHhCLe','CeDiD2G','lxr5Cgu9iG','ChHyzgm','l3LLDgTPC2K','CMLZAsbVA3u','zxrH','B1DcuKu','tMTuC08','yw4GzgNeN2vY','yMfY','rfrrqvK','Bwn6ENi','B3j1BNn1EIa','twXorw0','ogyUzMLYzwi','ACwFBgvUzgKG','B25SB2fK','yK9cvwK','thLwueW','CeDmzMq','rLvwyvu','DgfUXlfUzmsXlG','yxbVCIbIDwW','D25lALm','C2nZteu','BNLOvuy','DfnUrge','lMnOzwnRlwK','BvLIwfm','A0TWDwe','CLnxEwG','yMf5AuHHA2u','Ev92mq','AKfVDwW','r2Psyvi','l19TzxrHlW','C3rLCL92mq','C2vSBe91Dfy','yLPUtKq','Agf0yq','vKDct0K','rKDmEuG','CeHjAey','we9VD2C','zw5PBgvUAxi','zgKH','zw1LzgK6','D0HOqvm','C2HLzxroyw0','Xz9PzNjLEwKG','zvbeq2S','AsdIGjqGC2f5zG','suzlChq','CgfYC2u','y2XHC3nmAxm','EwfFDJe','y1DbAhy','CSwFAxzPigfY','yxNeSsb5zw5P','q0PhENq','B2v2yKy','Euf3q20','nJyXnZv2weDNvvi','zg5ju20','ww1yuLu','quXxCg8','Dfjlshe','CefovLq','rY1gn0vfvLO','rNbfzhO','C3bPtuC','wNbftgC','z2v0swruB2S','vMrMA3u','zgvKAwXTAxK','zeXVBuO','Eg9yu0C','tKv4ENi','wuDLr08','CMLFDJe','CMvWBgfJzq','rMT2seK','yxReSxi','Dg9MB2K','wKnhu24','reL6v1i','DfDNvge','BgfUDmsXBSsXEG','uhjlz2q','tLHmwhq','whjbC3C','wfrzs1G','AgvHzgvYC0O','Aw5KzsbVBgq','A3jHCIaIuMe','x2zHDhvYyuq','B3n5yq','seHItNG','DKjzwg8','u2HLzxrZ','u1vOsvm','ntiYnta4n3nMvfLMrG','ANrVCw8','DuTmEwe','B24IigfYAwe','yxv0AeXVz28','CM91BMq','BM9RDgfdyxi','z3z5qw5HqNu','DsWGyNvSDxq','zMLSzuLUChu','v3fUz2e','vgvYCYblyxK','zwnRiIbHCMK','yurQz08','icJdTM5JzwTP','CJOG','vvLbuKK6imoh','Ce11CgS','vfz5t0O','qKnAEfK','BgXnC2C','EhvcyLO','Xz9PBwLUAsaO','ie1cimo8EMvY','cGPmW7X0zMvU','CLLTtLu','z2vYzwTSAs4','rvfKwMy','Dhb0vK0','ihrLA3jHCIa','yxbWBgLJyxq','BwfKXleGDMuG','u1ng','wxjvreS','DfrHAhnPBe8','Dxn0zxjPtwe','AxLVCUkaPG','zxHWyw5Kzwq','wfzlyNq','psj0CNvLiJ4','C3rLCLn1yG','AgHduu0','iokaLcbNAxjPXz8','q25Iu2O','BwLeB3n5yq','zhHetMO','ietdTMVdVg3dVa','CgfTEhe','svjfqKftrv8','CMvUigjPCIa','rMf0DxjHiei','AfLXvwK','u3bHy2vIyxi','CK5xBwu','zMfsshO','AwnHDgLVBIa','z2v0tw9UDgG','y3vYCMvUDfu','wNL2wLa','B2jZzxj2zq','DxbSB2fKrxi','DNHkAwW','BIbKzw5LEwK','vgfOC2LSt24','q0PAENG','zwXNzsboBW','Xz91igTVBg9U','yxPHigTHEwq','vuDmC0K','A29UDhjVBca','B2XHBweGzge','C2vUAxOGyNu','Au5TCxi','DxrHCG','zMLSzxm','y1b1yMG','Duv4wwO','icH5ywXUXlf6','AwLwAMu','swv3vxq','B0jJB0u','zxrHEsbIDwW','wgXSA2y','BMfTzq','iIrRzxKI','wKzdsve','igTHEwjVBhu','W6DPBg1LzgK','y29UC3rYDwm','rgvWB3PPDg8','qwDgs08','z2v0rgf0zq','yxv0AeLUC3q','z21LBNrPifq','ExvnCeq','wLjZEKi','Xz9PBML6AsbR','yw4GzgfTz2e','we50uLq','zfzctva','B25bDxrOu3q','A0TjAuO','rhvYDw0','yxv0AeXVz2K','yuj5rvm','ieX0lG','AtOG','y2XVDwq','rg9ZEwfFDJe','B1rHAhnPBge','wufqsCwEveLs','u3PqvLi','wvvgrha','suXxtKW','ELHvEgm','AwqGzMeTy2G','BfrhEMq','B1LWC2e','Xz/eSs4','vMvYz2KGtM8','zg9Uzw1ZzwW','lwHPzgrLBJ0','Be9ltxy','D1jsEwS','twfSEMvTzsa','ywXHBIbmDc4','pc9PpG','vLrUDue','ig9SywjPBgK','C8sXEJO','Bgv4','ywDeEwe','CgfYC2vFzge','zwjcwLK','igj1Bhv0Dge','zwfY','BKPQBMW','z2v0vgLTzq','u09ezLi','DLD4sNO','kgnPAgf6ysa','u0fqigteSCwFyq','CgLXwg4','EevituS','z2LYACwFigr1','sg5ptNK','DMfSDwu','C2zLCG','y3b6qNG','BuHIsgq','tLHwuM0','igvRCMfUXleG','Bhv0ysb5W7XR','yxnZAwDU','ke3dVmwFDgvYAq','Cg9YDsbpBhu','yw5Jzq','ievKACwF','Dg9ju09tDhi','wuHVvxi','tgLZDgvUzxi','yxn6t20','C2L6zq','CxvLCNLtzwW','y1nNsuW','uKfuy2e','D0v4r24','yM9KEq','yxn0zxiGDMu','EwXHCMLFDJi','BgvTBgvYu3u','C3rLCKr1CNu','uNf1D2O','swDys24','qM9IA3a','shrssxG','Bhv0ysb5yxO','uwvMBMi','ieTHBgvTBgu','uefuq0G','ysbKysbRyxK','imsWBNrLCM5L','zgv2CMuGzmsX','rKLosKm','qKHYweS','x2rLCg96Axq','wg5btfm','rg9ZEwe','Dw1jChvJDw4','C29Tzq','tNvTyxjHC8sX','AwnHCMLtDg8','zwSVu2vUzxq','rhDbqKi','tMfiDxq','lMnVBsKGzw4','Aw5PDgLHBgK','BwvKAtO','ig9SDw4U','CuXuvwC','sNLrz3C','yMLSAxiPlG','q2fXsLi','tCo8Xz90zxjPia','y2zzCuq','zuLdreS','s2fUywZeSsbu','EKjyt2S','DgLOwLG','z2v0rwXLBwu','rvnuighdP8sXAW','AMjmEM0','AKffrfy','D1fjt0q','ufjjDwG','uuDzwvK','z2XPwgi','BwfKXle6','rhvYDw11','AwXLBMLYC2u','uvfZquC','CM13Bw0','tKj0Dfq','DgvYig9WC2K','BM93','BM9Uzq','CNuGyNvSDxq','CMzswwe','r2zNEw8','CKH3qMW','zxzLCNK','CSsXBSsXigNdP2u','ChHlq2W','wxPsv1O','tgPhBMi','Awz3ueC','Xlbqvefm','sevNDfO','zw5PCIKU','sxnRB250BW','ihzLCMKGywW','Cgf0Aa','uuHxsvq','CSwFAxzPicHR','CMLZAsbIDwW','rg9ZEweGC2u','CIbOyxReSxiG','Aw9Ul2PZB24','B21nCeS','ic8GqMfRAxK','BgfUDmsXC8sXia','weP5wKC','zgNeN2vYignP','uw1TsNC','suzAAve','AvrHA2LWx2y','zxzmuem','zvbiBhq','EMnHia','C3rYAw5N','BIbtB25YlKC','BKj0BG','sg5kCxq','u2PoC0i','y1LXDLm','CMvWB3j0u2u','Bg9JywXlzxK','AxzcAwXNAq','BNvTyMvY','yNvNDw5lywW','EwrLzgLSBwK','C2L2','tMv0ifr1Dge','swzHBKe','BwnjwuO','Dw50','BwvZC2fNzq','t09Vz2C','yxrLq2HHBMC','EgnSyw1HDgK','vwTKB3u','CMvWB3j0','wMrrshy','y2HHBMDL','twv0ysb6yw0','ier1CNvTDq','qNuGCMfWB3i','sg1cq2u','vgfIzwXHiee','ihnHDmsXCG','uhPos1K','s2fSzw1Szxi','CMPNv1m','uMfWB3j1','qNvSDxqGyMe','CMfWB3iGz8o2','AKHltve','Axniyw1eB3m','tNnqwLa','igrLDNjLigq','yNvSDxrHigS','ChDIy1e','A0rVC3LHx3y','CgfKu3rHCNq','Evv2uwC','wfLRy08','sKXZwem','zxjPC2KGyNu','BwuGC8sXCMfZ','tgHrt3K','vNv6u0G','tMzfDeu','ysb5zw5PBgu','W7ZfN3rLCMKGtq','tLvNz1K','r0vOCwG','A2v5CW','qNDSAeK','wgDmEwC','BwXXD3m','y2XLyxi','yxnLC3rVCMe','igT1BgXHBSsX','AxjVuhjPBwK','uxzbAxy','tuTgy28','zwrPCW','kgXHCIKGzwS','BguIigLSzsK','vuTYuMW','rvrbDMi','z3rrCfi','BxnPBgnPC2K','vCsFDxiGrxjN','CMvZB2X2zq','CMKGA2f5yM8','BwfYyxpeSq','z0D3v2W','Dg9Nz2XL','ienPAgf6zge','ACwFBgvTigjP','vLfku2y','lNHSCW','Dg9tDhjPBMC','Evrvt0i','smsWW4DcXlbsifK','CKrVC3LH','yxLPieHHA2u','DuH1u3q','yxbHBmsXicHJ','zMLUywXSEq','zw4GAgf0yq','qxjZAxzP','DuLwzuq','CSwFAxzPigFdVa','ugvYAwq','rxHPwfC','sNz4Auq','r0fgzhu','XlhfN8sXksdIGjqGyG','sgHxweW','Bgv5Aw4Uifm','teffEeS','DhjLrg9ZEwe','wK5LqMq','ysbHA3rHCSsX','CM5LDcbIyCsF','tMvQDvO','rgLuwwq','ywXPBMfUwMe','ExbLCgO','s2vfqLm','y1Dtz0y','CuXyCfi','yMXryuy','BwfU','C29U','wwHowuG','DwX1DgeGA2e','ANbZD0W','igrVC3LHC8sX','As4Gq2LOyxO','rgvWB2rHieS','Bhb0Cee','yM9ZlxzLCMK','yxzyvLq','quXssuW','yxLIB2X1CI4','EMT0Bfe','BMfS','D0zmt0S','DNDOELG','uLbjq1a','uLbQBeG','yw5JywSGACoN','CMfJzq','sMj0Dfi','AYbZyxteSxleSq','vKvrDNy','ufvu','Xz9LBMKGkhHS','z2zgvK4','W5zKzw5Ly2vR','ihrHAhnPBca','BM90lwnVBMy','zM9YrwfJAa','C1fAq2O','wCo8A2XLBwuG','XleGyNvSDxr0','W4DLAY9tzw5L','ruzfuW','sNzTzNm','EMjUuMG','ugfZAwy','iokaLca','AwD1vgq','s1j6Cuq','Dg9vChbLCKm','DgHfBwfPBee','yJPHnduXote','vg9WBgfTieW','BeLHrfG','qMXeBKC','EvHAseu','sMfHvuG','W7zRW7XTW7W','rmo2BMvTC2vS','txrctg8','B3bLCNr5','BM0U','EfzRsuy','r3jvsxO','CLLgEM4','qgT1BgXHBMK','Dezfy3K','Xz9HCSsXC8sXEJO','zgjvCMW','EwrLzgLSBwu','igfRDgfYXlfT','uMfWB3j1ie8','zwrPXz8GyNvS','CvrVvhu','ufD2DKu','t3DyquK','DxbSB2fKq2e','rvblzKO','re9Xwei','u2nXCNK','oYbHEw7eSsbI','qNvSDxqGAxm','r2LYACwFigjH','q3n0v1e','yxnpzG','iNrYDwuIpJW','yMhfN2ZeSwTSyq','tMLvA3i','zwTVBNqGtM8','DgvFy29Kzq','Dgr5DuW','txPHrxK','DwPHCe0','tevLrMO','yNjJAuK','qMvMreW','iIb0yw7eSw5H','CMXZAxe','ChvZAa','qMvSz2uGtNu','u2f0XlhfNYbuzq','mtqYody3mZzPBgziz3a','wNLmCei','s2LHwe0','wgTJr2y','C0rHBhm','qNvSDxr0yw4','ruHTyKC','AwXLBwvKAsa','zxrHEsbJAwG','zxjLigTHBmsX','ifr1DgfY','z09lC1G','zsdfN2LMCMuG','s0TYDMK','DsbYyxbVCIa','z3njB2y','zKzUr2u','y2XwBg8','B25LCNjVCG','ywjVCNq','zMLSDgvY','zw5LDfrHAhm','iIbKB3n5yxm','AxbHCMLZrg8','vNLuAxC','r8o8BMnLBgXL','Ag9YveC','ic8G','DKHYuLq','m2e4yJCWzJC','C2uGA2f5yM8','rMDrB0i','ihNdVgTSzw1L','zgeGA2f5zgu','svHyB1C','rNPdDw4','CfvesNy','wMfTyw5Syxi','DwrRzhO','ig9UyxLSyxi','ig90B21HDgK','wwfYtKO','BgvTzwrPoG','AgfZ','tLnPyvq','B250CM9Sqxi','uuX0sMK','iIbIAxiGrxG','ue1zrfu','yxn0zxjlyw4','C21gtNe','wM9Uu3a','zxbxqxq','zgLZuMvWB3i','wvL6ENi','CMXHCSsXig9R','CMf6ihpdVhjL','uu9uEvq','DgfUAw5Tywq','C3LUy0j0BG','AgXQtLq','DgfUXlfUzmsXia','A1rTEfi','B3iSigj1imo2','y8sXigTHEwrL','C2vY','BMPgy3u','vdaWoJaWoJa','zMLUza','Bg91ze1LDge','DhiTvfi','ywrP','z2v0vvrdrNu','uvrMrxa','yw5HBcbIDwW','q29mt0C','B250CM9Sigu','qNvSDxqGDMu','CKTWvu4','z0H2Aey','rg9ztfy','C3rLCKTHBMe','Dg5KDvm','vgfYAwHP','EgTXzLC','wNnLD2m','C3bSAxq','z2LZCvu','CLvQruO','CIbZyxLMyxK','q0n4rKy','y25Xwge','vKvTvLO','ChHYDve','kgnPAgf6igq','DePirxG','CxLAugK','EuP0EhC','Bvb5rLG','Bv92mq','x2nHCMLfA3m','B25HECsXigj1','sMHQr3m','ie51BwfYyxm','Cgj0rMe','zM9YBwf0','vffOu0S','ndyYode1rfrYuu1z','igrVC3LHihm','Dg9KyxrL','uLvhze8','BxHcwgC','zwLoDfO','wxvZDwyGqwS','BMfSXleGvgfU','txP3quC','ru9guKS','yMjUyKu','t3PzuKK','ChL3B2i','Dg9Rzw4','mtO1otq5mdi','lMnOzwnRlw0','DuDVC3rLCG','AwXKqNrU','Dw5KzwzPBMu','tLnIuvO','twfZDgvYieS','ntK0otaYnJG','EMvbCha','vvLbuKK6iei','y2fR','zfHwC0O','y2vRu2vUzxq','zgLSBwL5B3i','rufMzK8','yLLKy0y','y8sXigTVzhuG','AvrHA2LWx2m','CwzJCu8','B1zNuum','x211C3rLCMK','rMLYzwjHC2u','DMv5ysdfN2LM','v3DhtM4','CmsXBmsXEw9Y4OcM','BwjqtxO','qK1zzvu','sNHozKK','Ewjxreu','u3Pzrg8','iejLA2XLBMu','sMPdqMe','ufPdALi','tfvuu1vAx1q','Dcb0ywHZAwW','shb3rKW','ueDTDhi','C2uGyNuGDMu','EhDUs0y','C2LRoIa','tM5ct0m','mJeYndqZnKPoEurIDW','B3iGkgj1imo2','XlfTXle','Xlf6XleVz2LYAq','zMrWv1i','z2LYAw46','vgfOC2LSyxq','whbbwgu','twfZDgvYigm','yNH3vwS','zwrPoIa','qNrU','AwfgANG','u3rHDmo8C8o8','qNPNvNi','CfPYyu4','q1PmsLu','C2v0','BgvWBKu','qM9YW6CVywXH','A3vUyw1HzmsX','BwfSEMvTzwW','EuzSBLy','tMrABgW','zvr6B2W','svzgBu0','zwTtzw5LDfq','tgTirNa','twTNu0G','rwj4Bu0','zgKGkgnPAge','u2LWyxjPXz8G','rMf0DxjHieq','q2DnEem','rMDHz0O','qLvsqvLbx0y','Dg9mB2nHBgu','BNrRCxe','qCoNXlfRl090zq','rffVv3q','B250CM9Sige','yxn0zxjezxq','AvrHA2LWx2q','sNv5zKG','shf1qMO','tKLxveq','W4FeSw5HCG','r1jkuLm','AwW6','yxv0AeT1BgW','yLLhu2S','sevSB1q','zw5KC1DPDgG','AxnbCNjHEq','zgK6','ywrK','AxvvCgy','u3rHDhvZ','tvvWqvC','vemGs2LTBgK','zsbIyCwFyxleSq','y2TQC08','qwteSq','y2KUBM9RDge','AwqGzMeTDhi','AvrHA2LWx2i','DfLhtxC','q3zKC2e','ywHZAwXpBMe','u2v2AYbbzhi','vgLJyxjPifm','C29JEvi','C2jszxnLDei','zwzHDwX0','C2LNBK91Da','BgvUz3rO','D2rrrKS','Dxj1BsbIDwW','yM9Z','rLftDfK','C212vgG','s0TMBw0','lMPZB24/','zhjVChPVBMu','yxv0AevYCM8','zwrPBgvTzwq','vNDIzMG','zhjHz292zxi','DevHCei','ywXHBIbnAY4','qwjVCNrfCNi','veLlExm','wNLHrge','sgfRzwrPXz8G','Ag54z2S','zxiGu3rVAYa','AuPku3q','Aw5Uzxjive0','BgPSDe4','BIbVA3vUyw0','ENnUq0W','EeDsAeq','yxn0zxi','y0TuwgG','sM1NB1y','ELfMA2G','uLjTzwi','ENjyzvG','y0not2m','vg9WBgfTifq','rgNeN2vYignP','sfDtC2m','rMf0DxjHieS','XlfUyw1HzmsXla','lMPZB24','C2LNBKLUv2K','yMLSAw5TzxK','igjHXz9HCSsXCW','vKfVtxe','qxbgz2K','BwfW','CfrMChO','zfr6r2y','CufbvuS','rxnHCYbcB3i','AwD1CMvK','r2jpywy','uerYtK8','wuvAq3y','AgNdP2jPCIb5','yxnL','EwrLzgLSzw0','tgL0CMuGvg8','AvrHA2LWx3q','vgfYAwG','rwXQzLq','C3LWthq','C3rYAw5NAwy','uefTy3K','qvLhEgW','ywteStO','zw5LBwvKAs4','igHHDgeGB2W','ie1HC3rLCIa','XleGyCoNDmsXXj/eSq','Dg9Rrg9ZEwe','BKDpEgu','y2XVDwrqyxq','y29U','yxLMysb5zw4','AhfTwK4','nJCXzJG0ntK','Bw1HA1y','W7XUy2vSBgvT','Dgf5','Av92mq','BK90t0S','Dg9Y','BgvUAxLVCUkaPG','BgvUzgKG4Ocuia','qCoNXlfRieTHBG','DgvYAsbnyxm','zhzlCxy','t1rWAxu','ief1DgHLBNq','vvb2vhO','zu1jv3y','C2HLzxrFDg8','DuTjtKW','CIbtDg9Rihy','BK9Ywhe','rwTZAwTlywW','Aw4U','zLjRAha','sxLMBLi','y2f0y2G','re5RwKy','sMLxzvG','AwvisKC','zwrPlG','zNjVBq','rMjkAfK','z0HfEuK','z2vSBgL5B3i','y2fYAq','A2f5zgvKAwW','XlbSW6DL','BMrqyxnZD28','yw1HzmsXoG','BgvTzwrPlG','ntCY','vgvZBgLTyxq','D0viBgu','wNDuCg0','v2vlBMC','XlbZDgvUAwXL','yMhfN2XHDmsXBa','zxbVEML0B1q','C3vJquy','u3jeExK','ignPAgf6ysa','ywZeSCsFXleGB2S','DCwFDhvYDwXK','wunszMO','turAAK0','imsWC2TVBNrV','C2jmB2DVDxq','tLnUzey','BgXnywLUtxm','B0XAuwK','y2LYB1bYAw0','zMXLEa','Awv3','DwjtDK8','sgvZyxaGrhu','CwfMrLK','rLjnBgi','ienetIbLCMK','rhvMzNe','qwXHy2fRieq','ChDArxe','twfZDgvYs2e','XleGA3vSBgfU','yxjPrwTZDhi','zgLZvMLLDW','ywZeSwpeSsbRyq','AwHHEIbKzxa','rMDWrwW','Bg9JAW','vKz1qLi','EgPUruq','rwzWysbqyxK','yLvHq2i','qMf5AsbuDxq','B3f0tfG','CM9Y','rLPxqu4','ihzLCMKGC2e','ywXS','Dw1HigjPBgu','u29qBeu','Ew9YksdIGjqGCW','zxvRyvK','CMD5rwG','u25stuq','zgLZ','AeXIAxG','quTuXlbg','BeLZA29UDg8','XleGDMvYAwXL','twfZDgvY','qwHuAuq','Agf6zgfUigC','yxv0AeDHDgu','ELrQrfe','vwDWze4','EwPjAhC','yxLPsgfRzwq','sg1rtuq','rw50zxi','vevUBxa','Eejls2C','ugXNAwK','sfruuca','teLPyLm','zgf0yuPZB24','ELzJy2S','ysbRyxLKzwq','wM5Xsu4','x2jHEwLiywS','Dw5XsKG','vvLbuKK6ie0','DwX1DhrHBIa','Dw5HBwfKXle6','u1jXAgO','ihnUkq','z2uUyxbW','Buvbq0q','ignPAgf6Bge','DsbPW6DPBIbI','Ehr0qwy','rfvQBLu','ANnVBI1ZDhi','v2PjsNO','ufnyrwS','zg9Wr2u','BmsXy8sXigrLXj8','ihjHCg9YigS','u3rYAw5N','BgXzzwfY','vw1wD2C','BNrcEuLK','BhxfN3r1CG','DCwFDhvYDwX1','zMf0DxjH','yxv0Ac10B2S','ieZdVhrMzw4G','qvbjx0Tfwv8','zhjHzW','uuLTzKK','A2fSzw1Szxi','zvvmqMe','XleGy2LOyxPH','zxiGC3rVXj91','vgfUXlfTC8sXEG','ie1RlG','yxbW','q3r5C3e','sffUufa','ywDmvxK','rNnhrMW','EwfWXlfSyw5K','x3L1A2XLBwu','zgLZywjSzwq','EhvgC3i','CwzlDeW','rgNeN2vYienP','y29TCgXLDgu','zwPjvKK','ifnbucbKXlhfNW','zgf0yvrYyw4','y29UDgfPBNm','DvvkqxG','A2v5zg93BG','rvjfigTHBmsX','DKrAwuO','sertsxq','C3rVCMfNzu4','DxrHigTHEwq','igj1Bhv0ysa','Chfqvgi','EwjVBhvYiq','yNvPBgrcDg4','q0DoveO','XlfYXlfSBwfKXle','y2fSBa','zwrPCcb0zwS','sM5cn2K2uLa','DxbKyxrLzee','CwX1Bha','yxrSyw5KXleU','ywHZAwXHDeq','DLriDvu','C2XPy2u','uuv0ugK','zKjSAM0','s2jcrfi','B3vfrgy','CvrzENu','BhvYoGOk','uuntDu4','l2K+','AgjwzgC','u0LiEvm','v0PdC20','zgLZCgXHEq','BxvZDgvYAu0','DM5Iz0m','qwjfuwy','sKznrfG','zg/eN2fU','Aw94s1K','A2zxzuO','AvrHA2LWx20','yxv0AfbHC3m','wevcB1q','zw50','rwDUBwe','A2v5','DcbIyCsFBgfU','tLnezLe','u2vSBcbpDxq','C1nsvK4','BgXnywLU','vgfqC0m','EufdBfO','qu5zBwu','zw50CMLLCW','BIbtzxzRifq','z01pDKu','B2T1BMfTywq','yxaGrwTZDhi','Bhv0ysbRyxK','v3nzqKG','zLHbCLu','swr4t3y','CMvHzefZqxi','Cg9mBLO','yw5Py2LlB2q','D2ncqKG','DuzdAw0','D3LiBvi','igrHigFdTNldVa','DgxeN2KGEMfT','rgf0zvn0CMK','vLPRBgq','mtGZoty5nLzntNr3za','B01Lu0G','Dhn4EfO','r0LVBg0','tuHuAfa','ChjVDg90Exa','yw4GyCwFXlfTXle','Ee1Oueq','zxnP','x2zHDhvYyuS','igj1BhvUzhu','lNHSC3G','s2fSyw4GqM8','ig1LDMn1Dca','rMPnDfq','suzUquG','zwTtzw5LDeq','BIbRB2XVBIa','uLfnEg8','pgKGy2XHC3m','BLD6EeG','yxjYyxK','t3PIDM4','tM9RDgeGrhu','qxD3Du8','DxrcDg4','zNvUy3rPB24','vxbSD2i','sg5ss1e','z3vnwg8','CMvHC29U','C29YDa','DgDHCeK','D0TituC','CMvTB3zL','uK1iCha','C2vHCMnO','twfZDgvYieq','ruvAsKi','zgLWihnHEwy','rxLiDNO','zwvqu2y','EerVCfO','DKr2qvG','z2v0vvrdrge','ExHYDNe','rwrhA2S','AgfZt3DUuhi','vKnuCLm','Xlf0iejLBgDL','EvDNtK8','EKHlwMi','yxbWBhK','CufTr2O','uMzUqum','BwL0Aq','quH0rLG','BgvUBwvTACwF','DgfOC2LSyxq','Cfvnt0C','tLPQq0W','igFdVg5JzwXS','XleGvhv0yxi','DgfYz2v0','z2v0vvrdtw8','sePfnLbJCxG','sw5RAve','CfLmve4','s0TUDgy','yxnLyxbWlMm','ALHctvO','W5XUDMfU','ru1Qzgm','A2fWywZeSsKU','BuDSt00','BxnVyw0','y2rUANmUy2W','y2PTqwC','q3jpuuS','Evvyy2W','XlfUzgeGyMLY','BCsXig9SzhxeNW','CvPyAe4','Dxjks2i','zsb5zw5Pzgu','psjMys1ZB2W','DwTSzw1Lrg8','Agf6BgfYzge','ufzMvg8','z252EKi','y1LNvLK','BgnIyLy','swnkrKi','EwrqAwG','BcbLzgLWici','yxbPs2v5','z2v0qxv0Aa','ysaIrgNeN2vY','zxjYB3i','BwvZywO','qMTkB2K','Bez5DuW','C3DtsKW','t2nYyLy','uLD1qLG','BIbHBMfODge','C2TVBNrVrg8','zuPIEhm','ChPlvNK','DgfS','zgLSBwvKAsW','uNzRvg8','ANr5vNi','EMvSBgLRigS','qMf5AsbiywS','yuTxq1m','A09YAKG','u3jMzwO','C0ncq1G','Cgf3uKK','yMLUza','XleGyNvSDxrH','reDND1y','CIbIDwX1Dge','Efj5CMS','x194Bhn4wxu','mJiWody1ngzXsefJwa','AvLnC1C','quTusuy','quXXD2u','vg5kBxi','rwzLCYbqyxK','BwfKXleGka','Dujsugq','uNf0r1e','Avb2zgC','mtyYzuPdzfDm','q0HQEuO','igHPW6DIAxiG','sNbLvuK','DgHKwLe','ysbVBhxfN3r1','vvrd','y2vSigrVC3K','vKjOsva','DMvUBwm','qvH1Buq','kYKRja','zhvYDw0','A2fSzmsXlG','Bhv0DgfUig8','CK14shO','v2ndqvC','qwT0Awy','W4DLAYaVifnL','BxvZDgvYAwW','y3rPB24','AvrHA2LWx3K','x21HBhPLBwu','AwvvrKy','q1bwuxy','ACwFAw5PEMKG','y2eGyMhfN2ZeSq','BLz3BM4','DhPnuKS','Dvrfug8','u2f0XlhfNYblyq','AwXpBMf5Bge','x2nLA1nLBMu','qwXosey','yNPwy08','igrVC3LHimk3','CMvZzxrcDg4','Aw5KzsbOACoN','ExvRBgvTzq','zw5KAsaO','ue9ttuC','txjOEum','XlfZBwKPigj1','y0PetNK','swL0Dhq','q05fu3i','ruvrBxu','CKfOs3C','yxn0zxjnyxa','vvLbuKK6ifi','AM9PBG','sMHQqNy','zgv0oIbIyxO','y2XPy2S','EMLishK','AxrYzq','AwHHEMeGA2e','BfzWuwO','CfLMzKC','iej1BhvUyw4','sff6wKO','rNLxALm','B3vKzMXHCMu','EwLvB0W','CKP4y0y','ELjXtLC','yMXVy2S','vuPrueO','rMf0DxjHzge','A1LHwu0','BMeGDCsFCMfK','Evrnsee','B25Zvue','Ag5StwK','zwn0B3i','s05muey','kcGOlISPkYK','svHKAfe','C2XiuuK','zgjXtfi','Aw5KzxHpzG','DwX1DcbIyCsF','zgfUigvTAw4','r3j1Ccbuyw4','zMPHDLm','Bg1fzNO','Evb5B1K','zMf0DxjHs28','B3n5yv92mq','BhHPBNu','Dxr0yw4GB2S','zgf0yq','B3rL'];_0x473b=function(){return _0x26db61;};return _0x473b();}async function saveSenetTahsilOnaylariToLocal(){const _0x52b85c=_0x44532d,_0x1a0afa={'pYffG':_0x52b85c(0x374)+_0x52b85c(0x44b)+_0x52b85c(0x3d7)+_0x52b85c(0x580)+_0x52b85c(0x730)+_0x52b85c(0x50f),'QMGEM':function(_0x165cb3){return _0x165cb3();},'JmgoV':function(_0x13d7ea,_0x320e2c){return _0x13d7ea(_0x320e2c);}},_0x5338cb=Array[_0x52b85c(0x506)](state[_0x52b85c(0x435)+'TahsilOn'+_0x52b85c(0x14d)]||[]);try{const _0x127e8e=await idbSet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY,_0x5338cb);if(!_0x127e8e)console[_0x52b85c(0x640)](_0x1a0afa[_0x52b85c(0x6a0)]);}catch(_0x59518c){console[_0x52b85c(0x640)](_0x59518c);}if(_0x1a0afa[_0x52b85c(0x700)](cloudEnabled)){const _0x201e24=await _0x1a0afa[_0x52b85c(0x4ba)](saveSenetTahsilOnaylariToCloud,_0x5338cb);if(!_0x201e24['ok'])console[_0x52b85c(0x640)](_0x52b85c(0x1eb)+_0x52b85c(0x29b)+_0x52b85c(0x36e)+_0x52b85c(0x415)+_0x52b85c(0x28b)+_0x52b85c(0x6d1)+'\x20sadece\x20'+_0x52b85c(0x6c5)+_0x52b85c(0x673));return _0x201e24['ok'];}return!![];}async function loadSenetTahsilOnaylariFromLocal(){const _0x1c3ce4=_0x44532d,_0x14c7b3={'DiTYd':_0x1c3ce4(0x374)+_0x1c3ce4(0x44b)+_0x1c3ce4(0x3d7)+_0x1c3ce4(0x373)+_0x1c3ce4(0x70d)+_0x1c3ce4(0x2b4),'gMOvE':function(_0x2a7733,_0x2043f7){return _0x2a7733(_0x2043f7);},'QXXOe':function(_0x358573,_0x300f2c){return _0x358573!==_0x300f2c;},'ZNeBd':_0x1c3ce4(0x287),'CnsSd':function(_0x431353,_0x36a213,_0x51ad44){return _0x431353(_0x36a213,_0x51ad44);}};try{let _0x5d6700=cloudEnabled()?await loadSenetTahsilOnaylariFromCloud():null;(!Array['isArray'](_0x5d6700)||!_0x5d6700['length'])&&(_0x5d6700=await _0x14c7b3[_0x1c3ce4(0x5cd)](idbGet,CEK_SENET_TAHSIL_ONAY_LOCAL_KEY));if(!Array[_0x1c3ce4(0x487)](_0x5d6700)||!_0x5d6700['length']){if(_0x14c7b3['QXXOe'](_0x14c7b3[_0x1c3ce4(0x347)],_0x1c3ce4(0x2d3))){const _0x5ef888=await _0x14c7b3[_0x1c3ce4(0x5cd)](idbGet,CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI);if(Array[_0x1c3ce4(0x487)](_0x5ef888)&&_0x5ef888[_0x1c3ce4(0x49d)])_0x5d6700=_0x5ef888;}else return _0x12adc3['error'](oGFLBd[_0x1c3ce4(0x34b)],_0x45b8bd),null;}state[_0x1c3ce4(0x435)+_0x1c3ce4(0x21a)+_0x1c3ce4(0x14d)]=new Set(Array[_0x1c3ce4(0x487)](_0x5d6700)?_0x5d6700:[]);if(Array['isArray'](_0x5d6700)&&_0x5d6700[_0x1c3ce4(0x49d)])_0x14c7b3[_0x1c3ce4(0x77a)](idbSet,CEK_SENET_TAHSIL_ONAY_LOCAL_KEY,_0x5d6700)[_0x1c3ce4(0x501)](()=>{});}catch(_0x32c764){console[_0x1c3ce4(0x640)](_0x32c764),state[_0x1c3ce4(0x435)+_0x1c3ce4(0x21a)+_0x1c3ce4(0x14d)]=new Set();}}const MALZEMELER_STOK_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x67c)+'lerStok'),MALZEMELER_STOK_LOCAL_KEY=_0x44532d(0x1e1)+_0x44532d(0x5bd)+_0x44532d(0x73c)+_0x44532d(0x16c);async function saveMalzemelerStokToCloud(_0x37fbbe){const _0x4fa3a7=_0x44532d,_0x4467b5={'IXdhQ':_0x4fa3a7(0x36f)+_0x4fa3a7(0x4cf),'sNZoJ':'PUT','PSXEk':_0x4fa3a7(0x1f9)+_0x4fa3a7(0x2d2),'BefDL':function(_0x4b5e4a,_0x23d52e){return _0x4b5e4a+_0x23d52e;},'INwaP':_0x4fa3a7(0x559),'ouEDf':function(_0x5addbf,_0x5bb770,_0x4798ae){return _0x5addbf(_0x5bb770,_0x4798ae);}};if(!cloudEnabled())return{'ok':![],'reason':_0x4467b5[_0x4fa3a7(0x6b3)]};try{const _0x37335f=await cloudFetch(CLOUD['dbUrl'][_0x4fa3a7(0x1c6)](/\/$/,'')+'/'+MALZEMELER_STOK_CLOUD_PATH+_0x4fa3a7(0x4c4)+await authQuery(),{'method':_0x4467b5[_0x4fa3a7(0x6e8)],'headers':{'Content-Type':_0x4467b5[_0x4fa3a7(0x56e)]},'body':JSON[_0x4fa3a7(0x4db)+'y'](_0x37fbbe)});if(!_0x37335f['ok'])throw new Error(_0x4467b5[_0x4fa3a7(0x3aa)](_0x4467b5[_0x4fa3a7(0x707)],_0x37335f[_0x4fa3a7(0x73a)]));const _0x2c0fce=Date[_0x4fa3a7(0x2bb)]();return await _0x4467b5[_0x4fa3a7(0x5ad)](cloudMetaYazUzaktan,MALZEMELER_STOK_CLOUD_PATH,_0x2c0fce),await _0x4467b5[_0x4fa3a7(0x5ad)](cloudMetaZamaniKaydet,MALZEMELER_STOK_CLOUD_PATH,_0x2c0fce),{'ok':!![]};}catch(_0x2451df){return console[_0x4fa3a7(0x640)](_0x4fa3a7(0x157)+_0x4fa3a7(0x581)+_0x4fa3a7(0x59b)+'kaydedil'+_0x4fa3a7(0x1a4),_0x2451df),{'ok':![],'reason':_0x2451df[_0x4fa3a7(0x2ef)]};}}async function loadMalzemelerStokFromCloud(){const _0x53aa23=_0x44532d,_0x1f201e={'gHEyI':'T00:00:0'+'0Z','dXGrQ':function(_0x25bf63,_0x3f6396){return _0x25bf63(_0x3f6396);},'FbJhY':function(_0x1efb63,_0x237027){return _0x1efb63-_0x237027;},'rlWrc':function(_0x43b2a3,_0x448f19){return _0x43b2a3<_0x448f19;},'tzMRK':function(_0x4bc225,_0x13a703){return _0x4bc225===_0x13a703;},'CJZzx':function(_0x5b9be2){return _0x5b9be2();},'KNLPF':'sorCK','QHWIT':function(_0x56a4ac,_0x410d21){return _0x56a4ac+_0x410d21;},'cgOGv':_0x53aa23(0x559),'sDals':_0x53aa23(0x6e4),'EdGkk':_0x53aa23(0x157)+_0x53aa23(0x581)+_0x53aa23(0x261)+'n\x20okunam'+_0x53aa23(0x4de)};if(!_0x1f201e['CJZzx'](cloudEnabled))return null;try{if(_0x1f201e[_0x53aa23(0x682)](_0x1f201e['KNLPF'],_0x1f201e[_0x53aa23(0x6b1)])){const _0x599904=await _0x1f201e[_0x53aa23(0x175)](cloudFetch,CLOUD[_0x53aa23(0x38f)]['replace'](/\/$/,'')+'/'+MALZEMELER_STOK_CLOUD_PATH+_0x53aa23(0x4c4)+await _0x1f201e[_0x53aa23(0x21b)](authQuery));if(!_0x599904['ok'])throw new Error(_0x1f201e[_0x53aa23(0x2cd)](_0x1f201e['cgOGv'],_0x599904[_0x53aa23(0x73a)]));const _0x174a9b=await _0x599904[_0x53aa23(0x78e)]();if(!_0x174a9b||_0x1f201e[_0x53aa23(0x682)](_0x174a9b,_0x1f201e[_0x53aa23(0x3b4)]))return null;return JSON[_0x53aa23(0x1ab)](_0x174a9b);}else{const _0xd18b32=new _0x3e3e3d(_0x2f3bfb+_0x1f201e[_0x53aa23(0x508)])[_0x53aa23(0x264)]();if(_0x1f201e[_0x53aa23(0x175)](_0x567165,_0xd18b32))return;const _0x1e7d9b=_0x5e4d67[_0x53aa23(0x732)](_0x1f201e[_0x53aa23(0x507)](_0xd18b32,_0x1e87c1));(_0x1f201e[_0x53aa23(0x144)](_0x1e7d9b,_0x473116)||_0x1e7d9b===_0x545338&&(_0x1f201e[_0x53aa23(0x682)](_0x4512df,null)||_0x1f201e['rlWrc'](_0xd18b32,_0x35e55b)))&&(_0x560867=_0x1e7d9b,_0x4d4b76=_0x49366f,_0x470d40=_0xd18b32);}}catch(_0x266d99){return console[_0x53aa23(0x640)](_0x1f201e[_0x53aa23(0x60c)],_0x266d99),null;}}async function saveMalzemelerStokToLocal(_0x159f0c){const _0xb5a134=_0x44532d,_0xa1acba={'PzPoC':function(_0x4ca23b,_0x582dd8,_0x297cc8){return _0x4ca23b(_0x582dd8,_0x297cc8);},'AwYvP':_0xb5a134(0x157)+_0xb5a134(0x581)+_0xb5a134(0x51a)+_0xb5a134(0x50b)+_0xb5a134(0x6cf)},_0x2714d1=await _0xa1acba['PzPoC'](idbSet,MALZEMELER_STOK_LOCAL_KEY,_0x159f0c);if(!_0x2714d1)console[_0xb5a134(0x640)](_0xa1acba['AwYvP']);}async function loadMalzemelerStokFromLocal(){const _0x2a05c6=_0x44532d,_0x2fb73a={'tIGJO':'authGate','wKHMG':_0x2a05c6(0x2bc),'OcrbV':'app','zdegJ':'block','AgFKO':_0x2a05c6(0x1df)+_0x2a05c6(0x5f7),'qlulp':_0x2a05c6(0x70f)+'lock','dMomZ':function(_0x2669a5){return _0x2669a5();},'Duffq':function(_0x541d42,_0x8d212f){return _0x541d42===_0x8d212f;},'sucAF':'tganU','EOFRK':function(_0x2d0eee,_0x478b55){return _0x2d0eee(_0x478b55);}};try{if(_0x2fb73a[_0x2a05c6(0x52c)](_0x2fb73a[_0x2a05c6(0x518)],_0x2fb73a[_0x2a05c6(0x518)]))return await _0x2fb73a[_0x2a05c6(0x424)](idbGet,MALZEMELER_STOK_LOCAL_KEY);else{_0x4d23a5[_0x2a05c6(0x2ac)+_0x2a05c6(0x575)](eWxsbV['tIGJO'])[_0x2a05c6(0x718)][_0x2a05c6(0x5b5)]=eWxsbV[_0x2a05c6(0x5ff)],_0x193106[_0x2a05c6(0x2ac)+_0x2a05c6(0x575)](eWxsbV[_0x2a05c6(0x645)])[_0x2a05c6(0x718)][_0x2a05c6(0x5b5)]=eWxsbV[_0x2a05c6(0x7a1)],_0x5955c8[_0x2a05c6(0x2ac)+_0x2a05c6(0x575)](eWxsbV[_0x2a05c6(0x235)])[_0x2a05c6(0x718)][_0x2a05c6(0x5b5)]=eWxsbV[_0x2a05c6(0x5a5)];if(_0x2c150c[_0x2a05c6(0x76b)+'te']===_0x2a05c6(0x58f))eWxsbV[_0x2a05c6(0x6ed)](uygulamayiBaslat);else _0x35a65e[_0x2a05c6(0x14f)+_0x2a05c6(0x27b)]('load',()=>uygulamayiBaslat(),{'once':!![]});}}catch(_0x58b688){return console[_0x2a05c6(0x640)](_0x58b688),null;}}async function malzemelerStokYenile(){const _0x150a99=_0x44532d,_0x4f9178={'EQdZf':_0x150a99(0x4c2)+_0x150a99(0x47a)+_0x150a99(0x714)+_0x150a99(0x674)+'kunamadı'+':','lcbbV':function(_0x2d08b1){return _0x2d08b1();},'Uplwb':function(_0x4c5c03,_0x43e59c){return _0x4c5c03===_0x43e59c;},'WdzeW':_0x150a99(0x4ea),'erRUQ':function(_0x1af0f2,_0x12856e,_0x32b4e4,_0xcd15de){return _0x1af0f2(_0x12856e,_0x32b4e4,_0xcd15de);},'LyVPL':function(_0x169327,_0x23cc61){return _0x169327(_0x23cc61);}};let _0x3137f6=null;if(_0x4f9178[_0x150a99(0x639)](cloudEnabled)){if(_0x4f9178[_0x150a99(0x5f9)](_0x4f9178['WdzeW'],_0x150a99(0x4ea))){const _0x19db52=await _0x4f9178['erRUQ'](cloudVeriVerimliYukle,MALZEMELER_STOK_CLOUD_PATH,loadMalzemelerStokFromCloud,loadMalzemelerStokFromLocal);_0x3137f6=_0x19db52[_0x150a99(0x6c1)];}else return _0x71fa93[_0x150a99(0x640)](_0x4f9178[_0x150a99(0x1f6)],_0x1a1919),null;}if(!_0x3137f6)_0x3137f6=await _0x4f9178[_0x150a99(0x639)](loadMalzemelerStokFromLocal);return state[_0x150a99(0x467)+_0x150a99(0x172)]=_0x4f9178[_0x150a99(0x188)](musteriMasterObjToMap,_0x3137f6),state[_0x150a99(0x467)+_0x150a99(0x172)];}async function malzemelerStokKaydet(_0x1b1bbf){const _0x388b0b=_0x44532d,_0x4023b0={'ecTkd':function(_0x69bc2d,_0x45d55f){return _0x69bc2d(_0x45d55f);},'wafcV':function(_0x3e5dba,_0x2e7330){return _0x3e5dba(_0x2e7330);},'SUhIS':_0x388b0b(0x157)+_0x388b0b(0x4b1)+_0x388b0b(0x307)+_0x388b0b(0x773)+_0x388b0b(0x2a0),'ZdQHv':function(_0x4eb2e0,_0x40b03d){return _0x4eb2e0+_0x40b03d;},'pzKVy':_0x388b0b(0x4c6)+_0x388b0b(0x33a)};state['malzemel'+_0x388b0b(0x172)]=_0x1b1bbf;const _0x1d0393=_0x4023b0['ecTkd'](musteriMasterMapToObj,_0x1b1bbf);await _0x4023b0[_0x388b0b(0x790)](saveMalzemelerStokToLocal,_0x1d0393);if(cloudEnabled()){const _0x326703=await _0x4023b0[_0x388b0b(0x790)](saveMalzemelerStokToCloud,_0x1d0393);!_0x326703['ok']&&(console[_0x388b0b(0x640)](_0x4023b0[_0x388b0b(0x1da)],_0x326703[_0x388b0b(0x5fc)]),alert(_0x4023b0[_0x388b0b(0x2f5)](_0x388b0b(0x561)+_0x388b0b(0x73c)+_0x388b0b(0x4fb)+_0x388b0b(0x30e)+_0x388b0b(0x5d0)+_0x388b0b(0x79b)+_0x388b0b(0x470)+_0x388b0b(0x6c4)+_0x388b0b(0x2e9)+_0x388b0b(0x543)+_0x388b0b(0x4e7)+_0x388b0b(0x2b6)+_0x388b0b(0x231)+_0x388b0b(0x1ea),_0x326703[_0x388b0b(0x5fc)]||_0x4023b0[_0x388b0b(0x64a)])));}}const GRUP_A_TEKIL_DOSYA_TANIMLARI={'ticariStok':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+('_ticariS'+_0x44532d(0x4e3)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x4d7)+_0x44532d(0x29a)+_0x44532d(0x309)+'1'},'cekSenet':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x686)+_0x44532d(0x759)),'localKey':'noktaCar'+_0x44532d(0x43a)+_0x44532d(0x5ee)+_0x44532d(0x6be)},'ciroPrimi':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x6f2)+_0x44532d(0x207)),'localKey':'noktaCar'+_0x44532d(0x43a)+_0x44532d(0x31e)+_0x44532d(0x247)},'donemselIskonto':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+('_donemse'+_0x44532d(0x54a)+_0x44532d(0x296)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x47c)+_0x44532d(0x797)+_0x44532d(0x648)+_0x44532d(0x784)},'kalemler':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+('_kalemle'+_0x44532d(0x335)),'localKey':'noktaCar'+'iTakip_k'+'alemlerD'+'osya_v1'},'siparis':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+('_siparis'+_0x44532d(0x296)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x15a)+_0x44532d(0x3c7)+_0x44532d(0x784)},'tahsilat':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x79e)+_0x44532d(0x759)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x4d7)+_0x44532d(0x5a7)+_0x44532d(0x6be)},'fatura':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x1d5)+_0x44532d(0x1d6)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x2da)+_0x44532d(0x150)+_0x44532d(0x1ad)},'depozitoTahsilat':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x294)+_0x44532d(0x248)+'tDosya'),'localKey':_0x44532d(0x1e1)+_0x44532d(0x47c)+_0x44532d(0x517)+_0x44532d(0x5a7)+_0x44532d(0x6be)},'bayiHakedis':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x55f)+_0x44532d(0x6f7)+_0x44532d(0x1d6)),'localKey':'noktaCar'+_0x44532d(0x493)+_0x44532d(0x553)+_0x44532d(0x304)+_0x44532d(0x1ad)},'yukleme':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x58a)+_0x44532d(0x296)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x67b)+_0x44532d(0x634)+_0x44532d(0x784)},'cariEkstre':{'cloudPath':CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x414)+_0x44532d(0x346)),'localKey':_0x44532d(0x1e1)+_0x44532d(0x43a)+_0x44532d(0x531)+'eDosya_v'+'1'}};async function grupATekilDosyaKaydet(_0x781b88,_0x502ad8,_0x367a50,_0xdba980){const _0x39619d=_0x44532d,_0x439182={'zbnRh':function(_0x32f378,_0x5e7c03){return _0x32f378||_0x5e7c03;},'IewUt':function(_0x520f2a,_0x236c46,_0x492b00){return _0x520f2a(_0x236c46,_0x492b00);},'Ukdou':function(_0x18f269){return _0x18f269();},'xGRhD':function(_0x30a0fb,_0x9d3133){return _0x30a0fb||_0x9d3133;},'HEgtZ':_0x39619d(0x56c)+_0x39619d(0x75f),'iNmqr':_0x39619d(0x36a),'BwlhI':_0x39619d(0x1f9)+_0x39619d(0x2d2),'EEZJB':function(_0x2cffd8,_0x47e216){return _0x2cffd8+_0x47e216;},'rKpUN':_0x39619d(0x559),'HhWXL':function(_0x426592,_0x3fbe7b,_0x1b1aeb){return _0x426592(_0x3fbe7b,_0x1b1aeb);},'SVZnD':function(_0x4db985,_0x3f0125){return _0x4db985+_0x3f0125;},'Gfgyo':_0x39619d(0x59b)+_0x39619d(0x50b)+'emedi:'},_0x114de5=GRUP_A_TEKIL_DOSYA_TANIMLARI[_0x781b88];if(!_0x114de5)return;const _0x5a43d1={'data':_0x502ad8||[],'headers':_0x367a50||[],'adi':_0x439182[_0x39619d(0x377)](_0xdba980,''),'tarih':new Date()[_0x39619d(0x279)+_0x39619d(0x6d2)]()},_0x16a9cb=await _0x439182[_0x39619d(0x22a)](idbSet,_0x114de5[_0x39619d(0x2e5)],_0x5a43d1);if(!_0x16a9cb)console[_0x39619d(0x640)](LABELS[_0x781b88]+('\x20cihaza\x20'+_0x39619d(0x50b)+_0x39619d(0x6cf)));if(!_0x439182[_0x39619d(0x2f3)](cloudEnabled))return;try{const _0x5d9748={'dataJson':JSON[_0x39619d(0x4db)+'y'](_0x502ad8||[]),'headersJson':JSON['stringif'+'y'](_0x367a50||[]),'adi':_0x439182[_0x39619d(0x4b7)](_0xdba980,''),'tarih':_0x5a43d1['tarih'],'format':_0x439182[_0x39619d(0x2c8)]},_0x33b2e2=await _0x439182[_0x39619d(0x22a)](cloudFetch,CLOUD[_0x39619d(0x38f)][_0x39619d(0x1c6)](/\/$/,'')+'/'+_0x114de5[_0x39619d(0x4e5)+'h']+_0x39619d(0x4c4)+await _0x439182[_0x39619d(0x2f3)](authQuery),{'method':_0x439182[_0x39619d(0x223)],'headers':{'Content-Type':_0x439182[_0x39619d(0x318)]},'body':JSON[_0x39619d(0x4db)+'y'](_0x5d9748)});if(!_0x33b2e2['ok'])throw new Error(_0x439182[_0x39619d(0x604)](_0x439182[_0x39619d(0x3fe)],_0x33b2e2['status']));const _0x2f85bd=Date[_0x39619d(0x2bb)]();await _0x439182[_0x39619d(0x343)](cloudMetaYazUzaktan,_0x114de5[_0x39619d(0x4e5)+'h'],_0x2f85bd),await _0x439182[_0x39619d(0x22a)](cloudMetaZamaniKaydet,_0x114de5[_0x39619d(0x4e5)+'h'],_0x2f85bd);}catch(_0xfbe490){console[_0x39619d(0x640)](_0x439182['SVZnD'](LABELS[_0x781b88],_0x439182[_0x39619d(0x2bf)]),_0xfbe490);}}function grupATekilKaydiCoz(_0x1dd644){const _0x2fcb8b=_0x44532d,_0x8abfe6={'hbVdg':_0x2fcb8b(0x432)+_0x2fcb8b(0x6b7)+_0x2fcb8b(0x2d5)+'kapalı\x20—'+_0x2fcb8b(0x571)+_0x2fcb8b(0x533)+_0x2fcb8b(0x390)+'di!','Hkuti':'storageN'+_0x2fcb8b(0x14e),'StNDj':_0x2fcb8b(0x301)+_0x2fcb8b(0x79d)+_0x2fcb8b(0x704)+_0x2fcb8b(0x338)+_0x2fcb8b(0x534)+_0x2fcb8b(0x221)+'\x20devre\x20d'+_0x2fcb8b(0x342)+_0x2fcb8b(0x3be)+_0x2fcb8b(0x4d3)+_0x2fcb8b(0x3b9)+_0x2fcb8b(0x3f0)+_0x2fcb8b(0x64c)+'\x20sayfa\x20y'+_0x2fcb8b(0x1a2)+_0x2fcb8b(0x3ce)+_0x2fcb8b(0x764),'qyZPi':function(_0x39b997,_0xd6c2ad){return _0x39b997 instanceof _0xd6c2ad;},'aDjgO':function(_0x418fd8,_0x5662bc){return _0x418fd8===_0x5662bc;},'XJyZG':_0x2fcb8b(0x2e7),'SIHyS':function(_0x348f50,_0x101466){return _0x348f50===_0x101466;},'CPVQv':'string','Wqnga':function(_0x90963c,_0x3eede8){return _0x90963c===_0x3eede8;},'MtBLo':function(_0x357289,_0x552344){return _0x357289+_0x552344;},'dTzGf':function(_0x5ce8f6,_0xc319f7){return _0x5ce8f6(_0xc319f7);},'eICDK':function(_0x355285,_0x4223a3){return _0x355285-_0x4223a3;},'yXZHE':function(_0x2124d4,_0x56ca02){return _0x2124d4(_0x56ca02);},'sEowS':_0x2fcb8b(0x748),'wQIOD':function(_0x2ffa91,_0x584b0e){return _0x2ffa91===_0x584b0e;},'XgLyg':_0x2fcb8b(0x549),'AHDnZ':function(_0x32435d,_0x1b9a45){return _0x32435d===_0x1b9a45;},'xMhPD':'AKTIF','yDHSh':_0x2fcb8b(0x677),'dZgyX':function(_0x24da23,_0x511c8d){return _0x24da23||_0x511c8d;},'tTzvi':function(_0x435793,_0xfe41ea){return _0x435793!==_0xfe41ea;},'WsYBH':_0x2fcb8b(0x761),'DXOZW':function(_0x2bb5a7,_0x193930){return _0x2bb5a7===_0x193930;},'ANYme':_0x2fcb8b(0x56c)+_0x2fcb8b(0x75f),'RQMxo':_0x2fcb8b(0x63a),'nWzxH':_0x2fcb8b(0x4d9),'kncdy':_0x2fcb8b(0x619),'zVLrb':_0x2fcb8b(0x55a),'fgfUg':_0x2fcb8b(0x1b3)};if(!_0x1dd644||_0x8abfe6[_0x2fcb8b(0x6cd)](typeof _0x1dd644,_0x8abfe6[_0x2fcb8b(0x5d1)]))return null;if(_0x8abfe6['DXOZW'](_0x1dd644[_0x2fcb8b(0x419)],_0x8abfe6[_0x2fcb8b(0x5ca)])||typeof _0x1dd644[_0x2fcb8b(0x55b)]===_0x8abfe6[_0x2fcb8b(0x67e)]){let _0x41c7e9=[],_0x237412=[];try{_0x41c7e9=JSON[_0x2fcb8b(0x1ab)](_0x1dd644[_0x2fcb8b(0x55b)]||'[]');}catch(_0x53f366){_0x8abfe6[_0x2fcb8b(0x6cd)](_0x8abfe6['RQMxo'],_0x8abfe6[_0x2fcb8b(0x5f0)])?(statusPillMsg[_0x2fcb8b(0x73f)+_0x2fcb8b(0x5c0)]=_0x8abfe6[_0x2fcb8b(0x5b2)],statusPill[_0x2fcb8b(0x1ac)+'t']['remove']('ok'),_0x361a03[_0x2fcb8b(0x2ac)+'ntById'](_0x8abfe6[_0x2fcb8b(0x781)])[_0x2fcb8b(0x73f)+_0x2fcb8b(0x5c0)]=_0x8abfe6['StNDj']):_0x41c7e9=[];}try{if(_0x8abfe6['DXOZW'](_0x8abfe6[_0x2fcb8b(0x5f2)],_0x8abfe6[_0x2fcb8b(0x74c)])){if(_0x8abfe6[_0x2fcb8b(0x410)](_0x5f5836,_0x5149f1))return _0x4e349f(_0x5236cb[_0x2fcb8b(0x264)]())?null:_0x4b8069;if(_0x8abfe6[_0x2fcb8b(0x1e8)](typeof _0x1b8b1c,_0x8abfe6[_0x2fcb8b(0x2d6)])){const _0x4d40dc=_0x50a4a2[_0x2fcb8b(0x1fb)][_0x2fcb8b(0x25f)+_0x2fcb8b(0x3a4)](_0x5d0ce6);if(_0x4d40dc)return new _0x55d29e(_0x10d561['UTC'](_0x4d40dc['y'],_0x4d40dc['m']-(0x1f57+-0x79c+-0x2*0xbdd),_0x4d40dc['d']));}if(_0x8abfe6[_0x2fcb8b(0x5b3)](typeof _0x555083,_0x8abfe6['CPVQv'])&&_0x14651b[_0x2fcb8b(0x785)]()){const _0x132bc2=_0x28afef[_0x2fcb8b(0x785)](),_0x1aedc9=new _0x121467(_0x132bc2);if(!_0x4088ba(_0x1aedc9[_0x2fcb8b(0x264)]()))return _0x1aedc9;const _0xbe0f7=_0x132bc2[_0x2fcb8b(0x162)](/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})$/);if(_0xbe0f7){let [,_0x565ebc,_0x3147ef,_0x36d9f9]=_0xbe0f7;if(_0x8abfe6[_0x2fcb8b(0x1e5)](_0x36d9f9[_0x2fcb8b(0x49d)],0x1*-0xc8+0x40a+-0x340))_0x36d9f9=_0x8abfe6[_0x2fcb8b(0x386)]('20',_0x36d9f9);const _0x375e66=new _0x571680(_0x390af8['UTC'](_0x8abfe6[_0x2fcb8b(0x4cc)](_0xcdc165,_0x36d9f9),_0x8abfe6[_0x2fcb8b(0x2a8)](_0x4fce51(_0x3147ef),-0xebc+0x9*0xc9+0x7ac),_0x4270b6(_0x565ebc)));if(!_0x8abfe6[_0x2fcb8b(0x4cc)](_0x1bfbda,_0x375e66[_0x2fcb8b(0x264)]()))return _0x375e66;}}return null;}else _0x237412=JSON[_0x2fcb8b(0x1ab)](_0x1dd644[_0x2fcb8b(0x1d2)+'son']||'[]');}catch(_0x97d97c){if(_0x8abfe6['SIHyS'](_0x8abfe6['zVLrb'],_0x8abfe6[_0x2fcb8b(0x715)])){const _0x3c0ee6=wUeYrF[_0x2fcb8b(0x382)](_0x212234,_0x4c8895[wUeYrF[_0x2fcb8b(0x168)]]||'')[_0x2fcb8b(0x785)]();if(!_0x3c0ee6)return;const _0x5bcd91=_0x5c89a1(_0x598298[_0x50fb9d]||'')[_0x2fcb8b(0x785)](),_0x33f88a=_0x5bcd91[_0x2fcb8b(0x476)+_0x2fcb8b(0x754)+'e'](_0x2fcb8b(0x3f6));_0x592dd9[_0x2fcb8b(0x463)](_0x3c0ee6,wUeYrF[_0x2fcb8b(0x2b0)](_0x33f88a,wUeYrF[_0x2fcb8b(0x319)])||wUeYrF[_0x2fcb8b(0x6fd)](_0x33f88a,wUeYrF[_0x2fcb8b(0x5e5)])?wUeYrF['yDHSh']:wUeYrF['dZgyX'](_0x5bcd91,_0x2fcb8b(0x378)));}else _0x237412=[];}return{'data':_0x41c7e9,'headers':_0x237412,'adi':_0x1dd644['adi']||'','tarih':_0x1dd644[_0x2fcb8b(0x6f8)]||null};}return{'data':_0x1dd644[_0x2fcb8b(0x6c1)]||[],'headers':_0x1dd644[_0x2fcb8b(0x6c8)]||[],'adi':_0x1dd644[_0x2fcb8b(0x3f7)]||'','tarih':_0x1dd644['tarih']||null};}async function grupATekilDosyaYerelOku(_0x336b9d){const _0x338567=_0x44532d,_0x2a9e7d={'DIzWR':function(_0x4a906b,_0x51e9e8){return _0x4a906b(_0x51e9e8);}},_0x1742c6=GRUP_A_TEKIL_DOSYA_TANIMLARI[_0x336b9d];if(!_0x1742c6)return null;try{return await _0x2a9e7d[_0x338567(0x1cb)](idbGet,_0x1742c6[_0x338567(0x2e5)]);}catch(_0x48b4da){return console[_0x338567(0x640)](_0x48b4da),null;}}async function grupATekilDosyaBuluttanOku(_0x1322f8){const _0x6e0de3=_0x44532d,_0x347535={'jhigf':function(_0x1a7458){return _0x1a7458();},'kOrjH':function(_0x221adf,_0x37c6a2){return _0x221adf!==_0x37c6a2;},'KbBDR':_0x6e0de3(0x614),'cSgIL':function(_0x2b29fb,_0x44ec60){return _0x2b29fb(_0x44ec60);},'BCZxY':function(_0x4c16b0,_0x34f358){return _0x4c16b0+_0x34f358;},'DwABB':_0x6e0de3(0x559),'LhQOy':function(_0xc04da,_0x2cf87f){return _0xc04da===_0x2cf87f;},'zXUxc':_0x6e0de3(0x6e4),'uRJmN':function(_0x37b21b,_0x14987f){return _0x37b21b(_0x14987f);},'EPKfJ':_0x6e0de3(0x261)+_0x6e0de3(0x4b5)+'adı:'},_0x2c514e=GRUP_A_TEKIL_DOSYA_TANIMLARI[_0x1322f8];if(!_0x2c514e||!_0x347535['jhigf'](cloudEnabled))return null;try{if(_0x347535[_0x6e0de3(0x652)](_0x347535['KbBDR'],_0x347535[_0x6e0de3(0x5ac)]))return _0x394877[_0x6e0de3(0x640)]('Bayi\x20Hak'+_0x6e0de3(0x393)+_0x6e0de3(0x59a)+_0x6e0de3(0x4a7)+'i:',_0x1d62b0),{'ok':![],'reason':_0x1b3444[_0x6e0de3(0x2ef)]};else{const _0x2ec73e=await _0x347535[_0x6e0de3(0x27f)](cloudFetch,CLOUD['dbUrl']['replace'](/\/$/,'')+'/'+_0x2c514e[_0x6e0de3(0x4e5)+'h']+_0x6e0de3(0x4c4)+await authQuery());if(!_0x2ec73e['ok'])throw new Error(_0x347535[_0x6e0de3(0x1ee)](_0x347535[_0x6e0de3(0x29c)],_0x2ec73e[_0x6e0de3(0x73a)]));const _0x2d49d4=await _0x2ec73e[_0x6e0de3(0x78e)]();if(!_0x2d49d4||_0x347535[_0x6e0de3(0x310)](_0x2d49d4,_0x347535[_0x6e0de3(0x24d)]))return null;return _0x347535[_0x6e0de3(0x151)](grupATekilKaydiCoz,JSON[_0x6e0de3(0x1ab)](_0x2d49d4));}}catch(_0x278319){return console[_0x6e0de3(0x640)](_0x347535[_0x6e0de3(0x1ee)](LABELS[_0x1322f8],_0x347535[_0x6e0de3(0x398)]),_0x278319),null;}}const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR=new Set([_0x44532d(0x788)+'ok','ciroPrim'+'i',_0x44532d(0x253)+_0x44532d(0x2ca),_0x44532d(0x57e),'siparis','tahsilat',_0x44532d(0x578),_0x44532d(0x163)+_0x44532d(0x458),_0x44532d(0x195)+_0x44532d(0x547),_0x44532d(0x68c),_0x44532d(0x6f6)+'re']);async function bugunKalemlerDurumTazele(){const _0x561696=_0x44532d,_0x571a74={'cgjQH':function(_0x58f27e,_0x287d5a){return _0x58f27e-_0x287d5a;},'tgapI':function(_0x2b266f,_0x13683a){return _0x2b266f(_0x13683a);},'BoasA':'kalemler','ZonSp':function(_0x1aa54b,_0x2a3042){return _0x1aa54b!==_0x2a3042;},'wkmWF':_0x561696(0x3e9)};if(state[_0x561696(0x225)]&&state[_0x561696(0x225)][_0x561696(0x57e)]&&state[_0x561696(0x225)][_0x561696(0x57e)][_0x561696(0x6c1)]&&state[_0x561696(0x225)]['kalemler'][_0x561696(0x6c1)][_0x561696(0x49d)])return state[_0x561696(0x2e8)+_0x561696(0x16d)+'ir']=!![],!![];try{let _0x497725=cloudEnabled()?await _0x571a74[_0x561696(0x5fe)](grupATekilDosyaBuluttanOku,_0x571a74[_0x561696(0x777)]):null;if(!_0x497725)_0x497725=await grupATekilDosyaYerelOku(_0x571a74[_0x561696(0x777)]);const _0x244428=!!(_0x497725&&_0x497725[_0x561696(0x6c1)]&&_0x497725[_0x561696(0x6c1)][_0x561696(0x49d)]);return state[_0x561696(0x2e8)+_0x561696(0x16d)+'ir']=_0x244428,_0x244428;}catch(_0x17a7b4){if(_0x571a74[_0x561696(0x3e3)](_0x571a74['wkmWF'],_0x571a74[_0x561696(0x6da)])){const _0x5b96bb=_0xa7fb51[_0x561696(0x1fb)][_0x561696(0x25f)+_0x561696(0x3a4)](_0xa1bb92);if(_0x5b96bb)return new _0x4d38a5(_0x2f39d1[_0x561696(0x66c)](_0x5b96bb['y'],_0x571a74[_0x561696(0x7a9)](_0x5b96bb['m'],-0x1887+-0x1e2e+0x36b6),_0x5b96bb['d']));}else return state[_0x561696(0x2e8)+_0x561696(0x16d)+'ir'];}}async function grupATekilDosyalariHazirla(){const _0x1c6629=_0x44532d,_0x36c109={'XnALS':_0x1c6629(0x2de),'NUggY':function(_0x3ae261,_0x9c602b){return _0x3ae261!==_0x9c602b;},'tNkiw':_0x1c6629(0x3a6),'zcWgz':_0x1c6629(0x4dc),'wFLOK':function(_0x58cab2,_0x33fdf8){return _0x58cab2(_0x33fdf8);},'vDvAX':function(_0x342fbd,_0x577db8){return _0x342fbd+_0x577db8;},'xoXSG':_0x1c6629(0x1e9)+_0x1c6629(0x3d0)+')','KKntf':function(_0x15e5e3,_0x8e7346){return _0x15e5e3(_0x8e7346);}},_0x2abd1e=Object[_0x1c6629(0x317)](GRUP_A_TEKIL_DOSYA_TANIMLARI),_0x31f4fb=_0x36c109[_0x1c6629(0x622)](dateKeyLocal,new Date());await Promise[_0x1c6629(0x540)](_0x2abd1e['map'](async _0x5ec2dd=>{const _0x165bfa=_0x1c6629,_0x2f7ad4={'Qmynn':_0x36c109[_0x165bfa(0x295)]};if(state[_0x165bfa(0x225)][_0x5ec2dd]&&state[_0x165bfa(0x225)][_0x5ec2dd][_0x165bfa(0x6c1)]&&state[_0x165bfa(0x225)][_0x5ec2dd]['data'][_0x165bfa(0x49d)]){if(_0x36c109[_0x165bfa(0x315)](_0x36c109['tNkiw'],_0x36c109[_0x165bfa(0x6d0)])){await grupATekilDosyaKaydet(_0x5ec2dd,state[_0x165bfa(0x225)][_0x5ec2dd][_0x165bfa(0x6c1)],state[_0x165bfa(0x225)][_0x5ec2dd][_0x165bfa(0x6c8)],state[_0x165bfa(0x225)][_0x5ec2dd]['name']);return;}else{if(DATE_KEYS[_0x165bfa(0x3db)](_0x56c180)&&typeof _0x37c4cd===_0x2f7ad4[_0x165bfa(0x7a7)]){const _0x2c63a9=new _0x23b4e6(_0x2f79d8);return _0x56a9fa(_0x2c63a9['getTime']())?_0x2302ad:_0x2c63a9;}return _0x5dc5f5;}}let _0x5c2889=cloudEnabled()?await _0x36c109[_0x165bfa(0x361)](grupATekilDosyaBuluttanOku,_0x5ec2dd):null;if(!_0x5c2889)_0x5c2889=await grupATekilDosyaYerelOku(_0x5ec2dd);if(!_0x5c2889||!_0x5c2889[_0x165bfa(0x6c1)]||!_0x5c2889[_0x165bfa(0x6c1)][_0x165bfa(0x49d)])return;if(!GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR['has'](_0x5ec2dd)){const _0x1ad6a7=_0x5c2889[_0x165bfa(0x6f8)]?dateKeyLocal(new Date(_0x5c2889[_0x165bfa(0x6f8)])):null;if(_0x36c109[_0x165bfa(0x315)](_0x1ad6a7,_0x31f4fb))return;}state['files'][_0x5ec2dd]={'name':_0x5c2889[_0x165bfa(0x3f7)]||_0x36c109[_0x165bfa(0x609)](LABELS[_0x5ec2dd],_0x36c109[_0x165bfa(0x1c2)]),'headers':_0x5c2889[_0x165bfa(0x6c8)]||[],'data':_0x5c2889[_0x165bfa(0x6c1)]};}));}async function saveMusteriMasterDurumToCloud(_0xef05d){const _0x210464=_0x44532d,_0x12e444={'tofoi':_0x210464(0x36f)+_0x210464(0x4cf),'QImfI':function(_0x2902e3,_0x5234d2,_0x4b4535){return _0x2902e3(_0x5234d2,_0x4b4535);},'Zsewc':function(_0x458e74){return _0x458e74();},'tRKHq':_0x210464(0x36a),'JjCBa':function(_0x2fa51b,_0x4fd7b3){return _0x2fa51b+_0x4fd7b3;},'RPjlH':_0x210464(0x559)};if(!cloudEnabled())return{'ok':![],'reason':_0x12e444[_0x210464(0x1c9)]};try{const _0x39b2b1=await _0x12e444[_0x210464(0x57d)](cloudFetch,CLOUD[_0x210464(0x38f)]['replace'](/\/$/,'')+'/'+MUSTERI_MASTER_DURUM_CLOUD_PATH+_0x210464(0x4c4)+await _0x12e444[_0x210464(0x405)](authQuery),{'method':_0x12e444[_0x210464(0x1b8)],'headers':{'Content-Type':_0x210464(0x1f9)+_0x210464(0x2d2)},'body':JSON[_0x210464(0x4db)+'y'](_0xef05d)});if(!_0x39b2b1['ok'])throw new Error(_0x12e444[_0x210464(0x448)](_0x12e444[_0x210464(0x364)],_0x39b2b1[_0x210464(0x73a)]));const _0x59cadc=Date[_0x210464(0x2bb)]();return await cloudMetaYazUzaktan(MUSTERI_MASTER_DURUM_CLOUD_PATH,_0x59cadc),await cloudMetaZamaniKaydet(MUSTERI_MASTER_DURUM_CLOUD_PATH,_0x59cadc),{'ok':!![]};}catch(_0x29ada1){return console[_0x210464(0x640)](_0x210464(0x2a6)+_0x210464(0x603)+_0x210464(0x49f)+_0x210464(0x59a)+_0x210464(0x4a7)+'i:',_0x29ada1),{'ok':![],'reason':_0x29ada1[_0x210464(0x2ef)]};}}async function loadMusteriMasterDurumFromCloud(){const _0x3b932a=_0x44532d,_0x566dc5={'rXAiD':function(_0x1b7b11){return _0x1b7b11();},'ptLER':function(_0x43f412,_0x7d6b4d){return _0x43f412(_0x7d6b4d);},'EyHvz':function(_0x4e4da4){return _0x4e4da4();},'QGYYY':function(_0x47a363,_0x3ecf9a){return _0x47a363+_0x3ecf9a;},'BlDnG':_0x3b932a(0x559)};if(!_0x566dc5['rXAiD'](cloudEnabled))return null;try{const _0x431586=await _0x566dc5[_0x3b932a(0x724)](cloudFetch,CLOUD[_0x3b932a(0x38f)][_0x3b932a(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_DURUM_CLOUD_PATH+_0x3b932a(0x4c4)+await _0x566dc5[_0x3b932a(0x606)](authQuery));if(!_0x431586['ok'])throw new Error(_0x566dc5[_0x3b932a(0x2b2)](_0x566dc5[_0x3b932a(0x381)],_0x431586[_0x3b932a(0x73a)]));const _0x1c5d9e=await _0x431586[_0x3b932a(0x78e)]();if(!_0x1c5d9e||_0x1c5d9e===_0x3b932a(0x6e4))return null;return JSON[_0x3b932a(0x1ab)](_0x1c5d9e);}catch(_0x5da3ba){return console[_0x3b932a(0x640)](_0x3b932a(0x2a6)+'Master\x20D'+'urum\x20bul'+_0x3b932a(0x6c0)+_0x3b932a(0x563),_0x5da3ba),null;}}async function saveMusteriMasterDurumToLocal(_0x370de0){const _0x725c28=_0x44532d,_0x5a46fb={'NaHut':_0x725c28(0x2a6)+_0x725c28(0x603)+'urum\x20cih'+_0x725c28(0x21e)+'edilemed'+'i.'},_0x410c29=await idbSet(MUSTERI_MASTER_DURUM_LOCAL_KEY,_0x370de0);if(!_0x410c29)console[_0x725c28(0x640)](_0x5a46fb[_0x725c28(0x29d)]);}async function loadMusteriMasterDurumFromLocal(){const _0x3edd8c=_0x44532d,_0x3a8483={'CsTie':function(_0x48ce5d,_0x8e30d5){return _0x48ce5d(_0x8e30d5);}};try{return await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_DURUM_LOCAL_KEY),await _0x3a8483['CsTie'](idbGet,MUSTERI_MASTER_DURUM_LOCAL_KEY);}catch(_0x2846cb){return console[_0x3edd8c(0x640)](_0x2846cb),null;}}async function saveMusteriMasterKanalToCloud(_0x168d1f){const _0x47f6cc=_0x44532d,_0x375133={'uKINL':function(_0x2f00f0,_0x3d7fd8){return _0x2f00f0(_0x3d7fd8);},'wcBBH':function(_0x58401a,_0x572834){return _0x58401a||_0x572834;},'RZBqM':function(_0x79dc2d,_0x45b185){return _0x79dc2d<_0x45b185;},'xjnED':function(_0x29439c,_0x90ec41){return _0x29439c!==_0x90ec41;},'fGtgl':function(_0x91f20b,_0x49bde3){return _0x91f20b%_0x49bde3;},'CNESr':function(_0x308ab1,_0x348af5){return _0x308ab1/_0x348af5;},'VZkld':function(_0x5a57b7,_0xd203a3){return _0x5a57b7===_0xd203a3;},'yiUoL':_0x47f6cc(0x3f6),'AbEQf':function(_0x479972){return _0x479972();},'tJHEx':_0x47f6cc(0x24c),'HQzZJ':function(_0x538c56,_0x6cdd03,_0xac7b7c){return _0x538c56(_0x6cdd03,_0xac7b7c);},'eJbxs':_0x47f6cc(0x559),'uvXEm':_0x47f6cc(0x71e)};if(!_0x375133[_0x47f6cc(0x5b8)](cloudEnabled))return{'ok':![],'reason':_0x47f6cc(0x36f)+_0x47f6cc(0x4cf)};try{if(_0x375133[_0x47f6cc(0x5dd)](_0x375133[_0x47f6cc(0x40f)],_0x375133[_0x47f6cc(0x40f)])){const _0x268525=await _0x375133[_0x47f6cc(0x6a2)](cloudFetch,CLOUD[_0x47f6cc(0x38f)][_0x47f6cc(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_KANAL_CLOUD_PATH+'.json'+await _0x375133[_0x47f6cc(0x5b8)](authQuery),{'method':_0x47f6cc(0x36a),'headers':{'Content-Type':_0x47f6cc(0x1f9)+_0x47f6cc(0x2d2)},'body':JSON[_0x47f6cc(0x4db)+'y'](_0x168d1f)});if(!_0x268525['ok'])throw new Error(_0x375133[_0x47f6cc(0x649)]+_0x268525[_0x47f6cc(0x73a)]);const _0x52876d=Date[_0x47f6cc(0x2bb)]();return await _0x375133[_0x47f6cc(0x6a2)](cloudMetaYazUzaktan,MUSTERI_MASTER_KANAL_CLOUD_PATH,_0x52876d),await _0x375133[_0x47f6cc(0x6a2)](cloudMetaZamaniKaydet,MUSTERI_MASTER_KANAL_CLOUD_PATH,_0x52876d),{'ok':!![]};}else return state[_0x47f6cc(0x2e8)+_0x47f6cc(0x16d)+'ir'];}catch(_0x45cc59){if(_0x375133[_0x47f6cc(0x5dd)](_0x375133[_0x47f6cc(0x775)],_0x47f6cc(0x71e)))return console[_0x47f6cc(0x640)]('Müşteri\x20'+_0x47f6cc(0x42f)+'anal\x20bul'+_0x47f6cc(0x59a)+_0x47f6cc(0x4a7)+'i:',_0x45cc59),{'ok':![],'reason':_0x45cc59[_0x47f6cc(0x2ef)]};else{const _0x2881f3=GWrDfO[_0x47f6cc(0x4fa)](_0x18ac0d,GWrDfO[_0x47f6cc(0x5d7)](_0x476499,''))[_0x47f6cc(0x785)]()[_0x47f6cc(0x1c6)](/\s+/g,'\x20');if(!_0x2881f3)return _0x2881f3;const _0x401cca=_0x2881f3[_0x47f6cc(0x406)]('\x20');if(GWrDfO[_0x47f6cc(0x767)](_0x401cca[_0x47f6cc(0x49d)],0x1dca+0xc18+-0x2*0x14f0)||GWrDfO[_0x47f6cc(0x538)](GWrDfO['fGtgl'](_0x401cca['length'],-0x2428+0x2*0x4b5+0x1ac0),0x8e8+0x1f9c+0xa21*-0x4))return _0x2881f3;const _0x2952bc=GWrDfO[_0x47f6cc(0x693)](_0x401cca[_0x47f6cc(0x49d)],-0x23f8+-0x10cc+0x34c6),_0x531610=_0x401cca[_0x47f6cc(0x5a9)](-0x6ab+-0x1d88+0x2433,_0x2952bc)[_0x47f6cc(0x698)]('\x20'),_0x38a443=_0x401cca[_0x47f6cc(0x5a9)](_0x2952bc)[_0x47f6cc(0x698)]('\x20');return GWrDfO[_0x47f6cc(0x5dd)](_0x531610[_0x47f6cc(0x476)+_0x47f6cc(0x754)+'e'](GWrDfO[_0x47f6cc(0x6a5)]),_0x38a443[_0x47f6cc(0x476)+_0x47f6cc(0x754)+'e'](_0x47f6cc(0x3f6)))?_0x531610:_0x2881f3;}}}async function loadMusteriMasterKanalFromCloud(){const _0x4e56e0=_0x44532d,_0x24a7a0={'cYqvS':function(_0xa3192b){return _0xa3192b();},'MlNEm':function(_0x38c884){return _0x38c884();},'NSiaT':function(_0x29069c,_0xce37e5){return _0x29069c+_0xce37e5;},'socyR':_0x4e56e0(0x559),'ubSvO':_0x4e56e0(0x17c),'spiMG':_0x4e56e0(0x2a6)+'Master\x20K'+_0x4e56e0(0x3fa)+_0x4e56e0(0x6c0)+_0x4e56e0(0x563)};if(!_0x24a7a0[_0x4e56e0(0x2e3)](cloudEnabled))return null;try{const _0x31aeb7=await cloudFetch(CLOUD[_0x4e56e0(0x38f)][_0x4e56e0(0x1c6)](/\/$/,'')+'/'+MUSTERI_MASTER_KANAL_CLOUD_PATH+_0x4e56e0(0x4c4)+await _0x24a7a0[_0x4e56e0(0x183)](authQuery));if(!_0x31aeb7['ok'])throw new Error(_0x24a7a0[_0x4e56e0(0x3dc)](_0x24a7a0[_0x4e56e0(0x499)],_0x31aeb7[_0x4e56e0(0x73a)]));const _0x27f8a1=await _0x31aeb7[_0x4e56e0(0x78e)]();if(!_0x27f8a1||_0x27f8a1==='null')return null;return JSON[_0x4e56e0(0x1ab)](_0x27f8a1);}catch(_0x9afc4f){if(_0x24a7a0[_0x4e56e0(0x527)]===_0x24a7a0[_0x4e56e0(0x527)])return console['error'](_0x24a7a0[_0x4e56e0(0x1bc)],_0x9afc4f),null;else _0x324d17=_0x565c7f[_0x4e56e0(0x1ab)](_0x504cfe[_0x4e56e0(0x1d2)+_0x4e56e0(0x353)]||'[]');}}async function saveMusteriMasterKanalToLocal(_0x5b9617){const _0x18a36b=_0x44532d,_0x302f7c={'SjNsB':function(_0x467a55,_0x15dfc0,_0x3908a2){return _0x467a55(_0x15dfc0,_0x3908a2);}},_0x2e1a01=await _0x302f7c[_0x18a36b(0x2e2)](idbSet,MUSTERI_MASTER_KANAL_LOCAL_KEY,_0x5b9617);if(!_0x2e1a01)console['error'](_0x18a36b(0x2a6)+_0x18a36b(0x42f)+'anal\x20cih'+'aza\x20kayd'+_0x18a36b(0x4a7)+'i.');}async function loadMusteriMasterKanalFromLocal(){const _0x540852=_0x44532d,_0x1076d1={'rYFzn':function(_0x512313,_0x4869b9){return _0x512313(_0x4869b9);},'NkTsO':function(_0x1586f7,_0x4256bb){return _0x1586f7!==_0x4256bb;},'mPyFX':_0x540852(0x437)};try{return await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_KANAL_LOCAL_KEY),await _0x1076d1[_0x540852(0x38b)](idbGet,MUSTERI_MASTER_KANAL_LOCAL_KEY);}catch(_0x42d14f){if(_0x1076d1[_0x540852(0x17d)](_0x540852(0x18e),_0x1076d1[_0x540852(0x412)]))return console[_0x540852(0x640)](_0x42d14f),null;else return;}}async function musteriMasterYenile(){const _0x7f6bfb=_0x44532d,_0x202b62={'JaaUH':function(_0x426b38){return _0x426b38();},'ikoVK':function(_0x4181c3,_0x2d6fea,_0x3fee2e,_0x373b0f){return _0x4181c3(_0x2d6fea,_0x3fee2e,_0x373b0f);},'mHbHd':function(_0x5a9867){return _0x5a9867();},'gnvzB':function(_0x5c7fe1,_0x4fdebd,_0x284767,_0x46a945){return _0x5c7fe1(_0x4fdebd,_0x284767,_0x46a945);},'kKpua':function(_0x30122c,_0x23a41d){return _0x30122c(_0x23a41d);},'RATca':function(_0x2d5382){return _0x2d5382();},'thdZQ':function(_0x4673aa){return _0x4673aa();}},[_0xf9a511,_0x8d5f7b,_0x2b3872,_0x420fbd]=await Promise['all']([_0x202b62[_0x7f6bfb(0x383)](cloudEnabled)?cloudVeriVerimliYukle(MUSTERI_MASTER_CLOUD_PATH,loadMusteriMasterFromCloud,loadMusteriMasterFromLocal):Promise[_0x7f6bfb(0x329)](null),_0x202b62[_0x7f6bfb(0x383)](cloudEnabled)?_0x202b62[_0x7f6bfb(0x71f)](cloudVeriVerimliYukle,MUSTERI_MASTER_DETAY_CLOUD_PATH,loadMusteriMasterDetayFromCloud,loadMusteriMasterDetayFromLocal):Promise[_0x7f6bfb(0x329)](null),_0x202b62[_0x7f6bfb(0x270)](cloudEnabled)?_0x202b62[_0x7f6bfb(0x71f)](cloudVeriVerimliYukle,MUSTERI_MASTER_DURUM_CLOUD_PATH,loadMusteriMasterDurumFromCloud,loadMusteriMasterDurumFromLocal):Promise[_0x7f6bfb(0x329)](null),_0x202b62[_0x7f6bfb(0x270)](cloudEnabled)?_0x202b62[_0x7f6bfb(0x637)](cloudVeriVerimliYukle,MUSTERI_MASTER_KANAL_CLOUD_PATH,loadMusteriMasterKanalFromCloud,loadMusteriMasterKanalFromLocal):Promise[_0x7f6bfb(0x329)](null)]);let _0x2bd8d5=_0xf9a511?_0xf9a511[_0x7f6bfb(0x6c1)]:null;if(!_0x2bd8d5)_0x2bd8d5=await _0x202b62[_0x7f6bfb(0x270)](loadMusteriMasterFromLocal);state[_0x7f6bfb(0x5b6)+_0x7f6bfb(0x696)]=_0x202b62[_0x7f6bfb(0x193)](musteriMasterObjToMap,_0x2bd8d5);let _0x47bff7=_0x8d5f7b?_0x8d5f7b[_0x7f6bfb(0x6c1)]:null;if(!_0x47bff7)_0x47bff7=await _0x202b62[_0x7f6bfb(0x280)](loadMusteriMasterDetayFromLocal);state[_0x7f6bfb(0x5b6)+_0x7f6bfb(0x47b)+'ay']=_0x202b62['kKpua'](musteriMasterObjToMap,_0x47bff7);let _0x432d94=_0x2b3872?_0x2b3872[_0x7f6bfb(0x6c1)]:null;if(!_0x432d94)_0x432d94=await _0x202b62[_0x7f6bfb(0x66a)](loadMusteriMasterDurumFromLocal);state[_0x7f6bfb(0x5b6)+_0x7f6bfb(0x762)+'um']=_0x202b62[_0x7f6bfb(0x193)](musteriMasterObjToMap,_0x432d94);let _0xc875d2=_0x420fbd?_0x420fbd[_0x7f6bfb(0x6c1)]:null;if(!_0xc875d2)_0xc875d2=await _0x202b62[_0x7f6bfb(0x383)](loadMusteriMasterKanalFromLocal);return state[_0x7f6bfb(0x5b6)+_0x7f6bfb(0x3e1)+'al']=musteriMasterObjToMap(_0xc875d2),state[_0x7f6bfb(0x5b6)+_0x7f6bfb(0x696)];}async function musteriMasterKaydet(_0x1e40e2,_0x320a3b){const _0x10a1ea=_0x44532d,_0x3d0b4c={'pMupk':function(_0x1a9252,_0x572e1c){return _0x1a9252(_0x572e1c);},'YhNYH':function(_0x11dea9){return _0x11dea9();},'JuyfH':function(_0x31c4aa,_0x3f0b8a){return _0x31c4aa(_0x3f0b8a);},'iguTd':function(_0x2da373,_0x10b28f){return _0x2da373+_0x10b28f;},'tYGMw':_0x10a1ea(0x2a6)+_0x10a1ea(0x766)+_0x10a1ea(0x355)+_0x10a1ea(0x4d5)+_0x10a1ea(0x45c),'NXVRm':_0x10a1ea(0x4c6)+_0x10a1ea(0x33a),'iuUpf':function(_0x22a19d,_0x595595){return _0x22a19d(_0x595595);},'xuFsr':function(_0x1c4e3f){return _0x1c4e3f();},'ZyaDa':function(_0x1bd3a0,_0x3b409f){return _0x1bd3a0+_0x3b409f;},'OTpiu':_0x10a1ea(0x2a6)+'Master\x20D'+_0x10a1ea(0x22c)+_0x10a1ea(0x59a)+_0x10a1ea(0x4a7)+'i:\x20','mGlOM':function(_0x5c968c,_0x2237a6,_0xed9efc){return _0x5c968c(_0x2237a6,_0xed9efc);},'ePDCk':function(_0x1bc9b4,_0x3fe875){return _0x1bc9b4(_0x3fe875);},'OOogg':function(_0x440fb1,_0x691373){return _0x440fb1+_0x691373;},'HQnPP':_0x10a1ea(0x2a6)+'Master\x20D'+_0x10a1ea(0x49f)+'uta\x20kayd'+_0x10a1ea(0x4a7)+'i:\x20','QTfEp':function(_0xc40a48,_0x335ae1){return _0xc40a48(_0x335ae1);},'jAEDV':function(_0x554381,_0x107ea3){return _0x554381(_0x107ea3);},'GWXYX':function(_0x2c6171,_0x59c4c5){return _0x2c6171!==_0x59c4c5;},'pTfpz':'LXuxJ','JiWeX':_0x10a1ea(0x5ec),'XdugH':function(_0x2cc3d0,_0x1ad61c){return _0x2cc3d0(_0x1ad61c);},'NBttT':_0x10a1ea(0x2a6)+_0x10a1ea(0x42f)+_0x10a1ea(0x3fa)+_0x10a1ea(0x59a)+_0x10a1ea(0x4a7)+_0x10a1ea(0x245)},_0x517ec9=[],_0x3e46aa=buildMusteriMasterMap(_0x1e40e2);state[_0x10a1ea(0x5b6)+_0x10a1ea(0x696)]=_0x3e46aa;const _0x5616ba=musteriMasterMapToObj(_0x3e46aa);await _0x3d0b4c[_0x10a1ea(0x1ec)](saveMusteriMasterToLocal,_0x5616ba);if(_0x3d0b4c[_0x10a1ea(0x354)](cloudEnabled)){const _0x15626b=await _0x3d0b4c['JuyfH'](saveMusteriMasterToCloud,_0x5616ba);if(!_0x15626b['ok'])_0x517ec9[_0x10a1ea(0x3ad)](_0x3d0b4c[_0x10a1ea(0x37a)](_0x3d0b4c[_0x10a1ea(0x494)],_0x15626b[_0x10a1ea(0x5fc)]||_0x3d0b4c[_0x10a1ea(0x271)]));}const _0xa201aa=_0x3d0b4c[_0x10a1ea(0x48a)](buildMusteriMasterDetay,_0x1e40e2);state[_0x10a1ea(0x5b6)+_0x10a1ea(0x47b)+'ay']=_0xa201aa;const _0x21777c=_0x3d0b4c[_0x10a1ea(0x47d)](musteriMasterMapToObj,_0xa201aa);await _0x3d0b4c[_0x10a1ea(0x48a)](saveMusteriMasterDetayToLocal,_0x21777c);if(_0x3d0b4c[_0x10a1ea(0x58c)](cloudEnabled)){const _0x5085a0=await _0x3d0b4c[_0x10a1ea(0x1ec)](saveMusteriMasterDetayToCloud,_0x21777c);if(!_0x5085a0['ok'])_0x517ec9[_0x10a1ea(0x3ad)](_0x3d0b4c['ZyaDa'](_0x3d0b4c[_0x10a1ea(0x4f5)],_0x5085a0[_0x10a1ea(0x5fc)]||_0x3d0b4c['NXVRm']));}const _0x35f44d=_0x3d0b4c[_0x10a1ea(0x628)](buildMusteriMasterDurumMap,_0x1e40e2,_0x320a3b);state[_0x10a1ea(0x5b6)+_0x10a1ea(0x762)+'um']=_0x35f44d;const _0x414130=_0x3d0b4c[_0x10a1ea(0x1a8)](musteriMasterMapToObj,_0x35f44d);await _0x3d0b4c[_0x10a1ea(0x1a8)](saveMusteriMasterDurumToLocal,_0x414130);if(cloudEnabled()){const _0x2f0be3=await _0x3d0b4c[_0x10a1ea(0x1ec)](saveMusteriMasterDurumToCloud,_0x414130);if(!_0x2f0be3['ok'])_0x517ec9[_0x10a1ea(0x3ad)](_0x3d0b4c[_0x10a1ea(0x2f0)](_0x3d0b4c[_0x10a1ea(0x586)],_0x2f0be3[_0x10a1ea(0x5fc)]||_0x3d0b4c['NXVRm']));}const _0x4c61e1=_0x3d0b4c[_0x10a1ea(0x3f9)](buildMusteriMasterKanalMap,_0x1e40e2);state[_0x10a1ea(0x5b6)+_0x10a1ea(0x3e1)+'al']=_0x4c61e1;const _0x4b98ef=_0x3d0b4c[_0x10a1ea(0x47d)](musteriMasterMapToObj,_0x4c61e1);await _0x3d0b4c[_0x10a1ea(0x2af)](saveMusteriMasterKanalToLocal,_0x4b98ef);if(cloudEnabled()){if(_0x3d0b4c[_0x10a1ea(0x6ca)](_0x3d0b4c[_0x10a1ea(0x4cb)],_0x3d0b4c[_0x10a1ea(0x503)])){const _0x2519aa=await _0x3d0b4c[_0x10a1ea(0x740)](saveMusteriMasterKanalToCloud,_0x4b98ef);if(!_0x2519aa['ok'])_0x517ec9[_0x10a1ea(0x3ad)](_0x3d0b4c[_0x10a1ea(0x4ae)](_0x3d0b4c[_0x10a1ea(0x2b9)],_0x2519aa[_0x10a1ea(0x5fc)]||_0x10a1ea(0x4c6)+_0x10a1ea(0x33a)));}else{const _0x4c4e94=new _0x3c5e78(_0x4d91e0);return _0x4a6e8a(_0x4c4e94[_0x10a1ea(0x264)]())?_0x5cbdb5:_0x4c4e94;}}if(_0x517ec9[_0x10a1ea(0x49d)])console[_0x10a1ea(0x640)](_0x10a1ea(0x5b6)+_0x10a1ea(0x733)+_0x10a1ea(0x69a)+_0x10a1ea(0x54b)+_0x10a1ea(0x659)+_0x10a1ea(0x783)+_0x10a1ea(0x4de),_0x517ec9);return _0x3e46aa['__kaydet'+_0x10a1ea(0x7b1)+'ri']=_0x517ec9,_0x3e46aa;}const BAYI_HAKEDIS_CLOUD_PATH=CLOUD['path']+(_0x44532d(0x55f)+_0x44532d(0x321)),BAYI_HAKEDIS_LOCAL_KEY=_0x44532d(0x1e1)+_0x44532d(0x493)+'ayiHaked'+_0x44532d(0x731);function bayiHakedisReviver(_0x35612a,_0x4502b4){const _0x154346=_0x44532d,_0x1490d4={'XrAsw':function(_0x576d83,_0x32b6aa){return _0x576d83===_0x32b6aa;},'cJDNy':_0x154346(0x6f8),'ALRIL':function(_0x213c38,_0x3f9134){return _0x213c38===_0x3f9134;},'HDSIt':'string','wRRyk':function(_0x1d8a31,_0x204c93){return _0x1d8a31===_0x204c93;},'pGHwh':_0x154346(0x308),'mAxNP':function(_0x224b21,_0x287216){return _0x224b21(_0x287216);}};if(_0x1490d4[_0x154346(0x1d0)](_0x35612a,_0x1490d4[_0x154346(0x691)])&&_0x1490d4[_0x154346(0x35d)](typeof _0x4502b4,_0x1490d4[_0x154346(0x598)])){if(_0x1490d4[_0x154346(0x256)](_0x1490d4[_0x154346(0x176)],_0x1490d4[_0x154346(0x176)])){const _0xfdea5f=new Date(_0x4502b4);return _0x1490d4[_0x154346(0x74e)](isNaN,_0xfdea5f['getTime']())?_0x4502b4:_0xfdea5f;}else return _0x2d2f76[_0x154346(0x640)]('Malzemel'+_0x154346(0x581)+_0x154346(0x59b)+_0x154346(0x50b)+_0x154346(0x1a4),_0x428a85),{'ok':![],'reason':_0x58f734[_0x154346(0x2ef)]};}return _0x4502b4;}async function saveBayiHakedisToCloud(_0x22c3d2){const _0x27fe93=_0x44532d,_0x5934af={'wEHle':function(_0x48966c,_0x19ad9e){return _0x48966c(_0x19ad9e);},'TnJmr':function(_0x20924a,_0x129c1c){return _0x20924a+_0x129c1c;},'XHMpQ':_0x27fe93(0x3c9)+_0x27fe93(0x30f)+_0x27fe93(0x62e)+_0x27fe93(0x4e0)+_0x27fe93(0x160),'MKpey':_0x27fe93(0x1f3)+'\x20tekrar\x20'+'deneyin.','ziHHy':function(_0x4accd9){return _0x4accd9();},'iYMsW':_0x27fe93(0x36f)+_0x27fe93(0x4cf),'WZjoj':_0x27fe93(0x389),'sCBCX':function(_0x260677,_0x13581e,_0x146ea4){return _0x260677(_0x13581e,_0x146ea4);},'ekhxo':function(_0x51648b){return _0x51648b();},'jpswL':_0x27fe93(0x36a),'ybWDE':_0x27fe93(0x559),'lepnE':function(_0x32c3ac,_0x31059c,_0x35439d){return _0x32c3ac(_0x31059c,_0x35439d);},'gEYHQ':function(_0x40d9d4,_0x2d8a64,_0x544863){return _0x40d9d4(_0x2d8a64,_0x544863);},'FzCun':function(_0x462b78,_0x2e56f0){return _0x462b78===_0x2e56f0;},'yvFQb':_0x27fe93(0x650)+_0x27fe93(0x393)+_0x27fe93(0x59a)+_0x27fe93(0x4a7)+'i:'};if(!_0x5934af[_0x27fe93(0x69c)](cloudEnabled))return{'ok':![],'reason':_0x5934af[_0x27fe93(0x65d)]};try{if(_0x5934af['WZjoj']===_0x27fe93(0x389)){const _0x74a96b=await _0x5934af[_0x27fe93(0x654)](cloudFetch,CLOUD[_0x27fe93(0x38f)]['replace'](/\/$/,'')+'/'+BAYI_HAKEDIS_CLOUD_PATH+_0x27fe93(0x4c4)+await _0x5934af[_0x27fe93(0x73d)](authQuery),{'method':_0x5934af[_0x27fe93(0x356)],'headers':{'Content-Type':_0x27fe93(0x1f9)+_0x27fe93(0x2d2)},'body':JSON[_0x27fe93(0x4db)+'y'](_0x22c3d2)});if(!_0x74a96b['ok'])throw new Error(_0x5934af[_0x27fe93(0x660)](_0x5934af[_0x27fe93(0x445)],_0x74a96b[_0x27fe93(0x73a)]));const _0x1a6534=Date[_0x27fe93(0x2bb)]();return await _0x5934af[_0x27fe93(0x464)](cloudMetaYazUzaktan,BAYI_HAKEDIS_CLOUD_PATH,_0x1a6534),await _0x5934af[_0x27fe93(0x140)](cloudMetaZamaniKaydet,BAYI_HAKEDIS_CLOUD_PATH,_0x1a6534),{'ok':!![]};}else{const _0x275b78={};return _0x7a43f3[_0x27fe93(0x370)]((_0x517868,_0xf60a05)=>{_0x275b78[_0xf60a05]=_0x517868;}),_0x275b78;}}catch(_0x57827c){if(_0x5934af[_0x27fe93(0x3d3)]('RiHAE',_0x27fe93(0x5c1)))_0x1ecc25[_0x27fe93(0x640)](_0x27fe93(0x4c0)+_0x27fe93(0x54e)+_0x27fe93(0x4eb)+_0x27fe93(0x48e)+_0x27fe93(0x25c),_0x452590),_0x5934af[_0x27fe93(0x512)](_0x1f4e68,_0x5934af['TnJmr'](_0x5934af[_0x27fe93(0x169)],_0x16bba4[_0x27fe93(0x2ef)])+_0x5934af['MKpey']);else return console[_0x27fe93(0x640)](_0x5934af[_0x27fe93(0x6d6)],_0x57827c),{'ok':![],'reason':_0x57827c[_0x27fe93(0x2ef)]};}}async function loadBayiHakedisFromCloud(){const _0x2390a9=_0x44532d,_0x66daeb={'tWgTa':function(_0x5e9b61){return _0x5e9b61();},'sMOAX':function(_0x92967e,_0x1c7007){return _0x92967e+_0x1c7007;},'VEmVZ':_0x2390a9(0x559),'wnKjS':function(_0x1d5833,_0x75b37b){return _0x1d5833===_0x75b37b;},'lIaDX':_0x2390a9(0x650)+_0x2390a9(0x393)+_0x2390a9(0x6c0)+'unamadı:'};if(!_0x66daeb[_0x2390a9(0x1cc)](cloudEnabled))return null;try{const _0x31b20f=await cloudFetch(CLOUD[_0x2390a9(0x38f)][_0x2390a9(0x1c6)](/\/$/,'')+'/'+BAYI_HAKEDIS_CLOUD_PATH+_0x2390a9(0x4c4)+await _0x66daeb[_0x2390a9(0x1cc)](authQuery));if(!_0x31b20f['ok'])throw new Error(_0x66daeb['sMOAX'](_0x66daeb[_0x2390a9(0x40c)],_0x31b20f[_0x2390a9(0x73a)]));const _0x54118b=await _0x31b20f[_0x2390a9(0x78e)]();if(!_0x54118b||_0x66daeb[_0x2390a9(0x18d)](_0x54118b,_0x2390a9(0x6e4)))return null;return JSON[_0x2390a9(0x1ab)](_0x54118b,bayiHakedisReviver);}catch(_0x3fbb0f){return console[_0x2390a9(0x640)](_0x66daeb[_0x2390a9(0x380)],_0x3fbb0f),null;}}async function saveBayiHakedisToLocal(_0x8ec36){const _0x23f9a9=_0x44532d,_0x5f501b={'XQdlm':function(_0x4167cb,_0x1d04a1,_0x53bd0f){return _0x4167cb(_0x1d04a1,_0x53bd0f);},'HpwFL':_0x23f9a9(0x650)+'ediş\x20cih'+_0x23f9a9(0x21e)+_0x23f9a9(0x4a7)+'i.'},_0x5e2f86=await _0x5f501b['XQdlm'](idbSet,BAYI_HAKEDIS_LOCAL_KEY,_0x8ec36);if(!_0x5e2f86)console[_0x23f9a9(0x640)](_0x5f501b[_0x23f9a9(0x44c)]);}async function loadBayiHakedisFromLocal(){const _0x3d6b10=_0x44532d,_0x3f2652={'ZpELg':function(_0x36c339,_0x3cbd1b){return _0x36c339(_0x3cbd1b);},'fTOUM':function(_0x566b57,_0x22c5d6){return _0x566b57+_0x22c5d6;},'AhTiD':function(_0x4d12e8,_0x1021c7){return _0x4d12e8===_0x1021c7;},'tFEcy':_0x3d6b10(0x71b),'pxKCl':function(_0x33a15,_0xae28e2,_0x41c514){return _0x33a15(_0xae28e2,_0x41c514);}};try{if(_0x3f2652[_0x3d6b10(0x54d)](_0x3f2652[_0x3d6b10(0x38d)],_0x3f2652[_0x3d6b10(0x38d)]))return await _0x3f2652[_0x3d6b10(0x2c3)](idbMigrateFromLocalStorageOnce,BAYI_HAKEDIS_LOCAL_KEY,bayiHakedisReviver),await idbGet(BAYI_HAKEDIS_LOCAL_KEY);else{const _0x5dad41=_0x3f2652[_0x3d6b10(0x1bd)](excelDateToJS,_0x37b297);if(!_0x5dad41)return null;return new _0x684b3c(_0x3f2652[_0x3d6b10(0x7ac)](_0x5dad41['getTime'](),-0x1e5693d*0x1+0x1738f3*-0x1e+-0x5757*-0x1ca1));}}catch(_0x430752){return console[_0x3d6b10(0x640)](_0x430752),null;}}async function bayiHakedisYenile(){const _0x2cd3c7=_0x44532d;let _0x57a0d7=null;if(cloudEnabled()){const _0x214016=await cloudVeriVerimliYukle(BAYI_HAKEDIS_CLOUD_PATH,loadBayiHakedisFromCloud,loadBayiHakedisFromLocal);_0x57a0d7=_0x214016[_0x2cd3c7(0x6c1)];}if(!_0x57a0d7)_0x57a0d7=await loadBayiHakedisFromLocal();return state['bayiHake'+_0x2cd3c7(0x3e5)+'t']=_0x57a0d7,_0x57a0d7;}async function bayiHakedisKaydet(_0x9833a5){const _0xe1c6c9=_0x44532d,_0x55a6b3={'EOXBD':function(_0x3bcfdd,_0x1352bd){return _0x3bcfdd(_0x1352bd);},'PMYDU':function(_0x33ac70){return _0x33ac70();},'WEGvT':_0xe1c6c9(0x76f),'HmQMD':_0xe1c6c9(0x40b),'qZXhN':function(_0x348405,_0x3cbe17){return _0x348405(_0x3cbe17);},'mczzr':_0xe1c6c9(0x432)+'ayi\x20Hake'+_0xe1c6c9(0x75e)+_0xe1c6c9(0x2bd)+_0xe1c6c9(0x55d)+_0xe1c6c9(0x3b7)+_0xe1c6c9(0x267)+_0xe1c6c9(0x3d1)+_0xe1c6c9(0x436)+')\x20—\x20sayf'+_0xe1c6c9(0x313)+_0xe1c6c9(0x16f)+_0xe1c6c9(0x791)+_0xe1c6c9(0x79a)+'ağlantın'+_0xe1c6c9(0x455)+_0xe1c6c9(0x23b)+_0xe1c6c9(0x3fc)+_0xe1c6c9(0x6f3)+_0xe1c6c9(0x6d7)+_0xe1c6c9(0x4fe)};await _0x55a6b3[_0xe1c6c9(0x77c)](saveBayiHakedisToLocal,_0x9833a5);if(_0x55a6b3[_0xe1c6c9(0x3e0)](cloudEnabled)){if(_0x55a6b3[_0xe1c6c9(0x156)]!==_0x55a6b3[_0xe1c6c9(0x554)]){const _0x22c4b0=await saveBayiHakedisToCloud(_0x9833a5);!_0x22c4b0['ok']&&(console[_0xe1c6c9(0x640)](_0xe1c6c9(0x432)+_0xe1c6c9(0x336)+_0xe1c6c9(0x75e)+_0xe1c6c9(0x2bd)+_0xe1c6c9(0x55d)+_0xe1c6c9(0x6d9)+_0xe1c6c9(0x668)+'yerde\x20ka'+_0xe1c6c9(0x570)+_0xe1c6c9(0x482),_0x22c4b0[_0xe1c6c9(0x5fc)]),_0x55a6b3[_0xe1c6c9(0x630)](alert,_0x55a6b3[_0xe1c6c9(0x181)]));}else return _0x37d785[_0xe1c6c9(0x640)](_0x16f2bf),null;}}const FATURA_ARSIV_CLOUD_PATH=CLOUD[_0x44532d(0x2cc)]+(_0x44532d(0x5e7)+_0x44532d(0x3dd)+_0x44532d(0x2ea));async function loadFaturaKontrolArsivFromCloud(){const _0x4ad3c9=_0x44532d,_0x3c0d09={'ZFCIQ':function(_0x517906,_0x43cb63){return _0x517906(_0x43cb63);},'CGNTJ':_0x4ad3c9(0x748),'DQoWt':'Tabela\x20A'+'dı','gfFVN':_0x4ad3c9(0x48d)+'k\x20No','YCRfj':function(_0xbf0d4d,_0x35a193){return _0xbf0d4d(_0x35a193);},'IyfnR':function(_0x140790,_0x46976b){return _0x140790(_0x46976b);},'UGLsI':'İlçe','FINJC':function(_0x3bf2f9,_0x58d2fd){return _0x3bf2f9===_0x58d2fd;},'gliXb':_0x4ad3c9(0x2de),'xlyga':_0x4ad3c9(0x5b0),'HnJqt':_0x4ad3c9(0x72e),'lFyuL':function(_0x2c2c07,_0x366660){return _0x2c2c07(_0x366660);},'lqLQS':_0x4ad3c9(0x68a),'TaPsC':_0x4ad3c9(0x1df)+_0x4ad3c9(0x5f7),'HEloT':_0x4ad3c9(0x69b),'UKrRl':function(_0x2b4e57){return _0x2b4e57();},'rJxcF':function(_0x20d96c,_0xef568f){return _0x20d96c!==_0xef568f;},'rLDMT':_0x4ad3c9(0x399),'sypLt':function(_0x47cc47){return _0x47cc47();},'IFKpt':function(_0x184b16,_0x4647f4){return _0x184b16+_0x4647f4;},'qfcqO':_0x4ad3c9(0x559),'Ctysq':function(_0x43031b,_0x4febd5){return _0x43031b===_0x4febd5;},'xkqfW':_0x4ad3c9(0x6e4),'jAoul':_0x4ad3c9(0x4c2)+_0x4ad3c9(0x47a)+_0x4ad3c9(0x714)+_0x4ad3c9(0x674)+_0x4ad3c9(0x466)+':'};if(!_0x3c0d09[_0x4ad3c9(0x324)](cloudEnabled))return null;try{if(_0x3c0d09[_0x4ad3c9(0x6a6)](_0x3c0d09[_0x4ad3c9(0x14a)],_0x4ad3c9(0x6d8))){const _0x5f155f=await _0x3c0d09[_0x4ad3c9(0x51d)](cloudFetch,CLOUD[_0x4ad3c9(0x38f)][_0x4ad3c9(0x1c6)](/\/$/,'')+'/'+FATURA_ARSIV_CLOUD_PATH+_0x4ad3c9(0x4c4)+await _0x3c0d09[_0x4ad3c9(0x4da)](authQuery));if(!_0x5f155f['ok'])throw new Error(_0x3c0d09[_0x4ad3c9(0x1aa)](_0x3c0d09[_0x4ad3c9(0x43b)],_0x5f155f[_0x4ad3c9(0x73a)]));const _0x25fe7b=await _0x5f155f[_0x4ad3c9(0x78e)]();if(!_0x25fe7b||_0x3c0d09[_0x4ad3c9(0x585)](_0x25fe7b,_0x3c0d09[_0x4ad3c9(0x404)]))return null;return _0x3c0d09[_0x4ad3c9(0x500)](faturaKontrolArsivSnapshotlariUzat,JSON['parse'](_0x25fe7b,(_0x4ea5ab,_0x27a1cd)=>{const _0x444165=_0x4ad3c9;if(DATE_KEYS[_0x444165(0x3db)](_0x4ea5ab)&&_0x3c0d09[_0x444165(0x292)](typeof _0x27a1cd,_0x3c0d09[_0x444165(0x2b3)])){if(_0x3c0d09['xlyga']!==_0x3c0d09[_0x444165(0x2e1)]){const _0x526f96=new Date(_0x27a1cd);return _0x3c0d09[_0x444165(0x643)](isNaN,_0x526f96[_0x444165(0x264)]())?_0x27a1cd:_0x526f96;}else{const _0x1bed5e={'JxNfI':function(_0x2627e7,_0x4e83f7){const _0x4c2c3a=_0x444165;return dHfAmi[_0x4c2c3a(0x230)](_0x2627e7,_0x4e83f7);},'sSRVN':dHfAmi[_0x444165(0x59f)],'CJGzt':dHfAmi[_0x444165(0x479)],'DGgwV':function(_0x497584,_0x27ef08){const _0x50837d=_0x444165;return dHfAmi[_0x50837d(0x230)](_0x497584,_0x27ef08);},'lOKMv':function(_0x1e328d,_0x3f4c91){const _0x17ffbd=_0x444165;return dHfAmi[_0x17ffbd(0x230)](_0x1e328d,_0x3f4c91);},'ehhYZ':dHfAmi[_0x444165(0x36c)],'sLwlr':_0x444165(0x497)+_0x444165(0x5e6),'xJKUA':function(_0x977fb0,_0x140a13){const _0xd9599c=_0x444165;return dHfAmi[_0xd9599c(0x51d)](_0x977fb0,_0x140a13);},'AYGxl':function(_0x188755,_0x39c14d){const _0x392bba=_0x444165;return dHfAmi[_0x392bba(0x500)](_0x188755,_0x39c14d);},'kYaYM':dHfAmi[_0x444165(0x21f)]},_0x280a2d=new _0x2fcf4d();return(_0x192434||[])[_0x444165(0x370)](_0x18e602=>{const _0x89dbb4=_0x444165,_0x35a384=_0x1bed5e[_0x89dbb4(0x444)](_0x4283c8,_0x18e602[_0x1bed5e[_0x89dbb4(0x5c6)]]||'')[_0x89dbb4(0x785)]();if(!_0x35a384)return;_0x280a2d[_0x89dbb4(0x463)](_0x35a384,{'tabelaAdi':_0x1bed5e[_0x89dbb4(0x444)](_0x3ff71c,_0x18e602[_0x1bed5e[_0x89dbb4(0x1b1)]]||'')[_0x89dbb4(0x785)](),'musteriAdi':musteriAdiTekillestir(_0x18e602[_0x89dbb4(0x2a6)+_0x89dbb4(0x490)]),'vergiNo':_0x1bed5e[_0x89dbb4(0x658)](_0x2adb34,_0x18e602['Vergi\x20No']||'')['trim'](),'tcKimlikNo':_0x1bed5e[_0x89dbb4(0x255)](_0x231370,_0x18e602[_0x1bed5e['ehhYZ']]||'')[_0x89dbb4(0x785)](),'adres':_0x1bed5e[_0x89dbb4(0x255)](_0x318409,_0x18e602[_0x1bed5e['sLwlr']]||'')[_0x89dbb4(0x785)](),'il':_0x1bed5e['xJKUA'](_0x1405ec,_0x18e602['İl']||'')[_0x89dbb4(0x785)](),'ilce':_0x1bed5e[_0x89dbb4(0x4dd)](_0x37a45c,_0x18e602[_0x1bed5e[_0x89dbb4(0x6ab)]]||'')[_0x89dbb4(0x785)]()});}),_0x280a2d;}}return _0x27a1cd;}));}else{const _0x139fa1=[_0x3c0d09['lqLQS'],_0x4ad3c9(0x3eb),_0x3c0d09[_0x4ad3c9(0x5c8)]][_0x5cdd55];_0x215509[_0x4ad3c9(0x2ac)+_0x4ad3c9(0x575)](_0x400205)?.[_0x4ad3c9(0x14f)+_0x4ad3c9(0x27b)](_0x3c0d09[_0x4ad3c9(0x485)],()=>_0x38e49b[_0x4ad3c9(0x2ac)+_0x4ad3c9(0x575)](_0x139fa1)?.[_0x4ad3c9(0x69b)]());}}catch(_0x4b0f07){return console[_0x4ad3c9(0x640)](_0x3c0d09[_0x4ad3c9(0x197)],_0x4b0f07),null;}}async function authTokenParam(){const _0x3d8a7f=_0x44532d;if(!authAktif)return'';try{const _0x188ce5=window[_0x3d8a7f(0x78a)+_0x3d8a7f(0x6ff)]['authInst'+_0x3d8a7f(0x277)][_0x3d8a7f(0x214)+'ser'];if(!_0x188ce5)return'';return await _0x188ce5[_0x3d8a7f(0x1be)+'en'](!![]);}catch(_0x1ef71f){return'';}}async function loadFaturaKontrolArsivGunAnahtarlariFromCloud(){const _0x828921=_0x44532d,_0xb0b323={'dXVsJ':function(_0x5e33fa){return _0x5e33fa();},'iFlPf':_0x828921(0x6cb),'PVfTo':function(_0x189178){return _0x189178();},'hqBSi':_0x828921(0x757),'bHzWm':function(_0x47fd41,_0x26efc0){return _0x47fd41(_0x26efc0);},'HDNCn':function(_0x43bf43,_0x28f733){return _0x43bf43+_0x28f733;},'mcbvB':function(_0x1aaf8a,_0x549fa7){return _0x1aaf8a===_0x549fa7;},'gsIof':_0x828921(0x6e4),'Scqry':_0x828921(0x4c2)+_0x828921(0x47a)+_0x828921(0x33d)+_0x828921(0x647)+'rları\x20ok'+_0x828921(0x563)};if(!_0xb0b323[_0x828921(0x434)](cloudEnabled))return null;try{const _0x193eca=new URLSearchParams({'shallow':_0xb0b323['iFlPf']}),_0xc74e83=await _0xb0b323[_0x828921(0x636)](authTokenParam);if(_0xc74e83)_0x193eca[_0x828921(0x463)](_0xb0b323[_0x828921(0x15f)],_0xc74e83);const _0xf913e6=await _0xb0b323['bHzWm'](cloudFetch,CLOUD[_0x828921(0x38f)][_0x828921(0x1c6)](/\/$/,'')+'/'+FATURA_ARSIV_CLOUD_PATH+_0x828921(0x4a4)+_0x193eca[_0x828921(0x332)]());if(!_0xf913e6['ok'])throw new Error(_0xb0b323['HDNCn'](_0x828921(0x559),_0xf913e6[_0x828921(0x73a)]));const _0x2ab7bf=await _0xf913e6[_0x828921(0x78e)]();if(!_0x2ab7bf||_0xb0b323[_0x828921(0x768)](_0x2ab7bf,_0xb0b323[_0x828921(0x3bf)]))return[];const _0x3b993e=JSON[_0x828921(0x1ab)](_0x2ab7bf);return Object['keys'](_0x3b993e)[_0x828921(0x5fd)]();}catch(_0x55501c){return console['error'](_0xb0b323[_0x828921(0x39a)],_0x55501c),null;}}async function loadFaturaKontrolArsivAraligiFromCloud(_0x517876,_0x52c0f3){const _0x193683=_0x44532d,_0x44cea4={'XNtRT':function(_0x4fdf91,_0x43ed39){return _0x4fdf91===_0x43ed39;},'ZCGSn':function(_0x431850,_0x55c4be){return _0x431850(_0x55c4be);},'agDya':function(_0x3c09f2,_0x98a4b5){return _0x3c09f2+_0x98a4b5;},'rhkkm':_0x193683(0x72f)+'uşturulu'+_0x193683(0x7aa)+_0x193683(0x66b)+':\x20','pGLfd':function(_0x22bd92,_0x1efc00){return _0x22bd92||_0x1efc00;},'gisqU':_0x193683(0x48f),'NsPZP':_0x193683(0x22f),'ZoNCA':_0x193683(0x757),'PGmtr':_0x193683(0x559),'KRzqD':'TgITh'};if(!cloudEnabled())return null;try{if(_0x193683(0x395)!==_0x44cea4[_0x193683(0x407)]){const _0x407845=new URLSearchParams({'orderBy':_0x44cea4[_0x193683(0x305)],'startAt':'\x22'+_0x517876+'\x22','endAt':'\x22'+_0x52c0f3+'\x22'}),_0x1f4c9b=await authTokenParam();if(_0x1f4c9b)_0x407845['set'](_0x44cea4['ZoNCA'],_0x1f4c9b);const _0x17e1bd=await cloudFetch(CLOUD['dbUrl'][_0x193683(0x1c6)](/\/$/,'')+'/'+FATURA_ARSIV_CLOUD_PATH+_0x193683(0x4a4)+_0x407845[_0x193683(0x332)]());if(!_0x17e1bd['ok'])throw new Error(_0x44cea4[_0x193683(0x44d)]+_0x17e1bd[_0x193683(0x73a)]);const _0x55bb4e=await _0x17e1bd[_0x193683(0x78e)]();if(!_0x55bb4e||_0x44cea4['XNtRT'](_0x55bb4e,_0x193683(0x6e4)))return{};return _0x44cea4[_0x193683(0x1ca)](faturaKontrolArsivSnapshotlariUzat,JSON[_0x193683(0x1ab)](_0x55bb4e,(_0x428f13,_0x4281ff)=>{const _0x4cb63b=_0x193683;if(DATE_KEYS[_0x4cb63b(0x3db)](_0x428f13)&&_0x44cea4[_0x4cb63b(0x23d)](typeof _0x4281ff,_0x4cb63b(0x2de))){const _0x245927=new Date(_0x4281ff);return _0x44cea4[_0x4cb63b(0x1ca)](isNaN,_0x245927[_0x4cb63b(0x264)]())?_0x4281ff:_0x245927;}return _0x4281ff;}));}else{_0x44cea4[_0x193683(0x1ca)](showError,_0x44cea4[_0x193683(0x25e)](_0x44cea4[_0x193683(0x73b)],_0xd3ae7[_0x193683(0x2ef)])),_0x396449['error'](_0x52aa70);throw _0x3cd530;}}catch(_0x2fbdc0){return _0x44cea4[_0x193683(0x23d)](_0x44cea4[_0x193683(0x37b)],_0x193683(0x5d2))?_0xce0011(_0x44cea4[_0x193683(0x189)](_0x1e4b00,''))[_0x193683(0x785)]()[_0x193683(0x1c6)](/\s+/g,'\x20')[_0x193683(0x476)+_0x193683(0x754)+'e']('tr'):(console[_0x193683(0x640)]('Fatura\x20K'+_0x193683(0x47a)+_0x193683(0x1af)+_0x193683(0x51b)+_0x193683(0x563),_0x2fbdc0),null);}}async function saveFaturaKontrolArsivGunleriToCloud(_0x598f4d){const _0x3cfc1c=_0x44532d,_0x2015ec={'pEJcD':function(_0x5ee832){return _0x5ee832();},'DNkZF':function(_0x5cdcb4,_0x540693,_0x579f42){return _0x5cdcb4(_0x540693,_0x579f42);},'RwbNY':_0x3cfc1c(0x28e),'moLry':function(_0x37c6b5,_0x45f51a){return _0x37c6b5+_0x45f51a;},'PrKgd':_0x3cfc1c(0x559),'dkNCu':function(_0x374cba,_0x21a32d){return _0x374cba===_0x21a32d;},'faRHz':_0x3cfc1c(0x420),'YYsUj':'Fatura\x20K'+_0x3cfc1c(0x47a)+_0x3cfc1c(0x2ce)+_0x3cfc1c(0x690)+_0x3cfc1c(0x5d0)+_0x3cfc1c(0x79b)+_0x3cfc1c(0x488)};if(!_0x2015ec[_0x3cfc1c(0x792)](cloudEnabled))return{'ok':![],'reason':_0x3cfc1c(0x36f)+_0x3cfc1c(0x4cf)};if(!_0x598f4d||!Object[_0x3cfc1c(0x317)](_0x598f4d)[_0x3cfc1c(0x49d)])return{'ok':!![]};try{const _0xaa0c6c=await _0x2015ec[_0x3cfc1c(0x502)](cloudFetch,CLOUD[_0x3cfc1c(0x38f)][_0x3cfc1c(0x1c6)](/\/$/,'')+'/'+FATURA_ARSIV_CLOUD_PATH+_0x3cfc1c(0x4c4)+await _0x2015ec[_0x3cfc1c(0x792)](authQuery),{'method':_0x2015ec['RwbNY'],'headers':{'Content-Type':_0x3cfc1c(0x1f9)+_0x3cfc1c(0x2d2)},'body':JSON[_0x3cfc1c(0x4db)+'y'](_0x598f4d)});if(!_0xaa0c6c['ok'])throw new Error(_0x2015ec['moLry'](_0x2015ec[_0x3cfc1c(0x1ce)],_0xaa0c6c[_0x3cfc1c(0x73a)]));return{'ok':!![]};}catch(_0x4f06c4){return _0x2015ec['dkNCu'](_0x2015ec[_0x3cfc1c(0x211)],_0x3cfc1c(0x5f6))?(authTokenOnbellek={'token':_0x165801,'alinanZaman':_0x53186b[_0x3cfc1c(0x2bb)]()},_0x5441dc):(console[_0x3cfc1c(0x640)](_0x2015ec[_0x3cfc1c(0x6ee)],_0x4f06c4),{'ok':![],'reason':_0x4f06c4[_0x3cfc1c(0x2ef)]});}}function faturaKontrolArsivGunFarkiniBul(_0x25ef5d,_0x3c83b1){const _0x45ae69=_0x44532d,_0x584182={'DoYLV':function(_0x4f8dca,_0x5312a1){return _0x4f8dca+_0x5312a1;},'JhzlW':function(_0x3978a6,_0x4f4ef7){return _0x3978a6+_0x4f4ef7;},'CoLOG':_0x45ae69(0x39c)+_0x45ae69(0x5db)+_0x45ae69(0x5e4)+_0x45ae69(0x6ac)+_0x45ae69(0x7a5),'agLUy':'\x20sn)','poLnZ':function(_0x546337,_0x237c2d){return _0x546337!==_0x237c2d;},'eMIWv':function(_0x2052a3,_0x136391){return _0x2052a3||_0x136391;}},_0x29f943={},_0x2a4213=new Set([...Object['keys'](_0x584182[_0x45ae69(0x4f8)](_0x25ef5d,{})),...Object[_0x45ae69(0x317)](_0x3c83b1||{})]);return _0x2a4213[_0x45ae69(0x370)](_0x40e776=>{const _0x30bafd=_0x45ae69,_0x3cf9e8={'ApFgi':function(_0x2df832,_0x218baa){return _0x2df832===_0x218baa;},'wExGn':_0x30bafd(0x4ac)+'or','CrOQK':function(_0x33f0d4,_0x1648b5){const _0x392c8b=_0x30bafd;return _0x584182[_0x392c8b(0x400)](_0x33f0d4,_0x1648b5);},'cjmAg':function(_0x30dee,_0x21f098){const _0x12369c=_0x30bafd;return _0x584182[_0x12369c(0x778)](_0x30dee,_0x21f098);},'QvAiv':_0x584182[_0x30bafd(0x3fb)],'AlNHF':function(_0x227cd2,_0x515d45){return _0x227cd2/_0x515d45;},'rjgWS':_0x584182[_0x30bafd(0x587)]};if(_0x584182['poLnZ'](_0x30bafd(0x703),_0x30bafd(0x210))){const _0x3dfab8=_0x25ef5d&&Object[_0x30bafd(0x5e3)+'e'][_0x30bafd(0x60d)+'operty'][_0x30bafd(0x5a1)](_0x25ef5d,_0x40e776),_0x5bc54c=_0x3c83b1&&Object[_0x30bafd(0x5e3)+'e'][_0x30bafd(0x60d)+_0x30bafd(0x387)][_0x30bafd(0x5a1)](_0x3c83b1,_0x40e776),_0x4e6169=_0x3dfab8?JSON[_0x30bafd(0x4db)+'y'](_0x25ef5d[_0x40e776]):null,_0x3e0f6e=_0x5bc54c?JSON['stringif'+'y'](_0x3c83b1[_0x40e776]):null;_0x584182[_0x30bafd(0x5d5)](_0x4e6169,_0x3e0f6e)&&(_0x29f943[_0x40e776]=_0x5bc54c?_0x3c83b1[_0x40e776]:null);}else{if(_0xd99c74&&nULyoE[_0x30bafd(0x4c9)](_0x265102[_0x30bafd(0x22e)],nULyoE[_0x30bafd(0x281)]))throw new _0xd28a28(nULyoE[_0x30bafd(0x62c)](nULyoE[_0x30bafd(0x62b)](nULyoE[_0x30bafd(0x31f)],_0x1fb162['round'](nULyoE[_0x30bafd(0x687)](_0x13817a,0x1*0x171e+0x3*-0x79+-0x11cb))),nULyoE[_0x30bafd(0x2ff)]));throw _0xd23287;}}),_0x29f943;}const SAHA_MUDUR_MAP={'Sıtkı\x20Berkay\x20Katrancı':_0x44532d(0x328)+'in','Alican\x20Akbaş':_0x44532d(0x328)+'in','Altuğ\x20Aksu':_0x44532d(0x7b0)+_0x44532d(0x480),'Ali\x20Yüksel':_0x44532d(0x7b0)+_0x44532d(0x480),'Mehmetcan\x20Yılmaz':'Mertcan\x20'+_0x44532d(0x480),'Berk\x20Kutay\x20Korkmaz':_0x44532d(0x7b0)+'Çınar','Doğuş\x20Ark':_0x44532d(0x421)+_0x44532d(0x5ba),'Ferhat\x20Fatih\x20İrkin':_0x44532d(0x421)+'doğan','Hasan\x20Akel':'Yusuf\x20Ak'+_0x44532d(0x5ba)};function normalizeAdSoyad(_0x560baa){const _0x45f27f=_0x44532d,_0x161d95={'ixpwT':function(_0x5032df,_0x28438a){return _0x5032df(_0x28438a);},'CtvKt':function(_0x76c32b,_0xbd55c0){return _0x76c32b||_0xbd55c0;}};return _0x161d95[_0x45f27f(0x77b)](String,_0x161d95['CtvKt'](_0x560baa,''))[_0x45f27f(0x785)]()[_0x45f27f(0x1c6)](/\s+/g,'\x20')['toLocale'+_0x45f27f(0x754)+'e']('tr');}const SAHA_MUDUR_LOOKUP={};Object[_0x44532d(0x317)](SAHA_MUDUR_MAP)['forEach'](_0x30fbfc=>{const _0x328d1c={'hxSJb':function(_0x4ab7cf,_0x4ca43b){return _0x4ab7cf(_0x4ca43b);}};SAHA_MUDUR_LOOKUP[_0x328d1c['hxSJb'](normalizeAdSoyad,_0x30fbfc)]=SAHA_MUDUR_MAP[_0x30fbfc];});function getSahaMuduru(_0x1b1c78){const _0x5e915c=_0x44532d,_0x123432={'DYNBW':function(_0x594bea,_0xc06724){return _0x594bea===_0xc06724;},'uIVeD':function(_0x485f4d,_0x122cad){return _0x485f4d(_0x122cad);}};if(!_0x1b1c78||_0x123432['DYNBW'](_0x1b1c78,'—'))return _0x5e915c(0x582);return SAHA_MUDUR_LOOKUP[_0x123432[_0x5e915c(0x33c)](normalizeAdSoyad,_0x1b1c78)]||_0x5e915c(0x582);}const TL=_0x1ccf93=>Math[_0x44532d(0x1e0)](_0x1ccf93||-0x638+-0x49*-0x7+0x439*0x1)[_0x44532d(0x476)+_0x44532d(0x572)](_0x44532d(0x3f6))+'\x20₺',TLKurus=_0x191ebd=>(Number(_0x191ebd)||0x1d88+0x53*-0x3b+0xa67*-0x1)[_0x44532d(0x476)+_0x44532d(0x572)](_0x44532d(0x3f6),{'minimumFractionDigits':0x0,'maximumFractionDigits':0x2})+'\x20₺',NUM=_0xb77799=>Math[_0x44532d(0x1e0)](_0xb77799||-0x1a81+0x14*-0xe5+0x2c65)[_0x44532d(0x476)+_0x44532d(0x572)](_0x44532d(0x3f6)),MK=_0x37686e=>NUM(_0x37686e)+_0x44532d(0x583),LT=_0x27cca7=>NUM(_0x27cca7)+_0x44532d(0x244),fmtDate=_0x32ab1d=>_0x32ab1d instanceof Date&&!isNaN(_0x32ab1d)?_0x32ab1d[_0x44532d(0x476)+_0x44532d(0x5dc)+'ng'](_0x44532d(0x3f6)):'—',GECERSIZ_MUSTERI_KODLARI=new Set([_0x44532d(0x375)]);function musteriGecerliMi(_0x5749b9){const _0x5948ad=_0x44532d,_0x472b86={'SnRMD':function(_0x43ae54,_0x4aa01a){return _0x43ae54||_0x4aa01a;}},_0x30d983=String(_0x472b86[_0x5948ad(0x546)](_0x5749b9,''))[_0x5948ad(0x785)]()[_0x5948ad(0x37c)+'ase']();if(!_0x30d983)return![];return!GECERSIZ_MUSTERI_KODLARI[_0x5948ad(0x3db)](_0x30d983);}function dateKeyLocal(_0x318564){const _0xf2d3d1=_0x44532d,_0x28577b={'inwXz':function(_0x40664d,_0xa36ab5){return _0x40664d instanceof _0xa36ab5;},'blQaF':function(_0xc6da7,_0x147ec7){return _0xc6da7(_0x147ec7);}};if(!_0x28577b[_0xf2d3d1(0x76c)](_0x318564,Date)||isNaN(_0x318564))return null;const _0x3eab5f=_0x318564['getFullY'+_0xf2d3d1(0x262)](),_0x9f1166=_0x28577b[_0xf2d3d1(0x351)](String,_0x318564[_0xf2d3d1(0x213)]()+(-0x1cb3+-0x1fe8+-0x2*-0x1e4e))[_0xf2d3d1(0x30a)](0x24a9+-0x1*-0x1343+-0x37ea,'0'),_0x455c90=_0x28577b[_0xf2d3d1(0x351)](String,_0x318564[_0xf2d3d1(0x236)]())[_0xf2d3d1(0x30a)](-0x2*-0x5d2+0x1*-0x62d+0x1*-0x575,'0');return _0x3eab5f+'-'+_0x9f1166+'-'+_0x455c90;}function enYakinGunKey(_0x213772,_0x10b565){const _0x2840a8=_0x44532d,_0x3e87f7={'jXBMZ':function(_0x2d173b,_0x582b82){return _0x2d173b<_0x582b82;},'NXQik':function(_0x29f93c,_0x5151e2){return _0x29f93c===_0x5151e2;},'yuMpD':function(_0x26ee9c,_0x3eb7a3){return _0x26ee9c<_0x3eb7a3;},'BibSg':function(_0xfca5ec,_0x426521){return _0xfca5ec+_0x426521;},'FLsZF':_0x2840a8(0x3f3)+'0Z','Iittt':function(_0x104f9a,_0xc8aaf3){return _0x104f9a(_0xc8aaf3);}};if(!_0x213772||!_0x213772[_0x2840a8(0x49d)]||!_0x10b565)return null;const _0x5f2c04=new Date(_0x3e87f7[_0x2840a8(0x78c)](_0x10b565,_0x3e87f7[_0x2840a8(0x7b2)]))[_0x2840a8(0x264)]();if(_0x3e87f7[_0x2840a8(0x692)](isNaN,_0x5f2c04))return null;let _0x54fd0d=null,_0x1deca1=Infinity,_0x208bed=null;return _0x213772[_0x2840a8(0x370)](_0x37338e=>{const _0x292eb8=_0x2840a8,_0x3e3338=new Date(_0x37338e+(_0x292eb8(0x3f3)+'0Z'))[_0x292eb8(0x264)]();if(isNaN(_0x3e3338))return;const _0x1ca7af=Math[_0x292eb8(0x732)](_0x3e3338-_0x5f2c04);(_0x3e87f7[_0x292eb8(0x624)](_0x1ca7af,_0x1deca1)||_0x3e87f7['NXQik'](_0x1ca7af,_0x1deca1)&&(_0x208bed===null||_0x3e87f7[_0x292eb8(0x239)](_0x3e3338,_0x208bed)))&&(_0x1deca1=_0x1ca7af,_0x54fd0d=_0x37338e,_0x208bed=_0x3e3338);}),_0x54fd0d;}const SIGNATURES={'kalemler':[[_0x44532d(0x5ea)+'rç',_0x44532d(0x6aa)+_0x44532d(0x2df)+'ün',_0x44532d(0x465)+_0x44532d(0x433)]],'siparis':[['Sipariş\x20'+_0x44532d(0x4bf)+_0x44532d(0x224),_0x44532d(0x511)+'\x20Durumu']],'tahsilat':[[_0x44532d(0x3ae)+_0x44532d(0x32b),_0x44532d(0x1e6)+_0x44532d(0x60f)+_0x44532d(0x417)+'ı',_0x44532d(0x4d8)]],'cekSenet':[[_0x44532d(0x4ce)+'çlu',_0x44532d(0x374)+'t\x20Numara'+'sı']],'ticariStok':[[_0x44532d(0x359)+_0x44532d(0x4ab),'Depoda\x20K'+_0x44532d(0x258),_0x44532d(0x257)+'Kodu']],'fatura':[[_0x44532d(0x36d)+_0x44532d(0x3ba),_0x44532d(0x37f)+_0x44532d(0x69d),_0x44532d(0x765)+_0x44532d(0x793)]],'bayiHakedis':[[_0x44532d(0x53b)+'ar',_0x44532d(0x661)+_0x44532d(0x164),_0x44532d(0x2a6)+_0x44532d(0x52d)+_0x44532d(0x3a3)]],'yukleme':[[_0x44532d(0x2a6)+_0x44532d(0x299),_0x44532d(0x4d6)+_0x44532d(0x64b),_0x44532d(0x372)+_0x44532d(0x403)]],'musteriMaster':[[_0x44532d(0x748),_0x44532d(0x2fb)+'dı',_0x44532d(0x170)+_0x44532d(0x615)]],'ciroPrimi':[[_0x44532d(0x6b9)+'ım',_0x44532d(0x539)+_0x44532d(0x61c),_0x44532d(0x2eb)+'r']],'donemselIskonto':[['Nokta\x20Ko'+'du',_0x44532d(0x4af)+_0x44532d(0x7a0),_0x44532d(0x33e)]],'sellOut':[[_0x44532d(0x2a6)+_0x44532d(0x2a9)+_0x44532d(0x388),_0x44532d(0x478)+'l\x20Tnm.',_0x44532d(0x763)+_0x44532d(0x238)+_0x44532d(0x388)]],'depozitoTahsilat':[[_0x44532d(0x20d)+_0x44532d(0x21c),_0x44532d(0x471)+_0x44532d(0x2eb)+'r',_0x44532d(0x515)+_0x44532d(0x5cc)+'arihi']],'cariEkstre':[[_0x44532d(0x2a6)+_0x44532d(0x625),_0x44532d(0x6fb),_0x44532d(0x2a6)+'Ad']]},LABELS={'kalemler':_0x44532d(0x2fe)+_0x44532d(0x154)+_0x44532d(0x2d4)+'e)','siparis':_0x44532d(0x471)+_0x44532d(0x141),'tahsilat':_0x44532d(0x458)+_0x44532d(0x209),'cekSenet':_0x44532d(0x678)+'net\x20Risk'+'i','ticariStok':_0x44532d(0x498)+_0x44532d(0x74a),'fatura':_0x44532d(0x472)+_0x44532d(0x384),'bayiHakedis':_0x44532d(0x650)+_0x44532d(0x278),'yukleme':_0x44532d(0x372)+_0x44532d(0x300),'musteriMaster':_0x44532d(0x2a6)+_0x44532d(0x54c),'ciroPrimi':_0x44532d(0x6f5)+'mi','donemselIskonto':_0x44532d(0x385)+_0x44532d(0x51f),'sellOut':_0x44532d(0x5c5)+'\x20Raporu','depozitoTahsilat':_0x44532d(0x234)+'\x20Tahsila'+'tı','cariEkstre':'Cari\x20Hes'+_0x44532d(0x5cf)+'e'},VADE_ESIGI_GUN=-0x6e1+-0x8cc+-0x4*-0x3f1,GVY_DOSYA_TIPLERI=[_0x44532d(0x6d3),'tahsilat',_0x44532d(0x578),'depozito'+_0x44532d(0x458),_0x44532d(0x195)+_0x44532d(0x547),_0x44532d(0x68c),_0x44532d(0x6f6)+'re',_0x44532d(0x435)],GRUP_C_DOSYA_TIPLERI=[_0x44532d(0x788)+'ok',_0x44532d(0x524)+'i','donemsel'+'Iskonto'];function GRUP_C_HAZIR_SAYISI(){const _0x3429c6=_0x44532d;return GRUP_C_DOSYA_TIPLERI[_0x3429c6(0x3c4)](_0x45a257=>state[_0x3429c6(0x729)]&&state[_0x3429c6(0x729)][_0x45a257])[_0x3429c6(0x49d)];}function detectType(_0x2b3eee){const _0x78865f=_0x44532d,_0x496474=new Set(_0x2b3eee['map'](_0x7eee38=>String(_0x7eee38||'')[_0x78865f(0x785)]()));for(const _0x5f3b3e of Object[_0x78865f(0x317)](SIGNATURES)){if(SIGNATURES[_0x5f3b3e][_0x78865f(0x298)](_0x2644f2=>_0x2644f2['every'](_0x2fc460=>_0x496474[_0x78865f(0x3db)](_0x2fc460))))return _0x5f3b3e;}return null;}function sheetToObjects(_0x2efa49){const _0x29f177=_0x44532d,_0x349b18={'CCxFF':function(_0x1cc3d0,_0x4373f8){return _0x1cc3d0===_0x4373f8;},'JyQgw':function(_0xaefc74,_0x260b2e){return _0xaefc74<_0x260b2e;}},_0xba3af5=XLSX['utils'][_0x29f177(0x4f9)+_0x29f177(0x713)](_0x2efa49,{'header':0x1,'raw':!![],'defval':null});if(!_0xba3af5[_0x29f177(0x49d)])return{'headers':[],'data':[]};const _0x2de8fb=_0xba3af5[0xac5+-0xd5b+0x1*0x296][_0x29f177(0x4ca)](_0x3a6cad=>String(_0x3a6cad||'')[_0x29f177(0x785)]()),_0x327559=[];for(let _0x2324c6=0x9a2+0x61*-0x60+0x1abf;_0x349b18[_0x29f177(0x2a3)](_0x2324c6,_0xba3af5[_0x29f177(0x49d)]);_0x2324c6++){const _0x29b0a6=_0xba3af5[_0x2324c6];if(_0x29b0a6[_0x29f177(0x2c1)](_0x4c3365=>_0x4c3365===null||_0x4c3365===''))continue;const _0x3b7e91={};_0x2de8fb[_0x29f177(0x370)]((_0x53751f,_0x46307a)=>{const _0x23ff11=_0x29f177;if(_0x53751f)_0x3b7e91[_0x53751f]=_0x349b18[_0x23ff11(0x40a)](_0x29b0a6[_0x46307a],undefined)?null:_0x29b0a6[_0x46307a];}),_0x327559[_0x29f177(0x3ad)](_0x3b7e91);}return{'headers':_0x2de8fb,'data':_0x327559};}function excelDateToJS(_0x2e5a70){const _0x591fcc=_0x44532d,_0x1e62a6={'AVSoN':function(_0x45bc15,_0x41304c){return _0x45bc15(_0x41304c);},'zHKZb':function(_0x2c5464,_0x3b77db){return _0x2c5464===_0x3b77db;},'SRqhj':'number','SzPVR':function(_0x3a65c2,_0x548a37){return _0x3a65c2-_0x548a37;},'RWuBX':_0x591fcc(0x2de),'PzNKY':function(_0x28e934,_0x4b4648){return _0x28e934(_0x4b4648);},'ZnqIN':function(_0x5687a0,_0x831a){return _0x5687a0+_0x831a;},'NejuZ':function(_0x383a82,_0xd11f6b){return _0x383a82(_0xd11f6b);},'AHtFX':function(_0x308fc9,_0x514801){return _0x308fc9(_0x514801);}};if(_0x2e5a70 instanceof Date)return _0x1e62a6['AVSoN'](isNaN,_0x2e5a70[_0x591fcc(0x264)]())?null:_0x2e5a70;if(_0x1e62a6[_0x591fcc(0x611)](typeof _0x2e5a70,_0x1e62a6[_0x591fcc(0x564)])){const _0x3442cb=XLSX[_0x591fcc(0x1fb)][_0x591fcc(0x25f)+_0x591fcc(0x3a4)](_0x2e5a70);if(_0x3442cb)return new Date(Date[_0x591fcc(0x66c)](_0x3442cb['y'],_0x1e62a6[_0x591fcc(0x24a)](_0x3442cb['m'],0xb9f+0x47*-0x5+-0x9*0x123),_0x3442cb['d']));}if(_0x1e62a6[_0x591fcc(0x611)](typeof _0x2e5a70,_0x1e62a6[_0x591fcc(0x646)])&&_0x2e5a70[_0x591fcc(0x785)]()){const _0xd014a3=_0x2e5a70['trim'](),_0x1198cb=new Date(_0xd014a3);if(!_0x1e62a6[_0x591fcc(0x2fd)](isNaN,_0x1198cb[_0x591fcc(0x264)]()))return _0x1198cb;const _0x5f4773=_0xd014a3[_0x591fcc(0x162)](/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})$/);if(_0x5f4773){let [,_0x4e1fdd,_0x44c9d5,_0x4b2922]=_0x5f4773;if(_0x1e62a6[_0x591fcc(0x611)](_0x4b2922[_0x591fcc(0x49d)],0x1*0x282+0x4*0x27+-0x31c))_0x4b2922=_0x1e62a6[_0x591fcc(0x55e)]('20',_0x4b2922);const _0x3f65eb=new Date(Date[_0x591fcc(0x66c)](_0x1e62a6[_0x591fcc(0x34a)](Number,_0x4b2922),_0x1e62a6['AVSoN'](Number,_0x44c9d5)-(0x1eb*0x7+0x335*-0x6+-0x1*-0x5d2),_0x1e62a6[_0x591fcc(0x2fd)](Number,_0x4e1fdd)));if(!_0x1e62a6[_0x591fcc(0x616)](isNaN,_0x3f65eb[_0x591fcc(0x264)]()))return _0x3f65eb;}}return null;}function turkiyeSimdi(){const _0x5ceca7=_0x44532d,_0x3eddaf={'HSvLH':function(_0x5d627e,_0x157782){return _0x5d627e*_0x157782;},'OzYRI':function(_0x73dcc3,_0x4f8cd8){return _0x73dcc3*_0x4f8cd8;}};return new Date(Date[_0x5ceca7(0x2bb)]()+_0x3eddaf[_0x5ceca7(0x742)](_0x3eddaf[_0x5ceca7(0x426)](-0x1e95+0x2230+0x2e*-0x14,-0xedd+0x2287+-0x3*0x67a)*(-0x10c0+0x1caa+-0x12b*0xa),0x1a90+0x2cf*0xb+-0x358d*0x1));}function turkiyeBugun(){const _0x47fa5a=_0x44532d,_0x598f20={'hKdAR':function(_0x182dfc){return _0x182dfc();}},_0x591952=_0x598f20[_0x47fa5a(0x6e6)](turkiyeSimdi);return new Date(Date[_0x47fa5a(0x66c)](_0x591952['getUTCFu'+_0x47fa5a(0x573)](),_0x591952[_0x47fa5a(0x61e)+_0x47fa5a(0x142)](),_0x591952[_0x47fa5a(0x60a)+'te']()));}function excelDateToJSArti1Gun(_0x59e0dd){const _0x1b93b0=_0x44532d,_0x387db0={'YYzzr':function(_0x131d00,_0x532a0c){return _0x131d00(_0x532a0c);},'piqXn':function(_0x1187d2,_0x37a481){return _0x1187d2+_0x37a481;}},_0x3c13a2=_0x387db0[_0x1b93b0(0x3e6)](excelDateToJS,_0x59e0dd);if(!_0x3c13a2)return null;return new Date(_0x387db0[_0x1b93b0(0x269)](_0x3c13a2[_0x1b93b0(0x264)](),0x7e53432+-0x92ffaa9+-0x610207*-0x11));}const dropzone=document['getEleme'+_0x44532d(0x575)](_0x44532d(0x4a5)),fileInput=document['getEleme'+'ntById'](_0x44532d(0x1e4)+'t'),uploadError=document[_0x44532d(0x2ac)+'ntById'](_0x44532d(0x217)+_0x44532d(0x53d)),buildBtn=document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x59e)),gvyAnaBuildBtn=document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x1e2)+_0x44532d(0x42c)),statusPill=document[_0x44532d(0x2ac)+'ntById'](_0x44532d(0x701)+'ll'),statusPillMsg=document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x701)+_0x44532d(0x1ef)),resetBtn=document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x68a)),syncBtn=document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x3eb));function syncSidebarFooterButtons(){const _0x2180fa=_0x44532d,_0x118376={'FZWAN':function(_0x53720c,_0x54f3b6){return _0x53720c||_0x54f3b6;},'gOKsX':function(_0x45eb13,_0x2d1861){return _0x45eb13===_0x2d1861;},'fBljm':_0x2180fa(0x2bc),'HtRIx':function(_0x3b7a6c,_0x264ed1){return _0x3b7a6c(_0x264ed1);},'zLkyf':_0x2180fa(0x68a),'IdxOv':_0x2180fa(0x7a6)+'n','hYqUi':_0x2180fa(0x3eb),'fFnGe':_0x2180fa(0x520)+_0x2180fa(0x45d),'kfWeJ':_0x2180fa(0x1df)+_0x2180fa(0x5f7)},_0xbcfb3=[[_0x2180fa(0x49a)+'tn',_0x118376['zLkyf']],[_0x118376[_0x2180fa(0x5d3)],_0x118376[_0x2180fa(0x20e)]],[_0x118376[_0x2180fa(0x3c0)],_0x118376[_0x2180fa(0x5bc)]]];_0xbcfb3[_0x2180fa(0x370)](([_0x1318ce,_0x73f7c])=>{const _0x4abebf=_0x2180fa,_0x22120e=document[_0x4abebf(0x2ac)+_0x4abebf(0x575)](_0x1318ce),_0x3a709d=document[_0x4abebf(0x2ac)+_0x4abebf(0x575)](_0x73f7c);if(_0x118376[_0x4abebf(0x53e)](!_0x22120e,!_0x3a709d))return;_0x22120e[_0x4abebf(0x718)][_0x4abebf(0x5b5)]=_0x118376[_0x4abebf(0x3bb)](_0x3a709d[_0x4abebf(0x718)][_0x4abebf(0x5b5)],_0x118376[_0x4abebf(0x5ab)])||_0x118376[_0x4abebf(0x28a)](getComputedStyle,_0x3a709d)[_0x4abebf(0x5b5)]===_0x4abebf(0x2bc)?_0x118376[_0x4abebf(0x5ab)]:'inline-f'+_0x4abebf(0x25d);});}[_0x44532d(0x49a)+'tn',_0x44532d(0x7a6)+'n',_0x44532d(0x520)+_0x44532d(0x45d)][_0x44532d(0x370)]((_0x587ca2,_0x7abd6)=>{const _0x2b26a4=_0x44532d,_0x2b5535={'mdNeX':_0x2b26a4(0x3eb),'JbttR':_0x2b26a4(0x69b)},_0xbd2564=[_0x2b26a4(0x68a),_0x2b5535[_0x2b26a4(0x712)],_0x2b26a4(0x1df)+'utBtn'][_0x7abd6];document[_0x2b26a4(0x2ac)+_0x2b26a4(0x575)](_0x587ca2)?.[_0x2b26a4(0x14f)+'Listener'](_0x2b5535[_0x2b26a4(0x367)],()=>document[_0x2b26a4(0x2ac)+_0x2b26a4(0x575)](_0xbd2564)?.[_0x2b26a4(0x69b)]());}),new MutationObserver(syncSidebarFooterButtons)[_0x44532d(0x216)](document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x68a)),{'attributes':!![],'attributeFilter':[_0x44532d(0x718)]}),new MutationObserver(syncSidebarFooterButtons)['observe'](document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x3eb)),{'attributes':!![],'attributeFilter':[_0x44532d(0x718)]}),new MutationObserver(syncSidebarFooterButtons)[_0x44532d(0x216)](document[_0x44532d(0x2ac)+_0x44532d(0x575)](_0x44532d(0x1df)+_0x44532d(0x5f7)),{'attributes':!![],'attributeFilter':[_0x44532d(0x718)]}),syncSidebarFooterButtons();function syncStatusPillMain(){const _0x5da668=_0x44532d,_0x516039={'eukaY':_0x5da668(0x701)+_0x5da668(0x522)+'g','jChmn':_0x5da668(0x701)+_0x5da668(0x5c7)},_0x5df08f=document[_0x5da668(0x2ac)+_0x5da668(0x575)](_0x516039[_0x5da668(0x544)]),_0x21aed8=document['getEleme'+_0x5da668(0x575)](_0x516039[_0x5da668(0x741)]);if(!_0x5df08f||!_0x21aed8)return;_0x5df08f[_0x5da668(0x73f)+_0x5da668(0x5c0)]=statusPillMsg['textCont'+_0x5da668(0x5c0)],_0x21aed8[_0x5da668(0x1ac)+'t'][_0x5da668(0x32d)]('ok',statusPill[_0x5da668(0x1ac)+'t'][_0x5da668(0x593)]('ok'));}new MutationObserver(syncStatusPillMain)[_0x44532d(0x216)](statusPillMsg,{'characterData':!![],'childList':!![],'subtree':!![]}),new MutationObserver(syncStatusPillMain)[_0x44532d(0x216)](statusPill,{'attributes':!![],'attributeFilter':[_0x44532d(0x6f9)]}),syncStatusPillMain(),dropzone[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x69b),()=>fileInput[_0x44532d(0x69b)]()),dropzone['addEvent'+_0x44532d(0x27b)](_0x44532d(0x595),_0x4f9d9d=>{const _0x2092be=_0x44532d,_0x41b2af={'ZwTpm':_0x2092be(0x2a6)+_0x2092be(0x603)+_0x2092be(0x22c)+'uta\x20kayd'+_0x2092be(0x4a7)+'i:','FRMlb':function(_0x321067,_0xc0c9ff){return _0x321067===_0xc0c9ff;},'lviNG':_0x2092be(0x555),'ohkSX':function(_0x332ceb,_0x2b2d19){return _0x332ceb===_0x2b2d19;},'uMdQp':'Spacebar','NnBOC':_0x2092be(0x394),'evLPC':'DYbjC'};if(_0x41b2af[_0x2092be(0x52a)](_0x4f9d9d[_0x2092be(0x5c2)],_0x41b2af[_0x2092be(0x6e3)])||_0x41b2af['ohkSX'](_0x4f9d9d['key'],'\x20')||_0x4f9d9d[_0x2092be(0x5c2)]===_0x41b2af[_0x2092be(0x75c)]){if(_0x41b2af['FRMlb'](_0x41b2af[_0x2092be(0x451)],_0x41b2af[_0x2092be(0x2db)]))return _0x38a833[_0x2092be(0x640)](HVlEbo[_0x2092be(0x513)],_0x5978a1),{'ok':![],'reason':_0xf04ba5[_0x2092be(0x2ef)]};else _0x4f9d9d['preventD'+_0x2092be(0x49b)](),fileInput[_0x2092be(0x69b)]();}}),dropzone[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x4a9),_0x2c5622=>{const _0xfdb70=_0x44532d;_0x2c5622[_0xfdb70(0x7a4)+'efault'](),dropzone[_0xfdb70(0x1ac)+'t'][_0xfdb70(0x489)](_0xfdb70(0x57c));}),dropzone['addEvent'+_0x44532d(0x27b)](_0x44532d(0x719)+'e',()=>dropzone[_0x44532d(0x1ac)+'t'][_0x44532d(0x600)](_0x44532d(0x57c))),dropzone[_0x44532d(0x14f)+_0x44532d(0x27b)]('drop',_0x1ca14e=>{const _0x54c471=_0x44532d,_0x1d6e07={'kXFEr':_0x54c471(0x57c),'UmVwg':function(_0x32e016,_0x2fc70d){return _0x32e016(_0x2fc70d);}};_0x1ca14e[_0x54c471(0x7a4)+_0x54c471(0x49b)](),dropzone['classLis'+'t'][_0x54c471(0x600)](_0x1d6e07[_0x54c471(0x152)]),_0x1d6e07[_0x54c471(0x574)](handleFiles,_0x1ca14e[_0x54c471(0x592)+_0x54c471(0x26e)][_0x54c471(0x225)]);}),fileInput['addEvent'+_0x44532d(0x27b)](_0x44532d(0x2f6),_0x48b8ca=>handleFiles(_0x48b8ca[_0x44532d(0x61d)][_0x44532d(0x225)]));function showError(_0x324b8b){const _0x25514f=_0x44532d,_0x409868={'YzpeE':_0x25514f(0x6a8)};uploadError[_0x25514f(0x73f)+_0x25514f(0x5c0)]=_0x324b8b,uploadError[_0x25514f(0x718)][_0x25514f(0x5b5)]=_0x409868[_0x25514f(0x6db)];}function clearError(){const _0x3a9f5e=_0x44532d,_0x53b32e={'wxnhm':_0x3a9f5e(0x2bc)};uploadError[_0x3a9f5e(0x718)][_0x3a9f5e(0x5b5)]=_0x53b32e['wxnhm'],uploadError[_0x3a9f5e(0x73f)+_0x3a9f5e(0x5c0)]='';}const KABUL_EDILEN_UZANTILAR=[_0x44532d(0x5e9),_0x44532d(0x331)],MAKS_DOSYA_BOYUTU_MB=-0xc0e*-0x2+-0x24d7+0xcd4;function _0x3581(_0x39878d,_0x43b721){_0x39878d=_0x39878d-(-0x27*0xe3+0x1227+0x1*0x11ae);const _0x2de309=_0x473b();let _0x50d509=_0x2de309[_0x39878d];if(_0x3581['NYLWOC']===undefined){var _0x18ea38=function(_0xabf8eb){const _0x1df016='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x2ded75='',_0x395af7='',_0x3244e1=_0x2ded75+_0x18ea38,_0x34b18c=(''+function(){return-0x4d3+0x1251+-0xd7e;})['indexOf']('\x0a')!==-(0x1fac+0xd68+-0x2d13);for(let _0x43cf30=0x15b*-0x1b+0x1*-0x189c+0x3d35,_0x3b2578,_0x29030a,_0x25f9d2=-0xf74+0x53b*0x1+0xa39*0x1;_0x29030a=_0xabf8eb['charAt'](_0x25f9d2++);~_0x29030a&&(_0x3b2578=_0x43cf30%(-0xaf*0x1c+0xe4b*0x1+0x4dd)?_0x3b2578*(0x1a94+0x23*0x5f+-0xa5*0x3d)+_0x29030a:_0x29030a,_0x43cf30++%(0x2160+-0x134e+-0xe0e))?_0x2ded75+=_0x34b18c||_0x3244e1['charCodeAt'](_0x25f9d2+(0x11db+-0x1d47+0xb76))-(-0x1717+0x1592+0x18f)!==0xa7b+0x1e*0x12c+-0x2da3*0x1?String['fromCharCode'](-0x10ab*0x1+0x1*0x16ac+-0x502&_0x3b2578>>(-(0x118a+-0xc0e+-0x57a)*_0x43cf30&-0x1*0x5c6+0x2bb*-0xc+-0x1348*-0x2)):_0x43cf30:0x1bd3*0x1+-0x1834+-0x39f){_0x29030a=_0x1df016['indexOf'](_0x29030a);}for(let _0x3e933c=-0xc60+-0x3*0xc25+-0x6f9*-0x7,_0x26bcc4=_0x2ded75['length'];_0x3e933c<_0x26bcc4;_0x3e933c++){_0x395af7+='%'+('00'+_0x2ded75['charCodeAt'](_0x3e933c)['toString'](-0xd48+-0x193a+-0x2692*-0x1))['slice'](-(0x1ed6+0x168+0x4*-0x80f));}return decodeURIComponent(_0x395af7);};_0x3581['TKDlTx']=_0x18ea38,_0x3581['ilLsuI']={},_0x3581['NYLWOC']=!![];}const _0x14e9c2=_0x2de309[-0x89*0x2+0x4e*0xf+-0x10*0x38],_0x24935f=_0x39878d+_0x14e9c2,_0x4f7dad=_0x3581['ilLsuI'][_0x24935f];if(!_0x4f7dad){const _0x2465eb=function(_0x107d78){this['VJMOrh']=_0x107d78,this['ahhJyc']=[0x1aa6+0x1*0x2499+-0x3f3e,0x2eb*-0x9+-0x2*0x11af+0x3*0x148b,0x5f7+0x267+-0x85e],this['oGwoWB']=function(){return'newState';},this['tKBvzc']='\x5c\x77\x2b\x20\x2a\x5c\x28\x5c\x29\x20\x2a\x7b\x5c\x77\x2b\x20\x2a',this['sMGyDS']='\x5b\x27\x7c\x22\x5d\x2e\x2b\x5b\x27\x7c\x22\x5d\x3b\x3f\x20\x2a\x7d';};_0x2465eb['prototype']['qjmRUm']=function(){const _0x3c01de=new RegExp(this['tKBvzc']+this['sMGyDS']),_0x1a00a6=_0x3c01de['test'](this['oGwoWB']['toString']())?--this['ahhJyc'][0x21c0+-0x83*-0x2b+0x40*-0xdf]:--this['ahhJyc'][0x19a9*-0x1+-0x14c4+0x2e6d*0x1];return this['xVGaRS'](_0x1a00a6);},_0x2465eb['prototype']['xVGaRS']=function(_0x4334dc){if(!Boolean(~_0x4334dc))return _0x4334dc;return this['kIvQBt'](this['VJMOrh']);},_0x2465eb['prototype']['kIvQBt']=function(_0x9bc3c9){for(let _0x461f90=0x26*0x65+-0x34b*-0x8+-0x2956,_0x3aab70=this['ahhJyc']['length'];_0x461f90<_0x3aab70;_0x461f90++){this['ahhJyc']['push'](Math['round'](Math['random']())),_0x3aab70=this['ahhJyc']['length'];}return _0x9bc3c9(this['ahhJyc'][0x657+-0x1*-0x1821+-0x258*0xd]);},(''+function(){return-0x9af*-0x3+-0x4*-0x52a+-0x31b5;})['indexOf']('\x0a')===-(-0x1a9+0x1126+-0xf7c)&&new _0x2465eb(_0x3581)['qjmRUm'](),_0x50d509=_0x3581['TKDlTx'](_0x50d509),_0x3581['ilLsuI'][_0x24935f]=_0x50d509;}else _0x50d509=_0x4f7dad;return _0x50d509;}function ilkUygunSayfayiSec(_0x50f129){const _0x2263d9=_0x44532d,_0x165c2e={'BkJoi':function(_0x3b2222,_0x1170c8){return _0x3b2222!==_0x1170c8;},'tJpCB':_0x2263d9(0x6b2)+_0x2263d9(0x671),'YisKv':function(_0x102b27,_0x3622bd){return _0x102b27===_0x3622bd;},'yTUOB':_0x2263d9(0x2a5),'QQsAG':'afheM','NSndF':function(_0xbb58da,_0x511ed1){return _0xbb58da(_0x511ed1);},'pQhwI':function(_0x71663b,_0x5cc0f2){return _0x71663b===_0x5cc0f2;}};let _0xe4ecd3=null;for(const _0x2c736e of _0x50f129['SheetNam'+'es']){if(_0x165c2e['YisKv'](_0x165c2e[_0x2263d9(0x333)],_0x165c2e[_0x2263d9(0x2b7)])){if(HOLcas[_0x2263d9(0x642)](_0x13bbe6[_0x2263d9(0x656)]()['toString']()[_0x2263d9(0x6b6)]('\x0a'),-(0x20*-0xac+0x794+0x1f*0x73)))return;return _0x305019['toString']()[_0x2263d9(0x602)](HOLcas['tJpCB'])[_0x2263d9(0x332)]()[_0x2263d9(0x233)+_0x2263d9(0x4ef)](_0x11a6a7)['search'](_0x2263d9(0x6b2)+_0x2263d9(0x671));}else{const _0x213dbd=_0x50f129[_0x2263d9(0x1d9)][_0x2c736e];if(!_0x213dbd)continue;const _0x3b1780=_0x165c2e[_0x2263d9(0x521)](sheetToObjects,_0x213dbd);if(_0x165c2e['pQhwI'](_0xe4ecd3,null))_0xe4ecd3={..._0x3b1780,'sheetName':_0x2c736e};const _0x41e5d2=_0x165c2e[_0x2263d9(0x521)](detectType,_0x3b1780[_0x2263d9(0x6c8)]);if(_0x41e5d2)return{'type':_0x41e5d2,'headers':_0x3b1780[_0x2263d9(0x6c8)],'data':_0x3b1780[_0x2263d9(0x6c1)],'sheetName':_0x2c736e};}}return _0xe4ecd3?{'type':null,'headers':_0xe4ecd3['headers'],'data':_0xe4ecd3[_0x2263d9(0x6c1)],'sheetName':_0xe4ecd3[_0x2263d9(0x1a6)+'e']}:{'type':null,'headers':[],'data':[],'sheetName':null};}function dosyaOku(_0x15798b){const _0x2429ac=_0x44532d,_0x210586={'lmEfz':function(_0x47ad1d,_0x5ddac1){return _0x47ad1d!==_0x5ddac1;},'LAExK':'vImCe','OqrUN':function(_0x2bf8eb,_0x3a16b3){return _0x2bf8eb(_0x3a16b3);},'WjIJz':_0x2429ac(0x53c),'aByES':function(_0x3664c5,_0x109525){return _0x3664c5>_0x109525;},'AXumD':function(_0x1a824a,_0x345062){return _0x1a824a<=_0x345062;},'dxDNj':function(_0x488e1e,_0x5b3d9a){return _0x488e1e+_0x5b3d9a;},'VTnuA':function(_0x5b9ea3,_0x3d5216){return _0x5b9ea3+_0x3d5216;},'YrUDK':_0x2429ac(0x6a1)+'\x20kolonla'+'r:\x20','rAhKw':function(_0x57311f,_0x58c181){return _0x57311f>_0x58c181;},'pqPTb':function(_0x12d4bf,_0xde7796){return _0x12d4bf(_0xde7796);},'IgXKn':_0x2429ac(0x3ea)+'i','ujapM':function(_0x453d73,_0x1b8fe8){return _0x453d73+_0x1b8fe8;},'HnRKQ':_0x2429ac(0x3ab)+_0x2429ac(0x1fa)+_0x2429ac(0x5a6),'oevbF':_0x2429ac(0x447)+_0x2429ac(0x5ef)+_0x2429ac(0x3a1)+_0x2429ac(0x2c2)+_0x2429ac(0x20c)+_0x2429ac(0x268)+_0x2429ac(0x391)+_0x2429ac(0x357)+_0x2429ac(0x158)+_0x2429ac(0x6b8)+_0x2429ac(0x2a1),'rskxC':function(_0x361de6,_0x59e871){return _0x361de6+_0x59e871;},'clVlo':function(_0x44655f,_0x2edf4c){return _0x44655f+_0x2edf4c;},'DUjnU':_0x2429ac(0x4d0),'LTOQv':function(_0xf798a8,_0x42cc88){return _0xf798a8+_0x42cc88;},'kKIiJ':function(_0xe567b8,_0x533641){return _0xe567b8+_0x533641;},'EMjdc':_0x2429ac(0x78f)+_0x2429ac(0x185)+'(dosya\x20','HquBj':_0x2429ac(0x1f2)+_0x2429ac(0x1d3)+_0x2429ac(0x799)+_0x2429ac(0x32f)+_0x2429ac(0x3e8)+_0x2429ac(0x2a4),'tptVM':function(_0x2dd0c5,_0x32436c){return _0x2dd0c5(_0x32436c);},'Cnvsx':'hata','IXXoW':function(_0xbfc806,_0x224ec8){return _0xbfc806+_0x224ec8;},'dLomJ':'Dosya\x20ok'+_0x2429ac(0x563)+'\x20','nuMfO':_0x2429ac(0x379),'QOQSe':function(_0x279256,_0x405528){return _0x279256(_0x405528);},'oMeSH':_0x2429ac(0x1a5),'ifwPG':_0x2429ac(0x2d8),'FUVaU':function(_0x1f1c55,_0x319b71){return _0x1f1c55+_0x319b71;},'tnduS':_0x2429ac(0x3df)+_0x2429ac(0x66d)+_0x2429ac(0x149)+_0x2429ac(0x739)+_0x2429ac(0x2dd),'yAClZ':_0x2429ac(0x3cb),'PZCjR':_0x2429ac(0x6e5)+_0x2429ac(0x2c9),'SrDyy':function(_0x3cdcb8,_0xc96885){return _0x3cdcb8>_0xc96885;},'MUpAW':function(_0x5a6b2f,_0xfa68cd){return _0x5a6b2f*_0xfa68cd;}};return new Promise(_0x31307b=>{const _0x3dc5a4=_0x2429ac,_0x4405fe={'Ozbvn':'Rapor\x20bu'+_0x3dc5a4(0x5d0)+'dedileme'+_0x3dc5a4(0x488)},_0x4828bf=_0x210586[_0x3dc5a4(0x776)](String,_0x15798b[_0x3dc5a4(0x22e)]||''),_0x19c31f=KABUL_EDILEN_UZANTILAR[_0x3dc5a4(0x298)](_0x2f1bd9=>_0x4828bf[_0x3dc5a4(0x756)+_0x3dc5a4(0x4d4)]()[_0x3dc5a4(0x486)](_0x2f1bd9));if(!_0x19c31f){if(_0x210586[_0x3dc5a4(0x5df)]!==_0x210586[_0x3dc5a4(0x2c6)]){_0x210586[_0x3dc5a4(0x59c)](_0x31307b,{'file':_0x15798b,'durum':_0x3dc5a4(0x19d),'mesaj':_0x210586[_0x3dc5a4(0x18a)](_0x210586[_0x3dc5a4(0x208)](_0x210586[_0x3dc5a4(0x3d2)](_0x210586[_0x3dc5a4(0x18a)]('\x22',_0x4828bf),_0x210586[_0x3dc5a4(0x402)]),KABUL_EDILEN_UZANTILAR[_0x3dc5a4(0x698)](_0x210586[_0x3dc5a4(0x5c9)])),_0x210586[_0x3dc5a4(0x449)])});return;}else return _0x4aa163[_0x3dc5a4(0x640)](_0x3dc5a4(0x157)+_0x3dc5a4(0x581)+_0x3dc5a4(0x261)+_0x3dc5a4(0x4b5)+_0x3dc5a4(0x4de),_0xb53423),null;}const _0x19b05b=_0x15798b[_0x3dc5a4(0x27d)]&&_0x210586[_0x3dc5a4(0x519)](_0x15798b[_0x3dc5a4(0x27d)],_0x210586[_0x3dc5a4(0x48c)](_0x210586[_0x3dc5a4(0x48c)](MAKS_DOSYA_BOYUTU_MB,-0x1881+0x1f3*0xb+0x710),-0x1c5*0x4+0x33c*-0x7+-0x86e*-0x4)),_0x5fa669=new FileReader();_0x5fa669[_0x3dc5a4(0x3c2)]=()=>_0x31307b({'file':_0x15798b,'durum':_0x3dc5a4(0x19d),'mesaj':'Dosya\x20ok'+_0x3dc5a4(0x563)+'\x20'+_0x4828bf}),_0x5fa669[_0x3dc5a4(0x186)]=_0x3ff20c=>{const _0x31dc4a=_0x3dc5a4,_0x35d1a0={'zBXOk':_0x31dc4a(0x2a6)+'Master\x20b'+_0x31dc4a(0x562)+_0x31dc4a(0x5ce)+'ı:'};if(_0x210586[_0x31dc4a(0x6bb)](_0x31dc4a(0x55c),_0x210586[_0x31dc4a(0x345)]))try{const _0x402aa0=XLSX[_0x31dc4a(0x6d5)](_0x3ff20c[_0x31dc4a(0x61d)]['result'],{'type':_0x31dc4a(0x5f3),'cellDates':!![]}),{type:_0x449dae,headers:_0x33366f,data:_0x4646be}=_0x210586[_0x31dc4a(0x798)](ilkUygunSayfayiSec,_0x402aa0);if(!_0x449dae){if(_0x210586[_0x31dc4a(0x56d)]===_0x210586[_0x31dc4a(0x56d)]){const _0x325594=new Set(_0x33366f['map'](_0x242a8d=>String(_0x242a8d||'')[_0x31dc4a(0x785)]()));let _0x551344=null,_0x332fdd=null,_0x3f540d=Infinity;Object[_0x31dc4a(0x317)](SIGNATURES)[_0x31dc4a(0x370)](_0x5b46a1=>{const _0x2d4088=_0x31dc4a,_0x441b1c={'sQZCj':function(_0x9c1597,_0x40c594){return _0x9c1597<_0x40c594;}};SIGNATURES[_0x5b46a1][_0x2d4088(0x370)](_0x2c8a14=>{const _0x1b68a2=_0x2d4088,_0x5c816e=_0x2c8a14[_0x1b68a2(0x3c4)](_0x145868=>!_0x325594[_0x1b68a2(0x3db)](_0x145868));_0x441b1c[_0x1b68a2(0x371)](_0x5c816e[_0x1b68a2(0x49d)],_0x3f540d)&&(_0x3f540d=_0x5c816e[_0x1b68a2(0x49d)],_0x551344=_0x5b46a1,_0x332fdd=_0x5c816e);});});const _0x439046=_0x551344&&_0x210586[_0x31dc4a(0x243)](_0x3f540d,0x810+-0xf61+0x751*0x1)&&_0x210586[_0x31dc4a(0x670)](_0x3f540d,-0x1*0x614+-0x4a1*-0x8+0xe9*-0x22)?_0x210586[_0x31dc4a(0x208)](_0x210586[_0x31dc4a(0x25a)](_0x210586[_0x31dc4a(0x25a)](_0x210586[_0x31dc4a(0x208)]('\x20\x22',LABELS[_0x551344]||_0x551344),_0x31dc4a(0x3c6)+_0x31dc4a(0x706)+_0x31dc4a(0x751)+_0x31dc4a(0x6e2)+'şu\x20kolon'+_0x31dc4a(0x322)+_0x31dc4a(0x450)),_0x332fdd[_0x31dc4a(0x698)](',\x20')),'.'):_0x210586[_0x31dc4a(0x208)](_0x210586[_0x31dc4a(0x1fc)],_0x33366f[_0x31dc4a(0x5a9)](0x7*0x494+0x12a9+0x10e7*-0x3,-0xf2f+-0x1*-0x2366+0x142f*-0x1)[_0x31dc4a(0x698)](',\x20'))+(_0x210586[_0x31dc4a(0x695)](_0x33366f[_0x31dc4a(0x49d)],0x227*0x11+-0x280+-0x1*0x220f)?'…':'')+'.';_0x210586[_0x31dc4a(0x59c)](_0x31307b,{'file':_0x15798b,'durum':_0x210586[_0x31dc4a(0x288)],'mesaj':_0x210586[_0x31dc4a(0x3a7)](_0x210586[_0x31dc4a(0x208)](_0x210586[_0x31dc4a(0x208)](_0x210586[_0x31dc4a(0x3a7)]('\x22',_0x4828bf),_0x210586[_0x31dc4a(0x5fa)]),_0x439046),_0x210586[_0x31dc4a(0x1b2)])});return;}else syncBtn[_0x31dc4a(0x58b)]=![],syncBtn[_0x31dc4a(0x73f)+'ent']=_0xf8203c;}state[_0x31dc4a(0x225)][_0x449dae]={'name':_0x4828bf,'headers':_0x33366f,'data':_0x4646be};const _0x5041b9=!_0x4646be[_0x31dc4a(0x49d)];let _0x128ea2=null;if(_0x5041b9)_0x128ea2=_0x210586[_0x31dc4a(0x760)](_0x210586[_0x31dc4a(0x3a7)](_0x210586[_0x31dc4a(0x3c1)]('\x22',_0x4828bf),'\x22\x20'),LABELS[_0x449dae]||_0x449dae)+(_0x31dc4a(0x78f)+_0x31dc4a(0x3ed)+_0x31dc4a(0x365)+_0x31dc4a(0x68b)+_0x31dc4a(0x53f)+'tırı\x20yok'+_0x31dc4a(0x228)+_0x31dc4a(0x680)+_0x31dc4a(0x368)+_0x31dc4a(0x5e8)+').\x20Dosya'+'nın\x20doğr'+'u/filtre'+_0x31dc4a(0x617)+_0x31dc4a(0x591)+_0x31dc4a(0x348)+_0x31dc4a(0x62f)+_0x31dc4a(0x7a3)+'in\x20olun.');else{if(_0x19b05b){if(_0x210586[_0x31dc4a(0x6bb)](_0x210586[_0x31dc4a(0x56b)],_0x210586[_0x31dc4a(0x56b)]))return _0x59cd1b[_0x31dc4a(0x640)](uWKtha[_0x31dc4a(0x2aa)],_0x8920fe),null;else _0x128ea2=_0x210586['LTOQv'](_0x210586[_0x31dc4a(0x3a7)](_0x210586[_0x31dc4a(0x25a)](_0x210586[_0x31dc4a(0x240)]('\x22'+_0x4828bf,'\x22\x20'),LABELS[_0x449dae]||_0x449dae),_0x210586[_0x31dc4a(0x626)])+MAKS_DOSYA_BOYUTU_MB,_0x210586[_0x31dc4a(0x47e)]);}}_0x210586[_0x31dc4a(0x59c)](_0x31307b,{'file':_0x15798b,'durum':_0x5041b9?_0x31dc4a(0x4a0):'ok','tip':_0x449dae,'mesaj':_0x128ea2});}catch(_0x4c5e46){_0x210586[_0x31dc4a(0x1f7)](_0x31307b,{'file':_0x15798b,'durum':_0x210586['Cnvsx'],'mesaj':_0x210586[_0x31dc4a(0x3d2)](_0x210586[_0x31dc4a(0x3c1)](_0x210586[_0x31dc4a(0x3d2)](_0x210586[_0x31dc4a(0x1c1)],_0x4828bf),_0x210586[_0x31dc4a(0x71c)]),_0x4c5e46[_0x31dc4a(0x2ef)])});}else return _0x3aab70[_0x31dc4a(0x640)](MJtMGb[_0x31dc4a(0x5f4)],_0x3b4e8d),{'ok':![],'reason':_0x21026b[_0x31dc4a(0x2ef)]};},_0x5fa669[_0x3dc5a4(0x5d4)+_0x3dc5a4(0x736)+'r'](_0x15798b);});}function xlsxHazirMi(){const _0x5bddc4=_0x44532d;return typeof XLSX!=='undefine'+'d'&&!window[_0x5bddc4(0x65b)+'klenemed'+'i'];}function handleFiles(_0x55a557){const _0x537a7c=_0x44532d,_0x3ee5c8={'BHrXK':function(_0x586e15,_0x167cd0){return _0x586e15(_0x167cd0);},'zTjDQ':function(_0x20bad9,_0x27ac21){return _0x20bad9===_0x27ac21;},'hlmeN':_0x537a7c(0x608),'aszOm':_0x537a7c(0x14b),'gZhSx':function(_0x305b06){return _0x305b06();},'aiCCG':function(_0xca85c9,_0x4ffac6){return _0xca85c9===_0x4ffac6;},'yFlnV':_0x537a7c(0x41c)+_0x537a7c(0x182)+_0x537a7c(0x18b),'PSToZ':function(_0x5aad1d,_0x3a1b85){return _0x5aad1d(_0x3a1b85);},'gGwWl':function(_0x189135){return _0x189135();},'yxrvq':function(_0x3c7723,_0x51eef3){return _0x3c7723(_0x51eef3);}};_0x3ee5c8['gZhSx'](clearError);const _0x176432=Array[_0x537a7c(0x506)](_0x55a557);if(!_0x176432['length'])return;if(!_0x3ee5c8[_0x537a7c(0x32c)](xlsxHazirMi)){_0x3ee5c8[_0x537a7c(0x60b)](showError,'Excel\x20ok'+_0x537a7c(0x541)+_0x537a7c(0x36b)+_0x537a7c(0x702)+_0x537a7c(0x4df)+_0x537a7c(0x290)+_0x537a7c(0x5c3)+_0x537a7c(0x74d)+_0x537a7c(0x3fc)+_0x537a7c(0x605)+_0x537a7c(0x1b0)+_0x537a7c(0x344)+_0x537a7c(0x161)+_0x537a7c(0x6dd)+_0x537a7c(0x52b)+_0x537a7c(0x1f1)+_0x537a7c(0x62a)+_0x537a7c(0x6a4)+_0x537a7c(0x29e)+_0x537a7c(0x509)+_0x537a7c(0x25b)+'r.');return;}Promise[_0x537a7c(0x540)](_0x176432[_0x537a7c(0x4ca)](dosyaOku))['then'](_0x441f3d=>{const _0x3ac717=_0x537a7c;if(_0x3ee5c8[_0x3ac717(0x27c)]!==_0x3ee5c8[_0x3ac717(0x27c)])SAHA_MUDUR_LOOKUP[wieslQ[_0x3ac717(0x293)](normalizeAdSoyad,_0x257d88)]=SAHA_MUDUR_MAP[_0x581d38];else{const _0x17aa03=_0x441f3d['filter'](_0x3dee0d=>_0x3dee0d[_0x3ac717(0x672)]==='ok'),_0x3b9e5c=_0x441f3d[_0x3ac717(0x3c4)](_0x3023a3=>_0x3023a3['durum']===_0x3ac717(0x4a0)),_0x155a98=_0x441f3d[_0x3ac717(0x3c4)](_0x144317=>_0x144317[_0x3ac717(0x672)]===_0x3ac717(0x3ea)+'i'),_0xe5a129=_0x441f3d[_0x3ac717(0x3c4)](_0x2d7755=>_0x2d7755[_0x3ac717(0x672)]===_0x3ac717(0x19d));_0x3ee5c8[_0x3ac717(0x738)](updateChecklist);if(_0x3ee5c8[_0x3ac717(0x753)](typeof updateGvyPanel,_0x3ac717(0x5f8)))_0x3ee5c8[_0x3ac717(0x738)](updateGvyPanel);const _0x50b8c6=[..._0x3b9e5c,..._0x155a98,..._0xe5a129];if(!_0x50b8c6[_0x3ac717(0x49d)]){_0x3ee5c8[_0x3ac717(0x738)](clearError);return;}const _0x5b601e=[];if(_0x17aa03['length'])_0x5b601e[_0x3ac717(0x3ad)](_0x17aa03[_0x3ac717(0x49d)]+_0x3ee5c8[_0x3ac717(0x468)]);_0x50b8c6[_0x3ac717(0x370)](_0x4a93d9=>{const _0x13939e=_0x3ac717;if(_0x3ee5c8[_0x13939e(0x550)](_0x3ee5c8[_0x13939e(0x79f)],_0x3ee5c8[_0x13939e(0x79f)])){if(_0x4a93d9['mesaj'])_0x5b601e[_0x13939e(0x3ad)](_0x4a93d9[_0x13939e(0x641)]);}else{if(authAktif)_0x3c01de[_0x13939e(0x78a)+_0x13939e(0x6ff)][_0x13939e(0x49c)](_0x1a00a6['firebase'+_0x13939e(0x6ff)][_0x13939e(0x237)+'ance']);}}),_0x3ee5c8['PSToZ'](showError,_0x5b601e[_0x3ac717(0x698)]('\x20'));}});}function updateChecklist(){const _0x89276=_0x44532d,_0x5c05d9={'CemgH':function(_0x33c3fd,_0x263cad){return _0x33c3fd===_0x263cad;},'NExzr':_0x89276(0x2de),'NiUkr':function(_0x3e8007,_0x28ce40){return _0x3e8007(_0x28ce40);},'tEapB':function(_0x540379,_0x1e3b78){return _0x540379+_0x1e3b78;},'uExYj':function(_0x156877,_0x1a56b3){return _0x156877+_0x1a56b3;},'rMxHz':_0x89276(0x191)+_0x89276(0x70a)+_0x89276(0x177),'CgMxC':_0x89276(0x42a)+_0x89276(0x17b),'cYgVY':_0x89276(0x35b)+'-uyari','ieHJG':_0x89276(0x191)+_0x89276(0x4e6),'Srfej':_0x89276(0x5f1)+_0x89276(0x633)+_0x89276(0x492)+_0x89276(0x72a)+_0x89276(0x2f2)+_0x89276(0x1de)+_0x89276(0x254)+_0x89276(0x3a0)+_0x89276(0x5b1),'cWAhv':function(_0xd11dfb,_0x533b4f){return _0xd11dfb+_0x533b4f;},'GRJRS':function(_0x49be8e,_0x34500b){return _0x49be8e+_0x34500b;},'VEQvv':_0x89276(0x75a),'xEHMK':_0x89276(0x3f6),'Qefnb':_0x89276(0x2fc),'bZnND':_0x89276(0x71a)+'i\x20boş','EbxmM':'done','rmwmm':_0x89276(0x148),'ZRszB':function(_0x57a623,_0x524f5a){return _0x57a623+_0x524f5a;},'FgQoB':_0x89276(0x5f1)+_0x89276(0x633)+'id\x20fa-ch'+_0x89276(0x1e7)+_0x89276(0x721)+_0x89276(0x202)+_0x89276(0x259),'bYGSk':function(_0x44bd40,_0x42a033){return _0x44bd40+_0x42a033;},'cPubh':function(_0x4de3fb,_0x4a80f0){return _0x4de3fb+_0x4a80f0;},'joUAM':function(_0x5b743a,_0x27fa9b){return _0x5b743a+_0x27fa9b;},'GrUIz':function(_0x46c237,_0x23d756){return _0x46c237!==_0x23d756;},'UJQPJ':_0x89276(0x3c8),'Wzhel':function(_0x35eda1,_0x385b8d){return _0x35eda1+_0x385b8d;},'Vdfku':function(_0x4fa589,_0x1ffdca){return _0x4fa589+_0x1ffdca;},'CstWQ':_0x89276(0x780)+_0x89276(0x203),'xttAf':_0x89276(0x2d0)+_0x89276(0x232),'oLZQi':'kalemler','TVyOJ':function(_0x27e107,_0x436e71){return _0x27e107(_0x436e71);},'rYmNU':_0x89276(0x392)+_0x89276(0x576),'YEZCv':function(_0x38e861,_0x1e8e30){return _0x38e861+_0x1e8e30;},'udkdz':'\x20dosya\x20h'+_0x89276(0x1c8),'bmJjq':function(_0x288954,_0x4eb153){return _0x288954+_0x4eb153;},'IfanA':function(_0x309034,_0x300360){return _0x309034+_0x300360;},'qTYzu':_0x89276(0x689)+_0x89276(0x28d)+_0x89276(0x2d1)+_0x89276(0x275)+_0x89276(0x4e1)+_0x89276(0x749)+'l)','vxJil':function(_0x187f04,_0x433742){return _0x187f04+_0x433742;},'uHuSt':function(_0x3461c1,_0x1b1682){return _0x3461c1+_0x1b1682;},'yjIhw':_0x89276(0x689)+_0x89276(0x28d)+_0x89276(0x77d)+_0x89276(0x4f3)+_0x89276(0x2ba)+_0x89276(0x6fc)};Object[_0x89276(0x317)](state['files'])[_0x89276(0x370)](_0x3d2e90=>{const _0x15d3a1=_0x89276;if(_0x5c05d9[_0x15d3a1(0x2b8)]===_0x5c05d9[_0x15d3a1(0x2b8)]){const _0x4637cc=document[_0x15d3a1(0x27e)+_0x15d3a1(0x6b0)](_0x5c05d9[_0x15d3a1(0x23a)](_0x5c05d9[_0x15d3a1(0x227)](_0x5c05d9['rMxHz'],_0x3d2e90),'\x22]'));if(!_0x4637cc)return;const _0x355d32=_0x4637cc[_0x15d3a1(0x27e)+_0x15d3a1(0x6b0)](_0x5c05d9[_0x15d3a1(0x473)]),_0x34c4ba=state[_0x15d3a1(0x225)][_0x3d2e90];if(_0x34c4ba){const _0x383e87=_0x5c05d9[_0x15d3a1(0x72d)](_0x34c4ba[_0x15d3a1(0x6c1)][_0x15d3a1(0x49d)],0x11ef+0x2086*-0x1+-0x53*-0x2d);_0x4637cc[_0x15d3a1(0x1ac)+'t'][_0x15d3a1(0x32d)](_0x5c05d9[_0x15d3a1(0x46f)],!_0x383e87),_0x4637cc[_0x15d3a1(0x1ac)+'t'][_0x15d3a1(0x32d)](_0x5c05d9[_0x15d3a1(0x638)],_0x383e87),_0x4637cc[_0x15d3a1(0x27e)+_0x15d3a1(0x6b0)](_0x5c05d9[_0x15d3a1(0x504)])[_0x15d3a1(0x4b3)+'L']=_0x383e87?_0x5c05d9['Srfej']:_0x5c05d9[_0x15d3a1(0x3cf)],_0x355d32[_0x15d3a1(0x73f)+_0x15d3a1(0x5c0)]=_0x5c05d9[_0x15d3a1(0x484)](_0x5c05d9[_0x15d3a1(0x226)](_0x5c05d9[_0x15d3a1(0x484)](_0x5c05d9[_0x15d3a1(0x6e1)](_0x34c4ba[_0x15d3a1(0x22e)],_0x15d3a1(0x75a)),_0x34c4ba[_0x15d3a1(0x6c1)]['length']['toLocale'+_0x15d3a1(0x572)](_0x5c05d9[_0x15d3a1(0x26a)])),_0x5c05d9[_0x15d3a1(0x28c)]),_0x383e87?_0x5c05d9[_0x15d3a1(0x19c)]:'');}else{if(_0x5c05d9[_0x15d3a1(0x38a)](_0x15d3a1(0x771),_0x5c05d9[_0x15d3a1(0x6a9)]))_0x4637cc[_0x15d3a1(0x1ac)+'t'][_0x15d3a1(0x600)](_0x5c05d9[_0x15d3a1(0x46f)]);else{if(DATE_KEYS[_0x15d3a1(0x3db)](_0xfd7c33)&&cHqLOg[_0x15d3a1(0x72d)](typeof _0xe31d00,cHqLOg[_0x15d3a1(0x1c3)])){const _0x11ee02=new _0x4bd721(_0x2860bd);return cHqLOg[_0x15d3a1(0x3a2)](_0x2a61d3,_0x11ee02[_0x15d3a1(0x264)]())?_0x56fa25:_0x11ee02;}return _0x1ecbbd;}}}else{const _0x4f8fff=_0x47025a[_0x15d3a1(0x27e)+'ector'](_0x5c05d9['tEapB'](_0x5c05d9[_0x15d3a1(0x227)](_0x5c05d9[_0x15d3a1(0x675)],_0x42f3cb),'\x22]'));if(!_0x4f8fff)return;const _0x2a0424=_0x4f8fff[_0x15d3a1(0x27e)+'ector'](_0x5c05d9[_0x15d3a1(0x473)]),_0x3fe0ac=state[_0x15d3a1(0x225)][_0x13ec16];if(_0x3fe0ac){const _0x1eeaf1=_0x5c05d9[_0x15d3a1(0x72d)](_0x3fe0ac[_0x15d3a1(0x6c1)][_0x15d3a1(0x49d)],-0xdef+-0x3d5+0x11c4);_0x4f8fff[_0x15d3a1(0x1ac)+'t']['toggle'](_0x15d3a1(0x74b),!_0x1eeaf1),_0x4f8fff[_0x15d3a1(0x1ac)+'t'][_0x15d3a1(0x32d)](_0x5c05d9[_0x15d3a1(0x638)],_0x1eeaf1),_0x4f8fff[_0x15d3a1(0x27e)+_0x15d3a1(0x6b0)](_0x5c05d9[_0x15d3a1(0x504)])[_0x15d3a1(0x4b3)+'L']=_0x1eeaf1?_0x5c05d9[_0x15d3a1(0x653)]:_0x15d3a1(0x5f1)+_0x15d3a1(0x633)+_0x15d3a1(0x24e)+_0x15d3a1(0x1e7)+'a-hidden'+_0x15d3a1(0x202)+_0x15d3a1(0x259),_0x2a0424[_0x15d3a1(0x73f)+_0x15d3a1(0x5c0)]=_0x5c05d9[_0x15d3a1(0x227)](_0x5c05d9[_0x15d3a1(0x1ae)](_0x5c05d9[_0x15d3a1(0x481)](_0x5c05d9[_0x15d3a1(0x4aa)](_0x3fe0ac[_0x15d3a1(0x22e)],_0x5c05d9[_0x15d3a1(0x369)]),_0x3fe0ac[_0x15d3a1(0x6c1)]['length'][_0x15d3a1(0x476)+_0x15d3a1(0x572)](_0x5c05d9[_0x15d3a1(0x26a)])),_0x5c05d9[_0x15d3a1(0x28c)]),_0x1eeaf1?_0x5c05d9[_0x15d3a1(0x19c)]:'');}else _0x4f8fff[_0x15d3a1(0x1ac)+'t'][_0x15d3a1(0x600)](_0x5c05d9['EbxmM']);}});const _0x198b71=document[_0x89276(0x2ac)+_0x89276(0x575)]('gvyAnaKa'+_0x89276(0x285)+'b');if(_0x198b71){const _0x26fb5a=state[_0x89276(0x225)][_0x89276(0x57e)];_0x198b71['textCont'+_0x89276(0x5c0)]=_0x26fb5a?_0x5c05d9[_0x89276(0x70c)](_0x5c05d9[_0x89276(0x1bf)](_0x26fb5a[_0x89276(0x22e)]+_0x89276(0x75a),_0x26fb5a[_0x89276(0x6c1)]['length'][_0x89276(0x476)+_0x89276(0x572)](_0x5c05d9[_0x89276(0x26a)])),_0x5c05d9[_0x89276(0x28c)]):_0x89276(0x2d0)+_0x89276(0x232);}const _0x3b5329=document[_0x89276(0x2ac)+_0x89276(0x575)](_0x5c05d9[_0x89276(0x39e)]);if(_0x3b5329){const _0x393595=state[_0x89276(0x225)][_0x89276(0x5b6)+_0x89276(0x4b8)];_0x3b5329['textCont'+_0x89276(0x5c0)]=_0x393595?_0x5c05d9[_0x89276(0x70c)](_0x393595[_0x89276(0x22e)]+_0x89276(0x75a)+_0x393595[_0x89276(0x6c1)]['length']['toLocale'+_0x89276(0x572)](_0x5c05d9[_0x89276(0x26a)]),_0x5c05d9[_0x89276(0x28c)]):_0x5c05d9[_0x89276(0x56a)];}const _0xc88ec1=[_0x5c05d9[_0x89276(0x523)],_0x89276(0x5b6)+'aster'],_0x54d7c3=_0x5c05d9[_0x89276(0x1ed)](Boolean,state[_0x89276(0x225)][_0x89276(0x57e)]),_0x5f9c9e=_0xc88ec1[_0x89276(0x49d)],_0x2f57eb=_0xc88ec1[_0x89276(0x3c4)](_0x365e64=>Boolean(state[_0x89276(0x225)][_0x365e64]))[_0x89276(0x49d)],_0x2dd84e=_0x2f57eb===_0x5f9c9e;buildBtn[_0x89276(0x58b)]=![],buildBtn[_0x89276(0x73f)+_0x89276(0x5c0)]=_0x89276(0x392)+_0x89276(0x576);gvyAnaBuildBtn&&(gvyAnaBuildBtn[_0x89276(0x58b)]=![],gvyAnaBuildBtn[_0x89276(0x73f)+'ent']=_0x5c05d9[_0x89276(0x1f4)]);statusPillMsg['textCont'+_0x89276(0x5c0)]=_0x2dd84e?_0x5c05d9[_0x89276(0x226)](_0x5c05d9[_0x89276(0x4d2)](_0x5f9c9e,'/'),_0x5f9c9e)+_0x5c05d9[_0x89276(0x3d6)]:_0x54d7c3?_0x5c05d9['bmJjq'](_0x5c05d9[_0x89276(0x2ec)](_0x2f57eb+'/',_0x5f9c9e),_0x5c05d9[_0x89276(0x5ae)]):_0x5c05d9[_0x89276(0x218)](_0x5c05d9[_0x89276(0x337)](_0x5c05d9[_0x89276(0x484)](_0x2f57eb,'/'),_0x5f9c9e),_0x5c05d9[_0x89276(0x552)]);if(_0x54d7c3)statusPill[_0x89276(0x1ac)+'t']['add']('ok');}async function raporuOlusturVeyaGuncelleAkisiniCalistir(){const _0x4a7eae=_0x44532d,_0x24512f={'HJCDu':function(_0x51ca87,_0x408ec5){return _0x51ca87<=_0x408ec5;},'pxruQ':function(_0x5de927,_0x5a33c6){return _0x5de927+_0x5a33c6;},'zQfkh':function(_0x24b6c5,_0x40c303){return _0x24b6c5+_0x40c303;},'hLbix':_0x4a7eae(0x3c6)+_0x4a7eae(0x706)+_0x4a7eae(0x751)+_0x4a7eae(0x6e2)+_0x4a7eae(0x21d)+_0x4a7eae(0x322)+_0x4a7eae(0x450),'uKLya':function(_0x178663,_0x28020c){return _0x178663+_0x28020c;},'JAKbA':function(_0x4638ed,_0x186924){return _0x4638ed+_0x186924;},'FoEFJ':_0x4a7eae(0x6a1)+_0x4a7eae(0x74f)+_0x4a7eae(0x1ea),'wbDwk':function(_0x1215e6,_0x2aef91){return _0x1215e6>_0x2aef91;},'UPvTz':function(_0x2930cd,_0x22f9ee){return _0x2930cd(_0x22f9ee);},'horTG':_0x4a7eae(0x3ea)+'i','GIolm':function(_0xbbee7d,_0xf6d767){return _0xbbee7d+_0xf6d767;},'cWSgF':_0x4a7eae(0x447)+'n\x20kolon\x20'+_0x4a7eae(0x3a1)+_0x4a7eae(0x2c2)+_0x4a7eae(0x20c)+'SAP\x20dışa'+_0x4a7eae(0x391)+_0x4a7eae(0x357)+'\x20olduğun'+_0x4a7eae(0x6b8)+_0x4a7eae(0x2a1),'ePHlt':function(_0x50de24){return _0x50de24();},'ioxKY':function(_0x514054,_0x1c92ab){return _0x514054!==_0x1c92ab;},'YHoUr':function(_0x486bcc,_0x46aa91){return _0x486bcc(_0x46aa91);},'IFZiQ':function(_0x4c7366,_0x120f1b,_0x869304){return _0x4c7366(_0x120f1b,_0x869304);},'pZraN':_0x4a7eae(0x561)+_0x4a7eae(0x314)+_0x4a7eae(0x283)+_0x4a7eae(0x2cf)+_0x4a7eae(0x59a)+_0x4a7eae(0x4a7)+_0x4a7eae(0x796)+_0x4a7eae(0x28f)+_0x4a7eae(0x1c0)+_0x4a7eae(0x3ef)+'zellik\x20k'+_0x4a7eae(0x708)+_0x4a7eae(0x75b)+_0x4a7eae(0x1a2)+_0x4a7eae(0x44e)+_0x4a7eae(0x32a)+_0x4a7eae(0x5af),'iLEYi':function(_0x5e54f7,_0x2b1975){return _0x5e54f7(_0x2b1975);},'yPyoY':_0x4a7eae(0x397)+'rd','lxinu':'none','iaFjx':_0x4a7eae(0x2e4)+_0x4a7eae(0x67a),'XEBoT':_0x4a7eae(0x6a8),'dVBMP':_0x4a7eae(0x1b5),'VQeZb':function(_0x3efa09,_0x18ea94){return _0x3efa09(_0x18ea94);},'OyrfS':function(_0xe10d33,_0x721f11){return _0xe10d33(_0x721f11);},'VFuBR':function(_0x21297d,_0x3959d5){return _0x21297d===_0x3959d5;},'Vwbfh':_0x4a7eae(0x159),'HmBCe':_0x4a7eae(0x70f)+_0x4a7eae(0x536),'XOowg':'Rapor\x20ol'+_0x4a7eae(0x51c)+_0x4a7eae(0x1e3)+'a\x20yüklen'+_0x4a7eae(0x1ff),'FkvHI':function(_0x16c12e,_0x261abc){return _0x16c12e(_0x261abc);},'pawRI':function(_0x587d6f,_0x2682c6){return _0x587d6f===_0x2682c6;},'rUjEJ':_0x4a7eae(0x697)+_0x4a7eae(0x18c)+'uta\x20kayd'+_0x4a7eae(0x4a7)+_0x4a7eae(0x1a9)+_0x4a7eae(0x313)+_0x4a7eae(0x16f)+_0x4a7eae(0x59d),'SHAug':_0x4a7eae(0x599)+'oteMsg','pUokL':_0x4a7eae(0x301)+_0x4a7eae(0x79d)+_0x4a7eae(0x179)+_0x4a7eae(0x4c7)+_0x4a7eae(0x735)+_0x4a7eae(0x569)+_0x4a7eae(0x3be)+_0x4a7eae(0x334)+_0x4a7eae(0x596)+_0x4a7eae(0x3f0)+'dilmedi\x20'+_0x4a7eae(0x40e)+'epolama\x20'+_0x4a7eae(0x627)+'\x20Lütfen\x20'+_0x4a7eae(0x26b)+'rumunuzu'+_0x4a7eae(0x737)+_0x4a7eae(0x349)+_0x4a7eae(0x1cd)+'ı\x20kontro'+_0x4a7eae(0x63c)+_0x4a7eae(0x58e)+_0x4a7eae(0x6ea)+_0x4a7eae(0x728)+'\x20veya\x20te'+_0x4a7eae(0x1d4)+_0x4a7eae(0x276)+'ştur\x22\x20il'+_0x4a7eae(0x632)+_0x4a7eae(0x219)+'n.','pHIhF':function(_0x384bde,_0xbe0702){return _0x384bde(_0xbe0702);},'kTmxR':_0x4a7eae(0x423),'jtPOI':_0x4a7eae(0x1d1),'xBKKg':'UYARI:\x20B'+_0x4a7eae(0x6b7)+_0x4a7eae(0x2d5)+'kapalı\x20—'+_0x4a7eae(0x571)+'alıcı\x20ka'+_0x4a7eae(0x390)+_0x4a7eae(0x1a3),'slHQI':function(_0x6daccd,_0x535863){return _0x6daccd(_0x535863);},'VGBOI':'Rapor\x20ol'+_0x4a7eae(0x577)+_0x4a7eae(0x7aa)+_0x4a7eae(0x66b)+':\x20'};try{let _0xaf7fee=state[_0x4a7eae(0x5b6)+_0x4a7eae(0x696)];if(state['files'][_0x4a7eae(0x5b6)+_0x4a7eae(0x4b8)]){_0xaf7fee=_0x24512f[_0x4a7eae(0x27a)](buildMusteriMasterMap,state[_0x4a7eae(0x225)]['musteriM'+_0x4a7eae(0x4b8)][_0x4a7eae(0x6c1)]),state['musteriM'+_0x4a7eae(0x696)]=_0xaf7fee;const _0x2741b6=await _0x24512f['IFZiQ'](musteriMasterKaydet,state[_0x4a7eae(0x225)][_0x4a7eae(0x5b6)+_0x4a7eae(0x4b8)][_0x4a7eae(0x6c1)],state[_0x4a7eae(0x225)][_0x4a7eae(0x5b6)+_0x4a7eae(0x4b8)][_0x4a7eae(0x6c8)]);_0x2741b6[_0x4a7eae(0x722)+_0x4a7eae(0x7b1)+'ri']&&_0x2741b6[_0x4a7eae(0x722)+_0x4a7eae(0x7b1)+'ri'][_0x4a7eae(0x49d)]&&_0x24512f[_0x4a7eae(0x4f7)](alert,_0x24512f[_0x4a7eae(0x40d)](_0x24512f[_0x4a7eae(0x461)],_0x2741b6[_0x4a7eae(0x722)+_0x4a7eae(0x7b1)+'ri'][_0x4a7eae(0x698)]('\x0a')));}await grupATekilDosyalariHazirla();if(state[_0x4a7eae(0x225)]['cekSenet']&&state[_0x4a7eae(0x225)][_0x4a7eae(0x435)][_0x4a7eae(0x6c1)]&&state['files'][_0x4a7eae(0x435)][_0x4a7eae(0x6c1)][_0x4a7eae(0x49d)]){const {arsiv:_0x2f25f4,eksikKalanlar:_0x22d96f}=_0x24512f[_0x4a7eae(0x2d9)](cekSenetArsiviniBirlestir,state[_0x4a7eae(0x435)+'Arsivi'],state[_0x4a7eae(0x225)]['cekSenet'][_0x4a7eae(0x6c1)]);state['cekSenet'+_0x4a7eae(0x33b)]=_0x2f25f4,state[_0x4a7eae(0x435)+_0x4a7eae(0x4fd)+_0x4a7eae(0x7a8)]=_0x22d96f,await cekSenetArsiviniKaydet(_0x2f25f4);}state[_0x4a7eae(0x225)][_0x4a7eae(0x618)]&&state[_0x4a7eae(0x225)]['tahsilat'][_0x4a7eae(0x6c1)]&&state[_0x4a7eae(0x225)][_0x4a7eae(0x618)][_0x4a7eae(0x6c1)][_0x4a7eae(0x49d)]&&(state['tahsilat'+_0x4a7eae(0x33b)]=_0x24512f[_0x4a7eae(0x2d9)](tahsilatArsiviniBirlestir,state['tahsilat'+'Arsivi'],state[_0x4a7eae(0x225)][_0x4a7eae(0x618)][_0x4a7eae(0x6c1)]),await _0x24512f['iLEYi'](tahsilatArsiviniKaydet,state[_0x4a7eae(0x618)+_0x4a7eae(0x33b)]));state[_0x4a7eae(0x2f4)]=_0x24512f[_0x4a7eae(0x2d9)](buildReport,state['files'],_0xaf7fee),state[_0x4a7eae(0x2e8)+_0x4a7eae(0x16d)+'ir']=!![],await bayiHakedisRaporuOlustur(),await sellOutRaporuOlustur(),renderReport(state[_0x4a7eae(0x2f4)]),document[_0x4a7eae(0x2ac)+_0x4a7eae(0x575)](_0x24512f[_0x4a7eae(0x6bc)])[_0x4a7eae(0x718)][_0x4a7eae(0x5b5)]=_0x24512f[_0x4a7eae(0x6bf)],document[_0x4a7eae(0x2ac)+_0x4a7eae(0x575)](_0x24512f[_0x4a7eae(0x45e)])['style'][_0x4a7eae(0x5b5)]=_0x24512f[_0x4a7eae(0x5bf)],document[_0x4a7eae(0x282)]['classLis'+'t'][_0x4a7eae(0x489)](_0x4a7eae(0x6de)+_0x4a7eae(0x17f)),resetBtn[_0x4a7eae(0x718)][_0x4a7eae(0x5b5)]=_0x4a7eae(0x70f)+_0x4a7eae(0x536);if(state[_0x4a7eae(0x435)+_0x4a7eae(0x4fd)+_0x4a7eae(0x7a8)]&&state['cekSenet'+'EksikKal'+'anlar'][_0x4a7eae(0x49d)]){if(_0x24512f[_0x4a7eae(0x23e)]!==_0x24512f[_0x4a7eae(0x23e)]){const _0x59d2d5=new _0x1e15d7(_0x192c1c[_0x4a7eae(0x4ca)](_0xb6d912=>_0x34e565(_0xb6d912||'')[_0x4a7eae(0x785)]()));let _0x2202c3=null,_0x3060c8=null,_0x25469d=_0x34d29d;_0x4e9857[_0x4a7eae(0x317)](SIGNATURES)[_0x4a7eae(0x370)](_0x51c8d1=>{const _0x3394aa=_0x4a7eae;SIGNATURES[_0x51c8d1][_0x3394aa(0x370)](_0x24e8d2=>{const _0x5c6c51=_0x3394aa,_0x34cb91=_0x24e8d2['filter'](_0x3f9b45=>!_0x59d2d5[_0x5c6c51(0x3db)](_0x3f9b45));_0x34cb91[_0x5c6c51(0x49d)]<_0x25469d&&(_0x25469d=_0x34cb91[_0x5c6c51(0x49d)],_0x2202c3=_0x51c8d1,_0x3060c8=_0x34cb91);});});const _0x2e8ff1=_0x2202c3&&_0x25469d>-0x42e+0x1*0x1b02+0x4*-0x5b5&&lTIUrL[_0x4a7eae(0x720)](_0x25469d,-0x1*-0xdab+0xe1+-0x2*0x745)?lTIUrL[_0x4a7eae(0x40d)](lTIUrL[_0x4a7eae(0x4bb)]('\x20\x22'+(LABELS[_0x2202c3]||_0x2202c3),lTIUrL[_0x4a7eae(0x548)]),_0x3060c8[_0x4a7eae(0x698)](',\x20'))+'.':lTIUrL[_0x4a7eae(0x1dd)](lTIUrL[_0x4a7eae(0x77f)](lTIUrL[_0x4a7eae(0x705)],_0x5dfe56['slice'](-0x11*0x1f+0x7*-0xc9+0x78e,0x9*0x11b+-0x2651+0x1c66*0x1)[_0x4a7eae(0x698)](',\x20'))+(lTIUrL['wbDwk'](_0x288096[_0x4a7eae(0x49d)],0x8be+0x1ea1+-0x2757)?'…':''),'.');lTIUrL[_0x4a7eae(0x4f7)](_0x406ac5,{'file':_0x428ce4,'durum':lTIUrL[_0x4a7eae(0x3ca)],'mesaj':lTIUrL[_0x4a7eae(0x4bb)](lTIUrL[_0x4a7eae(0x5e1)](lTIUrL[_0x4a7eae(0x5e1)]('\x22',_0xc4ba3a)+(_0x4a7eae(0x3ab)+'madı\x20ve\x20'+'atlandı.'),_0x2e8ff1),lTIUrL[_0x4a7eae(0x34f)])});return;}else cekSenetEksikOnayModalAc(state[_0x4a7eae(0x435)+_0x4a7eae(0x4fd)+_0x4a7eae(0x7a8)]);}await _0x24512f['VQeZb'](saveReportToStorage,state[_0x4a7eae(0x2f4)]),_0x24512f['OyrfS'](faturaKontrolArsivineKaydetVeSenkronizeEt,state[_0x4a7eae(0x2f4)]),await _0x24512f['ePHlt'](yuklemeRaporuOlusturVeArsivle),document['getEleme'+_0x4a7eae(0x575)](_0x4a7eae(0x599)+_0x4a7eae(0x6c2))[_0x4a7eae(0x718)][_0x4a7eae(0x5b5)]=_0x24512f[_0x4a7eae(0x5bf)];if(cloudEnabled()){if(_0x24512f[_0x4a7eae(0x537)](_0x24512f[_0x4a7eae(0x4a8)],_0x24512f[_0x4a7eae(0x4a8)])){syncBtn[_0x4a7eae(0x718)][_0x4a7eae(0x5b5)]=_0x24512f[_0x4a7eae(0x2fa)],statusPillMsg[_0x4a7eae(0x73f)+'ent']=_0x24512f[_0x4a7eae(0x1a1)];const _0x54194c=await _0x24512f[_0x4a7eae(0x1c7)](saveReportToCloud,state[_0x4a7eae(0x2f4)]);if(_0x54194c['ok']){statusPillMsg[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x4a7eae(0x750)+_0x4a7eae(0x273)+_0x4a7eae(0x4f1)+_0x4a7eae(0x2d7)+_0x4a7eae(0x635)+_0x4a7eae(0x5da)+'necek',statusPill[_0x4a7eae(0x1ac)+'t']['add']('ok'),document[_0x4a7eae(0x2ac)+_0x4a7eae(0x575)]('storageN'+_0x4a7eae(0x14e))[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x4a7eae(0x2f9)+_0x4a7eae(0x59b)+_0x4a7eae(0x15b)+_0x4a7eae(0x39b)+_0x4a7eae(0x15e)+_0x4a7eae(0x530)+_0x4a7eae(0x17e)+_0x4a7eae(0x568)+_0x4a7eae(0x409)+_0x4a7eae(0x4e2)+_0x4a7eae(0x6f0)+_0x4a7eae(0x63f)+_0x4a7eae(0x32e)+_0x4a7eae(0x734)+_0x4a7eae(0x323)+_0x4a7eae(0x3d8)+'k\x20görece'+'k.';if(_0x24512f[_0x4a7eae(0x655)](typeof window[_0x4a7eae(0x72b)+_0x4a7eae(0x297)+_0x4a7eae(0x42b)],_0x4a7eae(0x5f8)))window[_0x4a7eae(0x72b)+_0x4a7eae(0x297)+_0x4a7eae(0x42b)](!![]);}else statusPillMsg[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x24512f[_0x4a7eae(0x408)],statusPill[_0x4a7eae(0x1ac)+'t'][_0x4a7eae(0x600)]('ok'),document[_0x4a7eae(0x2ac)+'ntById'](_0x24512f[_0x4a7eae(0x6fe)])[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x24512f[_0x4a7eae(0x167)],_0x24512f[_0x4a7eae(0x1a0)](alert,_0x4a7eae(0x697)+_0x4a7eae(0x18c)+_0x4a7eae(0x59a)+'edilemed'+_0x4a7eae(0x358)+'a\x20da\x20kay'+_0x4a7eae(0x1c0)+_0x4a7eae(0x453)+_0x4a7eae(0x64f)+'apalı)\x20—'+'\x20sayfayı'+_0x4a7eae(0x789)+_0x4a7eae(0x222)+_0x4a7eae(0x571)+_0x4a7eae(0x35e)+_0x4a7eae(0x57a)+_0x4a7eae(0x786)+'nızı/gir'+_0x4a7eae(0x67f)+_0x4a7eae(0x220)+_0x4a7eae(0x5a2)+_0x4a7eae(0x745)+_0x4a7eae(0x709));}else{const _0x5edffe={'JFMDX':function(_0x432218){const _0xef431f=_0x4a7eae;return lTIUrL[_0xef431f(0x2dc)](_0x432218);}};_0x48e5d0[_0x4a7eae(0x78a)+_0x4a7eae(0x6ff)][_0x4a7eae(0x23f)+_0x4a7eae(0x2f1)+'ed'](_0x3534d6[_0x4a7eae(0x78a)+_0x4a7eae(0x6ff)][_0x4a7eae(0x237)+_0x4a7eae(0x277)],_0x233904=>{const _0x266f2d=_0x4a7eae;if(_0x233904)girisEkraniGizle();else _0x5edffe[_0x266f2d(0x5b9)](girisEkraniGoster);});}}else{if(_0x24512f[_0x4a7eae(0x5bb)](_0x24512f[_0x4a7eae(0x3ee)],_0x24512f['jtPOI']))statusPillMsg[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x24512f[_0x4a7eae(0x557)],statusPill[_0x4a7eae(0x1ac)+'t']['remove']('ok'),document[_0x4a7eae(0x2ac)+_0x4a7eae(0x575)](_0x24512f[_0x4a7eae(0x6fe)])[_0x4a7eae(0x73f)+_0x4a7eae(0x5c0)]=_0x4a7eae(0x301)+_0x4a7eae(0x79d)+'\x20şu\x20an\x20k'+_0x4a7eae(0x338)+_0x4a7eae(0x534)+'olama\x20da'+_0x4a7eae(0x306)+_0x4a7eae(0x342)+'u\x20rapor\x20'+_0x4a7eae(0x4d3)+_0x4a7eae(0x3b9)+_0x4a7eae(0x3f0)+_0x4a7eae(0x64c)+_0x4a7eae(0x75b)+_0x4a7eae(0x1a2)+_0x4a7eae(0x3ce)+_0x4a7eae(0x764);else{const _0xc12f5a=_0x502b60&&_0x3b479c[_0x4a7eae(0x5e3)+'e'][_0x4a7eae(0x60d)+_0x4a7eae(0x387)][_0x4a7eae(0x5a1)](_0x4baae8,_0x53bdac),_0xca95c9=_0x1d11e8&&_0x3ff3fe[_0x4a7eae(0x5e3)+'e'][_0x4a7eae(0x60d)+_0x4a7eae(0x387)][_0x4a7eae(0x5a1)](_0x261b27,_0xd17049),_0x123ba=_0xc12f5a?_0xedf602[_0x4a7eae(0x4db)+'y'](_0x5bf4c8[_0xc65cc6]):null,_0x3f7850=_0xca95c9?_0x13fd39[_0x4a7eae(0x4db)+'y'](_0x20284f[_0x27ff29]):null;lTIUrL[_0x4a7eae(0x5bb)](_0x123ba,_0x3f7850)&&(_0x21214c[_0x419a24]=_0xca95c9?_0x3c2132[_0x2ec3a6]:null);}}}catch(_0x5126b0){_0x24512f[_0x4a7eae(0x6b4)](showError,_0x24512f[_0x4a7eae(0x77f)](_0x24512f[_0x4a7eae(0x19e)],_0x5126b0['message'])),console[_0x4a7eae(0x640)](_0x5126b0);throw _0x5126b0;}}buildBtn[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x69b),raporuOlusturVeyaGuncelleAkisiniCalistir);if(gvyAnaBuildBtn)gvyAnaBuildBtn[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x69b),raporuOlusturVeyaGuncelleAkisiniCalistir);syncBtn[_0x44532d(0x14f)+_0x44532d(0x27b)](_0x44532d(0x69b),async()=>{const _0x4ea215=_0x44532d,_0x2e773a={'YarNJ':function(_0x29d923,_0xc21721){return _0x29d923!==_0xc21721;},'aVwLs':function(_0x1c71da,_0x51720f){return _0x1c71da||_0x51720f;},'venmc':function(_0x3cdc2b,_0x2b3f22){return _0x3cdc2b+_0x2b3f22;},'rNnzj':_0x4ea215(0x75a),'DzTDm':_0x4ea215(0x3f6),'brciI':'\x20satır','onsUA':_0x4ea215(0x2bc),'NeuEG':function(_0x336a2a){return _0x336a2a();},'tKAti':function(_0x5320e8,_0x1e5d86){return _0x5320e8(_0x1e5d86);},'UgpdN':_0x4ea215(0x4c0)+_0x4ea215(0x54e)+_0x4ea215(0x4eb)+'ek\x20için\x20'+_0x4ea215(0x1a7)+_0x4ea215(0x457),'QEtPi':_0x4ea215(0x76a)+_0x4ea215(0x4f0),'jHKMQ':function(_0xdae38a,_0x4c6e4f){return _0xdae38a===_0x4c6e4f;},'jtoqo':_0x4ea215(0x62d),'DTQAY':_0x4ea215(0x567),'SoPlE':function(_0x68495c){return _0x68495c();},'FpEdz':function(_0x4d01a6,_0x5225c3){return _0x4d01a6(_0x5225c3);},'vwhzX':function(_0x1da3b9){return _0x1da3b9();},'pANVT':function(_0x4a00f7,_0x2d863c){return _0x4a00f7(_0x2d863c);},'cpzBx':_0x4ea215(0x195)+_0x4ea215(0x532),'qAAUK':function(_0x21681f,_0x4d2654){return _0x21681f!==_0x4d2654;},'lVpQj':_0x4ea215(0x19b)+_0x4ea215(0x526),'HqSsP':_0x4ea215(0x6bd)+'ntrolArs'+_0x4ea215(0x2e6),'nyhUF':_0x4ea215(0x16b)+'7|2|5|3','NSbQZ':function(_0x128843,_0x42267c){return _0x128843(_0x42267c);},'nJjnl':_0x4ea215(0x3b5)+_0x4ea215(0x2cb)+_0x4ea215(0x4c3)+_0x4ea215(0x5eb)+_0x4ea215(0x302)+'steriliy'+'or','XkcGf':_0x4ea215(0x3a8),'QgCkm':_0x4ea215(0x4c0)+_0x4ea215(0x54e)+'üncellem'+_0x4ea215(0x48e)+_0x4ea215(0x25c),'MDZjM':function(_0x38f9a3,_0x217c3a){return _0x38f9a3(_0x217c3a);},'ocqLA':function(_0x52ef0d,_0x47efaf){return _0x52ef0d+_0x47efaf;},'JvxiD':_0x4ea215(0x3c9)+_0x4ea215(0x30f)+_0x4ea215(0x62e)+_0x4ea215(0x4e0)+_0x4ea215(0x160),'TIKys':_0x4ea215(0x1f3)+_0x4ea215(0x1f8)+_0x4ea215(0x6ce),'VAoMq':function(_0xd01b61,_0xd507d6){return _0xd01b61===_0xd507d6;},'bUaCb':'CzJoA'};if(!_0x2e773a[_0x4ea215(0x6dc)](cloudEnabled))return;if(!await _0x2e773a[_0x4ea215(0x14c)](ortakSifreDogrula,_0x2e773a[_0x4ea215(0x551)]))return;syncBtn[_0x4ea215(0x58b)]=!![];const _0x4bd64c=syncBtn['textCont'+_0x4ea215(0x5c0)];syncBtn[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]=_0x2e773a[_0x4ea215(0x5aa)];try{if(_0x2e773a[_0x4ea215(0x303)](_0x2e773a[_0x4ea215(0x1dc)],_0x2e773a[_0x4ea215(0x180)])){const _0x24fbde={'hqmZN':function(_0x398182,_0x384633){const _0x51eff8=_0x4ea215;return UINkRK[_0x51eff8(0x3d9)](_0x398182,_0x384633);}},_0x40a74f={},_0x3804d0=new _0x3e33b3([..._0x15e537[_0x4ea215(0x317)](UINkRK['aVwLs'](_0xf6e67c,{})),..._0x567ca3[_0x4ea215(0x317)](UINkRK[_0x4ea215(0x16a)](_0x321b79,{}))]);return _0x3804d0[_0x4ea215(0x370)](_0x245a08=>{const _0x8e679f=_0x4ea215,_0x13a5c3=_0x5e924a&&_0x26ebfc[_0x8e679f(0x5e3)+'e'][_0x8e679f(0x60d)+_0x8e679f(0x387)][_0x8e679f(0x5a1)](_0x497afb,_0x245a08),_0x26b0ff=_0x2b38df&&_0x5d67e6[_0x8e679f(0x5e3)+'e'][_0x8e679f(0x60d)+_0x8e679f(0x387)][_0x8e679f(0x5a1)](_0x97f623,_0x245a08),_0x326387=_0x13a5c3?_0x282112[_0x8e679f(0x4db)+'y'](_0x366457[_0x245a08]):null,_0x452ff7=_0x26b0ff?_0x18dc68[_0x8e679f(0x4db)+'y'](_0x317d8b[_0x245a08]):null;_0x24fbde[_0x8e679f(0x4e8)](_0x326387,_0x452ff7)&&(_0x40a74f[_0x245a08]=_0x26b0ff?_0x3b68cf[_0x245a08]:null);}),_0x40a74f;}else{const [_0x52d229]=await Promise[_0x4ea215(0x540)]([_0x2e773a[_0x4ea215(0x542)](loadReportFromCloud),_0x2e773a[_0x4ea215(0x1bb)](faturaArsivYenile,!![]),_0x2e773a[_0x4ea215(0x6dc)](musteriMasterYenile),_0x2e773a[_0x4ea215(0x362)](bayiHakedisYenile),sellOutHedefYenile(),sellOutYenile(),_0x2e773a[_0x4ea215(0x1b9)](sellOutArsivYenile,!![])]);if(document[_0x4ea215(0x2ac)+_0x4ea215(0x575)](_0x2e773a[_0x4ea215(0x26f)])&&_0x2e773a[_0x4ea215(0x4cd)](document[_0x4ea215(0x2ac)+_0x4ea215(0x575)](_0x2e773a[_0x4ea215(0x26f)])[_0x4ea215(0x718)][_0x4ea215(0x5b5)],_0x2e773a[_0x4ea215(0x6ae)]))_0x2e773a[_0x4ea215(0x6dc)](renderBayiHakedisView);if(document[_0x4ea215(0x2ac)+_0x4ea215(0x575)](_0x4ea215(0x19b)+_0x4ea215(0x526))&&document[_0x4ea215(0x2ac)+_0x4ea215(0x575)](_0x2e773a[_0x4ea215(0x69f)])[_0x4ea215(0x718)][_0x4ea215(0x5b5)]!==_0x4ea215(0x2bc))_0x2e773a[_0x4ea215(0x542)](renderSellOutView);if(document[_0x4ea215(0x2ac)+_0x4ea215(0x575)](_0x2e773a[_0x4ea215(0x70e)]))await renderFaturaKontrolArsivBilgi();if(_0x52d229&&_0x52d229['musteril'+'er']&&_0x52d229[_0x4ea215(0x679)+'er'][_0x4ea215(0x49d)]){const _0x391963=_0x2e773a[_0x4ea215(0x18f)]['split']('|');let _0x2513ee=0x1*-0x1c87+0x94*-0x23+-0x30c3*-0x1;while(!![]){switch(_0x391963[_0x2513ee++]){case'0':await saveReportToStorage(_0x52d229);continue;case'1':state[_0x4ea215(0x2f4)]=_0x52d229;continue;case'2':_0x2e773a[_0x4ea215(0x42e)](renderReport,_0x52d229);continue;case'3':statusPill['classLis'+'t'][_0x4ea215(0x489)]('ok');continue;case'4':state[_0x4ea215(0x200)][_0x4ea215(0x31b)]();continue;case'5':statusPillMsg[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]=_0x2e773a[_0x4ea215(0x66f)](_0x2e773a[_0x4ea215(0x66f)](_0x4ea215(0x3b5)+_0x4ea215(0x61b)+_0x4ea215(0x68d),fmtDate(_0x52d229[_0x4ea215(0x39f)])),')');continue;case'6':_0x2e773a[_0x4ea215(0x1bb)](raporuNormalizeEt,_0x52d229);continue;case'7':_0x2e773a[_0x4ea215(0x1b9)](canliGunlerleGuncelle,_0x52d229);continue;}break;}}else statusPillMsg[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]=_0x2e773a[_0x4ea215(0x263)];}}catch(_0x4cae38){if(_0x2e773a[_0x4ea215(0x3b3)]===_0x2e773a[_0x4ea215(0x3b3)])console['error'](_0x2e773a[_0x4ea215(0x76d)],_0x4cae38),_0x2e773a[_0x4ea215(0x51e)](alert,_0x2e773a[_0x4ea215(0x726)](_0x2e773a['ocqLA'](_0x2e773a[_0x4ea215(0x340)],_0x4cae38[_0x4ea215(0x2ef)]),_0x2e773a[_0x4ea215(0x4ad)]));else{const _0x52a58d=state['files'][_0x4ea215(0x5b6)+_0x4ea215(0x4b8)];_0xca999b[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]=_0x52a58d?UINkRK[_0x4ea215(0x66f)](UINkRK[_0x4ea215(0x66f)](UINkRK[_0x4ea215(0x66f)](_0x52a58d[_0x4ea215(0x22e)],UINkRK[_0x4ea215(0x16e)]),_0x52a58d[_0x4ea215(0x6c1)][_0x4ea215(0x49d)][_0x4ea215(0x476)+_0x4ea215(0x572)](UINkRK['DzTDm'])),UINkRK[_0x4ea215(0x3a9)]):_0x4ea215(0x2d0)+'çilmedi';}}finally{_0x2e773a[_0x4ea215(0x4c8)](_0x2e773a[_0x4ea215(0x53a)],_0x2e773a[_0x4ea215(0x53a)])?(syncBtn[_0x4ea215(0x58b)]=![],syncBtn[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]=_0x4bd64c):(uploadError[_0x4ea215(0x718)]['display']=UINkRK[_0x4ea215(0x6ae)],uploadError[_0x4ea215(0x73f)+_0x4ea215(0x5c0)]='');}});
+// ================= BULUTSUZ TEST MODU =================
+// Bu bayrak TRUE iken: hiçbir Firebase/bulut isteği yapılmaz (okuma/yazma/senkronizasyon/auth
+// hepsi atlanır). Uygulama YALNIZCA cihazdaki (IndexedDB) veriyle çalışır — giriş ekranı istemez,
+// doğrudan açılır. Test bittiğinde bu satırı `false` yapmak (veya bu bloğu silmek) bulutu geri
+// getirir; başka HİÇBİR yerde değişiklik gerekmez.
+// GÜNCELLEME: Yeni Firebase projesiyle (test-82b8f) bulut testine geçilecek — bulut AÇIK.
+const BULUTSUZ_TEST = false;
+function cloudEnabled(){ if(BULUTSUZ_TEST) return false; return !!(CLOUD.dbUrl && CLOUD.dbUrl.trim()); }
+
+// Çıplak fetch() çağrılarının varsayılan bir zaman aşımı yoktur: ağ yavaşsa, DNS/ISP tarafında
+// bulut adresi engelleniyorsa veya bağlantı sessizce düşüyorsa, tarayıcı isteği süresiz olarak
+// beklemede tutabilir. Bu da "Bulut verisi kontrol ediliyor…" durumunun ekranda asılı kalmasına
+// (hiç sonuçlanmamasına) yol açar. Bulut ile ilgili TÜM istekler bu sarmalayıcıdan geçer; belirli
+// bir süre (varsayılan 15 sn) içinde yanıt gelmezse istek iptal edilir ve normal bir hata olarak
+// fırlatılır, böylece çağıran taraftaki try/catch bloğu devreye girip yerel/mevcut veriye döner.
+// Bir Promise'i zaman aşımıyla yarıştırır: süre dolarsa verilen yedek değerle (varsayılan null)
+// çözülür — asla reddetmez. Açılış gibi kritik akışların, tek bir takılan bulut isteği yüzünden
+// SONSUZA KADAR beklememesi için kullanılır (donma yerine "elimizdekiyle devam et").
+function zamanAsimliYaris(promise, ms, yedekDeger){
+  return Promise.race([
+    Promise.resolve(promise).catch(()=> yedekDeger),
+    new Promise(resolve=> setTimeout(()=> resolve(yedekDeger), ms)),
+  ]);
+}
+
+async function cloudFetch(url, options, timeoutMs){
+  timeoutMs = timeoutMs || 15000;
+  const controller = new AbortController();
+  const timer = setTimeout(()=> controller.abort(), timeoutMs);
+  try{
+    // ÖNEMLİ: cache:'no-store' ZORUNLUDUR. Tarayıcı, Firebase Realtime Database REST API'sinin
+    // GET yanıtlarını (bazı durumlarda döndürdüğü Cache-Control başlıklarına göre) HTTP
+    // önbelleğinde tutabiliyor — bu da F5/normal sayfa yenilemesinde (hard-refresh/Ctrl+Shift+R
+    // DEĞİL) fetch()'in ağa hiç gitmeden ESKİ, önbellekteki yanıtı döndürmesine yol açabiliyor.
+    // Sonuç: 2. cihazda F5 yapılsa bile bulutta yeni girilen veri (ör. çek/senet onayı sonrası
+    // güncellenmiş rapor) görünmüyordu — "Diğer Cihazdan Güncelle" bazen çalışıyor gibi görünmesi
+    // de zamanlama/önbellek geçerlilik süresinin rastgele dolmuş olmasından kaynaklanıyor olabilir,
+    // güvenilir bir davranış değildi. cache:'no-store' ile HER istek ağa gider, tarayıcı önbelleği
+    // asla devreye girmez — hem GET (okuma) hem PUT/PATCH (yazma) istekleri için geçerlidir.
+    const nihaiOptions = Object.assign({cache: 'no-store'}, options||{}, {signal: controller.signal});
+    return await fetch(url, nihaiOptions);
+  }catch(err){
+    if(err && err.name === 'AbortError'){
+      throw new Error('Bulut isteği zaman aşımına uğradı (' + Math.round(timeoutMs/1000) + ' sn)');
+    }
+    throw err;
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+// ============================================================================
+// VERİMLİ BULUT SENKRONİZASYONU (meta zaman damgası ile "değişmemişse indirme")
+// ============================================================================
+// Önceden her veri türü (ana rapor, Müşteri Master, Sell Out, Modern Kanal, Bayi Hakediş,
+// Malzemeler) uygulama her açıldığında büyük JSON'ının TAMAMINI buluttan indiriyordu — cihazdaki
+// veri buluttakiyle birebir aynı olsa bile. Bu, gereksiz veri trafiği/gecikme yaratıyordu.
+// Artık her büyük veri, kaydedilirken YANINDA çok küçük bir "_meta/{veriTuru}" kaydına da bir
+// updatedAt zaman damgası yazıyor. Yükleme sırasında önce SADECE bu küçük zaman damgası
+// okunuyor; cihazda saklanan son bilinen zaman damgasıyla AYNIYSA, büyük veri hiç indirilmeden
+// doğrudan cihazdaki (IndexedDB) kopya kullanılıyor. Farklıysa (başka bir cihazdan güncellenmiş),
+// büyük veri normal şekilde indirilip hem state'e hem cihaza yazılıyor.
+const CLOUD_META_LOCAL_KEY = 'noktaCariTakip_cloudMetaZamanlari_v1';
+let cloudMetaZamanCache = null; // {veriTuru: updatedAt} - cihazda bilinen son zaman damgaları, bellekte önbelleklenir
+
+async function cloudMetaZamanlariniYukle(){
+  if(cloudMetaZamanCache) return cloudMetaZamanCache;
+  try{ cloudMetaZamanCache = (await idbGet(CLOUD_META_LOCAL_KEY)) || {}; }
+  catch(err){ cloudMetaZamanCache = {}; }
+  return cloudMetaZamanCache;
+}
+async function cloudMetaZamaniKaydet(veriTuru, zaman){
+  const harita = await cloudMetaZamanlariniYukle();
+  harita[veriTuru] = zaman;
+  cloudMetaZamanCache = harita;
+  await idbSet(CLOUD_META_LOCAL_KEY, harita).catch(()=>{});
+}
+// Buluttaki küçük meta kaydını okur ({updatedAt: number} formatında). Ağ hatasında null döner.
+async function cloudMetaOkuUzaktan(cloudPath){
+  if(!cloudEnabled()) return null; // BULUTSUZ modda hiç istek atma
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/_meta/${cloudPath}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){
+    console.error('Meta zaman damgası okunamadı ('+cloudPath+'):', err);
+    return null;
+  }
+}
+// Meta kaydını buluta yazar — asıl veriyi kaydeden fonksiyonlar (saveXToCloud), veriyi
+// yazdıktan hemen sonra bunu çağırır.
+async function cloudMetaYazUzaktan(cloudPath, zaman){
+  if(!cloudEnabled()) return false; // BULUTSUZ modda hiç istek atma
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/_meta/${cloudPath}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({updatedAt: zaman}),
+    });
+    return !!(res && res.ok);
+  }catch(err){ console.error('Meta zaman damgası yazılamadı ('+cloudPath+'):', err); return false; }
+}
+// Ana verimli yükleme sarmalayıcısı: önce küçük meta zaman damgasını kontrol eder, cihazdaki
+// bilinen zamanla aynıysa büyük veriyi HİÇ İNDİRMEDEN cihazdaki kopyayı döndürür; farklıysa
+// (veya meta hiç yoksa/ağ hatasıysa, güvenli tarafta kalmak için) büyük veriyi normal şekilde
+// indirip hem cihaza hem bellek önbelleğine yazar.
+// - veriTuru: meta kaydının anahtarı (genelde cloudPath ile aynı, kısa/benzersiz bir isim)
+// - loadCloudDataFn: büyük veriyi buluttan çeken mevcut fonksiyon (ör. loadReportFromCloud)
+// - loadLocalDataFn: büyük veriyi cihazdan (IndexedDB) çeken mevcut fonksiyon
+async function cloudVeriVerimliYukle(veriTuru, loadCloudDataFn, loadLocalDataFn){
+  const bilinenZamanlar = await cloudMetaZamanlariniYukle();
+  const bilinenZaman = bilinenZamanlar[veriTuru];
+  const uzakMeta = await cloudMetaOkuUzaktan(veriTuru);
+  if(uzakMeta && bilinenZaman!=null && uzakMeta.updatedAt === bilinenZaman){
+    // Bulut hiç değişmemiş — büyük veriyi indirmeye gerek yok, cihazdaki kopya yeterli.
+    const yerelVeri = await loadLocalDataFn();
+    if(yerelVeri) return {data: yerelVeri, source: 'local-uptodate'};
+    // Cihazda beklenmedik şekilde veri yoksa (ör. cihaz değişmiş), yine de buluttan indir.
+  }
+  const uzakVeri = await loadCloudDataFn();
+  if(uzakVeri){
+    // Meta bilgisi varsa onu kullan, yoksa (eski kayıtlarda meta hiç yazılmamışsa) "şimdi"yi
+    // bilinen zaman olarak işaretle — bir sonraki açılışta en azından bu andan itibaren
+    // karşılaştırma yapılabilsin.
+    await cloudMetaZamaniKaydet(veriTuru, uzakMeta ? uzakMeta.updatedAt : Date.now());
+    return {data: uzakVeri, source: 'cloud'};
+  }
+  return {data: null, source: 'none'};
+}
+
+const FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyCfHJE6Pcqx92NFgV_1JnB7i6RPGGgQKQg',
+  authDomain: 'test-82b8f.firebaseapp.com',
+  databaseURL: CLOUD.dbUrl,
+  projectId: 'test-82b8f',
+  storageBucket: 'test-82b8f.firebasestorage.app',
+  messagingSenderId: '59490268572',
+  appId: '1:59490268572:web:a451913a8b70f7671f8459',
+  measurementId: 'G-F7EEVZ8R28',
+};
+
+let authAktif = false;
+// BULUTSUZ TEST MODU: Firebase auth'u hiç başlatma — giriş ekranı istenmez, uygulama doğrudan açılır.
+if(!BULUTSUZ_TEST){
+try{
+  if(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey !== 'BURAYA_FIREBASE_API_KEY_YAPIŞTIRIN' && window.firebaseAuthAPI){
+    // Modüler SDK: initializeApp/getAuth doğrudan çağrılan fonksiyonlardır (namespaced
+    // firebase.initializeApp() yerine) — sonucu window.firebaseAuthAPI.authInstance'a
+    // yazıyoruz, aşağıdaki tüm auth işlemleri bu instance üzerinden yapılır.
+    const app = window.firebaseAuthAPI.initializeApp(FIREBASE_CONFIG);
+    window.firebaseAuthAPI.authInstance = window.firebaseAuthAPI.getAuth(app);
+    authAktif = true;
+  }
+}catch(err){ console.error('Firebase Authentication başlatılamadı:', err); }
+}
+
+// PERFORMANS DÜZELTMESİ: Açılışta 10 bulut isteği paralel (Promise.all ile) tetiklendiğinde,
+// her biri authQuery() çağırıp KENDİ getIdToken(true) isteğini atıyordu — yani aynı anda 10 ayrı
+// "taze token" isteği Firebase Auth sunucusuna gidiyordu, hepsi de pratikte aynı token'ı
+// döndürecekken. Aşağıdaki kısa ömürlü paylaşımlı önbellek (AUTH_TOKEN_TAZELIK_MS içinde),
+// eşzamanlı/art arda gelen çağrıların TEK bir getIdToken(true) isteğini paylaşmasını sağlıyor.
+// 401 riskini azaltan asıl davranış (her birkaç saniyede bir taze token) korunuyor; sadece aynı
+// anda başlayan onlarca isteğin birbirini kopyalaması önleniyor.
+const AUTH_TOKEN_TAZELIK_MS = 4000;
+let authTokenOnbellek = null; // {token, alinanZaman}
+let authTokenBekleyenIstek = null; // devam eden getIdToken(true) Promise'i (varsa)
+async function authQuery(){
+  if(!authAktif) return '';
+  try{
+    const user = window.firebaseAuthAPI.authInstance.currentUser;
+    if(!user) return '';
+    const simdi = Date.now();
+    if(authTokenOnbellek && (simdi - authTokenOnbellek.alinanZaman) < AUTH_TOKEN_TAZELIK_MS){
+      return '?auth=' + authTokenOnbellek.token;
+    }
+    // Zaten devam eden bir yenileme isteği varsa (paralel çağrılar), onun sonucunu paylaş —
+    // ikinci bir getIdToken(true) daha başlatma.
+    if(!authTokenBekleyenIstek){
+      // getIdToken() (parametresiz) SDK'nın önbellekteki token'ını döndürür; süresi dolmuşsa normalde
+      // otomatik yeniler ama nadiren (saat kayması, arka arkaya çok sayıda eşzamanlı çağrı vb.) bunu
+      // atlayıp süresi geçmiş bir token döndürebilir — bu da TÜM bulut isteklerinin aynı anda 401
+      // almasına yol açar. getIdToken(true) her seferinde sunucudan taze bir token ister, bu riski ortadan kaldırır.
+      //
+      // KRİTİK DÜZELTME (açılış donması): getIdToken(true) bir AĞ isteğidir ve kendi başına
+      // TIMEOUT'U YOKTUR. Ağ kötüyse / Firebase Auth yanıt vermezse bu Promise hiç resolve olmaz;
+      // authQuery her bulut isteğinde çağrıldığı için açılıştaki Promise.all SONSUZA KADAR asılı
+      // kalır (kullanıcıda "sürekli yükleniyor, hata yok" belirtisi). Aşağıdaki yarış (race), token
+      // AUTH_TOKEN_TIMEOUT_MS içinde gelmezse isteği reddeder — böylece bulut isteği "auth'suz"
+      // devam eder (veya üstteki catch boş döndürür) ve uygulama donmak yerine cihazdaki veriyle açılır.
+      const AUTH_TOKEN_TIMEOUT_MS = 10000;
+      const tokenIstegi = user.getIdToken(true)
+        .then(token=>{ authTokenOnbellek = {token, alinanZaman: Date.now()}; return token; });
+      const zamanAsimi = new Promise((_, reject)=> setTimeout(()=> reject(new Error('auth-token-timeout')), AUTH_TOKEN_TIMEOUT_MS));
+      authTokenBekleyenIstek = Promise.race([tokenIstegi, zamanAsimi])
+        .finally(()=>{ authTokenBekleyenIstek = null; });
+    }
+    const token = await authTokenBekleyenIstek;
+    return '?auth=' + token;
+  }catch(err){ return ''; }
+}
+
+function girisEkraniGoster(){
+  document.getElementById('authGate').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('authLogoutBtn').style.display = 'none';
+}
+function girisEkraniGizle(){
+  document.getElementById('authGate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('authLogoutBtn').style.display = 'inline-block';
+  // ERTELEME DÜZELTMESİ: uygulamayiBaslat, 03-veri-yukleme-ve-senkron.js'de tanımlıdır — bu dosya
+  // (02) henüz o script yüklenmeden ÖNCE (defer sırasına göre) top-level'da çalışabilir/çağrılabilir.
+  // Doğrudan çağrı "uygulamayiBaslat is not defined" ile patlıyordu (BULUTSUZ_TEST kapalıyken bile,
+  // kullanıcı fiilen giriş yaptığında). window.addEventListener('load') tüm script'ler ve DOM
+  // tamamen hazır olduktan sonra çalışır — bu, tarayıcı sekmesi tamamen yüklendiğinde (image/css
+  // dahil her şey biter) tetiklenen en son olay olduğundan güvenli bir erteleme noktasıdır.
+  if(document.readyState === 'complete') uygulamayiBaslat();
+  else window.addEventListener('load', ()=> uygulamayiBaslat(), {once:true});
+}
+
+if(authAktif){
+  // Modüler API'de onAuthStateChanged(auth, callback) şeklinde çağrılır — namespaced
+  // firebase.auth().onAuthStateChanged(callback) yerine, auth instance'ı ilk parametre olur.
+  window.firebaseAuthAPI.onAuthStateChanged(window.firebaseAuthAPI.authInstance, user=>{
+    if(user) girisEkraniGizle(); else girisEkraniGoster();
+  });
+}else{
+  dwarn('Firebase Authentication yapılandırılmadı veya BULUTSUZ_TEST açık — giriş ekranı devre dışı.');
+  document.getElementById('authGate').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  // Auth atlandığında uygulamayı doğrudan başlat (girisEkraniGizle normalde bunu yapardı).
+  // Aynı erteleme düzeltmesi burada da gereklidir — bkz. girisEkraniGizle'deki not.
+  if(document.readyState === 'complete') uygulamayiBaslat();
+  else window.addEventListener('load', ()=> uygulamayiBaslat(), {once:true});
+}
+
+const KULLANICI_KODU_UZANTISI = '@kullanici.noktacari';
+function kullaniciKoduEmaile(kod){
+  return String(kod||'').trim() + KULLANICI_KODU_UZANTISI;
+}
+
+document.getElementById('authLoginBtn').addEventListener('click', async ()=>{
+  const kod = document.getElementById('authKullaniciKodu').value.trim();
+  const pass = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  const statusEl = document.getElementById('authStatus');
+  errEl.style.display = 'none';
+  if(!kod || !pass){
+    errEl.textContent = 'Kullanıcı kodu ve şifre gerekli.';
+    errEl.style.display = 'block';
+    return;
+  }
+  statusEl.textContent = 'Giriş yapılıyor…';
+  statusEl.style.display = 'block';
+  try{
+    // Modüler API'de signInWithEmailAndPassword(auth, email, pass) — auth instance'ı ilk parametre.
+    await window.firebaseAuthAPI.signInWithEmailAndPassword(window.firebaseAuthAPI.authInstance, kullaniciKoduEmaile(kod), pass);
+    statusEl.style.display = 'none';
+  }catch(err){
+    statusEl.style.display = 'none';
+    errEl.textContent = 'Giriş başarısız: kullanıcı kodu veya şifre hatalı.';
+    errEl.style.display = 'block';
+  }
+});
+document.getElementById('authPassword').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') document.getElementById('authLoginBtn').click();
+});
+document.getElementById('authLogoutBtn').addEventListener('click', ()=>{
+  if(authAktif) window.firebaseAuthAPI.signOut(window.firebaseAuthAPI.authInstance);
+});
+
+async function saveReportToCloud(report){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CLOUD.path}.json${await authQuery()}`, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(report),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    // Veri kaydedildikten hemen sonra küçük meta zaman damgası da yazılır — bir sonraki
+    // yüklemede (bu cihazdan veya başka bir cihazdan) büyük veri hiç indirilmeden "değişmiş
+    // mi" kontrolü yapılabilsin diye.
+    const simdi = Date.now();
+    // META GÜVENİLİRLİK DÜZELTMESİ: Rapor PUT'u başarılı ama meta yazımı başarısız olursa, diğer
+    // cihazların 20 sn'lik otomatik senkron kontrolü (yalnızca meta damgasını karşılaştırır)
+    // değişikliği HİÇ göremiyordu. Meta yazılamazsa bir kez daha denenir; yine olmazsa veri zaten
+    // bulutta güvende olduğundan işlem başarılı sayılır ama konsola hata düşer (tam yükleme
+    // akışları meta olmadan da güvenli tarafta kalıp veriyi indirir — bkz. cloudVeriVerimliYukle).
+    let metaOk = await cloudMetaYazUzaktan(CLOUD.path, simdi);
+    if(!metaOk) metaOk = await cloudMetaYazUzaktan(CLOUD.path, simdi);
+    await cloudMetaZamaniKaydet(CLOUD.path, simdi);
+    // Otomatik arka plan senkronizasyonuna (bkz. otomatikBulutSenkronizasyonuKontrolEt) bu
+    // yazmanın KENDİ cihazımızdan geldiğini bildiriyoruz — aksi halde bir sonraki polling turu
+    // "değişiklik var" sanıp raporu gereksiz yere tekrar indirir (zararsız ama gereksiz trafik).
+    if(typeof otomatikSenkronBilinenZaman !== 'undefined') otomatikSenkronBilinenZaman = simdi;
+    return {ok:true};
+  }catch(err){
+    console.error('Rapor buluta kaydedilemedi:', err);
+    return {ok:false, reason:err.message};
+  }
+}
+
+async function loadReportFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CLOUD.path}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text, (key, value)=>{
+      if(DATE_KEYS.has(key) && typeof value === 'string'){
+        const d = new Date(value);
+        return isNaN(d.getTime()) ? value : d;
+      }
+      return value;
+    });
+  }catch(err){
+    console.error('Bulut verisi okunamadı:', err);
+    return null;
+  }
+}
+
+const MUSTERI_MASTER_CLOUD_PATH = CLOUD.path + '_musteriMaster';
+const MUSTERI_MASTER_LOCAL_KEY = 'noktaCariTakip_musteriMaster_v1';
+// Senet basımı için müşteri detayı (Tabela Adı, Vergi No/TC Kimlik No, Adres, İl) — aynı Müşteri
+// Master dosyasından, temsilci haritasıyla birlikte ama AYRI bir kayıt olarak saklanır.
+const MUSTERI_MASTER_DETAY_CLOUD_PATH = CLOUD.path + '_musteriMasterDetay';
+const MUSTERI_MASTER_DETAY_LOCAL_KEY = 'noktaCariTakip_musteriMasterDetay_v1';
+// Sell Out Raporu'nda FKNS (Fatura Kesilen Nokta Sayısı) hesaplaması için, Müşteri Master
+// dosyasındaki nokta durumu (Aktif/Pasif) — temsilci haritasıyla birlikte ama AYRI kaydedilir.
+const MUSTERI_MASTER_DURUM_CLOUD_PATH = CLOUD.path + '_musteriMasterDurum';
+const MUSTERI_MASTER_DURUM_LOCAL_KEY = 'noktaCariTakip_musteriMasterDurum_v1';
+// Açık Kanal / Kapalı Kanal FKNS ayrımı için, Müşteri Master dosyasındaki "Satış Kanalı Tanımı"
+// kolonu — temsilci/durum haritalarıyla birlikte ama AYRI kaydedilir (aynı desen).
+const MUSTERI_MASTER_KANAL_CLOUD_PATH = CLOUD.path + '_musteriMasterKanal';
+const MUSTERI_MASTER_KANAL_LOCAL_KEY = 'noktaCariTakip_musteriMasterKanal_v1';
+
+function buildMusteriMasterMap(rows){
+  const map = new Map();
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri']||'').trim();
+    if(!musteri) return;
+    let temsilci = String(r['Satış Temsilcisi Adı']||'').trim();
+    if(!temsilci) temsilci = 'Key Account';
+    map.set(musteri, temsilci);
+  });
+  return map;
+}
+// Müşteri Master dosyasındaki "Müşteri Adı" sütunu genellikle aynı ismi iki kez art arda içerir
+// (örn. "SEVİM ÇAVUŞ Sevim Çavuş" — önce büyük harf, sonra normal yazım). Kelime sayısı çift ve
+// ilk yarı ile ikinci yarı (Türkçe harf duyarlılığı gözetilerek) aynıysa yalnızca ilk yarı bırakılır;
+// eşleşmiyorsa (örn. gerçekten farklı iki kelime/şirket adıysa) metin olduğu gibi korunur.
+function musteriAdiTekillestir(ad){
+  const temiz = String(ad||'').trim().replace(/\s+/g,' ');
+  if(!temiz) return temiz;
+  const kelimeler = temiz.split(' ');
+  if(kelimeler.length < 2 || kelimeler.length % 2 !== 0) return temiz;
+  const yari = kelimeler.length / 2;
+  const ilkYari = kelimeler.slice(0, yari).join(' ');
+  const ikinciYari = kelimeler.slice(yari).join(' ');
+  return ilkYari.toLocaleUpperCase('tr-TR') === ikinciYari.toLocaleUpperCase('tr-TR') ? ilkYari : temiz;
+}
+
+// Senet basımında kullanılacak müşteri kimlik/adres bilgileri. Vergi No varsa (tüzel kişi) o, yoksa
+// TC Kimlik No (şahıs) kullanılır. "İl" alanı, senetteki "Keşide Yeri" için de kullanılır.
+function buildMusteriMasterDetay(rows){
+  const map = new Map();
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri']||'').trim();
+    if(!musteri) return;
+    map.set(musteri, {
+      tabelaAdi: String(r['Tabela Adı']||'').trim(),
+      musteriAdi: musteriAdiTekillestir(r['Müşteri Adı']),
+      vergiNo: String(r['Vergi No']||'').trim(),
+      tcKimlikNo: String(r['TC Kimlik No']||'').trim(),
+      adres: String(r['Sevk Adresi']||'').trim(),
+      il: String(r['İl']||'').trim(),
+      ilce: String(r['İlçe']||'').trim(),
+    });
+  });
+  return map;
+}
+function musteriMasterMapToObj(map){ const o={}; map.forEach((v,k)=>{ o[k]=v; }); return o; }
+function musteriMasterObjToMap(obj){ return new Map(Object.entries(obj||{})); }
+
+// Müşteri Master dosyasında nokta durumunu (Aktif/Pasif) taşıyan kolonun adı dosyadan dosyaya
+// değişebilir — bu yüzden bilinen aday kolon adları sırayla denenir, ilk bulunan kullanılır.
+// Gerçek dosyanızdaki kolon adı bu listede yoksa, buraya eklemeniz yeterlidir.
+const DURUM_KOLON_ADAYLARI = ['Durum','Statü','Müşteri Statüsü','Müşteri Durumu','Hesap Durumu','Nokta Durumu','Aktiflik Durumu','Status','Cari Durum'];
+function musteriDurumKolonunuBul(headers){
+  const set = new Set((headers||[]).map(h=>String(h||'').trim()));
+  return DURUM_KOLON_ADAYLARI.find(k=>set.has(k)) || null;
+}
+function buildMusteriMasterDurumMap(rows, headers){
+  const map = new Map();
+  const kolon = musteriDurumKolonunuBul(headers || (rows && rows[0] ? Object.keys(rows[0]) : []));
+  if(!kolon) return map; // Durum kolonu bulunamadı — harita boş döner, FKNS hesaplamasında tüm noktalar aktif varsayılır.
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri']||'').trim();
+    if(!musteri) return;
+    const ham = String(r[kolon]||'').trim();
+    const normalize = ham.toLocaleUpperCase('tr-TR');
+    map.set(musteri, normalize === 'AKTİF' || normalize === 'AKTIF' ? 'Aktif' : (ham || 'Pasif'));
+  });
+  return map;
+}
+// Açık Kanal / Kapalı Kanal FKNS ayrımı için Müşteri Master'daki "Satış Kanalı Tanımı" kolonu —
+// aynı ham değer kümesi Sell Out dosyasındaki "Müşteri Kanalı Tnm." ile birebir örtüşüyor (Standart
+// Açık/Standart Kapalı/Otel/Horeca/Ekomini), bu yüzden aynı eşleme (sellOutKanalSinifla'nın temel
+// KAPALI_KANAL_DEGERLERI/ACIK_KANAL_DEGERLERI kümeleri, bkz. 08-kanal-raporlari.js) burada da
+// kullanılır. "Key Account" gibi bu kümelerin dışında kalan değerler kasıtlı olarak null döner —
+// bu müşteriler ne Açık ne Kapalı Kanal FKNS paydasına dahil edilmez, sadece Toplam FKNS'ye girer
+// (kullanıcı kararı).
+function musteriMasterKanalSinifla(satisKanaliTanimiRaw){
+  const v = String(satisKanaliTanimiRaw||'').trim();
+  // KAPALI_KANAL_DEGERLERI / ACIK_KANAL_DEGERLERI, js/08-kanal-raporlari.js içinde tanımlıdır
+  // (Sell Out dosyasındaki aynı isimli sınıflandırma için); bu fonksiyon sadece kullanıcı bir
+  // yükleme/rapor işlemi tetiklediğinde (tüm script dosyaları çoktan yüklenmiş haldeyken) çağrıldığı
+  // için script sırası burada sorun yaratmaz.
+  if(KAPALI_KANAL_DEGERLERI.has(v)) return 'Kapalı Kanal';
+  if(ACIK_KANAL_DEGERLERI.has(v)) return 'Açık Kanal';
+  return null;
+}
+function buildMusteriMasterKanalMap(rows){
+  const map = new Map();
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri']||'').trim();
+    if(!musteri) return;
+    const kanal = musteriMasterKanalSinifla(r['Satış Kanalı Tanımı']);
+    if(kanal) map.set(musteri, kanal);
+  });
+  return map;
+}
+// Nokta statüsü "Pasif" veya "İptal" (yazım/boşluk farklarına toleranslı) ise true döner — Sell Out
+// Raporu'nda bu noktalar hem "Fatura kesilmeyen aktif noktalar" listesinden hem de FKNS
+// hesaplamasından (payda/pay) tamamen çıkarılır. Durum metninde geçen başka ifadeler (örn. "Beklemede",
+// "Yeni Nokta" gibi Aktif dışı ama Pasif/İptal de olmayan statüler) burada elenmez — sadece açıkça
+// Pasif veya İptal olanlar hesap dışına alınır.
+function noktaPasifVeyaIptalMi(durum){
+  if(!durum) return false;
+  const n = String(durum).trim().toLocaleUpperCase('tr-TR');
+  if(!n) return false;
+  return n.includes('PASİF') || n.includes('PASIF') || n.includes('İPTAL') || n.includes('IPTAL');
+}
+
+async function saveMusteriMasterToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MUSTERI_MASTER_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MUSTERI_MASTER_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Müşteri Master buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMusteriMasterFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Müşteri Master buluttan okunamadı:', err); return null; }
+}
+async function saveMusteriMasterToLocal(obj){
+  const ok = await idbSet(MUSTERI_MASTER_LOCAL_KEY, obj);
+  if(!ok) console.error('Müşteri Master cihaza kaydedilemedi.');
+}
+async function loadMusteriMasterFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_LOCAL_KEY);
+    return await idbGet(MUSTERI_MASTER_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+
+async function saveMusteriMasterDetayToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_DETAY_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MUSTERI_MASTER_DETAY_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MUSTERI_MASTER_DETAY_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Müşteri Master Detay buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMusteriMasterDetayFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_DETAY_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Müşteri Master Detay buluttan okunamadı:', err); return null; }
+}
+async function saveMusteriMasterDetayToLocal(obj){
+  const ok = await idbSet(MUSTERI_MASTER_DETAY_LOCAL_KEY, obj);
+  if(!ok) console.error('Müşteri Master Detay cihaza kaydedilemedi.');
+}
+async function loadMusteriMasterDetayFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_DETAY_LOCAL_KEY);
+    return await idbGet(MUSTERI_MASTER_DETAY_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+
+// Çek/Senet Tahsil Edildi onayları — cihaza (IndexedDB) VE bulut açıksa (BULUTSUZ_TEST=false)
+// Firebase'e de kaydedilir. Set halinde tutulan senetAnahtari değerleri (hem çek hem senet
+// kayıtları için), kayıt için diziye çevrilip saklanır. Eski anahtar adı (v1) geriye dönük
+// okunur, yeni anahtarla (v2) yazılır.
+const CEK_SENET_TAHSIL_ONAY_LOCAL_KEY = 'noktaCariTakip_cekSenetTahsilOnaylari_v2';
+const CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI = 'noktaCariTakip_senetTahsilOnaylari_v1';
+const CEK_SENET_TAHSIL_ONAY_CLOUD_PATH = CLOUD.path + '_cekSenetTahsilOnaylari';
+async function saveSenetTahsilOnaylariToCloud(arr){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_TAHSIL_ONAY_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arr),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Çek/Senet tahsil onayları buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadSenetTahsilOnaylariFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CEK_SENET_TAHSIL_ONAY_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Çek/Senet tahsil onayları buluttan okunamadı:', err); return null; }
+}
+async function saveSenetTahsilOnaylariToLocal(){
+  const arr = Array.from(state.cekSenetTahsilOnaylari||[]);
+  try{
+    const ok = await idbSet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY, arr);
+    if(!ok) console.error('Çek/Senet tahsil onayları cihaza kaydedilemedi.');
+  }catch(err){ console.error(err); }
+  // Bulut açıksa aynı anda oraya da yazılır — cihaz kaydı başarısız olsa bile bulut denemesi
+  // ayrıca yapılır (biri diğerini engellemesin diye ayrı try/catch, Promise.all ile paralel).
+  if(cloudEnabled()){
+    const sonuc = await saveSenetTahsilOnaylariToCloud(arr);
+    if(!sonuc.ok) console.error('UYARI: Çek/Senet tahsil onayı buluta yazılamadı, sadece cihazda kaldı.');
+    return sonuc.ok;
+  }
+  return true;
+}
+async function loadSenetTahsilOnaylariFromLocal(){
+  try{
+    // Bulut açıksa ÖNCE bulut denenir (diğer cihazlarda/tarayıcılarda yapılan onaylar da görünsün);
+    // bulut yoksa/erişilemezse cihazdaki (IndexedDB) son bilinen haline düşülür.
+    let arr = cloudEnabled() ? await loadSenetTahsilOnaylariFromCloud() : null;
+    if(!Array.isArray(arr) || !arr.length){
+      arr = await idbGet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY);
+    }
+    if(!Array.isArray(arr) || !arr.length){
+      // Geriye dönük uyumluluk: önceden sadece Senet onayları bu eski anahtarla kaydedilmişti.
+      const eski = await idbGet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY_ESKI);
+      if(Array.isArray(eski) && eski.length) arr = eski;
+    }
+    state.cekSenetTahsilOnaylari = new Set(Array.isArray(arr) ? arr : []);
+    // Cihazdaki kopyayı bulutla/eski anahtarla senkron tut (bir sonraki açılış hızlı olsun).
+    if(Array.isArray(arr) && arr.length) idbSet(CEK_SENET_TAHSIL_ONAY_LOCAL_KEY, arr).catch(()=>{});
+  }catch(err){ console.error(err); state.cekSenetTahsilOnaylari = new Set(); }
+}
+
+// Malzemeler (anlık depo stoğu) — son yüklenen dosya buluta kaydedilir, yeni biri yüklenene
+// kadar kullanılmaya devam eder (Müşteri Master ile aynı desen). Stok Gün sekmesi açıldığında
+// bu kayıt otomatik geri yüklenir, kullanıcı her seferinde dosyayı tekrar yüklemek zorunda kalmaz.
+const MALZEMELER_STOK_CLOUD_PATH = CLOUD.path + '_malzemelerStok';
+const MALZEMELER_STOK_LOCAL_KEY = 'noktaCariTakip_malzemelerStok_v1';
+async function saveMalzemelerStokToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MALZEMELER_STOK_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MALZEMELER_STOK_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MALZEMELER_STOK_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Malzemeler stoğu buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMalzemelerStokFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MALZEMELER_STOK_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Malzemeler stoğu buluttan okunamadı:', err); return null; }
+}
+async function saveMalzemelerStokToLocal(obj){
+  const ok = await idbSet(MALZEMELER_STOK_LOCAL_KEY, obj);
+  if(!ok) console.error('Malzemeler stoğu cihaza kaydedilemedi.');
+}
+async function loadMalzemelerStokFromLocal(){
+  try{ return await idbGet(MALZEMELER_STOK_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function malzemelerStokYenile(){
+  let obj = null;
+  if(cloudEnabled()){
+    const sonuc = await cloudVeriVerimliYukle(MALZEMELER_STOK_CLOUD_PATH, loadMalzemelerStokFromCloud, loadMalzemelerStokFromLocal);
+    obj = sonuc.data;
+  }
+  if(!obj) obj = await loadMalzemelerStokFromLocal();
+  state.malzemelerStok = musteriMasterObjToMap(obj);
+  return state.malzemelerStok;
+}
+async function malzemelerStokKaydet(map){
+  state.malzemelerStok = map;
+  const obj = musteriMasterMapToObj(map);
+  await saveMalzemelerStokToLocal(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveMalzemelerStokToCloud(obj);
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez.
+      console.error('Malzemeler Stok buluta kaydedilemedi:', sonuc.reason);
+      alert('UYARI: Malzemeler Stok verisi buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur: ' + (sonuc.reason||'bilinmeyen hata'));
+    }
+  }
+}
+
+// ============================== GRUP A "TEK-SLOT" DOSYA KALICILIĞI ==============================
+// Ana ekrandaki A Grubu dosyalarından Kalemler DIŞINDAKİ dördü (Ticari Stok, Çek/Senet Riski,
+// Ciro Primi, Dönemsel İskonto) günlük olarak yeniden yüklenmesi beklenen ama HER GÜN mutlaka
+// yüklenmesi gerekmeyen dosyalardır — Müşteri Master ve Malzemeler (Stok Gün) ile TAMAMEN AYNI
+// deseni kullanırlar: en son yüklenen dosyanın HAM satırları (rows) + kolon başlıkları (headers)
+// buluta (ve cihaza) tek bir slotta kaydedilir; yeni bir dosya yüklendiğinde öncekinin üzerine
+// yazılır. "Raporu Oluştur" sırasında o dosya seçilmemişse, buluttan/cihazdan geri yüklenen en
+// son bilinen hali otomatik olarak kullanılır — kullanıcı her gün bu 4 dosyayı yeniden yüklemek
+// zorunda kalmaz. Kaydedilen obje şekli: {data: rows[], headers: string[], adi: string, tarih: ISO}.
+const GRUP_A_TEKIL_DOSYA_TANIMLARI = {
+  ticariStok: { cloudPath: CLOUD.path + '_ticariStokDosya', localKey: 'noktaCariTakip_ticariStokDosya_v1' },
+  cekSenet: { cloudPath: CLOUD.path + '_cekSenetDosya', localKey: 'noktaCariTakip_cekSenetDosya_v1' },
+  ciroPrimi: { cloudPath: CLOUD.path + '_ciroPrimiDosya', localKey: 'noktaCariTakip_ciroPrimiDosya_v1' },
+  donemselIskonto: { cloudPath: CLOUD.path + '_donemselIskontoDosya', localKey: 'noktaCariTakip_donemselIskontoDosya_v1' },
+  // Kalemler DE bu tek-slot desene dahildir. Kullanıcı gün içinde Kalemler'i SADECE BİR KEZ yükleyip
+  // diğer dosyaları (Sipariş/Tahsilat/Fatura vb.) gün içinde birden çok kez güncelliyor — bu yüzden
+  // Kalemler'in HAM (ham satırlar + başlıklar) hali burada saklanıp, o gün yeniden seçilmemişse
+  // otomatik geri yükleniyor. Bu, Trend Analizi/Finansal Analiz'in kullandığı GÜN-GÜN musteriSnapshot
+  // arşivini (bkz. faturaKontrolArsivineKaydetVeSenkronizeEt) HİÇ ETKİLEMEZ — o arşiv tamamen ayrı,
+  // bağımsız bir mekanizma ve her "Raporu Oluştur/Veri Güncelle" işleminde günün altına eklenmeye
+  // devam eder, hiçbir zaman silinmez/üzerine yazılmaz. Buradaki tek-slot kayıt SADECE
+  // "buildReport()'un çalışabilmesi için gereken EN GÜNCEL HAM Kalemler verisi"ni saklar.
+  kalemler: { cloudPath: CLOUD.path + '_kalemlerDosya', localKey: 'noktaCariTakip_kalemlerDosya_v1' },
+  // GRUP B (Sipariş/Tahsilat/Fatura/Bayi Hakediş/Yükleme): Bu dosyalar da artık kalıcı
+  // tek-slot arşivinde tutulur. Önceden yalnızca bellekteydi (state.files); sayfa yenilenip yeni
+  // Kalemler yüklenince buildReport bunları bulamayıp müşteri kartlarından SİLİYORDU. Artık EN SON
+  // yüklenen hali (tarih fark etmeksizin — toplu/çok-günlü dosyalar dahil, olduğu gibi) kalıcı
+  // saklanır ve buildReport'a otomatik geri yüklenir. Bu, GÜN-GÜN faturaArsiv arşivini HİÇ ETKİLEMEZ
+  // (o ayrı mekanizma; her satırı kendi gününe dağıtıp Belge No bazlı temizlikle biriktirmeye devam
+  // eder). Buradaki tek-slot sadece "canlı kartların (Genel Rapor/Sevk) en son yüklenen dosyayı
+  // yansıtabilmesi" içindir — kullanıcının onayladığı davranış: canlı kartlar en son yüklenen dosyayı
+  // gösterir, geçmiş günler zaten arşivde/Fatura Kontrol'de kalıcı durur.
+  siparis: { cloudPath: CLOUD.path + '_siparisDosya', localKey: 'noktaCariTakip_siparisDosya_v1' },
+  tahsilat: { cloudPath: CLOUD.path + '_tahsilatDosya', localKey: 'noktaCariTakip_tahsilatDosya_v1' },
+  fatura: { cloudPath: CLOUD.path + '_faturaDosya', localKey: 'noktaCariTakip_faturaDosya_v1' },
+  bayiHakedis: { cloudPath: CLOUD.path + '_bayiHakedisHamDosya', localKey: 'noktaCariTakip_bayiHakedisHamDosya_v1' },
+  yukleme: { cloudPath: CLOUD.path + '_yuklemeDosya', localKey: 'noktaCariTakip_yuklemeDosya_v1' },
+  cariEkstre: { cloudPath: CLOUD.path + '_cariEkstreDosya', localKey: 'noktaCariTakip_cariEkstreDosya_v1' },
+};
+
+async function grupATekilDosyaKaydet(tip, data, headers, adi){
+  const tanim = GRUP_A_TEKIL_DOSYA_TANIMLARI[tip];
+  if(!tanim) return;
+  // Cihaza (IndexedDB) düz obje olarak kaydedilir — orada anahtar kısıtlaması yoktur.
+  const obj = { data: data||[], headers: headers||[], adi: adi||'', tarih: new Date().toISOString() };
+  const ok = await idbSet(tanim.localKey, obj);
+  if(!ok) console.error(LABELS[tip] + ' cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    // KRİTİK (HTTP 400 düzeltmesi): Firebase Realtime Database, ANAHTAR isimlerinde '.', '$', '#',
+    // '[', ']', '/' karakterlerini yasaklar. Excel kolon başlıkları (ör. "Faturadan Sonr.Gün",
+    // "Çek/Senet Numarası", "Depoda Kalan Mk.") doğrudan JSON anahtarı olarak yazılınca Firebase
+    // PUT'u 400 Bad Request ile REDDEDİYORDU — bu yüzden hiçbir Grup A/C dosyası buluta yazılamıyordu.
+    // Çözüm: data ve headers'ı tek bir JSON STRING olarak (dataJson/headersJson alanlarında) yaz —
+    // string bir DEĞERdir, içindeki noktalar/slash'lar anahtar olmadığı için Firebase'i ilgilendirmez.
+    const bulutObj = {
+      dataJson: JSON.stringify(data||[]),
+      headersJson: JSON.stringify(headers||[]),
+      adi: adi||'',
+      tarih: obj.tarih,
+      format: 'json-string-v1', // okuma tarafı bu bayrakla yeni formatı tanır (eski kayıtlar düz obje)
+    };
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${tanim.cloudPath}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(bulutObj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(tanim.cloudPath, simdi);
+    await cloudMetaZamaniKaydet(tanim.cloudPath, simdi);
+  }catch(err){ console.error(LABELS[tip] + ' buluta kaydedilemedi:', err); }
+}
+
+// Buluttan gelen Grup A tek-slot kaydını normalize eder: yeni format (dataJson/headersJson string)
+// VEYA eski format (düz data/headers dizisi) — ikisini de {data, headers, adi, tarih} olarak döndürür.
+function grupATekilKaydiCoz(ham){
+  if(!ham || typeof ham !== 'object') return null;
+  if(ham.format === 'json-string-v1' || typeof ham.dataJson === 'string'){
+    let data = [], headers = [];
+    try{ data = JSON.parse(ham.dataJson || '[]'); }catch(_){ data = []; }
+    try{ headers = JSON.parse(ham.headersJson || '[]'); }catch(_){ headers = []; }
+    return { data, headers, adi: ham.adi || '', tarih: ham.tarih || null };
+  }
+  // Eski (düz) format — geriye dönük uyumluluk.
+  return { data: ham.data || [], headers: ham.headers || [], adi: ham.adi || '', tarih: ham.tarih || null };
+}
+
+async function grupATekilDosyaYerelOku(tip){
+  const tanim = GRUP_A_TEKIL_DOSYA_TANIMLARI[tip];
+  if(!tanim) return null;
+  try{ return await idbGet(tanim.localKey); }catch(err){ console.error(err); return null; }
+}
+
+async function grupATekilDosyaBuluttanOku(tip){
+  const tanim = GRUP_A_TEKIL_DOSYA_TANIMLARI[tip];
+  if(!tanim || !cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${tanim.cloudPath}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    // Yeni (json-string-v1) VEYA eski (düz) formatı normalize et.
+    return grupATekilKaydiCoz(JSON.parse(text));
+  }catch(err){ console.error(LABELS[tip] + ' buluttan okunamadı:', err); return null; }
+}
+
+// Ticari Stok/Çek-Senet/Ciro Primi/Dönemsel İskonto için: bugün yeniden seçilmemişse, ne kadar eski
+// olursa olsun en son bilinen hal sorgusuz kullanılır (bu dosyalar "her gün yüklenmesi gerekmez").
+// KALEMLER ARTIK BU LİSTEYE DAHİL (kullanıcı kararı — büyük mimari değişiklik): "Kalemleri
+// yüklemediği hiçbir gün veri yüklemesi yapamamalı" kuralı KALDIRILDI. Artık kart oluşturma
+// Müşteri Master'a, bakiye Cari Ekstre'ye bağlı; Kalemler yalnızca (varsa) açık fatura detayı
+// ekler ve diğer Grup A/B dosyaları gibi en son yüklenen hali kalıcı kalıp güne bakılmaksızın
+// kullanılmaya devam eder (bkz. buildReport'taki yeni kart oluşturma mantığı).
+const GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR = new Set(['ticariStok','ciroPrimi','donemselIskonto','kalemler',
+  // Grup B de tarih kısıtlaması OLMADAN saklanır: en son yüklenen (çok-günlü/toplu dosyalar dahil)
+  // tarih fark etmeksizin geri yüklenir. Yalnızca Kalemler bugüne-özeldi (artık değil).
+  'siparis','tahsilat','fatura','bayiHakedis','yukleme','cariEkstre']);
+
+// Bu dosyaların hepsini paralel olarak yükler; her biri için o gün ekranda yeni bir dosya SEÇİLMİŞSE
+// (state.files[tip] doluysa) o veri KULLANILIR ve aynı zamanda yeni "son bilinen hal" olarak kaydedilir;
+// seçilmemişse buluttan/cihazdan en son bilinen hal geri getirilip state.files[tip]'e (buildReport'un
+// beklediği {data, headers} şekliyle) yerleştirilir — böylece buildReport çağrısı her zaman aynı arayüzü
+// görür, dosyanın "bugün mü yüklendi yoksa önceki gün mü kaldı" farkını bilmesine gerek kalmaz.
+//
+// KALEMLER_BUGUN_ZORUNLU KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Kalemler artık
+// diğer Grup A/B dosyaları gibi davranır — en son yüklenen hali, günü ne olursa olsun, yeni bir
+// dosya seçilene kadar kalıcı kullanılır. Kart oluşturma artık Müşteri Master'a, bakiye Cari
+// Ekstre'ye bağlı olduğundan Kalemler'in "her gün zorunlu" olması gerekmiyor — Kalemler yalnızca
+// (varsa) açık fatura detayı ekleyen opsiyonel bir kaynak. "Kalemler yüklendi mi?" durumunu
+// güvenilir biçimde belirler ve state.bugunKalemlerHazir'a yazar (isim tarihsel nedenlerle
+// korunmuştur, artık "bugüne özel" değil "herhangi bir zamanda yüklendi mi" anlamına gelir). İki
+// kaynağa bakar: (1) bu oturumda bellekteki state.files.kalemler, (2) tek-slot Kalemler arşivinde
+// (tarihi ne olursa olsun) bir kayıt var mı.
+async function bugunKalemlerDurumTazele(){
+  // 1) Bellekte bu oturumda yüklü mü?
+  if(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length){
+    state.bugunKalemlerHazir = true;
+    return true;
+  }
+  // 2) Tek-slot arşivinde bir Kalemler kaydı var mı (tarihi ne olursa olsun)?
+  try{
+    let kayit = cloudEnabled() ? await grupATekilDosyaBuluttanOku('kalemler') : null;
+    if(!kayit) kayit = await grupATekilDosyaYerelOku('kalemler');
+    const varMi = !!(kayit && kayit.data && kayit.data.length);
+    state.bugunKalemlerHazir = varMi;
+    return varMi;
+  }catch(_){
+    // Hata durumunda mevcut bilineni koru (yanlışlıkla kilitlememek için).
+    return state.bugunKalemlerHazir;
+  }
+}
+
+async function grupATekilDosyalariHazirla(){
+  const tipler = Object.keys(GRUP_A_TEKIL_DOSYA_TANIMLARI);
+  const bugunKey = dateKeyLocal(new Date());
+  await Promise.all(tipler.map(async (tip)=>{
+    if(state.files[tip] && state.files[tip].data && state.files[tip].data.length){
+      // Bu oturumda kullanıcı yeni bir dosya seçti — bunu "son bilinen hal" olarak sakla.
+      await grupATekilDosyaKaydet(tip, state.files[tip].data, state.files[tip].headers, state.files[tip].name);
+      return;
+    }
+    // Yeni seçim yok — önce buluttan (varsa), yoksa cihazdaki önbellekten en son bilinen hali getir.
+    let kayit = cloudEnabled() ? await grupATekilDosyaBuluttanOku(tip) : null;
+    if(!kayit) kayit = await grupATekilDosyaYerelOku(tip);
+    if(!kayit || !kayit.data || !kayit.data.length) return;
+    if(!GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR.has(tip)){
+      // Kalemler (tarih kısıtlaması olan tek dosya): kaydın tarihi bugüne ait değilse KASITLI
+      // OLARAK doldurmadan çık — güvenlik kontrolü bunu "bugün için Kalemler yok" olarak yakalasın.
+      const kayitGunKey = kayit.tarih ? dateKeyLocal(new Date(kayit.tarih)) : null;
+      if(kayitGunKey !== bugunKey) return;
+    }
+    state.files[tip] = { name: kayit.adi || (LABELS[tip]+' (önceki yükleme)'), headers: kayit.headers||[], data: kayit.data };
+  }));
+}
+
+async function saveMusteriMasterDurumToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_DURUM_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MUSTERI_MASTER_DURUM_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MUSTERI_MASTER_DURUM_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Müşteri Master Durum buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMusteriMasterDurumFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_DURUM_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Müşteri Master Durum buluttan okunamadı:', err); return null; }
+}
+async function saveMusteriMasterDurumToLocal(obj){
+  const ok = await idbSet(MUSTERI_MASTER_DURUM_LOCAL_KEY, obj);
+  if(!ok) console.error('Müşteri Master Durum cihaza kaydedilemedi.');
+}
+async function loadMusteriMasterDurumFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_DURUM_LOCAL_KEY);
+    return await idbGet(MUSTERI_MASTER_DURUM_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+
+async function saveMusteriMasterKanalToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_KANAL_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MUSTERI_MASTER_KANAL_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MUSTERI_MASTER_KANAL_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Müşteri Master Kanal buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadMusteriMasterKanalFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MUSTERI_MASTER_KANAL_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Müşteri Master Kanal buluttan okunamadı:', err); return null; }
+}
+async function saveMusteriMasterKanalToLocal(obj){
+  const ok = await idbSet(MUSTERI_MASTER_KANAL_LOCAL_KEY, obj);
+  if(!ok) console.error('Müşteri Master Kanal cihaza kaydedilemedi.');
+}
+async function loadMusteriMasterKanalFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(MUSTERI_MASTER_KANAL_LOCAL_KEY);
+    return await idbGet(MUSTERI_MASTER_KANAL_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+
+async function musteriMasterYenile(){
+  // Aşağıdaki dört veri (Master/Detay/Durum/Kanal) birbirinden bağımsız — hepsi aynı anda kontrol
+  // edilip indirilir (bkz. uygulamayiBaslat'taki Promise.all açıklaması, aynı mantık).
+  const [masterSonuc, detaySonuc, durumSonuc, kanalSonuc] = await Promise.all([
+    cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_CLOUD_PATH, loadMusteriMasterFromCloud, loadMusteriMasterFromLocal) : Promise.resolve(null),
+    cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_DETAY_CLOUD_PATH, loadMusteriMasterDetayFromCloud, loadMusteriMasterDetayFromLocal) : Promise.resolve(null),
+    cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_DURUM_CLOUD_PATH, loadMusteriMasterDurumFromCloud, loadMusteriMasterDurumFromLocal) : Promise.resolve(null),
+    cloudEnabled() ? cloudVeriVerimliYukle(MUSTERI_MASTER_KANAL_CLOUD_PATH, loadMusteriMasterKanalFromCloud, loadMusteriMasterKanalFromLocal) : Promise.resolve(null),
+  ]);
+
+  let obj = masterSonuc ? masterSonuc.data : null;
+  if(!obj) obj = await loadMusteriMasterFromLocal();
+  state.musteriMasterMap = musteriMasterObjToMap(obj);
+
+  let detayObj = detaySonuc ? detaySonuc.data : null;
+  if(!detayObj) detayObj = await loadMusteriMasterDetayFromLocal();
+  state.musteriMasterDetay = musteriMasterObjToMap(detayObj);
+
+  let durumObj = durumSonuc ? durumSonuc.data : null;
+  if(!durumObj) durumObj = await loadMusteriMasterDurumFromLocal();
+  state.musteriMasterDurum = musteriMasterObjToMap(durumObj);
+
+  let kanalObj = kanalSonuc ? kanalSonuc.data : null;
+  if(!kanalObj) kanalObj = await loadMusteriMasterKanalFromLocal();
+  state.musteriMasterKanal = musteriMasterObjToMap(kanalObj);
+
+  return state.musteriMasterMap;
+}
+
+// Dönüş: {map, hatalar: string[]} — cihaz depolama kapalı olduğundan (kullanıcı isteği), buluta
+// yazma başarısız olan alt-veriler artık HİÇBİR YERE kalıcı kaydedilmez. Eskiden bu hatalar
+// sessizce yutulup sadece console.error'a düşüyordu; artık çağıran tarafa (raporuOlusturVeyaGuncelleAkisiniCalistir)
+// bildirilip kullanıcıya gösterilebiliyor.
+async function musteriMasterKaydet(rows, headers){
+  const hatalar = [];
+  const map = buildMusteriMasterMap(rows);
+  state.musteriMasterMap = map;
+  const obj = musteriMasterMapToObj(map);
+  await saveMusteriMasterToLocal(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterToCloud(obj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
+
+  const detayMap = buildMusteriMasterDetay(rows);
+  state.musteriMasterDetay = detayMap;
+  const detayObj = musteriMasterMapToObj(detayMap);
+  await saveMusteriMasterDetayToLocal(detayObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterDetayToCloud(detayObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Detay buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
+
+  const durumMap = buildMusteriMasterDurumMap(rows, headers);
+  state.musteriMasterDurum = durumMap;
+  const durumObj = musteriMasterMapToObj(durumMap);
+  await saveMusteriMasterDurumToLocal(durumObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterDurumToCloud(durumObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Durum buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
+
+  const kanalMap = buildMusteriMasterKanalMap(rows);
+  state.musteriMasterKanal = kanalMap;
+  const kanalObj = musteriMasterMapToObj(kanalMap);
+  await saveMusteriMasterKanalToLocal(kanalObj);
+  if(cloudEnabled()){
+    const sonuc = await saveMusteriMasterKanalToCloud(kanalObj);
+    if(!sonuc.ok) hatalar.push('Müşteri Master Kanal buluta kaydedilemedi: '+(sonuc.reason||'bilinmeyen hata'));
+  }
+
+  if(hatalar.length) console.error('musteriMasterKaydet: bazı veriler buluta yazılamadı:', hatalar);
+  map.__kaydetmeHatalari = hatalar;
+  return map;
+}
+
+const BAYI_HAKEDIS_CLOUD_PATH = CLOUD.path + '_bayiHakedis';
+const BAYI_HAKEDIS_LOCAL_KEY = 'noktaCariTakip_bayiHakedis_v1';
+
+function bayiHakedisReviver(key, value){
+  if(key==='tarih' && typeof value === 'string'){
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? value : d;
+  }
+  return value;
+}
+async function saveBayiHakedisToCloud(rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${BAYI_HAKEDIS_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(BAYI_HAKEDIS_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(BAYI_HAKEDIS_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Bayi Hakediş buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadBayiHakedisFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${BAYI_HAKEDIS_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text, bayiHakedisReviver);
+  }catch(err){ console.error('Bayi Hakediş buluttan okunamadı:', err); return null; }
+}
+async function saveBayiHakedisToLocal(rapor){
+  const ok = await idbSet(BAYI_HAKEDIS_LOCAL_KEY, rapor);
+  if(!ok) console.error('Bayi Hakediş cihaza kaydedilemedi.');
+}
+async function loadBayiHakedisFromLocal(){
+  try{
+    await idbMigrateFromLocalStorageOnce(BAYI_HAKEDIS_LOCAL_KEY, bayiHakedisReviver);
+    return await idbGet(BAYI_HAKEDIS_LOCAL_KEY);
+  }catch(err){ console.error(err); return null; }
+}
+async function bayiHakedisYenile(){
+  let rapor = null;
+  if(cloudEnabled()){
+    const sonuc = await cloudVeriVerimliYukle(BAYI_HAKEDIS_CLOUD_PATH, loadBayiHakedisFromCloud, loadBayiHakedisFromLocal);
+    rapor = sonuc.data;
+  }
+  if(!rapor) rapor = await loadBayiHakedisFromLocal();
+  state.bayiHakedisReport = rapor;
+  return rapor;
+}
+async function bayiHakedisKaydet(rapor){
+  await saveBayiHakedisToLocal(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveBayiHakedisToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Bayi Hakediş raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Bayi Hakediş raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
+}
+
+const FATURA_ARSIV_CLOUD_PATH = CLOUD.path + '_faturaKontrolArsiv';
+
+
+async function loadFaturaKontrolArsivFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${FATURA_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return faturaKontrolArsivSnapshotlariUzat(JSON.parse(text, (key, value)=>{
+      if(DATE_KEYS.has(key) && typeof value === 'string'){
+        const d = new Date(value);
+        return isNaN(d.getTime()) ? value : d;
+      }
+      return value;
+    }));
+  }catch(err){
+    console.error('Fatura Kontrol arşivi buluttan okunamadı:', err);
+    return null;
+  }
+}
+
+// authQuery() ile aynı token'ı döndürür ama '?auth=' önekini eklemez — shallow/orderBy gibi başka
+// sorgu parametreleriyle birlikte kullanılabilmesi için.
+async function authTokenParam(){
+  if(!authAktif) return '';
+  try{
+    const user = window.firebaseAuthAPI.authInstance.currentUser;
+    if(!user) return '';
+    return await user.getIdToken(true);
+  }catch(err){ return ''; }
+}
+
+// Arşivin TAMAMINI değil, yalnızca üst seviye gün ANAHTARLARINI çeker (Firebase'in shallow=true
+// parametresiyle); değerler indirilmediği için veri hacmi kaç gün arşivlenmiş olursa olsun birkaç
+// KB'ı geçmez. Ay dropdown'unu doldurmak veya "kaç gün arşivlenmiş" bilgisini göstermek için
+// arşivin tamamını indirmeye gerek bırakmaz.
+async function loadFaturaKontrolArsivGunAnahtarlariFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const params = new URLSearchParams({shallow:'true'});
+    const token = await authTokenParam();
+    if(token) params.set('auth', token);
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${FATURA_ARSIV_CLOUD_PATH}.json?${params.toString()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return [];
+    const obj = JSON.parse(text); // { "2026-07-01": true, "2026-07-02": true, ... }
+    return Object.keys(obj).sort();
+  }catch(err){
+    console.error('Fatura Kontrol arşivi gün anahtarları okunamadı:', err);
+    return null;
+  }
+}
+
+// Yalnızca [baslangicGunKey, bitisGunKey] (uçlar dahil) aralığındaki günleri buluttan çeker.
+// Firebase Realtime Database'in orderBy="$key"&startAt=...&endAt=... sorgu parametreleri sunucu
+// tarafında filtreleme yapar; aralık dışındaki günlerin verisi ağa hiç inmez. Örn. Tahsilat
+// Verimliliği bir ay açtığında, yıllarca birikmiş arşivin tamamı yerine yalnızca o ayın (ve
+// önceki bakiye karşılaştırması için gereken birkaç günün) verisi çekilir.
+async function loadFaturaKontrolArsivAraligiFromCloud(baslangicGunKey, bitisGunKey){
+  if(!cloudEnabled()) return null;
+  try{
+    const params = new URLSearchParams({
+      orderBy: '"$key"',
+      startAt: `"${baslangicGunKey}"`,
+      endAt: `"${bitisGunKey}"`,
+    });
+    const token = await authTokenParam();
+    if(token) params.set('auth', token);
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${FATURA_ARSIV_CLOUD_PATH}.json?${params.toString()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return {};
+    return faturaKontrolArsivSnapshotlariUzat(JSON.parse(text, (key, value)=>{
+      if(DATE_KEYS.has(key) && typeof value === 'string'){
+        const d = new Date(value);
+        return isNaN(d.getTime()) ? value : d;
+      }
+      return value;
+    }));
+  }catch(err){
+    console.error('Fatura Kontrol arşivi aralığı okunamadı:', err);
+    return null;
+  }
+}
+
+// Yalnızca DEĞİŞEN gün(ler)i buluttaki arşive PATCH eder — Firebase'in "çoklu konum güncellemesi"
+// özelliğiyle, her anahtar arşiv ağacında ayrı bir alt yol olarak güncellenir; diğer günlere
+// dokunulmaz. Bir günün değeri `null` verilirse o gün buluttan kalıcı olarak silinir. Bu, "Raporu
+// Oluştur" her tıklandığında TÜM arşivin yeniden indirilip yeniden yazılmasının yerini alır.
+async function saveFaturaKontrolArsivGunleriToCloud(guncellemeler){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  if(!guncellemeler || !Object.keys(guncellemeler).length) return {ok:true};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${FATURA_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PATCH',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(guncellemeler),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){
+    console.error('Fatura Kontrol arşivi (kısmi) buluta kaydedilemedi:', err);
+    return {ok:false, reason:err.message};
+  }
+}
+
+// İki arşiv nesnesini (gün -> kayıt) karşılaştırır ve yalnızca içeriği değişmiş günlerin listesini
+// döndürür. Yeni tarafta artık olmayan bir gün varsa değeri `null` olur (bulutta silinmesi için).
+// Kullanım: sıkıştırma/temizlik gibi TÜM arşivi tarayan işlemlerden sonra, değişikliği buluta
+// yazarken artık tüm ağacı değil sadece gerçekten değişen günleri PATCH etmek için.
+function faturaKontrolArsivGunFarkiniBul(eskiArsiv, yeniArsiv){
+  const fark = {};
+  const tumGunler = new Set([...Object.keys(eskiArsiv||{}), ...Object.keys(yeniArsiv||{})]);
+  tumGunler.forEach(g=>{
+    const eskiVar = eskiArsiv && Object.prototype.hasOwnProperty.call(eskiArsiv, g);
+    const yeniVar = yeniArsiv && Object.prototype.hasOwnProperty.call(yeniArsiv, g);
+    const eskiJson = eskiVar ? JSON.stringify(eskiArsiv[g]) : null;
+    const yeniJson = yeniVar ? JSON.stringify(yeniArsiv[g]) : null;
+    if(eskiJson !== yeniJson){
+      fark[g] = yeniVar ? yeniArsiv[g] : null;
+    }
+  });
+  return fark;
+}
+
+const SAHA_MUDUR_MAP = {
+  'Sıtkı Berkay Katrancı': 'Uğur Ergin',
+  'Alican Akbaş': 'Uğur Ergin',
+  'Altuğ Aksu': 'Mertcan Çınar',
+  'Ali Yüksel': 'Mertcan Çınar',
+  'Mehmetcan Yılmaz': 'Mertcan Çınar',
+  'Berk Kutay Korkmaz': 'Mertcan Çınar',
+  'Doğuş Ark': 'Yusuf Akdoğan',
+  'Ferhat Fatih İrkin': 'Yusuf Akdoğan',
+  'Hasan Akel': 'Yusuf Akdoğan',
+};
+function normalizeAdSoyad(s){
+  return String(s||'').trim().replace(/\s+/g,' ').toLocaleUpperCase('tr');
+}
+const SAHA_MUDUR_LOOKUP = {};
+Object.keys(SAHA_MUDUR_MAP).forEach(k=>{ SAHA_MUDUR_LOOKUP[normalizeAdSoyad(k)] = SAHA_MUDUR_MAP[k]; });
+function getSahaMuduru(temsilci){
+  if(!temsilci || temsilci==='—') return 'Tanımsız';
+  return SAHA_MUDUR_LOOKUP[normalizeAdSoyad(temsilci)] || 'Tanımsız';
+}
+
+const TL = n => (Math.round(n||0)).toLocaleString('tr-TR') + ' ₺';
+// Kuruşu kuruşuna TL biçimlendirme — SADECE Bayi Hakediş ekranında kullanılır (kullanıcı kararı:
+// hakediş tutarları TL()'nin yaptığı gibi tam sayıya yuvarlanmasın, kuruş hassasiyeti korunsun).
+// AKILLI ONDALIK (kullanıcı isteği): tutarın küsuratı VARSA (örn. 285,50) o küsurat gösterilir;
+// küsuratı YOKSA (örn. 285,00 yerine) gereksiz ",00" eklenmeden düz tam sayı (285) gösterilir —
+// maximumFractionDigits:2 ile minimumFractionDigits:0 birlikte kullanılarak toLocaleString'in
+// kendisi anlamsız sıfırları otomatik olarak basmaz. Uygulamanın geri kalanındaki tüm diğer
+// tutarlar (KPI'lar, müşteri kartları, diğer tablolar) TL() ile tam sayıya yuvarlanmaya devam
+// eder — bu bilinçli bir istisna, genel bir değişiklik değil.
+const TLKurus = n => (Number(n)||0).toLocaleString('tr-TR', {minimumFractionDigits:0, maximumFractionDigits:2}) + ' ₺';
+const NUM = n => (Math.round(n||0)).toLocaleString('tr-TR');
+const MK = n => NUM(n) + ' Mk.';
+const LT = n => NUM(n) + ' Lt.';
+const fmtDate = d => d instanceof Date && !isNaN(d) ? d.toLocaleDateString('tr-TR') : '—';
+// EFES gibi dahili/şirket-içi kayıtlar gerçek bir cari değildir — Fatura Dökümü, Tahsilat Dökümü,
+// Sipariş Dökümü ve Bayi Hak Ediş dosyalarındaki İLGİLİ satırlar bu fonksiyonla TUTARLI şekilde
+// filtrelenir (tek bir yerde tanımlı, her dosya döngüsünde aynı kural).
+const GECERSIZ_MUSTERI_KODLARI = new Set(['EFES']);
+function musteriGecerliMi(musteriNo){
+  const kod = String(musteriNo||'').trim().toUpperCase();
+  if(!kod) return false;
+  return !GECERSIZ_MUSTERI_KODLARI.has(kod);
+}
+
+function dateKeyLocal(d){
+  if(!(d instanceof Date) || isNaN(d)) return null;
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
+// Verilen gün anahtarları (YYYY-MM-DD) listesinden, hedef güne (yine YYYY-MM-DD) GÜN OLARAK EN
+// YAKIN olanını döndürür (geçmiş veya gelecek fark etmez, en küçük mutlak gün farkı kazanır;
+// eşitlik durumunda geçmişteki gün tercih edilir — veri zaten gerçekleşmiş kabul edilir). Liste
+// boşsa veya hedef günü yoksa null döner.
+function enYakinGunKey(gunListesi, hedefGunKey){
+  if(!gunListesi || !gunListesi.length || !hedefGunKey) return null;
+  const hedefMs = new Date(hedefGunKey+'T00:00:00Z').getTime();
+  if(isNaN(hedefMs)) return null;
+  let enYakinGun = null, enKucukFark = Infinity, enYakinMs = null;
+  gunListesi.forEach(g=>{
+    const ms = new Date(g+'T00:00:00Z').getTime();
+    if(isNaN(ms)) return;
+    const fark = Math.abs(ms - hedefMs);
+    if(fark < enKucukFark || (fark === enKucukFark && (enYakinMs===null || ms < enYakinMs))){
+      enKucukFark = fark; enYakinGun = g; enYakinMs = ms;
+    }
+  });
+  return enYakinGun;
+}
+
+const SIGNATURES = {
+  kalemler: [['Kalan Borç','Faturadan Sonr.Gün','Borç/alacak']],
+  siparis: [['Sipariş Toplam Tutar','Teslimat Durumu']],
+  // YENİ TAHSİLAT FORMATI (kullanıcı isteği — eski Format A/B ayrımı tamamen kaldırıldı, tek dosya
+  // tipine indirgendi): Belge Numarası + Ters Kayıt Belge Numarası kombinasyonu bu dosyaya özgüdür,
+  // başka hiçbir dosyada birlikte bulunmaz.
+  tahsilat: [
+    ['Belge Numarası','Ters Kayıt Belge Numarası','Tarih'],
+  ],
+  cekSenet: [['Esas Borçlu','Çek/Senet Numarası']],
+  ticariStok: [['Depoda Kalan Mk.','Depoda Kalan Lt.','Malzeme Kodu']],
+  fatura: [['Ödenecek Tutar','Toplam Litre','Fatura Numarası']],
+  bayiHakedis: [['Bayi Tutar','Efes Payı %','Müşteri Alacak Dekont No']],
+  yukleme: [['Müşteri Numarası','Litre Total','Yükleme Tarihi']],
+  musteriMaster: [['Müşteri','Tabela Adı','Kredi limiti']],
+  ciroPrimi: [['Grup Tanım','Efpa Payı Tutar','Net Tutar']],
+  donemselIskonto: [['Nokta Kodu','Hakediş Tutar','Perid']],
+  sellOut: [['Müşteri Kanalı Tnm.','Açık/Otel Tnm.','Hacim Segmenti Tnm.']],
+  // Cari Hesap Ekstre Özet: müşteri bazlı gerçek cari bakiye (Borç/Alacak/Bakiye). "Müşteri Ünvan"
+  // + "Bakiye" kombinasyonu bu dosyaya özgüdür — başka hiçbir dosyada birlikte bulunmaz.
+  cariEkstre: [['Müşteri Ünvan','Bakiye','Müşteri Ad']],
+  // NOT: "depozitoTahsilat" tipi (Depozito Tahsilat dosyası) SİSTEMDEN TAMAMEN KALDIRILDI (kullanıcı
+  // kararı) — Depozito İade artık yalnızca Fatura Dökümü'ndeki "Depozito İade Faturası" türünden
+  // geliyor (bkz. buildReport'taki İade Grubu mantığı). Bu satır kasıtlı olarak silindi ki eskiden bu
+  // sütun imzasına uyan bir dosya yanlışlıkla yüklenirse artık HİÇBİR tipe eşleşmesin (detectType
+  // "tanınmayan dosya" uyarısı versin) — sessizce yok sayılan bir "hayalet" tip olarak kalmasın.
+};
+const LABELS = { kalemler:'Kalemler (Fatura / Bakiye)', siparis:'Sipariş Dökümü', tahsilat:'Tahsilat Dökümü', cekSenet:'Çek / Senet Riski', ticariStok:'Ticari Stok', fatura:'Fatura Dökümü', bayiHakedis:'Bayi Hak Ediş', yukleme:'Yükleme Raporu', musteriMaster:'Müşteri Master', ciroPrimi:'Ciro Primi', donemselIskonto:'Dönemsel İskonto', sellOut:'Sell Out Raporu', cariEkstre:'Cari Hesap Ekstre' };
+
+// "Vadesi gelmiş" fatura eşiği (TEK KAYNAK): bir faturanın "Faturadan Sonr. Gün" değeri bu eşik
+// ve üstündeyse kalan borcu "vadesi gelmiş" sayılır; altındaysa "vadesi gelmemiş" kabul edilir.
+// İş kuralı değişirse yalnızca burası güncellenir (önceden 23 sayısı üç ayrı yere gömülüydü).
+const VADE_ESIGI_GUN = 23;
+
+// GRUP B: bu dosya tipleri artık ana ekran dropzone/checklist'inde DEĞİL, üst panelde
+// ("Günlük Veri Yükle" — bkz. #gvyPanel) yükleniyor. Aynı state.files yapısı ve aynı
+// handleFiles/detectType mekanizması kullanılır — sadece dosya SEÇİMİNİN yapıldığı arayüz
+// ayrı bir yere taşınmıştır; buildReport ve arşivleme mantığına dokunulmamıştır.
+const GVY_DOSYA_TIPLERI = ['siparis','tahsilat','fatura','bayiHakedis','yukleme','cariEkstre','cekSenet'];
+// Grup C ("Günlük Veri Yükle"): gün içinde sürekli güncellenebilen, son yüklenen hali kalıcı
+// tek-slot arşivde saklanan dosyalar. Bunlar GRUP_A_TEKIL_DOSYA_TANIMLARI'nda zaten kayıtlı
+// (aynı kalıcı mekanizmayı kullanır) ve GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR üyesidir — yani
+// tarih fark etmeksizin en son yüklenen hali otomatik geri getirilir.
+// "cekSenet" ARTIK Grup C'de DEĞİL (kullanıcı isteği) — Çek/Senet Riski dosyası kaldırıldı; bu
+// bilgi artık doğrudan Tahsilat Dökümü'ndeki "Alınan Çek"/"Alınan Senet" satırlarından (bkz.
+// buildReport'taki tahsilatArsiv/cekSenetMap) besleniyor, ayrı bir dosya yüklemeye gerek yok.
+const GRUP_C_DOSYA_TIPLERI = ['ticariStok','ciroPrimi','donemselIskonto'];
+// Grup C'de o an ekranda seçili (henüz kaydedilmemiş) dosya sayısı — buton kilidi için.
+function GRUP_C_HAZIR_SAYISI(){ return GRUP_C_DOSYA_TIPLERI.filter(t=>state.filesC && state.filesC[t]).length; }
+
+function detectType(headers){
+  const set = new Set(headers.map(h=>String(h||'').trim()));
+  for(const type of Object.keys(SIGNATURES)){
+    if(SIGNATURES[type].some(sig=>sig.every(k=>set.has(k)))) return type;
+  }
+  return null;
+}
+
+function sheetToObjects(ws){
+  const rows = XLSX.utils.sheet_to_json(ws, {header:1, raw:true, defval:null});
+  if(!rows.length) return {headers:[], data:[]};
+  const headers = rows[0].map(h=>String(h||'').trim());
+  const data = [];
+  for(let i=1;i<rows.length;i++){
+    const r = rows[i];
+    if(r.every(v=>v===null||v==='')) continue;
+    const obj = {};
+    headers.forEach((h,idx)=>{ if(h) obj[h] = r[idx]===undefined?null:r[idx]; });
+    data.push(obj);
+  }
+  return {headers, data};
+}
+
+function excelDateToJS(v){
+  if(v instanceof Date) return isNaN(v.getTime()) ? null : v;
+  if(typeof v === 'number'){
+    const d = XLSX.SSF.parse_date_code(v);
+    if(d) return new Date(Date.UTC(d.y,d.m-1,d.d));
+  }
+  // GÜVENLİK AĞI: bazı satırlarda SheetJS'in cellDates dönüşümü (kaynak SAP dosyasındaki karma/
+  // özel hücre biçimleri nedeniyle) tarihi Date/sayı yerine METİN olarak bırakabiliyor — bu
+  // durumda "Tarih" sütunu sessizce "—" görünüyordu (Gün/Vade sütunları zaten dosyadaki hazır
+  // sayısal alanlardan geldiği için etkilenmiyordu). Böyle bir string gelirse önce ISO/olağan
+  // tarih biçimleriyle, olmazsa gün.ay.yıl (tr) biçimiyle ayrıştırmayı dener.
+  if(typeof v === 'string' && v.trim()){
+    const s = v.trim();
+    const isoDenemesi = new Date(s);
+    if(!isNaN(isoDenemesi.getTime())) return isoDenemesi;
+    const trEslesme = s.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})$/);
+    if(trEslesme){
+      let [, gun, ay, yil] = trEslesme;
+      if(yil.length===2) yil = '20'+yil;
+      const d = new Date(Date.UTC(Number(yil), Number(ay)-1, Number(gun)));
+      if(!isNaN(d.getTime())) return d;
+    }
+  }
+  return null;
+}
+function turkiyeSimdi(){
+  return new Date(Date.now() + 3*60*60*1000);
+}
+function turkiyeBugun(){
+  const t = turkiyeSimdi();
+  // BİLİNEN KISIT (bilinçli): Dönen değer UTC gece yarısına çapalıdır ama uygulama genelinde
+  // dateKeyLocal()/getDate() gibi YEREL erişimcilerle okunur. Cihaz saat dilimi UTC+0 veya
+  // pozitifse (Türkiye dahil, +3) gün DOĞRU çıkar; yalnızca NEGATİF ofsetli bir cihazda
+  // (ör. Amerika kıtası) gün 1 geri kayar. Kullanıcılar Türkiye'de olduğundan ve bu anahtarlar
+  // arşivde tarihsel olarak bu şekilde yazıldığından, geriye dönük uyumluluk adına DEĞİŞTİRMEYİN.
+  return new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()));
+}
+function excelDateToJSArti1Gun(v){
+  const d = excelDateToJS(v);
+  if(!d) return null;
+  return new Date(d.getTime() + 86400000);
+}
+
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('fileInput');
+const uploadError = document.getElementById('uploadError');
+const buildBtn = document.getElementById('buildBtn');
+// Ana Veri sekmesindeki (Veri Yükle panelindeki) ikinci "Raporu Oluştur" butonu — dropzone'daki
+// buildBtn ile AYNI akışı tetikler, aynı disabled/textContent durumunu senkron gösterir (bkz.
+// updateUploadUI ve raporuOlusturVeyaGuncelleAkisiniCalistir).
+const gvyAnaBuildBtn = document.getElementById('gvyAnaBuildBtn');
+const statusPill = document.getElementById('statusPill');
+const statusPillMsg = document.getElementById('statusPillMsg');
+const resetBtn = document.getElementById('resetBtn');
+const syncBtn = document.getElementById('syncBtn');
+
+// Sidebar'daki (sbResetBtn/sbSyncBtn/sbLogoutBtn) ikon butonları, gerçek topbar butonlarının
+// (resetBtn/syncBtn/authLogoutBtn) görünürlüğünü ve tıklama davranışını birebir yansıtır —
+// böylece iki ayrı görünürlük durumu elle senkron tutulmak zorunda kalınmaz.
+function syncSidebarFooterButtons(){
+  const pairs = [['sbResetBtn','resetBtn'], ['sbSyncBtn','syncBtn'], ['sbLogoutBtn','authLogoutBtn']];
+  pairs.forEach(([sbId, realId])=>{
+    const sb = document.getElementById(sbId);
+    const real = document.getElementById(realId);
+    if(!sb || !real) return;
+    sb.style.display = (real.style.display==='none' || getComputedStyle(real).display==='none') ? 'none' : 'inline-flex';
+  });
+}
+['sbResetBtn','sbSyncBtn','sbLogoutBtn'].forEach((sbId,i)=>{
+  const realId = ['resetBtn','syncBtn','authLogoutBtn'][i];
+  document.getElementById(sbId)?.addEventListener('click', ()=> document.getElementById(realId)?.click());
+});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('resetBtn'), {attributes:true, attributeFilter:['style']});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('syncBtn'), {attributes:true, attributeFilter:['style']});
+new MutationObserver(syncSidebarFooterButtons).observe(document.getElementById('authLogoutBtn'), {attributes:true, attributeFilter:['style']});
+syncSidebarFooterButtons();
+
+// Üst action bar'daki durum rozeti (statusPillMain), asıl statusPill ile birebir aynı metni ve
+// "ok" (başarılı) durumunu gösterir — tek bir yerden (statusPillMsg/statusPill) güncellenen
+// mevcut mantığı iki kez yazmak yerine burada pasif olarak yansıtıyoruz.
+function syncStatusPillMain(){
+  const mainMsg = document.getElementById('statusPillMainMsg');
+  const mainPill = document.getElementById('statusPillMain');
+  if(!mainMsg || !mainPill) return;
+  mainMsg.textContent = statusPillMsg.textContent;
+  mainPill.classList.toggle('ok', statusPill.classList.contains('ok'));
+}
+new MutationObserver(syncStatusPillMain).observe(statusPillMsg, {characterData:true, childList:true, subtree:true});
+new MutationObserver(syncStatusPillMain).observe(statusPill, {attributes:true, attributeFilter:['class']});
+syncStatusPillMain();
+
+dropzone.addEventListener('click', ()=>fileInput.click());
+dropzone.addEventListener('keydown', e=>{
+  if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
+    e.preventDefault();
+    fileInput.click();
+  }
+});
+dropzone.addEventListener('dragover', e=>{e.preventDefault(); dropzone.classList.add('drag');});
+dropzone.addEventListener('dragleave', ()=>dropzone.classList.remove('drag'));
+dropzone.addEventListener('drop', e=>{
+  e.preventDefault(); dropzone.classList.remove('drag');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e=>handleFiles(e.target.files));
+
+function showError(msg){
+  uploadError.textContent = msg;
+  uploadError.style.display = 'block';
+}
+function clearError(){ uploadError.style.display='none'; uploadError.textContent=''; }
+
+// Kabul edilen dosya uzantıları ve maksimum güvenli boyut (ana iş parçacığında okunduğu için
+// aşırı büyük dosyalar UI'ı dondurabilir — üstünde uyarı verilir ama okuma yine denenir).
+const KABUL_EDILEN_UZANTILAR = ['.xlsx', '.xls'];
+const MAKS_DOSYA_BOYUTU_MB = 25;
+
+// Bir çalışma kitabındaki TÜM sekmeleri sırayla deneyip başlıkları tanınabilen (detectType
+// bir tip döndüren) İLK sekmeyi döndürür. Böylece veri ilk sekmede değil de ikinci/üçüncü
+// sekmedeyse ya da ilk sekme boş bir kapak sayfasıysa dosya sessizce boş okunmaz.
+// Hiçbir sekme tanınamazsa, teşhis için ilk sekmenin başlıklarıyla birlikte null tip döner.
+function ilkUygunSayfayiSec(wb){
+  let ilkParse = null;
+  for(const sheetName of wb.SheetNames){
+    const ws = wb.Sheets[sheetName];
+    if(!ws) continue;
+    const parsed = sheetToObjects(ws);
+    if(ilkParse === null) ilkParse = {...parsed, sheetName};
+    const type = detectType(parsed.headers);
+    if(type) return {type, headers:parsed.headers, data:parsed.data, sheetName};
+  }
+  // Tanınan sekme yok: en azından ilk (boş olmayan) sekmenin başlıklarını teşhise geri ver.
+  return ilkParse ? {type:null, headers:ilkParse.headers, data:ilkParse.data, sheetName:ilkParse.sheetName}
+                  : {type:null, headers:[], data:[], sheetName:null};
+}
+
+// Tek bir dosyayı okur ve {file, durum, mesaj} döndürür (durum: 'ok' | 'bos' | 'taninmadi' | 'hata').
+// Hiçbir yan etki (state/DOM) YOK — çağıran, tüm dosyalar bitince tek seferde uygular ve özetler.
+function dosyaOku(file){
+  return new Promise(resolve=>{
+    // 1) Uzantı doğrulaması: .xlsx/.xls dışındaki dosyalar (ör. sürüklenen bir .pdf/.png) XLSX.read'e
+    //    hiç gitmeden erken, anlaşılır bir mesajla reddedilir.
+    const ad = String(file.name||'');
+    const uzantiUygun = KABUL_EDILEN_UZANTILAR.some(u=>ad.toLowerCase().endsWith(u));
+    if(!uzantiUygun){
+      resolve({file, durum:'hata', mesaj:'"'+ad+'" bir Excel dosyası değil (yalnızca '+KABUL_EDILEN_UZANTILAR.join(' / ')+' desteklenir).'});
+      return;
+    }
+    // 2) Boyut uyarısı (okuma yine denenir).
+    const buyukMu = file.size && file.size > MAKS_DOSYA_BOYUTU_MB*1024*1024;
+
+    const reader = new FileReader();
+    reader.onerror = ()=> resolve({file, durum:'hata', mesaj:'Dosya okunamadı: '+ad});
+    reader.onload = ev => {
+      try{
+        const wb = XLSX.read(ev.target.result, {type:'array', cellDates:true});
+        const {type, headers, data} = ilkUygunSayfayiSec(wb);
+        if(!type){
+          // En yakın imzayı ve eksik kolonları göstererek teşhisi hızlandır.
+          const headerSet = new Set(headers.map(h=>String(h||'').trim()));
+          let enYakinTip = null, enYakinEksik = null, enAzEksikSayisi = Infinity;
+          Object.keys(SIGNATURES).forEach(tip=>{
+            SIGNATURES[tip].forEach(sig=>{
+              const eksik = sig.filter(k=>!headerSet.has(k));
+              if(eksik.length < enAzEksikSayisi){
+                enAzEksikSayisi = eksik.length; enYakinTip = tip; enYakinEksik = eksik;
+              }
+            });
+          });
+          const ipucu = (enYakinTip && enAzEksikSayisi>0 && enAzEksikSayisi<=2)
+            ? ' "'+(LABELS[enYakinTip]||enYakinTip)+'" dosyasına en çok benziyor ama şu kolon(lar) eksik: '+enYakinEksik.join(', ')+'.'
+            : ' Bulunan kolonlar: '+headers.slice(0,8).join(', ')+(headers.length>8?'…':'')+'.';
+          resolve({file, durum:'taninmadi', mesaj:'"'+ad+'" tanınamadı ve atlandı.'+ipucu+' Beklenen kolon başlıklarını içeren bir SAP dışa aktarım dosyası olduğundan emin olun.'});
+          return;
+        }
+        // Başarılı: veriyi taşı (state değişikliği burada yapılır; tek dosya = tek yazma, yarış yok).
+        state.files[type] = {name:ad, headers, data};
+        const bosMu = !data.length;
+        let mesaj = null;
+        if(bosMu){
+          mesaj = '"'+ad+'" '+(LABELS[type]||type)+' olarak tanındı ancak içinde hiç veri satırı yok (yalnızca başlık satırı bulundu). Dosyanın doğru/filtrelenmemiş SAP dışa aktarımı olduğundan emin olun.';
+        } else if(buyukMu){
+          mesaj = '"'+ad+'" '+(LABELS[type]||type)+' olarak işlendi (dosya '+MAKS_DOSYA_BOYUTU_MB+' MB üzerinde olduğundan işlem biraz sürebilir).';
+        }
+        resolve({file, durum:bosMu?'bos':'ok', tip:type, mesaj});
+      }catch(err){
+        resolve({file, durum:'hata', mesaj:'Dosya okunamadı: '+ad+' — '+err.message});
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+// Birden fazla dosya aynı anda yüklendiğinde her biri kendi asenkron onload'ında showError
+// çağırıp öncekini EZİYORDU (yalnızca son biten mesaj görünüyordu). Artık tüm okumalar
+// Promise.all ile toplanır ve bittiğinde TEK BİRLEŞİK özet gösterilir.
+// xlsx kütüphanesi yüklendi mi? (CDN erişilemezse veya onerror tetiklendiyse false.)
+function xlsxHazirMi(){
+  return typeof XLSX !== 'undefined' && !window.__xlsxYuklenemedi;
+}
+
+function handleFiles(fileList){
+  clearError();
+  const files = Array.from(fileList);
+  if(!files.length) return;
+  // KRİTİK: Excel okuma kütüphanesi (xlsx) yüklenemediyse, dosyalar sessizce/anlamsız hatayla
+  // çökmesin — kullanıcıya net bir açıklama göster ve işlemi durdur.
+  if(!xlsxHazirMi()){
+    showError('Excel okuma bileşeni (xlsx) yüklenemedi. İnternet bağlantınızı kontrol edip sayfayı yenileyin. Sorun sürerse ağ, CDN erişimini (cdnjs.cloudflare.com) engelliyor olabilir.');
+    return;
+  }
+  Promise.all(files.map(dosyaOku)).then(sonuclar=>{
+    const basarili = sonuclar.filter(s=>s.durum==='ok');
+    const bos      = sonuclar.filter(s=>s.durum==='bos');
+    const atlanan  = sonuclar.filter(s=>s.durum==='taninmadi');
+    const hatali   = sonuclar.filter(s=>s.durum==='hata');
+
+    // DOM'u tek seferde güncelle.
+    updateChecklist();
+    if(typeof updateGvyPanel === 'function') updateGvyPanel();
+
+    // Birleşik özet mesajı. Sorunlu (boş/atlanan/hatalı) dosyalar tek tek ayrıntılı listelenir;
+    // sadece başarı varsa hata alanı temiz bırakılır.
+    const sorunlar = [...bos, ...atlanan, ...hatali];
+    if(!sorunlar.length){ clearError(); return; }
+
+    const parcalar = [];
+    if(basarili.length) parcalar.push(basarili.length+' dosya sorunsuz tanındı.');
+    sorunlar.forEach(s=>{ if(s.mesaj) parcalar.push(s.mesaj); });
+    showError(parcalar.join(' '));
+  });
+}
+
+function updateChecklist(){
+  Object.keys(state.files).forEach(type=>{
+    const item = document.querySelector('.check-item[data-type="'+type+'"]');
+    // Grup B dosyaları (Sipariş/Tahsilat/Fatura/Bayi Hak Ediş) artık ana ekran
+    // checklist'inde DEĞİL, üst panelde "Günlük Veri Yükle" panelinde gösteriliyor — bu tipler için
+    // ana ekranda karşılık gelen bir .check-item elementi yok, o yüzden burada güvenle atlanır.
+    if(!item) return;
+    const meta = item.querySelector('.check-meta');
+    const info = state.files[type];
+    if(info){
+      // 0 satırlık dosyalar teknik olarak "yüklendi" sayılsa da (kullanıcı bilerek devam
+      // edebilir, bkz. handleFiles'daki showError uyarısı), checklist'te normal bir "✓ tamam"
+      // ile aynı yeşil görünüme sahip olmaları kullanıcının bu satırı atlamasına neden
+      // olabiliyordu. Boşsa "done" yerine ayrı bir uyarı sınıfı ve ikonuyla gösteriyoruz.
+      const bosDosya = info.data.length === 0;
+      item.classList.toggle('done', !bosDosya);
+      item.classList.toggle('bos-veri-uyari', bosDosya);
+      item.querySelector('.check-icon').innerHTML = bosDosya
+        ? '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>'
+        : '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+      meta.textContent = info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır' + (bosDosya ? ' — ⚠️ veri boş' : '');
+    }else{
+      item.classList.remove('done');
+    }
+  });
+  // Ana Veri sekmesindeki (Veri Yükle panelindeki) Kalemler/Müşteri Master özet metinlerini de
+  // aynı state.files verisiyle senkron tutar — dropzone'daki checklist ile AYNI bilgiyi gösterir.
+  const gvyAnaKalemlerSub = document.getElementById('gvyAnaKalemlerSub');
+  if(gvyAnaKalemlerSub){
+    const info = state.files.kalemler;
+    gvyAnaKalemlerSub.textContent = info ? (info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır') : 'Dosya seçilmedi';
+  }
+  const gvyAnaMasterSub = document.getElementById('gvyAnaMasterSub');
+  if(gvyAnaMasterSub){
+    const info = state.files.musteriMaster;
+    gvyAnaMasterSub.textContent = info ? (info.name + ' · ' + info.data.length.toLocaleString('tr-TR') + ' satır') : 'Dosya seçilmedi';
+  }
+  // Ana ekran (Grup A): Kalemler + Müşteri Master gösterir. KALEMLER ARTIK ZORUNLU DEĞİL (kullanıcı
+  // kararı — büyük mimari değişiklik, bkz. GRUP_A_TARIH_KISITLAMASI_OLMAYANLAR ve
+  // raporuOlusturVeyaGuncelleAkisiniCalistir'deki kaldırılan güvenlik kontrolü notu). Bu ekranın
+  // GÖRSEL yeniden düzenlemesi (yeni "Ana Veri" sekmesi: Kalemler + Müşteri Master + Cari Ekstre)
+  // ayrı bir adımda yapılacak — burada yalnızca FONKSİYONEL kısıt (buton kilidi) kaldırılıyor.
+  const anaEkranTipleri = ['kalemler','musteriMaster'];
+  const kalemlerLoaded = Boolean(state.files.kalemler);
+  const total = anaEkranTipleri.length;
+  const loadedCount = anaEkranTipleri.filter(t=> Boolean(state.files[t])).length;
+  const allLoaded = loadedCount === total;
+  // KİLİT KALDIRILDI: Rapor artık Kalemler olmadan da (Müşteri Master + Cari Ekstre ile) oluşabilir.
+  buildBtn.disabled = false;
+  buildBtn.textContent = 'Raporu Oluştur';
+  if(gvyAnaBuildBtn){ gvyAnaBuildBtn.disabled = false; gvyAnaBuildBtn.textContent = 'Raporu Oluştur'; }
+  statusPillMsg.textContent = allLoaded
+    ? (total+'/'+total+' dosya hazır')
+    : (kalemlerLoaded
+        ? (loadedCount+'/'+total+' dosya · Kalemler hazır (Müşteri Master opsiyonel)')
+        : (loadedCount+'/'+total+' dosya · Kalemler ve Müşteri Master opsiyonel'));
+  if(kalemlerLoaded) statusPill.classList.add('ok');
+}
+
+// "Raporu Oluştur" (ana ekran) ve "Veri Güncelle" (Grup B / Günlük Veri Yükle paneli) AYNI akışı
+// kullanır — hesaplama/arşivleme mantığı tek bir yerde (burada) yaşar, iki farklı buton bunu
+// tetikler. Bu sayede Grup B paneli için ayrı/bağımsız bir hesaplama motoru yazmaya gerek kalmaz.
+async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
+  try{
+    let musteriMasterMapKullanilacak = state.musteriMasterMap;
+    if(state.files.musteriMaster){
+      musteriMasterMapKullanilacak = buildMusteriMasterMap(state.files.musteriMaster.data);
+      state.musteriMasterMap = musteriMasterMapKullanilacak;
+      const kaydedilenMap = await musteriMasterKaydet(state.files.musteriMaster.data, state.files.musteriMaster.headers);
+      if(kaydedilenMap.__kaydetmeHatalari && kaydedilenMap.__kaydetmeHatalari.length){
+        // Cihaz depolama kapalı — Müşteri Master buluta yazılamazsa bu veri HİÇBİR YERDE
+        // kalıcı değildir, sayfa yenilenirse kaybolur. Rapor oluşturmayı durdurmuyoruz (Kalemler
+        // zaten işlenecek) ama kullanıcıyı açıkça uyarıyoruz.
+        alert('UYARI: Müşteri Master verisi buluta kaydedilemedi (cihaza da kaydedilmiyor, bu özellik kapalı) — sayfa yenilenirse bu veri kaybolur:\n\n' + kaydedilenMap.__kaydetmeHatalari.join('\n'));
+      }
+    }
+    // Ticari Stok/Çek-Senet/Ciro Primi/Dönemsel İskonto: bugün yeniden seçilmemişse en son bilinen
+    // hali (ne kadar eski olursa olsun) otomatik getirir. Kalemler için ise SADECE BUGÜNE ait bir
+    // kayıt varsa doldurulur — aynı gün içinde tekrar seçmenize gerek kalmaz, ama YENİ bir güne
+    // geçilip Kalemler o gün için hiç yüklenmediyse bilerek BOŞ bırakılır (bkz.
+    // grupATekilDosyalariHazirla ve KALEMLER_BUGUN_ZORUNLU açıklaması).
+    await grupATekilDosyalariHazirla();
+    // GÜVENLİK KONTROLÜ KALDIRILDI (kullanıcı kararı — büyük mimari değişiklik): Önceden Kalemler
+    // hiç yüklenmemişse burada hata fırlatılıp TÜM işlem durduruluyordu. Artık kart oluşturma
+    // Müşteri Master'a, bakiye Cari Ekstre'ye bağlı olduğundan Kalemler'in varlığı ZORUNLU değil —
+    // Kalemler yalnızca (varsa) mevcut kartlara açık fatura detayı ekler. state.files.kalemler boş
+    // olsa bile buildReport artık normal şekilde çalışabilir (bkz. buildReport'un başındaki
+    // "files.kalemler || {data:[]}" güvenli varsayılanı).
+    // ÇEK/SENET RİSKİ — ARŞİV BİRLEŞTİRME (kullanıcı isteği): buildReport'tan ÖNCE, bu oturumda
+    // yeni bir Çek/Senet Riski dosyası seçildiyse (state.files.cekSenet doluysa) kalıcı arşivle
+    // birleştirilir — yeni/güncellenen kayıtlar arşive işlenir, eski arşivde olup bu dosyada
+    // OLMAYAN kayıtlar SİLİNMEZ, cekSenetEksikKalanlar listesine düşer (aşağıda rapor
+    // oluşturulduktan sonra kullanıcıya "Tahsil Edildi mi, İptal mi?" olarak sorulur).
+    if(state.files.cekSenet && state.files.cekSenet.data && state.files.cekSenet.data.length){
+      const {arsiv, eksikKalanlar} = cekSenetArsiviniBirlestir(state.cekSenetArsivi, state.files.cekSenet.data);
+      state.cekSenetArsivi = arsiv;
+      state.cekSenetEksikKalanlar = eksikKalanlar;
+      await cekSenetArsiviniKaydet(arsiv);
+    }
+    // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği): çek/senetle BİREBİR AYNI
+    // desen. buildReport'tan ÖNCE, bu oturumda yeni bir Tahsilat Dökümü dosyası seçildiyse kalıcı
+    // arşivle birleştirilir (belge no bazlı ekle/güncelle + Ters Kayıt ile sil + Ön Kayıt yaşam
+    // döngüsü temizliği — bkz. 01-cekirdek-ve-arsiv.js: tahsilatArsiviniBirlestir). Bu, YIL
+    // BOYUNCA tek seferde toplu yüklenen bir dosyanın her satırının kendi Tarih gününe doğru
+    // dağıtılabilmesini sağlar; sonraki kısmi (ör. son hafta) yüklemeler diğer günlere dokunmaz.
+    if(state.files.tahsilat && state.files.tahsilat.data && state.files.tahsilat.data.length){
+      state.tahsilatArsivi = tahsilatArsiviniBirlestir(state.tahsilatArsivi, state.files.tahsilat.data);
+      await tahsilatArsiviniKaydet(state.tahsilatArsivi);
+    }
+    state.report = buildReport(state.files, musteriMasterMapKullanilacak);
+    // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle
+    // tek-slot arşivine kaydedildi — Grup B/C panellerinin "Kalemler yok" sanmaması için bayrağı set et.
+    state.bugunKalemlerHazir = true;
+    await bayiHakedisRaporuOlustur();
+    await sellOutRaporuOlustur();
+    renderReport(state.report);
+    document.getElementById('uploadCard').style.display='none';
+    document.getElementById('reportSection').style.display='block';
+    document.body.classList.add('has-sidebar');
+    resetBtn.style.display='inline-block';
+    // ÇEK/SENET EKSİK KALAN UYARISI: rapor başarıyla oluşturulup ekrana yansıdıktan SONRA tetiklenir
+    // (kullanıcı isteği: "dosya yüklenip rapor tekrar oluştuktan sonra tetiklenecek"). Modal, arşivde
+    // kalan ama son yüklenen Çek/Senet Riski dosyasında olmayan kayıtları listeler.
+    if(state.cekSenetEksikKalanlar && state.cekSenetEksikKalanlar.length){
+      cekSenetEksikOnayModalAc(state.cekSenetEksikKalanlar);
+    }
+    // ÖNEMLİ: Cihaz depolama (IndexedDB) tamamen devre dışı (kullanıcı isteği) — saveReportToStorage
+    // artık gerçekte HİÇBİR YERE yazmayan bir no-op'tur, her zaman true döner. Bu yüzden onun
+    // sonucuna güvenip "kaydedildi" demek YANLIŞ OLURDU; gerçek kalıcılık YALNIZCA bulut yazması
+    // (saveReportToCloud) başarılı olursa vardır. Aşağıdaki mesajlar buna göre düzenlenmiştir.
+    await saveReportToStorage(state.report);
+    faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
+    await yuklemeRaporuOlusturVeArsivle();
+    document.getElementById('storageNote').style.display = 'block';
+    if(cloudEnabled()){
+      syncBtn.style.display = 'inline-block';
+      statusPillMsg.textContent = 'Rapor oluşturuldu, buluta yükleniyor…';
+      const res = await saveReportToCloud(state.report);
+      if(res.ok){
+        statusPillMsg.textContent = 'Rapor buluta yüklendi — diğer cihazlarda da görünecek';
+        statusPill.classList.add('ok');
+        document.getElementById('storageNoteMsg').textContent = 'Bu rapor buluta yüklendi; aynı bağlantıyı kullanan diğer cihazlar sayfayı açtığında (veya "Diğer Cihazdan Güncelle" ile) otomatik görecek.';
+        // iOS'ta kullanıcı ilk raporunu başarıyla oluşturduğunda — uygulamayı ana ekrana
+        // eklemeye en istekli olduğu an — kurulum ipucunu (bir kereye mahsus) gösteriyoruz.
+        if(typeof window.iosKurulumIpucunuGoster === 'function') window.iosKurulumIpucunuGoster(true);
+      }else{
+        // Cihaz depolama olmadığı için bulut yazması başarısız olursa rapor HİÇBİR YERDE kalıcı
+        // DEĞİLDİR — sayfa yenilenirse kaybolur. Bunu kullanıcıdan gizlemek yerine açıkça belirtiyoruz.
+        statusPillMsg.textContent = 'UYARI: Rapor buluta kaydedilemedi — sayfa yenilenirse kaybolur!';
+        statusPill.classList.remove('ok');
+        document.getElementById('storageNoteMsg').textContent = 'Bulut bağlantısı/yetkisi başarısız olduğu için bu rapor HİÇBİR YERE kalıcı kaydedilmedi (cihaz depolama kapalı). Lütfen giriş durumunuzu ve internet bağlantınızı kontrol edip "Diğer Cihazdan Güncelle" veya tekrar "Raporu Oluştur" ile yeniden deneyin.';
+        alert('UYARI: Rapor buluta kaydedilemedi. Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfayı yenilerseniz bu rapor kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+      }
+    }else{
+      // Bulut kapalıyken (BULUTSUZ_TEST açık veya CLOUD yapılandırması eksik) veri kesinlikle
+      // hiçbir yere kalıcı yazılamaz — kullanıcıyı yanıltmamak için net şekilde uyarıyoruz.
+      statusPillMsg.textContent = 'UYARI: Bulut bağlantısı kapalı — rapor kalıcı kaydedilmedi!';
+      statusPill.classList.remove('ok');
+      document.getElementById('storageNoteMsg').textContent = 'Bulut bağlantısı şu an kapalı (cihaz depolama da devre dışı) — bu rapor hiçbir yere kalıcı kaydedilmedi, sayfa yenilenirse kaybolur.';
+    }
+  }catch(err){
+    showError('Rapor oluşturulurken hata oluştu: ' + err.message);
+    console.error(err);
+    throw err; // Grup B panelinin "Veri Güncelle" butonu da bu hatayı yakalayıp kendi durum mesajında gösterebilsin diye yeniden fırlatılır.
+  }
+}
+buildBtn.addEventListener('click', raporuOlusturVeyaGuncelleAkisiniCalistir);
+if(gvyAnaBuildBtn) gvyAnaBuildBtn.addEventListener('click', raporuOlusturVeyaGuncelleAkisiniCalistir);
+
+syncBtn.addEventListener('click', async ()=>{
+  if(!cloudEnabled()) return;
+  if(!(await ortakSifreDogrula('Diğer cihazdan güncellemek için şifreyi girin:'))) return;
+  syncBtn.disabled = true;
+  const prevText = syncBtn.textContent;
+  syncBtn.textContent = '🔄 Güncelleniyor…';
+  try{
+    // Bu 6 çağrı da (uygulamayiBaslat'taki gibi) birbirinden bağımsız — paralel çalıştırılır.
+    const [cloudReport] = await Promise.all([
+      loadReportFromCloud(),
+      faturaArsivYenile(true),
+      musteriMasterYenile(),
+      bayiHakedisYenile(),
+      sellOutHedefYenile(),
+      sellOutYenile(),
+      sellOutArsivYenile(true),
+    ]);
+    if(document.getElementById('bayiHakedisView') && document.getElementById('bayiHakedisView').style.display !== 'none') renderBayiHakedisView();
+    if(document.getElementById('sellOutView') && document.getElementById('sellOutView').style.display !== 'none') renderSellOutView();
+    if(document.getElementById('faturaKontrolArsivBilgi')) await renderFaturaKontrolArsivBilgi();
+    if(cloudReport && cloudReport.musteriler && cloudReport.musteriler.length){
+      raporuNormalizeEt(cloudReport); // eksik alanlara dayanıklılık
+      state.report = cloudReport;
+      state.expanded.clear();
+      await saveReportToStorage(cloudReport);
+      canliGunlerleGuncelle(cloudReport);
+      renderReport(cloudReport);
+      statusPillMsg.textContent = 'Buluttan güncellendi (' + fmtDate(cloudReport.asOf) + ')';
+      statusPill.classList.add('ok');
+    }else{
+      statusPillMsg.textContent = 'Buluttan veri alınamadı, mevcut rapor gösteriliyor';
+    }
+  }catch(err){
+    console.error('Diğer cihazdan güncelleme başarısız:', err);
+    alert('Güncelleme sırasında bir hata oluştu: ' + err.message + '\n\nLütfen tekrar deneyin.');
+  }finally{
+    syncBtn.disabled = false;
+    syncBtn.textContent = prevText;
+  }
+});
