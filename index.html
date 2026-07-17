@@ -863,6 +863,10 @@
           </div>
           <div class="toolbar">
             <select class="filter-select" id="yuklemeTarihSelect"></select>
+            <button class="btn yukleme-head-btn" id="yuklemeIptalBtn" type="button" style="display:none;position:relative;">
+              <i class="fa-solid fa-ban" aria-hidden="true"></i> İptal Siparişler
+              <span class="badge" id="yuklemeIptalSayacBadge" style="margin-left:4px;"></span>
+            </button>
             <button class="btn yukleme-head-btn" id="yuklemeYenileBtn" type="button"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i> Arşivi Yenile</button>
           </div>
         </div>
@@ -1911,6 +1915,60 @@
                 <th>Müşteri</th><th>No</th><th>Tip</th><th>Vade</th><th class="num">Tutar</th><th>Karar</th>
               </tr></thead>
               <tbody id="cekSenetEksikModalTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="yuklemeIptalModalOverlay">
+      <div class="modal" id="yuklemeIptalModal" role="dialog" aria-modal="true" aria-labelledby="yuklemeIptalModalTitle" style="max-width:720px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-ban" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="yuklemeIptalModalTitle">İptal Siparişler</div>
+              <div class="modal-head-navy-sub" id="yuklemeIptalModalSub"></div>
+            </div>
+          </div>
+          <button class="modal-close" id="yuklemeIptalModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:14px 20px 0;font-size:12.5px;color:var(--ink-soft);">
+            Teslim Statüsü "Not Delivered" veya "Rejected" olan siparişler — bu litreler Sevkiyat toplamına
+            ve ilgili temsilcinin litre rakamına DAHİL EDİLMEZ. Seçili günün (yukarıdaki tarih seçicideki)
+            listesidir; başka bir gün için tarih seçiciden değiştirip tekrar açabilirsiniz.
+          </div>
+          <div class="table-scroll" style="padding:12px 20px 20px;">
+            <table id="yuklemeIptalModalTable">
+              <thead><tr>
+                <th>Müşteri</th><th>Sipariş Kodu</th><th>Durum</th><th>Temsilci</th><th class="num">Ürün Sayısı</th><th class="num">Toplam Litre</th><th>Detay</th>
+              </tr></thead>
+              <tbody id="yuklemeIptalModalTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="yuklemeIptalUrunModalOverlay" style="z-index:1200;">
+      <div class="modal" id="yuklemeIptalUrunModal" role="dialog" aria-modal="true" aria-labelledby="yuklemeIptalUrunModalTitle" style="max-width:560px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="yuklemeIptalUrunModalTitle">Sipariş Ürün Detayı</div>
+              <div class="modal-head-navy-sub" id="yuklemeIptalUrunModalSub"></div>
+            </div>
+          </div>
+          <button class="modal-close" id="yuklemeIptalUrunModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="table-scroll" style="padding:12px 20px 20px;">
+            <table id="yuklemeIptalUrunModalTable">
+              <thead><tr><th>Ürün</th><th class="num">Litre</th></tr></thead>
+              <tbody id="yuklemeIptalUrunModalTbody"></tbody>
+              <tfoot id="yuklemeIptalUrunModalTfoot"></tfoot>
             </table>
           </div>
         </div>

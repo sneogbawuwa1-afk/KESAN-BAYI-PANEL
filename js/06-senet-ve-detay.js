@@ -945,6 +945,49 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
   //      fazla tahsilat ortalamayı yapay şekilde şişirmez/bozmaz.
   //   3) TÜM tahsilatların (kırpma uygulanmadan) TUTAR AĞIRLIKLI ORTALAMA TARİHİ ayrıca alınır.
   //   4) geriDonusGun = (Ort. Tahsilat Tarihi) − (Ort. Kapanmış Fatura Tarihi), gün cinsinden.
+  //
+  // AÇILIŞ BAKİYESİ DÜZELTMESİ (kritik düzeltme #5 — kullanıcı tarafından 3 aylık pencere için
+  // Excel'de doğrulandı, 19,79g manuel hesapla birebir teyit edildi): Kısa pencerelerde (3/6 ay),
+  // pencere BAŞLANGICINDAN ÖNCE zaten var olan açık bakiye hesaba katılmıyordu. Bu durumda o eski
+  // bakiyenin pencere içinde yapılan tahsilatları, penceredeki faturayı aşan bir "fazla ödeme"
+  // gibi görünüyor ve yukarıdaki adım 2 gereği BUGÜN tarihli (gün farkı 0) sanal faturaya
+  // dönüştürülüyordu — bu da gerçek dönüşü yapay şekilde 0'a çekiyordu (örn. Kaplan Gıda 2'de
+  // 3 aylık pencere -17,5g/0g çıkıyordu, oysa açılış bakiyesi dahil edilince 19,79g çıkıyor).
+  // ÇÖZÜM: pencere başlangıcından önceki tüm fatura/devir-bakiye tutarından, yine pencere
+  // başlangıcından önceki tüm tahsilat tutarı çıkarılır; kalan pozitifse bu, pencere BAŞLANGIÇ
+  // TARİHLİ bir "açılış bakiyesi" faturası olarak SADECE bu Dönüş hesabına eklenir (KPI'lardaki
+  // toplamFatura/aylikFatura rakamlarına DAHİL EDİLMEZ — onlar hâlâ sadece pencereye tarihli
+  // gerçek faturaları sayar).
+  let acilisBakiyesi = 0;
+  if(ayPenceresi != null){
+    const faturaOncesiToplam = birlesik.faturaArsiv
+      .filter(r=> r.musteri===musteri && r.faturaTarihi && new Date(r.faturaTarihi).getTime() < pencereBaslangic)
+      .reduce((a,b)=>a+(b.tutar||0), 0)
+      + Object.values(state.devirBakiyeArsivi||{})
+        .filter(r=> r.musteri===musteri && r.faturaTarihi && new Date(r.faturaTarihi).getTime() < pencereBaslangic)
+        .reduce((a,b)=>a+(b.tutar||0), 0);
+
+    const tahsilatOncesiNormal = Object.values(state.tahsilatArsivi||{})
+      .filter(r=> r.musteriKod===musteri && r.tarih && new Date(r.tarih).getTime() < pencereBaslangic
+        && (r.tahsilatKategori==='Normal' || r.tahsilatKategori==='Odeme' || r.tahsilatKategori==='Virman'))
+      .reduce((a,b)=>a+(b.tutar||0), 0);
+    const tahsilatOncesiHakedisDokum = Object.values(state.tahsilatArsivi||{})
+      .filter(r=> r.musteriKod===musteri && r.tarih && new Date(r.tarih).getTime() < pencereBaslangic && r.tahsilatKategori==='Hakedis')
+      .reduce((a,b)=>a+(b.tutar||0), 0);
+    const tahsilatOncesiHakedis = (birlesik.bayiHakedisArsiv || [])
+      .filter(r=> r.musteri===musteri && r.tahsilatTarihi && new Date(r.tahsilatTarihi).getTime() < pencereBaslangic)
+      .reduce((a,b)=>a+(b.tutar||0), 0) + tahsilatOncesiHakedisDokum;
+    const tahsilatOncesiCekSenet = Object.values(state.cekSenetArsivi||{})
+      .filter(r=> r.musteriKod===musteri && r.durum==='tahsilEdildi' && r.belgeTarihi && new Date(r.belgeTarihi).getTime() < pencereBaslangic)
+      .reduce((a,b)=>a+(b.tutar||0), 0);
+    const tahsilatOncesiIade = (birlesik.tahsilatArsiv || [])
+      .filter(r=> r.musteri===musteri && r.formatKaynagi==='FaturaIade' && r.belgeTarihi && new Date(r.belgeTarihi).getTime() < pencereBaslangic)
+      .reduce((a,b)=>a+(b.tutar||0), 0);
+
+    const tahsilatOncesiToplam = tahsilatOncesiNormal + tahsilatOncesiHakedis + tahsilatOncesiCekSenet + tahsilatOncesiIade;
+    acilisBakiyesi = Math.max(0, faturaOncesiToplam - tahsilatOncesiToplam);
+  }
+
   let geriDonusGun = null;
   let geriDonusYaklasik = false;
   {
@@ -952,6 +995,9 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
       .filter(r=> r.faturaTarihi && r.tutar>0)
       .map(r=>({tarih: new Date(r.faturaTarihi).getTime(), kalan: r.tutar}))
       .sort((a,b)=> a.tarih-b.tarih);
+    if(acilisBakiyesi > 0.01){
+      fifoFaturalarTumu.unshift({tarih: pencereBaslangic, kalan: acilisBakiyesi});
+    }
     const fifoTahsilatlar = tahsilatlar
       .filter(r=> r.belgeTarihi && r.tutar>0)
       .map(r=>({tarih: new Date(r.belgeTarihi).getTime(), tutar: r.tutar}))
@@ -994,10 +1040,11 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
       const ortFaturaTarihi = agirlikliFaturaTarihToplami / toplamKapanmisBorc;
       const ortTahsilatTarihi = agirlikliTahsilatTarihToplami / toplamTahsilatTutari;
       geriDonusGun = Math.max(0, (ortTahsilatTarihi - ortFaturaTarihi) / 86400000);
-      // Kapanmış fatura toplamı, pencere içi toplam faturadan (toplamFatura) belirgin farklıysa
-      // (yani kırpma sonrası kalan kısım pencere dışı faturalarla da örtüşüyorsa) sonuç
-      // yaklaşık sayılır.
-      geriDonusYaklasik = Math.abs(toplamKapanmisBorc - toplamFatura) > toplamFatura*0.02;
+      // Kapanmış fatura toplamı, pencere içi toplam faturadan (+ varsa açılış bakiyesinden)
+      // belirgin farklıysa (yani kırpma sonrası kalan kısım pencere dışı faturalarla da
+      // örtüşüyorsa) sonuç yaklaşık sayılır.
+      const kiyasPayi = toplamFatura + acilisBakiyesi;
+      geriDonusYaklasik = kiyasPayi > 0.01 && Math.abs(toplamKapanmisBorc - kiyasPayi) > kiyasPayi*0.02;
     }
   }
 
@@ -1327,6 +1374,10 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
 
   const yuklemeParsed = (yuklemeRows||[]).map(r=>({
     musteriNo: yuklemeKod(r['Müşteri Numarası']),
+    // musteriAdi ve urunAdi: sadece "İptal Siparişler" listesinde gösterim amaçlı (kullanıcı
+    // isteği, 17.07.2026) — litre/tahsilat hesaplamalarını etkilemez.
+    musteriAdi: String(r['Müşteri Adı']||'').trim(),
+    urunAdi: String(r['Ürün Adı']||'').trim(),
     litre: yuklemeNumber(r['Litre Total']),
     // Not: excelDateToJSArti1Gun kullanılır — bkz. yukarıdaki belgeTarihi notu (saat dilimi kaynaklı
     // 1 günlük kaymayı telafi eder).
@@ -1376,6 +1427,33 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
     // sevkiyat litre'ye sayılmaz; arşivde önceden bu sipariş nedeniyle var olan bir kayıt varsa
     // aşağıdaki tam-gün yeniden hesaplama sayesinde kendiliğinden düşer).
     const yuklemeGununSatirlari = yGun ? yGun.satirlar.filter(r=> r.teslimStatusu !== 'Not Delivered' && r.teslimStatusu !== 'Rejected') : [];
+
+    // İPTAL SİPARİŞLER (kullanıcı isteği, 17.07.2026): yukarıdaki filtrede hesap dışı bırakılan
+    // (Teslim Statüsü = 'Not Delivered' veya 'Rejected') satırlar artık sessizce kaybolmuyor —
+    // sipariş kodu bazında gruplanıp bu günün arşiv kaydına ayrı bir liste olarak ekleniyor. ST
+    // Tahsilat/Litre ekranındaki "İptal Siparişler" butonu bu listeyi gün gün gösterir.
+    const iptalGununSatirlari = yGun ? yGun.satirlar.filter(r=> r.teslimStatusu === 'Not Delivered' || r.teslimStatusu === 'Rejected') : [];
+    const iptalMap = new Map();
+    iptalGununSatirlari.forEach(r=>{
+      const key = r.musteriNo + '|' + r.siparisKodu + '|' + r.teslimStatusu;
+      if(!iptalMap.has(key)){
+        iptalMap.set(key, {
+          musteriNo: r.musteriNo,
+          musteriAdi: r.musteriAdi || r.musteriNo,
+          siparisKodu: r.siparisKodu,
+          teslimStatusu: r.teslimStatusu,
+          temsilci: musteriTemsilciHaritasi.get(r.musteriNo) || 'Tanımsız',
+          litre: 0,
+          urunSayisi: 0,
+          urunler: [],
+        });
+      }
+      const kayit = iptalMap.get(key);
+      kayit.litre += r.litre;
+      kayit.urunSayisi += 1;
+      if(r.urunAdi) kayit.urunler.push({ad: r.urunAdi, litre: r.litre});
+    });
+    const iptalSiparisler = Array.from(iptalMap.values()).sort((a,b)=> b.litre-a.litre);
 
     const litreByMusteri = new Map();
     yuklemeGununSatirlari.forEach(r=>{
@@ -1449,6 +1527,7 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
       genelToplamSatiri,
       belgeNoListesi: Array.from(belgeNoSeti),
       siparisKoduListesi: Array.from(siparisKoduSeti),
+      iptalSiparisler,
       // Bu iki bayrak, arşiv birleştirmede (yuklemeGununuArsivIleBirlestir) hangi tarafın (tahsilat
       // rakamları mı, sevkiyat/litre verisi mi) bu yüklemede TAZE geldiğini, hangisinin arşivden
       // olduğu gibi korunması gerektiğini belirler.
@@ -1526,6 +1605,17 @@ function renderYuklemeTable(report){
   state.yuklemeGosterilenRapor = report;
   const kolonlar = report.kolonlar || [];
   const sevkiyatBaslik = fmtDate(report.yuklemeTarihi) + ' SEVKİYAT';
+
+  // İPTAL SİPARİŞLER butonu: bu günün arşiv kaydında iptal/reddedilmiş sipariş varsa buton
+  // görünür olur ve toplam sayıyı rozet olarak gösterir; yoksa buton tamamen gizlenir.
+  const iptalBtn = document.getElementById('yuklemeIptalBtn');
+  const iptalListesi = report.iptalSiparisler || [];
+  if(iptalListesi.length){
+    iptalBtn.style.display = 'inline-flex';
+    document.getElementById('yuklemeIptalSayacBadge').textContent = iptalListesi.length;
+  } else {
+    iptalBtn.style.display = 'none';
+  }
 
   renderYuklemeToplamOzet(report);
 
@@ -1678,6 +1768,10 @@ function yuklemeGunuLitreIleBirlestir(yeniGun, eskiGun){
     temsilciler: birlesikTemsilciler,
     genelToplamSatiri,
     yuklemeTarihi: eskiGun.yuklemeTarihi || yeniGun.yuklemeTarihi,
+    // İPTAL SİPARİŞLER: bu yüklemede sevkiyat/Yükleme Raporu verisi TAZE DEĞİL (sadece Tahsilat
+    // Dökümü geldi) — o yüzden bu günün iptal/reddedilmiş sipariş listesi de (litre gibi) eski
+    // arşivden korunur, yeniGun'daki (boş) liste ile ezilmez.
+    iptalSiparisler: (eskiGun.iptalSiparisler && eskiGun.iptalSiparisler.length) ? eskiGun.iptalSiparisler : (yeniGun.iptalSiparisler||[]),
   });
 }
 
@@ -1912,6 +2006,74 @@ document.getElementById('yuklemeTarihSelect').addEventListener('change', (e)=>{
   if(rapor) renderYuklemeTable(rapor);
 });
 document.getElementById('yuklemeYenileBtn').addEventListener('click', renderYuklemeView);
+
+// İPTAL SİPARİŞLER MODALI (kullanıcı isteği, 17.07.2026): Teslim Statüsü 'Not Delivered'/'Rejected'
+// olduğu için Sevkiyat/litre toplamına dahil edilmeyen siparişleri, uyarı poposu yerine talep
+// üzerine açılan bir liste olarak gösterir — seçili günün (yuklemeTarihSelect) arşiv kaydından okur.
+function yuklemeIptalSatirHtml(k, idx){
+  const durumEtiket = k.teslimStatusu === 'Rejected' ? 'Reddedildi' : 'Teslim Edilmedi';
+  return `<tr>
+    <td>${escapeHtml(k.musteriAdi)}</td>
+    <td>${escapeHtml(k.siparisKodu||'—')}</td>
+    <td><span class="pill danger">${escapeHtml(durumEtiket)}</span></td>
+    <td>${escapeHtml(k.temsilci)}</td>
+    <td class="num">${k.urunSayisi}</td>
+    <td class="num num-strong">${YUKLEME_LT2(k.litre)} Lt</td>
+    <td><button type="button" class="nokta-detay-btn primary yukleme-iptal-urun-detay-btn" data-idx="${idx}">Detay ↗</button></td>
+  </tr>`;
+}
+function yuklemeIptalModalAc(report){
+  const liste = (report && report.iptalSiparisler) || [];
+  // Ürün detay popup'ının (aşağıdaki yuklemeIptalUrunModalAc) hangi siparişe ait olduğunu bulabilmesi
+  // için, o an modalde gösterilen liste burada saklanır (satırdaki data-idx ile eşleştirilir).
+  state.yuklemeIptalGosterilenListe = liste;
+  const toplamLitre = liste.reduce((a,k)=>a+k.litre, 0);
+  document.getElementById('yuklemeIptalModalSub').textContent =
+    fmtDate(report.yuklemeTarihi) + ' — ' + liste.length + ' sipariş, toplam ' + YUKLEME_LT2(toplamLitre) + ' Lt';
+  document.getElementById('yuklemeIptalModalTbody').innerHTML = liste.map(yuklemeIptalSatirHtml).join('')
+    || '<tr><td colspan="7" class="empty-state">Bu gün için iptal/reddedilmiş sipariş yok</td></tr>';
+  document.getElementById('yuklemeIptalModalOverlay').classList.add('open');
+}
+function yuklemeIptalModalKapat(){
+  document.getElementById('yuklemeIptalModalOverlay').classList.remove('open');
+}
+document.getElementById('yuklemeIptalBtn').addEventListener('click', ()=>{
+  if(state.yuklemeGosterilenRapor) yuklemeIptalModalAc(state.yuklemeGosterilenRapor);
+});
+document.getElementById('yuklemeIptalModalClose').addEventListener('click', yuklemeIptalModalKapat);
+document.getElementById('yuklemeIptalModalOverlay').addEventListener('click', (e)=>{
+  if(e.target.id==='yuklemeIptalModalOverlay') yuklemeIptalModalKapat();
+});
+
+// SİPARİŞ ÜRÜN DETAYI — ikinci seviye popup (kullanıcı isteği, 17.07.2026): İptal Siparişler
+// listesindeki bir satırın "Detay ↗" butonuna basıldığında, o siparişin içindeki her ürünü kendi
+// litresiyle ayrı ayrı gösterir.
+function yuklemeIptalUrunModalAc(kayit){
+  document.getElementById('yuklemeIptalUrunModalSub').textContent =
+    escapeHtml(kayit.musteriAdi) + ' · ' + (kayit.teslimStatusu==='Rejected' ? 'Reddedildi' : 'Teslim Edilmedi')
+    + ' · Sipariş ' + (kayit.siparisKodu||'—');
+  const urunler = (kayit.urunler||[]).slice().sort((a,b)=> b.litre-a.litre);
+  document.getElementById('yuklemeIptalUrunModalTbody').innerHTML = urunler.map(u=>`
+    <tr><td>${escapeHtml(u.ad)}</td><td class="num">${YUKLEME_LT2(u.litre)} Lt</td></tr>`).join('')
+    || '<tr><td colspan="2" class="empty-state">Ürün bilgisi yok</td></tr>';
+  document.getElementById('yuklemeIptalUrunModalTfoot').innerHTML =
+    `<tr><td><b>Toplam</b></td><td class="num num-strong">${YUKLEME_LT2(kayit.litre)} Lt</td></tr>`;
+  document.getElementById('yuklemeIptalUrunModalOverlay').classList.add('open');
+}
+function yuklemeIptalUrunModalKapat(){
+  document.getElementById('yuklemeIptalUrunModalOverlay').classList.remove('open');
+}
+document.getElementById('yuklemeIptalModalTbody').addEventListener('click', (e)=>{
+  const btn = e.target.closest('.yukleme-iptal-urun-detay-btn');
+  if(!btn) return;
+  const idx = Number(btn.dataset.idx);
+  const kayit = (state.yuklemeIptalGosterilenListe||[])[idx];
+  if(kayit) yuklemeIptalUrunModalAc(kayit);
+});
+document.getElementById('yuklemeIptalUrunModalClose').addEventListener('click', yuklemeIptalUrunModalKapat);
+document.getElementById('yuklemeIptalUrunModalOverlay').addEventListener('click', (e)=>{
+  if(e.target.id==='yuklemeIptalUrunModalOverlay') yuklemeIptalUrunModalKapat();
+});
 
 const yuklemeSortSelect = document.getElementById('yuklemeSortSelect');
 const yuklemeSortDirBtn = document.getElementById('yuklemeSortDirBtn');

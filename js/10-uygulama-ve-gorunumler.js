@@ -20,7 +20,9 @@
     senetModalOverlay:            typeof senetModalKapat==='function'             ? senetModalKapat             : null,
     hakedisModalOverlay:          typeof hakedisModalKapat==='function'           ? hakedisModalKapat           : null,
     faturaKesilmeyenModalOverlay: typeof faturaKesilmeyenModalKapat==='function'  ? faturaKesilmeyenModalKapat  : null,
-    karneRiskliModalOverlay:      typeof karneRiskliModalKapat==='function'       ? karneRiskliModalKapat       : null
+    karneRiskliModalOverlay:      typeof karneRiskliModalKapat==='function'       ? karneRiskliModalKapat       : null,
+    yuklemeIptalModalOverlay:     typeof yuklemeIptalModalKapat==='function'      ? yuklemeIptalModalKapat      : null,
+    yuklemeIptalUrunModalOverlay: typeof yuklemeIptalUrunModalKapat==='function'  ? yuklemeIptalUrunModalKapat  : null
   };
 
   function tumOverlayler(){ return Array.prototype.slice.call(document.querySelectorAll('.modal-overlay')); }
