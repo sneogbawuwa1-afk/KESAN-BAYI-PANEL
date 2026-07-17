@@ -1632,6 +1632,13 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     if(state.files.tahsilat && state.files.tahsilat.data && state.files.tahsilat.data.length){
       state.tahsilatArsivi = tahsilatArsiviniBirlestir(state.tahsilatArsivi, state.files.tahsilat.data);
       await tahsilatArsiviniKaydet(state.tahsilatArsivi);
+      // DEVİR BAKİYE AKTARIM (kullanıcı kararı, 17.07.2026): aynı Tahsilat Dökümü dosyasında
+      // Belge Türü='Devir Bakiye Aktarım' olan satırlar varsa (bkz. 01-cekirdek-ve-arsiv.js'teki
+      // devirBakiyeSatirlariniAyikla açıklaması), bunlar tahsilat DEĞİL, kendi Belge Tarihi'nde bir
+      // BORÇ/fatura kaydı olarak ayrı kalıcı arşive işlenir — computeMusteriAylikOzetPeriyot bu
+      // arşivi de `faturalar` listesine dahil eder.
+      state.devirBakiyeArsivi = devirBakiyeArsiviniBirlestir(state.devirBakiyeArsivi, state.files.tahsilat.data);
+      await devirBakiyeArsiviniKaydet(state.devirBakiyeArsivi);
     }
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
     // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle

@@ -793,6 +793,7 @@ async function uygulamayiBaslat(){
     loadSenetTahsilOnaylariFromLocal(),
     (async()=>{ state.cekSenetArsivi = await cekSenetArsiviniOku(); })(),
     (async()=>{ state.tahsilatArsivi = await tahsilatArsiviniOku(); })(),
+    (async()=>{ state.devirBakiyeArsivi = await devirBakiyeArsiviniOku(); })(),
   ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';

@@ -828,6 +828,16 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
     const t = new Date(r.faturaTarihi).getTime();
     return t>=pencereBaslangic && t<=simdi;
   });
+  // DEVİR BAKİYE AKTARIM — kullanıcı kararı (17.07.2026): Tahsilat Dökümü'nde Belge Türü='Devir
+  // Bakiye Aktarım' olan satırlar bir tahsilat değil, kendi Belge Tarihi'nde bir BORÇ/fatura
+  // kaydıdır (bkz. 01-cekirdek-ve-arsiv.js: devirBakiyeArsiviniOku/Birlestir). Bu kayıtlar da
+  // normal faturalarla AYNI şekilde pencereye ve müşteriye göre süzülüp `faturalar` listesine
+  // eklenir — böylece Dönüş/Ortalama Vade hesaplarında gerçek bir borç olarak sayılırlar.
+  Object.values(state.devirBakiyeArsivi||{}).forEach(r=>{
+    if(r.musteri!==musteri || !r.faturaTarihi) return;
+    const t = new Date(r.faturaTarihi).getTime();
+    if(t>=pencereBaslangic && t<=simdi) faturalar.push(r);
+  });
 
   // TAHSİLAT DÖKÜMÜ — kendi bağımsız kalıcı arşivi state.tahsilatArsivi (belge no bazlı) okunur.
   const tumTahsilatKayitlari = Object.values(state.tahsilatArsivi||{}).filter(r=>{
@@ -916,22 +926,29 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
   const aylikCekSenet = toplamCekSenet / aySayisi;
   const aylikIadeDepozito = toplamIadeDepozito / aySayisi;
 
-  // DÖNÜŞ SÜRESİ — FIFO FATURA/TAHSİLAT EŞLEŞTİRMESİ (kritik düzeltme — kullanıcı tarafından
-  // tespit edildi): Önceki formül `geriDonusGun = (aylikFatura/aylikTahsilat)*30` bir GERÇEK
-  // ÖDEME HIZI DEĞİL, bir AKIŞ DENGESİ ORANIYDI — pencere içinde kesilen fatura tutarı ile tahsil
-  // edilen tutar birbirine ne kadar yakınsa (yani müşteri düzenli ödüyorsa) sonuç HER ZAMAN ~30
-  // güne yakınsıyordu, faturaların gerçekte kaç günde tahsil edildiğinden neredeyse bağımsız
-  // olarak. Kullanıcının manuel hesabı (SAP dökümünden, ~7 gün) ile bu formülün ürettiği ~30-34
-  // gün arasındaki uçurum bunu kanıtladı.
-  // ÇÖZÜM: SAP'ın kendi "ORT ÖDEME" hesabıyla aynı mantık — her tahsilat, FIFO (İlk Giren İlk
-  // Çıkar) sırasıyla en eski açık faturaya eşleştirilir; her eşleşmenin (fatura tarihi → tahsilat
-  // tarihi) GERÇEK gün farkı, eşleşen tutar ile ağırlıklandırılarak ortalaması alınır. Bu, "bu
-  // pencerede tahsil edilen her lira, kesildiği faturadan ortalama kaç gün sonra tahsil edildi"
-  // sorusuna doğrudan cevap verir — akış dengesinden etkilenmez, gerçek ödeme temposunu yansıtır.
+  // DÖNÜŞ SÜRESİ — AĞIRLIKLI ORTALAMA TARİH FARKI YÖNTEMİ (kritik düzeltme #4 — kullanıcı
+  // tarafından gerçek Excel verisiyle (SAPUI5 dışa aktarımı, TOPLAM BAKİYE/TOPLAM TAHSİLAT/
+  // KALAN BAKİYE alanları) doğrulanan NİHAİ yöntem, 23,32g manuel hesapla birebir teyit edildi):
+  // Önceki FIFO ÇİFT EŞLEŞTİRME denemesi (her tahsilatı sırayla en eski açık faturayla eşleştirip
+  // eşleşen tutarların gün farkını ağırlıklı ortalamak) sıra bağımlı bir çarpıklık taşıyordu —
+  // özellikle POS/kredi kartı süpürmesi gibi fatura kesimiyle NEREDEYSE AYNI GÜN kapanan büyük
+  // hacimli işlemler ağırlığı ele geçirip, hâlâ açık duran büyük bakiyeleri gölgede bırakarak
+  // gerçek dışı düşük (örn. "4 gün") sonuçlar üretiyordu.
+  // NİHAİ ÇÖZÜM (kullanıcı tarafından tarif edildi, Excel'deki SAPUI5 dışa aktarımıyla
+  // doğrulandı): Çift eşleştirme YERİNE, iki ayrı TUTAR AĞIRLIKLI ORTALAMA TARİH hesaplanır —
+  //   1) Borç bakiyesi varsa (toplam fatura > toplam tahsilat): kalan bakiye tutarı kadarını
+  //      EN SON kesilen faturalardan (tarihe göre geriye doğru) düş — bu düşülen kısım "henüz
+  //      karşılığı beklenen / faturalanmamış" kabul edilir ve hesaba HİÇ KATILMAZ. Geriye kalan
+  //      (tamamen tahsilatla kapanmış) fatura kısmının TUTAR AĞIRLIKLI ORTALAMA TARİHİ alınır.
+  //   2) Alacak bakiyesi varsa (toplam tahsilat > toplam fatura, yani fazla ödeme): bu fazlalık
+  //      kadar tutarında GÜNCEL TARİHLİ bir "sanal fatura" eklenir (gün farkı = 0), böylece o
+  //      fazla tahsilat ortalamayı yapay şekilde şişirmez/bozmaz.
+  //   3) TÜM tahsilatların (kırpma uygulanmadan) TUTAR AĞIRLIKLI ORTALAMA TARİHİ ayrıca alınır.
+  //   4) geriDonusGun = (Ort. Tahsilat Tarihi) − (Ort. Kapanmış Fatura Tarihi), gün cinsinden.
   let geriDonusGun = null;
   let geriDonusYaklasik = false;
   {
-    const fifoFaturalar = faturalar
+    const fifoFaturalarTumu = faturalar
       .filter(r=> r.faturaTarihi && r.tutar>0)
       .map(r=>({tarih: new Date(r.faturaTarihi).getTime(), kalan: r.tutar}))
       .sort((a,b)=> a.tarih-b.tarih);
@@ -939,30 +956,48 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
       .filter(r=> r.belgeTarihi && r.tutar>0)
       .map(r=>({tarih: new Date(r.belgeTarihi).getTime(), tutar: r.tutar}))
       .sort((a,b)=> a.tarih-b.tarih);
-    let fIdx = 0;
-    let toplamAgirlikliGun = 0;
-    let toplamEslesenTutar = 0;
-    for(const tahsilat of fifoTahsilatlar){
-      let kalanOdeme = tahsilat.tutar;
-      while(kalanOdeme > 0.01 && fIdx < fifoFaturalar.length){
-        const f = fifoFaturalar[fIdx];
-        if(f.kalan <= 0.01){ fIdx++; continue; }
-        const odenen = Math.min(kalanOdeme, f.kalan);
-        const gunFarki = Math.max(0, (tahsilat.tarih - f.tarih) / 86400000);
-        toplamAgirlikliGun += gunFarki * odenen;
-        toplamEslesenTutar += odenen;
-        f.kalan -= odenen;
-        kalanOdeme -= odenen;
+
+    const toplamFaturaTutari = fifoFaturalarTumu.reduce((a,b)=>a+b.kalan, 0);
+    const toplamTahsilatTutari = fifoTahsilatlar.reduce((a,b)=>a+b.tutar, 0);
+    const netBakiye = toplamFaturaTutari - toplamTahsilatTutari;
+
+    // Hesaba katılacak fatura listesi (kalan bakiye kadarı en yeni faturalardan düşülüp
+    // çıkarılmış hali). Alacak bakiyesi durumunda ise fazla tahsilat kadar güncel tarihli bir
+    // "sanal fatura" bu listeye eklenir.
+    let fifoFaturalar;
+    if(netBakiye > 0.01){
+      // Borç bakiyesi: kalan bakiyeyi en son kesilen faturalardan düşerek tamamen çıkar.
+      const enYeniden = fifoFaturalarTumu.slice().sort((a,b)=> b.tarih-a.tarih);
+      let dusulecek = netBakiye;
+      for(const f of enYeniden){
+        if(dusulecek <= 0.01) break;
+        const dus = Math.min(dusulecek, f.kalan);
+        f.kalan -= dus;
+        dusulecek -= dus;
       }
-      // Bu pencerede eşleşecek açık fatura kalmadıysa (tahsilat, pencere öncesinden kalan bir
-      // faturayı kapatıyor olabilir) kalan tahsilat tutarı sessizce atlanır — DÖNÜŞ hesabına
-      // sadece bu pencere içindeki fatura↔tahsilat eşleşmeleri dahil edilir.
+      fifoFaturalar = fifoFaturalarTumu.filter(f=> f.kalan > 0.01).sort((a,b)=> a.tarih-b.tarih);
+    } else if(netBakiye < -0.01){
+      // Alacak bakiyesi: fazla tahsilat kadar güncel tarihli sanal fatura ekle (gün farkı 0).
+      fifoFaturalar = fifoFaturalarTumu.slice();
+      fifoFaturalar.push({tarih: simdi, kalan: -netBakiye});
+      fifoFaturalar.sort((a,b)=> a.tarih-b.tarih);
+    } else {
+      fifoFaturalar = fifoFaturalarTumu.slice();
     }
-    if(toplamEslesenTutar > 0){
-      geriDonusGun = toplamAgirlikliGun / toplamEslesenTutar;
-      // Pencere içi faturaların hepsi tahsilatla eşleşemediyse (bazı tahsilatlar pencere
-      // dışından/öncesinden gelen faturaları kapatıyorsa) sonuç yaklaşık değer sayılır.
-      geriDonusYaklasik = toplamEslesenTutar < toplamTahsilat*0.98;
+
+    // AĞIRLIKLI ORTALAMA TARİH FARKI: çift eşleştirme yerine iki tutar-ağırlıklı ortalama tarih
+    // arasındaki fark alınır (bkz. yukarıdaki NİHAİ ÇÖZÜM notu, adım 3-4).
+    const toplamKapanmisBorc = fifoFaturalar.reduce((a,b)=>a+b.kalan, 0);
+    if(toplamKapanmisBorc > 0.01 && toplamTahsilatTutari > 0.01){
+      const agirlikliFaturaTarihToplami = fifoFaturalar.reduce((a,b)=>a + b.kalan*b.tarih, 0);
+      const agirlikliTahsilatTarihToplami = fifoTahsilatlar.reduce((a,b)=>a + b.tutar*b.tarih, 0);
+      const ortFaturaTarihi = agirlikliFaturaTarihToplami / toplamKapanmisBorc;
+      const ortTahsilatTarihi = agirlikliTahsilatTarihToplami / toplamTahsilatTutari;
+      geriDonusGun = Math.max(0, (ortTahsilatTarihi - ortFaturaTarihi) / 86400000);
+      // Kapanmış fatura toplamı, pencere içi toplam faturadan (toplamFatura) belirgin farklıysa
+      // (yani kırpma sonrası kalan kısım pencere dışı faturalarla da örtüşüyorsa) sonuç
+      // yaklaşık sayılır.
+      geriDonusYaklasik = Math.abs(toplamKapanmisBorc - toplamFatura) > toplamFatura*0.02;
     }
   }
 

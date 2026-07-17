@@ -1225,4 +1225,91 @@ function tahsilatArsivindenAralikDiziyeCevir(arsiv, ilkGunKey, sonGunKey){
     }));
 }
 
+/* =====================================================================
+   DEVİR BAKİYE AKTARIM — KALICI ARŞİV (kullanıcı kararı, 17.07.2026 doğrulaması)
+   Tahsilat Dökümü dosyasında bazen Belge Türü='Devir Bakiye Aktarım' olan satırlar bulunur — bunlar
+   bir TAHSİLAT (Alacak) DEĞİL, sistemin/takibin başlangıcında müşteriye aktarılmış bir açılış/devir
+   BORCUDUR (ör. SAP dışa aktarımında "9800071390 / Devir Bakiye Aktarım / KAPLAN GIDA 2 / 23.12.2025
+   / 1.858.435,82" örneği — bkz. kullanıcı doğrulaması). tahsilatSatirlariniNormalizeEt bu Belge
+   Türünü tanımadığı için ('Müşteri Tahsilat'/'Hizmet Alış Fatura'/'Ödeme'/'Virman' değil) satırı
+   SESSİZCE ATLIYORDU — bu, gerçek bir borcun hiç görünmeden kaybolmasına yol açıyordu.
+   KULLANICI KARARI: Bu türden bir kayıt varsa, NOKTA'ya kendi Belge Tarihi'nde bir BORÇ KAYDI
+   (fatura muadili) gibi işlenecek — tahsilat değil, fatura/borç tarafına eklenecek. Çek/Senet'le
+   BİREBİR AYNI mimari: belge no bazlı kalıcı arşiv, aynı no tekrar gelirse günceller.
+   ===================================================================== */
+const DEVIR_BAKIYE_ARSIV_CLOUD_PATH = CLOUD.path + '_devirBakiyeArsivi';
+const DEVIR_BAKIYE_ARSIV_LOCAL_KEY = 'noktaCariTakip_devirBakiyeArsivi_v1';
+
+// "Devir Bakiye Aktarım" ve yazım/boşluk varyasyonlarını (SAP'ın tam metni değişebildiği için)
+// yakalamak üzere gevşek bir eşleşme kullanılır — büyük/küçük harf ve fazladan boşluklardan bağımsız.
+function belgeTuruDevirBakiyeMi(belgeTuru){
+  const b = String(belgeTuru||'').trim().toLocaleLowerCase('tr-TR');
+  return b.includes('devir') && b.includes('bakiye');
+}
+
+// Tahsilat Dökümü ham satırlarından SADECE Devir Bakiye Aktarım türündeki satırları ayıklar ve
+// fatura/borç arşivinin beklediği alan adlarıyla ({belgeNo, musteri, musteriAdi, tutar,
+// faturaTarihi, temsilci}) normalize eder — computeMusteriAylikOzetPeriyot'taki `faturalar`
+// listesine doğrudan eklenebilecek şekilde.
+function devirBakiyeSatirlariniAyikla(rows){
+  const sonuc = {};
+  (rows||[]).forEach(r=>{
+    const belgeTuru = String(r['Belge Türü']||'').trim();
+    if(!belgeTuruDevirBakiyeMi(belgeTuru)) return;
+    const musteriKod = String(r['Müşteri']||'').trim();
+    if(!musteriKod || !musteriGecerliMi(musteriKod)) return;
+    const belgeNo = String(r['Belge Numarası']||'').trim();
+    if(!belgeNo) return;
+    const tarih = excelDateToJSArti1Gun(r['Tarih']);
+    if(!tarih) return;
+    // Devir bakiye satırının kendi tutar işareti ne olursa olsun, bu her zaman bir BORÇ (fatura
+    // muadili) olarak sayılır — mutlak değer alınır (Tahsilat Dökümü'ndeki diğer türlerin aksine,
+    // burada işaret çevirme/koruma kuralı uygulanmaz, çünkü bu satır zaten tahsilat değildir).
+    sonuc[belgeNo] = {
+      belgeNo, musteri: musteriKod, musteriAdi: String(r['Müşteri Adı']||'').trim(),
+      tutar: Math.abs(Number(r['Tutar'])||0),
+      faturaTarihi: tarih.toISOString(),
+      temsilci: r['Satış Temsilcisi'] || null,
+      belgeTuru,
+    };
+  });
+  return sonuc;
+}
+
+// Mevcut kalıcı Devir Bakiye arşivini yeni yüklemeyle birleştirir — Tahsilat/Çek-Senet arşivleriyle
+// AYNI kural: aynı belge no tekrar gelirse günceller, arşivde olup yeni yüklemede olmayan kayıtlar
+// SİLİNMEZ (bu tek seferlik bir açılış kaydı olduğundan, sonraki kısmi/haftalık Tahsilat Dökümü
+// yüklemelerinde tekrar görünmeyebilir — yine de borç olarak arşivde kalmaya devam etmesi gerekir).
+function devirBakiyeArsiviniBirlestir(mevcutArsiv, yeniRows){
+  const yeni = devirBakiyeSatirlariniAyikla(yeniRows);
+  const arsiv = Object.assign({}, mevcutArsiv||{});
+  Object.assign(arsiv, yeni);
+  return arsiv;
+}
+
+async function devirBakiyeArsiviniKaydet(arsiv){
+  const ok = await idbSet(DEVIR_BAKIYE_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Devir Bakiye arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${DEVIR_BAKIYE_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(DEVIR_BAKIYE_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(DEVIR_BAKIYE_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Devir Bakiye arşivi buluta kaydedilemedi:', err); }
+}
+
+async function devirBakiyeArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${DEVIR_BAKIYE_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Devir Bakiye arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(DEVIR_BAKIYE_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
 
