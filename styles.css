@@ -1377,71 +1377,69 @@
      ============================================================================ */
   #senetYazdirmaAlani{display:none;}
   .senet-sayfa{
-    width:210mm;height:148mm;box-sizing:border-box;padding:9mm;
-    page-break-after:always;font-family:'Inter',sans-serif;color:#1B2233;
-    background:#FBF9F4;
+    width:210mm;height:148mm;box-sizing:border-box;padding:8mm;
+    page-break-after:always;font-family:'Inter',sans-serif;color:#3B3627;
+    background:#FAF7F0;
   }
   .senet-cerceve{
     position:relative;height:100%;box-sizing:border-box;
-    border:2.5px double #8A6D2F;padding:5px;
+    border:2.4px solid #35301F;padding:2px;
   }
+  /* Çok hafif yatay çizgi dokusu (eski defter kâğıdı hissi) — opaklık o kadar düşük ki
+     siyah-beyaz baskıda pratikte görünmez, metin okunurluğunu hiç etkilemez. */
   .senet-cerceve-inner{
     position:relative;height:100%;box-sizing:border-box;
-    border:1px solid #8A6D2F;padding:12px 20px 14px;
+    border:0.7px solid #35301F;padding:14px 24px 15px;
     display:flex;flex-direction:column;
-  }
-  .senet-watermark{
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-    font-family:'Space Grotesk',sans-serif;font-size:90px;font-weight:700;
-    color:rgba(138,109,47,0.05);letter-spacing:.1em;pointer-events:none;user-select:none;
-    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+    background:repeating-linear-gradient(0deg, rgba(53,48,31,0.012) 0 1px, transparent 1px 7px);
   }
   .senet-ust{
-    display:flex;align-items:flex-start;justify-content:center;margin-bottom:10px;
-    position:relative;z-index:1;
+    display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;
   }
-  .senet-baslik-wrap{text-align:center;}
-  .senet-baslik{font-family:'Space Grotesk';font-weight:700;font-size:24px;letter-spacing:.1em;color:#5C4310;}
-  .senet-baslik-cizgi{width:56px;height:2px;background:#8A6D2F;margin:3px auto 0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  .senet-alacakli{text-align:center;margin-bottom:10px;position:relative;z-index:1;}
-  .senet-alacakli-label{font-size:9px;font-weight:700;color:#8A6D2F;letter-spacing:.08em;text-transform:uppercase;}
-  .senet-alacakli-adi{font-size:13.5px;font-weight:700;color:#5C4310;max-width:420px;margin:2px auto 0;line-height:1.3;}
-  .senet-ust-tablo{width:100%;border-collapse:collapse;margin-bottom:12px;position:relative;z-index:1;}
-  .senet-ust-tablo th{
-    border:1px solid #8A6D2F;padding:6px 8px;text-align:center;
-    font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
-    background:#8A6D2F;color:#fff;
+  .senet-baslik{font-family:'EB Garamond','Georgia',serif;font-weight:700;font-size:30px;letter-spacing:.1em;color:#35301F;line-height:1;}
+  .senet-baslik small{display:block;font-size:9px;letter-spacing:.32em;color:#9A916F;margin-top:3px;font-weight:600;text-transform:uppercase;}
+  /* Tutar "damga" kutusu: sağ üstte, hafif ofset gölgeli — belgenin en kritik bilgisi (tutar)
+     ilk bakışta göze çarpar. Gölge düz gri olduğundan renksiz baskıda da aynı görünür. */
+  .senet-tutar-damga{
+    border:1.8px solid #35301F;padding:7px 14px 6px;text-align:center;background:#fff;
+    box-shadow:2.5px 2.5px 0 rgba(53,48,31,0.14);
     -webkit-print-color-adjust:exact;print-color-adjust:exact;
   }
-  .senet-ust-tablo td{
-    border:1px solid #8A6D2F;padding:8px 8px;text-align:center;
-    font-weight:700;font-size:12.5px;font-family:var(--font-figures);background:#fff;color:#3D2E0C;
-  }
-  .senet-ust-tablo td.senet-tutar-hucre{
-    background:#F3ECD8;color:#5C4310;font-size:14px;
-    -webkit-print-color-adjust:exact;print-color-adjust:exact;
-  }
-  .senet-metin{font-size:11.5px;line-height:1.6;text-align:justify;margin:0 0 12px;color:#3D2E0C;position:relative;z-index:1;}
-  .senet-taraflar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;position:relative;z-index:1;}
-  .senet-taraf-box{border:1px solid #8A6D2F;border-radius:2px;padding:9px 11px 10px;background:rgba(255,255,255,0.55);}
+  .senet-tutar-damga-label{font-size:7.5px;letter-spacing:.24em;color:#9A916F;text-transform:uppercase;font-weight:600;}
+  .senet-tutar-damga-deger{font-family:'EB Garamond','Georgia',serif;font-size:19px;font-weight:700;color:#35301F;margin-top:1px;font-variant-numeric:tabular-nums;}
+  .senet-alacakli{margin:5px 0 8px;}
+  .senet-alacakli-label{font-size:8.5px;font-weight:600;color:#9A916F;letter-spacing:.2em;text-transform:uppercase;}
+  .senet-alacakli-adi{font-family:'EB Garamond','Georgia',serif;font-size:14.5px;font-weight:700;color:#35301F;line-height:1.3;}
+  /* Tarih şeridi: tablo yerine üst+alt kalın çizgili yatay bant, aralar ince çizgiyle bölünür. */
+  .senet-meta-serit{display:flex;border-top:1.4px solid #35301F;border-bottom:1.4px solid #35301F;margin-bottom:9px;}
+  .senet-meta-item{flex:1;padding:6px 12px;border-right:0.7px solid #C9C1A4;}
+  .senet-meta-item:last-child{border-right:none;}
+  .senet-meta-label{font-size:8px;letter-spacing:.18em;color:#9A916F;text-transform:uppercase;margin-bottom:2px;font-weight:600;}
+  .senet-meta-deger{font-size:13px;font-weight:700;color:#35301F;font-variant-numeric:tabular-nums;font-family:var(--font-figures);}
+  .senet-metin{font-size:10.5px;line-height:1.56;text-align:justify;margin:0 0 8px;color:#3B3627;}
+  /* Borçlu / Düzenlenme-İmza kutuları büyütüldü (kullanıcı isteği: "1 parmak kadar" daha
+     geniş) — margin-top:auto ile kalan tüm dikey boşluğu dolduruyorlar zaten (flex kolonda),
+     büyüme asıl padding/font artışından ve üstteki metnin (senet-metin) hafif sıkıştırılmasından
+     geliyor; toplam sayfa yüksekliği (A5) sabit kaldığı için kutulara yer açmak üstten alındı. */
+  .senet-taraflar{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:auto;}
+  .senet-taraf-box{border:1.3px solid #35301F;padding:13px 16px 14px;background:rgba(255,255,255,0.72);}
   .senet-taraf-baslik{
-    font-family:'Space Grotesk';font-size:10.5px;font-weight:700;
-    letter-spacing:.05em;color:#5C4310;margin:0 0 6px;padding-bottom:5px;border-bottom:1px solid #C9B583;
+    font-family:'EB Garamond','Georgia',serif;font-size:13.5px;font-weight:700;
+    color:#35301F;margin:0 0 8px;padding-bottom:6px;border-bottom:1px solid #C9C1A4;
   }
-  .senet-taraf-box p{margin:2.5px 0;font-size:10.5px;line-height:1.4;color:#3D2E0C;}
-  .senet-taraf-box p b{color:#8A6D2F;font-weight:600;}
-  /* Sağ kutu (Borçlu kutusunun yanındaki): üstte "Düzenlenme Tarihi" (Keşide Tarihi ile AYNI
-     kaynaktan — kesideTarihi — türetilir, ayrı hesaplanmaz, ikisi her zaman birebir eşleşir),
-     altında kaşenin/imzanın basılacağı boş alan. Tek kutu içinde iki satır olarak durur. */
+  .senet-taraf-box p{margin:5px 0;font-size:11px;line-height:1.5;color:#3B3627;}
+  .senet-taraf-box p b{color:#877C54;font-weight:600;}
+  /* Sağ kutu: başlık satırı "Düzenlenme Tarihi : GG.AA.YYYY" (Keşide Tarihi ile AYNI kaynaktan
+     — kesideTarihi — türetilir, ayrı hesaplanmaz, ikisi her zaman birebir eşleşir; banka bu
+     eşleşmeyi kontrol ediyor), altı kaşenin/imzanın basılacağı boş alan. */
   .senet-imza-taraf-box{display:flex;flex-direction:column;}
-  .senet-duzenlenme-tarihi{margin:0 0 8px !important;}
   .senet-imza-blok{
-    flex:1;min-height:1px;display:flex;align-items:flex-end;justify-content:center;
-    color:#B3A276;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;padding-bottom:2px;
+    flex:1;min-height:1px;display:flex;align-items:center;justify-content:center;
+    color:#C0B896;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;padding-bottom:2px;
   }
   .senet-alt-bilgi{
-    display:flex;justify-content:space-between;font-size:9.5px;color:#B3A276;
-    margin-top:8px;letter-spacing:.03em;position:relative;z-index:1;
+    display:flex;justify-content:space-between;font-size:9.5px;color:#C0B896;
+    margin-top:8px;letter-spacing:.03em;
   }
   @page{size:A5 landscape;margin:0;}
 

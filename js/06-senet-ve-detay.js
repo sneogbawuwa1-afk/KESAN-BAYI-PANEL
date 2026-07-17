@@ -64,24 +64,30 @@ function senetTutarlariniBol(toplam, adet){
   return parcalar;
 }
 
+// SENET TASARIMI — "Öneri B: Klasik ticari evrak" (kullanıcı onayıyla seçildi).
+// Yapı: sol üstte büyük serif BONO başlığı, sağ üstte damga görünümlü tutar kutusu,
+// altında Alacaklı, sonra yatay çizgili tarih şeridi (Keşide Tarihi/Yeri/Ödeme Tarihi),
+// senet metni, en altta sol Borçlu kutusu + sağ Düzenlenme Tarihi/İmza-Kaşe kutusu.
+// Tamamen siyah-beyaz baskıya göre tasarlandı — renge bağımlı hiçbir unsur yok.
 function buildSenetHTML(opts){
   const kesideTarihi = turkiyeBugun();
   return `<div class="senet-sayfa"><div class="senet-cerceve"><div class="senet-cerceve-inner">
-    <div class="senet-watermark">BONO</div>
     <div class="senet-ust">
-      <div class="senet-baslik-wrap">
-        <div class="senet-baslik">BONO</div>
-        <div class="senet-baslik-cizgi"></div>
+      <div class="senet-baslik">BONO</div>
+      <div class="senet-tutar-damga">
+        <div class="senet-tutar-damga-label">Türk Lirası</div>
+        <div class="senet-tutar-damga-deger">${tutarRakamSenet(opts.tutar)}</div>
       </div>
     </div>
     <div class="senet-alacakli">
       <div class="senet-alacakli-label">Alacaklı</div>
       <div class="senet-alacakli-adi">${escapeHtml(SENET_SABIT.aliciUnvan)}</div>
     </div>
-    <table class="senet-ust-tablo">
-      <tr><th>Keşide Tarihi</th><th>Keşide Yeri</th><th>Ödeme Tarihi</th><th>Türk Lirası</th></tr>
-      <tr><td>${fmtDate(kesideTarihi)}</td><td>${escapeHtml(opts.il || '—')}</td><td>${fmtDate(opts.vadeTarihi)}</td><td class="senet-tutar-hucre">${tutarRakamSenet(opts.tutar)}</td></tr>
-    </table>
+    <div class="senet-meta-serit">
+      <div class="senet-meta-item"><div class="senet-meta-label">Keşide Tarihi</div><div class="senet-meta-deger">${fmtDate(kesideTarihi)}</div></div>
+      <div class="senet-meta-item"><div class="senet-meta-label">Keşide Yeri</div><div class="senet-meta-deger">${escapeHtml(opts.il || '—')}</div></div>
+      <div class="senet-meta-item"><div class="senet-meta-label">Ödeme Tarihi</div><div class="senet-meta-deger">${fmtDate(opts.vadeTarihi)}</div></div>
+    </div>
     <p class="senet-metin">İşbu emre yazılı senet mukabilinde <u>${tarihUzunYazi(opts.vadeTarihi)}</u> tarihinde <b><u>${escapeHtml(SENET_SABIT.aliciUnvan)}</u></b> veyahut emrühavalesine yukarıda yazılı <b><u>#${sayiyiYaziyaCevir(Math.floor(opts.tutar))}${Math.round((opts.tutar%1)*100)>0 ? ' Lira '+sayiyiYaziyaCevir(Math.round((opts.tutar%1)*100))+' Kuruş' : ''} Türk Lirası#</u></b> ödeyeceğim. Bedeli <b>MALEN</b> ahzolunmuştur. İşbu bononun gününde ödenmemesi halinde diğer bonoların da muacceliyet kazanacağını, bu durumda icra masraflarını ve avukatlık ücretini ödeyeceğimi, ihtilaf halinde <b><u>${escapeHtml(SENET_SABIT.yetkiliMahkeme)}</u></b> mahkemeleri ve icra dairelerinin yetkili olduğunu şimdiden kabul ediyorum.</p>
     <div class="senet-taraflar">
       <div class="senet-taraf-box">
@@ -91,7 +97,7 @@ function buildSenetHTML(opts){
         <p><b>Adres</b> : ${escapeHtml(senetAdresTamMetin(opts.adres, opts.ilce, opts.il))}</p>
       </div>
       <div class="senet-taraf-box senet-imza-taraf-box">
-        <p class="senet-duzenlenme-tarihi"><b>Düzenlenme Tarihi</b> : ${fmtDate(kesideTarihi)}</p>
+        <p class="senet-taraf-baslik">Düzenlenme Tarihi : ${fmtDate(kesideTarihi)}</p>
         <div class="senet-imza-blok">İmza / Kaşe</div>
       </div>
     </div>
