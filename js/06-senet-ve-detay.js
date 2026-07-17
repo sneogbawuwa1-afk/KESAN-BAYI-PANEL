@@ -73,7 +73,7 @@ function buildSenetHTML(opts){
   const kesideTarihi = turkiyeBugun();
   return `<div class="senet-sayfa"><div class="senet-cerceve"><div class="senet-cerceve-inner">
     <div class="senet-ust">
-      <div class="senet-baslik">BONO</div>
+      <div class="senet-baslik">BONO<small>Emre Muharrer Senet</small></div>
       <div class="senet-tutar-damga">
         <div class="senet-tutar-damga-label">Türk Lirası</div>
         <div class="senet-tutar-damga-deger">${tutarRakamSenet(opts.tutar)}</div>
@@ -916,18 +916,54 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
   const aylikCekSenet = toplamCekSenet / aySayisi;
   const aylikIadeDepozito = toplamIadeDepozito / aySayisi;
 
-  // DÖNÜŞ SÜRESİ — FATURA/TAHSİLAT ORANI (kullanıcı kararı, geri alındı): Önceki revizyonda bu
-  // metrik "kalan borç ağırlıklı açık fatura yaşı" (DSO benzeri) olarak değiştirilmişti — ama bu,
-  // ekranda yan yana duran "Fatura/Ay" ve "Tahsilat/Ay" rakamlarıyla DOĞRUDAN İLİŞKİLİYMİŞ gibi
-  // görünüp kullanıcıyı yanıltıyordu (iki farklı soruya cevap veren iki ayrı metrik aynı anda
-  // gösteriliyordu: "ne kadar satıldı/tahsil edildi" vs "elde duran faturalar ne kadar eski").
-  // Kullanıcı isteğiyle DÖNÜŞ artık tekrar birincil olarak akış oranına dayanır — bu pencerede
-  // kesilen faturanın kaç günde bir tahsilata dönüştüğünü basitçe gösterir ve yukarıdaki iki
-  // rakamla TUTARLI/açıklanabilir bir ilişkisi vardır.
+  // DÖNÜŞ SÜRESİ — FIFO FATURA/TAHSİLAT EŞLEŞTİRMESİ (kritik düzeltme — kullanıcı tarafından
+  // tespit edildi): Önceki formül `geriDonusGun = (aylikFatura/aylikTahsilat)*30` bir GERÇEK
+  // ÖDEME HIZI DEĞİL, bir AKIŞ DENGESİ ORANIYDI — pencere içinde kesilen fatura tutarı ile tahsil
+  // edilen tutar birbirine ne kadar yakınsa (yani müşteri düzenli ödüyorsa) sonuç HER ZAMAN ~30
+  // güne yakınsıyordu, faturaların gerçekte kaç günde tahsil edildiğinden neredeyse bağımsız
+  // olarak. Kullanıcının manuel hesabı (SAP dökümünden, ~7 gün) ile bu formülün ürettiği ~30-34
+  // gün arasındaki uçurum bunu kanıtladı.
+  // ÇÖZÜM: SAP'ın kendi "ORT ÖDEME" hesabıyla aynı mantık — her tahsilat, FIFO (İlk Giren İlk
+  // Çıkar) sırasıyla en eski açık faturaya eşleştirilir; her eşleşmenin (fatura tarihi → tahsilat
+  // tarihi) GERÇEK gün farkı, eşleşen tutar ile ağırlıklandırılarak ortalaması alınır. Bu, "bu
+  // pencerede tahsil edilen her lira, kesildiği faturadan ortalama kaç gün sonra tahsil edildi"
+  // sorusuna doğrudan cevap verir — akış dengesinden etkilenmez, gerçek ödeme temposunu yansıtır.
   let geriDonusGun = null;
   let geriDonusYaklasik = false;
-  if(aylikTahsilat>0){
-    geriDonusGun = (aylikFatura / aylikTahsilat) * 30;
+  {
+    const fifoFaturalar = faturalar
+      .filter(r=> r.faturaTarihi && r.tutar>0)
+      .map(r=>({tarih: new Date(r.faturaTarihi).getTime(), kalan: r.tutar}))
+      .sort((a,b)=> a.tarih-b.tarih);
+    const fifoTahsilatlar = tahsilatlar
+      .filter(r=> r.belgeTarihi && r.tutar>0)
+      .map(r=>({tarih: new Date(r.belgeTarihi).getTime(), tutar: r.tutar}))
+      .sort((a,b)=> a.tarih-b.tarih);
+    let fIdx = 0;
+    let toplamAgirlikliGun = 0;
+    let toplamEslesenTutar = 0;
+    for(const tahsilat of fifoTahsilatlar){
+      let kalanOdeme = tahsilat.tutar;
+      while(kalanOdeme > 0.01 && fIdx < fifoFaturalar.length){
+        const f = fifoFaturalar[fIdx];
+        if(f.kalan <= 0.01){ fIdx++; continue; }
+        const odenen = Math.min(kalanOdeme, f.kalan);
+        const gunFarki = Math.max(0, (tahsilat.tarih - f.tarih) / 86400000);
+        toplamAgirlikliGun += gunFarki * odenen;
+        toplamEslesenTutar += odenen;
+        f.kalan -= odenen;
+        kalanOdeme -= odenen;
+      }
+      // Bu pencerede eşleşecek açık fatura kalmadıysa (tahsilat, pencere öncesinden kalan bir
+      // faturayı kapatıyor olabilir) kalan tahsilat tutarı sessizce atlanır — DÖNÜŞ hesabına
+      // sadece bu pencere içindeki fatura↔tahsilat eşleşmeleri dahil edilir.
+    }
+    if(toplamEslesenTutar > 0){
+      geriDonusGun = toplamAgirlikliGun / toplamEslesenTutar;
+      // Pencere içi faturaların hepsi tahsilatla eşleşemediyse (bazı tahsilatlar pencere
+      // dışından/öncesinden gelen faturaları kapatıyorsa) sonuç yaklaşık değer sayılır.
+      geriDonusYaklasik = toplamEslesenTutar < toplamTahsilat*0.98;
+    }
   }
 
   return {
