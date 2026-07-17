@@ -1,1 +1,1054 @@
-const _0x4613d2=_0x1e5f;(function(_0x14f841,_0x1bb86d){const _0x23d46e=_0x1e5f,_0x303b13=_0x14f841();while(!![]){try{const _0x5b3804=parseInt(_0x23d46e(0xb7))/0x1*(-parseInt(_0x23d46e(0xd4))/0x2)+parseInt(_0x23d46e(0x16f))/0x3*(parseInt(_0x23d46e(0x11d))/0x4)+-parseInt(_0x23d46e(0xf8))/0x5*(-parseInt(_0x23d46e(0x164))/0x6)+-parseInt(_0x23d46e(0x108))/0x7*(parseInt(_0x23d46e(0x130))/0x8)+parseInt(_0x23d46e(0xe5))/0x9*(-parseInt(_0x23d46e(0x180))/0xa)+-parseInt(_0x23d46e(0xaf))/0xb+-parseInt(_0x23d46e(0x1a3))/0xc*(-parseInt(_0x23d46e(0x94))/0xd);if(_0x5b3804===_0x1bb86d)break;else _0x303b13['push'](_0x303b13['shift']());}catch(_0x2e24fb){_0x303b13['push'](_0x303b13['shift']());}}}(_0x29bd,0x97339));const SELLOUT_HEDEF_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+_0x4613d2(0xdd),SELLOUT_HEDEF_LOCAL_KEY=_0x4613d2(0x1a4),SELLOUT_REPORT_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+_0x4613d2(0x103),SELLOUT_REPORT_LOCAL_KEY=_0x4613d2(0x147),SELLOUT_ARSIV_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+_0x4613d2(0x13a),SELLOUT_ARSIV_LOCAL_KEY=_0x4613d2(0x143),KAPALI_KANAL_DEGERLERI=new Set([_0x4613d2(0x157),_0x4613d2(0x101)]),ACIK_KANAL_DEGERLERI=new Set([_0x4613d2(0xb6),_0x4613d2(0x10c),_0x4613d2(0x90)]);function sellOutKanalSinifla(_0x52c891,_0x470924){const _0x3e1bd0=_0x4613d2,_0x27865f=String(_0x52c891||'')[_0x3e1bd0(0x112)]();if(KAPALI_KANAL_DEGERLERI['has'](_0x27865f))return _0x3e1bd0(0xf0);if(ACIK_KANAL_DEGERLERI[_0x3e1bd0(0xc9)](_0x27865f))return _0x3e1bd0(0xec);return String(_0x470924||'')[_0x3e1bd0(0x112)]()?_0x3e1bd0(0xec):_0x3e1bd0(0xf0);}const DISTILE_ANAHTAR_KELIMELER=['rakı',_0x4613d2(0x170),_0x4613d2(0x150),'whisky','whiskey','votka',_0x4613d2(0x117),_0x4613d2(0x18c),_0x4613d2(0x182),_0x4613d2(0x199),_0x4613d2(0xf6),_0x4613d2(0x19b),_0x4613d2(0xda),_0x4613d2(0x1a0)],DISTILE_BILINEN_MARKALAR=[_0x4613d2(0x9e),_0x4613d2(0x156),_0x4613d2(0x9f),_0x4613d2(0x172),'hendrick\x27s',_0x4613d2(0x9b),_0x4613d2(0x1b5),_0x4613d2(0xba),_0x4613d2(0x96),_0x4613d2(0x129)],PARCALI_ANA_URUN_ESLEME={'151293':{'ana':_0x4613d2(0x144),'parcaliOranAna':0x2},'151436':{'ana':'151247','parcaliOranAna':0x2},'151448':{'ana':_0x4613d2(0xb4),'parcaliOranAna':0x2},'151463':{'ana':_0x4613d2(0x1b0),'parcaliOranAna':0x2},'151904':{'ana':_0x4613d2(0xe1),'parcaliOranAna':0x4},'151910':{'ana':_0x4613d2(0xe1),'parcaliOranAna':0x2},'151942':{'ana':_0x4613d2(0x163),'parcaliOranAna':0x4},'151943':{'ana':_0x4613d2(0x163),'parcaliOranAna':0x2},'152046':{'ana':'150784','parcaliOranAna':0x2},'152301':{'ana':_0x4613d2(0xde),'parcaliOranAna':0xc},'152312':{'ana':_0x4613d2(0xf5),'parcaliOranAna':0x6},'152313':{'ana':'152222','parcaliOranAna':0xc},'152314':{'ana':_0x4613d2(0xc3),'parcaliOranAna':0xc},'152315':{'ana':_0x4613d2(0x15e),'parcaliOranAna':0x18},'152316':{'ana':_0x4613d2(0x98),'parcaliOranAna':0x18},'152318':{'ana':_0x4613d2(0x1b2),'parcaliOranAna':0x6},'152327':{'ana':_0x4613d2(0x153),'parcaliOranAna':0x6},'152547':{'ana':_0x4613d2(0x16b),'parcaliOranAna':0x2},'152548':{'ana':'152422','parcaliOranAna':0x4},'152710':{'ana':_0x4613d2(0x175),'parcaliOranAna':0x4},'152716':{'ana':_0x4613d2(0x19f),'parcaliOranAna':0x2},'152755':{'ana':_0x4613d2(0xfc),'parcaliOranAna':0x18},'152756':{'ana':_0x4613d2(0x11a),'parcaliOranAna':0xc},'152757':{'ana':_0x4613d2(0x14a),'parcaliOranAna':0xc},'152758':{'ana':_0x4613d2(0xe2),'parcaliOranAna':0x6},'152759':{'ana':_0x4613d2(0xc5),'parcaliOranAna':0x6},'152763':{'ana':_0x4613d2(0xfb),'parcaliOranAna':0xc},'152764':{'ana':_0x4613d2(0x19e),'parcaliOranAna':0x6},'152782':{'ana':_0x4613d2(0x11b),'parcaliOranAna':0x4},'152949':{'ana':_0x4613d2(0x1ac),'parcaliOranAna':0x6},'154012':{'ana':_0x4613d2(0xb4),'parcaliOranAna':0x4},'154020':{'ana':_0x4613d2(0x11f),'parcaliOranAna':0x4},'154504':{'ana':_0x4613d2(0x91),'parcaliOranAna':0x4},'154505':{'ana':_0x4613d2(0x144),'parcaliOranAna':0x4},'154506':{'ana':_0x4613d2(0xd9),'parcaliOranAna':0x2},'154510':{'ana':_0x4613d2(0x11b),'parcaliOranAna':0x2},'154513':{'ana':_0x4613d2(0x135),'parcaliOranAna':0x2},'154525':{'ana':'150021','parcaliOranAna':0x2},'154527':{'ana':_0x4613d2(0xd3),'parcaliOranAna':0x2},'154535':{'ana':_0x4613d2(0xeb),'parcaliOranAna':0x2},'154539':{'ana':'152644','parcaliOranAna':0x2},'154547':{'ana':_0x4613d2(0xd9),'parcaliOranAna':0x4},'154548':{'ana':'150021','parcaliOranAna':0x4},'154555':{'ana':_0x4613d2(0x18b),'parcaliOranAna':0x4}},ANA_PARCALI_URUN_ESLEME_TERS=(function(){const _0x23bd6e=_0x4613d2,_0x41209a={};return Object[_0x23bd6e(0x16d)](PARCALI_ANA_URUN_ESLEME)[_0x23bd6e(0xcf)](_0x1a3fd3=>{const _0x2e4dc8=_0x23bd6e,_0x10fc45=PARCALI_ANA_URUN_ESLEME[_0x1a3fd3];if(!(_0x10fc45[_0x2e4dc8(0x1aa)]in _0x41209a))_0x41209a[_0x10fc45['ana']]={'parcali':_0x1a3fd3,'parcaliOranAna':_0x10fc45[_0x2e4dc8(0x132)]};}),_0x41209a;}());function stokGunHedefKodBul(_0x5bfa4a,_0x20ea92){const _0x1e420b=_0x4613d2,_0x1bcdaf=String(_0x5bfa4a||'')[_0x1e420b(0x112)](),_0x41f550=PARCALI_ANA_URUN_ESLEME[_0x1bcdaf];if(_0x41f550)return _0x20ea92===_0x1e420b(0x1a9)?_0x41f550[_0x1e420b(0x1aa)]:_0x1bcdaf;const _0x2e0ea7=ANA_PARCALI_URUN_ESLEME_TERS[_0x1bcdaf];if(_0x2e0ea7)return _0x20ea92===_0x1e420b(0x1a8)?_0x2e0ea7[_0x1e420b(0x184)]:_0x1bcdaf;return _0x1bcdaf;}function stokGunMiktarBirimCevir(_0x4820b4,_0x5d4877,_0x4d8d72){const _0x599f3a=_0x4613d2;_0x5d4877=String(_0x5d4877||'')[_0x599f3a(0x112)]();if(_0x4d8d72===_0x5d4877||_0x4820b4==null)return _0x4820b4;const _0x3c2434=PARCALI_ANA_URUN_ESLEME[_0x5d4877];if(_0x3c2434&&_0x3c2434[_0x599f3a(0x1aa)]===_0x4d8d72)return _0x4820b4/_0x3c2434[_0x599f3a(0x132)];const _0x4c8081=ANA_PARCALI_URUN_ESLEME_TERS[_0x5d4877];if(_0x4c8081&&_0x4c8081['parcali']===_0x4d8d72)return _0x4820b4*_0x4c8081[_0x599f3a(0x132)];return _0x4820b4;}function sellOutMarkaGrubu(_0x270698){const _0xb3876e=_0x4613d2,_0x4b0e03=String(_0x270698||'')[_0xb3876e(0x112)]();if(!_0x4b0e03)return'Bira';if(_0x4b0e03==='Distile'||_0x4b0e03==='Bira')return _0x4b0e03;const _0x22333b=_0x4b0e03[_0xb3876e(0xff)](_0xb3876e(0xca));if(DISTILE_ANAHTAR_KELIMELER[_0xb3876e(0x120)](_0x423ffd=>_0x22333b[_0xb3876e(0x197)](_0x423ffd)))return _0xb3876e(0x1a8);if(DISTILE_BILINEN_MARKALAR[_0xb3876e(0x120)](_0x135524=>_0x22333b[_0xb3876e(0x197)](_0x135524)))return _0xb3876e(0x1a8);return _0xb3876e(0x1a9);}function buildSellOutReport(_0x390875,_0x5e8630,_0x9069d,_0x311384,_0x15ec70){const _0x2bf432=_0x4613d2;_0x5e8630=_0x5e8630||new Map(),_0x9069d=_0x9069d||new Map(),_0x311384=_0x311384||new Map(),_0x15ec70=_0x15ec70||new Map();const _0x5df5fd=new Map(),_0x2e9d7f=new Map(),_0x122ab1=new Map(),_0x498009=new Map(),_0x3959e0=new Map(),_0x332cc4=new Map(),_0x114e68=new Map(),_0xaf3bfe=new Map(),_0x1cbc56=new Map();let _0x59eb55=0x0,_0x280c94=0x0,_0x394ad4=0x0,_0xc93dca=0x0,_0x161d56=0x0,_0x260242=0x0;const _0x3533e2=new Set(),_0x29e61b=new Set();(_0x390875||[])[_0x2bf432(0xcf)](_0x1579c1=>{const _0x2e60e4=_0x2bf432,_0x146403=String(_0x1579c1[_0x2e60e4(0xa6)]||'')[_0x2e60e4(0x112)](),_0x7ccc5f=String(_0x1579c1[_0x2e60e4(0x193)]||'')[_0x2e60e4(0x112)](),_0xe9957f=String(_0x1579c1[_0x2e60e4(0xc6)]||'')[_0x2e60e4(0x112)](),_0x45128a=Number(_0x1579c1[_0x2e60e4(0xb5)])||0x0,_0xe79b4=Number(_0x1579c1[_0x2e60e4(0x93)])||0x0,_0x1995de=Number(_0x1579c1[_0x2e60e4(0x139)])||0x0,_0x41bef9=sellOutKanalSinifla(_0x1579c1[_0x2e60e4(0xe7)],_0x1579c1[_0x2e60e4(0x152)]),_0x56096d=String(_0x1579c1['Mal\x20Grubu\x20Tnm.']||'')[_0x2e60e4(0x112)]()||'Diğer',_0xd2c617=String(_0x1579c1[_0x2e60e4(0x190)]||'')[_0x2e60e4(0x112)]()||'Tanımsız',_0xf62647=_0x1579c1[_0x2e60e4(0x149)],_0x3abdb1=String(_0x1579c1[_0x2e60e4(0x185)]||'')[_0x2e60e4(0x112)](),_0x3216cb=excelDateToJSArti1Gun(_0x1579c1[_0x2e60e4(0x104)]),_0x3aaaa0=String(_0x1579c1[_0x2e60e4(0x196)]||'')['trim'](),_0x21e9b7=String(_0x1579c1[_0x2e60e4(0xd1)]||'')[_0x2e60e4(0x112)]();_0x59eb55+=_0x45128a,_0x280c94+=_0xe79b4;if(_0x41bef9===_0x2e60e4(0xec))_0x394ad4+=_0x45128a;else _0xc93dca+=_0x45128a;if(_0xf62647!=null&&_0xf62647!=='')_0x3533e2['add'](String(_0xf62647));if(_0x146403)_0x29e61b['add'](_0x146403);_0x3abdb1===_0x2e60e4(0x137)&&(_0x161d56+=_0x45128a,_0x260242+=0x1);_0x122ab1[_0x2e60e4(0x12f)](_0x56096d,(_0x122ab1[_0x2e60e4(0x111)](_0x56096d)||0x0)+_0xe79b4),_0x498009[_0x2e60e4(0x12f)](_0xd2c617,(_0x498009[_0x2e60e4(0x111)](_0xd2c617)||0x0)+_0x45128a);if(_0x3216cb){const _0xdc38ad=dateKeyLocal(_0x3216cb);if(_0xdc38ad){if(!_0x3959e0[_0x2e60e4(0xc9)](_0xdc38ad))_0x3959e0['set'](_0xdc38ad,{'net':0x0,'litre':0x0});const _0xcfea90=_0x3959e0[_0x2e60e4(0x111)](_0xdc38ad);_0xcfea90['net']+=_0x45128a,_0xcfea90[_0x2e60e4(0x138)]+=_0xe79b4;if(_0x3aaaa0&&!_0x3aaaa0[_0x2e60e4(0xf2)]('2')){if(!_0x332cc4['has'](_0x3aaaa0))_0x332cc4[_0x2e60e4(0x12f)](_0x3aaaa0,new Map());const _0x586041=_0x332cc4[_0x2e60e4(0x111)](_0x3aaaa0);if(!_0x586041[_0x2e60e4(0xc9)](_0xdc38ad))_0x586041['set'](_0xdc38ad,{'litre':0x0,'miktar':0x0});const _0x48afc5=_0x586041[_0x2e60e4(0x111)](_0xdc38ad);_0x48afc5[_0x2e60e4(0x138)]+=_0xe79b4,_0x48afc5['miktar']+=_0x1995de;if(_0x21e9b7&&!_0x114e68[_0x2e60e4(0xc9)](_0x3aaaa0))_0x114e68['set'](_0x3aaaa0,_0x21e9b7);if(_0x56096d&&!_0xaf3bfe['has'](_0x3aaaa0))_0xaf3bfe[_0x2e60e4(0x12f)](_0x3aaaa0,sellOutMarkaGrubu(_0x56096d));if(_0x7ccc5f){if(!_0x1cbc56[_0x2e60e4(0xc9)](_0x3aaaa0))_0x1cbc56[_0x2e60e4(0x12f)](_0x3aaaa0,new Map());const _0x16a50b=_0x1cbc56[_0x2e60e4(0x111)](_0x3aaaa0);_0x16a50b['set'](_0x7ccc5f,(_0x16a50b[_0x2e60e4(0x111)](_0x7ccc5f)||0x0)+_0xe79b4);}}}}if(!_0x7ccc5f)return;const _0x4726b5=normalizeAdSoyad(_0x7ccc5f);if(_0xe9957f&&!_0x2e9d7f['has'](_0x4726b5))_0x2e9d7f['set'](_0x4726b5,_0xe9957f);!_0x5df5fd[_0x2e60e4(0xc9)](_0x4726b5)&&_0x5df5fd[_0x2e60e4(0x12f)](_0x4726b5,{'key':_0x4726b5,'ad':_0x7ccc5f,'ssm':_0xe9957f||null,'netCiro':0x0,'acikLitre':0x0,'kapaliLitre':0x0,'belgeSet':new Set(),'invoicedNoktaSet':new Set(),'aktifNoktalar':[]});const _0x4a6059=_0x5df5fd[_0x2e60e4(0x111)](_0x4726b5);if(_0xe9957f&&!_0x4a6059[_0x2e60e4(0xd0)])_0x4a6059[_0x2e60e4(0xd0)]=_0xe9957f;_0x4a6059[_0x2e60e4(0x8f)]+=_0x45128a;if(_0x41bef9===_0x2e60e4(0xec))_0x4a6059[_0x2e60e4(0x1a6)]+=_0xe79b4;else _0x4a6059[_0x2e60e4(0xf9)]+=_0xe79b4;if(_0xf62647!=null&&_0xf62647!=='')_0x4a6059['belgeSet'][_0x2e60e4(0x110)](String(_0xf62647));if(_0x146403)_0x4a6059[_0x2e60e4(0xae)][_0x2e60e4(0x110)](_0x146403);});const _0x2a7ac5=_0x15ec70,_0x40396d=_0x9069d['size']>0x0;_0x5e8630[_0x2bf432(0xcf)]((_0x1f7dda,_0x12c3dd)=>{const _0x2ea6f5=_0x2bf432;if(_0x40396d&&noktaPasifVeyaIptalMi(_0x9069d['get'](_0x12c3dd)))return;const _0x33b066=normalizeAdSoyad(_0x1f7dda);!_0x5df5fd['has'](_0x33b066)&&_0x5df5fd['set'](_0x33b066,{'key':_0x33b066,'ad':_0x1f7dda,'ssm':_0x2e9d7f['get'](_0x33b066)||null,'netCiro':0x0,'acikLitre':0x0,'kapaliLitre':0x0,'belgeSet':new Set(),'invoicedNoktaSet':new Set(),'aktifNoktalar':[]}),_0x5df5fd[_0x2ea6f5(0x111)](_0x33b066)[_0x2ea6f5(0x17b)]['push'](_0x12c3dd);});const _0x21c9a1=Array[_0x2bf432(0x1af)](_0x5df5fd[_0x2bf432(0xb9)]())[_0x2bf432(0x174)](_0xa7e5be=>{const _0x45393a=_0x2bf432,_0x311ab4=_0xa7e5be[_0x45393a(0x17b)][_0x45393a(0x1ad)],_0x356a1b=_0xa7e5be[_0x45393a(0x17b)][_0x45393a(0x141)](_0x2dd9d9=>!_0xa7e5be[_0x45393a(0xae)][_0x45393a(0xc9)](_0x2dd9d9)),_0x6967d8=_0x311ab4-_0x356a1b[_0x45393a(0x1ad)],_0x2e7119=_0x311ab4>0x0?_0x6967d8/_0x311ab4*0x64:null,_0x508b78=_0xa7e5be[_0x45393a(0x17b)]['filter'](_0x393a63=>_0x2a7ac5[_0x45393a(0x111)](_0x393a63)===_0x45393a(0xec)),_0x5aafa0=_0xa7e5be[_0x45393a(0x17b)]['filter'](_0x43d9e0=>_0x2a7ac5[_0x45393a(0x111)](_0x43d9e0)==='Kapalı\x20Kanal'),_0x4ca3bd=_0x508b78[_0x45393a(0x141)](_0x596d4c=>_0xa7e5be['invoicedNoktaSet'][_0x45393a(0xc9)](_0x596d4c))[_0x45393a(0x1ad)],_0x3f638a=_0x5aafa0['filter'](_0x225efe=>_0xa7e5be[_0x45393a(0xae)]['has'](_0x225efe))[_0x45393a(0x1ad)],_0x30953b=_0x508b78[_0x45393a(0x1ad)]>0x0?_0x4ca3bd/_0x508b78['length']*0x64:null,_0x27df85=_0x5aafa0[_0x45393a(0x1ad)]>0x0?_0x3f638a/_0x5aafa0[_0x45393a(0x1ad)]*0x64:null,_0x49b753=_0x356a1b[_0x45393a(0x141)](_0x369395=>_0x2a7ac5[_0x45393a(0x111)](_0x369395)===_0x45393a(0xec)),_0x4c89c8=_0x356a1b[_0x45393a(0x141)](_0x241f22=>_0x2a7ac5[_0x45393a(0x111)](_0x241f22)===_0x45393a(0xf0)),_0x591398=_0xa7e5be[_0x45393a(0xd0)]||getSahaMuduru(_0xa7e5be['ad'])||_0x45393a(0xa8);return{'key':_0xa7e5be['key'],'temsilci':_0xa7e5be['ad'],'ssm':_0x591398,'netCiro':_0xa7e5be[_0x45393a(0x8f)],'acikLitre':_0xa7e5be[_0x45393a(0x1a6)],'kapaliLitre':_0xa7e5be['kapaliLitre'],'toplamLitre':_0xa7e5be[_0x45393a(0x1a6)]+_0xa7e5be['kapaliLitre'],'belgeSayisi':_0xa7e5be[_0x45393a(0x123)][_0x45393a(0xc7)],'toplamAktifNokta':_0x311ab4,'faturaKesilenNokta':_0x6967d8,'faturaKesilmeyenNokta':_0x356a1b['length'],'faturaKesilmeyenNoktaAcik':_0x49b753[_0x45393a(0x1ad)],'faturaKesilmeyenNoktaKapali':_0x4c89c8['length'],'fknsOrani':_0x2e7119,'fknsAcikOrani':_0x30953b,'fknsKapaliOrani':_0x27df85,'toplamAktifNoktaAcik':_0x508b78['length'],'toplamAktifNoktaKapali':_0x5aafa0[_0x45393a(0x1ad)],'faturaKesilmeyenListe':_0x356a1b['map'](_0x1f4a32=>({'kod':_0x1f4a32,'adi':(_0x311384[_0x45393a(0x111)](_0x1f4a32)||{})[_0x45393a(0xcd)]||_0x1f4a32,'kanal':_0x2a7ac5[_0x45393a(0x111)](_0x1f4a32)||null}))};})[_0x2bf432(0x9a)]((_0x54ca58,_0x180a48)=>_0x180a48[_0x2bf432(0x14b)]-_0x54ca58[_0x2bf432(0x14b)]),_0x320855=_0x40396d?Array[_0x2bf432(0x1af)](_0x9069d[_0x2bf432(0xb9)]())[_0x2bf432(0x141)](_0x18fedd=>_0x18fedd==='Aktif')[_0x2bf432(0x1ad)]:_0x29e61b[_0x2bf432(0xc7)],_0x1cc7d3=Array[_0x2bf432(0x1af)](_0x3959e0['entries']())[_0x2bf432(0x174)](([_0xd3d0c7,_0x5d1aa0])=>({'gunKey':_0xd3d0c7,'net':_0x5d1aa0['net'],'litre':_0x5d1aa0[_0x2bf432(0x138)]}))[_0x2bf432(0x9a)]((_0x4a6ac1,_0x173907)=>_0x4a6ac1[_0x2bf432(0x17f)][_0x2bf432(0xbd)](_0x173907[_0x2bf432(0x17f)])),_0x4fc5f1=Array[_0x2bf432(0x1af)](_0x332cc4['entries']())[_0x2bf432(0x174)](([_0x4568b4,_0x268804])=>({'kod':_0x4568b4,'urunAdi':_0x114e68[_0x2bf432(0x111)](_0x4568b4)||_0x4568b4,'marka':_0xaf3bfe[_0x2bf432(0x111)](_0x4568b4)||_0x2bf432(0x1a9),'gunler':Array[_0x2bf432(0x1af)](_0x268804[_0x2bf432(0x126)]())[_0x2bf432(0x174)](([_0x1d0288,_0x44dd8e])=>({'gunKey':_0x1d0288,'litre':_0x44dd8e[_0x2bf432(0x138)],'miktar':_0x44dd8e[_0x2bf432(0xfd)]}))[_0x2bf432(0x9a)]((_0x124829,_0x20de0d)=>_0x124829[_0x2bf432(0x17f)][_0x2bf432(0xbd)](_0x20de0d[_0x2bf432(0x17f)])),'temsilciPay':((()=>{const _0x223535=_0x2bf432,_0x787c11=Array['from']((_0x1cbc56[_0x223535(0x111)](_0x4568b4)||new Map())['entries']())[_0x223535(0x174)](([_0x563051,_0x306af7])=>({'ad':_0x563051,'litre':_0x306af7})),_0x4476f5=_0x787c11['reduce']((_0x5422f8,_0x481a58)=>_0x5422f8+_0x481a58[_0x223535(0x138)],0x0);return _0x787c11[_0x223535(0x174)](_0x3fc9cf=>({'ad':_0x3fc9cf['ad'],'litre':_0x3fc9cf[_0x223535(0x138)],'pay':_0x4476f5>0x0?_0x3fc9cf['litre']/_0x4476f5*0x64:0x0}))[_0x223535(0x9a)]((_0x3e0e68,_0x55b60a)=>_0x55b60a[_0x223535(0x138)]-_0x3e0e68[_0x223535(0x138)])[_0x223535(0x14c)](0x0,0x5);})())}));return{'toplamNet':_0x59eb55,'toplamLitre':_0x280c94,'belgeSayisi':_0x3533e2['size'],'aktifNoktaSayisi':_0x320855,'durumVarMi':_0x40396d,'ssmSayisi':new Set(_0x21c9a1[_0x2bf432(0x174)](_0x4603f1=>_0x4603f1[_0x2bf432(0xd0)]||'Tanımsız')[_0x2bf432(0x141)](_0x5b4fae=>_0x5b4fae!==_0x2bf432(0xa8)))['size'],'temsilciSayisi':_0x21c9a1['length'],'blokajTutar':_0x161d56,'blokajAdet':_0x260242,'temsilciler':_0x21c9a1,'markalar':Array[_0x2bf432(0x1af)](_0x122ab1['entries']())[_0x2bf432(0x174)](([_0x199c56,_0xc46634])=>({'ad':_0x199c56,'litre':_0xc46634}))[_0x2bf432(0x9a)]((_0x54eaa2,_0x227891)=>_0x227891[_0x2bf432(0x138)]-_0x54eaa2[_0x2bf432(0x138)]),'hacimSegmentleri':Array['from'](_0x498009[_0x2bf432(0x126)]())['map'](([_0x5acada,_0x2de22a])=>({'ad':_0x5acada,'net':_0x2de22a}))[_0x2bf432(0x9a)]((_0x5491df,_0x43520a)=>_0x43520a[_0x2bf432(0x173)]-_0x5491df['net']),'kanalNet':{'acik':_0x394ad4,'kapali':_0xc93dca},'gunlukTrend':_0x1cc7d3,'malzemeler':_0x4fc5f1};}function applySellOutHedef(_0x33793,_0x10af7f){const _0x1107c2=_0x4613d2;_0x10af7f=_0x10af7f||{};const _0x5ad53a=_0x33793[_0x1107c2(0x188)][_0x1107c2(0x174)](_0x45a069=>{const _0x7787b3=_0x1107c2,_0x469baf=_0x10af7f[_0x45a069[_0x7787b3(0x122)]]||{},_0x433135=Number(_0x469baf[_0x7787b3(0xef)])||0x0,_0x5c712b=Number(_0x469baf['kapali'])||0x0,_0x4687f4=Math[_0x7787b3(0x181)](0x0,_0x433135-_0x45a069[_0x7787b3(0x1a6)]),_0x2709d7=Math[_0x7787b3(0x181)](0x0,_0x5c712b-_0x45a069['kapaliLitre']),_0x39ca0f=_0x433135+_0x5c712b,_0xc0d734=_0x39ca0f>0x0?_0x45a069['toplamLitre']/_0x39ca0f*0x64:null;return Object['assign']({},_0x45a069,{'acikHedef':_0x433135,'kapaliHedef':_0x5c712b,'acikKalan':_0x4687f4,'kapaliKalan':_0x2709d7,'hedefGerceklesme':_0xc0d734});})[_0x1107c2(0x141)](_0x12af15=>_0x12af15[_0x1107c2(0xd0)]&&_0x12af15[_0x1107c2(0xd0)]!==_0x1107c2(0xa8))[_0x1107c2(0x9a)]((_0x6a2135,_0x5e3255)=>_0x5e3255[_0x1107c2(0x14b)]-_0x6a2135[_0x1107c2(0x14b)]),_0x1aba1c=new Map();_0x5ad53a[_0x1107c2(0xcf)](_0xa2a683=>{const _0x5f0ea6=_0x1107c2,_0x3e80e7=_0xa2a683[_0x5f0ea6(0xd0)];if(!_0x1aba1c[_0x5f0ea6(0xc9)](_0x3e80e7))_0x1aba1c['set'](_0x3e80e7,{'ssm':_0x3e80e7,'acikHedef':0x0,'acikLitre':0x0,'kapaliHedef':0x0,'kapaliLitre':0x0,'toplamAktifNokta':0x0,'faturaKesilenNokta':0x0,'temsilciSayisi':0x0});const _0x139748=_0x1aba1c[_0x5f0ea6(0x111)](_0x3e80e7);_0x139748[_0x5f0ea6(0x179)]+=_0xa2a683[_0x5f0ea6(0x179)],_0x139748[_0x5f0ea6(0x1a6)]+=_0xa2a683['acikLitre'],_0x139748[_0x5f0ea6(0x18e)]+=_0xa2a683[_0x5f0ea6(0x18e)],_0x139748[_0x5f0ea6(0xf9)]+=_0xa2a683[_0x5f0ea6(0xf9)],_0x139748[_0x5f0ea6(0x100)]+=_0xa2a683['toplamAktifNokta'],_0x139748['faturaKesilenNokta']+=_0xa2a683[_0x5f0ea6(0xe0)],_0x139748[_0x5f0ea6(0x183)]+=0x1;});const _0x228181=Array[_0x1107c2(0x1af)](_0x1aba1c[_0x1107c2(0xb9)]())['map'](_0x2b437e=>{const _0x1e3a7b=_0x1107c2,_0x3ae3f2=_0x2b437e[_0x1e3a7b(0x179)]+_0x2b437e['kapaliHedef'],_0x291399=_0x2b437e[_0x1e3a7b(0x1a6)]+_0x2b437e[_0x1e3a7b(0xf9)];return Object[_0x1e3a7b(0x134)]({},_0x2b437e,{'hedefGerceklesme':_0x3ae3f2>0x0?_0x291399/_0x3ae3f2*0x64:null,'genelFkns':_0x2b437e[_0x1e3a7b(0x100)]>0x0?_0x2b437e[_0x1e3a7b(0xe0)]/_0x2b437e[_0x1e3a7b(0x100)]*0x64:null});})[_0x1107c2(0x9a)]((_0xdef854,_0x15443f)=>_0x15443f['acikLitre']+_0x15443f[_0x1107c2(0xf9)]-(_0xdef854[_0x1107c2(0x1a6)]+_0xdef854[_0x1107c2(0xf9)]));return Object[_0x1107c2(0x134)]({},_0x33793,{'temsilciler':_0x5ad53a,'ssmler':_0x228181,'temsilciSayisi':_0x5ad53a[_0x1107c2(0x1ad)],'ssmSayisi':_0x228181[_0x1107c2(0x1ad)]});}function _0x29bd(){const _0x3b974b=['qCoNXlfRieTHBMfS','pc9KAxy+','C2vSBe91DfnLy2LSAuf5','ywnPAW','s2fWywZeSsblyw5HBa','oYi+cIaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs10B3aIpGOGicaGicaGidXKAxyGy2XHC3m9iMn1C3qTyxzHDgfYiJ4','C3rHCNrZv2L0Aa','tw9KzxjUieTHBMfSigf5igfYXz9PDMKGyNvSDxrHigTHEwrLzgLSzw1LzgK6','Bw9KzxjUs2fUywXizwrLzLbHBMvS','mtuYmJiX','yNjLBMrP','vg9WBgfTieXPDhjL','nwrTwfPSBq','A2fWywXPtgL0CMu','C2vSBe91DeTHEwrLDcdIHPiGC3rHDguUC2vSBe91DfjLCg9YDcb5yxReSwZeSxLVCI4GDg9WBgfTtgL0CMu9','mtuYnZuZ','mtuYnZq3','BwLRDgfY','u2vSBcbpDxqGCMfWB3j1igj1Bhv0ysbRyxLKzwrPBgvTzwrPoG','Dg9mB2nHBgvmB3DLCKnHC2u','Dg9WBgfTqwT0AwzoB2T0yq','rwTVBwLUAq','vMvYAsbRyxLUyCsFXle6imsWCNnHBgL5zsbmAxn0zxnPicHlzxKGqwnJB3vUDc9nB2rLCM4Gs2fUywWPiokaLcbOzw7dVhOGECo8A2XLBM1LzgK','x3nLBgXpDxrszxbVCNq','r2LYAwXLBIbgyxr1CMfSyw1HifrHCMLOAq','CMvWBgfJzq','pc9KAxy+cIaGica8l2rPDJ4','CM91BMq','mJe3yMjcyvbt','pgrPDIbJBgfZCZ0IC3nTlwTHBMfSlwTHBgfUiJ5lywXHBIa','yMvSz2vtyxLPC2K','C2vSBe91DfnVBKD1BMnLBgXLBwu','t3rLBa','o2nVBg9YoG','AgvKzwzbBMXPA0DVCNvUDhu','phnWyw4Gy2XHC3m9iNnZBs1Ryw5HBc1Py29UiIbZDhLSzt0IyMfJA2DYB3vUzdO','ywrK','z2v0','DhjPBq','Dg9ju09tDhjPBMC','ic8G','zgLZywjSzwq','cIaGica','DM9KA2e','sgvKzwyGyNvSDxrHigTHEwrLzgLSzw1LzgKGkgnPAgf6ysbKysbRyxLKzwrPBg1PEw9YktOG','DMfYkc0TzgfUz2vYlxnVzNqP','mtuYnZq4','mtuXmZG0','u2vSBcbpDxqGAgvKzwyGy2LOyxPHigTHEwrLzgLSzw1LzgKU','mtm2ndy2ognUEwDkAa','z2v0rwXLBwvUDej5swq','mtuXndiW','C29Tzq','tw9KzxjUieTHBMfSihjHCg9YDsbIDwX1DgeGA2f5zgvKAwXLBwvKAtO','A2v5','yMvSz2vtzxq','x21VzgvYBKTHBMfSqxjZAxy','u2vSBcbpDxqGCMfWB3j1ignPAgf6ysbRyxLKzwrPBgvTzwrPlG','zw50CMLLCW','zgf0yq','C2vSBe91Def5u2vSzwn0','BwvYy2fUihjHA2K','Bw9KzxjUs2fUywXcB3nqyw5LBa','u2vSBcbpDxqGyxKGyxlfN2L2AsbIDwX1DhrHBIbVA3vUyw1HzmsXoG','u2vSBcbpDxqGCMfWB3j1ig9SDCwFDhvYDwXHBwfKXle6','igLJAw4GyxjZAxyGEMf0zw4GDMfYicHKB3n5ysbPy2vYAwDPBMuGz29YzsbIDsb2zxjPia','ChjVDg90ExbL','C2v0','mZa1ndu2r3HnqMnv','yxbWBgLJyxrPB24VANnVBG','CgfYy2fSAu9Yyw5bBMe','BwfSEMvTzvnHECsXC8sXpq','yxnZAwDU','mtuXote4','Bw9KzxjUs2fUywXlyxj0r3jPza','rMf0DxjHBgfTysbcBg9RywPSXle','BgL0CMu','twLRDgfY','x3nLBgXpDxrbCNnPDG','zMLSzxm','ks4Gq2LOyxPHigrHigTHEwrLzgLSBwL5B3iGkgj1imo2EMvSBgLRigTHCgfSXlePiokaLcbZyxLMysb5zw5PBgvUAxjZzsbIDsbHCSwFAxyGA2f5zmsXigTHEwjVBhvYlG','BM90lwnVBMzPz3vYzwq','ufvu','sfruuca','BwfSEMvTzvnHEwLZAt0','zMLSDgvY','cIaGica8zgL2ignSyxnZpsjZC20TzMTUCY1YAw5NlwL0zw0IpGOGicaGica','BM9RDgfdyxjPvgfRAxbFC2vSBe91DefYC2L2x3yX','mtuWndG3','ltaX','Aw5Uzxjive1m','BM9RDgfdyxjPvgfRAxbFC2vSBe91DfjLCg9YDf92mq','ChvZAa','u2f0XlhfNYbczwXNzxnP','mtuYnZq5','Dg9WBgfTtgL0CMu','C2XPy2u','qCoNXlfRiezltLm','kgnHBMZeSsK','Dg9gAxHLza','DMLZA2K','C2vSBe91DeHLzgvM','qCoNXlfRl090zwWGvg5TlG','mtuYmJm2','Bw9KzxjUs2fUywXtB25hDw5JzwXSzw1L','oYi+pgKGy2XHC3m9iMzHlxnVBgLKia','z3jHBNqNCW','u3rHBMrHCNqGs2fWywZeSq','BM9RDgfdyxjPvgfRAxbFBw9KzxjUs2fUywXszxbVCNrFDJe','cIaGica8zgL2ignSyxnZpsjZC20TA2fYBMuTy2fYzciGC3r5Bgu9iMjVCMrLCI1Szwz0oJrWEcbZB2XPzca','oYi+','igf5XlfUysbHAxqGyxlfN2L2ihzLCMLZAsbIDwX1BMfTywteSs4','C2vSBe91DefYC2L2BgvcDg4','DMfYkc0TD2fYBIK','mtuYmJi0','pg9WDgLVBIb2ywX1zt0IiJ5hW7XUy2vSicHJyw5SXlePpc9VChrPB24+','pgrPDIbJBgfZCZ0IC3nTlwzRBNmTCMLUzY10CMLViJ4kicaGia','tw9KzxjUieTHBMfSigf5igfYXz9PDMKGyNvSDxr0yw4GC2LSAw5LBwvKAtO','yMLSAw5TzxLLBIbOyxrH','mtuWnZGZ','mtq0mZu4ogjxBhLXAG','zgLZCgXHEq','Cgf0Aa','DMfYkc0TBgLUzs1ZB2z0kq','Bw9KzxjUs2fUywXbEvnLBgvJDa','qNuGyxNeSsbHCSwFAxzSzw1LAYbPW6DPBIdfN2LMCMv5AsbNAxjPBJO','BwfSEMvTzwXLCG','mtuYndiY','CMvHC29U','A2v5CW','vvLbuKK6iefYXz9PDIbIDwX1DgeGEwf6XlfSyw1HzmsXicG','m3L0Chj2EG','CMfRAq','tw9KzxjUieTHBMfSigf5igfYXz9PDMKGy2LOyxPHigTHEwrLzgLSzw1LzgKU','Bw9UA2v5ihnOB3vSzgvY','BMv0','BwfW','mtuYntqY','tw9KzxjUieTHBMfSigHLzgvMigj1Bhv0DgfUig9RDw5HBwfKXle6','tw9KzxjUieTHBMfSihjHCg9YDsbIDwX1DhrHBIbVA3vUyw1HzmsXoG','BM93','ywnPA0HLzgvM','C2vSBe91DefYC2L2q2fJAgu','ywT0AwzoB2T0ywXHCG','cIaGicaGicaGica8zgL2ignSyxnZpsjZC20TzMTUCY1YAw5NlwXHyMvSiJ5izwrLzJWVzgL2pGOGicaGicaGidWVzgL2pGOGicaGica8l2rPDJ4kicaGicaG','CgfYC2u','Dgv4Da','z3vUs2v5','ote2otbhrK56sva','Bwf4','z2LU','DgvTC2LSy2LtyxLPC2K','CgfYy2fSAq','txvOyxnLyMvSzCwFBwuGrhvYDw11ifrHBSsXBCsX','Bw9KzxjUs2fUywXtzwnPBgLbEq','DMfYkc0TD2fYBI1ZB2z0kq','DgvTC2LSy2LSzxi','vvLbuKK6ie1VzgvYBIblyw5HBcbYyxbVCNuGyNvSDxrHigTHEwrLzgLSzw1LzgKGkgnPAgf6ysbKysbRyxLKzwrPBg1PEw9YksdIGjqGC2f5zMeGEwvUAwXLBMLYC2uGA2f5yM9SDxiUieZdVhrMzw4GyMheN2XHBNteSw7eSxReSs9NAxjPXz9PBML6AsbRB250CM9SigvKAxaGDgvRCMfYigrLBMv5Aw4U','pc9KAxy+cIaGicaGicaGpgrPDJ4kicaGicaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs1Uyw1LiJ7eSejsquJeSe0GsCwEsuSGphnWyw4Gy2XHC3m9iMjHzgDLihnZBs1OAxLLCMfYC2KTyMfKz2uIpJXPignSyxnZpsjMys1ZB2XPzcbMys11C2vYlxrPzsiGyxjPys1OAwrKzw49iNrYDwuIpJWVAt4Gs2v5iefJy291BNq8l3nWyw4+pc9KAxy+cIaGicaGicaGica8zgL2ignSyxnZpsjZC20TA2fYBMuTC3vIiJ5nB2rLCM4Gs2fUywW8l2rPDJ4kicaGicaGica8l2rPDJ4kicaGicaGica8zgL2ignSyxnZpsjZC20TzMTUCY1YAw5NlxDYyxaIpGOGicaGicaGicaG','mtuYnJq0','y2LU','zgjvCMW','A2fWywXPsgvKzwy','pg9WDgLVBIb2ywX1zt0I','sgfJAw0Gu2vNBwvUDgKGvg5TlG','BxvZDgvYAu1HC3rLCKrLDgf5','pc90zxH0pGOGidWVC3zNpG','u2f0XlhfNYbuzw1ZAwXJAxnPiefKXle','yMvSz2vtyxLPC2K9','DMfYkc0TC3vJy2vZCY1ZB2z0kq','twfSEMvTzsblB2r1','Aw5JBhvKzxm','BxvZDgvYAu1HC3rLCKr1CNvT','A29UEwfR','BxvZDgvYAu1HC3rLCKTHBMfS','yNjHBMr5','DMfYkc0TAw5RlwzHAw50kq','C3rYAw5NAwz5','mtuYnZu0','mtuXotyX','BgLRB3i','BM9RDgfdyxjPvgfRAxbFBw9KzxjUs2fUywXbCNnPDL92mq','y2fSBa','mty4qNfbuvDi','BM9RDgfdyxjPvgfRAxbFC2vSBe91DeHLzgvMx3yX','vvLbuKK6ifnLBgWGt3v0ihjHCg9YDsbIDwX1DgeGA2f5zgvKAwXLBwvKAsaOy2LOyxPHigrHigTHEwrLzgLSBwL5B3iPiokaLcbZyxLMysb5zw5PBgvUAxjZzsbRyxLIB2X1CI4Gtmo8DgzLBIbIyCsFBgfUDmsXBSsXESsXl2DPCMNfN2LUAxPPigTVBNrYB2WGzwrPCcb0zwTYyxiGzgvUzxLPBI4','ywnPA0XPDhjL','BM9Uzq','rgLZDgLSzq','qMLYyq','yw5H','yMXVy2S','mtuYotuW','BgvUz3rO','u2vSBcbpDxqGCMfWB3j1igj1Bhv0DgfUig9RDw5HBwfKXle6','zNjVBq','mtuWmtm3','ihrHCMLOAw5KzsbHCSwFAxzSzw5TACwFksb2zxjPC2KGz8o2C3rLCMLSAxLVCG','mtuYmJi3','Dgv4DenVBNrLBNq','u2vSBcbpDxqGyxKGyxlfN2L2AsbJAwHHEMeGA2f5zgvKAwXLBwvKAs4','zMfZXlfSihjHA8sX','BwvZC2fNzq','CMvUzgvYtw9KzxjUs2fUywXwAwv3icHnt0rfuK4GzwTYyw4PiokgKIbRyxLUywSGC3rHDguUBw9KzxjUs2fUywXszxbVCNqUihrVCgXHBuXPDhjLpq','W5XYW7XUieTVzhu','C2vSBe91Da','BMv0q2LYBW','sg9YzwnH','mtuXmJq3','oYi+pc9KAxy+pc9KAxy+cIaGica','tgL0CMu','mJK2nZqWnMnKtxHuAq','Bw9KzxjUs2fUywXbCNnPDKnHy2HL','BwvYy2fUihjHA8sX','igf5XlfUXlfUicG','mtuYmJi1','tw9KzxjUieTHBMfSihjHCg9YDsbJAwHHEMeGA2f5zgvKAwXLBwvKAs4','C29YDa','AgvUzhjPy2TZ','BNvSBa','CMvKDwnL','z2XLBMzPzgrPy2G','z3jHBNrZ','C2vSBe91DfjLCg9YDa','pc9VChrPB24+','DMfSDwu','cIaGpc9KAxy+','tw9KzxjUieTHBMfSigf5igfYXz9PDMKGyNvSDxr0yw4GB2T1BMfTywteStO','x19OzxnHCgXHBM1HwMfTyw5P','tCo8Xz90zxjPie5V','zxjYB3i','vgfUXlfTC8sXEG','qxlfN2L2oIa','s2fWywZeSsbgs05t','CMv2zxjZzq','Bw9KzxjUs2fUywXbC09M','BxvZDgvYAu1HC3rLCK1HCa','Aw52B2LJzwroB2T0yvnLDa','mteYndCWmZH4zeXIre4','W5zUy2uGr2vSzw5LA3nLBcblyw5HBcbZzwTTzxnPBMrLBIb2zxLHigfUysb5W7XRBgvTzsbZyxLMyxpeSw5Kyw4Gzg9ZEwf5XleGECo8A2XLEwLWigHLC2fWBgf0XlfUlG','ideWmciGC3rYB2TLlwXPBMvJyxa9iNjVDw5KiI8+cIaGica8Dgv4Dcb4psiXociGEt0ImJeIigzVBNqTC2L6zt0IosiGzM9UDc13zwLNAhq9iJCWmciGzMLSBd0IiZe1mJiZociGDgv4Dc1HBMnOB3i9iM1PzgrSzsiGzM9UDc1Myw1PBhK9iLnWywnLieDYB3rLC2SIpG','igf5Aw5HigfPDcKUifv6zxjPBMuGEwf6AwXZAw4GBwK/','twfSEMvTzsbRXlfZysbTzxrUAq','mtuXmJCX','tMv0','u3rHBMrHCNqGqCoNXlfR','mJGZndu3ENzTBNPz','AxnbCNjHEq','DMfSDwvZ','zMfZAwWGCMfRAq','C3rHDhvZ','qxlfN2L2BgvUzwnLAYbYyxbVCIb5B2S','Bg9JywXLq29TCgfYzq','pc9ZCgfUpJXZCgfUignSyxnZpsj2ywWIpG','BwLU','C2xdP2LSAuf5pq','C3r5Bgu','yxjZAxzAyw1HBMK','mtuYmJiZ','cIaGicaGidXKAxyGy2XHC3m9iNnZBs1RyxjUzs1MB290iJ4kicaGicaGica8C3bHBIbJBgfZCZ0IzY1SyMWIpKHLzgvMieDLCSoNzwTSzCwFBwu8l3nWyw4+cIaGicaGicaGphnWyw4Gy2XHC3m9iMCTDMfSiIbZDhLSzt0Iy29SB3i6','mtuYnZuY','u2f0XlhfNYbnW7XKW7XYW7WGqwteSq','C2L6zq','cIaGicaGidXKAxyGy2XHC3m9iNnZBs1MA25ZlxjPBMCTBgfIzwWIpG','AgfZ','DhiTvfi','AM9PBG','tw9KzxjUieTHBMfSigHLzgvMigj1Bhv0ysbRyxLKzwrPBgvTzwrPoG','BxvZDgvYAufKAq','pgrPDIbJBgfZCZ0IC3nTlwTHBMfSlxjVDYi+cIaGica8zgL2ignSyxnZpsjZC20TA2fUywWTDg9WiJ48C3bHBIbJBgfZCZ0IBgjSiJ4','zM9YrwfJAa','C3nT','twfSEMvTzsbuBM0U','Bw9KzxjUs2fUywXjy2vYAwS','mtuXndi4','nevrEfvRqW','y2f0y2G','Bw9KzxjUs2fUywXszxbVCNq','vg9WBgfTiezltLm','iIbZDhjVA2uTD2LKDgG9iJqIihn0CM9Rzs1KyxnOyxjYyxK9iG','mtuXmZm1','BgLRW7zY','u2vSBcbpDxqGAgvKzwyGyNvSDxr0yw4GB2T1BMfTywteStO','lMPZB24','x3nLBgXpDxrizwrLzG','mtuYmJa4','XlbYC2fSAxLLifrHCMLOAq','zMf0DxjHs2vZAwXLBK5VA3rH','mtuWnZGY','mtuYnZuX','u2vSBcbpDxqGyxKGyxlfN2L2AsbIDwX1DgeGA2f5zgvKAwXLBwvKAtO','pc9ZCgfUpJWVzgL2pGOGicaGpgrPDIbJBgfZCZ0IC3nTlwTHBMfSlxrYywnRiJ48zgL2ignSyxnZpsjZC20TA2fUywWTzMLSBciGC3r5Bgu9iNDPzhrOoG','mZC4ufDjChnr','qxjZAxzSzw1LihnPCMfZAw5KysbIAxiGAgf0ysbVBhvZDhu6ia','tCo8Xz90zxjPieTHBMfSXleGvg5TlG','u2vSBcbpDxqGAgvKzwyGyNvSDxrHigTHEwrLzgLSzw1LzgK6','Bw9KzxjUs2fUywXizwrLzKLUChv0','Bw9KzxjUs2fUywXizwrLzG','mtuYnJa4'];_0x29bd=function(){return _0x3b974b;};return _0x29bd();}async function saveSellOutHedefToCloud(_0x1c36a2){const _0x42570b=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':_0x42570b(0x13d)};try{const _0x193310=await cloudFetch(CLOUD[_0x42570b(0x18d)]['replace'](/\/$/,'')+'/'+SELLOUT_HEDEF_CLOUD_PATH+_0x42570b(0xdc)+await authQuery(),{'method':_0x42570b(0x13e),'headers':{'Content-Type':_0x42570b(0x131)},'body':JSON['stringify'](_0x1c36a2)});if(!_0x193310['ok'])throw new Error(_0x42570b(0x13f)+_0x193310[_0x42570b(0xbb)]);return{'ok':!![]};}catch(_0x306b4c){return console[_0x42570b(0xa7)](_0x42570b(0xe8),_0x306b4c),{'ok':![],'reason':_0x306b4c[_0x42570b(0x1b6)]};}}async function loadSellOutHedefFromCloud(){const _0x3f1c48=_0x4613d2;if(!cloudEnabled())return null;try{const _0x3188d6=await cloudFetch(CLOUD[_0x3f1c48(0x18d)][_0x3f1c48(0x105)](/\/$/,'')+'/'+SELLOUT_HEDEF_CLOUD_PATH+_0x3f1c48(0xdc)+await authQuery());if(!_0x3188d6['ok'])throw new Error(_0x3f1c48(0x13f)+_0x3188d6[_0x3f1c48(0xbb)]);const _0x267db7=await _0x3188d6[_0x3f1c48(0x17e)]();if(!_0x267db7||_0x267db7===_0x3f1c48(0x9c))return null;return JSON[_0x3f1c48(0x17d)](_0x267db7);}catch(_0x1067fe){return console[_0x3f1c48(0xa7)](_0x3f1c48(0xdb),_0x1067fe),null;}}async function saveSellOutHedefToLocal(_0x2a1504){const _0x340e1a=_0x4613d2,_0x3b2714=await idbSet(SELLOUT_HEDEF_LOCAL_KEY,_0x2a1504);if(!_0x3b2714)console['error'](_0x340e1a(0x11c));}async function loadSellOutHedefFromLocal(){const _0xd9b7d4=_0x4613d2;try{return await idbGet(SELLOUT_HEDEF_LOCAL_KEY);}catch(_0x35c05a){return console[_0xd9b7d4(0xa7)](_0x35c05a),null;}}async function sellOutHedefYenile(){let _0x4194b5=null;if(cloudEnabled())_0x4194b5=await loadSellOutHedefFromCloud();if(!_0x4194b5)_0x4194b5=await loadSellOutHedefFromLocal();return state['sellOutHedef']=_0x4194b5||{},state['sellOutHedef'];}async function sellOutHedefKaydet(_0x4b65da){const _0x3e6162=_0x4613d2;state[_0x3e6162(0x151)]=_0x4b65da,await saveSellOutHedefToLocal(_0x4b65da);if(cloudEnabled()){const _0x333271=await saveSellOutHedefToCloud(_0x4b65da);if(!_0x333271['ok'])throw new Error(_0x3e6162(0x118)+(_0x333271[_0x3e6162(0x16c)]||_0x3e6162(0x162)));}}async function saveSellOutReportToCloud(_0x228f31){const _0x38622a=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':_0x38622a(0x13d)};try{const _0x45a346=await cloudFetch(CLOUD[_0x38622a(0x18d)]['replace'](/\/$/,'')+'/'+SELLOUT_REPORT_CLOUD_PATH+'.json'+await authQuery(),{'method':_0x38622a(0x13e),'headers':{'Content-Type':_0x38622a(0x131)},'body':JSON[_0x38622a(0x19d)](_0x228f31)});if(!_0x45a346['ok'])throw new Error(_0x38622a(0x13f)+_0x45a346[_0x38622a(0xbb)]);const _0xd2ee2a=Date[_0x38622a(0x178)]();return await cloudMetaYazUzaktan(SELLOUT_REPORT_CLOUD_PATH,_0xd2ee2a),await cloudMetaZamaniKaydet(SELLOUT_REPORT_CLOUD_PATH,_0xd2ee2a),{'ok':!![]};}catch(_0x255a6e){return console['error'](_0x38622a(0xfe),_0x255a6e),{'ok':![],'reason':_0x255a6e[_0x38622a(0x1b6)]};}}async function loadSellOutReportFromCloud(){const _0x1054b9=_0x4613d2;if(!cloudEnabled())return null;try{const _0x2403dd=await cloudFetch(CLOUD[_0x1054b9(0x18d)][_0x1054b9(0x105)](/\/$/,'')+'/'+SELLOUT_REPORT_CLOUD_PATH+_0x1054b9(0xdc)+await authQuery());if(!_0x2403dd['ok'])throw new Error(_0x1054b9(0x13f)+_0x2403dd['status']);const _0x2db1d8=await _0x2403dd[_0x1054b9(0x17e)]();if(!_0x2db1d8||_0x2db1d8==='null')return null;return JSON[_0x1054b9(0x17d)](_0x2db1d8);}catch(_0x44f741){return console[_0x1054b9(0xa7)](_0x1054b9(0x1ae),_0x44f741),null;}}async function saveSellOutReportToLocal(_0x171b8a){const _0x9fbeeb=_0x4613d2,_0x280418=await idbSet(SELLOUT_REPORT_LOCAL_KEY,_0x171b8a);if(!_0x280418)console[_0x9fbeeb(0xa7)](_0x9fbeeb(0x125));}async function loadSellOutReportFromLocal(){const _0x2f78db=_0x4613d2;try{return await idbGet(SELLOUT_REPORT_LOCAL_KEY);}catch(_0x292530){return console[_0x2f78db(0xa7)](_0x292530),null;}}async function sellOutYenile(){const _0xfb7ad9=_0x4613d2;let _0x3dde8d=null;if(cloudEnabled()){const _0x22bd5a=await cloudVeriVerimliYukle(SELLOUT_REPORT_CLOUD_PATH,loadSellOutReportFromCloud,loadSellOutReportFromLocal);_0x3dde8d=_0x22bd5a['data'];}if(!_0x3dde8d)_0x3dde8d=await loadSellOutReportFromLocal();state[_0xfb7ad9(0xa0)]=_0x3dde8d;if(_0x3dde8d&&_0x3dde8d[_0xfb7ad9(0xa5)])state[_0xfb7ad9(0x10b)]=_0x3dde8d[_0xfb7ad9(0xa5)];return _0x3dde8d;}async function sellOutKaydet(_0x332544){const _0x13f487=_0x4613d2,_0x1d7318=new Date()['toISOString']();_0x332544=Object[_0x13f487(0x134)]({},_0x332544,{'__hesaplanmaZamani':_0x1d7318}),ktlog(_0x13f487(0xfa),_0x332544&&_0x332544[_0x13f487(0x14b)],_0x13f487(0x194),_0x332544&&_0x332544[_0x13f487(0x10a)]),state[_0x13f487(0xa0)]=_0x332544,state[_0x13f487(0x10b)]=_0x1d7318,await saveSellOutReportToLocal(_0x332544);if(cloudEnabled()){const _0x5a7354=await saveSellOutReportToCloud(_0x332544);!_0x5a7354['ok']&&(console[_0x13f487(0xa7)]('UYARI:\x20Sell\x20Out\x20raporu\x20buluta\x20kaydedilemedi,\x20hiçbir\x20yerde\x20kalıcı\x20değil:',_0x5a7354['reason']),alert(_0x13f487(0x1a5)));}}async function sellOutRaporuOlustur(){const _0x11eac1=_0x4613d2,_0x5368f5=state['files'][_0x11eac1(0x8e)];if(!_0x5368f5)return;try{const _0x203813=buildSellOutReport(_0x5368f5['data'],state[_0x11eac1(0xad)],state[_0x11eac1(0x198)],state[_0x11eac1(0x191)],state[_0x11eac1(0x19a)]);await sellOutKaydet(_0x203813);}catch(_0x4ae1e7){console[_0x11eac1(0xa7)](_0x11eac1(0x12c),_0x4ae1e7);}}async function saveSellOutArsivAyToCloud(_0x160dab,_0x102279){const _0x3e3d5b=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':'not-configured'};try{const _0x7def74=await cloudFetch(CLOUD[_0x3e3d5b(0x18d)][_0x3e3d5b(0x105)](/\/$/,'')+'/'+SELLOUT_ARSIV_CLOUD_PATH+'/'+encodeURIComponent(_0x160dab)+_0x3e3d5b(0xdc)+await authQuery(),{'method':_0x3e3d5b(0x13e),'headers':{'Content-Type':_0x3e3d5b(0x131)},'body':JSON[_0x3e3d5b(0x19d)](_0x102279)});if(!_0x7def74['ok'])throw new Error(_0x3e3d5b(0x13f)+_0x7def74[_0x3e3d5b(0xbb)]);return{'ok':!![]};}catch(_0x319cd1){return console[_0x3e3d5b(0xa7)](_0x3e3d5b(0xe3),_0x319cd1),{'ok':![],'reason':_0x319cd1[_0x3e3d5b(0x1b6)]};}}async function sellOutArsivAyiSil(_0x137c7c){const _0x5ea7bf=_0x4613d2;if(cloudEnabled())try{const _0x10fa63=await cloudFetch(CLOUD[_0x5ea7bf(0x18d)][_0x5ea7bf(0x105)](/\/$/,'')+'/'+SELLOUT_ARSIV_CLOUD_PATH+'/'+encodeURIComponent(_0x137c7c)+_0x5ea7bf(0xdc)+await authQuery(),{'method':_0x5ea7bf(0x13e),'headers':{'Content-Type':'application/json'},'body':_0x5ea7bf(0x9c)});if(!_0x10fa63['ok'])throw new Error(_0x5ea7bf(0x13f)+_0x10fa63[_0x5ea7bf(0xbb)]);}catch(_0x31c8b9){console[_0x5ea7bf(0xa7)]('Sell\x20Out\x20ay\x20arşivi\x20buluttan\x20silinemedi:',_0x31c8b9);throw _0x31c8b9;}const _0x581d02=Object[_0x5ea7bf(0x134)]({},state[_0x5ea7bf(0x17a)]);delete _0x581d02[_0x137c7c],state[_0x5ea7bf(0x17a)]=_0x581d02,await saveSellOutArsivToLocal(_0x581d02);}async function loadSellOutArsivFromCloud(){const _0x4addf1=_0x4613d2;if(!cloudEnabled())return null;try{const _0x378290=await cloudFetch(CLOUD[_0x4addf1(0x18d)][_0x4addf1(0x105)](/\/$/,'')+'/'+SELLOUT_ARSIV_CLOUD_PATH+_0x4addf1(0xdc)+await authQuery());if(!_0x378290['ok'])throw new Error(_0x4addf1(0x13f)+_0x378290[_0x4addf1(0xbb)]);const _0x268110=await _0x378290['text']();if(!_0x268110||_0x268110==='null')return{};return JSON['parse'](_0x268110)||{};}catch(_0x22bce6){return console[_0x4addf1(0xa7)](_0x4addf1(0x12b),_0x22bce6),null;}}async function saveSellOutArsivToLocal(_0x33ec30){const _0x952442=_0x4613d2,_0x19d0af=await idbSet(SELLOUT_ARSIV_LOCAL_KEY,_0x33ec30);if(!_0x19d0af)console[_0x952442(0xa7)](_0x952442(0x1b4));}async function loadSellOutArsivFromLocal(){const _0x23980e=_0x4613d2;try{return await idbGet(SELLOUT_ARSIV_LOCAL_KEY)||{};}catch(_0x57aa8f){return console[_0x23980e(0xa7)](_0x57aa8f),{};}}let sellOutArsivYuklendiMi=![];async function sellOutArsivYenile(_0x55c8a8){const _0x284481=_0x4613d2;if(sellOutArsivYuklendiMi&&!_0x55c8a8)return state['sellOutArsivCache'];let _0x2421d2=null;if(cloudEnabled())_0x2421d2=await loadSellOutArsivFromCloud();if(!_0x2421d2)_0x2421d2=await loadSellOutArsivFromLocal();return state[_0x284481(0x17a)]=_0x2421d2||{},sellOutArsivYuklendiMi=!![],await saveSellOutArsivToLocal(state[_0x284481(0x17a)])['catch'](()=>{}),state[_0x284481(0x17a)];}const MODERNKANAL_HEDEF_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+'_modernKanalHedef',MODERNKANAL_HEDEF_LOCAL_KEY='noktaCariTakip_modernKanalHedef_v1',MODERNKANAL_REPORT_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+'_modernKanalReport',MODERNKANAL_REPORT_LOCAL_KEY=_0x4613d2(0x158),MODERNKANAL_ARSIV_CLOUD_PATH=CLOUD[_0x4613d2(0x166)]+_0x4613d2(0x124),MODERNKANAL_ARSIV_LOCAL_KEY=_0x4613d2(0x1a1);async function saveModernKanalHedefToCloud(_0x514d5b){const _0x4d5f09=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':_0x4d5f09(0x13d)};try{const _0x20d3f1=await cloudFetch(CLOUD['dbUrl'][_0x4d5f09(0x105)](/\/$/,'')+'/'+MODERNKANAL_HEDEF_CLOUD_PATH+'.json'+await authQuery(),{'method':_0x4d5f09(0x13e),'headers':{'Content-Type':'application/json'},'body':JSON[_0x4d5f09(0x19d)](_0x514d5b)});if(!_0x20d3f1['ok'])throw new Error(_0x4d5f09(0x13f)+_0x20d3f1[_0x4d5f09(0xbb)]);return{'ok':!![]};}catch(_0x5bc451){return console[_0x4d5f09(0xa7)](_0x4d5f09(0xcc),_0x5bc451),{'ok':![],'reason':_0x5bc451['message']};}}async function loadModernKanalHedefFromCloud(){const _0x14d50b=_0x4613d2;if(!cloudEnabled())return null;try{const _0x26e2f4=await cloudFetch(CLOUD[_0x14d50b(0x18d)][_0x14d50b(0x105)](/\/$/,'')+'/'+MODERNKANAL_HEDEF_CLOUD_PATH+_0x14d50b(0xdc)+await authQuery());if(!_0x26e2f4['ok'])throw new Error('HTTP\x20'+_0x26e2f4[_0x14d50b(0xbb)]);const _0x14b4c3=await _0x26e2f4[_0x14d50b(0x17e)]();if(!_0x14b4c3||_0x14b4c3===_0x14d50b(0x9c))return null;return JSON['parse'](_0x14b4c3);}catch(_0x20ebf4){return console['error'](_0x14d50b(0x176),_0x20ebf4),null;}}async function saveModernKanalHedefToLocal(_0x4af0f5){const _0x38d29f=_0x4613d2,_0xce5201=await idbSet(MODERNKANAL_HEDEF_LOCAL_KEY,_0x4af0f5);if(!_0xce5201)console[_0x38d29f(0xa7)]('Modern\x20Kanal\x20hedef\x20cihaza\x20kaydedilemedi.');}async function loadModernKanalHedefFromLocal(){const _0xc67f3f=_0x4613d2;try{return await idbGet(MODERNKANAL_HEDEF_LOCAL_KEY);}catch(_0x289ae4){return console[_0xc67f3f(0xa7)](_0x289ae4),null;}}async function modernKanalHedefYenile(){const _0x420c8b=_0x4613d2;let _0x439600=null;if(cloudEnabled())_0x439600=await loadModernKanalHedefFromCloud();if(_0x439600==null)_0x439600=await loadModernKanalHedefFromLocal();return state[_0x420c8b(0xea)]=Number(_0x439600)||0x0,state[_0x420c8b(0xea)];}async function modernKanalHedefKaydet(_0x3cb080){const _0x55c848=_0x4613d2;state[_0x55c848(0xea)]=Number(_0x3cb080)||0x0,await saveModernKanalHedefToLocal(state[_0x55c848(0xea)]);if(cloudEnabled()){const _0x1c68e7=await saveModernKanalHedefToCloud(state[_0x55c848(0xea)]);if(!_0x1c68e7['ok'])throw new Error('Hedef\x20buluta\x20kaydedilemedi\x20(cihaza\x20da\x20kaydedilmiyor):\x20'+(_0x1c68e7['reason']||_0x55c848(0x162)));}}async function saveModernKanalReportToCloud(_0x10f79f){const _0x14d1b4=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':_0x14d1b4(0x13d)};try{const _0x3a395e=await cloudFetch(CLOUD['dbUrl'][_0x14d1b4(0x105)](/\/$/,'')+'/'+MODERNKANAL_REPORT_CLOUD_PATH+'.json'+await authQuery(),{'method':_0x14d1b4(0x13e),'headers':{'Content-Type':_0x14d1b4(0x131)},'body':JSON[_0x14d1b4(0x19d)](_0x10f79f)});if(!_0x3a395e['ok'])throw new Error(_0x14d1b4(0x13f)+_0x3a395e[_0x14d1b4(0xbb)]);const _0x239b6e=Date[_0x14d1b4(0x178)]();return await cloudMetaYazUzaktan(MODERNKANAL_REPORT_CLOUD_PATH,_0x239b6e),await cloudMetaZamaniKaydet(MODERNKANAL_REPORT_CLOUD_PATH,_0x239b6e),{'ok':!![]};}catch(_0x109fdc){return console[_0x14d1b4(0xa7)](_0x14d1b4(0x121),_0x109fdc),{'ok':![],'reason':_0x109fdc[_0x14d1b4(0x1b6)]};}}async function loadModernKanalReportFromCloud(){const _0x31b7ae=_0x4613d2;if(!cloudEnabled())return null;try{const _0x4dad8d=await cloudFetch(CLOUD['dbUrl'][_0x31b7ae(0x105)](/\/$/,'')+'/'+MODERNKANAL_REPORT_CLOUD_PATH+_0x31b7ae(0xdc)+await authQuery());if(!_0x4dad8d['ok'])throw new Error('HTTP\x20'+_0x4dad8d[_0x31b7ae(0xbb)]);const _0x3e5957=await _0x4dad8d[_0x31b7ae(0x17e)]();if(!_0x3e5957||_0x3e5957===_0x31b7ae(0x9c))return null;return JSON[_0x31b7ae(0x17d)](_0x3e5957);}catch(_0x6d2a11){return console[_0x31b7ae(0xa7)](_0x31b7ae(0x177),_0x6d2a11),null;}}async function saveModernKanalReportToLocal(_0x453c80){const _0x1c45b7=_0x4613d2,_0x52b8ff=await idbSet(MODERNKANAL_REPORT_LOCAL_KEY,_0x453c80);if(!_0x52b8ff)console['error'](_0x1c45b7(0x99));}async function loadModernKanalReportFromLocal(){try{return await idbGet(MODERNKANAL_REPORT_LOCAL_KEY);}catch(_0x355260){return console['error'](_0x355260),null;}}async function modernKanalYenile(){const _0x5d7978=_0x4613d2;let _0x496cee=null;if(cloudEnabled()){const _0x1e010c=await cloudVeriVerimliYukle(MODERNKANAL_REPORT_CLOUD_PATH,loadModernKanalReportFromCloud,loadModernKanalReportFromLocal);_0x496cee=_0x1e010c[_0x5d7978(0x127)];}if(!_0x496cee)_0x496cee=await loadModernKanalReportFromLocal();state[_0x5d7978(0xd6)]=_0x496cee;if(_0x496cee&&_0x496cee[_0x5d7978(0xa5)])state[_0x5d7978(0x154)]=_0x496cee[_0x5d7978(0xa5)];return _0x496cee;}function _0x1e5f(_0x53d1e1,_0x27596d){_0x53d1e1=_0x53d1e1-0x8c;const _0x29bd62=_0x29bd();let _0x1e5fe4=_0x29bd62[_0x53d1e1];if(_0x1e5f['qXxRUB']===undefined){var _0x35b093=function(_0x1eca7e){const _0x16d9d6='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x52c891='',_0x470924='';for(let _0x27865f=0x0,_0x41209a,_0x1a3fd3,_0x10fc45=0x0;_0x1a3fd3=_0x1eca7e['charAt'](_0x10fc45++);~_0x1a3fd3&&(_0x41209a=_0x27865f%0x4?_0x41209a*0x40+_0x1a3fd3:_0x1a3fd3,_0x27865f++%0x4)?_0x52c891+=String['fromCharCode'](0xff&_0x41209a>>(-0x2*_0x27865f&0x6)):0x0){_0x1a3fd3=_0x16d9d6['indexOf'](_0x1a3fd3);}for(let _0x5bfa4a=0x0,_0x20ea92=_0x52c891['length'];_0x5bfa4a<_0x20ea92;_0x5bfa4a++){_0x470924+='%'+('00'+_0x52c891['charCodeAt'](_0x5bfa4a)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x470924);};_0x1e5f['URXnDL']=_0x35b093,_0x1e5f['GsyFJn']={},_0x1e5f['qXxRUB']=!![];}const _0x69a9dd=_0x29bd62[0x0],_0x41f448=_0x53d1e1+_0x69a9dd,_0x5660db=_0x1e5f['GsyFJn'][_0x41f448];return!_0x5660db?(_0x1e5fe4=_0x1e5f['URXnDL'](_0x1e5fe4),_0x1e5f['GsyFJn'][_0x41f448]=_0x1e5fe4):_0x1e5fe4=_0x5660db,_0x1e5fe4;}async function modernKanalKaydet(_0x510576){const _0x288fdd=_0x4613d2,_0x20b58e=new Date()[_0x288fdd(0x113)]();_0x510576=Object[_0x288fdd(0x134)]({},_0x510576,{'__hesaplanmaZamani':_0x20b58e}),ktlog('modernKanalKaydet\x20→\x20state.modernKanalReport\x20yazılıyor.\x20toplamLitre=',_0x510576&&_0x510576[_0x288fdd(0x14b)],_0x288fdd(0x140),_0x510576&&_0x510576[_0x288fdd(0x16a)]&&_0x510576[_0x288fdd(0x16a)][_0x288fdd(0x1ad)]),state[_0x288fdd(0xd6)]=_0x510576,state[_0x288fdd(0x154)]=_0x20b58e,await saveModernKanalReportToLocal(_0x510576);if(cloudEnabled()){const _0x4ca00b=await saveModernKanalReportToCloud(_0x510576);!_0x4ca00b['ok']&&(console[_0x288fdd(0xa7)]('UYARI:\x20Modern\x20Kanal\x20raporu\x20buluta\x20kaydedilemedi,\x20hiçbir\x20yerde\x20kalıcı\x20değil:',_0x4ca00b[_0x288fdd(0x16c)]),alert(_0x288fdd(0x189)));}}async function saveModernKanalArsivAyToCloud(_0xdccb2b,_0x65ca6b){const _0x73aafb=_0x4613d2;if(!cloudEnabled())return{'ok':![],'reason':'not-configured'};try{const _0x45b7f1=await cloudFetch(CLOUD[_0x73aafb(0x18d)][_0x73aafb(0x105)](/\/$/,'')+'/'+MODERNKANAL_ARSIV_CLOUD_PATH+'/'+encodeURIComponent(_0xdccb2b)+_0x73aafb(0xdc)+await authQuery(),{'method':_0x73aafb(0x13e),'headers':{'Content-Type':_0x73aafb(0x131)},'body':JSON[_0x73aafb(0x19d)](_0x65ca6b)});if(!_0x45b7f1['ok'])throw new Error('HTTP\x20'+_0x45b7f1['status']);return{'ok':!![]};}catch(_0x307086){return console[_0x73aafb(0xa7)](_0x73aafb(0xf3),_0x307086),{'ok':![],'reason':_0x307086[_0x73aafb(0x1b6)]};}}async function modernKanalArsivAyiSil(_0x152611){const _0x273310=_0x4613d2;if(cloudEnabled())try{const _0xd74a0d=await cloudFetch(CLOUD[_0x273310(0x18d)][_0x273310(0x105)](/\/$/,'')+'/'+MODERNKANAL_ARSIV_CLOUD_PATH+'/'+encodeURIComponent(_0x152611)+_0x273310(0xdc)+await authQuery(),{'method':_0x273310(0x13e),'headers':{'Content-Type':'application/json'},'body':_0x273310(0x9c)});if(!_0xd74a0d['ok'])throw new Error(_0x273310(0x13f)+_0xd74a0d[_0x273310(0xbb)]);}catch(_0x181a9b){console[_0x273310(0xa7)](_0x273310(0x161),_0x181a9b);throw _0x181a9b;}const _0x5c67e3=Object[_0x273310(0x134)]({},state['modernKanalArsivCache']);delete _0x5c67e3[_0x152611],state['modernKanalArsivCache']=_0x5c67e3,await saveModernKanalArsivToLocal(_0x5c67e3);}async function loadModernKanalArsivFromCloud(){const _0x2a14e3=_0x4613d2;if(!cloudEnabled())return null;try{const _0x499d74=await cloudFetch(CLOUD['dbUrl'][_0x2a14e3(0x105)](/\/$/,'')+'/'+MODERNKANAL_ARSIV_CLOUD_PATH+_0x2a14e3(0xdc)+await authQuery());if(!_0x499d74['ok'])throw new Error('HTTP\x20'+_0x499d74['status']);const _0x44d93e=await _0x499d74[_0x2a14e3(0x17e)]();if(!_0x44d93e||_0x44d93e===_0x2a14e3(0x9c))return{};return JSON['parse'](_0x44d93e)||{};}catch(_0x4765e1){return console[_0x2a14e3(0xa7)](_0x2a14e3(0xa4),_0x4765e1),null;}}async function saveModernKanalArsivToLocal(_0x3c7f56){const _0x285e84=_0x4613d2,_0x27a5e5=await idbSet(MODERNKANAL_ARSIV_LOCAL_KEY,_0x3c7f56);if(!_0x27a5e5)console[_0x285e84(0xa7)](_0x285e84(0x171));}async function loadModernKanalArsivFromLocal(){const _0x3185dd=_0x4613d2;try{return await idbGet(MODERNKANAL_ARSIV_LOCAL_KEY)||{};}catch(_0x3ab773){return console[_0x3185dd(0xa7)](_0x3ab773),{};}}let modernKanalArsivYuklendiMi=![];async function modernKanalArsivYenile(_0x5874fb){const _0x14cfe6=_0x4613d2;if(modernKanalArsivYuklendiMi&&!_0x5874fb)return state[_0x14cfe6(0x95)];let _0x55439c=null;if(cloudEnabled())_0x55439c=await loadModernKanalArsivFromCloud();if(!_0x55439c)_0x55439c=await loadModernKanalArsivFromLocal();return state['modernKanalArsivCache']=_0x55439c||{},modernKanalArsivYuklendiMi=!![],await saveModernKanalArsivToLocal(state[_0x14cfe6(0x95)])[_0x14cfe6(0xd5)](()=>{}),state[_0x14cfe6(0x95)];}function sellOutBaskinAy(_0x249123){const _0x355341=_0x4613d2,_0x3ec7e9=new Map();(_0x249123||[])[_0x355341(0xcf)](_0x4f3ea8=>{const _0x3b566a=_0x355341,_0x4acf21=excelDateToJSArti1Gun(_0x4f3ea8['Girilen\x20Faturalama\x20Tarihi']);if(!_0x4acf21)return;const _0x1cce82=dateKeyLocal(_0x4acf21)[_0x3b566a(0x14c)](0x0,0x7);_0x3ec7e9[_0x3b566a(0x12f)](_0x1cce82,(_0x3ec7e9[_0x3b566a(0x111)](_0x1cce82)||0x0)+0x1);});let _0x5d915a=null,_0x269174=0x0;return _0x3ec7e9['forEach']((_0x464170,_0x4c832d)=>{_0x464170>_0x269174&&(_0x269174=_0x464170,_0x5d915a=_0x4c832d);}),_0x5d915a;}function buildIrsaliyeReport(_0x3e1525){const _0x274aee=_0x4613d2;let _0x44e7c1=0x0;const _0x39f682=new Map(),_0x1c3d64=new Map();(_0x3e1525||[])[_0x274aee(0xcf)](_0x3633fe=>{const _0x19926b=_0x274aee,_0x4e49a5=Number(_0x3633fe[_0x19926b(0x93)])||0x0,_0x12135e=Number(_0x3633fe[_0x19926b(0x139)])||0x0,_0x51c4d7=String(_0x3633fe[_0x19926b(0x8d)]||'')[_0x19926b(0x112)](),_0x2fc98e=String(_0x3633fe[_0x19926b(0xb3)]||'')[_0x19926b(0x112)](),_0x354871=excelDateToJSArti1Gun(_0x3633fe['İrsaliye\x20Tarihi']);if(!_0x354871)return;const _0x1735a6=dateKeyLocal(_0x354871);if(!_0x1735a6)return;_0x44e7c1+=_0x4e49a5;if(_0x51c4d7&&!_0x51c4d7[_0x19926b(0xf2)]('2')){if(!_0x39f682[_0x19926b(0xc9)](_0x51c4d7))_0x39f682[_0x19926b(0x12f)](_0x51c4d7,new Map());const _0x44f21f=_0x39f682[_0x19926b(0x111)](_0x51c4d7);if(!_0x44f21f[_0x19926b(0xc9)](_0x1735a6))_0x44f21f['set'](_0x1735a6,{'litre':0x0,'miktar':0x0});const _0x5ea1ef=_0x44f21f[_0x19926b(0x111)](_0x1735a6);_0x5ea1ef[_0x19926b(0x138)]+=_0x4e49a5,_0x5ea1ef['miktar']+=_0x12135e;if(_0x2fc98e&&!_0x1c3d64[_0x19926b(0xc9)](_0x51c4d7))_0x1c3d64[_0x19926b(0x12f)](_0x51c4d7,_0x2fc98e);}});const _0x502bd2=Array[_0x274aee(0x1af)](_0x39f682[_0x274aee(0x126)]())['map'](([_0x48c535,_0x3a6fe6])=>({'kod':_0x48c535,'urunAdi':_0x1c3d64['get'](_0x48c535)||_0x48c535,'marka':'Bira','gunler':Array[_0x274aee(0x1af)](_0x3a6fe6[_0x274aee(0x126)]())[_0x274aee(0x174)](([_0x537478,_0x528803])=>({'gunKey':_0x537478,'litre':_0x528803[_0x274aee(0x138)],'miktar':_0x528803['miktar']}))[_0x274aee(0x9a)]((_0x59e00a,_0xc5a38d)=>_0x59e00a[_0x274aee(0x17f)][_0x274aee(0xbd)](_0xc5a38d['gunKey']))}));return{'toplamLitre':_0x44e7c1,'malzemeler':_0x502bd2};}function irsaliyeAylaraGoreGrupla(_0x245a09){const _0x4146bc=_0x4613d2,_0x248ab3=new Map();return(_0x245a09||[])[_0x4146bc(0xcf)](_0x19d83a=>{const _0x1a2752=_0x4146bc,_0x133205=excelDateToJSArti1Gun(_0x19d83a[_0x1a2752(0xdf)]);if(!_0x133205)return;const _0x294d58=dateKeyLocal(_0x133205)['slice'](0x0,0x7);if(!_0x248ab3[_0x1a2752(0xc9)](_0x294d58))_0x248ab3['set'](_0x294d58,[]);_0x248ab3[_0x1a2752(0x111)](_0x294d58)[_0x1a2752(0x148)](_0x19d83a);}),_0x248ab3;}async function sellOutArsivleButonu(){const _0x1fe882=_0x4613d2,_0x32a6ce=document['getElementById'](_0x1fe882(0x15c)),_0x4fe330=state[_0x1fe882(0xa0)];if(!_0x4fe330){toastGoster('warn',_0x1fe882(0xbc),_0x1fe882(0xb0));return;}const _0x4b1a50=state['sellOutKendiDosya']&&state['sellOutKendiDosya'][_0x1fe882(0x127)]||state[_0x1fe882(0x13b)][_0x1fe882(0x8e)]&&state[_0x1fe882(0x13b)][_0x1fe882(0x8e)][_0x1fe882(0x127)],_0x33ee02=_0x4b1a50&&sellOutBaskinAy(_0x4b1a50)||dateKeyLocal(turkiyeBugun())[_0x1fe882(0x14c)](0x0,0x7),_0x25e0aa=fmtDate(new Date(_0x33ee02+_0x1fe882(0x145))),_0x20c3da=Object[_0x1fe882(0x12e)]['hasOwnProperty'][_0x1fe882(0x1a2)](state[_0x1fe882(0x17a)]||{},_0x33ee02),_0x558125=_0x20c3da?_0x25e0aa+_0x1fe882(0x12d)+_0x25e0aa+_0x1fe882(0xb2):'Dosya\x20icerigine\x20gore\x20bu\x20veri\x20'+_0x25e0aa+'\x20ayina\x20ait\x20gorunuyor.\x20GUNCEL\x20Sell\x20Out\x20verisi\x20bu\x20ayin\x20altina\x20kalici\x20olarak\x20arsivlensin\x20mi?';if(!confirm(_0x558125))return;if(!await ortakSifreDogrula(_0x1fe882(0x169)))return;_0x32a6ce[_0x1fe882(0x115)]=!![];const _0xef5ea6=_0x32a6ce[_0x1fe882(0x1b3)];_0x32a6ce['textContent']='Arsivleniyor...';try{const _0x2558cd=Object[_0x1fe882(0x134)]({},applySellOutHedef(_0x4fe330,state[_0x1fe882(0x151)]),{'arsivAyKey':_0x33ee02,'arsivZamani':new Date()[_0x1fe882(0x113)]()});state[_0x1fe882(0x17a)]=Object[_0x1fe882(0x134)]({},state[_0x1fe882(0x17a)],{[_0x33ee02]:_0x2558cd}),await saveSellOutArsivToLocal(state[_0x1fe882(0x17a)]);const _0x1ceabc=await saveSellOutArsivAyToCloud(_0x33ee02,_0x2558cd);!_0x1ceabc['ok']&&alert(_0x1fe882(0x16e)+(_0x1ceabc[_0x1fe882(0x16c)]||'bilinmeyen\x20hata')+_0x1fe882(0x13c)),populateSellOutAySelect(),document[_0x1fe882(0x11e)](_0x1fe882(0x128))[_0x1fe882(0xa2)]=_0x33ee02,state['sellOutSeciliAy']=_0x33ee02,await renderSellOutView();}catch(_0x4b2ffa){console[_0x1fe882(0xa7)]('Sell\x20Out\x20arsivleme\x20hatasi:',_0x4b2ffa),alert(_0x1fe882(0xe6)+_0x4b2ffa['message']);}finally{_0x32a6ce['disabled']=![],_0x32a6ce[_0x1fe882(0x1b3)]=_0xef5ea6;}}function populateSellOutAySelect(){const _0x4fe2dd=_0x4613d2,_0x47a321=document[_0x4fe2dd(0x11e)](_0x4fe2dd(0x128)),_0x3da80b=Object['keys'](state[_0x4fe2dd(0x17a)]||{})[_0x4fe2dd(0x9a)]()['reverse'](),_0x25ac3a=state[_0x4fe2dd(0xee)];_0x47a321[_0x4fe2dd(0x146)]='<option\x20value=\x22\x22>Güncel\x20(canlı)</option>'+_0x3da80b[_0x4fe2dd(0x174)](_0x1d41ed=>_0x4fe2dd(0x18f)+_0x1d41ed+'\x22>'+fmtDate(new Date(_0x1d41ed+_0x4fe2dd(0x145)))+_0x4fe2dd(0xa1))[_0x4fe2dd(0xcb)](''),_0x47a321['value']=_0x25ac3a&&_0x3da80b[_0x4fe2dd(0x197)](_0x25ac3a)?_0x25ac3a:'',state[_0x4fe2dd(0xee)]=_0x47a321[_0x4fe2dd(0xa2)]||null;}function populateModernKanalAySelect(){const _0x4ead3c=_0x4613d2,_0x3e67dd=document['getElementById'](_0x4ead3c(0x168));if(!_0x3e67dd)return;const _0x4e3cee=Object[_0x4ead3c(0x16d)](state[_0x4ead3c(0x95)]||{})['sort']()[_0x4ead3c(0xab)](),_0x2fe54e=state[_0x4ead3c(0x186)];_0x3e67dd['innerHTML']=_0x4ead3c(0x15f)+_0x4e3cee[_0x4ead3c(0x174)](_0x2043e8=>_0x4ead3c(0x18f)+_0x2043e8+'\x22>'+fmtDate(new Date(_0x2043e8+'-01'))+_0x4ead3c(0xa1))[_0x4ead3c(0xcb)](''),_0x3e67dd[_0x4ead3c(0xa2)]=_0x2fe54e&&_0x4e3cee[_0x4ead3c(0x197)](_0x2fe54e)?_0x2fe54e:'',state[_0x4ead3c(0x186)]=_0x3e67dd[_0x4ead3c(0xa2)]||null;}async function renderModernKanalView(){const _0x21dbf5=_0x4613d2,_0x33be11=document[_0x21dbf5(0x11e)](_0x21dbf5(0x12a)),_0x2ccad0=document['getElementById'](_0x21dbf5(0xd2));populateModernKanalAySelect();const _0xe5e05e=state[_0x21dbf5(0x186)],_0x2fe47a=state['modernKanalReport'];ktlog(_0x21dbf5(0x8c),_0x2fe47a&&_0x2fe47a[_0x21dbf5(0x14b)],_0x21dbf5(0x133),_0x2fe47a&&_0x2fe47a[_0x21dbf5(0x16a)]&&_0x2fe47a[_0x21dbf5(0x16a)][_0x21dbf5(0x1ad)],_0x21dbf5(0xc0),_0xe5e05e||_0x21dbf5(0x14e));let _0x5901e6,_0x10467b;if(_0xe5e05e){_0x5901e6=state[_0x21dbf5(0x95)][_0xe5e05e]||null,_0x10467b=!![];if(!_0x5901e6){_0x33be11['style']['display']='block',_0x2ccad0[_0x21dbf5(0xc1)][_0x21dbf5(0x165)]=_0x21dbf5(0x1a7),document[_0x21dbf5(0x11e)](_0x21dbf5(0xac))['textContent']=fmtDate(new Date(_0xe5e05e+'-01'))+_0x21dbf5(0x15b);return;}}else{_0x10467b=![];if(!_0x2fe47a){_0x33be11[_0x21dbf5(0xc1)][_0x21dbf5(0x165)]=_0x21dbf5(0x1ab),_0x2ccad0[_0x21dbf5(0xc1)][_0x21dbf5(0x165)]=_0x21dbf5(0x1a7),document[_0x21dbf5(0x11e)]('modernKanalAsOf')[_0x21dbf5(0x1b3)]=_0x21dbf5(0x102);return;}_0x5901e6=_0x2fe47a;}_0x33be11[_0x21dbf5(0xc1)]['display']=_0x21dbf5(0x1a7),_0x2ccad0[_0x21dbf5(0xc1)]['display']=_0x21dbf5(0x1ab),document[_0x21dbf5(0x11e)](_0x21dbf5(0xac))[_0x21dbf5(0x1b3)]=_0x10467b?_0x21dbf5(0xa9)+fmtDate(new Date(_0xe5e05e+_0x21dbf5(0x145)))+_0x21dbf5(0x97)+fmtDate(new Date(_0x5901e6[_0x21dbf5(0xc2)]))+_0x21dbf5(0x1b1):'Veri\x20kaynağı:\x20İrsaliye\x20Listesi\x20(Key\x20Account/Modern\x20Kanal)';const _0x44e8e2=document[_0x21dbf5(0x11e)](_0x21dbf5(0xe9)),_0x7f430e=document[_0x21dbf5(0x11e)](_0x21dbf5(0xf4));if(_0x7f430e)_0x7f430e[_0x21dbf5(0xc1)][_0x21dbf5(0x165)]=_0x10467b?'none':_0x21dbf5(0x1ab);if(_0x44e8e2&&!_0x10467b)_0x44e8e2[_0x21dbf5(0xa2)]=state[_0x21dbf5(0xea)]||'';const _0x14612b=_0x10467b?_0x5901e6[_0x21dbf5(0x10e)]||0x0:state['modernKanalHedef']||0x0,_0x36af21=_0x5901e6['toplamLitre']||0x0,_0x266073=_0x14612b>0x0?_0x36af21/_0x14612b*0x64:null,_0x5e2331=sellOutRenk(_0x266073);document[_0x21dbf5(0x11e)](_0x21dbf5(0x136))[_0x21dbf5(0x146)]=_0x21dbf5(0x159)+_0x5e2331+_0x21dbf5(0xf1)+escapeHtml(avatarBaslangic('İbrahim\x20Işık'))+_0x21dbf5(0x18a)+fknsRingSvg(_0x266073)+_0x21dbf5(0x17c)+ssmKanalRowHtml(_0x21dbf5(0xf7),_0x36af21,_0x14612b,'fa-boxes-stacked')+_0x21dbf5(0xc4)+_0x5e2331+_0x21dbf5(0x15a)+(_0x266073!=null?fmtYuzde(_0x266073):'—')+'</span>\x0a\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20</div>';}function sellOutRenk(_0x202ac6){const _0x4d01d2=_0x4613d2;return performansRenk(_0x202ac6,{'iyi':0x5a,'orta':0x4b,'ortaRenk':_0x4d01d2(0x15d)});}function sellOutRenkSoft(_0x372f56){const _0x1460f2=_0x4613d2;return performansRenk(_0x372f56,{'iyi':0x5a,'orta':0x4b,'iyiRenk':_0x1460f2(0x195),'ortaRenk':_0x1460f2(0x187),'dusukRenk':_0x1460f2(0x119)});}function fknsRingSvg(_0x4e94e1){const _0x1d5a75=_0x4613d2,_0x330fa5=sellOutRenk(_0x4e94e1),_0x248dfe=_0x4e94e1==null?0x0:Math[_0x1d5a75(0x181)](0x0,Math[_0x1d5a75(0xbf)](0x64,_0x4e94e1)),_0x525566=_0x4e94e1==null?'—':'%'+Math[_0x1d5a75(0x107)](_0x4e94e1);return'<svg\x20class=\x22ssm-fkns-ring\x22\x20viewBox=\x220\x200\x2036\x2036\x22>\x0a\x20\x20\x20\x20<path\x20d=\x22M18\x202a16\x2016\x200\x200\x201\x200\x2032\x2016\x2016\x200\x200\x201\x200-32\x22\x20fill=\x22none\x22\x20stroke=\x22#EEF2F7\x22\x20stroke-width=\x224\x22/>\x0a\x20\x20\x20\x20<path\x20d=\x22M18\x202a16\x2016\x200\x200\x201\x200\x2032\x2016\x2016\x200\x200\x201\x200-32\x22\x20fill=\x22none\x22\x20style=\x22stroke:'+_0x330fa5+_0x1d5a75(0xd8)+_0x248dfe+_0x1d5a75(0xb1)+escapeHtml(_0x525566)+_0x1d5a75(0x192);}function fknsRingUcluSvg(_0x1b6556,_0x49ca56,_0x4051d4){const _0x42a40e=_0x4613d2,_0x265b75=(_0x34ec59,_0x26f06f)=>_0x42a40e(0x142)+fknsRingSvg(_0x34ec59)+_0x42a40e(0xc8)+escapeHtml(_0x26f06f)+_0x42a40e(0x106);return _0x42a40e(0x160)+_0x265b75(_0x1b6556,_0x42a40e(0x14d))+_0x42a40e(0x116)+_0x265b75(_0x49ca56,_0x42a40e(0xaa))+_0x42a40e(0x116)+_0x265b75(_0x4051d4,_0x42a40e(0xd7))+_0x42a40e(0xa3);}function ssmKanalRowHtml(_0x28c970,_0x42b055,_0x16290d,_0x37bd0a){const _0x48f414=_0x4613d2,_0x24e63e=_0x16290d>0x0,_0x1262c5=_0x24e63e?Math[_0x48f414(0xbf)](0x64,_0x42b055/_0x16290d*0x64):0x0,_0x2563c3=_0x24e63e?sellOutRenk(_0x1262c5):_0x48f414(0x19c),_0x88be77=_0x24e63e?sellOutRenkSoft(_0x1262c5):_0x48f414(0x167),_0x45d5e8=_0x24e63e?NUM(_0x42b055)+_0x48f414(0x114)+NUM(_0x16290d)+'\x20Lt.':LT(_0x42b055)+'\x20<small>·\x20hedef\x20yok</small>',_0x459432=_0x24e63e?_0x48f414(0x109)+LT(Math[_0x48f414(0x181)](0x0,_0x16290d-_0x42b055))+_0x48f414(0xed):'',_0x1aae0b=_0x37bd0a?_0x48f414(0x10f)+_0x88be77+_0x48f414(0x10d)+_0x2563c3+_0x48f414(0x155)+_0x37bd0a+'\x22\x20aria-hidden=\x22true\x22></i></span>':'';return _0x48f414(0xce)+_0x1aae0b+escapeHtml(_0x28c970)+_0x48f414(0xbe)+_0x45d5e8+_0x48f414(0xe4)+_0x1262c5[_0x48f414(0x14f)](0x1)+'%;background:'+_0x2563c3+_0x48f414(0x92)+_0x459432+'\x0a\x20\x20</div>';}function sellOutKanalOzeti(_0x4bcf3d){const _0x1d0aa7=_0x4613d2;if(!_0x4bcf3d||!Array[_0x1d0aa7(0xb8)](_0x4bcf3d[_0x1d0aa7(0x188)]))return{'toplamAcikLitre':0x0,'toplamKapaliLitre':0x0,'acikKalan':0x0,'kapaliKalan':0x0,'gerceklesmeOrani':null,'toplamLitre':0x0};const _0x2c8797=_0x4bcf3d[_0x1d0aa7(0x188)][_0x1d0aa7(0x9d)]((_0x29fa00,_0x49b1d7)=>_0x29fa00+_0x49b1d7[_0x1d0aa7(0x1a6)],0x0),_0x4f1a5a=_0x4bcf3d[_0x1d0aa7(0x188)]['reduce']((_0x129b47,_0x412962)=>_0x129b47+_0x412962['kapaliLitre'],0x0),_0x3c5e67=_0x4bcf3d[_0x1d0aa7(0x188)][_0x1d0aa7(0x9d)]((_0x21a6ab,_0x40112a)=>_0x21a6ab+_0x40112a[_0x1d0aa7(0x179)],0x0),_0x59c70a=_0x4bcf3d[_0x1d0aa7(0x188)][_0x1d0aa7(0x9d)]((_0x9d2b04,_0x40cf91)=>_0x9d2b04+_0x40cf91[_0x1d0aa7(0x18e)],0x0),_0x4aee8a=Math['max'](0x0,_0x3c5e67-_0x2c8797),_0x158269=Math[_0x1d0aa7(0x181)](0x0,_0x59c70a-_0x4f1a5a),_0x5892fb=_0x3c5e67+_0x59c70a,_0x26c724=_0x5892fb>0x0?(_0x2c8797+_0x4f1a5a)/_0x5892fb*0x64:null;return{'toplamAcikLitre':_0x2c8797,'toplamKapaliLitre':_0x4f1a5a,'acikKalan':_0x4aee8a,'kapaliKalan':_0x158269,'gerceklesmeOrani':_0x26c724,'toplamLitre':_0x4bcf3d[_0x1d0aa7(0x14b)]||0x0};}
+// ============================================================================
+// 6) SELL OUT RAPORU (Tasarım A)
+// ============================================================================
+const SELLOUT_HEDEF_CLOUD_PATH = CLOUD.path + '_sellOutHedef';
+const SELLOUT_HEDEF_LOCAL_KEY = 'noktaCariTakip_sellOutHedef_v1';
+const SELLOUT_REPORT_CLOUD_PATH = CLOUD.path + '_sellOutReport';
+const SELLOUT_REPORT_LOCAL_KEY = 'noktaCariTakip_sellOutReport_v1';
+const SELLOUT_ARSIV_CLOUD_PATH = CLOUD.path + '_sellOutArsiv'; // {ayKey: raporSnapshot} - her ay "Arşivle" ile elle kaydedilir
+const SELLOUT_ARSIV_LOCAL_KEY = 'noktaCariTakip_sellOutArsiv_v1';
+
+// Müşteri Kanalı Tnm. -> Açık Kanal / Kapalı Kanal eşlemesi. Ekomini -> Kapalı Kanal;
+// Otel ve Horeca -> Açık Kanal; Standart Açık/Standart Kapalı zaten adından bellidir.
+const KAPALI_KANAL_DEGERLERI = new Set(['Standart Kapalı','Ekomini']);
+const ACIK_KANAL_DEGERLERI = new Set(['Standart Açık','Otel','Horeca']);
+function sellOutKanalSinifla(musteriKanaliRaw, acikOtelRaw){
+  const v = String(musteriKanaliRaw||'').trim();
+  if(KAPALI_KANAL_DEGERLERI.has(v)) return 'Kapalı Kanal';
+  if(ACIK_KANAL_DEGERLERI.has(v)) return 'Açık Kanal';
+  return String(acikOtelRaw||'').trim() ? 'Açık Kanal' : 'Kapalı Kanal';
+}
+
+// Rakı/viski/votka/cin/konyak gibi distile içki markaları, Mal Grubu Tnm. metninde geçen
+// anahtar kelimelere göre tek bir "Distile" grubunda toplanır — Stok Gün raporundaki marka
+// filtresinde bu markalar artık kendi isimleriyle değil, tek "Distile" seçeneği olarak
+// görünür. Anahtar kelime tabanlı olduğu için yeni bir viski/rakı markası eklendiğinde de
+// (marka adında bu kelimelerden biri geçtiği sürece) otomatik yakalanır; adında anahtar kelime
+// geçmeyen bilinen distile markaları (Glenfiddich, Grant's, Monkey Shoulder gibi) ayrıca sabit
+// bir liste ile eşleştirilir.
+const DISTILE_ANAHTAR_KELIMELER = ['rakı','raki','viski','whisky','whiskey','votka','vodka','cin','gin','konyak','brendi','brandy','likör','likor'];
+const DISTILE_BILINEN_MARKALAR = ['glenfiddich','grant\'s','grants','monkey shoulder','hendrick\'s','hendricks','fasıl rakı','fasil raki','mercan rakı','mercan raki'];
+// Stok Gün marka filtresi artık SADECE 2 seçenek sunar: "Distile" (yukarıdaki anahtar kelime/bilinen
+// marka listesiyle eşleşen ürünler) ve "Bira" (distile olmayan TÜM diğer ürünler — eskiden "Diğer"
+// adı altında toplanan meşrubat/su gibi farklı ürün tipleri dahil, artık ayrı bir kategori yok).
+// Ana Ürün <-> Parçalı Ürün eşlemesi: bazı ürünler depoda toplu ambalajdan (ana kod, ör. koli/
+// kutu) daha küçük/tekli ambalaja (parçalı kod) bölünerek satılıyor. export_1.xlsx'teki gerçek
+// "Bozulan/Birleştirilen Ürün Kodu -> Oluşan Ürün Kodu" işlem geçmişinden, HER ÇİFT İÇİN GERÇEK
+// DÖNÜŞÜM ORANIYLA BİRLİKTE çıkarılmıştır (ör. 1 adet "12X1L" ana kod = 12 adet "1L" parçalı kod
+// olduğundan oran=12). "4X6" gibi çift yönlü/belirsiz ara-ambalaj varyasyonlarına (ör. Corona
+// 152417/152471/152733 zinciri) KASITLI OLARAK dokunulmamıştır — bu kodlar eşlemenin dışında
+// bırakılmış, kendi bağımsız satırları olarak kalırlar.
+//
+// Her girdi: 'parçalıKod': { ana:'anaKod', parcaliOranAna: N } — burada N, "1 adet ANA kod kaç
+// adet PARÇALI koda denk gelir" oranıdır (ör. 12X1L -> 1L için N=12). Miktar birleştirilirken
+// PARÇALI miktar ANA birimine çevrilirken N'e BÖLÜNÜR, ANA miktar PARÇALI birimine çevrilirken
+// N ile ÇARPILIR — aksi halde (ör. 15 adet parçalı + 812 adet ana toplamda doğrudan 827 gibi
+// yanlış bir toplam çıkar; doğrusu 812 + 15/2 = 819,5 gibi birim-dönüştürülmüş bir toplamdır).
+//
+// KURAL (Stok Gün ve anlık stok hesaplamalarında uygulanır):
+//  - BİRA grubunda: parçalı kodun miktarı ANA BİRİMİNE çevrilip (miktar / parcaliOranAna) ana
+//    koda eklenir; parçalı kod raporda/listede AYRICA gösterilmez (tek satır: ana kod).
+//  - DİSTİLE grubunda: tam tersi — ana kodun miktarı PARÇALI BİRİMİNE çevrilip (miktar *
+//    parcaliOranAna) parçalı koda eklenir; ana kod raporda/listede AYRICA gösterilmez (tek
+//    satır: parçalı kod).
+const PARCALI_ANA_URUN_ESLEME = {
+  '151293': { ana:'150487', parcaliOranAna: 2 },
+  '151436': { ana:'151247', parcaliOranAna: 2 },
+  '151448': { ana:'151271', parcaliOranAna: 2 },
+  '151463': { ana:'150137', parcaliOranAna: 2 },
+  '151904': { ana:'150782', parcaliOranAna: 4 },
+  '151910': { ana:'150782', parcaliOranAna: 2 },
+  '151942': { ana:'150783', parcaliOranAna: 4 },
+  '151943': { ana:'150783', parcaliOranAna: 2 },
+  '152046': { ana:'150784', parcaliOranAna: 2 },
+  '152301': { ana:'152208', parcaliOranAna: 12 },
+  '152312': { ana:'152221', parcaliOranAna: 6 },
+  '152313': { ana:'152222', parcaliOranAna: 12 },
+  '152314': { ana:'152223', parcaliOranAna: 12 },
+  '152315': { ana:'152224', parcaliOranAna: 24 },
+  '152316': { ana:'152225', parcaliOranAna: 24 },
+  '152318': { ana:'152227', parcaliOranAna: 6 },
+  '152327': { ana:'152236', parcaliOranAna: 6 },
+  '152547': { ana:'152422', parcaliOranAna: 2 },
+  '152548': { ana:'152422', parcaliOranAna: 4 },
+  '152710': { ana:'152542', parcaliOranAna: 4 },
+  '152716': { ana:'151961', parcaliOranAna: 2 },
+  '152755': { ana:'152747', parcaliOranAna: 24 },
+  '152756': { ana:'152748', parcaliOranAna: 12 },
+  '152757': { ana:'152749', parcaliOranAna: 12 },
+  '152758': { ana:'152751', parcaliOranAna: 6 },
+  '152759': { ana:'152752', parcaliOranAna: 6 },
+  '152763': { ana:'152753', parcaliOranAna: 12 },
+  '152764': { ana:'152754', parcaliOranAna: 6 },
+  '152782': { ana:'151384', parcaliOranAna: 4 },
+  '152949': { ana:'152950', parcaliOranAna: 6 },
+  '154012': { ana:'151271', parcaliOranAna: 4 },
+  '154020': { ana:'151420', parcaliOranAna: 4 },
+  '154504': { ana:'151247', parcaliOranAna: 4 },
+  '154505': { ana:'150487', parcaliOranAna: 4 },
+  '154506': { ana:'151335', parcaliOranAna: 2 },
+  '154510': { ana:'151384', parcaliOranAna: 2 },
+  '154513': { ana:'151918', parcaliOranAna: 2 },
+  '154525': { ana:'150021', parcaliOranAna: 2 },
+  '154527': { ana:'151428', parcaliOranAna: 2 },
+  '154535': { ana:'152608', parcaliOranAna: 2 },
+  '154539': { ana:'152644', parcaliOranAna: 2 },
+  '154547': { ana:'151335', parcaliOranAna: 4 },
+  '154548': { ana:'150021', parcaliOranAna: 4 },
+  '154555': { ana:'152644', parcaliOranAna: 4 },
+};
+// Ters yönlü (anaKod -> {parcaliKod, parcaliOranAna}) harita, her çağrıda yeniden taranmasın diye
+// bir kez hesaplanır. Not: aynı ana koda birden fazla parçalı kod bağlı olduğu durumlarda (ör.
+// Efes Xtra *6 ve *12 gibi) burada SADECE ilk eşleşme tutulur — Distile tarafında bir ana kodun
+// "tek" bir parçalı karşılığı olduğu varsayılır; birden fazla parçalı varyantı olan ana ürünler
+// çoğunlukla Bira grubundadır (yön zaten ana koda toplanır), bu yüzden pratikte sorun yaratmaz.
+const ANA_PARCALI_URUN_ESLEME_TERS = (function(){
+  const ters = {};
+  Object.keys(PARCALI_ANA_URUN_ESLEME).forEach(parcali=>{
+    const bilgi = PARCALI_ANA_URUN_ESLEME[parcali];
+    if(!(bilgi.ana in ters)) ters[bilgi.ana] = {parcali, parcaliOranAna: bilgi.parcaliOranAna};
+  });
+  return ters;
+})();
+// urunKodu ve o ürünün DISTILE/BIRA sınıflandırmasına göre "hangi kod altında raporlanacağını"
+// döndürür. Bira ise ana kod, Distile ise parçalı kod hedef koddur; eşlemede yer almayan
+// (ilişkisi tanımsız) ürünler kendi kodlarında kalır.
+function stokGunHedefKodBul(urunKodu, marka){
+  const kod = String(urunKodu||'').trim();
+  const bilgi = PARCALI_ANA_URUN_ESLEME[kod]; // bu kod parçalıysa, ait olduğu ana kod bilgisi
+  if(bilgi){
+    // Bu kod PARÇALI taraf: Bira -> ana koda yönlendir (parçalı kod gizlenir).
+    // Distile -> kendi kodunda kalır (parçalı kod zaten hedef).
+    return marka==='Bira' ? bilgi.ana : kod;
+  }
+  const tersBilgi = ANA_PARCALI_URUN_ESLEME_TERS[kod]; // bu kod ana ise, karşılık gelen parçalı kod
+  if(tersBilgi){
+    // Bu kod ANA taraf: Distile -> parçalı koda yönlendir (ana kod gizlenir).
+    // Bira -> kendi kodunda kalır (ana kod zaten hedef).
+    return marka==='Distile' ? tersBilgi.parcali : kod;
+  }
+  return kod; // eşlemede yok, olduğu gibi
+}
+// Bir miktarı, ham kodun biriminden HEDEF kodun birimine çevirir. hamKod parçalıysa ve hedef
+// (ana koda gitmişse) ana birime çevrilir (miktar / parcaliOranAna); hamKod ana ise ve hedef
+// (parçalı koda gitmişse) parçalı birime çevrilir (miktar * parcaliOranAna). Diğer tüm
+// durumlarda (hedef zaten hamKod'un kendisiyse, ya da eşleme tanımsızsa) miktar değişmeden döner.
+function stokGunMiktarBirimCevir(miktar, hamKod, hedefKod){
+  hamKod = String(hamKod||'').trim();
+  if(hedefKod===hamKod || miktar==null) return miktar;
+  const bilgi = PARCALI_ANA_URUN_ESLEME[hamKod];
+  if(bilgi && bilgi.ana===hedefKod) return miktar / bilgi.parcaliOranAna; // parçalı -> ana
+  const tersBilgi = ANA_PARCALI_URUN_ESLEME_TERS[hamKod];
+  if(tersBilgi && tersBilgi.parcali===hedefKod) return miktar * tersBilgi.parcaliOranAna; // ana -> parçalı
+  return miktar; // beklenmeyen durum, güvenli varsayılan: dönüştürme yapma
+}
+function sellOutMarkaGrubu(markaHam){
+  const marka = String(markaHam||'').trim();
+  if(!marka) return 'Bira';
+  // Girdi zaten önceden sınıflandırılmış (arşivden gelen "Distile"/"Bira" — bkz.
+  // stokGunUrunVerileriniTopla'daki yeniden hesaplama) ise olduğu gibi kabul edilir; aksi halde
+  // sonsuz döngüye/yanlış sınıflandırmaya yol açmaz (aksi halde "Distile" kelimesinin kendisi
+  // hiçbir anahtar kelimeyle eşleşmediği için yanlışlıkla "Bira" dönerdi).
+  if(marka === 'Distile' || marka === 'Bira') return marka;
+  const normalize = marka.toLocaleLowerCase('tr-TR');
+  if(DISTILE_ANAHTAR_KELIMELER.some(k=> normalize.includes(k))) return 'Distile';
+  if(DISTILE_BILINEN_MARKALAR.some(k=> normalize.includes(k))) return 'Distile';
+  return 'Bira';
+}
+
+// Ham satış kalemlerinden; hedef-bağımsız olmayan (litre, FKNS, marka, kanal, trend) her şeyi
+// hesaplar. Açık/Kapalı Kanal LİTRE HEDEFLERİ elle girildiği ve her an değişebildiği için burada
+// HESAPLANMAZ — bunlar render anında applySellOutHedef() ile ayrıca uygulanır; böylece bir hedef
+// kaydedildiğinde ham Sell Out dosyasını yeniden yüklemeye gerek kalmaz.
+function buildSellOutReport(rows, musteriMasterMap, musteriMasterDurumMap, musteriMasterDetayMap, musteriMasterKanalMap){
+  musteriMasterMap = musteriMasterMap || new Map();
+  musteriMasterDurumMap = musteriMasterDurumMap || new Map();
+  musteriMasterDetayMap = musteriMasterDetayMap || new Map();
+  musteriMasterKanalMap = musteriMasterKanalMap || new Map();
+
+  const temsilciAgg = new Map();
+  const temsilciToSSM = new Map();
+  const markaAgg = new Map();
+  const hacimSegAgg = new Map();
+  const gunlukTrend = new Map();
+  // Malzeme Kodu bazlı günlük litre — "Stok Gün" raporunun 1. Aşama (geçmiş pay tespiti) ve
+  // 2. Aşama (en yoğun hafta / yoğun dönem günlük hızı) hesaplarının TEK veri kaynağı. Her
+  // ürün için {gunKey -> litre} tutuluyor; ayrı bir toplam da (malzemeUrunAdi eşlemesi için).
+  const malzemeGunlukAgg = new Map(); // malzemeKodu -> Map(gunKey -> {litre, miktar})
+  const malzemeUrunAdi = new Map(); // malzemeKodu -> Malzeme Tnm.
+  const malzemeMarka = new Map(); // malzemeKodu -> Mal Grubu Tnm. (Stok Gün raporundaki marka filtresi için)
+  // malzemeKodu -> Map(temsilciAdi -> litre) — Stok Gün'deki "kritik üründe en çok satan
+  // temsilciler kimler ve tahsilat performansları nasıl" bağlantısı için (bkz.
+  // urunTemsilciRiskDetayi / computeStokGunRaporu). Sadece BU AYIN canlı verisi tutulur —
+  // arşivlenmiş geçmiş aylara taşınmaz, çünkü risk sinyali güncel (bugünkü) tahsilat karnesiyle
+  // eşleştirilir, geçmiş ayların temsilci dağılımı bugün için anlamlı değildir.
+  const malzemeTemsilciAgg = new Map();
+  let toplamNet=0, toplamLitre=0, acikNetToplam=0, kapaliNetToplam=0;
+  let blokajTutar=0, blokajAdet=0;
+  const belgeSetGenel = new Set();
+  const invoicedNoktaSetGenel = new Set();
+
+  (rows||[]).forEach(r=>{
+    const musteri = String(r['Müşteri No']||'').trim();
+    const temsilciHam = String(r['Satış Temsilcisi Adı']||'').trim();
+    const ssmHam = String(r['Satış Müdürü Adı']||'').trim();
+    const net = Number(r['Net'])||0;
+    const litre = Number(r['Litre'])||0;
+    const miktar = Number(r['Miktar'])||0;
+    const kanal = sellOutKanalSinifla(r['Müşteri Kanalı Tnm.'], r['Açık/Otel Tnm.']);
+    const marka = String(r['Mal Grubu Tnm.']||'').trim() || 'Diğer';
+    const hacimSeg = String(r['Hacim Segmenti Tnm.']||'').trim() || 'Tanımsız';
+    const belgeNo = r['Satış Belgesi'];
+    const muhasebeDurum = String(r['Muhasebeleşme Durumu Tanımı']||'').trim();
+    // Not: excelDateToJSArti1Gun kullanılır (excelDateToJS DEĞİL) — bkz. buildYuklemeRaporu'daki
+    // aynı notla birebir aynı sebep: tarayıcı Türkiye (+3) saat diliminde çalışırken, saf/naif Excel
+    // tarihleri 1 gün geriye kayabiliyor; bu düzeltme olmadan Günlük Trend grafiği bir gün ERKEN
+    // gösteriyordu (ör. dosyada 01-04 Temmuz varken grafik 30 Haziran-03 Temmuz gösteriyordu).
+    const trendTarihi = excelDateToJSArti1Gun(r['Girilen Faturalama Tarihi']);
+    const malzemeKodu = String(r['Malzeme Kodu']||'').trim();
+    const malzemeTnm = String(r['Malzeme Tnm.']||'').trim();
+
+    toplamNet += net; toplamLitre += litre;
+    if(kanal==='Açık Kanal') acikNetToplam += net; else kapaliNetToplam += net;
+    if(belgeNo!=null && belgeNo!=='') belgeSetGenel.add(String(belgeNo));
+    if(musteri) invoicedNoktaSetGenel.add(musteri);
+    if(muhasebeDurum === 'Faturalama Blokajlı'){ blokajTutar += net; blokajAdet += 1; }
+
+    markaAgg.set(marka, (markaAgg.get(marka)||0)+litre);
+    hacimSegAgg.set(hacimSeg, (hacimSegAgg.get(hacimSeg)||0)+net);
+
+    if(trendTarihi){
+      const gk = dateKeyLocal(trendTarihi);
+      if(gk){
+        if(!gunlukTrend.has(gk)) gunlukTrend.set(gk, {net:0, litre:0});
+        const g = gunlukTrend.get(gk);
+        g.net += net; g.litre += litre;
+        // Malzeme Kodu bazlı günlük litre — Stok Gün raporunun tek veri kaynağı. "2" ile
+        // başlayan malzeme kodları (ör. 222467) gerçek stoklu ürün değil, farklı bir kategori
+        // (iade/numune/promosyon vb.) olduğu için Stok Gün hesaplamasına hiç dahil edilmez.
+        if(malzemeKodu && !malzemeKodu.startsWith('2')){
+          if(!malzemeGunlukAgg.has(malzemeKodu)) malzemeGunlukAgg.set(malzemeKodu, new Map());
+          const mg = malzemeGunlukAgg.get(malzemeKodu);
+          if(!mg.has(gk)) mg.set(gk, {litre:0, miktar:0});
+          const mgGun = mg.get(gk);
+          mgGun.litre += litre;
+          mgGun.miktar += miktar;
+          if(malzemeTnm && !malzemeUrunAdi.has(malzemeKodu)) malzemeUrunAdi.set(malzemeKodu, malzemeTnm);
+          if(marka && !malzemeMarka.has(malzemeKodu)) malzemeMarka.set(malzemeKodu, sellOutMarkaGrubu(marka));
+          if(temsilciHam){
+            if(!malzemeTemsilciAgg.has(malzemeKodu)) malzemeTemsilciAgg.set(malzemeKodu, new Map());
+            const mt = malzemeTemsilciAgg.get(malzemeKodu);
+            mt.set(temsilciHam, (mt.get(temsilciHam)||0) + litre);
+          }
+        }
+      }
+    }
+
+    if(!temsilciHam) return;
+    const key = normalizeAdSoyad(temsilciHam);
+    if(ssmHam && !temsilciToSSM.has(key)) temsilciToSSM.set(key, ssmHam);
+    if(!temsilciAgg.has(key)){
+      temsilciAgg.set(key, {key, ad:temsilciHam, ssm: ssmHam||null, netCiro:0, acikLitre:0, kapaliLitre:0, belgeSet:new Set(), invoicedNoktaSet:new Set(), aktifNoktalar:[]});
+    }
+    const t = temsilciAgg.get(key);
+    if(ssmHam && !t.ssm) t.ssm = ssmHam;
+    t.netCiro += net;
+    if(kanal==='Açık Kanal') t.acikLitre += litre; else t.kapaliLitre += litre;
+    if(belgeNo!=null && belgeNo!=='') t.belgeSet.add(String(belgeNo));
+    if(musteri) t.invoicedNoktaSet.add(musteri);
+  });
+
+  // Açık/Kapalı Kanal FKNS ayrımı için müşteri kanalı — Müşteri Master dosyasındaki "Satış Kanalı
+  // Tanımı" kolonundan (musteriMasterKanalMap, bkz. buildMusteriMasterKanalMap/02-bulut-ve-auth.js)
+  // doğrudan okunur. Bu, bu dönem hiç satışı olmayan noktalar için de kanalın bilinmesini sağlar
+  // (eski yaklaşım sadece Sell Out satırlarından türetiyordu, satışı olmayan noktaların kanalı hiç
+  // bilinemiyordu). "Key Account" gibi Açık/Kapalı Kanal kümelerinin dışında kalan ya da Müşteri
+  // Master'da hiç bulunmayan noktalar musteriMasterKanalMap'te YER ALMAZ — aşağıda aktifNoktalar'a
+  // dağıtılırken kanalı bilinmiyor kabul edilip ne Açık ne Kapalı FKNS paydasına dahil edilir,
+  // sadece Toplam FKNS'ye girerler (kullanıcı kararı).
+  const musteriKanalMap = musteriMasterKanalMap;
+
+  // Müşteri Master'daki noktaları temsilcilerine dağıt (bu dönem satışı olmasa da FKNS hesabına
+  // dahil olmaları gerekir). Durum kolonu bulunamadıysa tüm noktalar aktif kabul edilir. Durum
+  // kolonu varsa, yalnızca statüsü açıkça "Pasif" veya "İptal" olan noktalar hem bu listeden hem de
+  // FKNS (Fatura Kesilen Nokta Sayısı) hesaplamasından tamamen çıkarılır; diğer statüler (Aktif ya da
+  // tanınmayan başka bir statü metni) hesaba dahil edilmeye devam eder.
+  const durumVarMi = musteriMasterDurumMap.size > 0;
+  musteriMasterMap.forEach((temsilciAd, musteriKod)=>{
+    if(durumVarMi && noktaPasifVeyaIptalMi(musteriMasterDurumMap.get(musteriKod))) return;
+    const key = normalizeAdSoyad(temsilciAd);
+    if(!temsilciAgg.has(key)){
+      temsilciAgg.set(key, {key, ad:temsilciAd, ssm: temsilciToSSM.get(key)||null, netCiro:0, acikLitre:0, kapaliLitre:0, belgeSet:new Set(), invoicedNoktaSet:new Set(), aktifNoktalar:[]});
+    }
+    temsilciAgg.get(key).aktifNoktalar.push(musteriKod);
+  });
+
+  const temsilciler = Array.from(temsilciAgg.values()).map(t=>{
+    const toplamAktif = t.aktifNoktalar.length;
+    const faturaKesilmeyenKodlar = t.aktifNoktalar.filter(k=>!t.invoicedNoktaSet.has(k));
+    const faturaKesilen = toplamAktif - faturaKesilmeyenKodlar.length;
+    const fknsOrani = toplamAktif>0 ? (faturaKesilen/toplamAktif*100) : null;
+    // Açık/Kapalı Kanal FKNS — aynı aktifNoktalar listesi, musteriKanalMap'e göre ikiye bölünüp
+    // her alt küme için ayrı ayrı (fatura kesilen / toplam aktif) oranı hesaplanır. Bu dönemde hiç
+    // satış satırı olmadığı için kanalı belirlenemeyen (musteriKanalMap'te bulunmayan) noktalar
+    // HİÇBİR kanal paydasına dahil edilmez — yanlışlıkla Açık ya da Kapalı Kanal'a sayılıp o
+    // oranları gereksiz yere düşürmesinler diye; Toplam FKNS (fknsOrani) bu noktaları zaten içerir.
+    const acikAktifNoktalar = t.aktifNoktalar.filter(k=> musteriKanalMap.get(k)==='Açık Kanal');
+    const kapaliAktifNoktalar = t.aktifNoktalar.filter(k=> musteriKanalMap.get(k)==='Kapalı Kanal');
+    const acikFaturaKesilen = acikAktifNoktalar.filter(k=> t.invoicedNoktaSet.has(k)).length;
+    const kapaliFaturaKesilen = kapaliAktifNoktalar.filter(k=> t.invoicedNoktaSet.has(k)).length;
+    const fknsAcikOrani = acikAktifNoktalar.length>0 ? (acikFaturaKesilen/acikAktifNoktalar.length*100) : null;
+    const fknsKapaliOrani = kapaliAktifNoktalar.length>0 ? (kapaliFaturaKesilen/kapaliAktifNoktalar.length*100) : null;
+    // Fatura kesilmeyen noktalar da aynı kanal haritasına göre Açık/Kapalı/(kanalı bilinmeyen)
+    // olarak üçe ayrılır — kart üzerindeki "Fatura kesilmeyen" sayacı ve Detay modalı bu ayrımı
+    // gösterir. faturaKesilmeyenListe (kanal etiketli, tam liste) modaldaki filtre/sekme için
+    // kullanılır; faturaKesilmeyenAcik/Kapali sayıları ise kart üzerindeki kısa özet içindir.
+    const faturaKesilmeyenAcikKodlar = faturaKesilmeyenKodlar.filter(k=> musteriKanalMap.get(k)==='Açık Kanal');
+    const faturaKesilmeyenKapaliKodlar = faturaKesilmeyenKodlar.filter(k=> musteriKanalMap.get(k)==='Kapalı Kanal');
+    const ssm = t.ssm || getSahaMuduru(t.ad) || 'Tanımsız';
+    return {
+      key:t.key, temsilci:t.ad, ssm, netCiro:t.netCiro,
+      acikLitre:t.acikLitre, kapaliLitre:t.kapaliLitre, toplamLitre:t.acikLitre+t.kapaliLitre,
+      belgeSayisi:t.belgeSet.size,
+      toplamAktifNokta:toplamAktif, faturaKesilenNokta:faturaKesilen, faturaKesilmeyenNokta:faturaKesilmeyenKodlar.length,
+      faturaKesilmeyenNoktaAcik:faturaKesilmeyenAcikKodlar.length, faturaKesilmeyenNoktaKapali:faturaKesilmeyenKapaliKodlar.length,
+      fknsOrani, fknsAcikOrani, fknsKapaliOrani,
+      toplamAktifNoktaAcik:acikAktifNoktalar.length, toplamAktifNoktaKapali:kapaliAktifNoktalar.length,
+      faturaKesilmeyenListe: faturaKesilmeyenKodlar.map(kod=>({kod, adi:(musteriMasterDetayMap.get(kod)||{}).musteriAdi || kod, kanal: musteriKanalMap.get(kod) || null})),
+    };
+  }).sort((a,b)=> b.toplamLitre - a.toplamLitre);
+
+  const aktifNoktaSayisi = durumVarMi
+    ? Array.from(musteriMasterDurumMap.values()).filter(v=>v==='Aktif').length
+    : invoicedNoktaSetGenel.size;
+
+  const gunlukTrendDizi = Array.from(gunlukTrend.entries())
+    .map(([gunKey,v])=>({gunKey, net:v.net, litre:v.litre}))
+    .sort((a,b)=>a.gunKey.localeCompare(b.gunKey));
+
+  // Malzeme kodu -> {urunAdi, marka, gunler:[{gunKey,litre,miktar}]} — Stok Gün raporunun ham
+  // girdisi. Her ürünün gün dizisi ayrı ayrı sıralı tutuluyor ki arşivlenen aylar
+  // birleştirildiğinde (bkz. sellOutArsivUrunBirlestir) doğrudan uç uca eklenebilsin.
+  const malzemelerDizi = Array.from(malzemeGunlukAgg.entries()).map(([kod, gunMap])=>({
+    kod,
+    urunAdi: malzemeUrunAdi.get(kod) || kod,
+    marka: malzemeMarka.get(kod) || 'Bira', // Stok Gün marka filtresi artık sadece Distile/Bira
+    gunler: Array.from(gunMap.entries()).map(([gunKey,v])=>({gunKey, litre:v.litre, miktar:v.miktar})).sort((a,b)=>a.gunKey.localeCompare(b.gunKey)),
+    // Bu ürünü bu ay en çok satan temsilciler, litre payına göre sıralı (en çok 5) — Stok Gün
+    // raporundaki ürün×temsilci risk detayının ham girdisi. ÖNEMLİ: pay yüzdesi, listeyi top-5'e
+    // KESMEDEN ÖNCE tüm temsilciler üzerinden hesaplanan gerçek toplama göre bulunuyor — yoksa
+    // (5'ten fazla temsilci satan ürünlerde) top-5'in kendi içindeki toplama bölünüp yüzdeler
+    // olduğundan yüksek çıkardı.
+    temsilciPay: (()=>{
+      const liste = Array.from((malzemeTemsilciAgg.get(kod)||new Map()).entries()).map(([ad,litre])=>({ad,litre}));
+      const gercekToplam = liste.reduce((a,t)=>a+t.litre,0);
+      return liste
+        .map(t=>({ad:t.ad, litre:t.litre, pay: gercekToplam>0 ? (t.litre/gercekToplam*100) : 0}))
+        .sort((a,b)=>b.litre-a.litre)
+        .slice(0,5);
+    })(),
+  }));
+
+  return {
+    toplamNet, toplamLitre, belgeSayisi: belgeSetGenel.size, aktifNoktaSayisi, durumVarMi,
+    ssmSayisi: new Set(temsilciler.map(t=>t.ssm||'Tanımsız').filter(s=>s!=='Tanımsız')).size,
+    temsilciSayisi: temsilciler.length,
+    blokajTutar, blokajAdet,
+    temsilciler,
+    markalar: Array.from(markaAgg.entries()).map(([ad,litre])=>({ad,litre})).sort((a,b)=>b.litre-a.litre),
+    hacimSegmentleri: Array.from(hacimSegAgg.entries()).map(([ad,net])=>({ad,net})).sort((a,b)=>b.net-a.net),
+    kanalNet: {acik:acikNetToplam, kapali:kapaliNetToplam},
+    gunlukTrend: gunlukTrendDizi,
+    malzemeler: malzemelerDizi,
+  };
+}
+
+// baseReport (hedef içermeyen, kalıcı olarak saklanan rapor) üzerine güncel litre hedeflerini
+// uygular ve temsilci + SSM satırlarını yeniden hesaplayıp döndürür. Saf bir fonksiyondur —
+// hedef kaydedildiğinde ham dosya yeniden yüklenmeden sadece bu fonksiyon tekrar çağrılır.
+function applySellOutHedef(baseReport, hedefMap){
+  hedefMap = hedefMap || {};
+  const temsilciler = baseReport.temsilciler.map(t=>{
+    const hedef = hedefMap[t.key] || {};
+    const acikHedef = Number(hedef.acik)||0;
+    const kapaliHedef = Number(hedef.kapali)||0;
+    const acikKalan = Math.max(0, acikHedef - t.acikLitre);
+    const kapaliKalan = Math.max(0, kapaliHedef - t.kapaliLitre);
+    const toplamHedef = acikHedef+kapaliHedef;
+    const hedefGerceklesme = toplamHedef>0 ? (t.toplamLitre/toplamHedef*100) : null;
+    return Object.assign({}, t, {acikHedef, kapaliHedef, acikKalan, kapaliKalan, hedefGerceklesme});
+  })
+  // SSM'i tespit edilemeyen (Tanımsız) temsilciler — genelde bu dönem hiç satışı olmayan, hardcoded
+  // SSM eşlemesinde de bulunmayan "yetim" kayıtlardır — hem raporda hem SSM tablosunda gösterilmez.
+  .filter(t=> t.ssm && t.ssm !== 'Tanımsız')
+  .sort((a,b)=> b.toplamLitre - a.toplamLitre);
+
+  const ssmAgg = new Map();
+  temsilciler.forEach(r=>{
+    const key = r.ssm;
+    if(!ssmAgg.has(key)) ssmAgg.set(key, {ssm:key, acikHedef:0, acikLitre:0, kapaliHedef:0, kapaliLitre:0, toplamAktifNokta:0, faturaKesilenNokta:0, temsilciSayisi:0});
+    const s = ssmAgg.get(key);
+    s.acikHedef += r.acikHedef; s.acikLitre += r.acikLitre;
+    s.kapaliHedef += r.kapaliHedef; s.kapaliLitre += r.kapaliLitre;
+    s.toplamAktifNokta += r.toplamAktifNokta; s.faturaKesilenNokta += r.faturaKesilenNokta;
+    s.temsilciSayisi += 1;
+  });
+  const ssmler = Array.from(ssmAgg.values()).map(s=>{
+    const toplamHedef = s.acikHedef+s.kapaliHedef;
+    const toplamSatis = s.acikLitre+s.kapaliLitre;
+    return Object.assign({}, s, {
+      hedefGerceklesme: toplamHedef>0 ? (toplamSatis/toplamHedef*100) : null,
+      genelFkns: s.toplamAktifNokta>0 ? (s.faturaKesilenNokta/s.toplamAktifNokta*100) : null,
+    });
+  }).sort((a,b)=> (b.acikLitre+b.kapaliLitre)-(a.acikLitre+a.kapaliLitre));
+
+  return Object.assign({}, baseReport, {
+    temsilciler, ssmler,
+    temsilciSayisi: temsilciler.length,
+    ssmSayisi: ssmler.length,
+  });
+}
+
+async function saveSellOutHedefToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_HEDEF_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Sell Out hedef buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadSellOutHedefFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_HEDEF_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Sell Out hedef buluttan okunamadı:', err); return null; }
+}
+async function saveSellOutHedefToLocal(obj){
+  const ok = await idbSet(SELLOUT_HEDEF_LOCAL_KEY, obj);
+  if(!ok) console.error('Sell Out hedef cihaza kaydedilemedi.');
+}
+async function loadSellOutHedefFromLocal(){
+  try{ return await idbGet(SELLOUT_HEDEF_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function sellOutHedefYenile(){
+  let obj = null;
+  if(cloudEnabled()) obj = await loadSellOutHedefFromCloud();
+  if(!obj) obj = await loadSellOutHedefFromLocal();
+  state.sellOutHedef = obj || {};
+  return state.sellOutHedef;
+}
+async function sellOutHedefKaydet(obj){
+  state.sellOutHedef = obj;
+  await saveSellOutHedefToLocal(obj);
+  if(cloudEnabled()){
+    const sonuc = await saveSellOutHedefToCloud(obj);
+    if(!sonuc.ok) throw new Error('Hedef buluta kaydedilemedi (cihaza da kaydedilmiyor): '+(sonuc.reason||'bilinmeyen hata'));
+  }
+}
+
+async function saveSellOutReportToCloud(rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_REPORT_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(SELLOUT_REPORT_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(SELLOUT_REPORT_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Sell Out raporu buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadSellOutReportFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_REPORT_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Sell Out raporu buluttan okunamadı:', err); return null; }
+}
+async function saveSellOutReportToLocal(rapor){
+  const ok = await idbSet(SELLOUT_REPORT_LOCAL_KEY, rapor);
+  if(!ok) console.error('Sell Out raporu cihaza kaydedilemedi.');
+}
+async function loadSellOutReportFromLocal(){
+  try{ return await idbGet(SELLOUT_REPORT_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function sellOutYenile(){
+  let rapor = null;
+  if(cloudEnabled()){
+    const sonuc = await cloudVeriVerimliYukle(SELLOUT_REPORT_CLOUD_PATH, loadSellOutReportFromCloud, loadSellOutReportFromLocal);
+    rapor = sonuc.data;
+  }
+  if(!rapor) rapor = await loadSellOutReportFromLocal();
+  state.sellOutReport = rapor;
+  // GVY panelinde "Son veri" gösterebilmek için — raporun İÇİNE gömülmüş zaman damgası (bkz.
+  // sellOutKaydet) buradan (sayfa yeniden yüklendiğinde/senkronize edildiğinde) da okunur.
+  if(rapor && rapor.__hesaplanmaZamani) state.sellOutSonGuncelleme = rapor.__hesaplanmaZamani;
+  return rapor;
+}
+async function sellOutKaydet(rapor){
+  const zaman = new Date().toISOString();
+  rapor = Object.assign({}, rapor, {__hesaplanmaZamani: zaman});
+  ktlog('sellOutKaydet → state.sellOutReport yazılıyor. toplamLitre=', rapor && rapor.toplamLitre, 'belgeSayisi=', rapor && rapor.belgeSayisi);
+  state.sellOutReport = rapor;
+  state.sellOutSonGuncelleme = zaman;
+  await saveSellOutReportToLocal(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveSellOutReportToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Sell Out raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Sell Out raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
+}
+
+async function sellOutRaporuOlustur(){
+  const dosya = state.files.sellOut;
+  if(!dosya) return; // yeni dosya yüklenmediyse önceden kaydedilmiş rapor korunur
+  try{
+    const baseRapor = buildSellOutReport(dosya.data, state.musteriMasterMap, state.musteriMasterDurum, state.musteriMasterDetay, state.musteriMasterKanal);
+    await sellOutKaydet(baseRapor);
+  }catch(err){
+    console.error('Sell Out raporu oluşturulamadı:', err);
+  }
+}
+
+// ============================================================================
+// SELL OUT RAPORU — AYLIK ARŞİV
+// ============================================================================
+// Sell Out raporunun kendisi (SELLOUT_REPORT_CLOUD_PATH) her yüklemede TEK bir yolun üzerine
+// yazıldığı için geriye dönük veri tutmuyordu. Bu bölüm, kullanıcının "<i class="fa-solid fa-box-archive" aria-hidden="true"></i> Bu Ayı Arşivle" butonuna
+// elle basmasıyla, O ANKİ (hedef overlay uygulanmış) rapor anlık görüntüsünü ayrı bir yola,
+// ayKey (YYYY-MM) altında KALICI olarak kaydeder. Otomatik/periyodik bir arşivleme YOKTUR —
+// kullanıcı ayın sonunda, o ayın son verisiyken elle "Arşivle"ye basmalıdır. Daha sonra "Dönem"
+// filtresinden geçmiş bir ay seçildiğinde, canlı veri yerine o ayın arşivlenmiş anlık görüntüsü
+// gösterilir (salt okunur — hedef düzenleme kapalıdır).
+async function saveSellOutArsivAyToCloud(ayKey, rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_ARSIV_CLOUD_PATH}/${encodeURIComponent(ayKey)}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Sell Out ay arşivi buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+// Belirli bir aya ait Sell Out arşiv kaydını (hem buluttan hem cihazdaki kopyadan) siler.
+// Güncel (canlı) Sell Out verisine (state.sellOutReport, state.files.sellOut, state.sellOutKendiDosya)
+// KESİNLİKLE dokunmaz — yalnızca o ayın "Bu Ayı Arşivle" ile daha önce (istenerek veya
+// istenmeden/başka bir cihazdan) kaydedilmiş anlık görüntüsünü kaldırır.
+async function sellOutArsivAyiSil(ayKey){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_ARSIV_CLOUD_PATH}/${encodeURIComponent(ayKey)}.json${await authQuery()}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'}, body:'null',
+      });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+    }catch(err){ console.error('Sell Out ay arşivi buluttan silinemedi:', err); throw err; }
+  }
+  const yeniArsiv = Object.assign({}, state.sellOutArsivCache);
+  delete yeniArsiv[ayKey];
+  state.sellOutArsivCache = yeniArsiv;
+  await saveSellOutArsivToLocal(yeniArsiv);
+}
+async function loadSellOutArsivFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${SELLOUT_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return {};
+    return JSON.parse(text) || {};
+  }catch(err){ console.error('Sell Out ay arşivi buluttan okunamadı:', err); return null; }
+}
+async function saveSellOutArsivToLocal(arsiv){
+  const ok = await idbSet(SELLOUT_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Sell Out ay arşivi cihaza kaydedilemedi.');
+}
+async function loadSellOutArsivFromLocal(){
+  try{ return (await idbGet(SELLOUT_ARSIV_LOCAL_KEY)) || {}; }catch(err){ console.error(err); return {}; }
+}
+let sellOutArsivYuklendiMi = false;
+async function sellOutArsivYenile(zorla){
+  if(sellOutArsivYuklendiMi && !zorla) return state.sellOutArsivCache;
+  let arsiv = null;
+  if(cloudEnabled()) arsiv = await loadSellOutArsivFromCloud();
+  if(!arsiv) arsiv = await loadSellOutArsivFromLocal();
+  state.sellOutArsivCache = arsiv || {};
+  sellOutArsivYuklendiMi = true;
+  await saveSellOutArsivToLocal(state.sellOutArsivCache).catch(()=>{});
+  return state.sellOutArsivCache;
+}
+// ============================================================================
+// MODERN KANAL — cloud/local kalıcılık (hedef, güncel rapor, aylık arşiv)
+// ============================================================================
+// Geleneksel Kanal (Sell Out) ile birebir aynı desen kopyalanmıştır; tek fark, hedefin
+// Açık/Kapalı ayrımı olmayan TEK bir "Key Account Hedef" sayısı olmasıdır (modernKanalHedef
+// bir obje değil doğrudan sayı olarak saklanır).
+const MODERNKANAL_HEDEF_CLOUD_PATH = CLOUD.path + '_modernKanalHedef';
+const MODERNKANAL_HEDEF_LOCAL_KEY = 'noktaCariTakip_modernKanalHedef_v1';
+const MODERNKANAL_REPORT_CLOUD_PATH = CLOUD.path + '_modernKanalReport';
+const MODERNKANAL_REPORT_LOCAL_KEY = 'noktaCariTakip_modernKanalReport_v1';
+const MODERNKANAL_ARSIV_CLOUD_PATH = CLOUD.path + '_modernKanalArsiv';
+const MODERNKANAL_ARSIV_LOCAL_KEY = 'noktaCariTakip_modernKanalArsiv_v1';
+
+async function saveModernKanalHedefToCloud(deger){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_HEDEF_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(deger),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal hedef buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadModernKanalHedefFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_HEDEF_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Modern Kanal hedef buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalHedefToLocal(deger){
+  const ok = await idbSet(MODERNKANAL_HEDEF_LOCAL_KEY, deger);
+  if(!ok) console.error('Modern Kanal hedef cihaza kaydedilemedi.');
+}
+async function loadModernKanalHedefFromLocal(){
+  try{ return await idbGet(MODERNKANAL_HEDEF_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function modernKanalHedefYenile(){
+  let deger = null;
+  if(cloudEnabled()) deger = await loadModernKanalHedefFromCloud();
+  if(deger==null) deger = await loadModernKanalHedefFromLocal();
+  state.modernKanalHedef = Number(deger)||0;
+  return state.modernKanalHedef;
+}
+async function modernKanalHedefKaydet(deger){
+  state.modernKanalHedef = Number(deger)||0;
+  await saveModernKanalHedefToLocal(state.modernKanalHedef);
+  if(cloudEnabled()){
+    const sonuc = await saveModernKanalHedefToCloud(state.modernKanalHedef);
+    if(!sonuc.ok) throw new Error('Hedef buluta kaydedilemedi (cihaza da kaydedilmiyor): '+(sonuc.reason||'bilinmeyen hata'));
+  }
+}
+
+async function saveModernKanalReportToCloud(rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_REPORT_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(MODERNKANAL_REPORT_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(MODERNKANAL_REPORT_CLOUD_PATH, simdi);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal raporu buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadModernKanalReportFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_REPORT_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Modern Kanal raporu buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalReportToLocal(rapor){
+  const ok = await idbSet(MODERNKANAL_REPORT_LOCAL_KEY, rapor);
+  if(!ok) console.error('Modern Kanal raporu cihaza kaydedilemedi.');
+}
+async function loadModernKanalReportFromLocal(){
+  try{ return await idbGet(MODERNKANAL_REPORT_LOCAL_KEY); }catch(err){ console.error(err); return null; }
+}
+async function modernKanalYenile(){
+  let rapor = null;
+  if(cloudEnabled()){
+    const sonuc = await cloudVeriVerimliYukle(MODERNKANAL_REPORT_CLOUD_PATH, loadModernKanalReportFromCloud, loadModernKanalReportFromLocal);
+    rapor = sonuc.data;
+  }
+  if(!rapor) rapor = await loadModernKanalReportFromLocal();
+  state.modernKanalReport = rapor;
+  // GVY panelinde "Son veri" gösterebilmek için — raporun İÇİNE gömülmüş zaman damgası (bkz.
+  // modernKanalKaydet) buradan (sayfa yeniden yüklendiğinde/senkronize edildiğinde) da okunur.
+  if(rapor && rapor.__hesaplanmaZamani) state.modernKanalSonGuncelleme = rapor.__hesaplanmaZamani;
+  return rapor;
+}
+async function modernKanalKaydet(rapor){
+  const zaman = new Date().toISOString();
+  rapor = Object.assign({}, rapor, {__hesaplanmaZamani: zaman});
+  ktlog('modernKanalKaydet → state.modernKanalReport yazılıyor. toplamLitre=', rapor && rapor.toplamLitre, 'malzemeSayisi=', rapor && rapor.malzemeler && rapor.malzemeler.length);
+  state.modernKanalReport = rapor;
+  state.modernKanalSonGuncelleme = zaman;
+  await saveModernKanalReportToLocal(rapor);
+  if(cloudEnabled()){
+    const sonuc = await saveModernKanalReportToCloud(rapor);
+    // Cihaz depolama kapalı — buluta yazılamazsa bu veri hiçbir yere kalıcı kaydedilmez. Kullanıcı
+    // isteği: bu durum artık sessiz kalmasın, ana rapor uyarılarıyla aynı tutarlılıkta alert de
+    // gösterilsin (konsol logu da korunur).
+    if(!sonuc.ok){
+      console.error('UYARI: Modern Kanal raporu buluta kaydedilemedi, hiçbir yerde kalıcı değil:', sonuc.reason);
+      alert('UYARI: Modern Kanal raporu buluta kaydedilemedi (cihaza da kaydedilmiyor) — sayfa yenilenirse kaybolur. Lütfen bağlantınızı/girişinizi kontrol edip tekrar deneyin.');
+    }
+  }
+}
+
+async function saveModernKanalArsivAyToCloud(ayKey, rapor){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_ARSIV_CLOUD_PATH}/${encodeURIComponent(ayKey)}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(rapor),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Modern Kanal ay arşivi buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+// Belirli bir aya ait Modern Kanal arşiv kaydını (hem buluttan hem cihazdaki kopyadan) siler.
+// Güncel (canlı) Modern Kanal verisine KESİNLİKLE dokunmaz — yalnızca o ayın "Bu Ayı Arşivle"
+// ile daha önce (istenerek veya istenmeden/başka bir cihazdan) kaydedilmiş anlık görüntüsünü kaldırır.
+async function modernKanalArsivAyiSil(ayKey){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_ARSIV_CLOUD_PATH}/${encodeURIComponent(ayKey)}.json${await authQuery()}`, {
+        method:'PUT', headers:{'Content-Type':'application/json'}, body:'null',
+      });
+      if(!res.ok) throw new Error('HTTP '+res.status);
+    }catch(err){ console.error('Modern Kanal ay arşivi buluttan silinemedi:', err); throw err; }
+  }
+  const yeniArsiv = Object.assign({}, state.modernKanalArsivCache);
+  delete yeniArsiv[ayKey];
+  state.modernKanalArsivCache = yeniArsiv;
+  await saveModernKanalArsivToLocal(yeniArsiv);
+}
+async function loadModernKanalArsivFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${MODERNKANAL_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return {};
+    return JSON.parse(text) || {};
+  }catch(err){ console.error('Modern Kanal ay arşivi buluttan okunamadı:', err); return null; }
+}
+async function saveModernKanalArsivToLocal(arsiv){
+  const ok = await idbSet(MODERNKANAL_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Modern Kanal ay arşivi cihaza kaydedilemedi.');
+}
+async function loadModernKanalArsivFromLocal(){
+  try{ return (await idbGet(MODERNKANAL_ARSIV_LOCAL_KEY)) || {}; }catch(err){ console.error(err); return {}; }
+}
+let modernKanalArsivYuklendiMi = false;
+async function modernKanalArsivYenile(zorla){
+  if(modernKanalArsivYuklendiMi && !zorla) return state.modernKanalArsivCache;
+  let arsiv = null;
+  if(cloudEnabled()) arsiv = await loadModernKanalArsivFromCloud();
+  if(!arsiv) arsiv = await loadModernKanalArsivFromLocal();
+  state.modernKanalArsivCache = arsiv || {};
+  modernKanalArsivYuklendiMi = true;
+  await saveModernKanalArsivToLocal(state.modernKanalArsivCache).catch(()=>{});
+  return state.modernKanalArsivCache;
+}
+
+function sellOutBaskinAy(rows){
+  const ayCounts = new Map();
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['Girilen Faturalama Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    ayCounts.set(ayKey, (ayCounts.get(ayKey)||0) + 1);
+  });
+  let baskinAy = null, maksSayi = 0;
+  ayCounts.forEach((sayi, ay)=>{ if(sayi > maksSayi){ maksSayi = sayi; baskinAy = ay; } });
+  return baskinAy;
+}
+
+// ============================================================================
+// MODERN KANAL — İrsaliye Listesi (Key Account/Modern Kanal sevkiyat dökümü)
+// ============================================================================
+// Geleneksel Kanal (Sell Out) ile aynı "ürün bazlı günlük litre/miktar" mantığını kullanır,
+// ama çok daha basittir: temsilci/SSM/kanal ayrımı yok, tek bir "İbrahim Işık" girdisi var,
+// tek bir Key Account Hedefi (Açık/Kapalı ayrımsız) girilir. Bu kanalın satışı, tahsilat
+// henüz gerçekleşmemiş olsa da anlık tahsil edilmiş kabul edilir; bu yüzden bu fonksiyon
+// hiçbir tahsilat/FKNS/DSO hesabına veri üretmez — yalnızca ürün bazlı litre/miktar ve
+// toplam litre döndürür (Stok Gün ve genel toplam sayılarda kullanılmak üzere).
+function buildIrsaliyeReport(rows){
+  let toplamLitre = 0;
+  const malzemeGunlukAgg = new Map(); // malzemeKodu -> Map(gunKey -> {litre, miktar})
+  const malzemeUrunAdi = new Map();
+
+  (rows||[]).forEach(r=>{
+    const litre = Number(r['Litre'])||0;
+    const miktar = Number(r['Miktar'])||0;
+    const malzemeKodu = String(r['Ürün Kodu']||'').trim();
+    const malzemeTnm = String(r['Malzeme kısa metni']||'').trim();
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const gk = dateKeyLocal(tarih);
+    if(!gk) return;
+
+    toplamLitre += litre;
+
+    // "2" ile başlayan malzeme kodları (ör. 225899) Sell Out'taki ile aynı sebeple hariç
+    // tutulur — gerçek stoklu ürün değil, farklı bir kategori (iade/numune/promosyon vb.).
+    if(malzemeKodu && !malzemeKodu.startsWith('2')){
+      if(!malzemeGunlukAgg.has(malzemeKodu)) malzemeGunlukAgg.set(malzemeKodu, new Map());
+      const mg = malzemeGunlukAgg.get(malzemeKodu);
+      if(!mg.has(gk)) mg.set(gk, {litre:0, miktar:0});
+      const mgGun = mg.get(gk);
+      mgGun.litre += litre;
+      mgGun.miktar += miktar;
+      if(malzemeTnm && !malzemeUrunAdi.has(malzemeKodu)) malzemeUrunAdi.set(malzemeKodu, malzemeTnm);
+    }
+  });
+
+  const malzemelerDizi = Array.from(malzemeGunlukAgg.entries()).map(([kod, gunMap])=>({
+    kod,
+    urunAdi: malzemeUrunAdi.get(kod) || kod,
+    marka: 'Bira', // İrsaliye Listesi'nde marka/Mal Grubu bilgisi yok; Stok Gün marka filtresi artık sadece Distile/Bira olduğu için bu ürünler Bira grubuna düşer.
+    gunler: Array.from(gunMap.entries()).map(([gunKey,v])=>({gunKey, litre:v.litre, miktar:v.miktar})).sort((a,b)=>a.gunKey.localeCompare(b.gunKey)),
+  }));
+
+  return { toplamLitre, malzemeler: malzemelerDizi };
+}
+
+// İrsaliye dosyasındaki satırların hangi aylara dağıldığını (ayKey -> satır sayısı) döndürür —
+// hem "Bu Ayı Arşivle" (baskın ay tespiti) hem "Tüm Ayları Toplu Arşivle" (her ayı ayrı ayrı
+// filtreleyip arşivlemek) için kullanılır.
+function irsaliyeAylaraGoreGrupla(rows){
+  const gruplar = new Map(); // ayKey -> rows[]
+  (rows||[]).forEach(r=>{
+    const tarih = excelDateToJSArti1Gun(r['İrsaliye Tarihi']);
+    if(!tarih) return;
+    const ayKey = dateKeyLocal(tarih).slice(0,7);
+    if(!gruplar.has(ayKey)) gruplar.set(ayKey, []);
+    gruplar.get(ayKey).push(r);
+  });
+  return gruplar;
+}
+
+async function sellOutArsivleButonu(){
+  const btn = document.getElementById('sellOutArsivleBtn');
+  const baseRapor = state.sellOutReport;
+  if(!baseRapor){
+    toastGoster('warn', 'Arşivlenecek rapor yok', 'Önce Geleneksel Kanal sekmesinden veya ana yükleme sayfasından dosyayı yükleyip hesaplatın.');
+    return;
+  }
+  const hamVeri = (state.sellOutKendiDosya && state.sellOutKendiDosya.data) || (state.files.sellOut && state.files.sellOut.data);
+  const ayKey = (hamVeri && sellOutBaskinAy(hamVeri)) || dateKeyLocal(turkiyeBugun()).slice(0,7);
+  const ayEtiket = fmtDate(new Date(ayKey+'-01'));
+  const zatenVar = Object.prototype.hasOwnProperty.call(state.sellOutArsivCache||{}, ayKey);
+  const soru = zatenVar
+    ? (ayEtiket + ' icin arsiv zaten var (dosya icerigine gore bu veri ' + ayEtiket + ' ayina ait). Uzerine yazilsin mi?')
+    : ('Dosya icerigine gore bu veri ' + ayEtiket + ' ayina ait gorunuyor. GUNCEL Sell Out verisi bu ayin altina kalici olarak arsivlensin mi?');
+  if(!confirm(soru)) return;
+  if(!(await ortakSifreDogrula('Bu ayı arşivlemek için şifreyi girin:'))) return;
+
+  btn.disabled = true;
+  const eskiText = btn.textContent;
+  btn.textContent = 'Arsivleniyor...';
+  try{
+    const raporSnapshot = Object.assign({}, applySellOutHedef(baseRapor, state.sellOutHedef), {
+      arsivAyKey: ayKey,
+      arsivZamani: new Date().toISOString(),
+    });
+    state.sellOutArsivCache = Object.assign({}, state.sellOutArsivCache, {[ayKey]: raporSnapshot});
+    await saveSellOutArsivToLocal(state.sellOutArsivCache);
+    const sonuc = await saveSellOutArsivAyToCloud(ayKey, raporSnapshot);
+    if(!sonuc.ok){
+      // Cihaz depolama kapalı (kullanıcı isteği) — bulut yazması başarısız olursa bu arşiv kaydı
+      // HİÇBİR YERDE kalıcı DEĞİLDİR, sayfa yenilenirse kaybolur.
+      alert('UYARI: Arşiv buluta yazılamadı (' + (sonuc.reason||'bilinmeyen hata') + '). Cihaza da kaydedilmiyor (bu özellik kapalı) — sayfa yenilenirse bu arşiv kaydı kaybolur.');
+    }
+    populateSellOutAySelect();
+    document.getElementById('sellOutAySelect').value = ayKey;
+    state.sellOutSeciliAy = ayKey;
+    await renderSellOutView();
+  }catch(err){
+    console.error('Sell Out arsivleme hatasi:', err);
+    alert('Arsivleme sirasinda bir hata olustu: ' + err.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = eskiText;
+  }
+}
+function populateSellOutAySelect(){
+  const sel = document.getElementById('sellOutAySelect');
+  const aylar = Object.keys(state.sellOutArsivCache||{}).sort().reverse();
+  const mevcutSecim = state.sellOutSeciliAy;
+  sel.innerHTML = '<option value="">Güncel (canlı)</option>' + aylar.map(a=>`<option value="${a}">${fmtDate(new Date(a+'-01'))}</option>`).join('');
+  sel.value = (mevcutSecim && aylar.includes(mevcutSecim)) ? mevcutSecim : '';
+  state.sellOutSeciliAy = sel.value || null;
+}
+
+function populateModernKanalAySelect(){
+  const sel = document.getElementById('modernKanalAySelect');
+  if(!sel) return;
+  const aylar = Object.keys(state.modernKanalArsivCache||{}).sort().reverse();
+  const mevcutSecim = state.modernKanalSeciliAy;
+  sel.innerHTML = '<option value="">Güncel (canlı)</option>' + aylar.map(a=>`<option value="${a}">${fmtDate(new Date(a+'-01'))}</option>`).join('');
+  sel.value = (mevcutSecim && aylar.includes(mevcutSecim)) ? mevcutSecim : '';
+  state.modernKanalSeciliAy = sel.value || null;
+}
+
+// Modern Kanal (İbrahim Işık) için render — Geleneksel Kanal'ın SSM kartıyla aynı görsel
+// dilde ama tek bir kişilik: kendi Key Account Hedefi ve kendi toplam litresine göre kendi
+// gerçekleşme oranı hesaplanır. Bu değer Toplam LT göstergesinin altında gösterilir.
+async function renderModernKanalView(){
+  const bosPanel = document.getElementById('modernKanalBosPanel');
+  const icerik = document.getElementById('modernKanalIcerik');
+  populateModernKanalAySelect();
+  const seciliAy = state.modernKanalSeciliAy;
+  const baseRapor = state.modernKanalReport;
+  ktlog('renderModernKanalView (MODERN ekran) → kaynak state.modernKanalReport. toplamLitre=', baseRapor&&baseRapor.toplamLitre, 'malzemeSayısı=', baseRapor&&baseRapor.malzemeler&&baseRapor.malzemeler.length, 'seçiliAy=', seciliAy||'(canlı)');
+
+  let report, isArsivGoruntuleme;
+  if(seciliAy){
+    report = state.modernKanalArsivCache[seciliAy] || null;
+    isArsivGoruntuleme = true;
+    if(!report){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('modernKanalAsOf').textContent = fmtDate(new Date(seciliAy+'-01'))+' ayına ait arşiv verisi bulunamadı.';
+      return;
+    }
+  }else{
+    isArsivGoruntuleme = false;
+    if(!baseRapor){
+      bosPanel.style.display='block';
+      icerik.style.display='none';
+      document.getElementById('modernKanalAsOf').textContent = 'Veri kaynağı: İrsaliye Listesi (Key Account/Modern Kanal) — henüz yüklenmedi';
+      return;
+    }
+    report = baseRapor;
+  }
+  bosPanel.style.display='none';
+  icerik.style.display='block';
+
+  document.getElementById('modernKanalAsOf').textContent = isArsivGoruntuleme
+    ? ('Arşiv: '+fmtDate(new Date(seciliAy+'-01'))+' ayının ('+fmtDate(new Date(report.arsivZamani))+' tarihinde arşivlenmiş) verisi gösteriliyor')
+    : 'Veri kaynağı: İrsaliye Listesi (Key Account/Modern Kanal)';
+
+  // Hedef alanı yalnızca güncel/canlı görünümde düzenlenebilir; arşiv görüntülemede salt okunur.
+  const hedefInput = document.getElementById('modernKanalHedefInput');
+  const hedefPanel = document.getElementById('modernKanalHedefPanel');
+  if(hedefPanel) hedefPanel.style.display = isArsivGoruntuleme ? 'none' : 'block';
+  if(hedefInput && !isArsivGoruntuleme) hedefInput.value = state.modernKanalHedef || '';
+
+  const hedef = isArsivGoruntuleme ? (report.hedefAnlikGoruntu||0) : (state.modernKanalHedef||0);
+  const toplamLitre = report.toplamLitre||0;
+  const gercek = hedef>0 ? (toplamLitre/hedef*100) : null;
+  const renk = sellOutRenk(gercek);
+
+  document.getElementById('modernKanalKartGrid').innerHTML = `
+    <div class="ssm-karne-card" style="border-left:4px solid ${renk};">
+      <div class="ssm-karne-top">
+        <div class="cust-avatar">${escapeHtml(avatarBaslangic('İbrahim Işık'))}</div>
+        <div>
+          <div class="ssm-karne-name">İBRAHİM IŞIK <span class="badge ssm-hiyerarsi-badge"><i class="fa-solid fa-user-tie" aria-hidden="true"></i> Key Account</span></div>
+          <div class="ssm-karne-sub">Modern Kanal</div>
+        </div>
+        <div class="ssm-fkns-ring-wrap">
+          ${fknsRingSvg(gercek)}
+          <div class="ssm-fkns-ring-label">Hedef</div>
+        </div>
+      </div>
+      ${ssmKanalRowHtml('Toplam Litre', toplamLitre, hedef, 'fa-boxes-stacked')}
+      <div class="ssm-karne-foot">
+        <span class="g-lbl">Hedef Gerçekleşme</span>
+        <span class="g-val" style="color:${renk};">${gercek!=null ? fmtYuzde(gercek) : '—'}</span>
+      </div>
+    </div>`;
+}
+
+function sellOutRenk(oran){
+  return performansRenk(oran, {iyi:90, orta:75, ortaRenk:'var(--warn)'});
+}
+// sellOutRenk ile aynı eşiklere göre, katı renk yerine "soft" (açık tonlu) zemin rengi döner —
+// rozet/ikon arka planlarında kullanılır (örn. temsilci kartındaki #sıra rozeti ve kanal ikonları).
+function sellOutRenkSoft(oran){
+  return performansRenk(oran, {iyi:90, orta:75, iyiRenk:'var(--success-soft)', ortaRenk:'var(--warn-soft)', dusukRenk:'var(--danger-soft)'});
+}
+
+// FKNS (ya da Genel FKNS) oranını gösteren dairesel gösterge (donut) — SSM Karneleri ve Temsilci
+// Karnesi kartlarında birebir aynı görselle kullanılır. Çevre uzunluğu r=16 için ~100 birim olduğundan
+// stroke-dasharray doğrudan yüzde değeriyle eşleşir.
+function fknsRingSvg(oran){
+  const renk = sellOutRenk(oran);
+  const deger = oran==null ? 0 : Math.max(0, Math.min(100, oran));
+  const metin = oran==null ? '—' : '%'+Math.round(oran);
+  return `<svg class="ssm-fkns-ring" viewBox="0 0 36 36">
+    <path d="M18 2a16 16 0 0 1 0 32 16 16 0 0 1 0-32" fill="none" stroke="#EEF2F7" stroke-width="4"/>
+    <path d="M18 2a16 16 0 0 1 0 32 16 16 0 0 1 0-32" fill="none" style="stroke:${renk}" stroke-width="4" stroke-dasharray="${deger} 100" stroke-linecap="round"/>
+    <text x="18" y="21" font-size="9" font-weight="700" fill="#152238" text-anchor="middle" font-family="Space Grotesk">${escapeHtml(metin)}</text>
+  </svg>`;
+}
+
+// Temsilci Karnesi kartlarında tek FKNS halkası yerine Açık Kanal / Kapalı Kanal / Toplam olmak
+// üzere yan yana 3 küçük halka gösterir. Aynı fknsRingSvg() motoru kullanılır (yeniden çizim
+// yerine sadece boyutu küçültülür), her halkanın altına kısa etiketi yazılır.
+function fknsRingUcluSvg(acikOran, kapaliOran, toplamOran){
+  const halka = (oran, etiket)=> `
+    <div class="ssm-fkns-ring-item">
+      ${fknsRingSvg(oran)}
+      <div class="ssm-fkns-ring-label">${escapeHtml(etiket)}</div>
+    </div>`;
+  return `<div class="ssm-fkns-ring-trio">
+    ${halka(acikOran, 'Açık FKNS')}
+    ${halka(kapaliOran, 'Kapalı FKNS')}
+    ${halka(toplamOran, 'Toplam FKNS')}
+  </div>`;
+}
+
+// Açık/Kapalı Kanal ilerleme satırı — hedef girilmemişse (0) sadece satış litresi gösterilir.
+// Hedef girilmişse, çubuğun altında kalan (hedef-satış, negatifse 0) litre bilgisi de gösterilir.
+function ssmKanalRowHtml(label, satis, hedef, icon){
+  const hedefVarMi = hedef>0;
+  const pct = hedefVarMi ? Math.min(100, satis/hedef*100) : 0;
+  const renk = hedefVarMi ? sellOutRenk(pct) : 'var(--ink-faint)';
+  const renkSoft = hedefVarMi ? sellOutRenkSoft(pct) : 'var(--line-soft)';
+  const valTxt = hedefVarMi ? `${NUM(satis)} / ${NUM(hedef)} Lt.` : `${LT(satis)} <small>· hedef yok</small>`;
+  const kalanTxt = hedefVarMi ? `<div class="ssm-kanal-kalan">Kalan ${LT(Math.max(0, hedef-satis))}</div>` : '';
+  const iconHtml = icon ? `<span class="ssm-kanal-icon" style="background:${renkSoft};color:${renk};"><i class="fa-solid ${icon}" aria-hidden="true"></i></span>` : '';
+  return `<div class="ssm-kanal-row">
+    <div class="ssm-kanal-top"><span class="lbl">${iconHtml}${escapeHtml(label)}</span><span class="val">${valTxt}</span></div>
+    <div class="ssm-kanal-track"><div class="ssm-kanal-fill" style="width:${pct.toFixed(1)}%;background:${renk};"></div></div>
+    ${kalanTxt}
+  </div>`;
+}
+
+// Açık/Kapalı Kanal LT özeti — hem Sell Out Raporu'nun kendi üst KPI şeridi hem Genel Bakış'ın
+// "Güncel Durum" kartı bu TEK fonksiyonu çağırır; böylece iki yerde ayrı hesap yapılıp
+// aralarında tutarsızlık (farklı formül/eksik hedef verisi vb.) oluşma riski kalmaz.
+// NOT: `report` zaten applySellOutHedef uygulanmış (acikHedef/kapaliHedef dolu) olmalı —
+// bu fonksiyon sadece o veriden özet çıkarır, hedef eşlemesini kendisi yapmaz (arşiv
+// görüntülemede hedefler arşivleme anındaki değerle donmuş kalmalı, güncel hedefle ezilmemeli).
+function sellOutKanalOzeti(report){
+  if(!report || !Array.isArray(report.temsilciler)){
+    return {toplamAcikLitre:0, toplamKapaliLitre:0, acikKalan:0, kapaliKalan:0, gerceklesmeOrani:null, toplamLitre:0};
+  }
+  const toplamAcikLitre = report.temsilciler.reduce((a,t)=>a+t.acikLitre,0);
+  const toplamKapaliLitre = report.temsilciler.reduce((a,t)=>a+t.kapaliLitre,0);
+  const toplamAcikHedef = report.temsilciler.reduce((a,t)=>a+t.acikHedef,0);
+  const toplamKapaliHedef = report.temsilciler.reduce((a,t)=>a+t.kapaliHedef,0);
+  const acikKalan = Math.max(0, toplamAcikHedef - toplamAcikLitre);
+  const kapaliKalan = Math.max(0, toplamKapaliHedef - toplamKapaliLitre);
+  const toplamHedef = toplamAcikHedef + toplamKapaliHedef;
+  const gerceklesmeOrani = toplamHedef>0 ? ((toplamAcikLitre+toplamKapaliLitre)/toplamHedef*100) : null;
+  return {toplamAcikLitre, toplamKapaliLitre, acikKalan, kapaliKalan, gerceklesmeOrani, toplamLitre: report.toplamLitre||0};
+}
