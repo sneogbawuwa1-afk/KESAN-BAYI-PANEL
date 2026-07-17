@@ -1577,15 +1577,35 @@ function yuklemeArsivReviver(key, value){
   }
   return value;
 }
+// KRİTİK DÜZELTME (kullanıcı bildirimi, 17.07.2026): Bu kayıt önceden TEK denemeyle, sabit 15 sn
+// zaman aşımıyla çalışıyordu ve başarısız olduğunda SADECE console.error'a yazıyordu — kullanıcı
+// arayüzünde hiçbir uyarı göstermiyordu. Sonuç: ağ geçici olarak yavaşladığında/hıçkırdığında bu
+// arşiv sessizce buluta kaydedilmiyordu, kullanıcı bunu fark edemiyordu ("yükleme raporunu buluta
+// arşivlemiyor" şikayetinin kök nedeni). Artık: 1) ilk deneme başarısız olursa 2 sn sonra, daha
+// uzun bir zaman aşımıyla (30 sn) BİR KEZ daha denenir; 2) bu ikinci deneme de başarısız olursa
+// çağıran taraf (yuklemeRaporlariniArsivineKaydet) kullanıcıya AÇIK bir uyarı gösterir.
 async function saveYuklemeArsivToCloud(arsiv){
   if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
-  try{
+  async function denemeYap(timeoutMs){
     const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${YUKLEME_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
       method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
-    });
+    }, timeoutMs);
     if(!res.ok) throw new Error('HTTP '+res.status);
+  }
+  try{
+    await denemeYap(15000);
     return {ok:true};
-  }catch(err){ console.error('Yükleme Raporu arşivi buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+  }catch(ilkHata){
+    console.error('Yükleme Raporu arşivi buluta kaydedilemedi (1. deneme), tekrar denenecek:', ilkHata);
+    await new Promise(r=> setTimeout(r, 2000));
+    try{
+      await denemeYap(30000);
+      return {ok:true};
+    }catch(ikinciHata){
+      console.error('Yükleme Raporu arşivi buluta kaydedilemedi (2. deneme, vazgeçildi):', ikinciHata);
+      return {ok:false, reason:ikinciHata.message};
+    }
+  }
 }
 async function loadYuklemeArsivFromCloud(){
   if(!cloudEnabled()) return null;
@@ -1747,8 +1767,17 @@ async function yuklemeRaporlariniArsivineKaydet(sonuc){
     arsiv[gunKey] = Object.assign({}, yuklemeGununuArsivIleBirlestir(sonuc.gunler[gunKey], arsiv[gunKey]), {kayitZamani: simdiIso});
   });
   state.yuklemeArsivCache = arsiv;
+  state.yuklemeRaporuBulutHatasi = false;
   if(cloudEnabled()){
-    await saveYuklemeArsivToCloud(arsiv);
+    const sonuc = await saveYuklemeArsivToCloud(arsiv);
+    if(!sonuc.ok){
+      // ARTIK SESSİZ DEĞİL (kullanıcı bildirimi, 17.07.2026): 2 deneme de başarısız olduysa, ana
+      // rapordaki bulut kayıt hatasıyla AYNI ciddiyette açıkça uyarılır — aksi halde kullanıcı bu
+      // günün ST Tahsilat/Litre verisinin buluta hiç ulaşmadığını (ve başka cihazda görünmeyeceğini)
+      // fark edemez.
+      state.yuklemeRaporuBulutHatasi = true;
+      alert('UYARI: Yükleme Raporu (ST Tahsilat/Litre) arşivi buluta kaydedilemedi — sadece bu cihazda kaldı, diğer cihazlarda görünmeyecek ve sayfa verisi temizlenirse kaybolabilir.\n\nHata: ' + sonuc.reason + '\n\nLütfen internet bağlantınızı kontrol edip "Raporu Oluştur"a tekrar basın.');
+    }
   }
   await saveYuklemeArsivToLocal(arsiv);
 }
@@ -1794,6 +1823,12 @@ function renderYuklemeArsivBilgi(){
   const gunSayisi = Object.keys(state.yuklemeArsivCache||{}).length;
   if(!cloudEnabled()){
     el.textContent = '⚠️ Bulut (Firebase) yapılandırılmamış; bu arşiv yalnızca bu cihazda (tarayıcı hafızasında) saklanıyor.';
+    return;
+  }
+  // Bir önceki kayıt denemesi (2 tekrar dahil) buluta ulaşamadıysa, sekme her açıldığında bu
+  // kalıcı uyarı görünür kalır — kullanıcı "Raporu Oluştur"a tekrar basana kadar unutulmaz.
+  if(state.yuklemeRaporuBulutHatasi){
+    el.textContent = '❌ SON YÜKLEME BULUTA KAYDEDİLEMEDİ — bu cihazda kaldı, diğer cihazlarda görünmüyor. Lütfen bağlantınızı kontrol edip "Raporu Oluştur"a tekrar basın.';
     return;
   }
   el.textContent = gunSayisi
