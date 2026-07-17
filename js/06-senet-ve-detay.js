@@ -2589,7 +2589,14 @@ async function computeTahsilatVerimlilikAy(report, ayKey, zorla){
   });
 
   const cariDegisimVarMi = !!baslangicMap;
-  const musteriKodlari = new Set([...bitisMap.keys(), ...ayTahsilatMap.keys()]);
+  // KRİTİK DÜZELTME (denetim bulgusu #5 — kullanıcı onayıyla düzeltildi): Ay başında (baslangicMap)
+  // borcu olup, ay sonu snapshot'ında (bitisMap) VE bu ayki tahsilat kayıtlarında (ayTahsilatMap)
+  // hiç görünmeyen bir müşteri — ör. kodu değişmiş, hesabı kapanmış/birleşmiş, ya da tam bu tarih
+  // aralığının dışında (ama yine de ayGunAraligi içinde) tek bir işlemle kapanmış bir müşteri —
+  // eskiden bu Set'e hiç girmiyordu ve "ay başı bakiyesi" toplamından tamamen düşüyordu; bu da
+  // toplamKalanBorcBaslangic'i (ve dolayısıyla cariDegisim'i) olduğundan düşük gösteriyordu.
+  // ÇÖZÜM: baslangicMap'teki müşteri kodları da birleşime dahil edilir.
+  const musteriKodlari = new Set([...bitisMap.keys(), ...ayTahsilatMap.keys(), ...(baslangicMap ? baslangicMap.keys() : [])]);
   const map = new Map();
   musteriKodlari.forEach(kod=>{
     const bitisM = bitisMap.get(kod);

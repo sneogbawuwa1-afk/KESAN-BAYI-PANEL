@@ -394,14 +394,28 @@ function renderSupheliHukukiDahaFazlaBtn(gosterilenSayi, toplamSayi){
 // tutar daha gerçekçi bir tahsilat hedefi tabanı oluşturuyor.
 // Yani hedef, o temsilcinin GERÇEK cari yaşlandırması ve GERÇEK fatura hacmine göre kendiliğinden
 // değişir; şirketin/kullanıcının uydurduğu sabit bir sayı değildir.
-function computeOtomatikTemsilciHedefi(musterilerBuTemsilci, otomatikKarsilikOranlari, gerceklesmeOrani, ayFaturaMap){
+function computeOtomatikTemsilciHedefi(musterilerBuTemsilci, otomatikKarsilikOranlari, gerceklesmeOrani, ayFaturaMap, buAy){
   let tahsilEdilebilirBakiye = 0;
   let faturaTutari = 0;
   musterilerBuTemsilci.forEach(m=>{
     const g = m.avgVadeGun||0;
     const idx = AGING_BUCKETS.findIndex(b=>b.test(g));
     const karsilikOrani = (idx>=0 && otomatikKarsilikOranlari[idx]) ? otomatikKarsilikOranlari[idx].oran : 0;
-    tahsilEdilebilirBakiye += (m.kalanBorc||0) * (1 - karsilikOrani/100);
+
+    // ÇİFT SAYIM DÜZELTMESİ (denetim bulgusu #3 — kullanıcı onayıyla düzeltildi): m.kalanBorc,
+    // müşterinin GÜNCEL açık bakiyesidir ve bu ay kesilip henüz ödenmemiş faturaları da İÇİNDE
+    // barındırır (Kalemler'den gelir). Aşağıda ayrıca eklenen ayFaturaMap (bu ayki Fatura
+    // Dökümü'nden TÜM fatura tutarı — ödenmiş/ödenmemiş fark etmeksizin) ile bu tutar iki kez
+    // sayılmasın diye, bu ayın faturalarının kalan bakiyesi burada (yaşlandırma bazlı bakiyeden)
+    // HARİÇ tutulur — bu ayki faturalanan tutarın hedefe katkısı SADECE aşağıdaki
+    // faturaTutari*oran teriminden gelir.
+    const buAyKalanBorc = buAy ? (m.invoices||[]).reduce((a,inv)=>{
+      const gk = inv.faturaTarihi instanceof Date ? dateKeyLocal(inv.faturaTarihi) : null;
+      if(gk && gk.slice(0,7)===buAy) return a + (inv.kalanBorc||0);
+      return a;
+    }, 0) : 0;
+    const eskiBakiye = (m.kalanBorc||0) - buAyKalanBorc;
+    tahsilEdilebilirBakiye += eskiBakiye * (1 - karsilikOrani/100);
     faturaTutari += (ayFaturaMap && ayFaturaMap.get(m.musteri)) || 0;
   });
   const oran = gerceklesmeOrani!=null ? gerceklesmeOrani : 0.7; // geçmiş veri yoksa temkinli varsayılan
@@ -470,7 +484,7 @@ async function computeTemsilciKarnesi(report, zorla){
     const aging = agingByRep.get(r.temsilci) || {agirlikliVade:0, agirlikBorc:0, riskliSayisi:0, riskliMusteriListe:[]};
     const ortVade = aging.agirlikBorc!==0 ? Math.round(aging.agirlikliVade/aging.agirlikBorc) : null;
     const musterileri = musterilerByRep.get(r.temsilci) || [];
-    const hedef = computeOtomatikTemsilciHedefi(musterileri, otomatikKarsilikOranlari, gerceklesmeOrani, ayFaturaMap);
+    const hedef = computeOtomatikTemsilciHedefi(musterileri, otomatikKarsilikOranlari, gerceklesmeOrani, ayFaturaMap, buAy);
     const gerceklesme = hedef>0 ? (r.toplamTahsilat/hedef*100) : null;
     return Object.assign({}, r, {ortVade, riskliMusteriSayisi:aging.riskliSayisi, riskliMusteriListe:aging.riskliMusteriListe, hedef, gerceklesme});
   }).sort((a,b)=>(b.gerceklesme||0)-(a.gerceklesme||0));

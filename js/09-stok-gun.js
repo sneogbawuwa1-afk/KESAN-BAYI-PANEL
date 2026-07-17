@@ -689,7 +689,19 @@ function computeStokGunRaporu(){
       }
       const haftaLitreSellOut = oran*kalanSellOut;
       const haftaLitreModernKanal = oran*kalanModernKanal;
-      return (haftaLitreSellOut + haftaLitreModernKanal)/7;
+      const hedefTemelliHiz = (haftaLitreSellOut + haftaLitreModernKanal)/7;
+      // KRİTİK DÜZELTME (denetim bulgusu #6 — kullanıcı onayıyla düzeltildi): "kalan hedef"
+      // (kalanSellOut/kalanModernKanal) o kanal için hedef hiç girilmemişse VEYA bu ayki satış
+      // zaten ürünün payına düşen hedefi karşılamış/aşmışsa sıfıra düşer — bu durumda hedef
+      // temelli hız da 0 çıkıp STOK GÜNÜ simülasyonunun bu ürünü "artık satılmıyormuş" gibi
+      // ele almasına, dolayısıyla gerçekte hızlı satan/riskli bir üründe bile yanıltıcı bir
+      // "~400 gün stok var" güveni vermesine yol açıyordu (ürün gerçekte satılmaya devam
+      // ediyor, sadece hedef "kotası" dolmuş sayılıyor). "Kalan Hedef"/"Gerekli Litre" (sipariş
+      // ihtiyacı) BURADAN ETKİLENMEZ, hâlâ doğru şekilde hedef karşılandıysa 0 kalır — sadece
+      // STOK GÜNÜ hesabında kullanılan tüketim hızı için, hedef temelli hız 0 (veya negatif)
+      // çıktığında, ölü ürün istisnasıyla birebir aynı, zaten kanıtlanmış formülle ürünün
+      // GERÇEK geçmiş haftalık hızına geri dönülür.
+      return hedefTemelliHiz > 0 ? hedefTemelliHiz : haftaDagilimi.litre[i]/7;
     });
     const gunlukHiz = haftaGunlukHizlari[bugunHaftaIndex] || 0; // tabloda "bugünün hızı" olarak gösterilmeye devam eder
     const gunlukMiktar = litreMiktarOrani>0 ? (gunlukHiz/litreMiktarOrani) : null;

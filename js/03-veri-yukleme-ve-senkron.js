@@ -1278,11 +1278,23 @@ function buildReport(files, musteriMasterMap){
   const hedefTahsilatGunKey = hedefTahsilatGunKeyTumYil;
   const efektifGunMap = new Map();
   if(hedefTahsilatGunKey) efektifGunMap.set(hedefTahsilatGunKey, tahsilatArsiv); // zaten "dün" gününe göre hesaplanmış
+  // KRİTİK DÜZELTME (denetim bulgusu #1): Aynı güne (gk) birden fazla İade Grubu kaydı denk
+  // gelirse, ESKİ kod her kaydı TEK TEK işleyip her seferinde "bu güne ait FaturaIade kayıtlarını
+  // temizle, yeni kaydı ekle" yapıyordu — bu da o günün SONUNCU İade kaydı hariç, AYNI DÖNGÜ
+  // içinde daha önce eklenmiş İade kayıtlarını da silip Toplam Tahsilat'ı (ve dolayısıyla Genel
+  // KPI/Sevk Özeti'ni) sessizce düşük gösteriyordu. ÇÖZÜM: önce aynı güne denk gelen TÜM İade
+  // kayıtlarını grupla, sonra o günün eski FaturaIade kayıtlarını BİR KEZ temizleyip hepsini
+  // birlikte ekle.
+  const iadeGunGruplari = new Map(); // gk -> [r, r, ...]
   bozukIadeTahsilat.forEach(r=>{
     const gk = r.belgeTarihi ? dateKeyLocal(new Date(r.belgeTarihi)) : null;
     if(!gk) return;
+    if(!iadeGunGruplari.has(gk)) iadeGunGruplari.set(gk, []);
+    iadeGunGruplari.get(gk).push(r);
+  });
+  iadeGunGruplari.forEach((kayitlar, gk)=>{
     const mevcut = (efektifGunMap.get(gk) || []).filter(x=>x.formatKaynagi!=='FaturaIade');
-    efektifGunMap.set(gk, mevcut.concat([r]));
+    efektifGunMap.set(gk, mevcut.concat(kayitlar));
   });
 
   const tahsilatKaynakMap = new Map(); // musteri -> {normal, bozukIade, depozito, hakedis}
