@@ -1,4 +1,3 @@
-
 // Geliştirme günlükleri (console.warn) tek bir bayrağın ardındadır: üretimde DEBUG=false ile
 // konsol gürültüsü kapatılır. Gerçek HATALAR (console.error) her zaman görünür kalır —
 // bunlar teşhis için üretimde de gereklidir, bilerek sarmalanmamıştır.
@@ -1003,6 +1002,52 @@ function cekSenetArsiviniBirlestir(mevcutArsiv, yeniRows){
   return {arsiv, eksikKalanlar};
 }
 
+// ÇEK/SENET KARARI SONRASI RAPORU GÜVENLE GÜNCELLE (kritik hata düzeltmesi): Önceden çek/senet
+// "Tahsil Et"/"İptal" kararından sonra TÜM rapor `buildReport(state.files, state.musteriMasterMap)`
+// ile YENİDEN İNŞA ediliyordu. Ama uygulama buluttan hazır bir rapor açtığında (kullanıcının normal
+// günlük kullanımı — artık Kalemler/Cari Ekstre'yi her gün yeniden yüklemesi ZORUNLU değil, bkz.
+// ilgili mimari karar), state.files BOŞTUR (yalnızca state.report doludur, dosyalardan değil
+// doğrudan buluttan gelmiştir). buildReport(state.files,...) bu durumda BOŞ dosyalarla çalışıp
+// TÜM müşterilerin kalan borcunu/bakiyesini SIFIRLIYORDU — kullanıcı raporunun tamamı bozuluyordu.
+// Bu fonksiyon, tam yeniden inşa YERİNE, state.cekSenetArsivi'ni okuyup MEVCUT state.report
+// üzerindeki (kalan borç/bakiye gibi diğer TÜM alanlara dokunmadan) yalnızca her müşterinin
+// cekSenet/cekSenetDetay/toplamRisk alanlarını günceller. Bu, buildReport'un ilgili bölümüyle
+// (bkz. 03-veri-yukleme-ve-senkron.js, "ÇEK/SENET — KALICI ARŞİVDEN") AYNI mantığı uygular.
+function cekSenetKararlariniMevcutRaporaUygula(report){
+  if(!report || !Array.isArray(report.musteriler)) return report;
+  const cekSenetMap = new Map();
+  const cekSenetDetayMap = new Map();
+  Object.entries(state.cekSenetArsivi||{}).forEach(([anahtar, r])=>{
+    const musteri = r.musteriKod;
+    if(!musteri) return;
+    if(r.durum !== 'tahsilEdildi'){
+      cekSenetMap.set(musteri, (cekSenetMap.get(musteri)||0) + r.tutar);
+    }
+    if(!cekSenetDetayMap.has(musteri)) cekSenetDetayMap.set(musteri, []);
+    cekSenetDetayMap.get(musteri).push({
+      no: r.no, tip: r.odemeTipiHam, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru,
+      tahsilEdildiMi: r.durum === 'tahsilEdildi', senetAnahtari: anahtar,
+      vade: r.vadeTarihi ? new Date(r.vadeTarihi) : null, belgeTarihi: r.belgeTarihi ? new Date(r.belgeTarihi) : null,
+    });
+  });
+  report.musteriler.forEach(m=>{
+    const eskiCekSenet = m.cekSenet||0;
+    m.cekSenet = cekSenetMap.get(m.musteri)||0;
+    m.cekSenetDetay = cekSenetDetayMap.get(m.musteri)||[];
+    // toplamRisk = kalanBorc + cekSenet — kalanBorc'a DOKUNULMUYOR, sadece cekSenet'teki
+    // değişim kadar toplamRisk güncelleniyor (buildReport'taki formülle birebir tutarlı).
+    m.toplamRisk = (m.toplamRisk||0) - eskiCekSenet + m.cekSenet;
+  });
+  // Bakiyesiz (Kalemler'de kaydı olmayan) müşteriler için de aynı güncelleme.
+  if(Array.isArray(report.bakiyesiz)){
+    report.bakiyesiz.forEach(b=>{
+      b.cekSenet = cekSenetMap.get(b.musteri)||0;
+      b.cekSenetDetay = cekSenetDetayMap.get(b.musteri)||[];
+    });
+  }
+  return report;
+}
+
 async function cekSenetArsiviniKaydet(arsiv){
   const ok = await idbSet(CEK_SENET_ARSIV_LOCAL_KEY, arsiv);
   if(!ok) console.error('Çek/Senet arşivi cihaza kaydedilemedi.');
@@ -1311,5 +1356,3 @@ async function devirBakiyeArsiviniOku(){
   }
   try{ return (await idbGet(DEVIR_BAKIYE_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
 }
-
-

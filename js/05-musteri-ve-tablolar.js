@@ -300,12 +300,19 @@ document.getElementById('cekSenetModalTbody').addEventListener('click', async (e
   await cekSenetArsiviniKaydet(state.cekSenetArsivi);
   state.cekSenetEksikKalanlar = (state.cekSenetEksikKalanlar||[]).filter(k=>k.anahtar!==anahtar);
   if(state.report){
-    // DÜZELTME: state.report yeniden kuruluyordu ama renderReport() ÇAĞRILMIYORDU — bu yüzden
-    // Tahsil Edildi/İptal kararı, açık olan bu popup'ta görünse de Nokta Detay kartları, Genel
-    // Bakış KPI'ları ve Trend Analizi gibi diğer TÜM ekranlar eski (karar öncesi) veriyle
-    // kalmaya devam ediyordu. renderReport, uygulamadaki her görünümü bu güncel rapora göre
-    // yeniden çizer — eksik-onay modalindeki eşdeğer handler'la artık tutarlı.
-    state.report = buildReport(state.files, state.musteriMasterMap);
+    // KRİTİK HATA DÜZELTMESİ: Önceden burada KOŞULSUZ buildReport(state.files, ...) çağrılıp TÜM
+    // rapor yeniden inşa ediliyordu. Ama kullanıcı Kalemler/Cari Ekstre'yi HER GÜN yeniden yüklemek
+    // ZORUNDA DEĞİL (bkz. ilgili mimari karar) — uygulama buluttan hazır bir rapor açtığında
+    // state.files TAMAMEN BOŞTUR (yalnızca state.report doludur). buildReport(state.files,...) bu
+    // durumda boş dosyalarla çalışıp TÜM müşterilerin kalan borcunu/bakiyesini SIFIRLIYORDU.
+    // Artık: state.files gerçekten doluysa (kullanıcı bu oturumda dosya yüklediyse) eskisi gibi tam
+    // yeniden inşa edilir; boşsa (buluttan gelen hazır rapor durumu — pratikte çok daha sık) mevcut
+    // rapor YENİDEN İNŞA EDİLMEZ, yalnızca çek/senet alanları (cekSenet/cekSenetDetay/toplamRisk)
+    // güncellenir — kalan borç/bakiye gibi diğer TÜM alanlar dokunulmadan korunur.
+    const filesGercektenDoluMu = !!(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length);
+    state.report = filesGercektenDoluMu
+      ? buildReport(state.files, state.musteriMasterMap)
+      : cekSenetKararlariniMevcutRaporaUygula(state.report);
     renderReport(state.report);
   }
   const mevcut = state.cekSenetModalMevcut;
@@ -375,8 +382,14 @@ document.getElementById('cekSenetEksikModalTbody').addEventListener('click', asy
   if(satir) satir.remove();
   if(!state.cekSenetEksikKalanlar.length) cekSenetEksikModalKapat();
   // Karar, müşteri kartındaki Toplam Risk/Alınan Tahsilat'ı etkilediği için raporu yeniden kur.
+  // KRİTİK HATA DÜZELTMESİ: bkz. yukarıdaki cekSenetModalTbody handler'ındaki aynı not —
+  // state.files boşken (buluttan gelen hazır rapor durumu) koşulsuz buildReport çağrısı TÜM
+  // müşterilerin bakiyesini sıfırlıyordu. Aynı güvenli düzeltme burada da uygulanır.
   if(state.report){
-    state.report = buildReport(state.files, state.musteriMasterMap);
+    const filesGercektenDoluMu = !!(state.files && state.files.kalemler && state.files.kalemler.data && state.files.kalemler.data.length);
+    state.report = filesGercektenDoluMu
+      ? buildReport(state.files, state.musteriMasterMap)
+      : cekSenetKararlariniMevcutRaporaUygula(state.report);
     renderReport(state.report);
   }
 });

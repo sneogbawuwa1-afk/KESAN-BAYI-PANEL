@@ -73,7 +73,7 @@ function buildSenetHTML(opts){
   const kesideTarihi = turkiyeBugun();
   return `<div class="senet-sayfa"><div class="senet-cerceve"><div class="senet-cerceve-inner">
     <div class="senet-ust">
-      <div class="senet-baslik">BONO<small>Emre Muharrer Senet</small></div>
+      <div class="senet-baslik">BONO</div>
       <div class="senet-tutar-damga">
         <div class="senet-tutar-damga-label">Türk Lirası</div>
         <div class="senet-tutar-damga-deger">${tutarRakamSenet(opts.tutar)}</div>
@@ -861,13 +861,18 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
     .concat(tahsilatDokumuHakedisleri);
   const toplamHakedisTahsilat = hakedisTahsilatlari.reduce((a,b)=>a+(b.tutar||0),0);
 
+  // KULLANICI KARARI (düzeltme, geri alındı): Tahsil edilmiş çek/senedin Aylık Trend Analizi'ndeki
+  // pencereye (Son 3/6/12 Ay) girip girmediği belgeTarihi'ne (çekin/senedin KESİLDİĞİ tarih) göre
+  // DEĞİL, vadeTarihi'ne (ÖDENMESİ gereken tarih) göre belirlenir — bu, önceden böyle çalışıyordu
+  // ve kullanıcı isteğiyle bu davranışa geri dönülmüştür. Örnek: 18.06.2026'da kesilmiş ama vadesi
+  // 15.07.2026 olan bir çek, "Son 3 Ay" penceresinde vade tarihine göre değerlendirilir.
   const tahsilEdilenCekSenetler = Object.values(state.cekSenetArsivi||{})
     .filter(r=>{
-      if(r.musteriKod!==musteri || r.durum!=='tahsilEdildi' || !r.belgeTarihi) return false;
-      const t = new Date(r.belgeTarihi).getTime();
+      if(r.musteriKod!==musteri || r.durum!=='tahsilEdildi' || !r.vadeTarihi) return false;
+      const t = new Date(r.vadeTarihi).getTime();
       return t>=pencereBaslangic && t<=simdi;
     })
-    .map(r=>({musteri: r.musteriKod, belgeTarihi: r.belgeTarihi, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru, __cekSenet: true}));
+    .map(r=>({musteri: r.musteriKod, belgeTarihi: r.vadeTarihi, tutar: r.tutar, tahsilatTuru: r.tahsilatTuru, __cekSenet: true}));
   const toplamCekSenetTahsilat = tahsilEdilenCekSenetler.reduce((a,b)=>a+(b.tutar||0),0);
 
   // İADE GRUBU (Bozuk/Sağlam/Depozito İade Faturası) — AYRI KAYNAK: Fatura Kontrol'deki
@@ -977,8 +982,13 @@ async function computeMusteriAylikOzetPeriyot(musteri, ayPenceresi){
     const tahsilatOncesiHakedis = (birlesik.bayiHakedisArsiv || [])
       .filter(r=> r.musteri===musteri && r.tahsilatTarihi && new Date(r.tahsilatTarihi).getTime() < pencereBaslangic)
       .reduce((a,b)=>a+(b.tutar||0), 0) + tahsilatOncesiHakedisDokum;
+    // Yukarıdaki (pencere içi) çek/senet filtresiyle TUTARLI olması için burada da vadeTarihi
+    // kullanılır (kullanıcı kararı — bkz. yukarıdaki tahsilEdilenCekSenetler notu). Aynı kayıt
+    // burada "belgeTarihi'ne göre pencere öncesi", yukarıda "vadeTarihi'ne göre pencere içi"
+    // sayılırsa, bir tahsilat ne açılış bakiyesine ne pencere içi tahsilata dahil olmaz ya da
+    // her ikisine birden girip çift sayılabilirdi.
     const tahsilatOncesiCekSenet = Object.values(state.cekSenetArsivi||{})
-      .filter(r=> r.musteriKod===musteri && r.durum==='tahsilEdildi' && r.belgeTarihi && new Date(r.belgeTarihi).getTime() < pencereBaslangic)
+      .filter(r=> r.musteriKod===musteri && r.durum==='tahsilEdildi' && r.vadeTarihi && new Date(r.vadeTarihi).getTime() < pencereBaslangic)
       .reduce((a,b)=>a+(b.tutar||0), 0);
     const tahsilatOncesiIade = (birlesik.tahsilatArsiv || [])
       .filter(r=> r.musteri===musteri && r.formatKaynagi==='FaturaIade' && r.belgeTarihi && new Date(r.belgeTarihi).getTime() < pencereBaslangic)
@@ -1375,9 +1385,11 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
   const yuklemeParsed = (yuklemeRows||[]).map(r=>({
     musteriNo: yuklemeKod(r['Müşteri Numarası']),
     // musteriAdi ve urunAdi: sadece "İptal Siparişler" listesinde gösterim amaçlı (kullanıcı
-    // isteği, 17.07.2026) — litre/tahsilat hesaplamalarını etkilemez.
+    // isteği, 17.07.2026) — litre/tahsilat hesaplamalarını etkilemez. urunMiktar da aynı şekilde
+    // yalnızca "Sipariş Ürün Detayı" popup'ında gösterim amaçlıdır (kullanıcı isteği, 18.07.2026).
     musteriAdi: String(r['Müşteri Adı']||'').trim(),
     urunAdi: String(r['Ürün Adı']||'').trim(),
+    urunMiktar: yuklemeNumber(r['Miktar Total']),
     litre: yuklemeNumber(r['Litre Total']),
     // Not: excelDateToJSArti1Gun kullanılır — bkz. yukarıdaki belgeTarihi notu (saat dilimi kaynaklı
     // 1 günlük kaymayı telafi eder).
@@ -1451,7 +1463,7 @@ function buildYuklemeRaporu(tahsilatRows, yuklemeRows){
       const kayit = iptalMap.get(key);
       kayit.litre += r.litre;
       kayit.urunSayisi += 1;
-      if(r.urunAdi) kayit.urunler.push({ad: r.urunAdi, litre: r.litre});
+      if(r.urunAdi) kayit.urunler.push({ad: r.urunAdi, litre: r.litre, miktar: r.urunMiktar});
     });
     const iptalSiparisler = Array.from(iptalMap.values()).sort((a,b)=> b.litre-a.litre);
 
@@ -2053,11 +2065,15 @@ function yuklemeIptalUrunModalAc(kayit){
     escapeHtml(kayit.musteriAdi) + ' · ' + (kayit.teslimStatusu==='Rejected' ? 'Reddedildi' : 'Teslim Edilmedi')
     + ' · Sipariş ' + (kayit.siparisKodu||'—');
   const urunler = (kayit.urunler||[]).slice().sort((a,b)=> b.litre-a.litre);
+  // MİKTAR KOLONU (kullanıcı isteği, 18.07.2026): Yükleme Raporu'ndaki "Miktar Total" kolonundan
+  // gelir (bkz. yuklemeParsed.urunMiktar) — ürünün adet/koli cinsinden miktarını, Litre'nin
+  // yanında ayrı bir sütunda gösterir.
+  const toplamMiktar = urunler.reduce((a,u)=>a+(u.miktar||0), 0);
   document.getElementById('yuklemeIptalUrunModalTbody').innerHTML = urunler.map(u=>`
-    <tr><td>${escapeHtml(u.ad)}</td><td class="num">${YUKLEME_LT2(u.litre)} Lt</td></tr>`).join('')
-    || '<tr><td colspan="2" class="empty-state">Ürün bilgisi yok</td></tr>';
+    <tr><td>${escapeHtml(u.ad)}</td><td class="num">${u.miktar!=null ? u.miktar.toLocaleString('tr-TR') : '—'}</td><td class="num">${YUKLEME_LT2(u.litre)} Lt</td></tr>`).join('')
+    || '<tr><td colspan="3" class="empty-state">Ürün bilgisi yok</td></tr>';
   document.getElementById('yuklemeIptalUrunModalTfoot').innerHTML =
-    `<tr><td><b>Toplam</b></td><td class="num num-strong">${YUKLEME_LT2(kayit.litre)} Lt</td></tr>`;
+    `<tr><td><b>Toplam</b></td><td class="num num-strong">${toplamMiktar.toLocaleString('tr-TR')}</td><td class="num num-strong">${YUKLEME_LT2(kayit.litre)} Lt</td></tr>`;
   document.getElementById('yuklemeIptalUrunModalOverlay').classList.add('open');
 }
 function yuklemeIptalUrunModalKapat(){
