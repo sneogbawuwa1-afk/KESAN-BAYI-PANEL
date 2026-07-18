@@ -1125,6 +1125,14 @@ function tahsilatSatirlariniNormalizeEt(rows){
     const odemeTipiHam = String(r['Ödeme Tipi']||'').trim();
     // ÇEK/SENET ES GEÇİLİR (kullanıcı kuralı) — bu veri artık ayrı Çek/Senet Riski modülünde.
     if(odemeTipiHam === 'Alınan Çek' || odemeTipiHam === 'Alınan Senet') return;
+    // EK KURAL (kullanıcı isteği, 18.07.2026): Ödeme Tipi 'Banka havalesi' (veya başka bir tip)
+    // olsa bile, satırda "Çek Senet Numarası" doluysa bu kayıt yine es geçilir — bu, çekin/senedin
+    // tahsil edildiğinde SAP'ın ürettiği bir kapama kaydıdır ve zaten Çek/Senet Riski modülünde
+    // "Tahsil Et" ile ayrıca (ve doğru vade tarihiyle) işleniyor. Es geçilmezse aynı tahsilat hem
+    // buradan hem çek/senet modülünden gelip MÜKERRER sayılırdı (gerçek örnek: Belge No 1501345481,
+    // Ödeme Tipi='Banka havalesi', Çek Senet Numarası='0254813', Tutar=-340.000 — bu, Express
+    // Market'in 0254813 numaralı çekinin tahsilat kaydıyla birebir aynı tutar).
+    if(String(r['Çek Senet Numarası']||'').trim()) return;
     const belgeNo = String(r['Belge Numarası']||'').trim();
     if(!belgeNo) return; // belge no'suz satır güvenilir şekilde yönetilemez, atlanır
     const belgeTuru = String(r['Belge Türü']||'').trim();
