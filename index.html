@@ -221,6 +221,7 @@
           <button class="sb-link sb-nav-link" id="sbbtn-nakitAkis" data-view="nakitAkis" type="button"><i class="fa-solid fa-money-bill sb-ic" aria-hidden="true"></i> <span class="sb-label">Nakit Akış Tahmini</span> </button>
           <button class="sb-link sb-nav-link" id="sbbtn-supheliAlacak" data-view="supheliAlacak" type="button"><i class="fa-solid fa-triangle-exclamation sb-ic" aria-hidden="true"></i> <span class="sb-label">Şüpheli Alacak</span> </button>
           <button class="sb-link sb-nav-link" id="sbbtn-dsoTrend" data-view="dsoTrend" type="button"><i class="fa-solid fa-chart-line sb-ic" aria-hidden="true"></i> <span class="sb-label">DSO Trendi</span> </button>
+          <button class="sb-link sb-nav-link" id="sbbtn-prim" data-view="prim" type="button"><i class="fa-solid fa-percent sb-ic" aria-hidden="true"></i> <span class="sb-label">Prim</span> </button>
           <button class="sb-link sb-nav-link" id="sbbtn-yonetimOzeti" data-view="yonetimOzeti" type="button"><i class="fa-solid fa-folder sb-ic" aria-hidden="true"></i> <span class="sb-label">Yönetim Özeti</span> </button>
         </div>
       </div>
@@ -627,6 +628,7 @@
       <button class="tab-btn dropdown-item" id="tabbtn-nakitAkis" data-view="nakitAkis" type="button" role="tab" aria-selected="false" aria-controls="nakitAkisView"><i class="fa-solid fa-money-bill" aria-hidden="true"></i> Nakit Akış Tahmini</button>
       <button class="tab-btn dropdown-item" id="tabbtn-supheliAlacak" data-view="supheliAlacak" type="button" role="tab" aria-selected="false" aria-controls="supheliAlacakView"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Şüpheli Alacak</button>
       <button class="tab-btn dropdown-item" id="tabbtn-dsoTrend" data-view="dsoTrend" type="button" role="tab" aria-selected="false" aria-controls="dsoTrendView"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> DSO Trendi</button>
+      <button class="tab-btn dropdown-item" id="tabbtn-prim" data-view="prim" type="button" role="tab" aria-selected="false" aria-controls="primView"><i class="fa-solid fa-percent" aria-hidden="true"></i> Prim</button>
       <button class="tab-btn dropdown-item" id="tabbtn-yonetimOzeti" data-view="yonetimOzeti" type="button" role="tab" aria-selected="false" aria-controls="yonetimOzetiView"><i class="fa-solid fa-folder" aria-hidden="true"></i> Yönetim Özeti</button>
     </div>
 
@@ -1038,6 +1040,21 @@
         </div>
       </div>
 
+    </div>
+
+    <div id="primView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-prim">
+      <div class="panel" id="primPanel">
+        <div class="panel-head panel-head-navy-hero">
+          <div class="yukleme-head-left">
+            <div class="yukleme-head-badge"><i class="fa-solid fa-percent" aria-hidden="true"></i></div>
+            <div><h2>Prim</h2><span class="count" id="primCount"></span></div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="gb-kpi-grid" id="primKpiGrid"></div>
+          <div id="primTbody"></div>
+        </div>
+      </div>
     </div>
 
     <div id="bayiHakedisView" style="display:none;" role="tabpanel" aria-labelledby="tabbtn-bayiHakedis">
@@ -2154,6 +2171,7 @@
 <script defer src="js/08-kanal-raporlari.js"></script>
 <script defer src="js/09-stok-gun.js"></script>
 <script defer src="js/10-uygulama-ve-gorunumler.js"></script>
+<script defer src="js/11-prim.js"></script>
 <button type="button" id="scrollTopBtn" class="scroll-top-btn" title="Yukarı çık" aria-label="Sayfanın başına dön">↑</button>
 <script>
 (function(){

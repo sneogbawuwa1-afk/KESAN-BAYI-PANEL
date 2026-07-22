@@ -784,6 +784,7 @@ async function uygulamayiBaslat(){
     musteriMasterYenile(),
     bayiHakedisYenile(),
     sellOutHedefYenile(),
+    (typeof primVerileriniYukle==='function' ? primVerileriniYukle() : Promise.resolve()),
     sellOutYenile(),
     sellOutArsivYenile(),
     modernKanalHedefYenile(),

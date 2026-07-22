@@ -514,7 +514,7 @@ function renderAppHeaderBadges(report){
   }
 }
 
-const FINANSAL_ANALIZ_VIEWS = ['temsilciKarnesi','tahsilatVerimlilik','cei','nakitAkis','supheliAlacak','dsoTrend','yonetimOzeti'];
+const FINANSAL_ANALIZ_VIEWS = ['temsilciKarnesi','tahsilatVerimlilik','cei','nakitAkis','supheliAlacak','dsoTrend','prim','yonetimOzeti'];
 const CARI_DETAY_VIEWS = ['genel','yaslandirma'];
 const DAGITIM_VIEWS = ['sevk','faturaKontrol','yukleme','ticariStok'];
 const BAYI_SATIS_VIEWS = ['sellOut','modernKanal','stokGun'];
@@ -561,7 +561,7 @@ document.addEventListener('click', (e)=>{
 window.addEventListener('resize', ()=>{ TAB_DROPDOWNS.forEach(d=>{ if(d.menu.classList.contains('open')) openDropdown(d); }); });
 document.querySelector('.tabbar')?.addEventListener('scroll', ()=>closeAllDropdowns(), {passive:true});
 
-const ALL_VIEW_IDS = ['genelBakis','genel','sevk','yukleme','yaslandirma','ticariStok','faturaKontrol','bayiHakedis','sellOut','modernKanal','stokGun','tahsilatVerimlilik','dsoTrend','nakitAkis','supheliAlacak','temsilciKarnesi','yonetimOzeti','cei'];
+const ALL_VIEW_IDS = ['genelBakis','genel','sevk','yukleme','yaslandirma','ticariStok','faturaKontrol','bayiHakedis','sellOut','modernKanal','stokGun','tahsilatVerimlilik','dsoTrend','nakitAkis','supheliAlacak','temsilciKarnesi','prim','yonetimOzeti','cei'];
 
 // ---- Sol sidebar: alt menü (Cari Detay / Dağıtım / Finansal Analiz) aç/kapa ----
 const SB_SUBMENUS = [
@@ -680,6 +680,7 @@ async function setActiveView(view){
     if(view==='temsilciKarnesi' && state.report) await renderTemsilciKarnesiView(state.report);
     if(view==='yonetimOzeti' && state.report) await renderYonetimOzetiView(state.report);
     if(view==='cei' && state.report) await renderCeiView(state.report);
+    if(view==='prim' && state.report) await renderPrimView(state.report);
   }finally{
     if(ASYNC_RENDER_VIEWLER.has(view)) viewYuklemeOverlayGizle(view);
   }
