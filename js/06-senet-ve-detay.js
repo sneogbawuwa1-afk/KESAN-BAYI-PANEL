@@ -2587,8 +2587,13 @@ async function computeTahsilatVerimlilikAy(report, ayKey, zorla){
   // NOT: 'DepozitoTahsilat' etiketi geriye dönük uyumluluk için sette tutulur (Depozito Tahsilat
   // dosyası ayrı kaynak olarak kaldırıldı, yeni veride bu etiket artık üretilmiyor).
   const KALAN_BORC_DEGISIMINE_DAHIL_EDILMEYEN_KREDI_ETIKETLERI = new Set(['FaturaIade', 'DepozitoTahsilat']);
+  // KULLANICI KARARI (2026-07-23): Ödeme ve Virman kayıtları GERÇEK TAHSİLAT DEĞİLDİR (bakiye
+  // aktarımı/mahsup işlemidir) — bu yüzden tahsilat hesaplamasından TAMAMEN ÇIKARILIR (ne
+  // toplamTahsilat'a ne ayNakitTahsilatMap'e eklenir).
+  const TAHSILAT_SAYILMAYAN_KATEGORILER = new Set(['Odeme', 'Virman']);
   tahsilatArsivindenAralikDiziyeCevir(state.tahsilatArsivi, ilkKey, sonKey).forEach(r=>{
     if(!r.belgeTarihi || !musteriTvIcinGecerliMi(r.musteri)) return;
+    if(TAHSILAT_SAYILMAYAN_KATEGORILER.has(r.tahsilatKategori)) return;
     const gk = dateKeyLocal(r.belgeTarihi);
     if(!gk || gk<ilkKey || gk>sonKey) return;
     ayTahsilatMap.set(r.musteri, (ayTahsilatMap.get(r.musteri)||0) + (r.tutar||0));
@@ -2602,6 +2607,32 @@ async function computeTahsilatVerimlilikAy(report, ayKey, zorla){
     if(!gk || gk<ilkKey || gk>sonKey) return;
     ayTahsilatMap.set(r.musteri, (ayTahsilatMap.get(r.musteri)||0) + (r.tutar||0));
     ayNakitTahsilatMap.set(r.musteri, (ayNakitTahsilatMap.get(r.musteri)||0) + (r.tutar||0));
+  });
+
+  // İADE GRUBU (Depozito/Bozuk/Sağlam İade Faturası — kullanıcı kararı, 2026-07-23): birlesikArsiv
+  // .tahsilatArsiv (state.faturaArsivCache günlük arşivi) içinde 'FaturaIade' etiketiyle durur —
+  // Tahsilat Verimliliği/Temsilci Karnesi/Prim bu tutarları AYRICA buradan okumalıdır. Kalan
+  // borçtan zaten düşülmüş olduğu için yalnızca toplamTahsilat'a eklenir, nakit toplamına dahil
+  // edilmez (aksi halde çift sayım olur).
+  (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
+    if(r.formatKaynagi!=='FaturaIade' || !r.belgeTarihi || !musteriTvIcinGecerliMi(r.musteri)) return;
+    const gk = dateKeyLocal(new Date(r.belgeTarihi));
+    if(!gk || gk<ilkKey || gk>sonKey) return;
+    ayTahsilatMap.set(r.musteri, (ayTahsilatMap.get(r.musteri)||0) + (r.tutar||0));
+  });
+
+  // MANUEL "TAHSİL EDİLDİ" İŞARETLENEN ÇEK/SENET (kullanıcı kararı, 2026-07-23 — netleştirildi):
+  // Çek/Senet kesildiği an Cari Değişim'i zaten etkiler (SAP bakiyeyi düşürür) ama bu RİSK olarak
+  // sayılır, TAHSİLAT değil. Kullanıcı "Tahsil Edildi" dediğinde Cari Değişim ETKİLENMEZ (zaten
+  // düşmüştü) ama Tahsilat ARTAR, Risk AZALIR — bunlar birbirinden bağımsız iki KPI'dır, biri
+  // diğerinin türevi değildir; bu yüzden burada AYRICA ayTahsilatMap'e eklenmesi çifte sayım
+  // DEĞİLDİR. Tarih olarak vadeTarihi kullanılır. Nakit toplamına dahil edilmez (Kalan Borç zaten
+  // düşmüştü, "gerçekleşme oranı" gibi kalan-borç-değişimiyle kıyaslanan oranlarda tekrar sayılmaz).
+  Object.values(state.cekSenetArsivi||{}).forEach(r=>{
+    if(r.durum!=='tahsilEdildi' || !r.vadeTarihi || !musteriTvIcinGecerliMi(r.musteriKod)) return;
+    const gk = dateKeyLocal(new Date(r.vadeTarihi));
+    if(!gk || gk<ilkKey || gk>sonKey) return;
+    ayTahsilatMap.set(r.musteriKod, (ayTahsilatMap.get(r.musteriKod)||0) + (r.tutar||0));
   });
 
   const cariDegisimVarMi = !!baslangicMap;

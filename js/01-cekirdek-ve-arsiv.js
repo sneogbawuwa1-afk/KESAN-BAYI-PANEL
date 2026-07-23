@@ -1158,7 +1158,17 @@ function tahsilatSatirlariniNormalizeEt(rows){
     const isaretliTutar = -hamTutar;
     const odemeEtiketi = tahsilatBankaAltEtiketi(odemeTipiHam, r['Banka']);
     const belgeTipi = String(r['Belge Tipi']||'').trim();
-    sonuc[belgeNo] = {
+    // ANAHTAR DÜZELTMESİ (kullanıcı bulgusu — LOKAL RESTAURAN örneği): Virman/Ödeme kayıtlarında
+    // aynı Belge Numarası, AYNI müşteride bile iki taraflı (biri pozitif biri negatif işaretli)
+    // satır olarak gelebiliyor — SADECE belgeNo anahtarıyla saklanırsa ikinci satır birinciyi
+    // SESSİZCE EZER ve o günün tahsilatı eksik/yanlış çıkar. Bu yüzden anahtar artık
+    // belgeNo + musteriKod + isaretliTutar birleşimidir: aynı müşteride + / - iki satır olsa bile
+    // farklı işaretli tutar farklı anahtar üretir, ikisi de arşivde ayrı ayrı korunur. Normal
+    // (Müşteri Tahsilat/Hakediş) kayıtlarda zaten tek satır olduğu için bu değişiklik onları
+    // etkilemez; belgeNo alanı kendisi de kayıt içinde ayrıca saklanır (ters kayıt eşleştirmesi
+    // ve diğer tüm kodlar `r.belgeNo` üzerinden çalışmaya devam eder).
+    const anahtar = belgeNo + '|' + musteriKod + '|' + isaretliTutar;
+    sonuc[anahtar] = {
       belgeNo, musteriKod, musteriAdi: String(r['Müşteri Adı']||'').trim(),
       tarih: tarih.toISOString(), tutar: isaretliTutar, tahsilatKategori, odemeEtiketi, belgeTipi,
       satisTemsilcisi: r['Satış Temsilcisi'] || null,
@@ -1186,10 +1196,15 @@ function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
   Object.keys(yeni).forEach(no=>{ if(yeni[no] && yeni[no].tersKayitNo) delete yeni[no]; });
 
   // AŞAMA 2 — Hedeflenen belge no'lar hem YENİ yüklemeden hem ARŞİVDEN silinir (dosya-içi VE
-  // dosya-arşiv arası eşleşme tek döngüde ele alınır).
+  // dosya-arşiv arası eşleşme tek döngüde ele alınır). NOT: anahtar artık `belgeNo` ile BİREBİR
+  // AYNI DEĞİL (bkz. yukarıdaki anahtar düzeltmesi — belgeNo+musteriKod+isaretliTutar), bu yüzden
+  // hedef no'yu doğrudan anahtar olarak silmek yerine, kaydın `belgeNo` ALANINA göre arayıp
+  // eşleşen TÜM anahtarları (aynı belge no altında birden fazla satır olabilir, ör. Virman'ın iki
+  // tarafı) sileriz.
+  const belgeNoIleAnahtarBul = (obj, hedefNo)=> Object.keys(obj).filter(k=> obj[k] && obj[k].belgeNo===hedefNo);
   tersKayitHedefleri.forEach(hedefNo=>{
-    delete yeni[hedefNo];
-    delete arsiv[hedefNo];
+    belgeNoIleAnahtarBul(yeni, hedefNo).forEach(k=>delete yeni[k]);
+    belgeNoIleAnahtarBul(arsiv, hedefNo).forEach(k=>delete arsiv[k]);
   });
 
   // AŞAMA 3 — Arşivde DAHA ÖNCEDEN duran bir ters-kayıt-hedefi ilişkisi de simetrik kontrol edilir:
@@ -1199,7 +1214,11 @@ function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
   Object.keys(arsiv).forEach(no=>{
     const eskiKayit = arsiv[no];
     if(!eskiKayit) return;
-    if(eskiKayit.tersKayitNo){ delete arsiv[no]; delete yeni[eskiKayit.tersKayitNo]; return; }
+    if(eskiKayit.tersKayitNo){
+      delete arsiv[no];
+      belgeNoIleAnahtarBul(yeni, eskiKayit.tersKayitNo).forEach(k=>delete yeni[k]);
+      return;
+    }
   });
 
   // AŞAMA 3.5 — ÖN KAYIT YAŞAM DÖNGÜSÜ (kullanıcı kuralı, istisnasız): "Ön Kayıt" statüsünde
@@ -1274,6 +1293,10 @@ function tahsilatArsivindenAralikDiziyeCevir(arsiv, ilkGunKey, sonGunKey){
     .map(r=>({
       musteri: r.musteriKod, belgeTarihi: new Date(r.tarih), tutar: r.tutar,
       formatKaynagi: r.tahsilatKategori==='Hakedis' ? 'TahsilatHakedis' : null,
+      // tahsilatKategori BURADA KORUNUR (Normal/Hakedis/Odeme/Virman) — kullanıcı kararı: Ödeme ve
+      // Virman kayıtları GERÇEK TAHSİLAT DEĞİLDİR (bakiye aktarımıdır), tahsilat hesaplamalarından
+      // TAMAMEN ÇIKARILMALIDIR (bkz. computeTahsilatVerimlilikAy).
+      tahsilatKategori: r.tahsilatKategori || null,
       gecerli: true, tahsilatTuru: r.odemeEtiketi, satisTemsilcisi: r.satisTemsilcisi,
     }));
 }

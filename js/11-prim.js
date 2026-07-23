@@ -141,6 +141,20 @@ async function primSnapshotKaydet(ayKey, snap){
    ===================================================================== */
 function primSnapshotOlustur(report){
   const musteriler = (report && report.musteriler || []).filter(m=>m && m.temsilci && m.temsilci!=='—');
+  // RİSK MEKANİZMASI (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23 revizyonu):
+  // Risk Cezası formülü "Risk Artışı = Ay Sonu Risk − Ay Başı Risk" gerektirir. Ay başı çek/senet
+  // riski (durum='risk' olan kayıtların, Belge Tarihi bu snapshot anına kadar olan toplamı),
+  // musteriMasterMap üzerinden temsilciye dağıtılıp burada saklanır — önceden bu bilgi hiç
+  // tutulmuyordu. ÖNEMLİ: Bu alan yalnızca BUNDAN SONRA alınan "Ay Başı Fotoğrafı"nda dolu olur;
+  // geçmiş snapshotlarda cekSenetRiskToplam alanı olmayabilir (primRiskCezasi bunu 0 kabul eder).
+  const masterMap = (typeof state !== 'undefined' && state.musteriMasterMap) ? state.musteriMasterMap : null;
+  const cekSenetRiskByTemsilci = new Map();
+  Object.values((typeof state !== 'undefined' && state.cekSenetArsivi) || {}).forEach(r=>{
+    if(!r || r.durum!=='risk') return;
+    const t = masterMap ? (masterMap.get(r.musteriKod)||null) : null;
+    if(!t || t==='—') return;
+    cekSenetRiskByTemsilci.set(t, (cekSenetRiskByTemsilci.get(t)||0) + (Number(r.tutar)||0));
+  });
   return {
     kayitZamani: new Date().toISOString(),
     asOf: report && report.asOf ? report.asOf : null,
@@ -150,6 +164,7 @@ function primSnapshotOlustur(report){
       kalanBorc: Number(m.kalanBorc)||0,
       avgVadeGun: Number(m.avgVadeGun)||0,
     })),
+    cekSenetRiskByTemsilci: Object.fromEntries(cekSenetRiskByTemsilci),
   };
 }
 
@@ -185,10 +200,28 @@ function primReportTemsilciTopla(report, esikGun){
   return map;
 }
 
-// Ay içi yeni fatura (net: iade türleri zaten faturaArsiv'e girmiyor) temsilci bazlı
-function primFaturaTemsilciTopla(report, ilkGunKey, sonGunKey){
+// Ay içi yeni fatura (net: iade türleri zaten faturaArsiv'e girmiyor) temsilci bazlı.
+// KRİTİK DÜZELTME: önceden report.faturaArsiv kullanılıyordu — bu, SADECE o an/en son yüklenen
+// Fatura Dökümü dosyasının ham satırlarıdır (bkz. buildReport, 03-veri-yukleme-ve-senkron.js),
+// ay boyunca farklı günlerde yapılmış önceki yüklemeleri İÇERMEZ. Tahsilat ve Çek/Senet zaten
+// kalıcı arşivden (state.tahsilatArsivi / state.cekSenetArsivi) okunuyordu; Fatura da aynı şekilde
+// kalıcı arşiv olan state.faturaArsivCache'ten (gün bazlı, {[gunKey]:{faturaArsiv:[...]}} şeklinde)
+// ay aralığı taranarak okunmalı — aksi halde ay içinde birden fazla gün fatura yüklendiğinde
+// (arşivlendiğinde) sadece son yüklemenin faturaları sayılır, ay toplamı eksik/yanlış çıkar.
+// KRİTİK DÜZELTME 2 (kullanıcı kararı, 2026-07-23 — gerçek verilerle simülasyon sonucu bulundu):
+// Önceki düzeltme state.faturaArsivCache'i HAM olarak tarıyordu — bu, faturaKontrolArsivBirlestir()
+// içindeki "kazanan yükleme günü" (tekilleştirme/gölge kayıt temizleme) mantığından GEÇMİYORDU. Bir
+// takvim günü birden fazla kez arşivlenmişse (ör. aynı Fatura Dökümü dosyası günde birden fazla kez
+// yüklendiyse), ham tarama o günün TÜM yüklemelerini toplarken, computeTahsilatVerimlilikAy
+// (06-senet-ve-detay.js) zaten birlesikArsiv (faturaKontrolArsivBirlestirCached) üzerinden SADECE
+// kazanan/en son yüklemeyi kullanıyordu — bu fark Prim ile Tahsilat Verimliliği arasında sistematik,
+// küçük ama gerçek sapmalara yol açıyordu (gerçek veri testinde 1 gölge kayıt, ~10.000 ₺ fark
+// olarak doğrulandı). ÇÖZÜM: Prim'in üç arşiv-taraması gereken fonksiyonu da (Fatura/Hakediş/
+// İade) artık HAM state.faturaArsivCache yerine, computeTahsilatVerimlilikAy ile AYNI birlesikArsiv
+// kaynağını kullanır (primHesapla içinde bir kez hesaplanıp parametre olarak geçirilir).
+function primFaturaTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey){
   const map = new Map();
-  (report && report.faturaArsiv || []).forEach(f=>{
+  (birlesikArsiv.faturaArsiv||[]).forEach(f=>{
     const t = f.temsilci; if(!t) return;
     const d = f.faturaTarihi instanceof Date ? f.faturaTarihi : (f.faturaTarihi? new Date(f.faturaTarihi):null);
     if(!d) return;
@@ -200,21 +233,100 @@ function primFaturaTemsilciTopla(report, ilkGunKey, sonGunKey){
   return map;
 }
 
-// Ay içi tahsilat (çek/senet tahsil edilince zaten arşive girmiş) temsilci bazlı
+// Ay içi tahsilat (çek/senet tahsil edilince zaten arşive girmiş) temsilci bazlı.
+// KULLANICI KARARI (2026-07-23): Ödeme ve Virman kayıtları GERÇEK TAHSİLAT DEĞİLDİR (bakiye
+// aktarımı/mahsup işlemidir) — computeTahsilatVerimlilikAy'daki AYNI kuralla tutarlı olması için
+// burada da tahsilatKategori üzerinden hariç tutulur (TEK KAYNAK ilkesi — iki fonksiyon farklı
+// mantık kullanırsa Prim ile Tahsilat Verimliliği raporları birbirinden sapar).
+const PRIM_TAHSILAT_SAYILMAYAN_KATEGORILER = new Set(['Odeme', 'Virman']);
 function primTahsilatTemsilciTopla(ilkGunKey, sonGunKey){
   const map = new Map();
   const dizi = tahsilatArsivindenAralikDiziyeCevir(state.tahsilatArsivi||{}, ilkGunKey, sonGunKey);
   dizi.forEach(r=>{
     const t = r.satisTemsilcisi; if(!t) return;
+    if(PRIM_TAHSILAT_SAYILMAYAN_KATEGORILER.has(r.tahsilatKategori)) return;
     map.set(t, (map.get(t)||0) + (Number(r.tutar)||0));
   });
   return map;
 }
 
 // Ay içi ciro (faturaArsiv tutarları = satış cirosu) temsilci bazlı
-function primCiroTemsilciTopla(report, ilkGunKey, sonGunKey){
+function primCiroTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey){
   // ciro = ay içi net satış faturası tutarı (faturaArsiv). Fatura toplamıyla aynı kaynak.
-  return primFaturaTemsilciTopla(report, ilkGunKey, sonGunKey);
+  return primFaturaTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey);
+}
+
+// Ay içi Bayi Hak Ediş temsilci bazlı toplam. DÜZELTME 2: artık birlesikArsiv.bayiHakedisArsiv
+// (tekilleştirilmiş, computeTahsilatVerimlilikAy ile AYNI kaynak) üzerinden okunur. Bu satırlarda
+// temsilci alanı YOK, TEK KAYNAK kuralı gereği musteriMasterMap üzerinden musteriKod -> temsilci
+// eşlemesi yapılır.
+function primHakedisTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey){
+  const map = new Map();
+  const masterMap = (typeof state !== 'undefined' && state.musteriMasterMap) ? state.musteriMasterMap : null;
+  (birlesikArsiv.bayiHakedisArsiv||[]).forEach(r=>{
+    if(!r || !r.tahsilatTarihi) return;
+    const gk = dateKeyLocal(new Date(r.tahsilatTarihi));
+    if(ilkGunKey && gk<ilkGunKey) return;
+    if(sonGunKey && gk>sonGunKey) return;
+    const t = masterMap ? (masterMap.get(r.musteri)||null) : null;
+    if(!t || t==='—') return;
+    map.set(t, (map.get(t)||0) + (Number(r.tutar)||0));
+  });
+  return map;
+}
+
+// Ay içi Fatura İade (Bozuk/Sağlam/Depozito İade grubu, MÜŞTERİ TAHSİLATI olarak sayılır) temsilci
+// bazlı toplam. DÜZELTME 2: artık birlesikArsiv.tahsilatArsiv (formatKaynagi==='FaturaIade',
+// computeTahsilatVerimlilikAy ile AYNI tekilleştirilmiş kaynak) üzerinden okunur. Temsilci yine
+// musteriMasterMap'ten (TEK KAYNAK kuralı).
+function primFaturaIadeTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey){
+  const map = new Map();
+  const masterMap = (typeof state !== 'undefined' && state.musteriMasterMap) ? state.musteriMasterMap : null;
+  (birlesikArsiv.tahsilatArsiv||[]).forEach(r=>{
+    if(!r || r.formatKaynagi!=='FaturaIade' || !r.belgeTarihi) return;
+    const gk = dateKeyLocal(new Date(r.belgeTarihi));
+    if(ilkGunKey && gk<ilkGunKey) return;
+    if(sonGunKey && gk>sonGunKey) return;
+    const t = masterMap ? (masterMap.get(r.musteri)||null) : null;
+    if(!t || t==='—') return;
+    map.set(t, (map.get(t)||0) + (Number(r.tutar)||0));
+  });
+  return map;
+}
+
+// Ay içi Çek/Senet — DÜZELTME (kullanıcı kararı, 2026-07-23): ay içinde KESİLEN ama henüz
+// 'tahsilEdildi' işaretlenmemiş (yani hâlâ 'risk' durumundaki) çek/senetler TAHSİLAT SAYILMAZ —
+// bunlar zaten Cari Değişim'i etkiler (SAP kesildiği an bakiyeyi düşürür) ama RİSKTİR, TAHSİLAT
+// DEĞİLDİR. Yalnızca kullanıcının manuel "Tahsil Edildi" işaretlediği kayıtlar (durum='tahsilEdildi')
+// tahsilata sayılır — computeTahsilatVerimlilikAy'daki (06-senet-ve-detay.js) AYNI kuralla
+// birebir tutarlı olması için Belge Tarihi yerine Vade Tarihi kullanılır (çekin KESİLDİĞİ değil
+// ÖDENMESİ gereken tarih). Önceki sürümde "durum fark etmeksizin TÜM kesilen çek/senet" tahsilat
+// sayılıyordu — bu, Prim'in Tahsilat Verimliliği'nden sistematik olarak daha yüksek çıkmasına
+// (temsilcinin henüz tahsil edilmemiş riskli kağıtları bile "başarı" gibi görünmesine) yol açıyordu.
+function primCekSenetTemsilciTopla(ilkGunKey, sonGunKey){
+  const toplamMap = new Map();
+  const riskMap = new Map();
+  const masterMap = (typeof state !== 'undefined' && state.musteriMasterMap) ? state.musteriMasterMap : null;
+  Object.values((typeof state !== 'undefined' && state.cekSenetArsivi) || {}).forEach(r=>{
+    if(!r) return;
+    const t = masterMap ? (masterMap.get(r.musteriKod)||null) : null;
+    if(!t || t==='—') return;
+    const tutar = Number(r.tutar)||0;
+    if(r.durum === 'tahsilEdildi'){
+      if(!r.vadeTarihi) return;
+      const gk = dateKeyLocal(new Date(r.vadeTarihi));
+      if(ilkGunKey && gk<ilkGunKey) return;
+      if(sonGunKey && gk>sonGunKey) return;
+      toplamMap.set(t, (toplamMap.get(t)||0) + tutar);
+    }else if(r.durum === 'risk'){
+      if(!r.belgeTarihi) return;
+      const gk = dateKeyLocal(new Date(r.belgeTarihi));
+      if(ilkGunKey && gk<ilkGunKey) return;
+      if(sonGunKey && gk>sonGunKey) return;
+      riskMap.set(t, (riskMap.get(t)||0) + tutar);
+    }
+  });
+  return {toplamMap, riskMap};
 }
 
 // --- Puanlama fonksiyonları ---
@@ -224,6 +336,76 @@ function puanTahsilatNet(netErime, netHedef){
   if(o<0) return 0;                 // cari büyüdü
   if(o>=1) return primClamp(85+(o-1)/0.30*15);
   return primClamp(o*85);
+}
+// GERÇEKLEŞME ÇARPANI (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23 revizyonu):
+// Son 3 ayın ORTALAMA tahsilat gerçekleşme oranına (netErime/netHedef) göre Risk Cezası'nı
+// büyüten bir çarpan. Düşük gerçekleşme = temsilci zaten hedefini tutturamıyor demektir, bu
+// durumda risk artışının cezası daha ağır uygulanır (kötü performans + artan risk = çifte sinyal).
+// Geçmiş ayın "ay sonu" verisi, BİR SONRAKİ ayın "ay başı" snapshot'ından türetilir (ay N'in ay
+// sonu = ay N+1'in ay başı). Yeterli geçmiş veri yoksa varsayılan olarak nötr çarpan (1.0) kullanılır
+// (geriye dönük veri eksikliğinde temsilciyi cezalandırmamak için).
+function primGerceklesmeCarpani(temsilci, ayKey, esikGun, ayar){
+  const gecmisOranlar = [];
+  const [y0,m0] = ayKey.split('-').map(Number);
+  for(let i=1;i<=3;i++){
+    const d = new Date(y0, m0-1-i, 1);
+    const oncekiAyKey = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+    const sonrakiD = new Date(y0, m0-i, 1);
+    const sonrakiAyKey = sonrakiD.getFullYear()+'-'+String(sonrakiD.getMonth()+1).padStart(2,'0');
+
+    const ayBasiSnap = (state.primSnapshotlar||{})[oncekiAyKey];
+    const aySonuSnap = (state.primSnapshotlar||{})[sonrakiAyKey]; // bir sonraki ayın ay başı = bu ayın ay sonu
+    if(!ayBasiSnap || !aySonuSnap) continue;
+
+    const ayBasiMap = primSnapshotTemsilciTopla(ayBasiSnap, esikGun);
+    const aySonuMap = primSnapshotTemsilciTopla(aySonuSnap, esikGun);
+    const ayBasi = ayBasiMap.get(temsilci);
+    const aySonu = aySonuMap.get(temsilci);
+    if(!ayBasi || ayBasi.bakiye<=0) continue;
+
+    // Bu geçmiş ay için net hedef, o zamanki ay başı bakiyeye göre yeniden hesaplanır (aynı otomatik
+    // hedef formülüyle) — gerçek tahsilat rakamına burada ihtiyaç yok, sadece BAKİYE DEĞİŞİMİ
+    // (cari azalışı) net erimenin bir yaklaşıklığı olarak kullanılır (tahsilat arşivinin geçmişe
+    // dönük her ay için ayrıca taranması yerine, zaten elde olan snapshot zincirinden ucuz bir
+    // performans göstergesi türetilir).
+    const netHedefGecmis = primOtomatikNetHedef(ayBasi.bakiye, ayBasi.bakiye>0 ? ayBasi.yaslanan/ayBasi.bakiye : 0, ayar);
+    if(netHedefGecmis<=0) continue;
+    const netErimeGecmis = ayBasi.bakiye - aySonu.bakiye;
+    gecmisOranlar.push(netErimeGecmis/netHedefGecmis);
+  }
+  if(!gecmisOranlar.length) return 1.0; // geçmiş veri yoksa nötr çarpan
+  const ortalamaOran = gecmisOranlar.reduce((a,b)=>a+b,0)/gecmisOranlar.length;
+  const yuzde = ortalamaOran*100;
+  if(yuzde>=85) return 1.0;
+  if(yuzde>=70) return 1.3;
+  if(yuzde>=50) return 1.8;
+  if(yuzde>=30) return 2.5;
+  return 3.5;
+}
+
+// RİSK CEZASI (kullanıcı kararı, 2026-07-23 revizyonu — İKİNCİ DÜZELTME): Risk Cezası artık
+// MUTLAK tutar farkına (Risk Artışı) değil, RİSK ORANI farkına dayanır. Sebep (kullanıcı örneği):
+// Ay 1'de 20M satış / 3M risk (oran %15), Ay 2'de 10M satış / 2M risk (oran %20) — mutlak risk
+// azalmış (3M→2M) ama ORAN kötüleşmiş (%15→%20); temsilci aslında daha riskli davranıyor ama eski
+// (mutlak fark) formül bunu "iyileşme" sayıp hiç ceza uygulamazdı. Formül:
+//   Risk Cezası = [(Ay Sonu Risk/Ay Sonu Cari) − (Ay Başı Risk/Ay Başı Cari)] × 100 × 0.4 × Çarpan
+// Oran farkı negatifse (yani risk oranı gerçekten iyileşmişse) ceza uygulanmaz (0 döner).
+function primRiskCezasiYeni(ayBasiRisk, aySonuRisk, ayBasiBakiye, aySonuBakiye, gerceklesmeCarpani){
+  const aySonuOran = (aySonuBakiye>0) ? (aySonuRisk||0)/aySonuBakiye : 0;
+  const ayBasiOran = (ayBasiBakiye>0) ? (ayBasiRisk||0)/ayBasiBakiye : 0;
+  const oranFarki = aySonuOran - ayBasiOran;
+  if(oranFarki<=0) return 0;
+  return oranFarki * 100 * 0.4 * gerceklesmeCarpani;
+}
+
+// PRİM TAVANI ESNEKLİĞİ (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23 revizyonu):
+// Alt puan tavanı 100'den 150'ye çıkar (Risk Cezası puanı 0'ın altına düşürebildiği gibi, güçlü
+// performans da 100'ün üstüne çıkabilir). Puan ≤120 ise prim tavanı normal (%100); 120-150 arası
+// doğrusal olarak %130'a kadar artar; 150 ve üzeri sabit %130'da kalır.
+function primTavanKatsayisi(toplamPuan){
+  if(toplamPuan<=120) return 1.0;
+  if(toplamPuan>=150) return 1.3;
+  return 1.0 + (toplamPuan-120)/(150-120)*0.3;
 }
 function puanYaslandirma(basi, sonu){
   if(basi<=0) return (sonu<=0)?100:50;
@@ -248,17 +430,27 @@ function primOtomatikNetHedef(ayBasiBakiye, yaslanmaOrani, ayar){
 }
 
 // Ana hesap: temsilci başına prim satırı listesi döndürür
-function primHesapla(report, ayKey){
+async function primHesapla(report, ayKey){
   const ayar = primAyar();
   const esik = ayar.yaslanmaEsigiGun;
   const ilkGunKey = primAyBaslangicKey(ayKey);
   const sonGunKey = primAySonuKey(ayKey);
 
+  // TEK KAYNAK (kullanıcı kararı, 2026-07-23 — 2. düzeltme): birlesikArsiv artık BİR KEZ burada
+  // hesaplanıp Fatura/Hakediş/İade fonksiyonlarına PARAMETRE olarak geçirilir — bu,
+  // computeTahsilatVerimlilikAy'ın (06-senet-ve-detay.js) kullandığı AYNI tekilleştirilmiş
+  // (gölge kayıtlardan arındırılmış) kaynaktır. Önceden bu üç fonksiyon ham state.faturaArsivCache'i
+  // ayrı ayrı tarıyordu — bu, gerçek veri testinde ~10.000 ₺'lik sistematik sapmaya yol açıyordu.
+  const birlesikArsiv = await faturaKontrolArsivBirlestirCached(state.faturaArsivCache);
+
   const snap = (state.primSnapshotlar||{})[ayKey] || null;
   const ayBasiMap = snap ? primSnapshotTemsilciTopla(snap, esik) : null;
   const aySonuMap = primReportTemsilciTopla(report, esik);
-  const faturaMap = primFaturaTemsilciTopla(report, ilkGunKey, sonGunKey);
+  const faturaMap = primFaturaTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey);
   const tahsilatMap = primTahsilatTemsilciTopla(ilkGunKey, sonGunKey);
+  const hakedisMap = primHakedisTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey);
+  const faturaIadeMap = primFaturaIadeTemsilciTopla(birlesikArsiv, ilkGunKey, sonGunKey);
+  const {toplamMap: cekSenetMap, riskMap: cekSenetRiskMap} = primCekSenetTemsilciTopla(ilkGunKey, sonGunKey);
   const ciroMap = faturaMap; // ay içi net satış = ciro
 
   // AKTİF temsilci = ay içinde GERÇEK HAREKETİ olan (fatura VEYA tahsilat).
@@ -269,16 +461,46 @@ function primHesapla(report, ayKey){
   const temsilciSet = new Set();
   faturaMap.forEach((tutar,t)=>{ if(Math.abs(tutar)>0) temsilciSet.add(t); });
   tahsilatMap.forEach((tutar,t)=>{ if(Math.abs(tutar)>0) temsilciSet.add(t); });
+  hakedisMap.forEach((tutar,t)=>{ if(Math.abs(tutar)>0) temsilciSet.add(t); });
+  faturaIadeMap.forEach((tutar,t)=>{ if(Math.abs(tutar)>0) temsilciSet.add(t); });
+  cekSenetMap.forEach((tutar,t)=>{ if(Math.abs(tutar)>0) temsilciSet.add(t); });
   temsilciSet.delete('—'); temsilciSet.delete(''); temsilciSet.delete('Key Account');
 
   const satirlar = [];
   temsilciSet.forEach(t=>{
     const ayBasi = ayBasiMap ? (ayBasiMap.get(t)||{bakiye:0,yaslanan:0,musteriSayisi:0}) : null;
     const aySonu = aySonuMap.get(t) || {bakiye:0,yaslanan:0,musteriSayisi:0};
-    const tahsilat = tahsilatMap.get(t)||0;
+    // Tahsilat: Tahsilat Dökümü + Bayi Hak Ediş + Fatura İade (Bozuk/Sağlam/Depozito) — üçü de
+    // müşteri cari bakiyesini azaltan birer tahsilat kredisidir (kullanıcı kararı).
+    const tahsilatNormal = tahsilatMap.get(t)||0;
+    const hakedis = hakedisMap.get(t)||0;
+    const faturaIade = faturaIadeMap.get(t)||0;
+    // Ay içi Çek/Senet: yalnızca MANUEL "Tahsil Edildi" işaretlenenler burada (bkz.
+    // primCekSenetTemsilciTopla'daki güncel mantık — kullanıcı kararı, 2026-07-23).
+    const ayIciCekSenet = cekSenetMap.get(t)||0;
+    // KRİTİK DÜZELTME 3 (kullanıcı kararı, 2026-07-23 — gerçek Çek/Senet dosyasıyla simülasyonla
+    // bulundu): "tahsilat" alanı önceden ayIciCekSenet'i İÇERMİYORDU — yalnızca netErime
+    // hesabında kullanılıyordu ama Prim tablosundaki "Tahsilat" sütununa ve gösterge kartlarına hiç
+    // yansımıyordu. Bu, bir temsilcinin o ay SADECE manuel tahsil edilmiş çek/senedi varsa (başka
+    // normal tahsilat/hakediş/iade olmasa bile) Prim'in Tahsilat'ı YANLIŞLIKLA 0 göstermesine yol
+    // açıyordu — computeTahsilatVerimlilikAy (Tahsilat Verimliliği) ise bu tutarı doğru gösteriyordu.
+    const tahsilat = tahsilatNormal + hakedis + faturaIade + ayIciCekSenet;
     const yeniFatura = faturaMap.get(t)||0;
     const ciro = ciroMap.get(t)||0;
-    const netErime = tahsilat - yeniFatura;
+    // KRİTİK DÜZELTME 4 (kullanıcı kararı, 2026-07-23 — "çek senet riske sayarken sanki cariden
+    // düşen bir değer gibi görmemekte" tespitiyle bulundu): Net Erime, gerçek Cari Değişim
+    // (Ay Başı Bakiye - Ay Sonu Bakiye) ile TUTARLI olmalıdır. Ama önceden netErime = tahsilat -
+    // yeniFatura formülü, ay içinde KESİLEN ama henüz "Tahsil Edildi" işaretlenmemiş (yani RİSK
+    // durumundaki) çek/senetleri HİÇ hesaba katmıyordu — oysa bu tutar SAP'ta kesildiği an cariyi
+    // zaten düşürür (kullanıcının netleştirdiği kural). Sonuç: risk durumundaki büyük bir çek/senet
+    // varsa, Net Erime gerçek cari azalışını YANSITMIYOR, sanki cari hiç düşmemiş/büyümüş gibi
+    // görünüyordu. ÇÖZÜM: cariyi düşüren TOPLAM tutar (riskCezasindan bağımsız olarak) hem manuel
+    // tahsil edilmiş HEM risk durumundaki ay içi çek/senedi kapsar — riskMap bu ikinciyi zaten
+    // Belge Tarihi'ne göre tutuyordu (bkz. primCekSenetTemsilciTopla). "Tahsilat" KPI'sına DAHİL
+    // EDİLMEZ (risk hâlâ risktir, başarı sayılmaz) ama Net Erime'nin cari ile tutarlı olması için
+    // buraya eklenir.
+    const cekSenetRisk = cekSenetRiskMap.get(t)||0;
+    const netErime = tahsilat + cekSenetRisk - yeniFatura;
 
     // ay başı yoksa (snapshot alınmamışsa) cari azaltma/yaşlandırma hesaplanamaz -> uyarı
     const ayBasiVar = !!ayBasi;
@@ -289,6 +511,14 @@ function primHesapla(report, ayKey){
     const override = (ayar.hedefOverride||{})[t];
     const netHedef = (override!=null && override>0) ? Number(override) : primOtomatikNetHedef(ayBasiBakiye, yaslanmaOrani, ayar);
 
+    // RİSK CEZASI (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23 revizyonu):
+    // Risk Cezası = (Risk Artışı / Ortalama Cari) × 100 × 0.4 × Gerçekleşme Çarpanı. Bu artık
+    // tahsilat puanından (pT) DEĞİL, TOPLAM puandan düşülür (aşağıda). Ay başı risk, snapshot'ın
+    // cekSenetRiskByTemsilci alanından okunur (yoksa 0 — eski snapshotlarda bu alan olmayabilir).
+    const ayBasiRisk = (snap && snap.cekSenetRiskByTemsilci && snap.cekSenetRiskByTemsilci[t]) || 0;
+    const gerceklesmeCarpani = primGerceklesmeCarpani(t, ayKey, esik, ayar);
+    const riskCezasi = primRiskCezasiYeni(ayBasiRisk, cekSenetRisk, ayBasiBakiye, aySonu.bakiye, gerceklesmeCarpani);
+
     const pT = puanTahsilatNet(netErime, netHedef);
     const pY = ayBasiVar ? puanYaslandirma(ayBasi.yaslanan, aySonu.yaslanan) : 50;
     const pC = ayBasiVar ? puanCariAzaltma(ayBasi.bakiye, aySonu.bakiye) : 50;
@@ -296,27 +526,37 @@ function primHesapla(report, ayKey){
     const ciroHedef = ayBasiBakiye>0 ? ayBasiBakiye*0.5 : (ciro||1);
     const pR = puanCiro(ciro, ciroHedef);
 
-    const toplam = pT*(ayar.agirlikTahsilat/100) + pY*(ayar.agirlikYaslandirma/100)
+    // TAVAN 150 (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23 revizyonu): toplam
+    // puan artık 0-100 değil 0-150 aralığında olabilir (Risk Cezası'nın toplamı düşürebilmesi VE
+    // güçlü performansın 100'ün üstüne bonus alanına çıkabilmesi için alt tavan yükseltildi).
+    const toplamHam = pT*(ayar.agirlikTahsilat/100) + pY*(ayar.agirlikYaslandirma/100)
                  + pC*(ayar.agirlikCari/100) + pR*(ayar.agirlikCiro/100);
+    const toplam = Math.max(0, Math.min(150, toplamHam - riskCezasi));
 
     let prim = 0;
     if(toplam >= ayar.barajPuan){
       const oran = (toplam - ayar.barajPuan) / (100 - ayar.barajPuan);
       prim = ayar.primTavan * (0.20 + oran*0.80);
-      prim = Math.min(prim, ayar.primTavan);
+      // PRİM TAVANI ESNEKLİĞİ (kullanıcı kararı, önceki oturumda netleştirildi — 2026-07-23
+      // revizyonu): puan ≤120 için normal tavan (%100), 120-150 arası doğrusal %130'a kadar,
+      // 150+ sabit %130. Önceden prim hep primTavan'da sabitleniyordu (Math.min ile) — artık
+      // yüksek performans tavanın ÜZERİNE çıkabilir.
+      const tavanKatsayisi = primTavanKatsayisi(toplam);
+      prim = Math.min(prim, ayar.primTavan * tavanKatsayisi);
     }
     const not = toplam>=80?'A': toplam>=70?'B': toplam>=55?'C':'D';
 
-    // EK GÜVENCE: ay içi tahsilat, fatura ve cironun hepsi sıfırsa bu temsilci
+    // EK GÜVENCE: ay içi tahsilat, fatura, çek/senet ve cironun hepsi sıfırsa bu temsilci
     // ay içinde hiç iş yapmamış demektir -> listede gösterme (kullanıcı kararı).
-    if(Math.abs(tahsilat)===0 && Math.abs(yeniFatura)===0 && Math.abs(ciro)===0) return;
+    if(Math.abs(tahsilat)===0 && Math.abs(yeniFatura)===0 && Math.abs(ciro)===0 && Math.abs(ayIciCekSenet)===0) return;
 
     satirlar.push({
       temsilci:t, musteriSayisi: aySonu.musteriSayisi,
       ayBasiBakiye, aySonuBakiye: aySonu.bakiye,
       ayBasiYaslanan: ayBasiVar?ayBasi.yaslanan:null, aySonuYaslanan: aySonu.yaslanan,
-      tahsilat, yeniFatura, netErime, ciro, netHedef,
-      pT,pY,pC,pR, toplam, prim, not, ayBasiVar,
+      tahsilat, tahsilatNormal, hakedis, faturaIade, yeniFatura, ayIciCekSenet, cekSenetRisk,
+      netErime, ciro, netHedef,
+      pT,pY,pC,pR, riskCezasi, toplam, prim, not, ayBasiVar,
     });
   });
 
@@ -344,8 +584,12 @@ async function renderPrimView(report){
   if(!listEl) return;
   if(!report){ listEl.innerHTML = '<div class="empty-state">Önce rapor oluşturun.</div>'; return; }
 
+  // Fatura/Hak Ediş/Fatura İade artık kalıcı arşivden (state.faturaArsivCache) okunuyor — bu
+  // önbelleğin güncel olduğundan emin olunur (diğer arşiv-bağımlı görünümlerle aynı desen).
+  await faturaArsivYenile();
+
   const ayKey = primSecilenAyKey();
-  const sonuc = primHesapla(report, ayKey);
+  const sonuc = await primHesapla(report, ayKey);
   const ayar = primAyar();
   const satirlar = sonuc.satirlar;
 
@@ -435,6 +679,7 @@ function primTemsilciKart(r,i){
     +   '<span style="font-size:12px;font-weight:700;padding:2px 9px;border-radius:8px;color:'+renk+';background:'+renk+'22;">'+r.not+'</span>'
     + '</div>'
     + '<div style="font-size:13px;margin:4px 0 10px;">Prim: <b style="font-size:15px;color:'+(r.prim>0?'var(--gb-good,#008300)':'#b3261e')+';">'+primFmtTL(r.prim)+'</b></div>'
+    + (r.cekSenetRisk>0 ? '<div style="font-size:11.5px;margin:0 0 8px;color:#946400;"><i class="fa-solid fa-triangle-exclamation"></i> Risk (tahsil edilmemiş çek/senet): <b>'+primFmtM(r.cekSenetRisk)+' ₺</b>'+(r.riskCezasi>0?' · Puan cezası: −'+r.riskCezasi.toFixed(1):'')+'</div>' : '')
     + bar('Tahsilat', r.pT, '#2a78d6')
     + bar('Yaşlandırma', r.pY, '#eda100')
     + bar('Cari Azaltma', r.pC, '#1baf7a')
@@ -444,7 +689,7 @@ function primTemsilciKart(r,i){
 
 function primDetayTablo(satirlar, ayar){
   const head = '<tr>'
-    + ['Temsilci','Ay Başı Cari','Ay Sonu Cari','Tahsilat','Yeni Fatura','Net Erime','Yaşlanan (B→S)','Puan','Not','Prim']
+    + ['Temsilci','Ay Başı Cari','Ay Sonu Cari','Tahsilat','Yeni Fatura','Çek/Senet (Ay İçi)','Risk (Çek/Senet)','Net Erime','Yaşlanan (B→S)','Puan','Not','Prim']
       .map(h=>'<th style="padding:9px 10px;text-align:right;font-size:11px;text-transform:uppercase;color:var(--text-secondary,#52514e);border-bottom:1px solid var(--border,#e3e2dc);">'+h+'</th>').join('')
     + '</tr>';
   const td=(c,al)=>'<td style="padding:9px 10px;text-align:'+(al||'right')+';border-bottom:1px solid var(--border,#e3e2dc);font-variant-numeric:tabular-nums;">'+c+'</td>';
@@ -454,12 +699,15 @@ function primDetayTablo(satirlar, ayar){
     const dCariStr = r.ayBasiVar ? (dCari<=0?'<span style="color:#008300;">'+primFmtM(dCari)+'</span>':'<span style="color:#b3261e;">+'+primFmtM(dCari)+'</span>') : '—';
     const yasStr = r.ayBasiVar ? (primFmtM(r.ayBasiYaslanan)+' → '+primFmtM(r.aySonuYaslanan)) : '—';
     const netStr = r.netErime<0? '<span style="color:#b3261e;">'+primFmtM(r.netErime)+'</span>' : primFmtM(r.netErime);
+    const riskStr = r.cekSenetRisk>0 ? '<span style="color:#946400;font-weight:600;">'+primFmtM(r.cekSenetRisk)+'</span>' : '—';
     rows += '<tr>'
       + td(primEsc(r.temsilci),'left')
       + td(r.ayBasiVar?primFmtM(r.ayBasiBakiye):'—')
       + td(primFmtM(r.aySonuBakiye))
       + td(primFmtM(r.tahsilat))
       + td(primFmtM(r.yeniFatura))
+      + td(primFmtM(r.ayIciCekSenet))
+      + td(riskStr)
       + td(netStr)
       + td(yasStr)
       + td(r.toplam.toFixed(1))
