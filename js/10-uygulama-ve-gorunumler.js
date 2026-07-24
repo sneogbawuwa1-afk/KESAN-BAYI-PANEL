@@ -15,6 +15,7 @@
     cekSenetModalOverlay:         typeof cekSenetModalKapat==='function'          ? cekSenetModalKapat          : null,
     cekSenetEksikModalOverlay:    typeof cekSenetEksikModalKapat==='function'     ? cekSenetEksikModalKapat     : null,
     tahsilatTahminiModalOverlay:  typeof tahsilatTahminiModalKapat==='function'   ? tahsilatTahminiModalKapat   : null,
+    sapKontrolExportModalOverlay: typeof sapKontrolExportModalKapat==='function'  ? sapKontrolExportModalKapat  : null,
     analizModalOverlay:           typeof analizModalKapat==='function'            ? analizModalKapat            : null,
     stokModalOverlay:             typeof stokModalKapat==='function'              ? stokModalKapat              : null,
     senetModalOverlay:            typeof senetModalKapat==='function'             ? senetModalKapat             : null,

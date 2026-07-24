@@ -129,14 +129,14 @@ async function cloudVeriVerimliYukle(veriTuru, loadCloudDataFn, loadLocalDataFn)
 }
 
 const FIREBASE_CONFIG = {
-  apiKey: 'AIzaSyDyHAEWS39YGQSBhmJbRH6admHh436AoRI',
-  authDomain: 'kesan-bayi.firebaseapp.com',
+  apiKey: 'AIzaSyBQIKNDlgKWqaTHRz9OBrAJVRNn85c2xqs',
+  authDomain: 'kesan-bayi1.firebaseapp.com',
   databaseURL: CLOUD.dbUrl,
-  projectId: 'kesan-bayi',
-  storageBucket: 'kesan-bayi.firebasestorage.app',
-  messagingSenderId: '959704892177',
-  appId: '1:959704892177:web:05c9a09c1bbb56653742b0',
-  measurementId: 'G-C41J6SFESB',
+  projectId: 'kesan-bayi1',
+  storageBucket: 'kesan-bayi1.firebasestorage.app',
+  messagingSenderId: '282801007554',
+  appId: '1:282801007554:web:2461b7ac714b031effc45b',
+  measurementId: 'G-1P7N1GJ8GD',
 };
 
 let authAktif = false;
@@ -1612,16 +1612,31 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     // Kalemler yalnızca (varsa) mevcut kartlara açık fatura detayı ekler. state.files.kalemler boş
     // olsa bile buildReport artık normal şekilde çalışabilir (bkz. buildReport'un başındaki
     // "files.kalemler || {data:[]}" güvenli varsayılanı).
+    // ARŞİV DEĞİŞİKLİK RAPORU (kullanıcı isteği, 23.07.2026): Bu yüklemede arşivde SESSİZCE
+    // silinen/güncellenen/eklenen HER kaydı tek bir yerde topluyoruz — ters kayıt eşleşmesi, ön
+    // kayıt yaşam döngüsü, sipariş iptal/mükerrer temizliği, çek/senet eksik kalanları. Rapor
+    // oluşturma akışı bittikten sonra (varsa) kullanıcıya gösterilir (bkz. renderArsivDegisiklikRaporu).
+    const buYuklemeArsivDegisiklikleri = [];
+
     // ÇEK/SENET RİSKİ — ARŞİV BİRLEŞTİRME (kullanıcı isteği): buildReport'tan ÖNCE, bu oturumda
     // yeni bir Çek/Senet Riski dosyası seçildiyse (state.files.cekSenet doluysa) kalıcı arşivle
     // birleştirilir — yeni/güncellenen kayıtlar arşive işlenir, eski arşivde olup bu dosyada
     // OLMAYAN kayıtlar SİLİNMEZ, cekSenetEksikKalanlar listesine düşer (aşağıda rapor
     // oluşturulduktan sonra kullanıcıya "Tahsil Edildi mi, İptal mi?" olarak sorulur).
     if(state.files.cekSenet && state.files.cekSenet.data && state.files.cekSenet.data.length){
-      const {arsiv, eksikKalanlar} = cekSenetArsiviniBirlestir(state.cekSenetArsivi, state.files.cekSenet.data);
+      const {arsiv, eksikKalanlar, degisiklikler: cekSenetDegisiklikleri} = cekSenetArsiviniBirlestir(state.cekSenetArsivi, state.files.cekSenet.data);
       state.cekSenetArsivi = arsiv;
       state.cekSenetEksikKalanlar = eksikKalanlar;
       await cekSenetArsiviniKaydet(arsiv);
+      cekSenetDegisiklikleri.forEach(d=> buYuklemeArsivDegisiklikleri.push(Object.assign({kaynak:'cekSenet'}, d)));
+      eksikKalanlar.forEach(k=>{
+        if(k.durum === 'tahsilEdildi') return; // zaten karar verilmiş, gürültü olmasın
+        buYuklemeArsivDegisiklikleri.push({
+          tur:'eksik', sebep:'Çek/Senet — önceki yüklemede vardı, bu dosyada yok (karar bekliyor)',
+          belgeNo:k.no||'', musteriKod:k.musteriKod||'', musteriAdi:k.musteriAdi||'', tutar:k.tutar||0, tarih:k.belgeTarihi||null,
+          kaynak:'cekSenet',
+        });
+      });
     }
     // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği): çek/senetle BİREBİR AYNI
     // desen. buildReport'tan ÖNCE, bu oturumda yeni bir Tahsilat Dökümü dosyası seçildiyse kalıcı
@@ -1630,8 +1645,10 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     // BOYUNCA tek seferde toplu yüklenen bir dosyanın her satırının kendi Tarih gününe doğru
     // dağıtılabilmesini sağlar; sonraki kısmi (ör. son hafta) yüklemeler diğer günlere dokunmaz.
     if(state.files.tahsilat && state.files.tahsilat.data && state.files.tahsilat.data.length){
-      state.tahsilatArsivi = tahsilatArsiviniBirlestir(state.tahsilatArsivi, state.files.tahsilat.data);
+      const {arsiv: yeniTahsilatArsivi, degisiklikler: tahsilatDegisiklikleri} = tahsilatArsiviniBirlestir(state.tahsilatArsivi, state.files.tahsilat.data);
+      state.tahsilatArsivi = yeniTahsilatArsivi;
       await tahsilatArsiviniKaydet(state.tahsilatArsivi);
+      tahsilatDegisiklikleri.forEach(d=> buYuklemeArsivDegisiklikleri.push(Object.assign({kaynak:'tahsilat'}, d)));
       // DEVİR BAKİYE AKTARIM (kullanıcı kararı, 17.07.2026): aynı Tahsilat Dökümü dosyasında
       // Belge Türü='Devir Bakiye Aktarım' olan satırlar varsa (bkz. 01-cekirdek-ve-arsiv.js'teki
       // devirBakiyeSatirlariniAyikla açıklaması), bunlar tahsilat DEĞİL, kendi Belge Tarihi'nde bir
@@ -1640,6 +1657,7 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
       state.devirBakiyeArsivi = devirBakiyeArsiviniBirlestir(state.devirBakiyeArsivi, state.files.tahsilat.data);
       await devirBakiyeArsiviniKaydet(state.devirBakiyeArsivi);
     }
+    state.arsivDegisiklikRaporu = buYuklemeArsivDegisiklikleri;
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
     // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle
     // tek-slot arşivine kaydedildi — Grup B/C panellerinin "Kalemler yok" sanmaması için bayrağı set et.
@@ -1651,19 +1669,30 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
     document.getElementById('reportSection').style.display='block';
     document.body.classList.add('has-sidebar');
     resetBtn.style.display='inline-block';
+    // ÖNEMLİ: Cihaz depolama (IndexedDB) tamamen devre dışı (kullanıcı isteği) — saveReportToStorage
+    // artık gerçekte HİÇBİR YERE yazmayan bir no-op'tur, her zaman true döner. Bu yüzden onun
+    // sonucuna güvenip "kaydedildi" demek YANLIŞ OLURDU; gerçek kalıcılık YALNIZCA bulut yazması
+    // (saveReportToCloud) başarılı olursa vardır. Aşağıdaki mesajlar buna göre düzenlenmiştir.
+    await saveReportToStorage(state.report);
+    // NOT: Bu çağrı artık await EDİLİYOR (öncesinde fire-and-forget'ti) — sipariş arşiv temizliği
+    // bu fonksiyonun İÇİNDE state.arsivDegisiklikRaporu'na kendi kayıtlarını ekliyor (bkz.
+    // 01-cekirdek-ve-arsiv.js), ve aşağıdaki "Arşiv Değişiklik Raporu" modalının TÜM kategorileri
+    // (çek/senet, tahsilat, sipariş) eksiksiz görebilmesi için bu işlemin bitmiş olması gerekir.
+    await faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
+    await yuklemeRaporuOlusturVeArsivle();
+    // ARŞİV DEĞİŞİKLİK RAPORU (kullanıcı isteği, 23.07.2026): rapor başarıyla oluşturulup ekrana
+    // yansıdıktan SONRA, çek/senet eksik uyarısıyla AYNI noktada, ama ondan hemen önce gösterilir
+    // (kullanıcı önce "bu yüklemede ne değişti"yi görsün, sonra çek/senet kararı versin). Sadece
+    // gerçekten bir değişiklik varsa açılır — sessiz/temiz bir yükleme kullanıcıyı rahatsız etmesin.
+    if(state.arsivDegisiklikRaporu && state.arsivDegisiklikRaporu.length && typeof arsivDegisiklikRaporuModalAc==='function'){
+      arsivDegisiklikRaporuModalAc(state.arsivDegisiklikRaporu);
+    }
     // ÇEK/SENET EKSİK KALAN UYARISI: rapor başarıyla oluşturulup ekrana yansıdıktan SONRA tetiklenir
     // (kullanıcı isteği: "dosya yüklenip rapor tekrar oluştuktan sonra tetiklenecek"). Modal, arşivde
     // kalan ama son yüklenen Çek/Senet Riski dosyasında olmayan kayıtları listeler.
     if(state.cekSenetEksikKalanlar && state.cekSenetEksikKalanlar.length){
       cekSenetEksikOnayModalAc(state.cekSenetEksikKalanlar);
     }
-    // ÖNEMLİ: Cihaz depolama (IndexedDB) tamamen devre dışı (kullanıcı isteği) — saveReportToStorage
-    // artık gerçekte HİÇBİR YERE yazmayan bir no-op'tur, her zaman true döner. Bu yüzden onun
-    // sonucuna güvenip "kaydedildi" demek YANLIŞ OLURDU; gerçek kalıcılık YALNIZCA bulut yazması
-    // (saveReportToCloud) başarılı olursa vardır. Aşağıdaki mesajlar buna göre düzenlenmiştir.
-    await saveReportToStorage(state.report);
-    faturaKontrolArsivineKaydetVeSenkronizeEt(state.report);
-    await yuklemeRaporuOlusturVeArsivle();
     document.getElementById('storageNote').style.display = 'block';
     if(cloudEnabled()){
       syncBtn.style.display = 'inline-block';

@@ -395,7 +395,13 @@ async function faturaKontrolArsivineKaydetVeSenkronizeEt(report){
   // kalıcı arşivi birbirinden TAMAMEN BAĞIMSIZ iki ayrı veri kaynağıdır.
   let calismaArsivi = eskiArsivTumu;
 
-  const {arsiv: siparisIslenmisArsiv} = siparisArsivGunlereDagitVeTemizle(calismaArsivi, report.siparisArsiv || []);
+  const {arsiv: siparisIslenmisArsiv, degisiklikler: siparisDegisiklikleri} = siparisArsivGunlereDagitVeTemizle(calismaArsivi, report.siparisArsiv || []);
+  // ARŞİV DEĞİŞİKLİK RAPORU (kullanıcı isteği, 23.07.2026): raporuOlusturVeyaGuncelleAkisiniCalistir
+  // içinde başlatılan state.arsivDegisiklikRaporu dizisine sipariş temizliği kayıtlarını da ekle —
+  // bu fonksiyon o akıştan SONRA çağrıldığı için (buildReport → bu fonksiyon), dizi zaten var
+  // olmalı; güvenlik amaçlı yoksa boş dizi ile başlatılır.
+  if(!Array.isArray(state.arsivDegisiklikRaporu)) state.arsivDegisiklikRaporu = [];
+  siparisDegisiklikleri.forEach(d=> state.arsivDegisiklikRaporu.push(Object.assign({kaynak:'siparis'}, d)));
 
   // Fatura Dökümü ve Bayi Hak Ediş artık BUGÜNÜN altına değil, kendi tarihlerine (Fatura Tarihi /
   // hak ediş tahsilat tarihi) göre ilgili arşiv gününe dağıtılır (bkz. arsivGunlereDagitVeDegistir).
@@ -514,6 +520,7 @@ const SIPARIS_IPTAL_DURUMLARI = new Set(['Reddedildi', 'İptal Edildi', 'Teslim 
    yalnızca gerçekten değişen günleri buluta PATCH eder). */
 function siparisArsivGunlereDagitVeTemizle(mevcutArsiv, yeniSiparisSatirlari){
   const yeniArsiv = Object.assign({}, mevcutArsiv);
+  const siparisDegisiklikleri = [];
 
   // 0) DÜZELTME: Bu yüklemede gelen satırların Satış Belge No'larını topla ve bu numaralara ait
   // ESKİ kayıtları, hangi takvim gününde (hangi eski İstenilen Tsl. Trh. altında) duruyor olursa
@@ -529,6 +536,15 @@ function siparisArsivGunlereDagitVeTemizle(mevcutArsiv, yeniSiparisSatirlari){
       if(!eski.length) return;
       const temiz = eski.filter(r=> !(r.satisBelgeNo && buYuklemedekiBelgeNolari.has(r.satisBelgeNo)));
       if(temiz.length !== eski.length){
+        // DEĞİŞİKLİK GÜNLÜĞÜ: çıkarılan her satır, aslında bu yüklemede AYNI belge no ile yeniden
+        // eklenecek (aşağıdaki adım 1) — yani bu bir "kayıp" değil, teslim tarihi değiştiği için
+        // eski güne ait kaydın taşınmasıdır. Yine de kullanıcı hangi siparişin hangi günden
+        // kaldırıldığını görebilsin diye loglanır.
+        eski.forEach(r=>{
+          if(!temiz.includes(r)){
+            siparisDegisiklikleri.push(arsivDegisiklikSatiri('silindi', 'Teslim tarihi değişmiş — bu güne ait eski kayıt kaldırıldı (yeni tarihiyle yeniden eklenecek)', {belgeNo:r.satisBelgeNo, musteriKod:r.musteri, musteriAdi:r.musteriAdi, tutar:r.tutar, tarih:r.istenilenTeslimTarihi}));
+          }
+        });
         yeniArsiv[gunKey] = Object.assign({}, gun, {siparisArsiv: temiz});
       }
     });
@@ -591,11 +607,24 @@ function siparisArsivGunlereDagitVeTemizle(mevcutArsiv, yeniSiparisSatirlari){
 
     silinenSatir += (orijinal.length - sonraki.length);
     if(sonraki.length !== orijinal.length){
+      // DEĞİŞİKLİK GÜNLÜĞÜ (kullanıcı isteği, 23.07.2026): hangi kayıtların hangi sebeple
+      // çıkarıldığını tekil olarak da kaydet — üstteki 3 filtrenin HANGİSİNİN bu satırı
+      // eleyeceğini ayırt etmek için filtreleri satır bazında tekrar kontrol ediyoruz (mantığın
+      // kendisini DEĞİŞTİRMEDEN, sadece "neden" etiketi için).
+      orijinal.forEach(r=>{
+        const kaldiMi = sonraki.includes(r);
+        if(kaldiMi) return;
+        let sebep;
+        if(r.satisBelgeNo && iptalBelgeNolari.has(r.satisBelgeNo)) sebep = 'Sipariş iptal/red/teslim edilemedi durumunda — belgenin TÜM kayıtları kaldırıldı';
+        else if(r.satisBelgeNo && belgeNoKazananGun.get(r.satisBelgeNo) !== gunKey) sebep = 'Aynı Satış Belge No başka bir güne (daha güncel teslim tarihi) taşınmış';
+        else sebep = 'Aynı gün içinde mükerrer Satış Belge No';
+        siparisDegisiklikleri.push(arsivDegisiklikSatiri('silindi', sebep, {belgeNo:r.satisBelgeNo, musteriKod:r.musteri, musteriAdi:r.musteriAdi, tutar:r.tutar, tarih:r.istenilenTeslimTarihi}));
+      });
       yeniArsiv[gunKey] = Object.assign({}, gun, {siparisArsiv: sonraki});
     }
   });
 
-  return {arsiv: yeniArsiv, silinenSatir, iptalEdilenBelgeSayisi: iptalBelgeNolari.size};
+  return {arsiv: yeniArsiv, silinenSatir, iptalEdilenBelgeSayisi: iptalBelgeNolari.size, degisiklikler: siparisDegisiklikleri};
 }
 
 /* DRY YARDIMCI: "Kazanan yükleme günü" haritası — bir takvim gününe ait satırlar arşivde birden
@@ -883,7 +912,7 @@ function ortakSifreDogrula(mesaj){
 }
 
 const CLOUD = {
-  dbUrl: 'https://kesan-bayi-default-rtdb.europe-west1.firebasedatabase.app',
+  dbUrl: 'https://kesan-bayi1-default-rtdb.europe-west1.firebasedatabase.app',
   path: 'nokta_cari_rapor_v1',
 };
 // Yükleme sırası: debounce, 04-genel-bakis.js top-level kodunda kullanıldığı için çekirdekte tanımlanır.
@@ -983,12 +1012,27 @@ function cekSenetArsiviniBirlestir(mevcutArsiv, yeniRows){
   const yeni = cekSenetSatirlariniNormalizeEt(yeniRows);
   const arsiv = Object.assign({}, mevcutArsiv||{});
   const eksikKalanlar = [];
+  const degisiklikler = [];
   // 1) Yeni gelenler: ekle veya güncelle (durum 'tahsilEdildi' ise bile, aynı no tekrar geldiğinde
   //    ham veriler güncellenir ama durum korunur — kullanıcı onayını kaybetmeyelim).
   Object.keys(yeni).forEach(anahtar=>{
     const eski = arsiv[anahtar];
     const yeniKayit = yeni[anahtar];
-    if(eski) yeniKayit.durum = eski.durum; // önceki karar (risk/tahsilEdildi) korunur
+    if(eski){
+      yeniKayit.durum = eski.durum; // önceki karar (risk/tahsilEdildi) korunur
+      // DEĞİŞİKLİK GÜNLÜĞÜ (kullanıcı isteği, 23.07.2026): aynı çek/senet no'su, farklı tutar
+      // veya farklı vade tarihiyle tekrar geldiyse (SAP'ta düzeltme/yeniden vadelendirme
+      // yapılmış olabilir) — bu, kullanıcının bilmesi gereken bir değişikliktir. Sıradan
+      // metadata güncellemeleri (aynı tutar/vade, başka alan değişmiş) sessizce geçilir.
+      const tutarDegisti = Math.abs((eski.tutar||0) - (yeniKayit.tutar||0)) > 0.01;
+      const vadeDegisti = (eski.vadeTarihi||null) !== (yeniKayit.vadeTarihi||null);
+      if(tutarDegisti || vadeDegisti){
+        const parcalar = [];
+        if(tutarDegisti) parcalar.push(`tutar ${TL(eski.tutar||0)} → ${TL(yeniKayit.tutar||0)}`);
+        if(vadeDegisti) parcalar.push('vade tarihi değişti');
+        degisiklikler.push(arsivDegisiklikSatiri('guncellendi', 'Çek/Senet — '+parcalar.join(', '), {belgeNo:yeniKayit.no, musteriKod:yeniKayit.musteriKod, musteriAdi:yeniKayit.musteriAdi, tutar:yeniKayit.tutar, tarih:yeniKayit.belgeTarihi}));
+      }
+    }
     arsiv[anahtar] = yeniKayit;
   });
   // 2) Eski arşivde olup bu yüklemede gelmeyenler: silinmez, 'eksik' listesine düşer (zaten
@@ -999,7 +1043,7 @@ function cekSenetArsiviniBirlestir(mevcutArsiv, yeniRows){
     if(kayit.durum === 'tahsilEdildi') return; // karar verilmiş, tekrar sorma
     eksikKalanlar.push(Object.assign({anahtar}, kayit));
   });
-  return {arsiv, eksikKalanlar};
+  return {arsiv, eksikKalanlar, degisiklikler};
 }
 
 // ÇEK/SENET KARARI SONRASI RAPORU GÜVENLE GÜNCELLE (kritik hata düzeltmesi): Önceden çek/senet
@@ -1184,16 +1228,40 @@ function tahsilatSatirlariniNormalizeEt(rows){
 // anlamlı bir tahsilat değildir). AYRICA, eğer işaret ettiği belge no dosyada veya ARŞİVDE
 // bulunuyorsa, o hedef kayıt da silinir (orijinal işlem + iptali = ikisi de yok sayılır). Bu
 // kontrol dosya-içi VE dosya-arşiv arası olmak üzere iki aşamada, HER yüklemede yeniden yapılır.
+// DEĞİŞİKLİK GÜNLÜĞÜ YARDIMCISI (kullanıcı isteği, 23.07.2026): Arşiv birleştirme fonksiyonları
+// sessizce kayıt silebiliyor/güncelleyebiliyor (ters kayıt eşleşmesi, ön kayıt yaşam döngüsü,
+// sipariş iptal temizliği vb.) — kullanıcı her yüklemede NELERİN değiştiğini/neden değiştiğini
+// görmek istiyor. Bu fonksiyon tek bir kaydı standart bir günlük satırına çevirir; her birleştirme
+// fonksiyonu kendi silme/güncelleme noktasında bunu çağırıp kendi diziyle biriktirir. Var olan
+// hiçbir silme/birleştirme MANTIĞI bu yüzden değişmez — sadece "ne olduğu" ayrıca kaydedilir.
+function arsivDegisiklikSatiri(tur, sebep, kayit, ekBilgi){
+  return Object.assign({
+    tur,             // 'silindi' | 'guncellendi' | 'eklendi'
+    sebep,           // insan-okunur kısa açıklama (ör. 'Ters kayıt eşleşmesi')
+    belgeNo: kayit && (kayit.belgeNo || kayit.no || kayit.satisBelgeNo) || '',
+    musteriKod: kayit && (kayit.musteriKod || kayit.musteri) || '',
+    musteriAdi: kayit && kayit.musteriAdi || '',
+    tutar: kayit && kayit.tutar || 0,
+    tarih: kayit && (kayit.tarih || kayit.belgeTarihi || kayit.faturaTarihi) || null,
+  }, ekBilgi||{});
+}
+
 function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
   let yeni = tahsilatSatirlariniNormalizeEt(yeniRows);
   const arsiv = Object.assign({}, mevcutArsiv||{});
+  const degisiklikler = [];
 
   // Bu yüklemedeki tüm ters-kayıt hedef no'larını topla (kaynak satırın kendisi ne olursa olsun).
   const tersKayitHedefleri = new Set();
   Object.values(yeni).forEach(r=>{ if(r.tersKayitNo) tersKayitHedefleri.add(r.tersKayitNo); });
 
   // AŞAMA 1 — Ters kayıt İŞARETİ taşıyan HER satır bu yüklemeden düşer (hedefi bulunsun/bulunmasın).
-  Object.keys(yeni).forEach(no=>{ if(yeni[no] && yeni[no].tersKayitNo) delete yeni[no]; });
+  Object.keys(yeni).forEach(no=>{
+    if(yeni[no] && yeni[no].tersKayitNo){
+      degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Ters kayıt (iptal) belgesi — kendisi işlenmedi', yeni[no], {hedefBelgeNo: yeni[no].tersKayitNo}));
+      delete yeni[no];
+    }
+  });
 
   // AŞAMA 2 — Hedeflenen belge no'lar hem YENİ yüklemeden hem ARŞİVDEN silinir (dosya-içi VE
   // dosya-arşiv arası eşleşme tek döngüde ele alınır). NOT: anahtar artık `belgeNo` ile BİREBİR
@@ -1203,8 +1271,14 @@ function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
   // tarafı) sileriz.
   const belgeNoIleAnahtarBul = (obj, hedefNo)=> Object.keys(obj).filter(k=> obj[k] && obj[k].belgeNo===hedefNo);
   tersKayitHedefleri.forEach(hedefNo=>{
-    belgeNoIleAnahtarBul(yeni, hedefNo).forEach(k=>delete yeni[k]);
-    belgeNoIleAnahtarBul(arsiv, hedefNo).forEach(k=>delete arsiv[k]);
+    belgeNoIleAnahtarBul(yeni, hedefNo).forEach(k=>{
+      degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Ters kayıt hedefi — aynı dosyada iptal edilmiş', yeni[k]));
+      delete yeni[k];
+    });
+    belgeNoIleAnahtarBul(arsiv, hedefNo).forEach(k=>{
+      degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Ters kayıt hedefi — arşivde iptal edilmiş', arsiv[k]));
+      delete arsiv[k];
+    });
   });
 
   // AŞAMA 3 — Arşivde DAHA ÖNCEDEN duran bir ters-kayıt-hedefi ilişkisi de simetrik kontrol edilir:
@@ -1215,8 +1289,12 @@ function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
     const eskiKayit = arsiv[no];
     if(!eskiKayit) return;
     if(eskiKayit.tersKayitNo){
+      degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Arşivde duran ters kayıt (veri tutarsızlığına karşı temizlik)', eskiKayit));
       delete arsiv[no];
-      belgeNoIleAnahtarBul(yeni, eskiKayit.tersKayitNo).forEach(k=>delete yeni[k]);
+      belgeNoIleAnahtarBul(yeni, eskiKayit.tersKayitNo).forEach(k=>{
+        degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Arşivdeki ters kaydın hedefi — bu dosyada da iptal edildi', yeni[k]));
+        delete yeni[k];
+      });
       return;
     }
   });
@@ -1230,12 +1308,53 @@ function tahsilatArsiviniBirlestir(mevcutArsiv, yeniRows){
   // tahsilatından düşer) — Format A'nın eski "geçici" doğasının doğal sonucu.
   Object.keys(arsiv).forEach(no=>{
     const eskiKayit = arsiv[no];
-    if(eskiKayit && eskiKayit.belgeTipi === 'Ön Kayıt') delete arsiv[no];
+    if(eskiKayit && eskiKayit.belgeTipi === 'Ön Kayıt'){
+      // Aynı belge no bu yüklemede de geldiyse zaten Aşama 4'te üzerine yazılacak — bu durumda
+      // "silindi" değil "güncellendi" olarak loglanır, iki kez "silindi" görünmesin diye burada
+      // atlanır (Aşama 4 zaten kendi güncelleme logunu düşecek).
+      const buYuklemedeVarMi = Object.keys(yeni).some(k=> yeni[k] && yeni[k].belgeNo === eskiKayit.belgeNo);
+      if(!buYuklemedeVarMi){
+        degisiklikler.push(arsivDegisiklikSatiri('silindi', 'Ön Kayıt — bir sonraki yüklemede Gerçek Kayıt gelmedi', eskiKayit));
+      }
+      delete arsiv[no];
+    }
   });
 
-  // AŞAMA 4 — Sağ kalan yeni kayıtlar arşive eklenir/günceller (aynı belge no tekrar gelirse günceller).
+  // AŞAMA 4 — Sağ kalan yeni kayıtlar arşive eklenir/günceller (aynı ANAHTAR tekrar gelirse
+  // günceller — anahtar belgeNo+musteriKod+isaretliTutar olduğundan, tutar değiştiğinde anahtar
+  // da değişir, bu yüzden Object.assign bu durumda ESKİ anahtarı SİLMEZ, sadece yeni anahtarı
+  // ekler — arşivde iki satır bir arada kalır). BULGU (kullanıcı bulgusu doğrultusunda test
+  // edilerek doğrulandı, 23.07.2026): bu, mevcut anahtar tasarımının BİLİNEN bir sonucudur —
+  // Virman'ın iki tarafını ayrı ayrı saklayabilmek için anahtara tutar dahil edilmiş, ama bunun
+  // yan etkisi olarak AYNI belge no'nun SAP'ta tutarı düzeltilmiş hâli (nadir ama mümkün) eski
+  // tutarıyla birlikte arşivde İKİ AYRI SATIR olarak kalabiliyor. Bu fonksiyon bu mimariyi
+  // DEĞİŞTİRMİYOR (kapsamlı bir anahtar tasarımı değişikliği ayrı onay gerektirir) — ama en
+  // azından bu durumu kullanıcıya "olası mükerrer/gölge kayıt" olarak AÇIKÇA raporluyor.
+  const belgeNoTekrarSayaci = new Map(); // belgeNo -> bu yüklemede kaç FARKLI anahtarla göründü
+  Object.values(arsiv).forEach(r=>{
+    if(!r || !r.belgeNo) return;
+    belgeNoTekrarSayaci.set(r.belgeNo, (belgeNoTekrarSayaci.get(r.belgeNo)||0) + 1);
+  });
+  Object.keys(yeni).forEach(no=>{
+    const yeniKayit = yeni[no];
+    const eskiKayit = arsiv[no]; // TAM AYNI anahtar (belgeNo+musteriKod+isaretliTutar) — gerçek güncelleme
+    if(eskiKayit){
+      // Aynı anahtar zaten vardı — pratikte bu, tutarın da (anahtarın parçası olduğu için)
+      // birebir aynı geldiği, sadece metadata'nın (ör. ödeme tipi) değiştiği durumdur.
+      return;
+    }
+    // Bu TAM anahtar arşivde yok. Aynı belgeNo, FARKLI bir anahtarla (örn. farklı tutarla) daha
+    // önce arşive girmiş miydi? Öyleyse bu, olası bir gölge/mükerrer kayıttır — raporlanır.
+    // Sıradan yeni tahsilat kayıtları (kullanıcı kararı, 23.07.2026: normal günlük hacim çok
+    // yüksek olduğundan gürültü olmasın diye) burada ARTIK loglanmıyor — yalnızca anormal
+    // durumlar (silinen/güncellenen/mükerrer) rapora girer.
+    const ayniBelgeNoBaskaAnahtarlaVarMi = yeniKayit.belgeNo && belgeNoTekrarSayaci.has(yeniKayit.belgeNo);
+    if(ayniBelgeNoBaskaAnahtarlaVarMi){
+      degisiklikler.push(arsivDegisiklikSatiri('guncellendi', 'Aynı belge no arşivde FARKLI tutarla zaten var — muhtemel tutar düzeltmesi, ESKİ kayıt silinmedi (mükerrer/gölge kayıt riski, arşivi elle kontrol edin)', yeniKayit));
+    }
+  });
   Object.assign(arsiv, yeni);
-  return arsiv;
+  return {arsiv, degisiklikler};
 }
 
 async function tahsilatArsiviniKaydet(arsiv){

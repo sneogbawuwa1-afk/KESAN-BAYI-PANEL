@@ -22,7 +22,12 @@
      kontrolü yapılır (bkz. handleFiles / xlsxHazirMi). Bütünlük (SRI) için: güvenli bir ortamda
      `openssl dgst -sha384 -binary xlsx.full.min.js | openssl base64 -A` ile üretilen hash'i
      integrity="sha384-..." olarak bu etikete ekleyebilirsiniz (hash sürüme özeldir). -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" crossorigin="anonymous" defer onerror="window.__xlsxYuklenemedi=true;"></script>
+<!-- xlsx-js-style: SheetJS Community sürümünün üzerine hücre stili (font/dolgu/kenarlık/hizalama)
+     desteği ekleyen bir üst küme (superset) — okuma tarafındaki TÜM API (XLSX.read,
+     sheet_to_json, SSF.parse_date_code vb.) aynen çalışmaya devam eder, bu yüzden uygulamanın
+     geri kalanındaki dosya-okuma kodları etkilenmez. SAP Kontrol Export'un renkli/biçimli
+     Excel üretebilmesi için standart xlsx.full.min.js yerine bu kullanılıyor. -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js" crossorigin="anonymous" defer onerror="window.__xlsxYuklenemedi=true;"></script>
 <!-- Firebase Authentication — MODÜLER (tree-shakable) SDK, compat modu yerine. Google, compat
      paketlerini gelecekte tamamen kaldıracağını duyurdu; bu yüzden namespaced (firebase.auth())
      API yerine modüler (getAuth(), onAuthStateChanged() vb.) API kullanılıyor. Modüler SDK
@@ -1011,6 +1016,8 @@
               </div>
               <button type="button" class="btn small" id="faturaKontrolArsivYenileBtn" title="Buluttaki arşivi yeniden çeker"><i class="fa-solid fa-arrow-rotate-right" aria-hidden="true"></i> Yenile</button>
               <button type="button" class="btn small" id="faturaKontrolArsivSikistirBtn" title="Tahsilat/Fatura için aynı takvim gününe ait daha eski/yinelenen yükleme kayıtlarını (gölge kayıtları) siler. Sipariş için ise Satış Belge No bazlı temizliği (Red/İptal/Teslim Edilemedi olan siparişlerin TÜM kayıtlarını ve aynı gün mükerrer kayıtlarını) arşivin tamamı üzerinde yeniden çalıştırır. Bakiye geçmişine (Trend Analizi) dokunmaz."><i class="fa-solid fa-broom" aria-hidden="true"></i> Arşivi Sıkıştır</button>
+              <button type="button" class="btn small" id="sapKontrolExportBtn" title="Seçilen tarih aralığındaki fatura, tahsilat, iade/depozito, hakediş ve çek/senet kayıtlarını temsilci bilgisiyle birlikte tek bir Excel dosyasına aktarır (SAP mutabakatı için)."><i class="fa-solid fa-file-export" aria-hidden="true"></i> SAP Kontrol Export</button>
+              <button type="button" class="btn small" id="arsivDegisiklikGosterBtn" title="Son yüklemede arşivde otomatik silinen, güncellenen veya eklenen kayıtların listesini gösterir."><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Değişiklik Raporu</button>
             </div>
           </div>
           <div class="as-of" id="faturaKontrolArsivBilgi"></div>
@@ -1909,6 +1916,49 @@
       </div>
     </div>
 
+    <div class="modal-overlay" id="arsivDegisiklikModalOverlay">
+      <div class="modal" id="arsivDegisiklikModal" role="dialog" aria-modal="true" aria-labelledby="arsivDegisiklikModalTitle" style="max-width:820px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div class="modal-head-navy-avatar"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i></div>
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="arsivDegisiklikModalTitle">Arşiv Değişiklik Raporu</div>
+              <div class="modal-head-navy-sub" id="arsivDegisiklikModalSub"></div>
+            </div>
+          </div>
+          <button class="modal-close" id="arsivDegisiklikModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:14px 20px 0;font-size:12.5px;color:var(--ink-soft);">
+            Bu yüklemede arşivde otomatik olarak silinen, güncellenen veya eklenen kayıtların listesi —
+            SAP/manuel kontrol için hangi belgenin neden değiştiğini burada görebilirsiniz.
+          </div>
+          <div class="toolbar" style="padding:10px 20px 0;">
+            <select class="filter-select" id="arsivDegisiklikTurFilter">
+              <option value="">Tüm türler</option>
+              <option value="silindi">Silinenler</option>
+              <option value="guncellendi">Güncellenenler</option>
+              <option value="eksik">Karar bekleyenler</option>
+            </select>
+            <select class="filter-select" id="arsivDegisiklikKaynakFilter">
+              <option value="">Tüm kaynaklar</option>
+              <option value="tahsilat">Tahsilat</option>
+              <option value="siparis">Sipariş</option>
+              <option value="cekSenet">Çek/Senet</option>
+            </select>
+          </div>
+          <div class="table-scroll" style="padding:12px 20px 20px;">
+            <table id="arsivDegisiklikModalTable">
+              <thead><tr>
+                <th>Tür</th><th>Kaynak</th><th>Müşteri</th><th>Belge No</th><th>Tarih</th><th class="num">Tutar</th><th>Sebep</th>
+              </tr></thead>
+              <tbody id="arsivDegisiklikModalTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="cekSenetEksikModalOverlay">
       <div class="modal" id="cekSenetEksikModal" role="dialog" aria-modal="true" aria-labelledby="cekSenetEksikModalTitle" style="max-width:720px;">
         <div class="panel-head modal-head-navy">
@@ -2018,6 +2068,42 @@
               </tr></thead>
               <tbody id="cekSenetModalTbody"></tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="sapKontrolExportModalOverlay">
+      <div class="modal" id="sapKontrolExportModal" role="dialog" aria-modal="true" aria-labelledby="sapKontrolExportModalTitle" style="max-width:460px;">
+        <div class="panel-head modal-head-navy">
+          <div class="modal-head-navy-top">
+            <div style="min-width:0;">
+              <div class="modal-head-navy-name" id="sapKontrolExportModalTitle">SAP Kontrol Export</div>
+              <div class="modal-head-navy-sub">Tarih aralığına göre Excel çıktısı</div>
+            </div>
+          </div>
+          <button class="modal-close" id="sapKontrolExportModalClose" type="button" aria-label="Kapat">✕</button>
+        </div>
+        <div class="modal-body">
+          <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:14px;">
+            <div style="font-size:12.5px;color:var(--ink-soft);line-height:1.5;">
+              Seçilen tarih aralığındaki satış faturaları, normal tahsilat, iade/depozito, bayi hakediş ve çek/senet kayıtları — her biri temsilci bilgisiyle birlikte — tek bir Excel dosyasına aktarılır. Birleşik (tekilleştirilmiş) arşiv kullanılır.
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <div style="flex:1;min-width:140px;">
+                <label style="display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:5px;">Başlangıç Tarihi</label>
+                <input type="date" id="sapKontrolExportBaslangic" class="filter-input" style="width:100%;" />
+              </div>
+              <div style="flex:1;min-width:140px;">
+                <label style="display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:5px;">Bitiş Tarihi</label>
+                <input type="date" id="sapKontrolExportBitis" class="filter-input" style="width:100%;" />
+              </div>
+            </div>
+            <div id="sapKontrolExportUyari" style="display:none;font-size:12.5px;color:#B42318;font-weight:600;"></div>
+            <div id="sapKontrolExportOzet" style="display:none;font-size:12.5px;color:var(--ink-soft);"></div>
+            <button type="button" class="btn primary" id="sapKontrolExportCalistirBtn" style="align-self:flex-start;">
+              <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i> Excel Oluştur ve İndir
+            </button>
           </div>
         </div>
       </div>
@@ -2172,6 +2258,8 @@
 <script defer src="js/09-stok-gun.js"></script>
 <script defer src="js/10-uygulama-ve-gorunumler.js"></script>
 <script defer src="js/11-prim.js"></script>
+<script defer src="js/12-sap-kontrol-export.js"></script>
+<script defer src="js/13-arsiv-degisiklik-raporu.js"></script>
 <button type="button" id="scrollTopBtn" class="scroll-top-btn" title="Yukarı çık" aria-label="Sayfanın başına dön">↑</button>
 <script>
 (function(){
