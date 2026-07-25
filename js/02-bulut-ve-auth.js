@@ -576,6 +576,79 @@ async function loadSenetTahsilOnaylariFromLocal(){
 // Malzemeler (anlık depo stoğu) — son yüklenen dosya buluta kaydedilir, yeni biri yüklenene
 // kadar kullanılmaya devam eder (Müşteri Master ile aynı desen). Stok Gün sekmesi açıldığında
 // bu kayıt otomatik geri yüklenir, kullanıcı her seferinde dosyayı tekrar yüklemek zorunda kalmaz.
+// Kullanıcı isteği (24.07.2026, genişletme): işaretli satırlar Bayi Hakediş içinde ayrı bir
+// "Faturası Alınanlar" alt-sekmesinde, Temsilci/Müşteri filtreli olarak tam detaylarıyla (kaynak,
+// belge no, tutar, tarih, temsilci) listelenir. Bu yüzden artık sadece belgeNo değil, işaretleme
+// ANINDAKİ tam satır detayı saklanır — rapor daha sonra değişse/silinse bile bu liste kendi başına
+// eksiksiz kalır. Yapı: {[belgeNo]: {belgeNo, musteriKod, musteriAdi, temsilci, kaynak, tarih(ISO),
+// tutarHaric, tutarKdvli, isaretlemeZamani(ISO)}} — düz obje, ciroPrimiArsivi ile aynı mimari
+// (JSON/Firebase uyumlu, buluta öncelikli). Tıklanan satıra tekrar tıklanırsa kayıt SİLİNİR (toggle).
+const HAKEDIS_FATURA_ALINDI_LOCAL_KEY = 'noktaCariTakip_hakedisFaturaAlindi_v2';
+const HAKEDIS_FATURA_ALINDI_CLOUD_PATH = CLOUD.path + '_hakedisFaturaAlindi';
+async function saveHakedisFaturaAlindiToCloud(obj){
+  if(!cloudEnabled()) return {ok:false, reason:'not-configured'};
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${HAKEDIS_FATURA_ALINDI_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(obj),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    return {ok:true};
+  }catch(err){ console.error('Hakediş fatura alındı işaretleri buluta kaydedilemedi:', err); return {ok:false, reason:err.message}; }
+}
+async function loadHakedisFaturaAlindiFromCloud(){
+  if(!cloudEnabled()) return null;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${HAKEDIS_FATURA_ALINDI_CLOUD_PATH}.json${await authQuery()}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const text = await res.text();
+    if(!text || text==='null') return null;
+    return JSON.parse(text);
+  }catch(err){ console.error('Hakediş fatura alındı işaretleri buluttan okunamadı:', err); return null; }
+}
+async function saveHakedisFaturaAlindiToLocal(){
+  const obj = state.hakedisFaturaAlindi || {};
+  try{
+    const ok = await idbSet(HAKEDIS_FATURA_ALINDI_LOCAL_KEY, obj);
+    if(!ok) console.error('Hakediş fatura alındı işaretleri cihaza kaydedilemedi.');
+  }catch(err){ console.error(err); }
+  if(cloudEnabled()){
+    const sonuc = await saveHakedisFaturaAlindiToCloud(obj);
+    if(!sonuc.ok){
+      console.error('UYARI: Hakediş fatura alındı işareti buluta yazılamadı, sadece cihazda kaldı.');
+      alert('UYARI: Bu işaretleme buluta kaydedilemedi — diğer cihazlarda görünmeyebilir. Bağlantınızı kontrol edip tekrar deneyin.');
+    }
+    return sonuc.ok;
+  }
+  return true;
+}
+async function loadHakedisFaturaAlindiFromLocal(){
+  try{
+    let obj = cloudEnabled() ? await loadHakedisFaturaAlindiFromCloud() : null;
+    if(!obj || typeof obj !== 'object' || Array.isArray(obj) || !Object.keys(obj).length){
+      const cihazVeri = await idbGet(HAKEDIS_FATURA_ALINDI_LOCAL_KEY);
+      if(cihazVeri && typeof cihazVeri === 'object' && !Array.isArray(cihazVeri)) obj = cihazVeri;
+    }
+    state.hakedisFaturaAlindi = (obj && typeof obj === 'object' && !Array.isArray(obj)) ? obj : {};
+    if(Object.keys(state.hakedisFaturaAlindi).length) idbSet(HAKEDIS_FATURA_ALINDI_LOCAL_KEY, state.hakedisFaturaAlindi).catch(()=>{});
+  }catch(err){ console.error(err); state.hakedisFaturaAlindi = {}; }
+}
+// Bir hakediş satırını işaretle/kaldır (toggle) ve kalıcı hale getir. `detay` yalnızca YENİ
+// işaretlemede kullanılır (kaldırırken gerekmez). DÖNÜŞ: yeni durum (true=işaretli).
+async function hakedisFaturaAlindiToggle(belgeNo, detay){
+  if(!belgeNo) return false;
+  const key = String(belgeNo).trim();
+  if(!key) return false;
+  if(!state.hakedisFaturaAlindi) state.hakedisFaturaAlindi = {};
+  const simdiIsaretliMi = !!state.hakedisFaturaAlindi[key];
+  if(simdiIsaretliMi){
+    delete state.hakedisFaturaAlindi[key];
+  } else {
+    state.hakedisFaturaAlindi[key] = Object.assign({belgeNo:key, isaretlemeZamani:new Date().toISOString()}, detay||{});
+  }
+  await saveHakedisFaturaAlindiToLocal();
+  return !simdiIsaretliMi;
+}
+
 const MALZEMELER_STOK_CLOUD_PATH = CLOUD.path + '_malzemelerStok';
 const MALZEMELER_STOK_LOCAL_KEY = 'noktaCariTakip_malzemelerStok_v1';
 async function saveMalzemelerStokToCloud(obj){
@@ -1657,6 +1730,18 @@ async function raporuOlusturVeyaGuncelleAkisiniCalistir(){
       state.devirBakiyeArsivi = devirBakiyeArsiviniBirlestir(state.devirBakiyeArsivi, state.files.tahsilat.data);
       await devirBakiyeArsiviniKaydet(state.devirBakiyeArsivi);
     }
+    // CİRO PRİMİ / DÖNEMSEL İSKONTO — KALICI ARŞİV (kullanıcı isteği, 24.07.2026): buildReport'tan
+    // ÖNCE, Çek/Senet ve Tahsilat ile AYNI noktada — Bayi Hak Ediş (Müşteri Alacak Dekont No) ile
+    // çapraz kontrol edilerek ödenen kayıtlar arşivden silinir, ödenmeyip kaynaktan kaybolanlar
+    // "Karar Bekliyor" olarak işaretlenir. bayiHakedisRaporuOlustur (aşağıda) artık bu iki arşivin
+    // aktif kayıtlarından okur — tek slotluk state.files.ciroPrimi/donemselIskonto'dan DEĞİL.
+    const {degisiklikler: ciroPrimiDegisiklikleri} = await ciroPrimiVeDonemselIskontoArsiviniGuncelle();
+    // kaynak alanı sebep metnindeki önekten (ör. "Ciro Primi — ...") türetilir; her satırın kendi
+    // kaynağını (ciroPrimi/donemselIskonto) doğru taşıması Arşiv Değişiklik Raporu filtresi içindir.
+    ciroPrimiDegisiklikleri.forEach(d=>{
+      const kaynak = String(d.sebep||'').startsWith('Dönemsel İskonto') ? 'donemselIskonto' : 'ciroPrimi';
+      buYuklemeArsivDegisiklikleri.push(Object.assign({kaynak}, d));
+    });
     state.arsivDegisiklikRaporu = buYuklemeArsivDegisiklikleri;
     state.report = buildReport(state.files, musteriMasterMapKullanilacak);
     // Bu noktada Kalemler kesinlikle yüklü ve grupATekilDosyalariHazirla ile bugünün tarihiyle

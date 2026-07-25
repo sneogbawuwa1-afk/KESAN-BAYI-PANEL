@@ -2178,18 +2178,25 @@ function buildBayiHakedisRaporu(ciroPrimiRows, donemselIskontoRows, musteriMaste
 }
 
 async function bayiHakedisRaporuOlustur(){
-  const ciroPrimiDosya = state.files.ciroPrimi;
-  const donemselIskontoDosya = state.files.donemselIskonto;
   state.bayiHakedisHata = null;
-  if(!ciroPrimiDosya && !donemselIskontoDosya){
+  // KALICI ARŞİVDEN OKUMA (kullanıcı isteği, 24.07.2026): artık state.files.ciroPrimi/donemselIskonto
+  // (tek-slot, sadece son yüklenen dosya) DEĞİL, state.ciroPrimiArsivi/donemselIskontoArsivi
+  // (kalıcı, biriken, Bayi Hak Ediş ile çapraz kontrollü) okunur. 'karar_bekliyor' işaretli
+  // kayıtlar — kullanıcı kararı: "belirsiz durumda tutara dahil edilmesin" — toplamdan HARİÇ
+  // tutulur, ama sayıları ayrı bir rozet olarak (bayiHakedisKararBekliyorSayisi) saklanır.
+  const ciroPrimiTumu = Object.values(state.ciroPrimiArsivi||{});
+  const donemselIskontoTumu = Object.values(state.donemselIskontoArsivi||{});
+  const ciroPrimiRows = ciroPrimiTumu.filter(r=>r._durum!=='karar_bekliyor');
+  const donemselIskontoRows = donemselIskontoTumu.filter(r=>r._durum!=='karar_bekliyor');
+  state.bayiHakedisKararBekliyorSayisi =
+    ciroPrimiTumu.filter(r=>r._durum==='karar_bekliyor').length +
+    donemselIskontoTumu.filter(r=>r._durum==='karar_bekliyor').length;
+  if(!ciroPrimiRows.length && !donemselIskontoRows.length){
+    state.bayiHakedisReport = null;
     return;
   }
   try{
-    const rapor = buildBayiHakedisRaporu(
-      ciroPrimiDosya ? ciroPrimiDosya.data : [],
-      donemselIskontoDosya ? donemselIskontoDosya.data : [],
-      state.musteriMasterMap
-    );
+    const rapor = buildBayiHakedisRaporu(ciroPrimiRows, donemselIskontoRows, state.musteriMasterMap);
     state.bayiHakedisReport = rapor;
     await bayiHakedisKaydet(rapor);
   }catch(err){
@@ -2257,6 +2264,9 @@ function renderBayiHakedisTable(resetSayfa=true){
   const gosterilecekRows = rows.slice(0, gosterilecekSayi);
   state.bayiHakedisKodMap = new Map(rows.map(r=>[r.kod, r]));
   list.innerHTML = gosterilecekRows.map(r=>{
+    // FATURA ALINDI SAYACI (kullanıcı isteği, 24.07.2026): bu noktanın hakediş satırlarından
+    // kaçının "Faturasını Aldım" işaretli olduğunu ana listede de gösterir.
+    const alindiSayisi = (r.kayitlar||[]).filter(k=> k.belgeNo && state.hakedisFaturaAlindi && state.hakedisFaturaAlindi[String(k.belgeNo).trim()]).length;
     return `<div class="htk-card" data-kod="${escapeHtml(r.kod)}">
       <div class="htk-head">
         <div style="min-width:0;">
@@ -2274,6 +2284,7 @@ function renderBayiHakedisTable(resetSayfa=true){
       <div class="htk-inline-stats">
         <span>İskonto: ${r.iskontoSayisi ? '<b>'+r.iskontoSayisi+'</b>' : '<span class="zero">—</span>'}</span>
         <span>İşletme Katkı: ${r.katkiPayiSayisi ? '<b>'+r.katkiPayiSayisi+'</b>' : '<span class="zero">—</span>'}</span>
+        ${alindiSayisi ? `<span style="color:var(--success,#1A8A4C);"><i class="fa-solid fa-check" aria-hidden="true" style="font-size:10px;"></i> Fatura Alındı: <b>${alindiSayisi}</b></span>` : ''}
       </div>
       <div class="htk-alt" style="justify-content:flex-end;">
         <div class="htk-alt-actions">
@@ -2287,6 +2298,7 @@ function renderBayiHakedisTable(resetSayfa=true){
 }
 
 function hakedisModalAc(kod){
+  state.hakedisModalAcikKod = kod;
   let r = state.bayiHakedisKodMap && state.bayiHakedisKodMap.get(kod);
   // DÜZELTME: bayiHakedisKodMap SADECE "Bayi Hakediş" sekmesi bir kez render edildiğinde dolar.
   // Bu popup artık Fatura Kontrol/Genel Rapor içindeki "Hakediş" butonundan da (o sekmeye hiç
@@ -2306,18 +2318,58 @@ function hakedisModalAc(kod){
   document.getElementById('hakedisModalAvatar').textContent = avatarBaslangic(r.adi);
   document.getElementById('hakedisModalTitle').textContent = r.adi;
   document.getElementById('hakedisModalSub').textContent = r.kod + ' · ' + (r.kayitSayisi||0) + ' kayıt';
-  document.getElementById('hakedisModalTbody').innerHTML = (r.kayitlar||[]).length ? r.kayitlar.map(k=>`<tr>
+  document.getElementById('hakedisModalTbody').innerHTML = (r.kayitlar||[]).length ? r.kayitlar.map(k=>{
+    const belgeNo = k.belgeNo!=null ? String(k.belgeNo).trim() : '';
+    const alindiMi = belgeNo && state.hakedisFaturaAlindi && state.hakedisFaturaAlindi[belgeNo];
+    // Belge No yoksa (beklenmeyen veri) toggle işlevsiz gösterilir — yanlış kayda işaret sürmesin.
+    // data-* attribute'ları toggle anında "Faturası Alınanlar" listesi için gereken tüm detayı
+    // (müşteri, temsilci, kaynak, tutar, tarih) taşır — bkz. hakedisModalTbody click listener.
+    const toggleHtml = belgeNo
+      ? `<button type="button" class="hakedis-fatura-toggle${alindiMi?' alindi':''}" data-belge-no="${escapeHtml(belgeNo)}"
+          data-musteri-kod="${escapeHtml(r.kod)}" data-musteri-adi="${escapeHtml(r.adi)}" data-temsilci="${escapeHtml(r.temsilci||'—')}"
+          data-kaynak="${escapeHtml(k.kaynak||'')}" data-tarih="${k.tarih instanceof Date ? k.tarih.toISOString() : ''}"
+          data-tutar-haric="${k.tutarHaric||0}" data-tutar-kdvli="${k.tutarKdvli||0}"
+          title="${alindiMi ? 'Faturası alınmıştı — geri almak için tıklayın' : 'Faturasını aldıysanız işaretleyin'}">
+          <i class="fa-solid ${alindiMi?'fa-check':'fa-circle-question'}" aria-hidden="true"></i>${alindiMi?'Alındı':'Bekliyor'}
+        </button>`
+      : '<span class="empty-state" style="padding:0;">—</span>';
+    return `<tr>
     <td>${fmtDate(k.tarih)}</td><td>${escapeHtml(k.kategori)}</td>
     <td class="num">${TLKurus(k.tutarHaric)}</td><td class="num">${TLKurus(k.tutarKdvli)}</td>
-  </tr>`).join('') : `<tr><td colspan="4" class="empty-state">Hakediş kaydı bulunamadı</td></tr>`;
+    <td style="text-align:center;">${toggleHtml}</td>
+  </tr>`;
+  }).join('') : `<tr><td colspan="5" class="empty-state">Hakediş kaydı bulunamadı</td></tr>`;
   document.getElementById('hakedisModalOverlay').classList.add('open');
 }
 function hakedisModalKapat(){
+  state.hakedisModalAcikKod = null;
   document.getElementById('hakedisModalOverlay').classList.remove('open');
 }
 document.getElementById('hakedisModalClose').addEventListener('click', hakedisModalKapat);
 document.getElementById('hakedisModalOverlay').addEventListener('click', (e)=>{
   if(e.target.id==='hakedisModalOverlay') hakedisModalKapat();
+});
+// HAKEDİŞ "FATURASINI ALDIM" İŞARETLEME (kullanıcı isteği, 24.07.2026): satırdaki toggle
+// butonuna tıklanınca kalıcı olarak işaretlenir/kaldırılır (bkz. hakedisFaturaAlindiToggle,
+// 02-bulut-ve-auth.js) ve modal geçerli kod için hemen yeniden çizilir — kullanıcı sonucu
+// anında (yeşile dönen buton) görür.
+document.getElementById('hakedisModalTbody').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('.hakedis-fatura-toggle');
+  if(!btn) return;
+  e.stopPropagation();
+  const belgeNo = btn.getAttribute('data-belge-no');
+  if(!belgeNo) return;
+  btn.disabled = true;
+  const detay = {
+    musteriKod: btn.getAttribute('data-musteri-kod')||'', musteriAdi: btn.getAttribute('data-musteri-adi')||'',
+    temsilci: btn.getAttribute('data-temsilci')||'—', kaynak: btn.getAttribute('data-kaynak')||'',
+    tarih: btn.getAttribute('data-tarih')||'',
+    tutarHaric: Number(btn.getAttribute('data-tutar-haric'))||0, tutarKdvli: Number(btn.getAttribute('data-tutar-kdvli'))||0,
+  };
+  await hakedisFaturaAlindiToggle(belgeNo, detay);
+  if(state.hakedisModalAcikKod) hakedisModalAc(state.hakedisModalAcikKod);
+  renderBayiHakedisTable(); // ana listedeki "işaretli" göstergesi de güncellensin
+  if(typeof renderFaturasiAlinanlarTable==='function') renderFaturasiAlinanlarTable();
 });
 document.addEventListener('click', (e)=>{
   const btn = e.target.closest('.hakedis-detay-btn');
@@ -2408,10 +2460,43 @@ document.addEventListener('click', (e)=>{
   faturaKesilmeyenModalAc(btn.getAttribute('data-temsilci-key'), btn.getAttribute('data-kanal'));
 });
 
+function renderBayiHakedisKararBekliyorRozet(){
+  const rozet = document.getElementById('bayiHakedisKararBekliyorRozet');
+  const sayiEl = document.getElementById('bayiHakedisKararBekliyorSayi');
+  if(!rozet || !sayiEl) return;
+  const sayi = state.bayiHakedisKararBekliyorSayisi || 0;
+  if(sayi > 0){
+    sayiEl.textContent = sayi.toLocaleString('tr-TR');
+    rozet.style.display = 'inline-flex';
+  } else {
+    rozet.style.display = 'none';
+  }
+}
+document.getElementById('bayiHakedisKararBekliyorRozet').addEventListener('click', ()=>{
+  if(state.arsivDegisiklikRaporu && state.arsivDegisiklikRaporu.length && typeof arsivDegisiklikRaporuModalAc==='function'){
+    arsivDegisiklikRaporuModalAc(state.arsivDegisiklikRaporu);
+  } else {
+    alert('Karar bekleyen kayıtların detayını görmek için son yüklemedeki Arşiv Değişiklik Raporu\'na bakın. Yeni bir yükleme yapıldığında bu rapor otomatik açılır.');
+  }
+});
+
 function renderBayiHakedisView(){
   const panel = document.getElementById('bayiHakedisPanel');
   const bosPanel = document.getElementById('bayiHakedisBosPanel');
   const bosMesaj = document.getElementById('bayiHakedisBosMesaj');
+  renderBayiHakedisKararBekliyorRozet();
+
+  // "Faturası Alınanlar" state.hakedisFaturaAlindi'den beslenir — bayiHakedisReport'tan
+  // BAĞIMSIZ (kullanıcı isteği, 24.07.2026: "rapordan bağımsız, kalıcı liste"). Bu yüzden
+  // rapor henüz oluşturulmamış olsa bile (aşağıdaki erken return'den ÖNCE) sekme sayacı ve
+  // -eğer o sekme aktifse- liste güncellenir.
+  const alinanSayisi = Object.keys(state.hakedisFaturaAlindi||{}).length;
+  const alinanSayiEl = document.getElementById('bhSubtabAlinanlarSayi');
+  if(alinanSayiEl) alinanSayiEl.textContent = alinanSayisi.toLocaleString('tr-TR');
+  if(state.bhAktifSubview === 'alinanlar'){
+    populateFaturasiAlinanlarTemsilciFilter();
+    renderFaturasiAlinanlarTable();
+  }
 
   if(!state.bayiHakedisReport){
     panel.style.display = 'none';
@@ -2419,13 +2504,125 @@ function renderBayiHakedisView(){
     bosMesaj.textContent = state.bayiHakedisHata
       ? ('Bayi Hakediş raporu oluşturulamadı: ' + state.bayiHakedisHata)
       : 'Bayi Hakediş raporu için ana yükleme sayfasında hem "Ciro Primi" hem de "Dönemsel İskonto" dosyalarını yükleyip "Raporu Oluştur"a basmanız gerekir.';
+    // Rapor yoksa "Noktalar" boş görünür ama "Faturası Alınanlar" (yukarıda zaten güncellendi)
+    // yine de erişilebilir kalır — panel tamamen gizlenmez, sadece Noktalar içeriği boş kalır.
+    const noktalarSayiEl = document.getElementById('bhSubtabNoktalarSayi');
+    if(noktalarSayiEl) noktalarSayiEl.textContent = '0';
+    if(state.bhAktifSubview !== 'alinanlar'){
+      return;
+    }
+    panel.style.display = alinanSayisi ? 'block' : 'none';
+    bosPanel.style.display = alinanSayisi ? 'none' : 'block';
     return;
   }
   bosPanel.style.display = 'none';
   panel.style.display = 'block';
   populateBayiHakedisTemsilciFilter();
   renderBayiHakedisTable();
+  const noktalarSayiEl = document.getElementById('bhSubtabNoktalarSayi');
+  if(noktalarSayiEl) noktalarSayiEl.textContent = (state.bayiHakedisReport.noktalar||[]).length.toLocaleString('tr-TR');
 }
+
+// BAYİ HAKEDİŞ ALT-SEKMELERİ (kullanıcı isteği, 24.07.2026): "Noktalar" / "Faturası Alınanlar"
+// arası geçiş — state.bhAktifSubview görünen sekmeyi tutar, sayfa yenilense de (render tekrar
+// çağrılınca) doğru sekme gösterilmeye devam eder.
+function bhSubviewGecis(hedef){
+  state.bhAktifSubview = hedef;
+  document.querySelectorAll('.bh-subtab').forEach(btn=>{
+    const aktifMi = btn.getAttribute('data-bhview') === hedef;
+    btn.classList.toggle('active', aktifMi);
+    btn.setAttribute('aria-selected', aktifMi ? 'true' : 'false');
+  });
+  document.getElementById('bhSubview-noktalar').style.display = hedef==='noktalar' ? '' : 'none';
+  document.getElementById('bhSubview-alinanlar').style.display = hedef==='alinanlar' ? '' : 'none';
+  if(hedef==='alinanlar'){
+    populateFaturasiAlinanlarTemsilciFilter();
+    renderFaturasiAlinanlarTable();
+  }
+}
+document.querySelectorAll('.bh-subtab').forEach(btn=>{
+  btn.addEventListener('click', ()=> bhSubviewGecis(btn.getAttribute('data-bhview')));
+});
+
+// FATURASI ALINANLAR — filtre/arama/liste (kullanıcı isteği, 24.07.2026)
+function getFaturasiAlinanlarFilteredSorted(){
+  const tumu = Object.values(state.hakedisFaturaAlindi||{});
+  const q = (document.getElementById('faturasiAlinanlarSearchInput').value||'').trim().toLocaleLowerCase('tr-TR');
+  const temsilci = document.getElementById('faturasiAlinanlarTemsilciFilter').value;
+  return tumu.filter(k=>{
+    if(q && !musteriAramaEslesiyorMu(q, k.musteriAdi, k.musteriKod)) return false;
+    if(temsilci && k.temsilci !== temsilci) return false;
+    return true;
+  }).sort((a,b)=> new Date(b.isaretlemeZamani||0) - new Date(a.isaretlemeZamani||0));
+}
+
+function populateFaturasiAlinanlarTemsilciFilter(){
+  const sel = document.getElementById('faturasiAlinanlarTemsilciFilter');
+  const current = sel.value;
+  const set = Array.from(new Set(Object.values(state.hakedisFaturaAlindi||{}).map(k=>k.temsilci).filter(t=>t && t!=='—'))).sort((a,b)=>a.localeCompare(b,'tr'));
+  sel.innerHTML = '<option value="">Tüm temsilciler</option>' + set.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+  if(current && set.includes(current)) sel.value = current;
+}
+
+function faturasiAlinanlarSatirHtml(k){
+  const kaynakRenk = k.kaynak==='Dönemsel İskonto' ? {bg:'#FDF3D9',fg:'#8A6D1F'} : {bg:'#DCEBFC',fg:'#1D5FB8'};
+  const tarih = k.tarih ? new Date(k.tarih) : null;
+  return `<div class="htk-card" data-belge-no="${escapeHtml(k.belgeNo)}">
+    <div class="htk-head">
+      <div style="min-width:0;">
+        <div class="htk-musteri-row"><span class="htk-musteri">${escapeHtml(k.musteriAdi||'—')}</span></div>
+        <div class="htk-temsilci">${escapeHtml(k.musteriKod||'')}</div>
+      </div>
+      <span class="htk-badge-pill" style="background:${kaynakRenk.bg};color:${kaynakRenk.fg};">${escapeHtml(k.kaynak||'—')}</span>
+    </div>
+    <div class="htk-borc-satir">
+      <span class="htk-borc">${TL(k.tutarKdvli||0)}</span>
+      <span class="htk-gecikme" style="color:var(--ink-faint);">KDV dahil</span>
+    </div>
+    <div class="htk-inline-stats">
+      <span>Belge No: <b>${escapeHtml(k.belgeNo||'—')}</b></span>
+      <span>Temsilci: <b>${escapeHtml(k.temsilci||'—')}</b></span>
+      ${tarih ? `<span>Tarih: <b>${fmtDate(tarih)}</b></span>` : ''}
+    </div>
+    <div class="htk-alt" style="justify-content:flex-end;">
+      <div class="htk-alt-actions">
+        <button type="button" class="nokta-detay-btn faturasi-alinanlar-geri-al-btn" data-belge-no="${escapeHtml(k.belgeNo)}">Geri Al</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderFaturasiAlinanlarTable(){
+  const list = document.getElementById('faturasiAlinanlarTbody');
+  const toplamEl = document.getElementById('faturasiAlinanlarGenelToplam');
+  if(!list) return;
+  const rows = getFaturasiAlinanlarFilteredSorted();
+  list.innerHTML = rows.length ? rows.map(faturasiAlinanlarSatirHtml).join('')
+    : '<div class="empty-state">Henüz "Faturasını Aldım" işaretlenmiş bir hakediş kaydı yok. İşaretleme, Bayi Hakediş → Noktalar → müşteri detayından yapılır.</div>';
+  if(toplamEl){
+    const toplamTutar = rows.reduce((s,k)=> s + (k.tutarKdvli||0), 0);
+    toplamEl.textContent = rows.length ? `${rows.length.toLocaleString('tr-TR')} kayıt — toplam ${TL(toplamTutar)} (KDV dahil)` : '';
+  }
+}
+
+document.getElementById('faturasiAlinanlarTbody').addEventListener('click', async (e)=>{
+  const btn = e.target.closest('.faturasi-alinanlar-geri-al-btn');
+  if(!btn) return;
+  const belgeNo = btn.getAttribute('data-belge-no');
+  if(!belgeNo) return;
+  btn.disabled = true;
+  await hakedisFaturaAlindiToggle(belgeNo); // detay verilmezse zaten kayıt SİLİNİR (toggle geri alma)
+  renderFaturasiAlinanlarTable();
+  renderBayiHakedisTable(); // Noktalar sekmesindeki rozet ve modal (açıksa) da senkron kalsın
+  if(state.hakedisModalAcikKod) hakedisModalAc(state.hakedisModalAcikKod);
+  const alinanSayiEl = document.getElementById('bhSubtabAlinanlarSayi');
+  if(alinanSayiEl) alinanSayiEl.textContent = Object.keys(state.hakedisFaturaAlindi||{}).length.toLocaleString('tr-TR');
+});
+
+const debouncedRenderFaturasiAlinanlarTable = debounce(()=>renderFaturasiAlinanlarTable());
+wireSearchInput('faturasiAlinanlarSearchInput', 'faturasiAlinanlarSearchClearBtn', debouncedRenderFaturasiAlinanlarTable);
+wireSearchClear('faturasiAlinanlarSearchInput', 'faturasiAlinanlarSearchClearBtn', renderFaturasiAlinanlarTable);
+document.getElementById('faturasiAlinanlarTemsilciFilter').addEventListener('change', ()=>renderFaturasiAlinanlarTable());
 
 const debouncedRenderBayiHakedisTable = debounce(()=>renderBayiHakedisTable());
 wireSearchInput('bayiHakedisSearchInput', 'bayiHakedisSearchClearBtn', debouncedRenderBayiHakedisTable);

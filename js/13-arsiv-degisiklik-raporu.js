@@ -25,6 +25,7 @@ const ARSIV_DEGISIKLIK_TUR_ETIKET = {
 };
 const ARSIV_DEGISIKLIK_KAYNAK_ETIKET = {
   tahsilat: 'Tahsilat', siparis: 'Sipariş', cekSenet: 'Çek/Senet',
+  ciroPrimi: 'Ciro Primi', donemselIskonto: 'Dönemsel İskonto',
 };
 
 function arsivDegisiklikSatirHtml(d){

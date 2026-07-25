@@ -792,9 +792,14 @@ async function uygulamayiBaslat(){
     modernKanalArsivYenile(),
     malzemelerStokYenile(),
     loadSenetTahsilOnaylariFromLocal(),
+    loadHakedisFaturaAlindiFromLocal(),
     (async()=>{ state.cekSenetArsivi = await cekSenetArsiviniOku(); })(),
     (async()=>{ state.tahsilatArsivi = await tahsilatArsiviniOku(); })(),
     (async()=>{ state.devirBakiyeArsivi = await devirBakiyeArsiviniOku(); })(),
+    // CİRO PRİMİ / DÖNEMSEL İSKONTO — KALICI ARŞİV (kullanıcı isteği, 24.07.2026): açılışta,
+    // Çek/Senet ve Tahsilat ile AYNI noktada okunur — sayfa yenilense de hakediş geçmişi kaybolmaz.
+    (async()=>{ state.ciroPrimiArsivi = await ciroPrimiArsiviniOku(); })(),
+    (async()=>{ state.donemselIskontoArsivi = await donemselIskontoArsiviniOku(); })(),
   ].map(p=> zamanAsimliYaris(p, ACILIS_ISTEK_TIMEOUT_MS, null)));
   if(cloudEnabled()){
     statusPillMsg.textContent = 'Bulut verisi kontrol ediliyor…';

@@ -1072,8 +1072,17 @@
             <div class="yukleme-head-badge"><i class="fa-solid fa-award" aria-hidden="true"></i></div>
             <div><h2>Bayi Hakediş</h2><span class="count" id="bayiHakedisCount"></span></div>
           </div>
+          <button type="button" id="bayiHakedisKararBekliyorRozet" class="modal-close" style="display:none;position:static;width:auto;height:auto;padding:5px 12px;border-radius:999px;background:#FDF3D9;border:1px solid #8A6D1F;color:#63500F;font-size:12px;font-weight:700;white-space:nowrap;" title="Karar bekleyen kayıtları gör">
+            <i class="fa-solid fa-triangle-exclamation" aria-hidden="true" style="margin-right:5px;"></i><span id="bayiHakedisKararBekliyorSayi">0</span> Karar Bekliyor
+          </button>
         </div>
         <div class="panel-body">
+          <div class="bh-subtabbar" role="tablist" aria-label="Bayi Hakediş görünümü">
+            <button type="button" class="bh-subtab active" id="bhSubtab-noktalar" data-bhview="noktalar" role="tab" aria-selected="true">Noktalar <span class="n" id="bhSubtabNoktalarSayi">0</span></button>
+            <button type="button" class="bh-subtab" id="bhSubtab-alinanlar" data-bhview="alinanlar" role="tab" aria-selected="false">✓ Faturası Alınanlar <span class="n" id="bhSubtabAlinanlarSayi">0</span></button>
+          </div>
+
+          <div id="bhSubview-noktalar">
           <div class="stok-section-divider" style="margin-top:0;padding-top:0;border-top:none;">
             <div class="stok-section-divider-title">Müşteri Ara ve Filtrele</div>
             <div class="toolbar">
@@ -1102,6 +1111,23 @@
           <div class="musteri-daha-fazla-wrap" id="bayiHakedisDahaFazlaWrap" style="display:none;">
             <button type="button" class="btn" id="bayiHakedisDahaFazlaBtn">Daha fazla göster</button>
             <span class="musteri-daha-fazla-info" id="bayiHakedisDahaFazlaInfo"></span>
+          </div>
+          </div>
+
+          <div id="bhSubview-alinanlar" style="display:none;">
+            <div class="stok-section-divider" style="margin-top:0;padding-top:0;border-top:none;">
+              <div class="stok-section-divider-title">Temsilci veya Müşteriye Göre Filtrele</div>
+              <div class="toolbar">
+                <div class="search-box">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+                  <input type="text" id="faturasiAlinanlarSearchInput" placeholder="Müşteri numarası veya adı ara…" aria-label="Müşteri numarası veya adı ara" />
+                  <button type="button" id="faturasiAlinanlarSearchClearBtn" class="search-clear-btn" title="Aramayı temizle" aria-label="Aramayı temizle" style="display:none;">✕</button>
+                </div>
+                <select class="filter-select" id="faturasiAlinanlarTemsilciFilter"><option value="">Tüm temsilciler</option></select>
+              </div>
+            </div>
+            <div class="as-of" id="faturasiAlinanlarGenelToplam"></div>
+            <div class="cust-card-list" id="faturasiAlinanlarTbody"></div>
           </div>
         </div>
       </div>
@@ -2148,6 +2174,7 @@
                 <th>Kategori</th>
                 <th class="num">KDV Hariç</th>
                 <th class="num">KDV Dahil</th>
+                <th style="text-align:center;">Fatura</th>
               </tr></thead>
               <tbody id="hakedisModalTbody"></tbody>
             </table>

@@ -25,6 +25,15 @@ const state = {
   // çek hem senet için kullanılır) bu Set'e eklenir ve buildReport bir sonraki çalışmasında o
   // kaydı tahsilat sayar. idb ile cihaza kalıcı kaydedilir.
   cekSenetTahsilOnaylari: new Set(),
+  // HAKEDİŞ "FATURASINI ALDIM" İŞARETLEME (kullanıcı isteği, 24.07.2026): {[belgeNo]: detay} —
+  // Bayi Hakediş modalindeki bir satır işaretlendiğinde o satırın tüm detayı (müşteri, temsilci,
+  // kaynak, tutar, tarih) buraya eklenir, tekrar tıklanınca kaldırılır (toggle). Bulutta kalıcı
+  // (bkz. hakedisFaturaAlindiToggle, 02-bulut-ve-auth.js) — tüm cihazlarda/temsilcilerde aynı
+  // görünür. "Faturası Alınanlar" alt-sekmesi (Bayi Hakediş içi) doğrudan bundan beslenir.
+  hakedisFaturaAlindi: {},
+  // BAYİ HAKEDİŞ ALT-SEKMESİ (kullanıcı isteği, 24.07.2026): 'noktalar' | 'alinanlar' — hangi
+  // alt görünümün açık olduğunu tutar (bkz. bhSubviewGecis, 06-senet-ve-detay.js).
+  bhAktifSubview: 'noktalar',
   // ÇEK/SENET RİSKİ — KALICI ARŞİV (kullanıcı isteği): {[anahtar]: {no, musteriKod, musteriAdi,
   // tahsilatTuru, tutar, vadeTarihi, belgeTarihi, durum:'risk'|'tahsilEdildi'}}. Tahsilat
   // Dökümü'nden bağımsız, ayrı bir Grup B alanından yüklenir; buildReport bunu HİÇ SİLMEDEN okur
@@ -33,6 +42,15 @@ const state = {
   // TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği): {[belgeNo]: kayit}. Çek/
   // senetle aynı mimari — buildReport bunu hiç silmeden okur (bkz. tahsilatArsivindenGunlukDiziyeCevir).
   tahsilatArsivi: {},
+  // CİRO PRİMİ / DÖNEMSEL İSKONTO — KALICI ARŞİV (kullanıcı isteği, 24.07.2026): {[belgeNo]: kayit}.
+  // Çek/Senet ile aynı mimari, ek olarak Bayi Hak Ediş (Müşteri Alacak Dekont No) ile çapraz
+  // kontrol edilir (bkz. ciroPrimiVeDonemselIskontoArsiviniGuncelle). bayiHakedisRaporuOlustur
+  // bu iki arşivin _durum!=='karar_bekliyor' olan kayıtlarından okur.
+  ciroPrimiArsivi: {},
+  donemselIskontoArsivi: {},
+  // "Karar Bekliyor" (kaynaktan kaybolmuş ama Bayi Hak Ediş'te ödemesi bulunamamış) toplam kayıt
+  // sayısı — Bayi Hakediş ekranındaki rozet için (bkz. renderBayiHakedisKararBekliyorRozet).
+  bayiHakedisKararBekliyorSayisi: 0,
   // Son "Veri Güncelle" / "Raporu Oluştur" sonrasında tespit edilen, arşivde olup yeni yüklenen
   // Çek/Senet Riski dosyasında YER ALMAYAN kayıtlar — kullanıcıya "Tahsil Edildi mi, İptal mi?"
   // sorulacak liste (bkz. cekSenetEksikOnayModalAc). Her rapor oluşturmada yeniden hesaplanır.
@@ -1116,6 +1134,237 @@ async function cekSenetArsiviniOku(){
   }
   try{ return (await idbGet(CEK_SENET_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
 }
+
+/* =====================================================================
+   CİRO PRİMİ / DÖNEMSEL İSKONTO — KALICI ARŞİV (kullanıcı isteği, 24.07.2026)
+   Çek/Senet ile BİREBİR AYNI mimari: Fatura No (Ciro Primi) / SD Belgesi (Dönemsel
+   İskonto) bazlı, kalıcı, {[belgeNo]: kayit} obje arşivi. Her yüklemede:
+     1) Yeni dosyada olup arşivde OLMAYAN kayıtlar → arşive EKLENİR.
+     2) Arşivde olup yeni dosyada OLMAYAN kayıtlar için Bayi Hak Ediş arşivindeki
+        (state.files.bayiHakedis → Müşteri Alacak Dekont No) ile eşleşme aranır:
+          - Eşleşme VARSA  → hakediş ÖDENMİŞ demektir, kayıt arşivden SİLİNİR.
+          - Eşleşme YOKSA  → kayıt SİLİNMEZ, _durum='karar_bekliyor' işaretlenir ve
+            Arşiv Değişiklik Raporu'na 'eksik' (Karar Bekliyor) düşer. Bir kez
+            işaretlenen kayıt kullanıcı manuel karar verene kadar bir daha OTOMATİK
+            kontrol edilmez (kullanıcı kararı, 24.07.2026).
+   Arşiv yapısı: {[belgeNo]: {...hamSatır, _durum:'aktif'|'karar_bekliyor'}}
+   ===================================================================== */
+const CIRO_PRIMI_ARSIV_CLOUD_PATH = CLOUD.path + '_ciroPrimiArsivi';
+const CIRO_PRIMI_ARSIV_LOCAL_KEY = 'noktaCariTakip_ciroPrimiArsivi_v1';
+const DONEMSEL_ISKONTO_ARSIV_CLOUD_PATH = CLOUD.path + '_donemselIskontoArsivi';
+const DONEMSEL_ISKONTO_ARSIV_LOCAL_KEY = 'noktaCariTakip_donemselIskontoArsivi_v1';
+
+// Bayi Hak Ediş ham dosyasından (state.files.bayiHakedis) "Müşteri Alacak Dekont No"
+// setini çıkarır — Ciro Primi/Dönemsel İskonto kayıtlarının ödenip ödenmediğini bu sete
+// bakarak anlıyoruz.
+function bayiHakedisDekontNoSeti(bayiHakedisRows){
+  const set = new Set();
+  (bayiHakedisRows||[]).forEach(r=>{
+    const no = r['Müşteri Alacak Dekont No'];
+    if(no!=null && String(no).trim()!=='') set.add(String(no).trim());
+  });
+  return set;
+}
+
+// Genel amaçlı birleştirici — ciroPrimi (anahtar: Fatura No) ve donemselIskonto
+// (anahtar: SD Belgesi) için ortak. DÖNÜŞ: {arsiv, degisiklikler, eksikKalanlar}
+// eksikKalanlar: arşivde olup bu yüklemede GELMEYEN, henüz 'karar_bekliyor' OLMAYAN
+// belge no'ları — çağıran taraf (Bayi Hak Ediş kontrolü için) bunları işler.
+function belgeNoBazliArsiviBirlestir(mevcutArsiv, yeniRows, opts){
+  const arsiv = Object.assign({}, mevcutArsiv||{});
+  const degisiklikler = [];
+  const yeniAnahtarSet = new Set();
+
+  (yeniRows||[]).forEach(row=>{
+    const belgeNoHam = row[opts.anahtarAlani];
+    const belgeNo = belgeNoHam!=null ? String(belgeNoHam).trim() : '';
+    if(!belgeNo) return;
+    yeniAnahtarSet.add(belgeNo);
+    const eski = arsiv[belgeNo];
+    if(!eski){
+      // 1) Yeni kayıt → ekle
+      arsiv[belgeNo] = Object.assign({}, row, {_durum:'aktif'});
+      degisiklikler.push(arsivDegisiklikSatiri('eklendi', opts.kaynakEtiketi+' — yeni hakediş kaydı', {
+        belgeNo, musteriKod: String(row[opts.musteriAlani]||'').trim(),
+        tutar: Number(row[opts.tutarAlani])||0, tarih: excelDateToJS(row['Fatura Tarihi']),
+      }));
+      return;
+    }
+    // Aynı belge no tekrar geldi. Kullanıcı kararı (24.07.2026): "aynı belge no farklı tutarla
+    // gelmez, gelirse uyarı verip onay istesin." Burada arşiv OTOMATİK üzerine YAZILMAZ —
+    // farklı tutar tespit edilirse çağıran akış (ciroPrimiVeDonemselIskontoArsiviniGuncelle)
+    // kullanıcıya confirm() ile sorar; onaylanırsa günceller, onaylanmazsa eski kayıt korunur.
+    const eskiTutar = Number(eski[opts.tutarAlani])||0;
+    const yeniTutar = Number(row[opts.tutarAlani])||0;
+    if(Math.abs(eskiTutar - yeniTutar) > 0.01){
+      opts.tutarUyusmazliklari.push({belgeNo, eski, yeni: row});
+    }
+    // Tutar aynıysa (beklenen/normal durum) sessizce geçilir — zaten arşivde doğru hali var.
+  });
+
+  const eksikKalanlar = [];
+  Object.keys(arsiv).forEach(belgeNo=>{
+    if(yeniAnahtarSet.has(belgeNo)) return; // bu yüklemede geldi
+    const kayit = arsiv[belgeNo];
+    if(kayit._durum === 'karar_bekliyor') return; // zaten işaretli, tekrar sorma
+    eksikKalanlar.push(belgeNo);
+  });
+
+  return {arsiv, degisiklikler, eksikKalanlar};
+}
+
+async function ciroPrimiArsiviniKaydet(arsiv){
+  const ok = await idbSet(CIRO_PRIMI_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Ciro Primi arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CIRO_PRIMI_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(CIRO_PRIMI_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(CIRO_PRIMI_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Ciro Primi arşivi buluta kaydedilemedi:', err); }
+}
+async function ciroPrimiArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${CIRO_PRIMI_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Ciro Primi arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(CIRO_PRIMI_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
+async function donemselIskontoArsiviniKaydet(arsiv){
+  const ok = await idbSet(DONEMSEL_ISKONTO_ARSIV_LOCAL_KEY, arsiv);
+  if(!ok) console.error('Dönemsel İskonto arşivi cihaza kaydedilemedi.');
+  if(!cloudEnabled()) return;
+  try{
+    const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${DONEMSEL_ISKONTO_ARSIV_CLOUD_PATH}.json${await authQuery()}`, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(arsiv),
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const simdi = Date.now();
+    await cloudMetaYazUzaktan(DONEMSEL_ISKONTO_ARSIV_CLOUD_PATH, simdi);
+    await cloudMetaZamaniKaydet(DONEMSEL_ISKONTO_ARSIV_CLOUD_PATH, simdi);
+  }catch(err){ console.error('Dönemsel İskonto arşivi buluta kaydedilemedi:', err); }
+}
+async function donemselIskontoArsiviniOku(){
+  if(cloudEnabled()){
+    try{
+      const res = await cloudFetch(`${CLOUD.dbUrl.replace(/\/$/,'')}/${DONEMSEL_ISKONTO_ARSIV_CLOUD_PATH}.json${await authQuery()}`);
+      if(res.ok){ const text = await res.text(); if(text && text!=='null') return JSON.parse(text); }
+    }catch(err){ console.error('Dönemsel İskonto arşivi buluttan okunamadı:', err); }
+  }
+  try{ return (await idbGet(DONEMSEL_ISKONTO_ARSIV_LOCAL_KEY)) || {}; }catch(_){ return {}; }
+}
+
+// ANA FONKSİYON: her iki arşivi de günceller, Bayi Hak Ediş ile çapraz kontrol yapar, tutar
+// tutarsızlıklarında kullanıcıya onay sorar, Arşiv Değişiklik Raporu satırlarını üretir.
+// Akış tarafından (raporuOlusturVeyaGuncelleAkisiniCalistir) çağrılır.
+// DÖNÜŞ: {degisiklikler} — buYuklemeArsivDegisiklikleri'ne eklenir.
+async function ciroPrimiVeDonemselIskontoArsiviniGuncelle(){
+  const tumDegisiklikler = [];
+  const dekontSeti = bayiHakedisDekontNoSeti(state.files.bayiHakedis ? state.files.bayiHakedis.data : []);
+  let hakedisFaturaAlindiDegisti = false;
+
+  // --- CİRO PRİMİ (anahtar: Fatura No) ---
+  if(state.files.ciroPrimi && state.files.ciroPrimi.data && state.files.ciroPrimi.data.length){
+    const tutarUyusmazliklari = [];
+    const {arsiv, degisiklikler, eksikKalanlar} = belgeNoBazliArsiviBirlestir(state.ciroPrimiArsivi, state.files.ciroPrimi.data, {
+      anahtarAlani:'Fatura No', kaynakEtiketi:'Ciro Primi', tutarAlani:'Net Tutar', musteriAlani:'Müşteri', tutarUyusmazliklari,
+    });
+    // Beklenmeyen durum: aynı Fatura No farklı tutarla geldi — kullanıcıya onay sor.
+    tutarUyusmazliklari.forEach(u=>{
+      const eskiTutar = Number(u.eski['Net Tutar'])||0, yeniTutar = Number(u.yeni['Net Tutar'])||0;
+      const onay = confirm(`DİKKAT — Ciro Primi Fatura No ${u.belgeNo} arşivdeki tutardan FARKLI geldi:\n\nArşiv: ${TL(eskiTutar)}\nYeni dosya: ${TL(yeniTutar)}\n\nArşivdeki kaydı yeni tutarla güncellemek istiyor musunuz?`);
+      if(onay){
+        arsiv[u.belgeNo] = Object.assign({}, u.yeni, {_durum:'aktif'});
+        tumDegisiklikler.push(arsivDegisiklikSatiri('guncellendi', `Ciro Primi — tutar ${TL(eskiTutar)} → ${TL(yeniTutar)} (kullanıcı onayladı)`, {
+          belgeNo:u.belgeNo, musteriKod:String(u.yeni['Müşteri']||'').trim(), tutar:yeniTutar, tarih: excelDateToJS(u.yeni['Fatura Tarihi']),
+        }));
+      }
+      // Onaylanmazsa arşivdeki eski kayıt olduğu gibi korunur, hiçbir şey yapılmaz.
+    });
+    eksikKalanlar.forEach(belgeNo=>{
+      const kayit = arsiv[belgeNo];
+      if(dekontSeti.has(belgeNo)){
+        // 1. YOL: Bayi Hak Ediş'te ödemesi bulundu → arşivden sil
+        delete arsiv[belgeNo];
+        // Kullanıcı kararı (24.07.2026): hakediş gerçekten faturalanıp arşivden silindiğinde,
+        // varsa "Fatura Alındı" işareti de otomatik temizlenir — aksi halde işaret objede
+        // anlamsızca birikirdi (artık hiçbir görünür satırı temsil etmiyor).
+        if(state.hakedisFaturaAlindi && state.hakedisFaturaAlindi[belgeNo]){
+          delete state.hakedisFaturaAlindi[belgeNo];
+          hakedisFaturaAlindiDegisti = true;
+        }
+        tumDegisiklikler.push(arsivDegisiklikSatiri('silindi', 'Ciro Primi — Bayi Hak Ediş\'te ödemesi bulundu (Dekont No eşleşti)', {
+          belgeNo, musteriKod:String(kayit['Müşteri']||'').trim(), tutar:Number(kayit['Net Tutar'])||0, tarih: excelDateToJS(kayit['Fatura Tarihi']),
+        }));
+      } else {
+        // 2. YOL: eşleşme yok → sil, ama işaretle + uyar
+        arsiv[belgeNo] = Object.assign({}, kayit, {_durum:'karar_bekliyor'});
+        tumDegisiklikler.push(arsivDegisiklikSatiri('eksik', 'Ciro Primi — kaynaktan kayboldu ama Müşteri Alacak Dekont No karşılığı YOK, kontrol edin', {
+          belgeNo, musteriKod:String(kayit['Müşteri']||'').trim(), tutar:Number(kayit['Net Tutar'])||0, tarih: excelDateToJS(kayit['Fatura Tarihi']),
+        }));
+      }
+    });
+    state.ciroPrimiArsivi = arsiv;
+    await ciroPrimiArsiviniKaydet(arsiv);
+    tumDegisiklikler.push(...degisiklikler);
+  }
+
+  // --- DÖNEMSEL İSKONTO (anahtar: SD Belgesi) ---
+  if(state.files.donemselIskonto && state.files.donemselIskonto.data && state.files.donemselIskonto.data.length){
+    const tutarUyusmazliklari = [];
+    const {arsiv, degisiklikler, eksikKalanlar} = belgeNoBazliArsiviBirlestir(state.donemselIskontoArsivi, state.files.donemselIskonto.data, {
+      anahtarAlani:'SD Belgesi', kaynakEtiketi:'Dönemsel İskonto', tutarAlani:'Hakediş Tutar', musteriAlani:'Nokta Kodu', tutarUyusmazliklari,
+    });
+    tutarUyusmazliklari.forEach(u=>{
+      const eskiTutar = Number(u.eski['Hakediş Tutar'])||0, yeniTutar = Number(u.yeni['Hakediş Tutar'])||0;
+      const onay = confirm(`DİKKAT — Dönemsel İskonto SD Belgesi ${u.belgeNo} arşivdeki tutardan FARKLI geldi:\n\nArşiv: ${TL(eskiTutar)}\nYeni dosya: ${TL(yeniTutar)}\n\nArşivdeki kaydı yeni tutarla güncellemek istiyor musunuz?`);
+      if(onay){
+        arsiv[u.belgeNo] = Object.assign({}, u.yeni, {_durum:'aktif'});
+        tumDegisiklikler.push(arsivDegisiklikSatiri('guncellendi', `Dönemsel İskonto — tutar ${TL(eskiTutar)} → ${TL(yeniTutar)} (kullanıcı onayladı)`, {
+          belgeNo:u.belgeNo, musteriKod:String(u.yeni['Nokta Kodu']||'').trim(), tutar:yeniTutar, tarih: excelDateToJS(u.yeni['Fatura Tarihi']),
+        }));
+      }
+    });
+    eksikKalanlar.forEach(belgeNo=>{
+      const kayit = arsiv[belgeNo];
+      if(dekontSeti.has(belgeNo)){
+        delete arsiv[belgeNo];
+        if(state.hakedisFaturaAlindi && state.hakedisFaturaAlindi[belgeNo]){
+          delete state.hakedisFaturaAlindi[belgeNo];
+          hakedisFaturaAlindiDegisti = true;
+        }
+        tumDegisiklikler.push(arsivDegisiklikSatiri('silindi', 'Dönemsel İskonto — Bayi Hak Ediş\'te ödemesi bulundu (Dekont No eşleşti)', {
+          belgeNo, musteriKod:String(kayit['Nokta Kodu']||'').trim(), tutar:Number(kayit['Hakediş Tutar'])||0, tarih: excelDateToJS(kayit['Fatura Tarihi']),
+        }));
+      } else {
+        arsiv[belgeNo] = Object.assign({}, kayit, {_durum:'karar_bekliyor'});
+        tumDegisiklikler.push(arsivDegisiklikSatiri('eksik', 'Dönemsel İskonto — kaynaktan kayboldu ama Müşteri Alacak Dekont No karşılığı YOK, kontrol edin', {
+          belgeNo, musteriKod:String(kayit['Nokta Kodu']||'').trim(), tutar:Number(kayit['Hakediş Tutar'])||0, tarih: excelDateToJS(kayit['Fatura Tarihi']),
+        }));
+      }
+    });
+    state.donemselIskontoArsivi = arsiv;
+    await donemselIskontoArsiviniKaydet(arsiv);
+    tumDegisiklikler.push(...degisiklikler);
+  }
+
+  // Silme sırasında Fatura Alındı işaretlerinden herhangi biri temizlendiyse kalıcı hale getir
+  // (bkz. saveHakedisFaturaAlindiToLocal, 02-bulut-ve-auth.js — script sırası gereği bu fonksiyon
+  // çağrı ANINDA tanımlı olur, tanım zamanında değil).
+  if(hakedisFaturaAlindiDegisti && typeof saveHakedisFaturaAlindiToLocal === 'function'){
+    await saveHakedisFaturaAlindiToLocal();
+  }
+
+  return {degisiklikler: tumDegisiklikler};
+}
+
 
 /* =====================================================================
    TAHSİLAT DÖKÜMÜ — YENİ TEK FORMAT, KALICI ARŞİV (kullanıcı isteği)
