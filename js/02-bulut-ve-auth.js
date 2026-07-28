@@ -1402,9 +1402,29 @@ function turkiyeBugun(){
   return new Date(Date.UTC(t.getUTCFullYear(), t.getUTCMonth(), t.getUTCDate()));
 }
 function excelDateToJSArti1Gun(v){
-  const d = excelDateToJS(v);
-  if(!d) return null;
-  return new Date(d.getTime() + 86400000);
+  // 28.07.2026 KRİTİK DÜZELTME (kullanıcı bulgusu — gerçek SAP Cari Hesap
+  // Detay ekstresiyle çapraz doğrulandı): bu fonksiyon önceden +1 gün
+  // EKLİYORDU, "Türkiye +3 saat dilimi düzeltmesi" gerekçesiyle. Ama bu
+  // gerekçe YANLIŞTI: excelDateToJS() zaten Date.UTC(d.y,d.m-1,d.d) ile
+  // SAAT BİLEŞENİ OLMAYAN bir tarihi doğru gün olarak kodluyor — üstüne
+  // +1 gün eklemek, gerçek İşlem Tarihi'nden HER ZAMAN 1 gün İLERİ bir
+  // tarih üretiyordu (kanıt: aynı belge numaralarının panel/SAP export
+  // tarihi ile SAP'ın kendi Cari Hesap Detay ekstresindeki İşlem Tarihi
+  // karşılaştırıldığında, TUTARLI ŞEKİLDE +1 gün fark bulundu — hem Fatura
+  // hem Tahsilat tarafında, birden fazla belge üzerinden doğrulandı).
+  //
+  // SONUÇ ETKİSİ: bu hatalı kayma, "aynı güne ait TÜM kayıtları SİLİP
+  // yeniden yazan" arşiv dağıtım mantığıyla (arsivGunlereDagitVeDegistir,
+  // tahsilatKredisiGunlereEkleVeDegistir) birleşince gerçek veri KAYBINA
+  // yol açabiliyordu — bir kayıt farklı yüklemelerde farklı güne düşünce,
+  // o günün arşivi baştan yazıldığı için kayıt kaybolabiliyordu.
+  //
+  // DÜZELTME: artık +1 gün eklenmiyor, düzeltmesiz excelDateToJS ile aynı
+  // sonucu döndürür. Fonksiyon SİLİNMEDİ (17 çağrı yerini tek tek
+  // değiştirmek yerine burada merkezi düzeltme yapıldı) — ama artık "Arti1Gun"
+  // adı yanıltıcı, kod içinde arama yapan biri bu yorumu görsün diye
+  // bilinçli olarak silinmedi.
+  return excelDateToJS(v);
 }
 
 const dropzone = document.getElementById('dropzone');
